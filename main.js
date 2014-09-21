@@ -5,9 +5,14 @@
 var http = require('http');
 var express = require('express');
 
+var item = require('./src/item');
+
 var app = express();
 
-app.get('/', function(req, res) {
+app.get('/save', function(req, res) {
+
+	item.save('save test');
+
 	res.write('test');
 	res.end();
 });
