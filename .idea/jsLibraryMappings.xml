@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{Node.js v0.10.25 Core Modules, express-DefinitelyTyped, mocha-DefinitelyTyped, requirejs-DefinitelyTyped, should-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{Node.js v0.10.25 Core Modules, body-parser-DefinitelyTyped, express-DefinitelyTyped, mocha-DefinitelyTyped, requirejs-DefinitelyTyped, should-DefinitelyTyped}" />
     <includedPredefinedLibrary name="Node.js Globals" />
   </component>
 </project>
