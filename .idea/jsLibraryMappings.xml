@@ -2,7 +2,7 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{CareerBoxServer node_modules}" />
-    <file url="PROJECT" libraries="{Node.js v0.10.25 Core Modules, async-DefinitelyTyped, body-parser-DefinitelyTyped, express-DefinitelyTyped, express-session-DefinitelyTyped, mocha-DefinitelyTyped, mongodb-DefinitelyTyped, requirejs-DefinitelyTyped, should-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{async-DefinitelyTyped, body-parser-DefinitelyTyped, express-DefinitelyTyped, express-session-DefinitelyTyped, mocha-DefinitelyTyped, mongodb-DefinitelyTyped, requirejs-DefinitelyTyped, should-DefinitelyTyped}" />
     <includedPredefinedLibrary name="Node.js Globals" />
   </component>
 </project>
