@@ -3,8 +3,8 @@
  */
 
 var itemDao = function itemDao(type) {
+	this._id = null;
 	this.type = type;
-	this.content = '';
 	this.pos = {
 		x: 0,
 		y: 0

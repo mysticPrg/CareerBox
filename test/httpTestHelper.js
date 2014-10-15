@@ -4,10 +4,8 @@
 
 var http = require('http');
 
-var req = null;
-
-module.exports.make = function (host, port, path, method, test) {
-	req = http.request({
+var HttpTestHelper = function HttpTestHelper(host, port, path, method, test) {
+	this.req = http.request({
 		host: host,
 		port: port,
 		path: path,
@@ -18,15 +16,18 @@ module.exports.make = function (host, port, path, method, test) {
 	}, test);
 };
 
-module.exports.send = function (data, done) {
-	if (req === null)
+HttpTestHelper.prototype.send = function (data, done) {
+	if (this.req === null)
 		return;
 
-	req.on('error', function (e) {
+	this.req.on('error', function (e) {
 		e.should.not.ok();
+		console.log(e.message);
 		done();
 	});
 
-	req.write(JSON.stringify(data));
-	req.end();
+	this.req.write(JSON.stringify(data));
+	this.req.end();
 };
+
+module.exports = HttpTestHelper;

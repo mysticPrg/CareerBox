@@ -6,42 +6,51 @@ var should = require('should');
 var http = require('http');
 
 var paper = require('../src/paper');
-var itemDao = require('../src/itemDao');
 var server = require('../src/server');
 
-var httpTestHelper = require('./httpTestHelper');
+var paperDao = require('../src/dao/paperDao');
+var itemDao = require('../src/dao/itemDao');
+
+var HttpTestHelper = require('./httpTestHelper');
+
+var port = 8124;
 
 describe('Paper', function () {
 	before(function () {
 		paper.set(server);
 
-		server.start(8123);
+		server.start(port);
 	});
 
-	it('can be save', function (done) {
-		function assertFunc(res) {
-			res.on('data', function(data) {
-				var json = JSON.parse(data)	;
+	it('Save and Load', function (done) {
+		var paper = new paperDao();
+		var item = new itemDao('text');
+		item.content = 'hello text';
+		paper.add(item);
 
-				json.should.be.a.Array.and.length(2);
-				json[0].type.should.be.exactly('text');
+		item = new itemDao('image');
+		item.content = 'hello image';
+		paper.add(item);
+
+		new HttpTestHelper('localhost', port, '/paper', 'POST', function (res) {
+			res.on('data', function (data) {
+				var result = JSON.parse(data);
+				result.returnCode.should.be.exactly('000');
+				result.result.should.be.ok;
+			});
+			res.statusCode.should.be.exactly(200);
+		}).send(paper, done);
+
+		new HttpTestHelper('localhost', port, '/paper', 'GET', function (res) {
+			res.on('data', function (data) {
+				var result = JSON.parse(data);
+				result.returnCode.should.be.exactly('000');
+
+				result.result.should.eql(paper);
 				done();
 			});
-
 			res.statusCode.should.be.exactly(200);
-		}
-
-		var data = new Array();
-		var dao = new itemDao('text');
-		dao.content = 'hello world';
-		data.push(dao);
-
-		dao = new itemDao('image');
-		dao.content = 'hello.jpg';
-		data.push(dao);
-
-		httpTestHelper.make('localhost', 8123, '/paper', 'POST', assertFunc);
-		httpTestHelper.send(data, done);
+		}).send(null, done);
 	});
 
 	after(function () {

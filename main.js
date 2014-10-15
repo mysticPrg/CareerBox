@@ -3,8 +3,11 @@
  */
 
 var server = require('./src/server');
-var item = require('./src/paper');
 
+var member = require('./src/member');
+var paper = require('./src/paper');
+
+member.set(server);
 paper.set(server);
 
 server.start(8123);
