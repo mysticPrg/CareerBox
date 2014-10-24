@@ -6,6 +6,7 @@
 var async = require('async');
 
 var Result = require('./result');
+//noinspection JSUnusedGlobalSymbols
 var itemDao = require('./dao/itemDao');
 var paperDao = require('./dao/paperDao');
 
@@ -23,8 +24,7 @@ module.exports.set = function (server) {
 
 function save(req, res) {
 	var session = req.session;
-	var data = req.body.items;
-	var result = new Result(null);
+    var result = new Result(null);
 
 	res.writeHead(200, {
 		'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ function save(req, res) {
 }
 
 function existCheck(collection, _id, callback) {
-	var cursor = collection.findOne({_id: _id}, function (err, paper) {
+	collection.findOne({_id: _id}, function (err, paper) {
 		callback(err, collection, paper, _id);
 	});
 }
@@ -88,12 +88,12 @@ function create(collection, paper, _id, callback) {
 
 function update(collection, _id, items, callback) {
 
-	var paper = new Array();
+	var paper = [];
 
 	for (var key in items) {
 		var item = items[key];
 		paper.push({
-			_id: null,
+			_id: item._id,
 			type: item.type,
 			pos: item.pos,
 			size: item.size
@@ -105,7 +105,6 @@ function update(collection, _id, items, callback) {
 
 function load(req, res) {
 	var session = req.session;
-	var data = req.body.items;
 	var result = new Result(null);
 
 	res.writeHead(200, {
@@ -135,7 +134,7 @@ function load(req, res) {
 				if (paper) {
 					result.result = paper.items;
 				} else {
-					result.result = new Array();
+					result.result = [];
 				}
 
 				callback(null, result);

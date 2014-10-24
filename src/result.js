@@ -17,6 +17,8 @@ Result.prototype.toString = function toString() {
 		result: this.result
 	};
 
+    console.log('\nReturnCode: ' + this.returnCode);
+
 	return JSON.stringify(json);
 };
 

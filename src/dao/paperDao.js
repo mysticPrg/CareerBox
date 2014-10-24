@@ -4,7 +4,7 @@
 
 var paperDao = function paperDao() {
 	this._id = null;
-	this.items = new Array();
+	this.items = [];
 };
 
 paperDao.prototype.add = function add(itemDao) {

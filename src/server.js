@@ -14,22 +14,51 @@ var DBHelper = require('./DBHelper');
 var app = express();
 var server = null;
 
+function allowCrossDomain (req, res, next) {
+//    res.header('Access-Control-Allow-Origin', 'http://localhost:63342');
+////    res.header('Access-Control-Allow-Origin', req.headers.origin);
+//    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+//    res.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+//    res.header('Access-Control-Allow-Credentials', true);
+//
+//    next();
+
+    var allowedHost = [
+        'http://localhost:63342'
+    ];
+
+    if(allowedHost.indexOf(req.headers.origin) !== -1) {
+        res.header('Access-Control-Allow-Credentials', true);
+        res.header('Access-Control-Allow-Origin', req.headers.origin)
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+        res.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+//        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        next();
+    } else {
+        //res.send({auth: false});
+        next();
+    }
+}
+
+morgan.token('session', function(req, res) {
+    return req.session.email;
+});
+
 app.dbhelper = new DBHelper();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(morgan('dev'));
 app.use(session({
-	secret: 'career key'
+	secret: 'careerkey',
+    resave: true,
+    saveUninitialized: false,
+//    cookie: { secure: true },
+//    name: 'careerbox.session',
+//    rolling: true
 }));
-
-app.all('*', function(req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-	res.header('Access-Control-Allow-Headers', 'Content-Type');
-	next();
-});
+app.use(morgan(':remote-addr :session [:date], :method :url :response-time ms [:status]'));
+app.use(allowCrossDomain);
 
 app.start = function (port) {
 	server = http.createServer(app).listen(port);
