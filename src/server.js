@@ -14,7 +14,7 @@ var DBHelper = require('./DBHelper');
 var app = express();
 var server = null;
 
-function allowCrossDomain (req, res, next) {
+function allowCrossDomain(req, res, next) {
 //    res.header('Access-Control-Allow-Origin', 'http://localhost:63342');
 ////    res.header('Access-Control-Allow-Origin', req.headers.origin);
 //    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
@@ -27,9 +27,9 @@ function allowCrossDomain (req, res, next) {
         'http://localhost:63342'
     ];
 
-    if(allowedHost.indexOf(req.headers.origin) !== -1) {
+    if (allowedHost.indexOf(req.headers.origin) !== -1) {
         res.header('Access-Control-Allow-Credentials', true);
-        res.header('Access-Control-Allow-Origin', req.headers.origin)
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
         res.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
 //        res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -40,7 +40,7 @@ function allowCrossDomain (req, res, next) {
     }
 }
 
-morgan.token('session', function(req, res) {
+morgan.token('session', function (req, res) {
     return req.session.email;
 });
 
@@ -50,7 +50,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
-	secret: 'careerkey',
+    secret: 'careerkey',
     resave: true,
     saveUninitialized: false,
 //    cookie: { secure: true },
@@ -61,13 +61,14 @@ app.use(morgan(':remote-addr :session [:date], :method :url :response-time ms [:
 app.use(allowCrossDomain);
 
 app.start = function (port) {
-	server = http.createServer(app).listen(port);
-	console.log('CareerBox Service Server Listening on port ' + port + '\n');
+    server = http.createServer(app).listen(port);
+    console.log('CareerBox Service Server Listening on port ' + port + '\n');
 };
 
 app.close = function () {
-	if (server !== null)
-		server.close();
+    if (server !== null) {
+        server.close();
+    }
 };
 
 module.exports = app;

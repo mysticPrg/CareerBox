@@ -8,14 +8,17 @@ var memberDao = function memberDao(data) {
 	this.password = '';
 
 	if (data) {
-		if (data._id)
-			this._id = data._id;
+		if (data._id) {
+            this._id = data._id;
+        }
 
-		if (data.email)
-			this.email = data.email;
+		if (data.email) {
+            this.email = data.email;
+        }
 
-		if (data.password)
-			this.password = data.password;
+		if (data.password) {
+            this.password = data.password;
+        }
 	}
 
 };
