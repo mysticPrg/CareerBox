@@ -12,7 +12,7 @@ var itemDao = function itemDao(type) {
 	this.size = {
 		width: 100,
 		height: 40
-	}
+	};
 };
 
 module.exports = itemDao;

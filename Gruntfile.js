@@ -11,14 +11,14 @@ module.exports = function (grunt) {
                 tasks: "default"
             },
             javascript: {
-                files: ["src/**/*.js", "src/*.js", "spec/*Spec.js"],
+                files: ["src/**/*.js", "src/*.js", "spec/*Spec.js", "spec/**/*Spec.js"],
                 tasks: "test"
             }
         },
         jasmine: {
-            src: "src/**/*.js",
+            src: ["src/**/*.js", "src/*.js"],
             options: {
-                specs: "spec/*Spec.js"
+                specs: ["spec/*Spec.js", "spec/**/*Spec.js"]
             }
         },
         jshint: {
@@ -35,6 +35,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-jasmine");
-    grunt.registerTask("test", ["jasmine"]);
+    grunt.registerTask("test", ["jshint", "jasmine"]);
     grunt.registerTask("default", ["test"]);
 };

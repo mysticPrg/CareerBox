@@ -24,6 +24,14 @@ function join(req, res) {
         password: req.body.password
     });
 
+    if (!newMember.email || !newMember.password) {
+        res.writeHead(200, {
+           'Content-Type': 'application/json'
+        });
+        res.end(new Result(null).setCode('001').toString());
+        return;
+    }
+
     try {
         //noinspection JSUnusedGlobalSymbols
         async.waterfall([
@@ -91,7 +99,7 @@ function login(req, res) {
                 collection.findOne({
                     email: req.body.email,
                     password: req.body.password
-                }, callback)
+                }, callback);
             },
             function doLogin(member, callback) {
                 var result = new Result(null);

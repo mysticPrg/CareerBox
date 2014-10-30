@@ -11,7 +11,3 @@ member.set(server);
 paper.set(server);
 
 server.start(8123);
-
-var uuid = require('node-uuid');
-
-console.log(uuid.v1().replace(/[-]/gi, ''));

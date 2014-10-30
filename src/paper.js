@@ -103,8 +103,8 @@ function update(collection, _id, items, callback) {
 
     collection.update(
         {_id: _id},
-        {$set: newItems}
-        , callback);
+        {$set: newItems},
+        callback);
 }
 
 function load(req, res) {

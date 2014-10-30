@@ -9,6 +9,8 @@ var Result = function Result (data) {
 
 Result.prototype.setCode = function setCode(code) {
 	this.returnCode = code;
+
+    return this;
 };
 
 Result.prototype.toString = function toString() {

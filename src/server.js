@@ -69,6 +69,10 @@ app.close = function () {
     if (server !== null) {
         server.close();
     }
+
+    if (this.dbhelper) {
+        this.dbhelper.close();
+    }
 };
 
 module.exports = app;
