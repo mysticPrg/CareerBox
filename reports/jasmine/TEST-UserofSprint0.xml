@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-<testsuite name="User of Sprint#0" errors="0" tests="3" failures="0" time="0.528" timestamp="2014-10-31T17:48:49">
-  <testcase classname="User of Sprint#0" name="join to CareerBox" time="0.428"></testcase>
-  <testcase classname="User of Sprint#0" name="can do login and logout" time="0.037"></testcase>
+<testsuite name="User of Sprint#0" errors="0" tests="3" failures="0" time="0.677" timestamp="2014-10-31T17:58:40">
+  <testcase classname="User of Sprint#0" name="join to CareerBox" time="0.577"></testcase>
+  <testcase classname="User of Sprint#0" name="can do login and logout" time="0.038"></testcase>
   <testcase classname="User of Sprint#0" name="can do save and load the paper" time="0.062"></testcase>
 </testsuite>
 </testsuites>

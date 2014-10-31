@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="335"  lines-covered="244"  line-rate="0.7284"  branches-valid="62"  branches-covered="26"  branch-rate="0.4194"  timestamp="1414745329813" complexity="0" version="0.1">
+<coverage lines-valid="335"  lines-covered="244"  line-rate="0.7284"  branches-valid="62"  branches-covered="26"  branch-rate="0.4194"  timestamp="1414745920699" complexity="0" version="0.1">
 <sources>
 	<source>D:\git\CareerBoxServer</source>
 </sources>
