@@ -10,6 +10,7 @@ var paper = require('../../src/paper');
 
 var request = require('request');
 var async = require('async');
+var ObjectID = require('mongodb').ObjectID;
 
 var server_url = 'http://210.118.74.166:8223';
 
@@ -118,7 +119,9 @@ describe('User of Sprint#0', function () {
     });
 
     it('can do save and load the paper', function (done) {
+        var dbBackup = null;
         var user = {
+            _id: null,
             email: 'test@test.com',
             password: '1234'
         };
@@ -139,7 +142,7 @@ describe('User of Sprint#0', function () {
                 },
                 {
                     _id: '2',
-                    type: 'text',
+                    type: 'image',
                     pos: {
                         x: 100,
                         y: 150
@@ -150,7 +153,7 @@ describe('User of Sprint#0', function () {
                     }
                 }
             ]
-        }
+        };
 
         try {
             async.waterfall([
@@ -158,7 +161,8 @@ describe('User of Sprint#0', function () {
                     request.post({
                         url: server_url + '/member/login',
                         json: user,
-                        method: 'POST'
+                        method: 'POST',
+                        jar: true
                     }, callback);
                 },
                 function (res, body, callback) { // login check
@@ -170,12 +174,41 @@ describe('User of Sprint#0', function () {
                     request.post({
                         url: server_url + '/paper',
                         json: paper,
-                        method: 'POST'
+                        method: 'POST',
+                        jar: true
                     }, callback);
                 },
-                function (res, body, callback) { // logout check
+                function (res, body, callback) { // save check
                     expect(body.returnCode).toEqual('000');
                     callback(null);
+                },
+                function (callback) { // Open DB
+                    server.dbhelper.connect(callback);
+                },
+                function (db, callback) { // Open member collection
+                    dbBackup = db;
+                    db.collection('member', callback);
+                },
+                function (collection, callback) { // find ID and Pass
+                    collection.findOne({email: user.email}, function (err, result) {
+                        callback(err, collection, result);
+                    });
+                },
+                function (collection, findMember, callback) { // check ID and Pass
+                    expect(findMember.email).toEqual(user.email);
+                    expect(findMember.password).toEqual(user.password);
+                    user._id = new ObjectID(findMember._id).toHexString();
+                    callback();
+                },
+                function (callback) { // open paper collection
+                    dbBackup.collection('paper', callback);
+                },
+                function (collection, callback) { // find paper
+                    collection.findOne({_id: user._id}, callback);
+                },
+                function (findPaper, callback) { // check paper
+                    expect(findPaper.items['1']).toEqual(paper.items[0]);
+                    callback();
                 }
             ], function (err) {
                 if (err) {

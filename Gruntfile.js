@@ -15,11 +15,24 @@ module.exports = function (grunt) {
                 tasks: "test"
             }
         },
-        jasmine: {
-            src: ["src/**/*.js", "src/*.js"],
+        jasmine_node: {
+            coverage: {
+                savePath: "./reports/coverage/"
+            },
             options: {
-                specs: ["spec/*Spec.js", "spec/**/*Spec.js"]
-            }
+                forceExit: true,
+                match: '.',
+                matchall: false,
+                extensions: 'js',
+                specNameMatcher: 'spec',
+                jUnit: {
+                    report: true,
+                    savePath: "./reports/jasmine",
+                    useDotNotation: true,
+                    consolidate: true
+                }
+            },
+            all: ['spec/']
         },
         jshint: {
             all: [
@@ -34,7 +47,8 @@ module.exports = function (grunt) {
     });
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-jshint");
-    grunt.loadNpmTasks("grunt-contrib-jasmine");
-    grunt.registerTask("test", ["jshint", "jasmine"]);
+    grunt.loadNpmTasks("grunt-jasmine-node");
+    grunt.loadNpmTasks('grunt-jasmine-node-coverage');
+    grunt.registerTask("test", ["jshint", "jasmine_node"]);
     grunt.registerTask("default", ["test"]);
 };
