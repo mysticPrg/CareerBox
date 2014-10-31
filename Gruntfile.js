@@ -46,7 +46,16 @@ module.exports = function (grunt) {
                 "spec/**/*.js"
             ],
             options: {
-                jshintrc: ".jshintrc"
+                jshintrc: ".jshintrc",
+                reporter: require('jshint-jenkins-checkstyle-reporter'),
+                reporterOutput: 'report-jshint-checkstyle.xml'
+            }
+        },
+        jscpd: {
+            javascript: {
+                path: "src/**/*.js",
+                exclude: ['globalize/**', 'plugins/**'],
+                output: "jscpd.xml"
             }
         }
     });
@@ -56,6 +65,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-jasmine-node");
     grunt.loadNpmTasks('grunt-jasmine-node-coverage');
-    grunt.registerTask("test", ["jshint", "jasmine_node"]);
+    grunt.registerTask("test", ["jshint", "jscpd", "jasmine_node"]);
     grunt.registerTask("default", ["test"]);
 };

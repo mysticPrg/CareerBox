@@ -15,7 +15,7 @@
     "latedef": false,  // 정의가 사용보다 뒤에 있는지 검사
 
     "globals": {    // 전역적으로 사용할 이름들 정의
-        "it": true,
+//        "it": true,
         "describe": true,
         "beforeEach": true,
         "afterEach": true,
