@@ -8,8 +8,8 @@ var async = require('async');
 var Result = require('./result');
 var genID = require('./util/genID');
 
-var itemDao = require('./dao/itemDao');
-var paperDao = require('./dao/paperDao');
+//var itemDao = require('./dao/itemDao');
+//var paperDao = require('./dao/paperDao');
 
 var _server = null;
 

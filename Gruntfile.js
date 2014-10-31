@@ -15,7 +15,9 @@ module.exports = function (grunt) {
                 tasks: "test"
             }
         },
+        /* jshint -W106 */
         jasmine_node: {
+            /* jshint +W106 */
             coverage: {
                 savePath: "./reports/coverage/"
             },

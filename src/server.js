@@ -40,7 +40,7 @@ function allowCrossDomain(req, res, next) {
     }
 }
 
-morgan.token('session', function (req, res) {
+morgan.token('session', function (req) {
     return req.session.email;
 });
 

@@ -12,7 +12,7 @@ var request = require('request');
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
-var server_url = 'http://210.118.74.166:8223';
+var serverUrl = 'http://210.118.74.166:8223';
 
 describe('User of Sprint#0', function () {
 
@@ -32,7 +32,7 @@ describe('User of Sprint#0', function () {
         };
 
         request.post({
-                url: server_url + '/member/join',
+                url: serverUrl + '/member/join',
                 json: newMember,
                 method: 'POST'
             },
@@ -85,7 +85,7 @@ describe('User of Sprint#0', function () {
             async.waterfall([
                 function (callback) { // request login
                     request.post({
-                        url: server_url + '/member/login',
+                        url: serverUrl + '/member/login',
                         json: user,
                         method: 'POST'
                     }, callback);
@@ -97,7 +97,7 @@ describe('User of Sprint#0', function () {
                 },
                 function (callback) { // request logout
                     request.get({
-                        url: server_url + '/member/logout',
+                        url: serverUrl + '/member/logout',
                         json: {},
                         method: 'GET'
                     }, callback);
@@ -159,7 +159,7 @@ describe('User of Sprint#0', function () {
             async.waterfall([
                 function (callback) { // request login
                     request.post({
-                        url: server_url + '/member/login',
+                        url: serverUrl + '/member/login',
                         json: user,
                         method: 'POST',
                         jar: true
@@ -172,7 +172,7 @@ describe('User of Sprint#0', function () {
                 },
                 function (callback) { // request save
                     request.post({
-                        url: server_url + '/paper',
+                        url: serverUrl + '/paper',
                         json: paper,
                         method: 'POST',
                         jar: true

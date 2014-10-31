@@ -12,6 +12,7 @@ paperDao.prototype.add = function add(itemDao) {
 };
 
 paperDao.prototype.remove = function remove(itemId) {
+    console.log(itemId);
 };
 
 module.exports = paperDao;

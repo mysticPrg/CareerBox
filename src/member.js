@@ -109,10 +109,12 @@ function login(req, res) {
                     session._id = member._id;
                     result.setCode('000');
                 } else {
-                    if (session.email)
+                    if (session.email) {
                         delete session.email;
-                    if (session._id)
+                    }
+                    if (session._id) {
                         delete session._id;
+                    }
 
                     result.setCode('101');
                 }
@@ -140,10 +142,12 @@ function login(req, res) {
 function logout(req, res) {
     var session = req.session;
 
-    if (session.email)
+    if (session.email) {
         delete session.email;
-    if (session._id)
+    }
+    if (session._id) {
         delete session._id;
+    }
 
     res.writeHead(200, {
         'Content-Type': 'application/json'
@@ -175,8 +179,9 @@ function list(req, res) {
                 callback(null, null);
             }
         ], function result(err) {
-            if (err)
+            if (err) {
                 console.log(err.message);
+            }
 
             _server.dbhelper.close();
         });
@@ -198,8 +203,9 @@ function reset(req, res) {
                 collection.remove(null, {safe: true}, callback);
             }
         ], function result(err) {
-            if (err)
+            if (err) {
                 console.log(err.message);
+            }
 
             res.end();
         });
