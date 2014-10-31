@@ -5,6 +5,8 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
+        clean: ["./reports/*"],
+
         watch: {
             grunt: {
                 files: ["Gruntfile.js", "package.json"],
@@ -19,7 +21,8 @@ module.exports = function (grunt) {
         jasmine_node: {
             /* jshint +W106 */
             coverage: {
-                savePath: "./reports/coverage/"
+                savePath: "./reports/coverage/",
+                report: ["cobertura"]
             },
             options: {
                 forceExit: true,
@@ -47,6 +50,8 @@ module.exports = function (grunt) {
             }
         }
     });
+
+    grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-jasmine-node");

@@ -52,7 +52,7 @@ app.use(cookieParser());
 app.use(session({
     secret: 'careerkey',
     resave: true,
-    saveUninitialized: false,
+    saveUninitialized: false
 //    cookie: { secure: true },
 //    name: 'careerbox.session',
 //    rolling: true
@@ -66,7 +66,7 @@ app.start = function (port) {
 };
 
 app.close = function () {
-    if (server !== null) {
+    if (server) {
         server.close();
     }
 
