@@ -16,6 +16,7 @@
     <orderEntry type="library" name="Node.js v0.10.32 Core Modules" level="application" />
     <orderEntry type="library" name="node-uuid-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="jasmine-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="gruntjs-DefinitelyTyped" level="application" />
   </component>
 </module>
 
