@@ -5,8 +5,8 @@
 var testPort = 8223;
 
 var server;
-var member = require('../../src/member');
-var paper = require('../../src/paper');
+var member = require('../../src/services/member');
+var paper = require('../../src/services/paper');
 
 var request = require('request');
 var async = require('async');
@@ -14,10 +14,12 @@ var ObjectID = require('mongodb').ObjectID;
 
 var serverUrl = 'http://210.118.74.166:8223';
 
+var ItemDao = require('../../src/dao/itemDao');
+
 describe('User of Sprint#0', function () {
 
     beforeEach(function () {
-        server = require('../../src/server');
+        server = require('../../src/services/server');
 
         member.set(server);
         paper.set(server);
@@ -128,7 +130,7 @@ describe('User of Sprint#0', function () {
 
         var paper = {
             items: [
-                {
+                new ItemDao({
                     _id: '1',
                     type: 'text',
                     pos: {
@@ -139,8 +141,8 @@ describe('User of Sprint#0', function () {
                         width: 250,
                         height: 200
                     }
-                },
-                {
+                }),
+                new ItemDao({
                     _id: '2',
                     type: 'image',
                     pos: {
@@ -151,7 +153,7 @@ describe('User of Sprint#0', function () {
                         width: 250,
                         height: 200
                     }
-                }
+                })
             ]
         };
 

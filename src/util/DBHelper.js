@@ -2,7 +2,7 @@
  * Created by mysticPrg on 2014-10-09.
  */
 
-var DBHelper = function DBHelper() {
+function DBHelper() {
 //	this.server = new mongodb.Server('localhost', 27017, {auto_reconnect: true});
     this.client = require('mongodb').MongoClient;
     this.db = null;

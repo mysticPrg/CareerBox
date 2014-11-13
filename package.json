@@ -28,6 +28,7 @@
     "tough-cookie": "^0.12.1"
   },
   "dependencies": {
+    "amdefine": "^0.1.0",
     "async": "~0.9.0",
     "body-parser": "~1.8.3",
     "cookie-parser": "~1.3.3",
@@ -36,6 +37,7 @@
     "grunt-jscpd": "0.0.11",
     "mongodb": "~1.4.18",
     "morgan": "~1.3.1",
-    "node-uuid": "^1.4.1"
+    "node-uuid": "^1.4.1",
+    "requirejs": "^2.1.15"
   }
 }

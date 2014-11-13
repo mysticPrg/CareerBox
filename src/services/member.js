@@ -5,7 +5,7 @@
 var async = require('async');
 
 var Result = require('./result');
-var memberDao = require('./dao/memberDao');
+var memberDao = require('./../dao/memberDao');
 var _server = null;
 
 module.exports.set = function (server) {

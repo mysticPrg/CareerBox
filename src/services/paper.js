@@ -6,9 +6,9 @@
 var async = require('async');
 
 var Result = require('./result');
-var genID = require('./util/genID');
+var genID = require('./../util/genID');
 
-//var itemDao = require('./dao/itemDao');
+var ItemDao = require('./../dao/itemDao');
 //var paperDao = require('./dao/paperDao');
 
 var _server = null;
@@ -39,19 +39,20 @@ function save(req, res) {
 
     try {
         async.waterfall([
-            function openDB(callback) {
+            function (callback) { // openDB
                 _server.dbhelper.connect(callback);
             },
-            function openCollection(db, callback) {
+            function (db, callback) { // openCollection
                 db.collection('paper', function (err, collection) {
                     callback(err, collection, session._id);
                 });
             },
             existCheck,
             create,
-            function doUpdate(collection, callback) {
+            function (collection, callback) { // doUpdate
                 update(collection, session._id, req.body.items, callback);
-            }
+            },
+            del
         ], function sendResult(err) {
             if (err) {
                 console.log(err.message);
@@ -75,36 +76,61 @@ function existCheck(collection, _id, callback) {
 }
 
 function create(collection, paper, _id, callback) {
-	if (!paper) {
-		collection.insert({
-			_id: _id,
-			items: {}
-		}, null, function (err) {
-			callback(err, collection);
-		});
-	} else {
-		callback(null, collection);
-	}
+    if (!paper) {
+        collection.insert({
+            _id: _id,
+            items: {}
+        }, null, function (err) {
+            callback(err, collection);
+        });
+    } else {
+        callback(null, collection);
+    }
 }
 
 function update(collection, _id, items, callback) {
-
     var newItems = {};
 
     for (var key in items) {
         var item = items[key];
-        if (!item._id) {
+
+        if (item.state === 'new') {
             item._id = genID();
+        } else if (item.state === 'del:') {
+            continue;
         }
 
         var str = "items." + item._id;
-        newItems[str] = item;
+        newItems[str] = new ItemDao(item);
     }
 
     collection.update(
         {_id: _id},
         {$set: newItems},
-        callback);
+        function (err) {
+            callback(err, collection, _id, items);
+        }
+    );
+}
+
+function del(collection, _id, items, callback) {
+    var delItems = [];
+
+    for (var key in items) {
+        if (items[key].state === 'del') {
+            delItems.push(items[key]);
+        }
+    }
+
+    async.each(delItems, function (item, callback) {
+        collection.update(
+            {_id: _id},
+            {$unset: 'items.' + item.id},
+            callback
+        );
+    }, function (e) {
+        callback(e);
+    });
 }
 
 function load(req, res) {
