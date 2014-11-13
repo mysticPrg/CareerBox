@@ -14,8 +14,8 @@ var ItemDao = require('./../dao/itemDao');
 var _server = null;
 
 module.exports.set = function (server) {
-    server.post('/paper', save);
-    server.get('/paper', load);
+    server.post('/fortfolio/paper', save);
+    server.get('/fortpaper', load);
 
     _server = server;
 

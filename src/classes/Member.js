@@ -8,14 +8,23 @@ if (typeof define !== 'function') {
 
 define([], function () {
 
-    function Member() {
+    function Member(props) {
         this._id = null;
         this.email = '';
+        this.isFacebook = false;
         this.password = '';
-        this.token = null;
 
         // server only
-        this.timestamp = null;
+        this.timestamp = new Date();
+
+        if (props) {
+            this._id = props._id ? props._id : null;
+            this.email = props.email ? props.email : this.email;
+            this.isFacebook = props.isFacebook ? props.isFacebook : this.isFacebook;
+            this.password = props.password ? props.password : this.password;
+
+            this.timestamp = props.timestamp ? props.timestamp : this.timestamp;
+        }
     };
 
     return Member;

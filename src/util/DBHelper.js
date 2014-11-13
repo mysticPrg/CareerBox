@@ -2,6 +2,8 @@
  * Created by mysticPrg on 2014-10-09.
  */
 
+var async = require('async');
+
 function DBHelper() {
 //	this.server = new mongodb.Server('localhost', 27017, {auto_reconnect: true});
     this.client = require('mongodb').MongoClient;
@@ -22,6 +24,28 @@ DBHelper.prototype.connect = function connect(callback) {
         self.db = db;
         callback(err, db);
     });
+};
+
+DBHelper.prototype.connectAndOpen = function connectAndOpen(collectionName, callback) {
+
+    var self = this;
+
+    try {
+        async.waterfall([
+            function (cb) { // openDB
+                self.connect(cb);
+            }
+        ], function sendResult(err, db) {
+            if (err) {
+                console.log(err.message);
+                return;
+            }
+            db.collection(collectionName, callback);
+        });
+    } catch (err) {
+        console.log(err.message);
+    }
+
 };
 
 DBHelper.prototype.close = function close() {

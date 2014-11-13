@@ -12,19 +12,23 @@ define([], function () {
 
         this._id = null;
         this.title = '';
-        this.datetime = null;
+        this.timestamp = new Date();;
         this.description = '';
         this.thumbnail = null;
+
+        // server only
+        this._member_id = null;
 
         if (props) {
             this._id = props._id ? props._id : null;
             this.title = props.title ? props.title : this.title;
-            this.datetime = props.datetime ? props.datetime : this.datetime;
+            this.timestamp = props.timestamp ? props.timestamp : this.timestamp;
             this.description = props.description ? props.description : this.description;
+            this.thumbnail = props.thumbnail ? props.thumbnail : this.thumbnail;
+
+            this._member_id = props._member_id ? props._member_id : this._member_id;
         }
 
-        // server only
-        this._member_id = null;
     };
 
     return Portfolio;

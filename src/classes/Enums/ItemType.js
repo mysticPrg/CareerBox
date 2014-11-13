@@ -13,7 +13,7 @@ define([], function () {
         shape: 'shape',
         text: 'text',
         image: 'image',
-        link: 'link',
+        link: 'link'
     };
 
     return ItemType;

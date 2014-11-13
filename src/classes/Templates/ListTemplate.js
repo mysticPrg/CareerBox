@@ -12,9 +12,13 @@ define([
     'classes/Templates/Template'
 ], function (Util, ListType, Template) {
 
-    function ListTemplate() {
-        Template.call(this);
+    function ListTemplate(props) {
+        Template.call(this, props);
         this.listType = ListType.vertical;
+
+        if (props) {
+            this.listType = props.listType ? props.listType : this.listType;
+        }
     };
 
     Util.inherit(ListTemplate, Template);
