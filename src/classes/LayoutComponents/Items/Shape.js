@@ -8,11 +8,14 @@ if (typeof define !== 'function') {
 
 define([
     'classes/Util',
+    'classes/Enums/ShapeType',
     'classes/LayoutComponents/Items/Item'
-], function (Util, Item) {
+], function (Util, ShapeType, Item) {
 
     function Shape() {
         Item.call(this);
+
+        this.type = ShapeType.box;
     };
 
     Util.inherit(Shape, Item);

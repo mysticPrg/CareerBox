@@ -7,7 +7,7 @@ if (typeof define !== 'function') {
 }
 
 define([], function () {
-    function Page() {
+    function Paper() {
         this._id = null;
         this.articles = [];
 
@@ -15,5 +15,5 @@ define([], function () {
         this._portfolio_id = null;
     };
 
-    return Page;
+    return Paper;
 });

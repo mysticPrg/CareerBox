@@ -8,6 +8,10 @@ var async = require('async');
 var Result = require('./result');
 var genID = require('./../util/genID');
 
+var requirejs = require('../require.config');
+
+var Member = requirejs('classes/Member');
+
 var ItemDao = require('./../dao/itemDao');
 //var paperDao = require('./dao/paperDao');
 

@@ -7,7 +7,7 @@ var server = require('./src/services/server');
 var MemberService = require('./src/services/MemberService');
 var PortfolioService = require('./src/services/PortfolioService');
 var TemplateService = require('./src/services/TemplateService');
-var PaperService = require('./src/services/paper');
+var PaperService = require('./src/services/PaperService');
 
 MemberService.set(server);
 PortfolioService.set(server);

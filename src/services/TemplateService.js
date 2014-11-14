@@ -57,13 +57,13 @@ function createService(req, res) {
             function (collection, callback) { // create
                 collection.insert(newTemplate, callback);
             }
-        ], function sendResult(err) {
+        ], function sendResult(err, insertResult) {
             if (err) {
                 console.log(err.message);
                 return;
             }
 
-            var result = new Result(null);
+            var result = new Result(insertResult[0]._id);
             res.end(result.toString());
 
             _server.dbhelper.close();

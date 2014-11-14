@@ -9,7 +9,6 @@ var Member = requirejs('classes/Member');
 var async = require('async');
 
 var Result = require('./result');
-var memberDao = require('./../dao/memberDao');
 var _server = null;
 
 module.exports.set = function (server) {
@@ -92,7 +91,7 @@ function login(member, session, callback) {
 
                 if (existMember) {
                     session.email = existMember.email;
-                    session._id = existMember._id;
+                    session._id = existMember._id.toHexString();
                     callback(true);
                 } else {
                     if (member.isFacebook) {
@@ -146,6 +145,9 @@ function loginService(req, res) {
     var session = req.session;
     var result = new Result(null);
     var member = req.body.member;
+
+    session._id = '';
+    session.email = '';
 
     res.writeHead(200, {
         'Content-Type': 'application/json'

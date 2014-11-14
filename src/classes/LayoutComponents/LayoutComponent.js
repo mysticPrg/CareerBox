@@ -20,6 +20,7 @@ define([
         this.outline = new Outline();
         this.fill = new Fill();
         this.radius = 0;
+        this.rotate = 0;
     };
 
     return LayoutComponent;
