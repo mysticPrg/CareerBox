@@ -5,7 +5,7 @@
 var testPort = 8223;
 
 var server;
-var member = require('../../src/services/member');
+var member = require('../../src/services/MemberService');
 var paper = require('../../src/services/paper');
 
 var request = require('request');
@@ -21,7 +21,7 @@ describe('User of Sprint#0', function () {
     beforeEach(function () {
         server = require('../../src/services/server');
 
-        member.set(server);
+        MemberService.set(server);
         paper.set(server);
         server.start(testPort);
     });
