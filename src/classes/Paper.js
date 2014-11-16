@@ -10,7 +10,7 @@ define([], function (props) {
     function Paper() {
         this._id = null;
         this.articles = [];
-        this.templateRefs = [];
+        this.templateRefs = {};
 
         // server only
         this._portfolio_id = null;
