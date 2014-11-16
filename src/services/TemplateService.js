@@ -48,6 +48,7 @@ function createService(req, res) {
         newTemplate = new Template(newTemplate);
     }
     newTemplate._member_id = session._id;
+    newTemplate.version = 0;
 
     try {
         async.waterfall([
@@ -135,7 +136,7 @@ function getTemplateListService(req, res) {
         result.setCode('001');
         res.end(result.toString());
         return;
-    } else if (templateType !== TemplateType.article && templateType !== TemplateType.articleList && templateType !== TemplateType.section ) {
+    } else if (templateType !== TemplateType.article && templateType !== TemplateType.articleList && templateType !== TemplateType.section) {
         result.setCode('001');
         res.end(result.toString());
         return;
@@ -201,13 +202,22 @@ function updateService(req, res) {
     changedTemplate._member_id = session._id;
     changedTemplate._id = new ObjectID(changedTemplate._id);
 
+    delete changedTemplate.version;
+
     try {
         async.waterfall([
             function (callback) { // Open Collection
                 _server.dbhelper.connectAndOpen('template', callback);
             },
             function (collection, callback) { // update
-                collection.update({_id: changedTemplate._id}, changedTemplate, callback);
+                collection.update(
+                    {_id: changedTemplate._id},
+                    {
+                        $set: changedTemplate,
+                        $inc: {version: 1}
+                    },
+                    callback
+                );
             }
         ], function sendResult(err) {
             if (err) {
