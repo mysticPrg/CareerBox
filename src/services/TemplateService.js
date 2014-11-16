@@ -11,6 +11,7 @@ var TemplateType = requirejs('classes/Enums/TemplateType');
 var async = require('async');
 var Result = require('./result');
 var ObjectID = require('mongodb').ObjectID;
+var genID = require('../util/genID');
 
 var _server = null;
 
@@ -19,7 +20,7 @@ module.exports.set = function (server) {
 
     server.post('/template', createService);
     server.delete('/template', deleteService);
-    server.get('/template/:type', getTemplateListService);
+    server.get('/template/:templateType', getTemplateListService);
     server.put('/template', updateService);
 };
 
@@ -42,13 +43,17 @@ function createService(req, res) {
         return;
     }
 
-    if (newTemplate.itemType === TemplateType.articleList) {
+    if (newTemplate.templateType === TemplateType.articleList) {
         newTemplate = new ListTemplate(newTemplate);
     } else {
         newTemplate = new Template(newTemplate);
     }
     newTemplate._member_id = session._id;
     newTemplate.version = 0;
+
+    for (var k in newTemplate.target) {
+        newTemplate.target[k]._id = genID();
+    }
 
     try {
         async.waterfall([
@@ -122,7 +127,7 @@ function deleteService(req, res) {
 function getTemplateListService(req, res) {
     var session = req.session;
     var result = new Result(null);
-    var templateType = req.params.itemType;
+    var templateType = req.params.templateType;
 
     res.writeHead(200, {
         'Content-Type': 'application/json'
@@ -144,14 +149,14 @@ function getTemplateListService(req, res) {
 
     try {
         async.waterfall([
-            function (callback) { // Open Collection
-                _server.dbhelper.connectAndOpen('template', callback);
+            function (cb) { // Open Collection
+                _server.dbhelper.connectAndOpen('template', cb);
             },
-            function (collection, callback) { // find
+            function (collection, cb2) { // find
                 collection.find({
                     _member_id: session._id,
-                    type: templateType
-                }).toArray(callback);
+                    templateType: templateType
+                }).toArray(cb2);
             }
         ], function sendResult(err, templateList) {
             if (err) {
