@@ -12,7 +12,7 @@ define(['classes/Enums/TemplateType'], function (TemplateType) {
         this._id = null;
         this.version = 0;
         this.title = 'New Template';
-        this.type = TemplateType.article;
+        this.itemType = TemplateType.article;
         this.target = null;
         this.description = '';
         this.timestamp = new Date();
@@ -25,7 +25,7 @@ define(['classes/Enums/TemplateType'], function (TemplateType) {
             this._id = props._id ? props._id : null;
             this.version = props.version ? props.version : this.version;
             this.title = props.title ? props.title : this.title;
-            this.type = props.type ? props.type : this.type;
+            this.itemType = props.itemType ? props.itemType : this.itemType;
             this.target = props.target ? props.target : this.target;
             this.description = props.description ? props.description : this.description;
             this.timestamp = props.timestamp ? props.timestamp : this.timestamp;

@@ -15,7 +15,7 @@ define([
     function Icon() {
         Item.call(this);
 
-        this.type = IconType.asterisk;
+        this.iconType = IconType.asterisk;
     };
 
     Util.inherit(Icon, Item);

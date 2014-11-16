@@ -15,7 +15,7 @@ define([
     function Item() {
         LayoutComponent.call(this);
 
-        this.type = ItemType.shape;
+        this.itemType = ItemType.shape;
     };
 
     Util.inherit(Item, LayoutComponent);

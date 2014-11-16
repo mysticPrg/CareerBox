@@ -42,7 +42,7 @@ function createService(req, res) {
         return;
     }
 
-    if (newTemplate.type === TemplateType.articleList) {
+    if (newTemplate.itemType === TemplateType.articleList) {
         newTemplate = new ListTemplate(newTemplate);
     } else {
         newTemplate = new Template(newTemplate);
@@ -122,7 +122,7 @@ function deleteService(req, res) {
 function getTemplateListService(req, res) {
     var session = req.session;
     var result = new Result(null);
-    var templateType = req.params.type;
+    var templateType = req.params.itemType;
 
     res.writeHead(200, {
         'Content-Type': 'application/json'
@@ -194,7 +194,7 @@ function updateService(req, res) {
         return;
     }
 
-    if (changedTemplate.type === TemplateType.articleList) {
+    if (changedTemplate.itemType === TemplateType.articleList) {
         changedTemplate = new ListTemplate(changedTemplate);
     } else {
         changedTemplate = new Template(changedTemplate);

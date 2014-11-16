@@ -15,7 +15,7 @@ define([
     function Shape() {
         Item.call(this);
 
-        this.type = ShapeType.box;
+        this.shapeType = ShapeType.box;
     };
 
     Util.inherit(Shape, Item);
