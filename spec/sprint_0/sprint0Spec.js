@@ -132,7 +132,7 @@ describe('User of Sprint#0', function () {
             items: [
                 new ItemDao({
                     _id: '1',
-                    type: 'text',
+                    itemType: 'text',
                     pos: {
                         x: 100,
                         y: 150
@@ -144,7 +144,7 @@ describe('User of Sprint#0', function () {
                 }),
                 new ItemDao({
                     _id: '2',
-                    type: 'image',
+                    itemType: 'image',
                     pos: {
                         x: 100,
                         y: 150

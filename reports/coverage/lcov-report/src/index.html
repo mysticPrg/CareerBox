@@ -343,7 +343,7 @@
                 row[name + '_html'] = node.get('innerHTML');
                 row.classes[name] = node.getAttribute('class');
                 //Y.log('Name: ' + name + '; Value: ' + row[name]);
-                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+                if (cols[i].itemType === 'number') { row[name] = row[name] * 1; }
             }
             //Y.log(row);
             return row;
