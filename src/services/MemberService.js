@@ -36,14 +36,16 @@ function join(newMember, callback) {
             function (existObj, collection, cb) { // Insert
                 if (existObj) {
                     isExist = true;
-                    cb(null);
+                    cb(null, isExist, existObj);
                 } else {
                     isExist = false;
-                    collection.insert(newMember, cb);
+                    collection.insert(newMember, function(err, insertedMember) {
+                        cb(err, isExist, insertedMember[0]);
+                    });
                 }
             }
-        ], function (err) {
-            callback(err, isExist);
+        ], function (err, isExist, joinedMember) {
+            callback(err, isExist, joinedMember);
         });
     } catch (err) {
         console.log(err.message);
@@ -115,6 +117,9 @@ function joinService(req, res) {
 
     var result = new Result(null);
     var newMember = req.body.member;
+    var session = req.session;
+
+    session._id = '';
 
     res.writeHead(200, {
         'Content-Type': 'application/json'
@@ -127,7 +132,7 @@ function joinService(req, res) {
 
     newMember = new Member(newMember);
 
-    join(newMember, function (err, isExist) {
+    join(newMember, function (err, isExist, joinedMember) {
         if (err) {
             console.log(err.message);
             return;
@@ -135,6 +140,10 @@ function joinService(req, res) {
 
         if (isExist) {
             result.setCode('102');
+        } else {
+            result.setCode('000');
+            session._id = joinedMember._id.toHexString();
+            session.email = joinedMember.email;
         }
 
         res.end(result.toString());
