@@ -29,7 +29,11 @@ function join(newMember, callback) {
                 _server.dbhelper.connectAndOpen('member', cb);
             },
             function (collection, cb) { // Exist Check
-                collection.findOne({email: newMember.email}, function (err, existObj) {
+                collection.findOne({
+                    email: newMember.email,
+                    isFacebook: newMember.isFacebook,
+                    password: newMember.password
+                }, function (err, existObj) {
                     cb(err, existObj, collection);
                 });
             },
@@ -56,21 +60,21 @@ function findMember(member, callback) {
 
     try {
         async.waterfall([
-            function (callback) { // Open Collection
-                _server.dbhelper.connectAndOpen('member', callback);
+            function (cb) { // Open Collection
+                _server.dbhelper.connectAndOpen('member', cb);
             },
-            function (collection, callback) { // find email
+            function (collection, cb) { // find email
 
                 if (member.isFacebook) {
                     collection.findOne({
                         email: member.email,
                         isFacebook: true
-                    }, callback);
+                    }, cb);
                 } else {
                     collection.findOne({
                         email: member.email,
                         password: member.password
-                    }, callback);
+                    }, cb);
                 }
             }
         ], function (err, existMember) {
