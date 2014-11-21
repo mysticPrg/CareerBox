@@ -12,10 +12,14 @@ define([
     'classes/LayoutComponents/Items/Item'
 ], function (Util, IconType, Item) {
 
-    function Icon() {
-        Item.call(this);
+    function Icon(props) {
+        Item.call(this, props);
 
         this.iconType = IconType.asterisk;
+
+        if (props) {
+            this.iconType = props.iconType ? props.iconType : this.iconType;
+        }
     };
 
     Util.inherit(Icon, Item);

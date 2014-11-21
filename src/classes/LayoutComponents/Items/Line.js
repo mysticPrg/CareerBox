@@ -13,12 +13,18 @@ define([
     'classes/LayoutComponents/Items/Item'
 ], function (Util, Arrow, Position, Item) {
 
-    function Line() {
-        Item.call(this);
+    function Line(props) {
+        Item.call(this, props);
 
         this.arrow = new Arrow();
         this.pos_start = new Position();
         this.pos_end = new Position();
+
+        if (props) {
+            this.arrow = props.arrow ? props.arrow : this.arrow;
+            this.pos_start = props.pos_start ? props.pos_start : this.pos_start;
+            this.pos_end = props.pos_end ? props.pos_end : this.pos_end;
+        }
     };
 
     Util.inherit(Line, Item);

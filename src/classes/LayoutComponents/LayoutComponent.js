@@ -10,10 +10,11 @@ define([
     'classes/Structs/Size',
     'classes/Structs/Position',
     'classes/Structs/Outline',
-    'classes/Structs/Fill'
-], function (Size, Position, Outline, Fill) {
+    'classes/Structs/Fill',
+    'classes/Enums/LayoutComponentType'
+], function (Size, Position, Outline, Fill, LayoutComponentType) {
 
-    function LayoutComponent() {
+    function LayoutComponent(props) {
         this._id = null;
         this.size = new Size();
         this.pos = new Position();
@@ -21,6 +22,18 @@ define([
         this.fill = new Fill();
         this.radius = 0;
         this.rotate = 0;
+        this.layoutComponentType = LayoutComponentType.item;
+
+        if (props) {
+            this._id = props._id ? props._id : this._id;
+            this.size = props.size ? props.size : this.size;
+            this.pos = props.pos ? props.pos : this.pos;
+            this.outline = props.outline ? props.outline : this.outline;
+            this.fill = props.fill ? props.fill : this.fill;
+            this.radius = props.radius ? props.radius : this.radius;
+            this.rotate = props.rotate ? props.rotate : this.rotate;
+            this.layoutComponentType = props.layoutComponentType ? props.layoutComponentType : this.layoutComponentType;
+        }
     };
 
     return LayoutComponent;

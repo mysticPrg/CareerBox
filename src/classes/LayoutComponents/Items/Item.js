@@ -12,10 +12,14 @@ define([
     'classes/LayoutComponents/LayoutComponent'
 ], function (Util, ItemType, LayoutComponent) {
 
-    function Item() {
-        LayoutComponent.call(this);
+    function Item(props) {
+        LayoutComponent.call(this, props);
 
         this.itemType = ItemType.shape;
+
+        if (props) {
+            this.itemType = props.itemType ? props.itemType : this.itemType;
+        }
     };
 
     Util.inherit(Item, LayoutComponent);

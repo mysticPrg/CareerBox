@@ -12,11 +12,16 @@ define([
 
 ], function (Util, Text) {
 
-    function Link() {
-        Text.call(this);
+    function Link(props) {
+        Text.call(this, props);
 
         this.name = '';
         this.url = 'about:blank';
+
+        if (props) {
+            this.name = props.name ? props.name : this.name;
+            this.url = props.url ? props.url : this.url;
+        }
     };
 
     Util.inherit(Link, Text);

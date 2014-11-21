@@ -8,9 +8,14 @@ if (typeof define !== 'function') {
 
 define([], function () {
 
-    function Size() {
+    function Size(props) {
         this.width = 100;
         this.height = 100;
+
+        if (props) {
+            this.width = props.width ? props.width : this.width;
+            this.height = props.height ? props.height : this.height;
+        }
     };
 
     return Size;

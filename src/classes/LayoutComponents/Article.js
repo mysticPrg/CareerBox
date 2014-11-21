@@ -11,11 +11,20 @@ define([
     'classes/LayoutComponents/LayoutComponent'
 ], function (Util, LayoutComponent) {
 
-    function Article() {
-        LayoutComponent.call(this);
+    function Article(props) {
+        LayoutComponent.call(this, props);
 
         this._template_id = null;
-        this.items = [];
+        this.childArr = [];
+        this.rowCount = 1;
+        this.colCount = 1;
+
+        if (props) {
+            this._template_id = props._template_id ? props._template_id : this._template_id;
+            this.childArr = props.childArr ? props.childArr : this.childArr;
+            this.rowCount = props.rowCount ? props.rowCount : this.rowCount;
+            this.colCount = props.colCount ? props.colCount : this.colCount;
+        }
     };
 
     Util.inherit(Article, LayoutComponent);

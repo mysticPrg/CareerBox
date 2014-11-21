@@ -11,11 +11,16 @@ define([
     'classes/LayoutComponents/Items/Item'
 ], function (Util, Item) {
 
-    function Image() {
-        Item.call(this);
+    function Image(props) {
+        Item.call(this, props);
 
         this.name = '';
         this.thumbnail = '';
+
+        if (props) {
+            this.name = props.name ? props.name : this.name;
+            this.thumbnail = props.thumbnail ? props.thumbnail : this.thumbnail;
+        }
     };
 
     Util.inherit(Image, Item);

@@ -6,19 +6,19 @@ if (typeof define !== 'function') {
     var define = require('amdefine')(module);
 }
 
-define([], function (props) {
-    function Paper() {
+define([], function () {
+    function Paper(props) {
         this._id = null;
-        this.articles = [];
-        this.templateRefs = {};
+        this.childArr = [];
+        this.title = ''
 
         // server only
         this._portfolio_id = null;
 
         if ( props ) {
             this._id = props._id ? props._id : this._id;
-            this.articles = props.articles ? props.articles : this.articles;
-            this.templateRefs = props.templateRefs ? props.templateRefs : this.templateRefs;
+            this.childArr = props.childArr ? props.childArr : this.childArr;
+            this.title = props.title ? props.title : this.title;
 
             this._portfolio_id = props._portfolio_id ? props._portfolio_id : this._portfolio_id;
         }

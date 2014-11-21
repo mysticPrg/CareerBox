@@ -14,13 +14,20 @@ define([
     'classes/Structs/Font'
 ], function (Util, Item, Align, VerticalAlign, Font) {
 
-    function Text() {
-        Item.call(this);
+    function Text(props) {
+        Item.call(this, props);
 
         this.value = 'Text';
         this.font = new Font();
         this.align = Align.left;
         this.vAlign = VerticalAlign.middle;
+
+        if (props) {
+            this.value = props.value ? props.value : this.value;
+            this.font = props.font ? props.font : this.font;
+            this.align = props.align ? props.align : this.align;
+            this.vAlign = props.vAlign ? props.vAlign : this.vAlign;
+        }
     };
 
     Util.inherit(Text, Item);

@@ -8,9 +8,14 @@ if (typeof define !== 'function') {
 
 define([], function () {
 
-    function Position() {
+    function Position(props) {
         this.x = 0;
-        this.x = 0;
+        this.y = 0;
+
+        if (props) {
+            this.x = props.x ? props.x : this.x;
+            this.y = props.y ? props.y : this.y;
+        }
     };
 
     return Position;

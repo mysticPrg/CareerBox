@@ -13,7 +13,7 @@ define(['classes/Enums/TemplateType'], function (TemplateType) {
         this.version = 0;
         this.title = 'New Template';
         this.templateType = TemplateType.article;
-        this.target = [];
+        this.childArr = [];
         this.description = '';
         this.timestamp = new Date();
         this.thumbnail = null;
@@ -26,7 +26,7 @@ define(['classes/Enums/TemplateType'], function (TemplateType) {
             this.version = props.version ? props.version : this.version;
             this.title = props.title ? props.title : this.title;
             this.templateType = props.templateType ? props.templateType : this.templateType;
-            this.target = props.target ? props.target : this.target;
+            this.childArr = props.childArr ? props.childArr : this.childArr;
             this.description = props.description ? props.description : this.description;
             this.timestamp = props.timestamp ? props.timestamp : this.timestamp;
             this.thumbnail = props.thumbnail ? props.thumbnail : this.thumbnail;
@@ -38,7 +38,7 @@ define(['classes/Enums/TemplateType'], function (TemplateType) {
     Template.prototype.instanciate = function instanciate() {
         // TODO: 여기에 target을 복제하는 코드 작성
         console.log('instanciate!');
-        return this.target;
+        return this.childArr;
     };
 
     return Template;
