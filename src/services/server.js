@@ -63,6 +63,7 @@ app.use(allowCrossDomain);
 app.start = function (port) {
     server = http.createServer(app).listen(port);
     console.log('CareerBox Service Server Listening on port ' + port + '\n');
+    require('../util/DBCollections').getInstance().open();
 };
 
 app.close = function () {

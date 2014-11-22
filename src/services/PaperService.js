@@ -7,6 +7,7 @@
 var requirejs = require('../require.config');
 
 var Paper = requirejs('classes/Paper');
+var PaperDB = require('../db/PaperDB');
 
 var async = require('async');
 var Result = require('./result');
@@ -23,151 +24,137 @@ module.exports.set = function (server) {
     _server = server;
 };
 
+function checkErr(err) {
+    if (err) {
+        console.log(err.message);
+        return false;
+    }
+
+    return true;
+}
+
+function setResHeader(res) {
+    res.writeHead(200, {
+        'Content-Type': 'application/json'
+    });
+}
+
+function checkSession(req, res) {
+    if (!req.session._id) {
+
+        var result = new Result(null);
+        result.setCode('002');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function checkArgForPaper(req, res) {
+    if (!req.body.paper) {
+
+        var result = new Result(null);
+        result.setCode('001');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function checkArgForId(req, res) {
+    var _paper_id = req.body._id;
+    if (!req.body._id || !ObjectID.isValid(_paper_id)) {
+
+        var result = new Result(null);
+        result.setCode('001');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function checkArgForPortfolioId(req, res) {
+    if (!req.body._portfolio_id) {
+
+        var result = new Result(null);
+        result.setCode('001');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function sendResult(err, res, data) {
+    if (!checkErr(err)) {
+        return;
+    }
+
+    var result = new Result(data);
+    res.end(result.toString());
+}
+
 function createService(req, res) {
     var session = req.session;
-    var result = new Result(null);
     var newPaper = req.body.paper;
     var _portfolio_id = req.body._portfolio_id;
 
-    res.writeHead(200, {
-        'Content-Type': 'application/json'
-    });
-
-    if (!session._id) {
-        result.setCode('002');
-        res.end(result.toString());
+    setResHeader(res);
+    if (!checkSession(req, res)) {
         return;
-    } else if (!newPaper) {
-        result.setCode('001');
-        res.end(result.toString());
+    }
+    if (!checkArgForPaper(req, res)) {
         return;
-    } else if (!_portfolio_id) {
-        result.setCode('001');
-        res.end(result.toString());
+    }
+    if (!checkArgForPortfolioId(req, res)) {
         return;
     }
 
-    newPaper = new Paper(newPaper);
     newPaper._member_id = session._id;
     newPaper._portfolio_id = _portfolio_id;
 
-    try {
-        async.waterfall([
-            function (callback) { // Open Collection
-                _server.dbhelper.connectAndOpen('paper', callback);
-            },
-            function (collection, callback) { // create
-                collection.insert(newPaper, callback);
-            }
-        ], function sendResult(err, insertResult) {
-            if (err) {
-                console.log(err.message);
-                return;
-            }
-
-            var result = new Result(insertResult[0]._id);
-            res.end(result.toString());
-
-            _server.dbhelper.close();
-        });
-    } catch (err) {
-        console.log(err.message);
-    }
+    PaperDB.create(newPaper, function (err, created) {
+        sendResult(err, res, created);
+    });
 }
 
 function deleteService(req, res) {
-    var session = req.session;
-    var result = new Result(null);
     var _paper_id = req.body._id;
 
-    res.writeHead(200, {
-        'Content-Type': 'application/json'
+    setResHeader(res);
+    if (!checkSession(req, res)) {
+        return;
+    }
+    if (!checkArgForId(req, res)) {
+        return;
+    }
+
+    PaperDB.remove(_paper_id, function (err) {
+        sendResult(err, res, null);
     });
-
-    if (!session._id) {
-        result.setCode('002');
-        res.end(result.toString());
-        return;
-    } else if (!_paper_id) {
-        result.setCode('001');
-        res.end(result.toString());
-        return;
-    }
-
-    try {
-        async.waterfall([
-            function (callback) { // Open Collection
-                _server.dbhelper.connectAndOpen('paper', callback);
-            },
-            function (collection, callback) { // delete
-                collection.remove({
-                    _id: new ObjectID(_paper_id)
-                }, callback);
-            }
-        ], function sendResult(err) {
-            if (err) {
-                console.log(err.message);
-                return;
-            }
-
-            var result = new Result(null);
-            res.end(result.toString());
-
-            _server.dbhelper.close();
-        });
-    } catch (err) {
-        console.log(err.message);
-    }
 }
 
 function loadService(req, res) {
-    var session = req.session;
-    var result = new Result(null);
     var _paper_id = req.params._id;
 
-    res.writeHead(200, {
-        'Content-Type': 'application/json'
+    setResHeader(res);
+    if (!checkSession(req, res)) {
+        return;
+    }
+    if (!checkArgForId(req, res)) {
+        return;
+    }
+
+    PaperDB.get(_paper_id, function(err, paper) {
+        sendResult(err, res, paper);
     });
-
-    if (!session._id) {
-        result.setCode('002');
-        res.end(result.toString());
-        return;
-    } else if (!ObjectID.isValid(_paper_id)) {
-        result.setCode('001');
-        res.end(result.toString());
-        return;
-    }
-
-    try {
-        async.waterfall([
-            function (callback) { // Open Collection
-                _server.dbhelper.connectAndOpen('paper', callback);
-            },
-            function (collection, callback) { // find
-                collection.findOne({
-                    _id: new ObjectID(_paper_id)
-                }, callback);
-            }
-        ], function sendResult(err, paper) {
-            if (err) {
-                console.log(err.message);
-                return;
-            }
-
-            if ( paper ) {
-                delete paper._portfolio_id;
-            }
-
-            var result = new Result(null);
-            result.result = paper;
-            res.end(result.toString());
-
-            _server.dbhelper.close();
-        });
-    } catch (err) {
-        console.log(err.message);
-    }
 }
 
 function updateService(req, res) {
@@ -175,44 +162,18 @@ function updateService(req, res) {
     var result = new Result(null);
     var changedPaper = req.body.paper;
 
-    res.writeHead(200, {
-        'Content-Type': 'application/json'
-    });
-
-    if (!session._id) {
-        result.setCode('002');
-        res.end(result.toString());
+    setResHeader(res);
+    if (!checkSession(req, res)) {
         return;
-    } else if (!changedPaper) {
-        result.setCode('001');
-        res.end(result.toString());
+    }
+    if (!checkArgForPaper(req, res)) {
         return;
     }
 
-    changedPaper = new Paper(changedPaper);
-    changedPaper._member_id = session._id;
+//    changedPaper = new Paper(changedPaper);
+//    changedPaper._member_id = session._id;
     changedPaper._id = new ObjectID(changedPaper._id);
-
-    try {
-        async.waterfall([
-            function (callback) { // Open Collection
-                _server.dbhelper.connectAndOpen('portfolio', callback);
-            },
-            function (collection, callback) { // update
-                collection.update({_id: changedPaper._id}, changedPaper, callback);
-            }
-        ], function sendResult(err) {
-            if (err) {
-                console.log(err.message);
-                return;
-            }
-
-            var result = new Result(null);
-            res.end(result.toString());
-
-            _server.dbhelper.close();
-        });
-    } catch (err) {
-        console.log(err.message);
-    }
+    PaperDB.update(changedPaper, function(err) {
+        sendResult(err, res, null);
+    });
 }

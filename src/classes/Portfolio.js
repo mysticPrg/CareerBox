@@ -15,6 +15,7 @@ define([], function () {
         this.timestamp = new Date();;
         this.description = '';
         this.thumbnail = null;
+        this.papers = [];
 
         // server only
         this._member_id = null;
@@ -25,6 +26,7 @@ define([], function () {
             this.timestamp = props.timestamp ? props.timestamp : this.timestamp;
             this.description = props.description ? props.description : this.description;
             this.thumbnail = props.thumbnail ? props.thumbnail : this.thumbnail;
+            this.papers = props.papers ? props.papers : this.papers;
 
             this._member_id = props._member_id ? props._member_id : this._member_id;
         }

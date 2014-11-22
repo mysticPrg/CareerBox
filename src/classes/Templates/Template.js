@@ -10,7 +10,6 @@ define(['classes/Enums/TemplateType'], function (TemplateType) {
 
     function Template(props) {
         this._id = null;
-        this.version = 0;
         this.title = 'New Template';
         this.templateType = TemplateType.article;
         this.childArr = [];
@@ -23,7 +22,6 @@ define(['classes/Enums/TemplateType'], function (TemplateType) {
 
         if (props) {
             this._id = props._id ? props._id : null;
-            this.version = props.version ? props.version : this.version;
             this.title = props.title ? props.title : this.title;
             this.templateType = props.templateType ? props.templateType : this.templateType;
             this.childArr = props.childArr ? props.childArr : this.childArr;

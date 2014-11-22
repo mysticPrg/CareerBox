@@ -12,15 +12,10 @@ define([], function () {
         this.childArr = [];
         this.title = ''
 
-        // server only
-        this._portfolio_id = null;
-
         if ( props ) {
             this._id = props._id ? props._id : this._id;
             this.childArr = props.childArr ? props.childArr : this.childArr;
             this.title = props.title ? props.title : this.title;
-
-            this._portfolio_id = props._portfolio_id ? props._portfolio_id : this._portfolio_id;
         }
     };
 
