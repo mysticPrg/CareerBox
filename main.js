@@ -2,7 +2,6 @@
  * Created by mysticPrg on 2014-09-22.
  */
 
-
 var capture = require('./src/util/Capture');
 var genID = require('./src/util/genID');
 
@@ -25,3 +24,16 @@ server.get('/capture', function(req, res) {
 });
 
 server.start(8123);
+
+//var capture = require('./src/util/Capture');
+//capture('<div></div>', 'test');
+
+//var $ = require('jquerygo');
+//$.config.addJQuerty = false;
+//$('<html><div></div></html>', function() {
+//    $('div').html('testcodeHTml', function() {
+//        $('html').html(function (result) {
+//            console.log(result);
+//        })
+//    })
+//})

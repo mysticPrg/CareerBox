@@ -62,7 +62,7 @@ function update(data, callback) {
             $set: template
         },
         function(err, updated) {
-            PaperDB.refreshTempalteData(updated[0], function(err2) {
+            PaperDB.refreshTempalteData(template, function(err2) {
                 callback(err2)
             })
         }
