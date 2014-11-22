@@ -2,202 +2,140 @@
  * Created by mysticPrg on 2014-10-09.
  */
 
-var requirejs = require('../require.config');
-
-var Member = requirejs('classes/Member');
-
-var async = require('async');
+var MemberDB = require('../db/MemberDB');
 
 var Result = require('./result');
-var _server = null;
 
 module.exports.set = function (server) {
     server.post('/member/join', joinService);
     server.post('/member/login', loginService);
     server.get('/member/logout', logoutService);
-
-    _server = server;
 };
 
-function join(newMember, callback) {
 
-    var isExist = false;
-
-    try {
-        async.waterfall([
-            function (cb) { // Open Collection
-                _server.dbhelper.connectAndOpen('member', cb);
-            },
-            function (collection, cb) { // Exist Check
-                collection.findOne({
-                    email: newMember.email,
-                    isFacebook: newMember.isFacebook,
-                    password: newMember.password
-                }, function (err, existObj) {
-                    cb(err, existObj, collection);
-                });
-            },
-            function (existObj, collection, cb) { // Insert
-                if (existObj) {
-                    isExist = true;
-                    cb(null, isExist, existObj);
-                } else {
-                    isExist = false;
-                    collection.insert(newMember, function(err, insertedMember) {
-                        cb(err, isExist, insertedMember[0]);
-                    });
-                }
-            }
-        ], function (err, isExist, joinedMember) {
-            callback(err, isExist, joinedMember);
-        });
-    } catch (err) {
+function checkErr(err) {
+    if (err) {
         console.log(err.message);
+        return false;
     }
+
+    return true;
 }
 
-function findMember(member, callback) {
-
-    try {
-        async.waterfall([
-            function (cb) { // Open Collection
-                _server.dbhelper.connectAndOpen('member', cb);
-            },
-            function (collection, cb) { // find email
-
-                if (member.isFacebook) {
-                    collection.findOne({
-                        email: member.email,
-                        isFacebook: true
-                    }, cb);
-                } else {
-                    collection.findOne({
-                        email: member.email,
-                        password: member.password
-                    }, cb);
-                }
-            }
-        ], function (err, existMember) {
-            _server.dbhelper.close();
-            callback(err, existMember);
-        });
-    } catch (err) {
-        console.log(err.message);
-    }
-}
-
-function login(member, session, callback) {
-
-    try {
-        async.waterfall([
-            function (cb) {
-                findMember(member, cb);
-            },
-            function (existMember) { // Exist Check
-
-                if (existMember) {
-                    session.email = existMember.email;
-                    session._id = existMember._id.toHexString();
-                    callback(true);
-                } else {
-                    if (member.isFacebook) {
-                        join(member, function () {
-                            login(member, session, callback);
-                        });
-                    } else {
-                        // login failed
-                        callback(false);
-                    }
-                }
-
-            }
-        ]);
-    } catch (err) {
-        console.log(err.message);
-    }
-}
-
-function joinService(req, res) {
-
-    var result = new Result(null);
-    var newMember = req.body.member;
-    var session = req.session;
-
-    session._id = '';
-
+function setResHeader(res) {
     res.writeHead(200, {
         'Content-Type': 'application/json'
     });
+}
 
-    if (!newMember.email) {
-        res.end(new Result(null).setCode('001').toString());
+function checkSession(req, res) {
+    if (!req.session._id) {
+
+        var result = new Result(null);
+        result.setCode('002');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function checkArgForMember(req, res) {
+    if (!req.body.member) {
+
+        var result = new Result(null);
+        result.setCode('001');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function sendResult(err, res, data, returnCode) {
+    if (!checkErr(err)) {
         return;
     }
 
-    newMember = new Member(newMember);
-
-    join(newMember, function (err, isExist, joinedMember) {
-        if (err) {
-            console.log(err.message);
-            return;
-        }
-
-        if (isExist) {
-            result.setCode('102');
-        } else {
-            result.setCode('000');
-            session._id = joinedMember._id.toHexString();
-            session.email = joinedMember.email;
-        }
-
-        res.end(result.toString());
-    });
+    var result = new Result(data);
+    if (returnCode) {
+        result.setCode(returnCode);
+    }
+    res.end(result.toString());
 }
 
-function loginService(req, res) {
+
+function joinService(req, res) {
     var session = req.session;
-    var result = new Result(null);
     var member = req.body.member;
 
     session._id = '';
     session.email = '';
 
-    res.writeHead(200, {
-        'Content-Type': 'application/json'
-    });
-
-    if (!member.email) {
-        res.end(new Result(null).setCode('001').toString());
+    setResHeader(res);
+    if (!checkArgForMember(req, res)) {
         return;
     }
 
-    member = new Member(member);
-
-    login(member, session, function(loginIsSuccessed) {
-        if ( loginIsSuccessed ) {
-            result.setCode('000');
-        } else {
-            result.setCode('101');
+    MemberDB.isExistEmail(member.email, member.isFacebook, function (err, findMember) {
+        if (findMember) {
+            sendResult(err, res, null, '102');
+            return;
         }
-        res.end(result.toString());
+
+        MemberDB.create(member, function (err, created) {
+            session._id = created._id;
+            session.email = created.email;
+
+            sendResult(err, res, null);
+        });
     });
+}
 
+function loginService(req, res) {
+    var session = req.session;
+    var member = req.body.member;
 
+    session._id = '';
+    session.email = '';
+
+    setResHeader(res);
+    if (!checkArgForMember(req, res)) {
+        return;
+    }
+
+    MemberDB.isExistEmail(member.email, member.isFacebook, function (err, findMember) {
+        if (findMember) {
+            session._id = findMember._id.toHexString();
+            session.email = findMember.email;
+
+            sendResult(err, res, null);
+        } else if (member.isFacebook) {
+            MemberDB.create(member, function (err, created) {
+                session._id = created[0]._id.toHexString();
+                session.email = created[0].email;
+
+                sendResult(err, res, null);
+            });
+        } else {
+            sendResult(err, res, null, '101');
+        }
+
+    });
 }
 
 function logoutService(req, res) {
     var session = req.session;
 
-    if (session.email) {
-        delete session.email;
-    }
+    setResHeader(res);
     if (session._id) {
         delete session._id;
     }
+    if (session.email) {
+        delete session.email;
+    }
 
-    res.writeHead(200, {
-        'Content-Type': 'application/json'
-    });
-    var result = new Result(null);
-    res.end(result.toString());
+    sendResult(null, res, null);
 }

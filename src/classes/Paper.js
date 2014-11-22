@@ -10,12 +10,17 @@ define([], function () {
     function Paper(props) {
         this._id = null;
         this.childArr = [];
-        this.title = ''
+        this.title = '';
+
+        // server only
+        this._member_id = null;
 
         if ( props ) {
             this._id = props._id ? props._id : this._id;
             this.childArr = props.childArr ? props.childArr : this.childArr;
             this.title = props.title ? props.title : this.title;
+
+            this._member_id = props._member_id ? props._member_id : this._member_id;
         }
     };
 

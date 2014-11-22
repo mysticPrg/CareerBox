@@ -5,6 +5,8 @@
 var requirejs = require('../require.config');
 var Template = requirejs('classes/Templates/Template');
 
+var PaperDB = require('./PaperDB');
+
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
@@ -59,7 +61,11 @@ function update(data, callback) {
         {
             $set: template
         },
-        callback
+        function(err, updated) {
+            PaperDB.refreshTempalteData(updated[0], function(err2) {
+                callback(err2)
+            })
+        }
     );
 }
 

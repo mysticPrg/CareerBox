@@ -41,11 +41,31 @@ function update(data, callback) {
     );
 }
 
+function refreshTemplateData(template, callback) {
+    var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
+
+    paperCollection.update(
+        {
+            _member_id: template._member_id,
+            childArr: {$elemMatch: {_template_id: template._id}}
+        },
+        {
+            $set: {
+                'childArr.$': template
+            }
+        },
+        {
+            multi: true
+        },
+        callback);
+}
+
 var exports = {
     create: create,
     get: get,
     remove: remove,
-    update: update
+    update: update,
+    refreshTempalteData: refreshTemplateData
 }
 
 module.exports = exports;

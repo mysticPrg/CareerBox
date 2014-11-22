@@ -21,7 +21,6 @@ module.exports.set = function (server) {
     server.post('/template', createOrUpdateService);
     server.delete('/template', deleteService);
     server.get('/template/:templateType', getTemplateListService);
-//    server.post('/template', updateService);
 };
 
 function checkErr(err) {
@@ -126,7 +125,7 @@ function createOrUpdateService(req, res) {
         }
 
         TemplateDB.create(newTemplate, function (err, created) {
-            sendResult(err, res, created[0]._id);
+            sendResult(err, res, created[0]._id.toHexString());
         });
     }
 }

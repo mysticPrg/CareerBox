@@ -4,24 +4,16 @@
  */
 
 
-var requirejs = require('../require.config');
-
-var Paper = requirejs('classes/Paper');
 var PaperDB = require('../db/PaperDB');
 
-var async = require('async');
 var Result = require('./result');
 var ObjectID = require('mongodb').ObjectID;
-
-var _server = null;
 
 module.exports.set = function (server) {
     server.post('/portfolio/paper', createService);
     server.delete('/portfolio/paper', deleteService);
     server.get('/portfolio/paper/:_id', loadService);
     server.put('/portfolio/paper', updateService);
-
-    _server = server;
 };
 
 function checkErr(err) {
@@ -121,7 +113,7 @@ function createService(req, res) {
     newPaper._portfolio_id = _portfolio_id;
 
     PaperDB.create(newPaper, function (err, created) {
-        sendResult(err, res, created);
+        sendResult(err, res, created[0]._id.toHexString());
     });
 }
 
@@ -159,7 +151,6 @@ function loadService(req, res) {
 
 function updateService(req, res) {
     var session = req.session;
-    var result = new Result(null);
     var changedPaper = req.body.paper;
 
     setResHeader(res);
@@ -170,8 +161,7 @@ function updateService(req, res) {
         return;
     }
 
-//    changedPaper = new Paper(changedPaper);
-//    changedPaper._member_id = session._id;
+    changedPaper._member_id = session._id;
     changedPaper._id = new ObjectID(changedPaper._id);
     PaperDB.update(changedPaper, function(err) {
         sendResult(err, res, null);
