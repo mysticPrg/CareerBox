@@ -59,6 +59,7 @@ app.use(session({
 }));
 app.use(morgan(':remote-addr :session [:date], :method :url :response-time ms [:status]'));
 app.use(allowCrossDomain);
+app.use('/res', express.static(__dirname + '/../../res'));
 
 app.start = function (port) {
     server = http.createServer(app).listen(port);

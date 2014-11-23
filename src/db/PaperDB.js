@@ -5,6 +5,7 @@
 
 var requirejs = require('../require.config');
 var Paper = requirejs('classes/Paper');
+var PaperInfo = requirejs('classes/Structs/PaperInfo');
 
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
@@ -20,6 +21,22 @@ function get(_id, callback) {
     var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
 
     paperCollection.findOne({'_id': new ObjectID(_id)}, callback);
+}
+
+function getList(_portfolio_id, callback) {
+    var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
+
+    var resultList = [];
+    paperCollection.find({'_portfolio_id': _portfolio_id}).toArray(function(err, list) {
+        for ( var i=0 ; i<list.length ; i++ ) {
+            resultList.push(new PaperInfo({
+                _portfolio_id: list[i]._portfolio_id,
+                title: list[i].title
+            }));
+        }
+
+        callback(err, list);
+    });
 }
 
 function remove(_id, callback) {
@@ -63,6 +80,7 @@ function refreshTemplateData(template, callback) {
 var exports = {
     create: create,
     get: get,
+    getList: getList,
     remove: remove,
     update: update,
     refreshTempalteData: refreshTemplateData

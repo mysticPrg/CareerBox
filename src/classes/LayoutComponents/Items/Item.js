@@ -9,12 +9,14 @@ if (typeof define !== 'function') {
 define([
     'classes/Util',
     'classes/Enums/ItemType',
+    'classes/Enums/LayoutComponentType',
     'classes/LayoutComponents/LayoutComponent'
-], function (Util, ItemType, LayoutComponent) {
+], function (Util, ItemType, LayoutComponentType, LayoutComponent) {
 
     function Item(props) {
         LayoutComponent.call(this, props);
 
+        this.layoutComponentType = LayoutComponentType.item;
         this.itemType = ItemType.shape;
 
         if (props) {

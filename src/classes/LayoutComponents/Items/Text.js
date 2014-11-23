@@ -11,12 +11,14 @@ define([
     'classes/LayoutComponents/Items/Item',
     'classes/Enums/Align',
     'classes/Enums/VerticalAlign',
+    'classes/Enums/ItemType',
     'classes/Structs/Font'
-], function (Util, Item, Align, VerticalAlign, Font) {
+], function (Util, Item, Align, VerticalAlign, ItemType, Font) {
 
     function Text(props) {
         Item.call(this, props);
 
+        this.itemType = ItemType.text;
         this.value = 'Text';
         this.font = new Font();
         this.align = Align.left;

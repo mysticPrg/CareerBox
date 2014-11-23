@@ -8,12 +8,14 @@ if (typeof define !== 'function') {
 
 define([
     'classes/Util',
+    'classes/Enums/ItemType',
     'classes/LayoutComponents/Items/Item'
-], function (Util, Item) {
+], function (Util, ItemType, Item) {
 
     function Image(props) {
         Item.call(this, props);
 
+        this.itemType = ItemType.image;
         this.name = '';
         this.thumbnail = '';
 

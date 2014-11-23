@@ -8,13 +8,15 @@ if (typeof define !== 'function') {
 
 define([
     'classes/Util',
+    'classes/Enums/ItemType',
     'classes/LayoutComponents/Items/Text'
 
-], function (Util, Text) {
+], function (Util, ItemType, Text) {
 
     function Link(props) {
         Text.call(this, props);
 
+        this.itemType = ItemType.link;
         this.name = '';
         this.url = 'about:blank';
 

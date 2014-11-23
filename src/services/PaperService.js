@@ -9,11 +9,13 @@ var PaperDB = require('../db/PaperDB');
 var Result = require('./result');
 var ObjectID = require('mongodb').ObjectID;
 
+var genID = require('../util/genID');
+
 module.exports.set = function (server) {
-    server.post('/portfolio/paper', createService);
+    server.post('/portfolio/paper', createOrUpdateService);
     server.delete('/portfolio/paper', deleteService);
     server.get('/portfolio/paper/:_id', loadService);
-    server.put('/portfolio/paper', updateService);
+    server.post('/portfolio/paperList', loadListService);
 };
 
 function checkErr(err) {
@@ -57,9 +59,23 @@ function checkArgForPaper(req, res) {
     return true;
 }
 
-function checkArgForId(req, res) {
+function checkArgForIdOnParams(req, res) {
+    var _paper_id = req.params._id;
+    if (!_paper_id || !ObjectID.isValid(_paper_id)) {
+
+        var result = new Result(null);
+        result.setCode('001');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function checkArgForIdOnBody(req, res) {
     var _paper_id = req.body._id;
-    if (!req.body._id || !ObjectID.isValid(_paper_id)) {
+    if (!_paper_id || !ObjectID.isValid(_paper_id)) {
 
         var result = new Result(null);
         result.setCode('001');
@@ -93,7 +109,7 @@ function sendResult(err, res, data) {
     res.end(result.toString());
 }
 
-function createService(req, res) {
+function createOrUpdateService(req, res) {
     var session = req.session;
     var newPaper = req.body.paper;
     var _portfolio_id = req.body._portfolio_id;
@@ -112,9 +128,22 @@ function createService(req, res) {
     newPaper._member_id = session._id;
     newPaper._portfolio_id = _portfolio_id;
 
-    PaperDB.create(newPaper, function (err, created) {
-        sendResult(err, res, created[0]._id.toHexString());
-    });
+    for (var k in newPaper.childArr) {
+        if (!newPaper.childArr[k]._id) {
+            newPaper.childArr[k]._id = genID();
+        }
+    }
+
+    if (newPaper._id) {
+        newPaper._id = new ObjectID(newPaper._id);
+        PaperDB.update(newPaper, function(err) {
+            sendResult(err, res, null);
+        });
+    } else {
+        PaperDB.create(newPaper, function (err, created) {
+            sendResult(err, res, created[0]._id);
+        });
+    }
 }
 
 function deleteService(req, res) {
@@ -124,7 +153,7 @@ function deleteService(req, res) {
     if (!checkSession(req, res)) {
         return;
     }
-    if (!checkArgForId(req, res)) {
+    if (!checkArgForIdOnBody(req, res)) {
         return;
     }
 
@@ -140,7 +169,7 @@ function loadService(req, res) {
     if (!checkSession(req, res)) {
         return;
     }
-    if (!checkArgForId(req, res)) {
+    if (!checkArgForIdOnParams(req, res)) {
         return;
     }
 
@@ -149,21 +178,18 @@ function loadService(req, res) {
     });
 }
 
-function updateService(req, res) {
-    var session = req.session;
-    var changedPaper = req.body.paper;
+function loadListService(req, res) {
+    var _portfolio_id = req.body._portfolio_id;
 
     setResHeader(res);
     if (!checkSession(req, res)) {
         return;
     }
-    if (!checkArgForPaper(req, res)) {
+    if (!checkArgForPortfolioId(req, res)) {
         return;
     }
 
-    changedPaper._member_id = session._id;
-    changedPaper._id = new ObjectID(changedPaper._id);
-    PaperDB.update(changedPaper, function(err) {
-        sendResult(err, res, null);
+    PaperDB.getList(_portfolio_id, function(err, list) {
+        sendResult(err, res, list);
     });
 }

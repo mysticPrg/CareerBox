@@ -114,16 +114,20 @@ function createOrUpdateService(req, res) {
 
     newTemplate._member_id = req.session._id;
 
+    for (var k in newTemplate.childArr) {
+        if (!newTemplate.childArr[k]._id) {
+            newTemplate.childArr[k]._id = genID();
+        }
+    }
+
     if (newTemplate._id) {
+        console.log(newTemplate._id);
         newTemplate._id = new ObjectID(newTemplate._id);
+
         TemplateDB.update(newTemplate, function (err) {
             sendResult(err, res, null);
         });
     } else {
-        for (var k in newTemplate.childArr) {
-            newTemplate.childArr[k]._id = genID();
-        }
-
         TemplateDB.create(newTemplate, function (err, created) {
             sendResult(err, res, created[0]._id.toHexString());
         });

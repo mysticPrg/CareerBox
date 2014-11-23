@@ -9,12 +9,14 @@ if (typeof define !== 'function') {
 define([
     'classes/Util',
     'classes/Enums/IconType',
+    'classes/Enums/ItemType',
     'classes/LayoutComponents/Items/Item'
-], function (Util, IconType, Item) {
+], function (Util, IconType, ItemType, Item) {
 
     function Icon(props) {
         Item.call(this, props);
 
+        this.itemType = ItemType.icon;
         this.iconType = IconType.asterisk;
 
         if (props) {

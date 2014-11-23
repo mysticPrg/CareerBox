@@ -16,6 +16,7 @@ define([
 
     function LayoutComponent(props) {
         this._id = null;
+        this.zOrder = 0;
         this.size = new Size();
         this.pos = new Position();
         this.outline = new Outline();
@@ -26,6 +27,7 @@ define([
 
         if (props) {
             this._id = props._id ? props._id : this._id;
+            this.zOrder = props.zOrder ? props.zOrder : this.zOrder;
             this.size = props.size ? props.size : this.size;
             this.pos = props.pos ? props.pos : this.pos;
             this.outline = props.outline ? props.outline : this.outline;

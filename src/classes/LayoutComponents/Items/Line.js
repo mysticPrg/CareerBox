@@ -10,12 +10,14 @@ define([
     'classes/Util',
     'classes/Structs/Arrow',
     'classes/Structs/Position',
+    'classes/Enums/ItemType',
     'classes/LayoutComponents/Items/Item'
-], function (Util, Arrow, Position, Item) {
+], function (Util, Arrow, Position, ItemType, Item) {
 
     function Line(props) {
         Item.call(this, props);
 
+        this.itemType = ItemType.line;
         this.arrow = new Arrow();
         this.pos_start = new Position();
         this.pos_end = new Position();
