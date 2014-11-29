@@ -23,6 +23,7 @@ define([
         this.fill = new Fill();
         this.radius = 0;
         this.rotate = 0;
+        this.alpha = 100;
         this.layoutComponentType = LayoutComponentType.item;
 
         if (props) {
@@ -34,6 +35,7 @@ define([
             this.fill = props.fill ? props.fill : this.fill;
             this.radius = props.radius ? props.radius : this.radius;
             this.rotate = props.rotate ? props.rotate : this.rotate;
+            this.alpha = props.alpha ? props.alpha : this.alpha;
             this.layoutComponentType = props.layoutComponentType ? props.layoutComponentType : this.layoutComponentType;
         }
     };

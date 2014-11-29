@@ -5,8 +5,10 @@
 //var phantom = require('phantom');
 
 var $ = require('jquerygo');
-var Thumbnail = require('thumbnail');
 var async = require('async');
+
+var Thumbnail = require('thumbnail');
+//var thumb = require('node-thumbnail').thumb;
 var HTMLGen = require('./HTMLGen');
 
 var screenShotPath = 'res/screenshot/';
@@ -35,14 +37,14 @@ module.exports = function capture(target) {
             $('body').html(' ', callback);
         },
         function (callback) {
-            HTMLGen.itemToHTML($, target, callback);
+            HTMLGen.templateToHTML($, $('body'), target, callback);
         },
         function (callback) { // save screenshot
             $.capture(__dirname + '/../../' + screenShotPath + target._id + '.png', callback);
         },
         function (callback) {
             var thumbnail = new Thumbnail(screenShotPath, screenShotPath + 'thumb/');
-            thumbnail.ensureThumbnail(target._id + '.png', thumbWidth, null, function (err, filename) {
+            thumbnail.ensureThumbnail(target._id + '.png', thumbWidth, function (err, filename) {
                 callback();
             });
         },

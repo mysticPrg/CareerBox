@@ -11,12 +11,10 @@ define(['classes/Structs/Color'], function (Color) {
     function Fill(props) {
         this.use = true;
         this.color = Color.WHITE;
-        this.alpha = 100;
 
         if (props) {
             this.use = props.use ? props.use : this.use;
             this.color = props.color ? props.color : this.color;
-            this.alpha = props.alpha ? props.alpha : this.alpha;
         }
     };
 
