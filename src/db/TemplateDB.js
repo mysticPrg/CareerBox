@@ -36,7 +36,7 @@ function getList(_member_id, templateType, callback) {
 
     templateCollection.find({
         _member_id: _member_id,
-        templateType: templateType,
+        templateType: templateType
     }).toArray(function (err, list) {
         async.each(list, function (t, cb) {
             delete t._member_id;
@@ -56,7 +56,6 @@ function remove(_id, callback) {
 function update(data, callback) {
     var templateCollection = require('../util/DBCollections').getInstance().collections.template;
 
-//    var template = new Template(data);
     var template = data;
 
     templateCollection.update(
@@ -64,7 +63,7 @@ function update(data, callback) {
         {
             $set: template
         },
-        function(err, updated) {
+        function() {
             PaperDB.refreshTempalteData(template, function(err2) {
                 callback(err2)
             })

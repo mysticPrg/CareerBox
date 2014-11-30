@@ -45,6 +45,12 @@ function remove(_id, callback) {
     paperCollection.remove({'_id': new ObjectID(_id)}, callback);
 }
 
+function removeByPortfolio(_portfolio_id, callback) {
+    var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
+
+    paperCollection.remove({'_portfolio_id': new ObjectID(_portfolio_id)}, callback);
+}
+
 function update(data, callback) {
     var paper = new Paper(data);
     var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
@@ -82,6 +88,7 @@ var exports = {
     get: get,
     getList: getList,
     remove: remove,
+    removeByPortfolio: removeByPortfolio,
     update: update,
     refreshTempalteData: refreshTemplateData
 }
