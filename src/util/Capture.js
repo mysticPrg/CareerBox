@@ -37,6 +37,7 @@ module.exports = function capture(target) {
             $('body').html(' ', callback);
         },
         function (callback) {
+            // 어떤걸 HTML로 만들어야 하는지 캐치!
             HTMLGen.templateToHTML($, $('body'), target, callback);
         },
         function (callback) { // save screenshot
