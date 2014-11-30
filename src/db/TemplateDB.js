@@ -11,7 +11,9 @@ var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
 function create(data, callback) {
-    var template = new Template(data);
+//    var template = new Template(data);
+
+    var template = data;
 
     var templateCollection = require('../util/DBCollections').getInstance().collections.template;
     templateCollection.insert(template, callback);
@@ -54,7 +56,8 @@ function remove(_id, callback) {
 function update(data, callback) {
     var templateCollection = require('../util/DBCollections').getInstance().collections.template;
 
-    var template = new Template(data);
+//    var template = new Template(data);
+    var template = data;
 
     templateCollection.update(
         {_id: template._id},

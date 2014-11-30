@@ -5,6 +5,8 @@
 var requirejs = require('../require.config');
 
 var TemplateType = requirejs('classes/Enums/TemplateType');
+var Template = requirejs('classes/Templates/Template');
+var Article = requirejs('classes/LayoutComponents/Article');
 
 var TemplateDB = require('../db/TemplateDB');
 
@@ -112,13 +114,16 @@ function createOrUpdateService(req, res) {
         return;
     }
 
+    newTemplate = new Template(newTemplate);
     newTemplate._member_id = req.session._id;
 
-    for (var k in newTemplate.childArr) {
-        if (!newTemplate.childArr[k]._id) {
-            newTemplate.childArr[k]._id = genID();
+    for (var k in newTemplate.target.childArr) {
+        if (!newTemplate.target.childArr[k]._id) {
+            newTemplate.target.childArr[k]._id = genID();
         }
     }
+
+    newTemplate.target = new Article(newTemplate.target);
 
     if (newTemplate._id) {
         console.log(newTemplate._id);

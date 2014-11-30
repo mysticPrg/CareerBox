@@ -197,10 +197,17 @@ function articleToHTML($, parent, article, callback) {
 
     async.waterfall([
         function (_callback) { // add div
-            parent.append('<div id="' + article._id + '"></div>', _callback);
+            parent.append('<div id="' + article._id + '"></div>', function() {
+                _callback(null, $, article);
+            });
         },
-        function (_callback) {
-
+        setSize,
+        setPos,
+        setOutline,
+        setFill,
+        setRadius,
+        setRotate,
+        function ($, article, _callback) { // add child items
             var jArticle = $('#' + article._id);
 
             async.each(article.childArr, function (item, __callback) {

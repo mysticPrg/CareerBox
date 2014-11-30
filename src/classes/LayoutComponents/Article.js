@@ -10,20 +10,21 @@ define([
     'classes/Util',
     'classes/LayoutComponents/LayoutComponent',
     'classes/Enums/ItemType',
+    'classes/Enums/LayoutComponentType',
     'classes/LayoutComponents/Items/Icon',
     'classes/LayoutComponents/Items/Image',
     'classes/LayoutComponents/Items/Line',
     'classes/LayoutComponents/Items/Link',
     'classes/LayoutComponents/Items/Shape',
     'classes/LayoutComponents/Items/Text',
-], function (Util, LayoutComponent, ItemType, Icon, Image, Line, Link, Shape, Text) {
+], function (Util, LayoutComponent, ItemType, LayoutComponentType, Icon, Image, Line, Link, Shape, Text) {
 
     function createChildObj(article, data) {
 
         var childArr = [];
 
         for ( var i=0 ; i<data.length ; i++ ) {
-            switch (data.itemType) {
+            switch (data[i].itemType) {
                 case ItemType.icon:
                     childArr.push(new Icon(data[i]));
                     break;
@@ -60,6 +61,7 @@ define([
         this.childArr = [];
         this.rowCount = 1;
         this.colCount = 1;
+        this.layoutComponentType = LayoutComponentType.article;
 
         if (props) {
             this._template_id = props._template_id ? props._template_id : this._template_id;
