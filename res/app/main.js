@@ -63,8 +63,8 @@ require([
     var cntl = $('body').attr('ng-controller');
 
     require([
-        'bootstrap',
         'controllers/' + cntl
     ], function () {
+        require(['bootstrap'])
     });
 });
