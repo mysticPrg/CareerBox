@@ -209,6 +209,12 @@ img {
     background-color: #ffffff;
 }
 
+.paper {
+    width: 960px !important;
+    height: 1358px !important;
+}
+
+
 .dropzone {
     transition: background-color 0.3s;
 }
