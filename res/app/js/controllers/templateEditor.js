@@ -90,36 +90,17 @@ define([
         }
 
         function getTemplateChildArr(ItemArray) {
+            // array copy
             var templateItemArray = [];
             for (var key in ItemArray) {
                 templateItemArray[key] = ItemArray[key];
             }
 
-            var templateChildArr = new Array();
-
-            var start_x = 9999, start_y = 9999;
+            var templateChildArr = [];
 
             for (var key in templateItemArray) {
 
                 var item = templateItemArray[key];
-
-//                console.log(item.itemType, item.pos.x, item.pos.y);
-
-                if (item.pos.x < start_x) {
-                    start_x = item.pos.x;
-                }
-
-                if (item.pos.y < start_y) {
-                    start_y = item.pos.y;
-                }
-            }
-
-            for (var key in templateItemArray) {
-
-                var item = templateItemArray[key];
-
-                item.pos.x = templateItemArray[key].pos.x - start_x;
-                item.pos.y = templateItemArray[key].pos.y - start_y;
 
                 if (item.state == 'new') {
                     delete item._id;
@@ -140,8 +121,13 @@ define([
 
         $scope.save = function () {
             EditorData.focusId = '';
+
             var article = new Article();
             article.template = $scope.template._template_id;
+
+            article.size.width = $('#canvas-content').width();
+            article.size.height = $('#canvas-content').height();
+
             article.childArr = getTemplateChildArr(EditorData.templateItemArray);
 //            article.childArr = EditorData.templateItemArray;
             article.rowCount = 0;
@@ -186,6 +172,10 @@ define([
 //
 ////            EditorData.templateItemArray[id] = item;
 //        }
+
+        $scope.canvasClick = function (){
+            alert(test);
+        }
 
         $('#canvas-content').droppable({
             activeClass: "drop-area",

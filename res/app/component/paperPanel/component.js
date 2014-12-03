@@ -132,27 +132,13 @@ define([
 
             function createTemplateDiv(template, id) {
                 var domObj = "<div id=" + id + " draggable></div>";
-                var width = 0, height = 0;
-
-                var templateItemArray = template.target.childArr;
-                var item;
-                for (var index = 0; index < templateItemArray.length; index++) {
-                    item = templateItemArray[index];
-                    if (width < (item.pos.x + item.size.width)) {
-                        width = (item.pos.x + item.size.width);
-                    }
-
-                    if (height < (item.pos.y + item.size.height)) {
-                        height = (item.pos.y + item.size.height);
-                    }
-                }
 
                 $(domObj).appendTo('#canvas-content');
                 $compile($(domObj))($scope);
 
                 $('#' + id).css('position', 'absolute');
-                $('#' + id).width(width);
-                $('#' + id).height(height);
+                $('#' + id).width(template.target.size.width);
+                $('#' + id).height(template.target.size.height);
                 $('#' + id).css("background-color", "gray");
 
                 $compile($('#canvas-content'))($scope);

@@ -191,6 +191,7 @@ img {
 #canvas-box {
     width: 100%;
     height: calc(100% - 54px);
+    background-color: #eeeeee;
     overflow: auto;
 }
 
@@ -203,8 +204,9 @@ img {
 }
 
 #canvas-box #canvas-content {
-    height: 1000px;
-    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #ffffff;
 }
 
 .dropzone {
