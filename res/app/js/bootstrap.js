@@ -8,7 +8,6 @@ define([
 ], function (ng, app) {
     'use strict';
 
-
     require(['domReady'], function (document) {
         ng.bootstrap(document, ['myApp']);
     });
