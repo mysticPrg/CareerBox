@@ -50,7 +50,9 @@ function getList(_member_id, templateType, callback) {
 function remove(_id, callback) {
     var templateCollection = require('../util/DBCollections').getInstance().collections.template;
 
-    templateCollection.remove({'_id': new ObjectID(_id)}, callback);
+    templateCollection.remove({'_id': new ObjectID(_id)}, function () {
+        PaperDB.removeTemplateData(_id, callback);
+    });
 }
 
 function update(data, callback) {
@@ -63,12 +65,26 @@ function update(data, callback) {
         {
             $set: template
         },
-        function() {
-            PaperDB.refreshTempalteData(template, function(err2) {
+        function () {
+            PaperDB.refreshTempalteData(template, function (err2) {
                 callback(err2)
             })
         }
     );
+}
+
+function checkUsingTemplate(_id, callback) {
+    var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
+
+    paperCollection.findOne({
+        childArr: {$elemMatch: {_template_id: _id}}
+    }, function (err, finded) {
+        if ( finded ) {
+            callback(err, true);
+        } else {
+            callback(err, false);
+        }
+    });
 }
 
 var exports = {
@@ -76,7 +92,8 @@ var exports = {
     get: get,
     getList: getList,
     remove: remove,
-    update: update
+    update: update,
+    checkUsingTemplate: checkUsingTemplate
 }
 
 module.exports = exports;

@@ -23,6 +23,7 @@ module.exports.set = function (server) {
     server.post('/template', createOrUpdateService);
     server.delete('/template', deleteService);
     server.get('/template/:templateType', getTemplateListService);
+    server.get('/template/check/:_id', getTemplateUsingCheckService);
 };
 
 function checkErr(err) {
@@ -68,6 +69,20 @@ function checkArgForTemplate(req, res) {
 
 function checkArgForId(req, res) {
     if (!req.body._id) {
+
+        var result = new Result(null);
+        result.setCode('001');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function checkArgForIdOnParams(req, res) {
+    var _paper_id = req.params._id;
+    if (!_paper_id || !ObjectID.isValid(_paper_id)) {
 
         var result = new Result(null);
         result.setCode('001');
@@ -166,7 +181,23 @@ function getTemplateListService(req, res) {
         return;
     }
 
-    TemplateDB.getList(req.session._id, templateType, function(err, list) {
+    TemplateDB.getList(req.session._id, templateType, function (err, list) {
         sendResult(err, res, list);
+    });
+}
+
+function getTemplateUsingCheckService(req, res) {
+    var _template_id = req.params._id;
+
+    setResHeader(res);
+    if (!checkSession(req, res)) {
+        return;
+    }
+    if (!checkArgForIdOnParams(req, res)) {
+        return;
+    }
+
+    TemplateDB.checkUsingTemplate(_template_id, function(err, check) {
+       sendResult(err, res, check);
     });
 }

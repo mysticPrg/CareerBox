@@ -6,6 +6,7 @@
 var requirejs = require('../require.config');
 var Paper = requirejs('classes/Paper');
 var PaperInfo = requirejs('classes/Structs/PaperInfo');
+var TemplateType = requirejs('classes/Enums/TemplateType');
 
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
@@ -27,8 +28,8 @@ function getList(_portfolio_id, callback) {
     var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
 
     var resultList = [];
-    paperCollection.find({'_portfolio_id': _portfolio_id}).toArray(function(err, list) {
-        for ( var i=0 ; i<list.length ; i++ ) {
+    paperCollection.find({'_portfolio_id': _portfolio_id}).toArray(function (err, list) {
+        for (var i = 0; i < list.length; i++) {
             resultList.push(new PaperInfo({
                 _portfolio_id: list[i]._portfolio_id,
                 title: list[i].title
@@ -66,6 +67,27 @@ function update(data, callback) {
 
 function refreshTemplateData(template, callback) {
     var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
+    var setData = {
+        'childArr.$.size': template.target.size,
+        'childArr.$.outline': template.target.outline,
+        'childArr.$.fill': template.target.fill,
+        'childArr.$.radius': template.target.radius,
+        'childArr.$.rotate': template.target.rotate,
+        'childArr.$.alpha': template.target.alpha
+    };
+
+
+    switch (template.templateType) {
+        case TemplateType.article:
+            setData['childArr.$.childArr'] = template.target.childArr;
+            setData['childArr.$.rowCount'] = template.target.rowCount;
+            setData['childArr.$.colCount'] = template.target.colCount;
+            break;
+
+        case TemplateType.section:
+            setData['childArr.$.childArr'] = template.target.childArr;
+            break;
+    }
 
     paperCollection.update(
         {
@@ -73,8 +95,24 @@ function refreshTemplateData(template, callback) {
             childArr: {$elemMatch: {_template_id: template._id}}
         },
         {
-            $set: {
-                'childArr.$': template
+            $set: setData
+        },
+        {
+            multi: true
+        },
+        callback);
+}
+
+function removeTemplateData(_template_id, callback) {
+    var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
+
+    paperCollection.update(
+        {
+            childArr: {$elemMatch: {_template_id: _template_id}}
+        },
+        {
+            $unset: {
+                'childArr.$': 1
             }
         },
         {
@@ -90,7 +128,8 @@ var exports = {
     remove: remove,
     removeByPortfolio: removeByPortfolio,
     update: update,
-    refreshTempalteData: refreshTemplateData
+    refreshTempalteData: refreshTemplateData,
+    removeTemplateData: removeTemplateData
 }
 
 module.exports = exports;
