@@ -12,6 +12,8 @@ define([
     'component/attribute/alphaAttribute/component',
     'component/attribute/alignAttribute/component',
     'component/attribute/valueAttribute/component',
+    'component/attribute/titleAttribute/component',
+    'component/attribute/descriptionAttribute/component',
     'component/attribute/fontAttribute/component',
     'component/attribute/verticalAlignAttribute/component',
     'component/attribute/nameAttribute/component',

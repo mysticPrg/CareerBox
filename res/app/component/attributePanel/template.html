@@ -7,18 +7,30 @@
             <ul id="itemAttrList">
                 <div id="itemAttrInfo" class="clearfix">
                     <h3>{{attributeInformation.itemType}}</h3>
+                    <h3>{{attributeInformation.templateType}}</h3>
+
                     <button ng-if=attributeInformation class="btn btn-default"
                             ng-click="deleteItem(attributeInformation._id)">삭제
                     </button>
                 </div>
 
                 <li ng-repeat="(key, att) in attributeInformation track by $index"
-                    ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType' || key == 'state' || key == 'zOrder' || key == 'pos_end' || key == 'pos_start'">
+                    ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType' || key == 'state' || key == 'zOrder' || key == 'pos_end' || key == 'pos_start' || key == 'target' || key == '_template_id' || key == 'templateType' || key == 'timestamp' " >
                     <!--<h3>{{key}}</h3>-->
                     <ANY ng-switch="key">
+
+                        <ANY ng-switch-when="title">
+                            <div title-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="description">
+                            <div description-attribute to="attributeInformation"></div>
+                        </ANY>
+
                         <ANY ng-switch-when="fill">
                             <div fill-attribute to="attributeInformation"></div>
                         </ANY>
+
 
                         <ANY ng-switch-when="outline">
                             <div outline-attribute to="attributeInformation"></div>
@@ -76,7 +88,7 @@
                         </ANY>
 
                         <ANY ng-switch-default>
-                            <p>{{att}}</p>
+                            <p>{{key}} : {{att}}</p>
                         </ANY>
                     </ANY>
 
