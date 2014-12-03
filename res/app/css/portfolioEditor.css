@@ -1,0 +1,392 @@
+html, body {
+    height:100%;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+}
+
+div, h1, h3 , ul, li, pre {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type:none
+}
+a {
+    text-decoration:none
+}
+img {
+    border-style:none
+}
+
+.clearfix:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+#top-pane {
+    height: 50px;
+    background-color: rgba(0,0,0,0.9);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+#top-pane h1 {
+    line-height: 50px;
+    color: #fff;
+    font-family:'arial'
+
+}
+
+/*#body {*/
+    /*min-height: 100%;*/
+    /*margin: -100px 0 -50px;*/
+/*}*/
+* html #body {
+    height: 100%;
+}
+
+#bottom-pane {
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 50px);
+    border-style: none;
+    box-sizing: border-box;
+}
+
+#bottom-pane #pageEditor {
+    min-width: 299px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+#bottom-pane #pageEditor .pageNum {
+    width: 135px;
+}
+
+#bottom-pane #pageEditor #pageSelect ul li a {
+    height: 40px;
+}
+
+#bottom-pane #pageEditor #pageSelect ul li a span {
+    line-height: 40px;
+}
+
+.delete {
+    padding: 0px;
+    width: 24px;
+    height: 24px;
+}
+
+#bottom-pane #pageEditor #pageSelect ul li a .delBtn {
+    float: right;
+    margin-top: 8px;
+}
+
+#bottom-pane #page #canvasWrapper {
+    border-style: none;
+}
+
+#bottom-pane #page #stateBar {
+    background: #f3f3f3;
+    padding: 10px;
+}
+/*canvas 내부 스크롤 생기는 문제*/
+/*#bottom-pane #page #canvas-box {*/
+    /*margin-top: -54px;*/
+
+/*}*/
+
+/*#canvas-content {*/
+    /*height: 1000px;*/
+    /*overflow: scroll;*/
+/*}*/
+
+#bottom-pane #page #stateBar #stateGroup ul li {
+    float: left;
+}
+
+#bottom-pane #page #stateBar #stateGroup ul li pre {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+#bottom-pane #page #stateBar #stateGroup {
+    float: left;
+}
+
+#bottom-pane #page #stateBar #btnGroup {
+    float: right;
+}
+
+
+#articleTemplateArea{
+    padding: 20px;
+    text-align: center;
+}
+
+#articleTemplateList{
+    text-align: center;
+}
+
+#btnAddArticleTemplate{
+    width: 200px;
+}
+
+#editorBody{
+
+}
+
+
+/*drag 존*/
+#drag-box {
+    width: 250px;
+    height: 700px;
+    float: left;
+    margin: 20px 5px 20px 20px;
+}
+
+#drag-box #drag-title {
+    background-color: #60b59f;
+    height: 50px;
+    border-radius: 15px 15px 0 0;
+    text-align: center;
+    line-height: 50px;
+}
+
+#drag-box #drag-content {
+    height: 650px;
+    border: solid 3px #60b59f;
+    text-align: center;
+}
+
+.element {
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    background-color: #dddddd;
+    border: solid 2px #c8c8c8;
+    border-radius: 10px;
+    /*margin-top: 30px;*/
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.ui-resizable {
+    /*position: absolute;*/
+    position: absolute;
+    display: inline-block !important;
+}
+
+.element h3{
+    color: #838383;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/********************************************************************/
+#canvas-box {
+    width: 100%;
+    height: calc(100% - 54px);
+    overflow: auto;
+}
+
+#canvas-box #canvas-title {
+    background-color: #f5928f;
+    height: 50px;
+    border-radius: 15px 15px 0 0;
+    text-align: center;
+    line-height: 50px;
+}
+
+#canvas-box #canvas-content {
+    height: 1000px;
+    position: relative;
+}
+
+.dropzone {
+    transition: background-color 0.3s;
+}
+
+.drop-target {
+    background-color: #29e;
+}
+
+.drag-drop {
+    transition: background-color 0.3s;
+}
+
+.can-drop {
+    background-color: #4e4;
+}
+#header {
+    margin-top: 20px;
+}
+
+#footer {
+    margin-top: 750px;
+    text-align: right;
+}
+
+.circle {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    display: inline-block;
+    position: absolute;
+}
+
+#articleTemplateArea #btnAddArticleTemplate {
+    margin-bottom: 30px;
+}
+
+#articleTemplateArea > #articleTemplateList {
+    width: 220px;
+    margin: 0 auto;
+}
+
+#articleTemplateArea > #articleTemplateList > li{
+
+    position: relative;
+    margin-bottom: 40px;
+}
+
+#articleTemplateArea #articleTemplateList .description {
+    margin: 15px 0;
+}
+
+#articleTemplateArea #articleTemplateList #editGroup {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+
+#articleTemplateArea #articleTemplateList #editGroup .dropdown-menu {
+    min-width: 75px;
+}
+
+#articleTemplateArea #articleTemplateList #editGroup .dropdown-menu li {
+    text-align: center;
+}
+
+#articleTemplateArea #articleTemplateList #editGroup .dropdown-menu li {
+    cursor: pointer;
+}
+
+ #itemTemplateArea > #itemTemplateList {
+    width: 85%;
+    min-width: 250px;
+    margin: 0 auto;
+    text-align: center;
+
+
+}
+
+#itemTemplateArea > #itemTemplateList li {
+    margin: 20px;
+    width: 85px;
+    float: left;
+
+    display: inline-block;
+}
+
+#TemplateEditor #itemEditorArea > ul {
+
+    width: 85%;
+    min-width: 250px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#TemplateEditor #itemEditorArea > ul > li {
+
+    margin: 20px;
+    width: 85px;
+    float: left;
+
+    display: inline-block;
+}
+
+.itemText {
+}
+
+.itemLink {
+    background-color: #eeeeee;
+}
+
+#shareLink {
+    text-decoration: underline;
+    color: #0000ff;
+}
+
+.itemImage .ui-wrapper {
+    overflow: visible !important;
+}
+
+/*************************************************************************************************/
+/*속성창 css*/
+
+/*속성창 타이틀*/
+#attribute > h3 {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/*item type 이름 & 삭제 버튼*/
+#attribute #sectionAttr #itemAttrInfo > h3{
+    float: left;
+}
+
+#attribute #sectionAttr #itemAttrInfo .btn {
+    float: right;
+}
+
+/*속성 리스트 ul*/
+#attribute #sectionAttr > #itemAttrList {
+    width: 250px;
+    margin: 0 auto;
+    margin-top: 13px;
+}
+
+#attribute #sectionAttr > #itemAttrList > li{
+    margin: 25px 0;
+}
+
+/*속성창 input css*/
+.attrInput {
+    width: 35px;
+    height: 15px;
+    display: inline-block;
+}
+
+/*pos, size 속성*/
+#posForm > li, #sizeForm > li {
+    width: 125px;
+    float: left;
+}
+
+/*outline 속성*/
+#outlineForm ,#weightForm {
+    width: 125px;
+    float: left;
+    display: inline-block;
+}
+
+#arrowForm > li {
+    margin-bottom: 25px;
+}
+
+#fontForm .fontElement {
+
+    margin-bottom: 25px;
+}
+
+#fontForm #fontOptionForm #fontFamilyInput {
+    width: 65px;
+}
+

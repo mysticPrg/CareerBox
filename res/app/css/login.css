@@ -1,0 +1,85 @@
+html, body {
+    /*width: 100%;*/
+    margin:0;
+    padding:0;
+    overflow:hidden;
+}
+
+div, h1, h2, h3 , ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type:none
+}
+a {
+    text-decoration:none
+}
+img {
+    border-style:none
+}
+
+.clearfix:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+#loginForm {
+    background-color: rgba(0,0,0,0.8);
+    position: absolute;
+    left: 50%;
+    margin-left: -350px;
+    margin-top: 100px;
+    padding: 40px;
+    width: 700px;
+    height: 430px;
+    text-align: center;
+}
+
+#loginForm #loginTbl {
+    display: inline-block;
+}
+
+#loginForm #loginTbl #tblStyle1 {
+    width: 190px;
+    border-right:1px solid #5d5d5d;
+    padding-right:35px;
+    text-align:center;
+}
+
+#loginForm #loginTbl #tblStyle2 {
+    padding-left:35px;
+}
+
+#loginForm #loginTbl #tblStyle2 .submitBtn{
+    margin-top: 115px;
+}
+
+#loginForm .userInput {
+    display: inline-block;
+    width: 250px;
+    margin: 0 0 20px 0;
+}
+
+#loginForm .submitBtn {
+    display: inline-block;
+    width: 250px;
+    height: 50px;
+    margin: 30px 0 20px 0;
+}
+
+#loginForm h1{
+    display: inline-block;
+    font-family:'arial';
+    color: #fff;
+    width: 250px;
+    margin-bottom: 50px;
+    border: solid 4px #fff;
+    padding: 10px;
+}
+
+#loginForm a{
+    color: #fff;
+}

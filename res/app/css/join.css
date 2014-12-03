@@ -1,0 +1,79 @@
+html, body {
+    margin:0;
+    padding:0;
+    overflow:hidden;
+}
+
+div, h1, h2, h3 , ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type:none
+}
+a {
+    text-decoration:none
+}
+img {
+    border-style:none
+}
+
+.clearfix:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#joinForm {
+    background-color: rgba(0,0,0,0.8);
+    position: absolute;
+    left: 50%;
+    margin-left: -250px;
+    margin-top: 60px;
+    padding: 30px 50px;
+    width: 500px;
+    height: 500px;
+}
+
+#joinForm span {
+    color: #ff9900;
+}
+
+#joinForm .joinInput {
+    width: 400px;
+    margin: 0 0 8px 0;
+}
+
+#joinForm .submitBtn {
+    width: 400px;
+    height: 50px;
+    margin: 30px 0 20px 0;
+}
+
+#joinForm #joinHeader #logo{
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+    color: #fff;
+    font-family:'arial';
+    font-size: 15px;
+    color: #fff;
+    width: 100px;
+    border: solid 1px #fff;
+    padding: 5px;
+    text-align: center;
+}
+
+#joinForm h1{
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+

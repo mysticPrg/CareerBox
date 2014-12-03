@@ -1,0 +1,20 @@
+<div id="fontForm">
+    <div id="fontColorForm" class="fontElement">
+        <label for="fontColorInput">font color :</label>
+        <input id="fontColorInput" kendo-color-picker ng-model="color" k-buttons="true" k-preview="true" k-input="false"/>
+    </div>
+    <div id="fontSizeForm" class="fontElement">
+        <label for="fontSizeInput">font size :</label>
+        <input id="fontSizeInput" class="attrInput form-control" ng-model="data.font.size"/>
+    </div>
+    <div id="fontOptionForm" class="fontElement">
+        <label for="fontFamilyInput">family :</label>
+        <input id="fontFamilyInput" class="attrInput form-control" ng-model="data.font.family"/>
+
+        <div class="btn-group">
+            <label class="btn btn-primary" ng-model="data.font.bold" btn-checkbox><b>B</b></label>
+            <label class="btn btn-primary" ng-model="data.font.italic" btn-checkbox><i>I</i></label>
+        </div>
+
+    </div>
+</div>

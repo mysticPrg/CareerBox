@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/join.css" rel="stylesheet">
+
+    <title> Join </title>
+</head>
+<body ng-controller="joinController">
+<script src="../libs/require/require.js" data-main="../main.js"></script>
+
+<form class="form-horizontal" id="joinForm" role="form" name="joinForm" ng-submit='join()'>
+
+    <div id="joinHeader">
+        <div id="logo">CareerBox</div>
+        <!--<a href="login.html"  id="loginBtn"> 로그인 </a>-->
+        <button type="button" class="btn btn-default" id="loginBtn" ng-click="goToLogin($index)">login</button>
+
+        <h1>가입하기</h1>
+    </div>
+
+
+
+    <div class="form-group">
+        <label class="sr-only" for="joinEmail">Email</label>
+        <input type="email" class="form-control joinInput" id="joinEmail" name="email" placeholder="email" ng-model="userEmail" ng-required="true"
+               ng-pattern="/^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/">
+        <span ng-show="joinForm.email.$error.pattern">입력하신 이메일형식이 유효하지 않습니다. </span>
+        <span ng-show="joinForm.email.$error.required">이메일을 입력하세요.</span>
+    </div>
+
+    <div class="form-group">
+        <label class="sr-only" for="joinPwd">Password</label>
+        <input type="password" class="form-control joinInput" id="joinPwd" name="password" placeholder="password" ng-model="userPassword" ng-required="true"
+               ng-pattern="/^[a-z0-9_-]{6,18}$/">
+        <span ng-show="joinForm.password.$error.pattern">패스워드는 6자이상 18자이하입니다. </span>
+        <span ng-show="joinForm.password.$error.required">패스워드를 입력하세요.</span>
+    </div>
+
+    <div class="form-group">
+        <label class="sr-only" for="joinReconfPwd">Password Reconfirm</label>
+        <input type="password" class="form-control joinInput" id="joinReconfPwd" name="passwordReconfirm" placeholder="password reconfirm" ng-model="userPasswordReconfirm" ng-required="true"/>
+        <span ng-show="joinForm.passwordReconfirm.$error.required">패스워드를 다시 입력해주세요.</span>
+    </div>
+
+    <button type="submit" class="btn btn-danger submitBtn">Join</button>
+
+    <ul>
+        <li class="err" ng-repeat="error in errors"> {{error}}</li>
+    </ul>
+    <ul>
+        <li class="info" ng-repeat="msg in msgs"> {{msg}}</li>
+    </ul>
+</form>
+</body>
+</html>

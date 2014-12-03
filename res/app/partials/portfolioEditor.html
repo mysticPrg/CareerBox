@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title>Portfolio Editor</title>
+
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../libs/jquery/jquery-ui.css" rel="stylesheet">
+
+    <link href="../libs/kendo/styles/web/kendo.flat.min.css" rel="stylesheet">
+    <link href="../libs/kendo/styles/web/kendo.common.core.css" rel="stylesheet">
+
+    <link href="../css/portfolioEditor.css" rel="stylesheet">
+
+</head>
+<body ng-controller="portfolioEditor">
+<div id="top-pane">
+    <h1>Career Box</h1>
+</div>
+<div id="bottom-pane" kendo-splitter k-panes="panes" k-orientation="orientation">
+    <div id="page">
+        <div ng-view style="height: 100%"></div>
+    </div>
+    <div attribute-panel></div>
+</div>
+
+
+<script src="../libs/require/require.js" data-main="../main.js"></script>
+</body>
+</html>

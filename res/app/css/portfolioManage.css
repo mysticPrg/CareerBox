@@ -1,0 +1,203 @@
+html, body {
+    margin:0;
+    padding:0;
+}
+
+div, h1, h2, h3 , ul, li, p{
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type:none;
+}
+
+a {
+    text-decoration:none;
+}
+
+img {
+    border-style:none;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/*좌측 메뉴 css*/
+#menu {
+    width: 240px;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.9);
+}
+
+#menu a#logo {
+    display:block;
+    width:150px;
+    height:60px;
+    line-height:60px;
+    text-align:center;
+    margin:50px auto;
+    border:solid 2px #fff;
+    color:#fff;
+    font-size:20px;
+    font-weight:bold;
+    font-family:'arial'
+}
+
+#menu ul {
+    text-align:center;
+}
+#menu ul a {
+    display:block;
+    color:#666;
+    height:30px;
+    line-height:30px
+}
+#menu ul a:hover {
+    background-color:#000;
+    color:#fff;
+    text-decoration: none;
+}
+
+/*컨텐츠 부분 너비는 메뉴 제외한 100%*/
+#content {
+    text-align: center;
+    margin-left: 240px;
+}
+
+/*상단 사용자 정보 css*/
+#content #user-info {
+    width: 100%;
+    height: 120px;
+    background-color: #eeeeee;
+    text-align: center;
+}
+
+#content #user-info h2{
+    font-family:'arial';
+    line-height: 120px;
+}
+
+/*포트폴리오 생성 버튼*/
+#content #btnNew {
+    margin-top: 50px;
+}
+
+/*portfolio list - wrapper*/
+#content #portfolio-list {
+    width: 100%;
+    text-align: center;
+}
+
+/*portfolio list - ul*/
+#content #portfolio-list > ul{
+    display: inline-block;
+    width: 900px;
+    margin-top: 25px;
+}
+
+/*portfolio list - ul*/
+#content #portfolio-list > ul > li {
+    float: left;
+    margin: 25px;
+    width: 250px;
+    height: 350px;
+    position: relative;
+    box-shadow:0 1px 2px #3e3e3e;
+}
+
+#content #portfolio-list > ul > li .img{
+    background-color: #666666;
+    width: 250px;
+    height: 350px;
+    color: #fff;
+}
+
+/*포트폴리오 정보*/
+#content #portfolio-list .portfolioInfo{
+    background: rgba(0,0,0,0.74);
+    color: #fff;
+    font-family:'arial';
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+}
+
+/*포트폴리오 부연설명*/
+#content #portfolio-list .portfolioInfo #description {
+    padding: 7px;
+}
+
+/*포트폴리오 관리 버튼들*/
+#content #portfolio-list .portfolioInfo #btnGroup {
+    text-align: center;
+}
+
+#content #portfolio-list .portfolioInfo #btnGroup ul{
+    display: inline-block;
+}
+
+#content #portfolio-list .portfolioInfo #btnGroup ul li{
+    float: left;
+}
+
+#content #portfolio-list .portfolioInfo #btnGroup .btn {
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 0;
+    border: none;
+    color: #ccc;
+    padding: 5px 0;
+    text-align: center;
+    font-size: 12px;
+    width: 65px;
+    margin: 0 5px;
+}
+
+
+/*미디어 쿼리*/
+@media only screen and (max-width : 1140px) {
+
+    #content #portfolio-list {
+        width: 100%;
+        text-align: center;
+    }
+
+    #content #portfolio-list > ul {
+        display: inline-block;
+        width: 600px;
+        margin-top: 25px;
+    }
+
+    #content #portfolio-list > ul > li {
+        float: left;
+        margin: 25px;
+    }
+}
+
+@media only screen and (max-width : 840px) {
+
+    #content #portfolio-list {
+        width: 100%;
+        text-align: center;
+    }
+
+    #content #portfolio-list > ul {
+        display: inline-block;
+        width: 270px;
+        margin-top: 25px;
+    }
+
+    #content #portfolio-list > ul > li {
+        float: left;
+        margin: 20px;
+    }
+}

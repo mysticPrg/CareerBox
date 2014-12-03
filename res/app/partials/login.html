@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/login.css" rel="stylesheet">
+
+    <title>Login</title>
+</head>
+
+<body ng-controller="loginController">
+
+<!--로그인 폼-->
+<form id="loginForm" name="form" role="form" ng-submit='login()'>
+
+    <!--logo-->
+    <h1>Career Box</h1>
+
+    <table id="loginTbl">
+        <tr>
+            <!--열1-->
+            <td id="tblStyle1">
+                <!--email 입력-->
+                <div>
+                    <input type="email" class="form-control userInput" placeholder="Email" name="email" ng-model="userEmail" ng-required="true"
+                           ng-pattern="/^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/">
+                    <span ng-show="loginForm.email.$error.pattern">입력하신 이메일형식이 유효하지 않습니다. </span>
+                    <span ng-show="loginForm.email.$error.required">이메일을 입력하세요.</span>
+                </div>
+
+                <!--password 입력-->
+                <div>
+                    <input type="password" class="form-control userInput" placeholder="Password" name="password" ng-model="userPassword" ng-required="true"
+                           ng-pattern="/^[a-z0-9_-]{6,18}$/" minlength="6" ng-maxlength="18">
+                    <span ng-show="loginForm.password.$error.pattern">패스워드는 6자이상 18자이하입니다. </span>
+                    <span ng-show="loginForm.password.$error.required">패스워드를 입력하세요.</span>
+                </div>
+
+                <!--sign in 버튼-->
+                <button type="submit" class="btn btn-danger submitBtn"
+                        ng-show="!loginForm.email.$error.pattern && !loginForm.email.$error.required && !loginForm.password.$error.pattern && !loginForm.password.$error.required">Sign in</button>
+
+                <!--회원가입 하기-->
+                <div>
+                    <a href="join.html"> If you are not member, Join </a>
+                </div>
+            </td>
+
+            <!--열2-->
+            <td id="tblStyle2">
+                <!--facebook으로 로그인-->
+                <button type="button" class="btn btn-info submitBtn" data-ng-disabled="!facebookReady" data-ng-click="IntentLogin()">Facebook Sign in</button>
+            </td>
+        </tr>
+    </table>
+
+    <ul>
+        <li class="err" ng-repeat="error in errors"> {{error}}</li>
+    </ul>
+    <ul>
+        <li class="info" ng-repeat="msg in msgs"> {{msg}}</li>
+    </ul>
+
+</form>
+
+
+<script src="../libs/require/require.js" data-main="../main.js"></script>
+</body>
+</html>

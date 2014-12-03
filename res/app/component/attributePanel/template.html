@@ -1,0 +1,92 @@
+<div id="attribute" ng-controller="attributePanel">
+    <!--<h3>Attribute</h3>-->
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="sectionAttr">
+
+            <ul id="itemAttrList">
+                <div id="itemAttrInfo" class="clearfix">
+                    <h3>{{attributeInformation.itemType}}</h3>
+                    <button ng-if=attributeInformation class="btn btn-default"
+                            ng-click="deleteItem(attributeInformation._id)">삭제
+                    </button>
+                </div>
+
+                <li ng-repeat="(key, att) in attributeInformation track by $index"
+                    ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType' || key == 'state' || key == 'zOrder' || key == 'pos_end' || key == 'pos_start'">
+                    <!--<h3>{{key}}</h3>-->
+                    <ANY ng-switch="key">
+                        <ANY ng-switch-when="fill">
+                            <div fill-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="outline">
+                            <div outline-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="shapeType">
+                            <div shape-type-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="arrow">
+                            <div arrow-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="radius">
+                            <div radius-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="rotate">
+                            <div rotate-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="pos">
+                            <div pos-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="size">
+                            <div size-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="alpha">
+                            <div alpha-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="align">
+                            <div align-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="font">
+                            <div font-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="vAlign">
+                            <div vertical-align-attribute to="attributeInformation"></div>
+                        </ANY>
+                        <ANY ng-switch-when="value">
+                            <div value-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="name">
+                            <div name-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="url">
+                            <div url-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-default>
+                            <p>{{att}}</p>
+                        </ANY>
+                    </ANY>
+
+
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="tab-pane" id="articleAttr">article attribute</div>
+        <div class="tab-pane" id="itemAttr">item attribute</div>
+    </div>
+</div>

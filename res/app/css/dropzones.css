@@ -1,0 +1,50 @@
+body { font-family: Helvetica, Arial, sans-serif; }
+
+.dropzone-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.dropzone {
+    overflow: hidden;
+    padding: 1em;
+    color: #666;
+    text-align: center;
+    background: #ccc;
+    line-height: 4em;
+    border: 4px dashed transparent;
+    transition: background .15s linear, border-color .15s linear;
+}
+
+.dropzone.-drop-possible { border-color: #666; }
+
+.dropzone.-drop-over {
+    background: #666;
+    color: #fff;
+}
+
+.draggable {
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    background-color: #dddddd;
+    border: solid 2px #c8c8c8;
+    border-radius: 10px;
+    margin-top: 30px;
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+
+    /*position: relative;*/
+    /*z-index: 10;*/
+    /*width: 200px;*/
+    /*margin: .25em;*/
+    /*padding: 1em 2em;*/
+    /*background-color: #29e;*/
+    /*color: #fff;*/
+    /*text-align: center;*/
+}
+
+.draggable.-drop-possible { background-color: #42bd41; }

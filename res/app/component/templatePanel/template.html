@@ -1,0 +1,83 @@
+<div id="editor">
+    <!--페이퍼 에디터-->
+    <div id="pageEditor">
+        <!--페이지 드롭다운-->
+        <div id="pageSelect" class="btn-group">
+            <button type="button" class="pageNum btn btn-default">Page1</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a href="#">
+                        <span>Page1</span>
+
+                        <div class="delBtn">
+                            <button type="button" class="delete btn btn-primary" data-toggle="button">-</button>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>Page2</span>
+
+                        <div class="delBtn">
+                            <button type="button" class="delete btn btn-primary" data-toggle="button">-</button>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>Page3</span>
+
+                        <div class="delBtn">
+                            <button type="button" class="delete btn btn-primary" data-toggle="button">-</button>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--New 페이지 생성 버튼-->
+        <button type="button" class="btn btn-primary" data-toggle="button">+ New</button>
+    </div>
+
+    <!--Section, Article, Item 에디터-->
+    <div id="otherEditor">
+        <div id="TemplateEditor">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#itemEditorArea">item</a></li>
+
+                <div class="tab-pane" id="itemEditorArea">
+                    <ul id="newTemplateList" class="clearfix">
+                        <li>
+                            <div ng-click="itemClone('text')">
+                                <img src="../img/item_icon/item_text.png"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div ng-click="itemClone('image')">
+                                <img src="../img/item_icon/item_image.png"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div ng-click="itemClone('line')">
+                                <img src="../img/item_icon/item_line.png"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div ng-click="itemClone('link')">
+                                <img src="../img/item_icon/item_link.png"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div ng-click="itemClone('shape')">
+                                <img src="../img/item_icon/item_shape.png"/>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<div id="editor">
+    <div paper-component></div>
+
+    <!--Section, Article, Item 에디터-->
+    <div id="otherEditor">
+        <!--Section 수정 가능한 에디터-->
+        <div id="SectionEditor" data-ng-init="initializeSectionEditor()">
+            <!--탭-->
+            <ul class="nav nav-tabs nav-justified" id="SectionEditorTab">
+                <li ng-click="loadArticleTemplate()"><a id="articleTabLink" href="#articleTemplateArea">article</a></li>
+                <li><a id="itemTabLink" href="#itemTemplateArea">item</a></li>
+            </ul>
+
+            <!--탭 내부 정보-->
+            <div class="tab-content">
+                <!--Article 템플릿 리스트-->
+                <div class="tab-pane" id="articleTemplateArea">
+                    <!--New 템플릿 생성 버튼-->
+                    <button id="btnAddArticleTemplate" class="btn btn-default form-control"
+                            ng-click="popCreateTemplateModal()">add article template
+                    </button>
+                    <!--생성한 템플릿 리스트 -->
+                    <ul id="articleTemplateList">
+                        <li ng-repeat="template in templates track by $index">
+                            <div id="templateThumb" ng-click="templateClone(template)">
+                                <img src="../img/thumb_template.png"/>
+
+                                <div class="description">
+                                    {{template.title}}
+                                </div>
+                            </div>
+                            <div id="editGroup" class="dropdown">
+                                  
+                                <button data-toggle="dropdown" class="btn btn-default" href="#">edit</button>
+                                  
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        
+                                    <li><a ng-click="editTemplate(template)">수정</a></li>
+                                    <li><a ng-click="deleteTemplate(template._id)">삭제</a></li>
+                                      
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!--Item 템플릿 리스트-->
+                <div class="tab-pane" id="itemTemplateArea">
+                    <ul id="itemTemplateList" class="clearfix">
+                        <li>
+                            <div id="text" class="" ng-click="itemClone('text')">
+                                <img src="../img/item_icon/item_text.png"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="image" class="" ng-click="itemClone('image')">
+                                <img src="../img/item_icon/item_image.png"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="line" class="" ng-click="itemClone('line')">
+                                <img src="../img/item_icon/item_line.png"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="link" class="" ng-click="itemClone('link')">
+                                <img src="../img/item_icon/item_link.png"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="shape" class="" ng-click="itemClone('shape')">
+                                <img src="../img/item_icon/item_shape.png"/>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end of SectionEditor -->
+    </div>
+</div>
