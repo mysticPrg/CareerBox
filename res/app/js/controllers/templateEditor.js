@@ -44,7 +44,6 @@ define([
             EditorData.templateItemArray = [];
 
             if (EditorData.templateState == 'edit') {
-                console.log('test');
                 loadTemplate();
             }
         });
@@ -59,6 +58,9 @@ define([
 
         // Load Element
         function loadTemplate() {
+            var size = $scope.template.target.size;
+            loadEditorCanvas(size);
+
             var itemArray = $scope.template.target.childArr;
             for (var index = 0; index < itemArray.length; index++) {
                 delete itemArray[index].state;
@@ -67,6 +69,11 @@ define([
 
             loadTemplateElement();
 
+        }
+
+        function loadEditorCanvas(size){
+            $('#canvas-content').width(size.width);
+            $('#canvas-content').height(size.height);
         }
 
         function loadTemplateElement() {
