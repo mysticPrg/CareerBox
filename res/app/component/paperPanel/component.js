@@ -131,7 +131,7 @@ define([
             }
 
             function createTemplateDiv(template, id) {
-                var domObj = "<div id=" + id + " draggable></div>";
+                var domObj = "<div id=" + id + " draggable ng-click common-attribute></div>";
 
                 $(domObj).appendTo('#canvas-content');
                 $compile($(domObj))($scope);

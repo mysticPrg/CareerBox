@@ -7,39 +7,33 @@ define([
 ], function (app) {
     app.factory('SetAttributeInformation', function (EditorData) {
         return function (id) {
-//            console.log('id',id);
 
             var idArray = "";
             if(typeof id == 'string')if(id.indexOf("_")) idArray = id.split("_");
 
+            // 템플릿 에디터의 아이템 요소들일 경우
             var controllerType = window.location.href.split("#/")[1];
             if(controllerType == 'TemplateEditor'){
-//                console.log('templateEditor');
                 return EditorData.templateItemArray[id];
-            } else if(idArray.length == 3){
-                // 아티클 안의 요소들
+            };
 
+            // 아티클 안의 요소들일 경우
+            if(idArray.length == 3){
+                // 아이디 파싱
                 var templateID = id.split("_")[0] + "_" + id.split("_")[1];
                 var childID = id.split("_")[2];
 
-//                console.log('templateID',templateID);
-//                console.log('childID',childID);
-
-//                console.log('EditorData.childArr[templateID].childArr[childID]',EditorData.childArr[templateID].target[childID]);
-
-//                return EditorData.childArr[templateID].target.childArr[childID];
-
+                // 모델 경로 설정
                 for(var key in EditorData.childArr[templateID].target.childArr){
-//                    console.log('childArr',EditorData.childArr[templateID].target.childArr[key]);
                     if(EditorData.childArr[templateID].target.childArr[key]._id == childID){
                         return EditorData.childArr[templateID].target.childArr[key];
                     }
                 };
-
-            } else {
-                // 아티클 자체
-                return EditorData.childArr[id];
             };
+
+            // 아티클 자체일 경우
+            return EditorData.childArr[id];
+
         };
     });
 });
