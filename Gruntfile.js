@@ -57,8 +57,36 @@ module.exports = function (grunt) {
                 exclude: ['globalize/**', 'plugins/**'],
                 output: "jscpd.xml"
             }
+        },
+
+        // for client
+        requirejs: {
+            compile: {
+                options: {
+                    name: '../main',
+                    out: 'res/app/main.min.js',
+                    removeCombined: true,
+                    findNestedDependencies: true,
+                    baseUrl: 'res/app/js',
+                    mainConfigFile: 'res/app/main.js',
+                    exclude: [
+                        'angular',
+                        'angular-route',
+                        'angular-bootstrap',
+                        'jquery',
+                        'jquery-ui',
+                        'domReady',
+                        'twitter-bootstrap',
+                        'kendo',
+                        'facebook'
+                    ]
+                }
+            }
         }
+
     });
+
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     grunt.loadNpmTasks("grunt-jscpd");
     grunt.loadNpmTasks("grunt-contrib-clean");
