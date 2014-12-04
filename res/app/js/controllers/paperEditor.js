@@ -45,7 +45,6 @@ define([
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             function loadPaper(paper) {
-
                 var articleArray = paper.childArr;
 
                 var article;
@@ -54,8 +53,6 @@ define([
                     EditorData.childArr[article._id] = article;
                     loadArticle(article);
                 }
-
-                console.log(paper);
             }
 
             function loadArticle(article) {
@@ -72,7 +69,7 @@ define([
                 var articleItemId;
                 for (var index = 0; index < templateItemArray.length; index++) {
                     // Item of article 's id = template id_item id
-                    articleItemId = article._id + '_' +templateItemArray[index]._id;
+                    articleItemId = article._id + '_load_' +templateItemArray[index]._id;
                     ArticleDom += HTMLGenerator('loadItem', templateItemArray[index], articleItemId, itemOption);
                 }
 

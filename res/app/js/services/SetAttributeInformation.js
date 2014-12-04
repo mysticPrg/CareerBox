@@ -20,13 +20,18 @@ define([
             // 아티클 안의 요소들일 경우
             if(idArray.length == 3){
                 // 아이디 파싱
-                var templateID = id.split("_")[0] + "_" + id.split("_")[1];
+                var articleId;
+                if(id.split("_")[1] === 'load'){
+                    articleId = id.split("_")[0];
+                }else{
+                    articleId = id.split("_")[0] + "_" + id.split("_")[1]
+                }
                 var childID = id.split("_")[2];
 
                 // 모델 경로 설정 ** EditorData.childArr -> article
-                for(var key in EditorData.childArr[templateID].childArr){
-                    if(EditorData.childArr[templateID].childArr[key]._id == childID){
-                        return EditorData.childArr[templateID].childArr[key];
+                for(var key in EditorData.childArr[articleId].childArr){
+                    if(EditorData.childArr[articleId].childArr[key]._id == childID){
+                        return EditorData.childArr[articleId].childArr[key];
                     }
                 };
             };

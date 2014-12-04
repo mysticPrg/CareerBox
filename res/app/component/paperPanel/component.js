@@ -103,7 +103,7 @@ define([
                 template._template_id = template._id;
                 template.state = 'new';
 
-                // **template의 article을 저장.
+                // template의 article을 저장.
                 EditorData.childArr[templateDomId] = template.target;
 
                 var templateItemArray = template.target.childArr;
