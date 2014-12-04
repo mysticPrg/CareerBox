@@ -17,7 +17,7 @@ require.config({
         'facebook': '../libs/facebook/angular-facebook',
 
         'component': '../component',
-        'classes': './classes'
+        'classes': '../../../src/classes'
     },
 
     shim: {

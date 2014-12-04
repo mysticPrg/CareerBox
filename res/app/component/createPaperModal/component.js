@@ -3,7 +3,7 @@
  */
 define([
     'app',
-    '../../js/classes/Paper'
+    'classes/Paper'
 ], function (app, Paper) {
     app.controller('createPaperModalController', function ($scope, $modalInstance) {
         $scope.paper = new Paper();

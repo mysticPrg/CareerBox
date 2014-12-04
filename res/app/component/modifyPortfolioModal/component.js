@@ -1,7 +1,8 @@
 
 define([
     'app',
-    '../../js/classes/Portfolio'
+//    '../../js/classes/Portfolio'
+    'classes/Templates/Template'
 ], function (app, Portfolio) {
 
     app.controller('modifyPortfolioModalController', function ($scope, $modalInstance) {

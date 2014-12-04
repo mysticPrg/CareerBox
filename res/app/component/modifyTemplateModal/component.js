@@ -3,7 +3,8 @@
  */
 define([
     'app',
-    '../../js/classes/Templates/Template'
+//    '../../js/classes/Templates/Template'
+    'classes/Templates/Template'
 ], function (app, Template) {
     app.controller('createTemplateModalController', function ($scope, $modalInstance, template) {
         $scope.template = template;
