@@ -4,10 +4,12 @@
 define([
     'app',
     '../createPaperModal/component',
+    '../deletePaperModal/component',
     'services/EditorData',
     'services/SavePaper',
+    'services/deletePaper',
     'services/LoadPaperList'
-], function (app, createPaperModal) {
+], function (app, createPaperModal, deletePaperModal) {
     app.controller('paperComponent', [
         '$scope',
         '$http',
@@ -15,14 +17,23 @@ define([
         '$modal',
         'EditorData',
         'SavePaper',
+        'deletePaper',
         'LoadPaperList',
-        function ($scope, $http, $compile, $modal, EditorData, SavePaper, LoadPaperList) {
+        function ($scope, $http, $compile, $modal, EditorData, SavePaper, deletePaper, LoadPaperList) {
             $scope.paperTitle = 'Select Paper';
             $scope.papers = [];
 
             $(document).ready(function () {
 
             });
+
+            $scope.createPaper = function (paper){
+                var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};
+
+                SavePaper($http, data, function (result) {
+                    $scope.loadPaperList();
+                });
+            }
 
             $scope.loadPaperList = function (){
                 LoadPaperList($http, EditorData.portfolio._id, function (result) {
@@ -54,11 +65,16 @@ define([
                 });
             };
 
-            $scope.createPaper = function (paper){
-                var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};
+            $scope.popDeletePaperModal = function (id){
+                var modalInstance = $modal.open(deletePaperModal);
+                modalInstance.result.then(function () {
+                    var data = {_id: id};
 
-                SavePaper($http, data, function (result) {
-                    $scope.loadPaperList();
+                    deletePaper($http, data, function(result){
+                        console.log(result);
+                        $scope.loadPaperList();
+                    });
+                }, function () {
                 });
             }
         }
