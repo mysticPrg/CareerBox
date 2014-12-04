@@ -9,14 +9,6 @@ define([
     'angular',
     'app',
     'classes/Paper',
-    'classes/Templates/Template',
-    'classes/LayoutComponents/Items/Icon',
-    'classes/LayoutComponents/Items/Image',
-    'classes/LayoutComponents/Items/Item',
-    'classes/LayoutComponents/Items/Line',
-    'classes/LayoutComponents/Items/Link',
-    'classes/LayoutComponents/Items/Shape',
-    'classes/LayoutComponents/Items/Text',
     'directives/draggable',
     'directives/resizable',
     'services/EditorData',
@@ -25,11 +17,10 @@ define([
     'services/SavePaper',
     'services/LoadPaper',
     '../../component/paperPanel/component'
-], function ($, ng, app, Paper, Template, Icon, Image, Item, Line, Link, Shape, Text) {
+], function ($, ng, app, Paper) {
     app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper',
         function ($scope, $rootScope, $http, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper) {
             $scope.paper = new Paper();
-            $scope.paperId = '';
 
             $scope.paperItemArray = [];
 
@@ -39,21 +30,16 @@ define([
                     {collapsible: true, size: "300px"},
                     {collapsible: false}
                 ];
+            });
 
-                LoadPaperList($http, EditorData.portfolio._id, function (result) {
-                    EditorData.paperList = result.result;
+            $scope.$watch("EditorData.paperId", function() {
+                if(EditorData.paperId === '')
+                    return;
 
-                    if (EditorData.paperList.length > 0) {
-                        $scope.paperId = EditorData.paperList[0]._id;
-                        LoadPaper($http, $scope.paperId, function (result) {
-                            EditorData.paper = result.result;
-//                        console.log(EditorData.paper);
-//                        console.log('//////////////////');
-//                        console.log(EditorData.paper.childArr);
-                            loadPaper(EditorData.paper);
-
-                        });
-                    }
+//                console.log(EditorData.paperId);
+                LoadPaper($http, EditorData.paperId, function (result) {
+                    EditorData.paper = result.result;
+                    loadPaper(EditorData.paper);
                 });
             });
 
@@ -68,6 +54,8 @@ define([
                     EditorData.childArr[article._id] = article;
                     loadArticle(article);
                 }
+
+                console.log(paper);
             }
 
             function loadArticle(article) {
@@ -78,17 +66,6 @@ define([
                 var width = 0, height = 0;
 
                 var templateItemArray = article.childArr;
-                var item;
-                for (var index = 0; index < templateItemArray.length; index++) {
-                    item = templateItemArray[index];
-                    if (width < (item.pos.x + item.size.width)) {
-                        width = (item.pos.x + item.size.width);
-                    }
-
-                    if (height < (item.pos.y + item.size.height)) {
-                        height = (item.pos.y + item.size.height);
-                    }
-                }
 
                 var itemOption = {draggable: false, resizable: false};
 
@@ -125,8 +102,7 @@ define([
             }
 
             $scope.save = function () {
-                $scope.paper._portfolio_id = EditorData.portfolio._id;
-                $scope.paper._id = $scope.paperId;
+                $scope.paper = EditorData.paper;
                 $scope.paper.childArr = getPaperChildArr(EditorData.childArr);
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: $scope.paper};
 

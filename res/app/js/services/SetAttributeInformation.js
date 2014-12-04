@@ -23,10 +23,10 @@ define([
                 var templateID = id.split("_")[0] + "_" + id.split("_")[1];
                 var childID = id.split("_")[2];
 
-                // 모델 경로 설정
-                for(var key in EditorData.childArr[templateID].target.childArr){
-                    if(EditorData.childArr[templateID].target.childArr[key]._id == childID){
-                        return EditorData.childArr[templateID].target.childArr[key];
+                // 모델 경로 설정 ** EditorData.childArr -> article
+                for(var key in EditorData.childArr[templateID].childArr){
+                    if(EditorData.childArr[templateID].childArr[key]._id == childID){
+                        return EditorData.childArr[templateID].childArr[key];
                     }
                 };
             };

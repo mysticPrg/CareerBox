@@ -71,7 +71,7 @@ define([
                 // 모델 GET
                 scope.attributeInformation = SetAttributeInformation(att.id);
 
-                console.log('scope.attributeInformation', scope.attributeInformation);
+//                console.log('scope.attributeInformation', scope.attributeInformation);
 
                 // 아티클, 아이템 공통
                 setCommonWatch(scope, element, att);
