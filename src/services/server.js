@@ -57,9 +57,10 @@ app.use(session({
 //    name: 'careerbox.session',
 //    rolling: true
 }));
-app.use(morgan(':remote-addr :session [:date], :method :url :response-time ms [:status]'));
 app.use(allowCrossDomain);
 app.use('/res', express.static(__dirname + '/../../res'));
+app.use('/src', express.static(__dirname + '/../../src'));
+app.use(morgan(':remote-addr :session [:date], :method :url :response-time ms [:status]'));
 
 app.start = function (port) {
     server = http.createServer(app).listen(port);
