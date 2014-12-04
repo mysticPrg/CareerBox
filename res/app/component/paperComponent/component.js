@@ -42,19 +42,14 @@ define([
 
                     if(EditorData.paperId === ''){
                         EditorData.paperId = EditorData.paperList[0]._id;
-                    }
-
-                    // get selected paper title
-                    for(var idx = 0; idx < $scope.papers.length; idx++){
-                        if(EditorData.paperId === $scope.papers[idx]._id){
-                            $scope.paperTitle = $scope.papers[idx].title;
-                        }
+                        $scope.paperTitle = $scope.papers[0].title;
                     }
                 });
             }
 
-            $scope.loadPaper = function (){
-                console.log('loadPaper');
+            $scope.changePage = function (id, title){
+                EditorData.paperId = id;
+                $scope.paperTitle = title;
             }
 
             $scope.popCreatePaperModal = function () {

@@ -8,7 +8,7 @@
         </button>
         <ul class="dropdown-menu" role="menu" data-ng-init="loadPaperList()">
             <li ng-repeat="paper in papers track by $index">
-                <a href="#">
+                <a ng-click="changePage(paper._id, paper.title)">
                     <span>{{paper.title}}</span>
 
                     <div class="delBtn">
@@ -16,26 +16,6 @@
                     </div>
                 </a>
             </li>
-            <!--<li ng-repeat="template in templates track by $index">-->
-                <!--<div id="templateThumb" ng-click="templateClone(template)">-->
-                    <!--<img src="../img/thumb_template.png"/>-->
-
-                    <!--<div class="description">-->
-                        <!--{{template.title}}-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div id="editGroup" class="dropdown">-->
-                    <!--  -->
-                    <!--<button data-toggle="dropdown" class="btn btn-default" href="#">edit</button>-->
-                    <!--  -->
-                    <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">-->
-                        <!--    -->
-                        <!--<li><a ng-click="editTemplate(template)">수정</a></li>-->
-                        <!--<li><a ng-click="deleteTemplate(template._id)">삭제</a></li>-->
-                        <!--  -->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</li>-->
         </ul>
     </div>
     <!--New 페이지 생성 버튼-->
