@@ -12,6 +12,7 @@ define([
     'classes/LayoutComponents/Items/Shape',
     'classes/LayoutComponents/Items/Text',
     '../createTemplateModal/component',
+    '../deleteTemplateModal/component',
     '../paperComponent/component',
     'services/EditorData',
     'services/HTMLGenerator',
@@ -19,7 +20,7 @@ define([
     'services/LoadTemplate',
     'services/deleteTemplate',
     'services/ApplyCommonItemAttribute'
-], function (app, Template, Icon, Image, Item, Line, Link, Shape, Text, createTemplateModal, paperComponent) {
+], function (app, Template, Icon, Image, Item, Line, Link, Shape, Text, createTemplateModal, deleteTemplateModal, paperComponent) {
     app.controller('paperPanel', [
         '$scope',
         '$rootScope',
@@ -169,27 +170,36 @@ define([
                 });
             }
 
-            // 템플릿 다이얼로그 수정 함수
-            $scope.popModifyTemplateModal = function (template) {
-                createTemplateModal.resolve = {
-                    template: template
-                };
-
-                var modalInstance = $modal.open(createTemplateModal);
-                modalInstance.result.then(function (template) { // OK
-                    $scope.templateClone(template);
-                }, function () {
-                });
-            };
-
-            // 템플릿 다이얼로그 생성 함수
+            // create template modal
             $scope.popCreateTemplateModal = function () {
                 var modalInstance = $modal.open(createTemplateModal);
-                modalInstance.result.then(function (template) { // OK
+                modalInstance.result.then(function (template) {
                     $scope.createTemplate(template);
                 }, function () {
                 });
             };
+
+            // delete template modal
+            $scope.popDeleteTemplateModal = function (id) {
+                var modalInstance = $modal.open(deleteTemplateModal);
+                modalInstance.result.then(function () {
+                    $scope.deleteTemplate(id);
+                }, function () {
+                });
+            };
+
+            // modify template modal
+//            $scope.popModifyTemplateModal = function (template) {
+//                createTemplateModal.resolve = {
+//                    template: template
+//                };
+//
+//                var modalInstance = $modal.open(createTemplateModal);
+//                modalInstance.result.then(function (template) { // OK
+//                    $scope.templateClone(template);
+//                }, function () {
+//                });
+//            };
         }
     ]);
 
