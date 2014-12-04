@@ -15,7 +15,10 @@
                 </div>
 
                 <li ng-repeat="(key, att) in attributeInformation track by $index"
-                    ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType' || key == 'state' || key == 'zOrder' || key == 'pos_end' || key == 'pos_start' || key == 'target' || key == '_template_id' || key == 'templateType' || key == 'timestamp' " >
+                    ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType'
+                    || key == 'state' || key == 'zOrder' || key == 'pos_end' || key == 'pos_start'
+                    || key == 'target' || key == '_template_id' || key == 'templateType' || key == 'timestamp'
+                    || key == 'childArr' " >
                     <!--<h3>{{key}}</h3>-->
                     <ANY ng-switch="key">
 
