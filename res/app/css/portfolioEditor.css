@@ -203,11 +203,12 @@ img {
     line-height: 50px;
 }
 
-#canvas-box #canvas-content {
-    width: 600px;
-    height: 400px;
-    background-color: #ffffff;
-}
+/*#canvas-box #canvas-content {*/
+    /*position: relative;*/
+    /*width: 600px;*/
+    /*height: 400px;*/
+    /*background-color: #ffffff;*/
+/*}*/
 
 .paper {
     width: 960px !important;
@@ -216,6 +217,10 @@ img {
 
 
 .dropzone {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    background-color: #ffffff;
     transition: background-color 0.3s;
 }
 
