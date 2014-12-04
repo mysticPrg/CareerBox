@@ -3,20 +3,28 @@
  */
 define([
     'app',
+    '../createPaperModal/component',
     'services/EditorData',
+    'services/SavePaper',
     'services/LoadPaperList'
-], function (app) {
+], function (app, createPaperModal) {
     app.controller('paperComponent', [
         '$scope',
         '$http',
         '$compile',
+        '$modal',
         'EditorData',
+        'SavePaper',
         'LoadPaperList',
-        function ($scope, $http, $compile, EditorData, LoadPaperList) {
-            $scope.paperTitle = '';
-            $scope.papers;
+        function ($scope, $http, $compile, $modal, EditorData, SavePaper, LoadPaperList) {
+            $scope.paperTitle = 'Select Paper';
+            $scope.papers = [];
 
             $(document).ready(function () {
+
+            });
+
+            $scope.loadPaperList = function (){
                 LoadPaperList($http, EditorData.portfolio._id, function (result) {
                     EditorData.paperList = result.result;
                     $scope.papers = result.result;
@@ -32,7 +40,27 @@ define([
                         }
                     }
                 });
-            });
+            }
+
+            $scope.loadPaper = function (){
+                console.log('loadPaper');
+            }
+
+            $scope.popCreatePaperModal = function () {
+                var modalInstance = $modal.open(createPaperModal);
+                modalInstance.result.then(function (paper) {
+                    $scope.createPaper(paper);
+                }, function () {
+                });
+            };
+
+            $scope.createPaper = function (paper){
+                var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};
+
+                SavePaper($http, data, function (result) {
+                    $scope.loadPaperList();
+                });
+            }
         }
     ]);
 

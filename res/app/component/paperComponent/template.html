@@ -6,7 +6,7 @@
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu" role="menu">
+        <ul class="dropdown-menu" role="menu" data-ng-init="loadPaperList()">
             <li ng-repeat="paper in papers track by $index">
                 <a href="#">
                     <span>{{paper.title}}</span>
@@ -39,5 +39,5 @@
         </ul>
     </div>
     <!--New 페이지 생성 버튼-->
-    <button type="button" class="btn btn-primary" data-toggle="button">+ New</button>
+    <button type="button" class="btn btn-primary" data-toggle="button" ng-click="popCreatePaperModal()">+ New</button>
 </div>
