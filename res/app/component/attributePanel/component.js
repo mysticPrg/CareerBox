@@ -31,8 +31,39 @@ define([
         });
 
         $scope.deleteItem = function (id){
+            // z index 처리
+            for(var i=0 ; i < EditorData.templateItemArray.length ; i++){
+                if(EditorData.templateItemArray[i].zOrder > $scope.attributeInformation.zOrder){
+                    EditorData.templateItemArray[i].zOrder--;
+                }
+            }
+            EditorData.end_zOrder--;
+
             $scope.$emit('deleteItem', id);
         };
+
+        $scope.goFront = function () {
+
+            for(var i=0 ; i < EditorData.templateItemArray.length ; i++){
+                if(EditorData.templateItemArray[i].zOrder == $scope.attributeInformation.zOrder + 1){
+                    EditorData.templateItemArray[i].zOrder--;
+                    $scope.attributeInformation.zOrder++;
+                    return;
+                }
+            }
+
+        };
+
+        $scope.goBack = function () {
+
+            for(var i=0 ; i < EditorData.templateItemArray.length ; i++){
+                if(EditorData.templateItemArray[i].zOrder == $scope.attributeInformation.zOrder - 1){
+                    EditorData.templateItemArray[i].zOrder++;
+                    $scope.attributeInformation.zOrder--;
+                    return;
+                }
+            }
+        }
     }]);
 
     app.directive('attributePanel', function () {

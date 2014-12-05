@@ -14,7 +14,8 @@ define(['app'
             'alpha' : alpha,
             'all' : all,
             'pos' : pos,
-            'size' : size
+            'size' : size,
+            'zOrder' : zOrder
         };
         return att;
     }]);
@@ -92,6 +93,12 @@ define(['app'
         });
     }
 
+    function zOrder(element, item){
+        element.css({
+            'z-Index': item.zOrder
+        });
+    }
+
     function all(element, item) {
         fill(element, item);
         outline(element, item);
@@ -100,5 +107,6 @@ define(['app'
         alpha(element, item);
         pos(element, item);
         size(element, item);
+        zOrder(element, item);
     }
 });

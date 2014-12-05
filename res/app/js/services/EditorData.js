@@ -12,7 +12,9 @@ define(['app', 'classes/Paper', 'classes/Portfolio', 'classes/Templates/Template
         template : new Template,
         templateState : '',
         templateItemArray : [],
-        childArr: []
+        childArr: [],
+        start_zOrder : null,
+        end_zOrder : null
     };
 
     app.factory('EditorData', function() {
