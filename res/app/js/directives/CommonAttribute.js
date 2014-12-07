@@ -11,10 +11,11 @@ define([
 ], function (app) {
     app.directive('commonAttribute', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation) {
         function zOrderWatch(scope, element, att){
-            if(scope.type != 'acticle_item') {
+//            if(scope.type != 'acticle_item')
+            {
                 scope.$watch("attributeInformation.zOrder", function () {
                     if(scope.attributeInformation._id == att.id)
-                    ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
+                        ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
                 }, true);
             }
         };
@@ -83,17 +84,23 @@ define([
                 scope.attributeInformation = info.attributeInformation;
                 scope.type = info.type;
 
+                console.log('EditorData', EditorData);
+
                 // z index
-//                if(scope.attributeInformation._id == att.id)
+
                 if(scope.type != 'acticle_item'){
                     if(EditorData.end_zOrder == null){
                         EditorData.end_zOrder = 0;
                     } else {
                         EditorData.end_zOrder++;
                     };
-
                     scope.attributeInformation.zOrder = EditorData.end_zOrder;
+                } else {
+                    // 아티클 아이템일 경우
+                    console.log('scope.attributeInformation.zOrder', scope.attributeInformation.zOrder);
+                    console.log('scope.attributeInformation.itemType', scope.attributeInformation.itemType);
                 }
+
 
                 // 아티클, 아이템 공통
                 setCommonWatch(scope, element, att);
@@ -103,6 +110,7 @@ define([
                 };
                 // z 인덱스
                 zOrderWatch(scope, element, att);
+
 
             }
         };

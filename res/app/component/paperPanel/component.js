@@ -99,6 +99,13 @@ define([
             $scope.templateClone = function (template_ori) {
                 var template = jQuery.extend(true, {}, template_ori);   // 객체 복사해주어야함!.
 
+                for(var key in EditorData.childArr){
+                    if($scope.childIndex < Number(EditorData.childArr[key]._id.split(template._id + '_')[1])){
+                        $scope.childIndex = Number(EditorData.childArr[key]._id.split(template._id + '_')[1]) + 1;
+                    }
+                }
+
+
                 var templateDomId = template._id + '_' + $scope.childIndex;
                 var templateItemDom = '';
 

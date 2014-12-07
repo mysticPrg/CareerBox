@@ -22,15 +22,20 @@ define([
             };
 
             // 아티클 안의 요소들일 경우
-            if(idArray.length == 3){
+            if(idArray.length >= 3){
                 // 아이디 파싱
                 var articleId;
-                if(id.split("_")[1] === 'load'){
-                    articleId = id.split("_")[0];
-                }else{
-                    articleId = id.split("_")[0] + "_" + id.split("_")[1]
+                var childID;
+
+                var indexOfLoad = id.indexOf('load')
+                if(indexOfLoad>=0){
+                    articleId = id.split("_load_")[0];
+                    childID = id.split("_load_")[1];
                 }
-                var childID = id.split("_")[2];
+                else{
+                    articleId = id.split("_")[0] + "_" + id.split("_")[1];
+                    childID = id.split("_")[2];
+                }
 
                 // 모델 경로 설정 ** EditorData.childArr -> article
                 for(var key in EditorData.childArr[articleId].childArr){
