@@ -29,6 +29,11 @@ define([
     '../../component/templatePanel/component'
 ], function ($, ng, app, Template, Article, Icon, Image, Item, Line, Link, Shape, Text) {
     app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', function ($scope, $rootScope, $http, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation) {
+        console.log('templ');
+        // z index 초기화
+        EditorData.end_zOrder = 0;
+        EditorData.start_zOrder = 0;
+
         $scope.template = new Template();
 
         $(document).ready(function () {
@@ -160,25 +165,6 @@ define([
         $scope.cancel = function () {
             window.history.back();
         }
-
-        // updateModel 폐업
-
-//        function updateModel(id, draggable) {
-//
-//            console.log('updateModel start');
-//
-//            var item = SetAttributeInformation(id);
-////            var item = EditorData.templateItemArray[id];
-//            // ** do not override item id
-////            item._id = id;
-//            item.pos = {x: draggable.position().left, y: draggable.position().top};
-//            item.size = {width: draggable.width(), height: draggable.height()};
-//            if (item.state != 'new') {
-//                item.state = 'edit';
-//            }
-//
-////            EditorData.templateItemArray[id] = item;
-//        }
 
         $scope.canvasClick = function (){
             alert(test);

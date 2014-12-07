@@ -13,7 +13,7 @@ define([
             // A = attribute, E = Element, C = Class and M = HTML Comment
             restrict: 'A',
             link: function(scope, element, att) {
-                scope.info = SetAttributeInformation(att.id);
+                scope.info = SetAttributeInformation(att.id).attributeInformation;
                 scope.style = {};
 
                 // align

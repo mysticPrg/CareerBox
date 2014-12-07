@@ -16,7 +16,7 @@ define([
 
                 element.bind('mouseup', function (){
                     // 사이즈 업데이트
-                    var item = SetAttributeInformation(att.id);
+                    var item = SetAttributeInformation(att.id).attributeInformation;
                     if(item){
                         item.size = {width: element.width(), height: element.height()};
                         if (item.state != 'new') {

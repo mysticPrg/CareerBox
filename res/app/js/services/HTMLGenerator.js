@@ -32,7 +32,7 @@ define(['app'], function (app) {
     }
 
     function loadDivDom(item, option) {
-        var domObj = '<div id="' + item._id + '" ';
+        var domObj = '<div id="' + item._id + '" ng-click common-attribute ';
 
         if(option.draggable === true){
             domObj += 'draggable ';

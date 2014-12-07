@@ -96,7 +96,9 @@ define([
                 EditorData.focusId = item._id;    // 클론될 때 클론된 아이템의 속성창을 바로 띄워줌.
             };
 
-            $scope.templateClone = function (template) {
+            $scope.templateClone = function (template_ori) {
+                var template = jQuery.extend(true, {}, template_ori);   // 객체 복사해주어야함!.
+
                 var templateDomId = template._id + '_' + $scope.childIndex;
                 var templateItemDom = '';
 
@@ -104,6 +106,7 @@ define([
                 template.state = 'new';
 
                 // template의 article을 저장.
+                template.target._id = templateDomId;
                 EditorData.childArr[templateDomId] = template.target;
 
                 var templateItemArray = template.target.childArr;
@@ -136,14 +139,17 @@ define([
                 var domObj = "<div id=" + id + " draggable ng-click common-attribute></div>";
 
                 $(domObj).appendTo('#canvas-content');
-                $compile($(domObj))($scope);
+
+                // 나중에 한번 더 컴파일 하므로 불필요
+//                $compile($(domObj))($scope);
 
                 $('#' + id).css('position', 'absolute');
                 $('#' + id).width(template.target.size.width);
                 $('#' + id).height(template.target.size.height);
                 $('#' + id).css("background-color", "gray");
 
-                $compile($('#canvas-content'))($scope);
+//                다른 요소까지 컴파일 되므로 주석처리 함
+//                $compile($('#canvas-content'))($scope);
 
             }
 

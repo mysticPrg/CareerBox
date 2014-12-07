@@ -27,14 +27,17 @@ define([
         $scope.EditorData = EditorData;
 
         $scope.$watch('EditorData.focusId', function(){
-            $scope.attributeInformation = SetAttributeInformation(EditorData.focusId);
+            var infomation = SetAttributeInformation(EditorData.focusId);
+            $scope.attributeInformation = infomation.attributeInformation;
+            $scope.parentArray = infomation.parentArray;
+
         });
 
         $scope.deleteItem = function (id){
             // z index 처리
-            for(var i=0 ; i < EditorData.templateItemArray.length ; i++){
-                if(EditorData.templateItemArray[i].zOrder > $scope.attributeInformation.zOrder){
-                    EditorData.templateItemArray[i].zOrder--;
+            for(var i=0 ; i < $scope.parentArray.length ; i++){
+                if($scope.parentArray[i].zOrder > $scope.attributeInformation.zOrder){
+                    $scope.parentArray[i].zOrder--;
                 }
             }
             EditorData.end_zOrder--;
@@ -44,25 +47,27 @@ define([
 
         $scope.goFront = function () {
 
-            for(var i=0 ; i < EditorData.templateItemArray.length ; i++){
-                if(EditorData.templateItemArray[i].zOrder == $scope.attributeInformation.zOrder + 1){
-                    EditorData.templateItemArray[i].zOrder--;
+            for(var key in $scope.parentArray){
+                if($scope.parentArray[key].zOrder == $scope.attributeInformation.zOrder + 1){
+                    $scope.parentArray[key].zOrder--;
                     $scope.attributeInformation.zOrder++;
                     return;
                 }
             }
-
+            console.log('더이상 앞으로 갈수가 없습니다.' ,$scope);
         };
 
         $scope.goBack = function () {
 
-            for(var i=0 ; i < EditorData.templateItemArray.length ; i++){
-                if(EditorData.templateItemArray[i].zOrder == $scope.attributeInformation.zOrder - 1){
-                    EditorData.templateItemArray[i].zOrder++;
+            console.log('$scope' ,$scope);
+            for(var key in $scope.parentArray){
+                if($scope.parentArray[key].zOrder == $scope.attributeInformation.zOrder - 1){
+                    $scope.parentArray[key].zOrder++;
                     $scope.attributeInformation.zOrder--;
                     return;
                 }
             }
+            console.log('더이상 뒤로 갈수가 없습니다.' ,$scope);
         }
     }]);
 

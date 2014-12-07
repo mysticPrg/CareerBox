@@ -16,7 +16,7 @@ define([
 
             //The link function is responsible for registering DOM listeners as well as updating the DOM.
             link: function (scope, element, att) {
-                scope.attribute = SetAttributeInformation(att.id);
+                scope.attribute = SetAttributeInformation(att.id).attributeInformation;
                 scope.lineEnd = {};
                 scope.style = {};
 

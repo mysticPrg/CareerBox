@@ -34,7 +34,7 @@ define([
             link: function(scope, element, att) {
 
 
-                scope.info = SetAttributeInformation(att.id);
+                scope.info = SetAttributeInformation(att.id).attributeInformation;
                 scope.style = {};
 
                 // align

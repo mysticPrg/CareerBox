@@ -31,7 +31,7 @@ define([
 
                 element.bind('mouseup', function (){
                     // 위치 업데이트
-                    var item = SetAttributeInformation(att.id);
+                    var item = SetAttributeInformation(att.id).attributeInformation;
                     item.pos = {x: element.position().left, y: element.position().top};
 
                     if (item.state != 'new') {

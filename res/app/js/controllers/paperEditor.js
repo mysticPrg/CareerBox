@@ -20,11 +20,15 @@ define([
 ], function ($, ng, app, Paper) {
     app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper',
         function ($scope, $rootScope, $http, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper) {
+
+
             $scope.paper = new Paper();
 
             $scope.paperItemArray = [];
 
             $(document).ready(function () {
+
+
                 $scope.orientation = "horizontal";
                 $scope.panes = [
                     {collapsible: true, size: "300px"},
@@ -38,6 +42,11 @@ define([
 
 //                console.log(EditorData.paperId);
                 LoadPaper($http, EditorData.paperId, function (result) {
+                    console.log('paper');
+                    // z index 초기화
+                    EditorData.end_zOrder = 0;
+                    EditorData.start_zOrder = 0;
+
                     EditorData.paper = result.result;
                     loadPaper(EditorData.paper);
                 });
@@ -50,8 +59,10 @@ define([
                 var article;
                 for (var index = 0; index < articleArray.length; index++) {
                     article = articleArray[index];
-                    EditorData.childArr[article._id] = article;
-                    loadArticle(article);
+                    if(article.childArr){
+                        EditorData.childArr[article._id] = article;
+                        loadArticle(article);
+                    }
                 }
             }
 
@@ -116,9 +127,6 @@ define([
             function updateModel(id, draggable) {
 
                 var child;
-                // child는 포지션이 들어가야할 대상임.
-                // 경우에 따라서 child가 달라짐.
-                // 보람의 아이디 정책 변경 이후 업데이트 모듈을 드래그로 넣어두겠음.
 
                 child = EditorData.childArr[id];
 

@@ -10,6 +10,15 @@ define([
     'services/SetAttributeInformation'
 ], function (app) {
     app.directive('commonAttribute', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation) {
+        function zOrderWatch(scope, element, att){
+            if(scope.type != 'acticle_item') {
+                scope.$watch("attributeInformation.zOrder", function () {
+                    if(scope.attributeInformation._id == att.id)
+                    ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
+                }, true);
+            }
+        };
+
         function setCommonWatch(scope, element, att) {
             // pos
             scope.$watch("attributeInformation.pos",function() {
@@ -22,11 +31,6 @@ define([
             scope.$watch("attributeInformation.size",function() {
                 if(EditorData.focusId == att.id)
                     ApplyCommonItemAttribute.size(element, scope.attributeInformation);
-            },true);
-
-            // zOrder
-            scope.$watch("attributeInformation.zOrder",function() {
-                    ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
             },true);
 
         };
@@ -64,12 +68,6 @@ define([
                 if(EditorData.focusId == att.id)
                     ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
             },true);
-
-            // z Order
-            scope.$watch("attributeInformation.zOrder",function() {
-                if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
-            },true);
         };
 
         return {
@@ -81,17 +79,21 @@ define([
             link: function (scope, element, att) {
 
                 // 모델 GET
-                scope.attributeInformation = SetAttributeInformation(att.id);
-
+                var info = SetAttributeInformation(att.id);
+                scope.attributeInformation = info.attributeInformation;
+                scope.type = info.type;
 
                 // z index
-                if(EditorData.end_zOrder == null){
-                    EditorData.end_zOrder = 0;
-                } else {
-                    EditorData.end_zOrder++;
-                };
-                scope.attributeInformation.zOrder = EditorData.end_zOrder;
+//                if(scope.attributeInformation._id == att.id)
+                if(scope.type != 'acticle_item'){
+                    if(EditorData.end_zOrder == null){
+                        EditorData.end_zOrder = 0;
+                    } else {
+                        EditorData.end_zOrder++;
+                    };
 
+                    scope.attributeInformation.zOrder = EditorData.end_zOrder;
+                }
 
                 // 아티클, 아이템 공통
                 setCommonWatch(scope, element, att);
@@ -99,6 +101,8 @@ define([
                     ApplyCommonItemAttribute.all(element, scope.attributeInformation);
                     setItemWatch(scope, element, att);
                 };
+                // z 인덱스
+                zOrderWatch(scope, element, att);
 
             }
         };
