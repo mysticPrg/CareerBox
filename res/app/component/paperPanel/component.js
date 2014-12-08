@@ -105,7 +105,6 @@ define([
                 var template = jQuery.extend(true, {}, template_ori);   // 객체 복사해주어야함!.
 
                 // 로드된 템플릿과 아이디가 겹치지 않도록함.
-                console.log('EditorData.childArr', EditorData.childArr);
                 for(var key in EditorData.childArr){
                     if(EditorData.childArr[key].layoutComponentType != "item")  // 아이템은 무시
                     if($scope.childIndex < Number(EditorData.childArr[key]._id.split(template._id + '_')[1])){

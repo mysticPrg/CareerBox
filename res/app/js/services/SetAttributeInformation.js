@@ -12,32 +12,30 @@ define([
             if(typeof id == 'string')if(id.indexOf("_")) idArray = id.split("_");
 
             // 템플릿 에디터의 아이템 요소들일 경우
-            var controllerType = window.location.href.split("#/")[1];
-            if(controllerType == 'TemplateEditor'){
-                if(EditorData.template._id == id){
+            if(window.location.href.split("#/")[1] == 'TemplateEditor'){
+                if(EditorData.template._id == id)
                     return {
                         parentArray : EditorData,
                         attributeInformation : EditorData.template,
                         type : 'template'
                     }
-                } else
-                return {
-                    parentArray : EditorData.templateItemArray,
-                    attributeInformation : EditorData.templateItemArray[id],
-                    type : 'template_item'
-                }
+                else
+                    return {
+                        parentArray : EditorData.templateItemArray,
+                        attributeInformation : EditorData.templateItemArray[id],
+                        type : 'template_item'
+                    }
             };
 
             // 페이퍼일 경우
             if(EditorData.paperId == id){
                 for(var key in EditorData.paperList){
-                    if(EditorData.paperList[key]._id == id){
+                    if(EditorData.paperList[key]._id == id)
                         return {
                             parentArray : EditorData,
                             attributeInformation : EditorData.paperList[key],
                             type : 'paper'
                         }
-                    }
                 }
 
             }
@@ -60,17 +58,16 @@ define([
 
                 // 모델 경로 설정 ** EditorData.childArr -> article
                 for(var key in EditorData.childArr[articleId].childArr){
-                    if(EditorData.childArr[articleId].childArr[key]._id == childID){
+                    if(EditorData.childArr[articleId].childArr[key]._id == childID)
                         return {
                             parentArray : EditorData.childArr[articleId].childArr,
                             attributeInformation : EditorData.childArr[articleId].childArr[key],
                             type : 'acticle_item'
                         }
-                    }
                 };
             };
 
-            // 아티클 자체일 경우
+            // 페이퍼에디터에서 아티클 자체이거나 아이템인 경우
             return {
                 parentArray : EditorData.childArr,
                 attributeInformation : EditorData.childArr[id],

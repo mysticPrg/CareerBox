@@ -25,10 +25,9 @@ define([
                     containment: '#canvas-content'    // 드롭되지 않으면 다시 돌아옴.
                 });
 
-                element.bind('click', function (event){
+                element.bind('mousedown', function (event){
                     // 포커싱 처리
                     EditorData.focusId = att.id;
-                    console.log("Item EditorData.focusId", EditorData.focusId);
                 });
 
                 element.bind('mouseup', function (event){
@@ -43,7 +42,6 @@ define([
                 element.bind('mouseout', function (event){
                     EditorData.focusId = att.id;
                     $('#canvas-content').bind('click', function (event){
-                        console.log('CANVAS EditorData.focusId', EditorData.focusId);
                         // 포커싱 처리
                         if(window.location.href.split("#/")[1] == 'TemplateEditor')
                             EditorData.focusId = EditorData.template._id;

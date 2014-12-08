@@ -31,19 +31,24 @@ define([
             $scope.attributeInformation = infomation.attributeInformation;
             $scope.parentArray = infomation.parentArray;
             $scope.type = infomation.type;
-
         },true);
 
         $scope.deleteItem = function (id){
             // z index 처리
-            for(var i=0 ; i < $scope.parentArray.length ; i++){
-                if($scope.parentArray[i].zOrder > $scope.attributeInformation.zOrder){
-                    $scope.parentArray[i].zOrder--;
+            for(var key in $scope.parentArray){
+                if($scope.parentArray[key].zOrder > $scope.attributeInformation.zOrder){
+                    $scope.parentArray[key].zOrder--;
                 }
             }
+
             EditorData.end_zOrder--;
 
             $scope.$emit('deleteItem', id);
+
+            if(window.location.href.split("#/")[1] == 'TemplateEditor')
+                EditorData.focusId = EditorData.template._id;
+            else
+                EditorData.focusId = EditorData.paperId;
         };
 
         $scope.goFront = function () {
