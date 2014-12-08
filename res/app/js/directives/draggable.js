@@ -4,12 +4,13 @@
 
 define([
     'app',
+    'jquery',
     'jquery-ui',
     'services/EditorData',
     'services/ApplyCommonItemAttribute',
     'services/SetAttributeInformation'
-], function (app) {
-    app.directive('draggable', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation) {
+], function (app, $) {
+    app.directive('draggable', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', '$document', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation, $document) {
         return {
 
             // A = attribute, E = Element, C = Class and M = HTML Comment
@@ -24,19 +25,37 @@ define([
                     containment: '#canvas-content'    // 드롭되지 않으면 다시 돌아옴.
                 });
 
-                element.bind('mousedown', function (){
+                element.bind('click', function (event){
                     // 포커싱 처리
                     EditorData.focusId = att.id;
+                    console.log("Item EditorData.focusId", EditorData.focusId);
                 });
 
-                element.bind('mouseup', function (){
+                element.bind('mouseup', function (event){
                     // 위치 업데이트
                     var item = SetAttributeInformation(att.id).attributeInformation;
                     item.pos = {x: element.position().left, y: element.position().top};
-
                     if (item.state != 'new') {
                         item.state = 'edit';
                     }
+                });
+
+                element.bind('mouseout', function (event){
+                    EditorData.focusId = att.id;
+                    $('#canvas-content').bind('click', function (event){
+                        console.log('CANVAS EditorData.focusId', EditorData.focusId);
+                        // 포커싱 처리
+                        if(window.location.href.split("#/")[1] == 'TemplateEditor')
+                            EditorData.focusId = EditorData.template._id;
+                        else
+                            EditorData.focusId = EditorData.paperId;
+
+                    });
+
+                });
+
+                element.bind('mouseover', function (event){
+                    $('#canvas-content').unbind('click');
                 });
             }
         };

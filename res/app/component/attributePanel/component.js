@@ -30,8 +30,9 @@ define([
             var infomation = SetAttributeInformation(EditorData.focusId);
             $scope.attributeInformation = infomation.attributeInformation;
             $scope.parentArray = infomation.parentArray;
+            $scope.type = infomation.type;
 
-        });
+        },true);
 
         $scope.deleteItem = function (id){
             // z index 처리

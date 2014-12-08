@@ -84,18 +84,6 @@ define([
                 scope.attributeInformation = info.attributeInformation;
                 scope.type = info.type;
 
-                // z index >> 클론일 때만 적용해야함
-//                console.log('scope.attributeInformation',scope.attributeInformation);
-//                if(scope.type != 'acticle_item'){
-//                    if(EditorData.end_zOrder == null){
-//                        EditorData.end_zOrder = 0;
-//                    } else {
-//                        EditorData.end_zOrder++;
-//                    };
-//                    scope.attributeInformation.zOrder = EditorData.end_zOrder;
-//                }
-
-
                 // 아티클, 아이템 공통
                 setCommonWatch(scope, element, att);
                 if('itemType' in scope.attributeInformation){

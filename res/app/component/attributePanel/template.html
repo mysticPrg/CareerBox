@@ -1,5 +1,6 @@
 <div id="attribute" >
     <!--<h3>Attribute</h3>-->
+    id : {{EditorData.focusId}}
 
     <div class="tab-content">
         <div class="tab-pane active" id="sectionAttr">
@@ -8,8 +9,9 @@
                 <div id="itemAttrInfo" class="clearfix">
                     <h3>{{attributeInformation.layoutComponentType}}</h3>
                     <h3>{{attributeInformation.itemType}}</h3>
+                    <h3>{{attributeInformation.templateType}}</h3>
 
-                    <div ng-if=attributeInformation>
+                    <div ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
                         <button class="btn btn-default"
                                 ng-click="deleteItem(attributeInformation._id)">삭제
                         </button>
@@ -30,7 +32,7 @@
                     ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType'
                     || key == 'state' || key == 'pos_end' || key == 'pos_start'
                     || key == 'target' || key == '_template_id' || key == 'templateType' || key == 'timestamp'
-                    || key == 'childArr' " >
+                    || key == 'childArr' || key == '_member_id'" >
                     <!--<h3>{{key}}</h3>-->
                     <ANY ng-switch="key">
 

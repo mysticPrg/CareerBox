@@ -21,6 +21,12 @@ define([
     app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper',
         function ($scope, $rootScope, $http, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper) {
 
+            // 페이퍼 속성
+            $('#canvas-content').bind('click', function (){
+                // 포커싱 처리
+                EditorData.focusId = EditorData.paperId;
+            });
+
 
             $scope.paper = new Paper();
 
@@ -40,9 +46,7 @@ define([
                 if(EditorData.paperId === '')
                     return;
 
-//                console.log(EditorData.paperId);
                 LoadPaper($http, EditorData.paperId, function (result) {
-                    console.log('paper');
                     // z index 초기화
                     EditorData.end_zOrder = 0;
                     EditorData.start_zOrder = 0;

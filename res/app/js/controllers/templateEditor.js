@@ -26,15 +26,27 @@ define([
     'services/HTMLGenerator',
     'services/SaveTemplate',
     'services/SetAttributeInformation',
-    '../../component/templatePanel/component'
+    'component/templatePanel/component',
+    'directives/drag'
 ], function ($, ng, app, Template, Article, Icon, Image, Item, Line, Link, Shape, Text) {
     app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', function ($scope, $rootScope, $http, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation) {
-        console.log('templ');
         // z index 초기화
         EditorData.end_zOrder = 0;
         EditorData.start_zOrder = 0;
 
         $scope.template = new Template();
+
+        // 템플릿 속성
+        $('#canvas-content').bind('click', function (){
+            // 포커싱 처리
+            EditorData.focusId = EditorData.template._id;
+        });
+
+        $scope.setFocus = function() {
+            if(EditorData.focusId != EditorData.template._id)
+            EditorData.focusId = EditorData.template._id
+            console.log('EditorData.template',EditorData.template);
+        }
 
         $(document).ready(function () {
             $scope.orientation = "horizontal";
@@ -51,6 +63,7 @@ define([
             if (EditorData.templateState == 'edit') {
                 loadTemplate();
             }
+            console.log('$scope.template', $scope.template);
         });
 
         $rootScope.$on("deleteItem", function (e, id) {

@@ -14,12 +14,33 @@ define([
             // 템플릿 에디터의 아이템 요소들일 경우
             var controllerType = window.location.href.split("#/")[1];
             if(controllerType == 'TemplateEditor'){
+                if(EditorData.template._id == id){
+                    return {
+                        parentArray : EditorData,
+                        attributeInformation : EditorData.template,
+                        type : 'template'
+                    }
+                } else
                 return {
                     parentArray : EditorData.templateItemArray,
                     attributeInformation : EditorData.templateItemArray[id],
                     type : 'template_item'
                 }
             };
+
+            // 페이퍼일 경우
+            if(EditorData.paperId == id){
+                for(var key in EditorData.paperList){
+                    if(EditorData.paperList[key]._id == id){
+                        return {
+                            parentArray : EditorData,
+                            attributeInformation : EditorData.paperList[key],
+                            type : 'paper'
+                        }
+                    }
+                }
+
+            }
 
             // 아티클 안의 요소들일 경우
             if(idArray.length >= 3){
