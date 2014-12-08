@@ -21,7 +21,7 @@ img {
 
 body {
     width:100%;
-    background-color: #4b4e43;
+    background-color: #fff;
     font-family: arial, sans-serif;
 }
 
@@ -38,36 +38,29 @@ body {
 
 #header {
     width: 100%;
-    height:400px;
+    height:500px;
     background-size: cover;
-    background-color:#fff;
+    background-color:#10152c;
 }
 
 #headerInner {
-    padding-top: 40px;
+    padding-top: 25px;
+    width: 960px;
+    height: 500px;
+    background-image: url('../img/index_img/index_bg.png');
+    background-repeat: no-repeat;
 }
 
 #headerInner #logo {
-    color: #040404;
-    font-size: 20px;
-    width: 100px;
-    border: solid 3px #040404;
-    padding: 10px 15px;
-    text-align: center;
+
 }
-
-
 
 #headerInner .member {
     float: right;
-    color: #040404;
+    color: #fff;
     font-size: 17px;
     margin-left: 40px;
-}
-
-#headerInner #slogan h1 {
-    text-align: center;
-    margin-top: 125px;
+    line-height: 29px;
 }
 
 #content {
@@ -76,18 +69,13 @@ body {
 
 #content #infoList > li {
     float: left;
-    width: 200px;
-    height: 200px;
-    margin-right: 180px;
-    background-color: #222222;
-    border-radius: 100%;
-    text-align: center;
+    margin-right: 267px;
 }
 
 #content #infoList {
     display: inline-block;
-    width: 1140px;
-    margin: 70px 0;
+    width: 1227px;
+    margin: 25px 0;
 }
 
 #content #infoList > li a {
