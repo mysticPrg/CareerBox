@@ -84,22 +84,16 @@ define([
                 scope.attributeInformation = info.attributeInformation;
                 scope.type = info.type;
 
-                console.log('EditorData', EditorData);
-
-                // z index
-
-                if(scope.type != 'acticle_item'){
-                    if(EditorData.end_zOrder == null){
-                        EditorData.end_zOrder = 0;
-                    } else {
-                        EditorData.end_zOrder++;
-                    };
-                    scope.attributeInformation.zOrder = EditorData.end_zOrder;
-                } else {
-                    // 아티클 아이템일 경우
-                    console.log('scope.attributeInformation.zOrder', scope.attributeInformation.zOrder);
-                    console.log('scope.attributeInformation.itemType', scope.attributeInformation.itemType);
-                }
+                // z index >> 클론일 때만 적용해야함
+//                console.log('scope.attributeInformation',scope.attributeInformation);
+//                if(scope.type != 'acticle_item'){
+//                    if(EditorData.end_zOrder == null){
+//                        EditorData.end_zOrder = 0;
+//                    } else {
+//                        EditorData.end_zOrder++;
+//                    };
+//                    scope.attributeInformation.zOrder = EditorData.end_zOrder;
+//                }
 
 
                 // 아티클, 아이템 공통

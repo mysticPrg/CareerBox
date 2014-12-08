@@ -19,7 +19,8 @@ define([
     'services/SaveTemplate',
     'services/LoadTemplate',
     'services/deleteTemplate',
-    'services/ApplyCommonItemAttribute'
+    'services/ApplyCommonItemAttribute',
+    'services/SetZOrder'
 ], function (app, Template, Icon, Image, Item, Line, Link, Shape, Text, createTemplateModal, deleteTemplateModal, paperComponent) {
     app.controller('paperPanel', [
         '$scope',
@@ -34,7 +35,8 @@ define([
         'LoadTemplate',
         'DeleteTemplate',
         'ApplyCommonItemAttribute',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, LoadTemplate, DeleteTemplate, ApplyCommonItemAttribute) {
+        'SetZOrder',
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, LoadTemplate, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder) {
             $scope.templates = [];
 
             $scope.childIndex = 0;
@@ -94,17 +96,21 @@ define([
                 $compile($('#' + item._id))($scope);
 
                 EditorData.focusId = item._id;    // 클론될 때 클론된 아이템의 속성창을 바로 띄워줌.
+
+                SetZOrder(item, item._id);
             };
 
             $scope.templateClone = function (template_ori) {
                 var template = jQuery.extend(true, {}, template_ori);   // 객체 복사해주어야함!.
 
+                // 로드된 템플릿과 아이디가 겹치지 않도록함.
+                console.log('EditorData.childArr', EditorData.childArr);
                 for(var key in EditorData.childArr){
+                    if(EditorData.childArr[key].layoutComponentType != "item")  // 아이템은 무시
                     if($scope.childIndex < Number(EditorData.childArr[key]._id.split(template._id + '_')[1])){
                         $scope.childIndex = Number(EditorData.childArr[key]._id.split(template._id + '_')[1]) + 1;
                     }
                 }
-
 
                 var templateDomId = template._id + '_' + $scope.childIndex;
                 var templateItemDom = '';
@@ -115,6 +121,7 @@ define([
                 // template의 article을 저장.
                 template.target._id = templateDomId;
                 EditorData.childArr[templateDomId] = template.target;
+                SetZOrder(template.target, templateDomId);
 
                 var templateItemArray = template.target.childArr;
 
@@ -140,6 +147,7 @@ define([
                 $compile($('#' + templateDomId))($scope);
 
                 $scope.childIndex++;
+
             }
 
             function createTemplateDiv(template, id) {

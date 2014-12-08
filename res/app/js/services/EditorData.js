@@ -21,6 +21,6 @@ define(['app', 'classes/Paper', 'classes/Portfolio', 'classes/Templates/Template
         return EditorData;
     });
 
-//    return EditorData;
+    return EditorData;
 });
 

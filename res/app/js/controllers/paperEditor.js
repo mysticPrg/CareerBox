@@ -74,7 +74,7 @@ define([
                 var width = 0, height = 0;
 
                 var templateItemArray = article.childArr;
-
+                EditorData.end_zOrder++;
                 var itemOption = {draggable: false, resizable: false};
 
                 var articleItemId;
@@ -113,10 +113,6 @@ define([
                 $scope.paper = EditorData.paper;
                 $scope.paper.childArr = getPaperChildArr(EditorData.childArr);
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: $scope.paper};
-
-                console.log($scope.paper);
-                console.log('//////////////////');
-                console.log($scope.paper.childArr);
 
                 SavePaper($http, data, function (result) {
                     console.log(result);
