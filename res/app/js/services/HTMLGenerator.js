@@ -23,7 +23,7 @@ define(['app'], function (app) {
         } else if (itemType === 'link') {
             domObj += 'link class="itemLink" ';
         } else if (itemType === 'shape') {
-            domObj += 'shape class="element" ';
+            domObj += 'shape class="itemShape" ';
         }
 
         domObj += 'style="position: absolute; top: ' + item.pos.y + 'px; left: ' + item.pos.x + 'px; width: ' + item.size.width + 'px; height: ' + item.size.height + 'px;"></div>';
