@@ -34,6 +34,8 @@ define([
                     ApplyCommonItemAttribute.size(element, scope.attributeInformation);
             },true);
 
+            setItemWatch(scope, element, att);
+
         };
 
         function setItemWatch(scope, element, att) {
@@ -84,12 +86,12 @@ define([
                 scope.attributeInformation = info.attributeInformation;
                 scope.type = info.type;
 
+                // 로딩시 CSS 적용
+                ApplyCommonItemAttribute.all(element, scope.attributeInformation);
+
                 // 아티클, 아이템 공통
                 setCommonWatch(scope, element, att);
-                if('itemType' in scope.attributeInformation){
-                    ApplyCommonItemAttribute.all(element, scope.attributeInformation);
-                    setItemWatch(scope, element, att);
-                };
+
                 // z 인덱스
                 zOrderWatch(scope, element, att);
 
