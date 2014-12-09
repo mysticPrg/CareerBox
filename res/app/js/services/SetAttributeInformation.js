@@ -13,10 +13,12 @@ define([
 
             // 템플릿 에디터의 아이템 요소들일 경우
             if(window.location.href.split("#/")[1] == 'TemplateEditor'){
-                if(EditorData.template._id == id)
+//                if(id == "canvas-content")
+//                    id = EditorData.template._id;
+                if(EditorData.template._id == id || id == "canvas-content")
                     return {
                         parentArray : EditorData,
-                        attributeInformation : EditorData.template,
+                        attributeInformation : EditorData.template.target,
                         type : 'template'
                     }
                 else
