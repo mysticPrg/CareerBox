@@ -11,13 +11,10 @@ define([
 ], function (app) {
     app.directive('commonAttribute', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation) {
         function zOrderWatch(scope, element, att){
-//            if(scope.type != 'acticle_item')
-            {
-                scope.$watch("attributeInformation.zOrder", function () {
-                    if(scope.attributeInformation._id == att.id)
-                        ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
-                }, true);
-            }
+            scope.$watch("attributeInformation.zOrder", function () {
+                if(scope.attributeInformation._id == att.id)
+                    ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
+            }, true);
         };
 
         function setCommonWatch(scope, element, att) {
@@ -31,7 +28,7 @@ define([
             // size
             scope.$watch("attributeInformation.size",function() {
 //                if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.size(element, scope.attributeInformation);
+                ApplyCommonItemAttribute.size(element, scope.attributeInformation);
             },true);
 
             setItemWatch(scope, element, att);
@@ -44,32 +41,33 @@ define([
                 // fill 리스너 달기
                 scope.$watch("attributeInformation.fill",function() {
 //                    if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
+                    ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
                 },true);
 
                 // outline 색
                 scope.$watch("attributeInformation.outline",function() {
 //                    if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.outline(element, scope.attributeInformation);
+                    ApplyCommonItemAttribute.outline(element, scope.attributeInformation);
                 },true);
 
                 // radius
                 scope.$watch("attributeInformation.radius",function() {
+                    console.log('radius 설정 후 EditorData',EditorData)
 //                    if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
+                    ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
                 },true);
 
                 // alpha 리스너 달기
                 scope.$watch("attributeInformation.alpha",function() {
 //                    if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.alpha(element, scope.attributeInformation);
+                    ApplyCommonItemAttribute.alpha(element, scope.attributeInformation);
                 },true);
 
             };
             // rotate
             scope.$watch("attributeInformation.rotate",function() {
 //                if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
+                ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
             },true);
         };
 
@@ -82,16 +80,9 @@ define([
             link: function (scope, element, att) {
 
                 // 모델 GET
-                var info;
-                if(window.location.href.split("#/")[1] == 'TemplateEditor' && att.id == "canvas-content"){
-                    info = SetAttributeInformation(EditorData.template._id);
-                    console.log('info',info);
-                } else{
-                    info = SetAttributeInformation(att.id);
-                }
+                var info = SetAttributeInformation(att.id);
                 scope.attributeInformation = info.attributeInformation;
                 scope.type = info.type;
-
 
                 // 로딩시 CSS 적용
                 ApplyCommonItemAttribute.all(element, scope.attributeInformation);
