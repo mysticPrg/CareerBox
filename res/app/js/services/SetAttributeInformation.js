@@ -48,8 +48,7 @@ define([
                 var articleId;
                 var childID;
 
-                var indexOfLoad = id.indexOf('load')
-                if(indexOfLoad>=0){
+                if(isLoaded(id)){
                     articleId = id.split("_load_")[0];
                     childID = id.split("_load_")[1];
                 }
@@ -68,6 +67,13 @@ define([
                         }
                 };
             };
+
+            function isLoaded(id){
+                if(id.indexOf('load') >= 0)
+                    return true;
+                else
+                    return false;
+            }
 
             // 페이퍼에디터에서 아티클 자체이거나 아이템인 경우
             return {
