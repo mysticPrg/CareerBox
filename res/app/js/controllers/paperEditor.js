@@ -153,7 +153,9 @@ define([
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: $scope.paper};
 
                 SavePaper($http, data, function (result) {
-                    console.log(result);
+                    if(result === '000'){
+                        alert('저장되었습니다.');
+                    }
                 });
 
             }
