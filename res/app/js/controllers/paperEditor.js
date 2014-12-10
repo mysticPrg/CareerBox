@@ -22,13 +22,13 @@ define([
         function ($scope, $rootScope, $http, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper) {
 
             // 페이퍼 속성
-            $('#canvas-content').bind('click', function (){
+            $('#canvas-content').bind('click', function () {
                 // 포커싱 처리
                 EditorData.focusId = EditorData.paperId;
             });
 
 
-            $scope.paper = new Paper();
+            $scope.paper;
 
             $scope.paperItemArray = [];
 
@@ -42,19 +42,28 @@ define([
                 ];
             });
 
-            $scope.$watch("EditorData.paperId", function() {
-                if(EditorData.paperId === '')
+            $scope.$watch("EditorData.paperId", function () {
+                if (EditorData.paperId === '')
                     return;
 
-                LoadPaper($http, EditorData.paperId, function (result) {
-                    // z index 초기화
-                    EditorData.end_zOrder = 0;
-                    EditorData.start_zOrder = 0;
+                initPaper();
 
+                LoadPaper($http, EditorData.paperId, function (result) {
                     EditorData.paper = result.result;
                     loadPaper(EditorData.paper);
                 });
             });
+
+            function initPaper(){
+                $('#canvas-content').find('div').remove();
+
+                $scope.paper = new Paper();
+                EditorData.childArr = [];
+
+                // z index 초기화
+                EditorData.end_zOrder = 0;
+                EditorData.start_zOrder = 0;
+            }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             function loadPaper(paper) {
@@ -63,7 +72,7 @@ define([
                 var article;
                 for (var index = 0; index < articleArray.length; index++) {
                     article = articleArray[index];
-                    if(article.childArr){
+                    if (article.childArr) {
                         EditorData.childArr[article._id] = article;
                         loadArticle(article);
                     }
@@ -84,15 +93,16 @@ define([
                 var articleItemId;
                 for (var index = 0; index < templateItemArray.length; index++) {
                     // Item of article 's id = template id_item id
-                    articleItemId = article._id + '_load_' +templateItemArray[index]._id;
+                    articleItemId = article._id + '_load_' + templateItemArray[index]._id;
                     ArticleDom += HTMLGenerator('loadItem', templateItemArray[index], articleItemId, itemOption);
                 }
 
                 ArticleDom += '</div>';
 
                 $('#canvas-content').append(ArticleDom);
-                $compile($('#'+article._id))($scope);
+                $compile($('#' + article._id))($scope);
             }
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             function getPaperChildArr(childArr) {
