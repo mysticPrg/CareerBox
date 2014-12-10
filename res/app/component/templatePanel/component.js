@@ -11,7 +11,8 @@ define([
     'classes/LayoutComponents/Items/Shape',
     'classes/LayoutComponents/Items/Text',
     'services/EditorData',
-    'services/HTMLGenerator'
+    'services/HTMLGenerator',
+    'services/SetZOrder'
 ], function (app, Icon, Image, Item, Line, Link, Shape, Text) {
     app.controller('templatePanel', [
         '$scope',
@@ -19,7 +20,8 @@ define([
         '$compile',
         'EditorData',
         'HTMLGenerator',
-        function ($scope, $http, $compile, EditorData, HTMLGenerator) {
+        'SetZOrder',
+        function ($scope, $http, $compile, EditorData, HTMLGenerator, SetZOrder) {
             $scope.childIndex = 0;
 
             function newItem(type) {
@@ -56,6 +58,7 @@ define([
                 $compile($('#' + item._id))($scope);
 
                 EditorData.focusId = item._id;    // 클론될 때 클론된 아이템의 속성창을 바로 띄워줌.
+                SetZOrder(item, item._id);
             };
         }
     ]);

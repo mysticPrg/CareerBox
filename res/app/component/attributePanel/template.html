@@ -1,21 +1,39 @@
-<div id="attribute" ng-controller="attributePanel">
+<div id="attribute" >
     <!--<h3>Attribute</h3>-->
+    <!--id : {{EditorData.focusId}}<br/>-->
+    <!--z_index : {{EditorData.end_zOrder}}-->
 
     <div class="tab-content">
         <div class="tab-pane active" id="sectionAttr">
 
             <ul id="itemAttrList">
                 <div id="itemAttrInfo" class="clearfix">
+                    <h3>{{attributeInformation.layoutComponentType}}</h3>
                     <h3>{{attributeInformation.itemType}}</h3>
                     <h3>{{attributeInformation.templateType}}</h3>
 
-                    <button ng-if=attributeInformation class="btn btn-default"
-                            ng-click="deleteItem(attributeInformation._id)">삭제
-                    </button>
+                    <div ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
+                        <button class="btn btn-default"
+                                ng-click="deleteItem(attributeInformation._id)">삭제
+                        </button>
+
+                        <button class="btn btn-default"
+                                ng-click="goFront()">앞으로
+                        </button>
+
+                        <button class="btn btn-default"
+                                ng-click="goBack()">뒤로
+                        </button>
+                    </div>
+
+
                 </div>
 
                 <li ng-repeat="(key, att) in attributeInformation track by $index"
-                    ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType' || key == 'state' || key == 'zOrder' || key == 'pos_end' || key == 'pos_start' || key == 'target' || key == '_template_id' || key == 'templateType' || key == 'timestamp' " >
+                    ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType'
+                    || key == 'state' || key == 'pos_end' || key == 'pos_start'
+                    || key == 'target' || key == '_template_id' || key == 'templateType' || key == 'timestamp'
+                    || key == 'childArr' || key == '_member_id'" >
                     <!--<h3>{{key}}</h3>-->
                     <ANY ng-switch="key">
 
@@ -75,6 +93,7 @@
                         <ANY ng-switch-when="vAlign">
                             <div vertical-align-attribute to="attributeInformation"></div>
                         </ANY>
+
                         <ANY ng-switch-when="value">
                             <div value-attribute to="attributeInformation"></div>
                         </ANY>

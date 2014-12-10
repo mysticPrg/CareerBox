@@ -19,7 +19,8 @@ define([
     'services/SaveTemplate',
     'services/LoadTemplate',
     'services/deleteTemplate',
-    'services/ApplyCommonItemAttribute'
+    'services/ApplyCommonItemAttribute',
+    'services/SetZOrder'
 ], function (app, Template, Icon, Image, Item, Line, Link, Shape, Text, createTemplateModal, deleteTemplateModal, paperComponent) {
     app.controller('paperPanel', [
         '$scope',
@@ -34,9 +35,11 @@ define([
         'LoadTemplate',
         'DeleteTemplate',
         'ApplyCommonItemAttribute',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, LoadTemplate, DeleteTemplate, ApplyCommonItemAttribute) {
+        'SetZOrder',
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, LoadTemplate, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder) {
             $scope.templates = [];
 
+//            console.log('EditorData', EditorData);
             $scope.childIndex = 0;
 
             $scope.initializeSectionEditor = function () {
@@ -94,9 +97,24 @@ define([
                 $compile($('#' + item._id))($scope);
 
                 EditorData.focusId = item._id;    // 클론될 때 클론된 아이템의 속성창을 바로 띄워줌.
+
+                SetZOrder(item, item._id);
             };
 
-            $scope.templateClone = function (template) {
+            $scope.templateClone = function (template_ori) {
+                var template = jQuery.extend(true, {}, template_ori);   // 객체 복사해주어야함!.
+
+                // 로드된 템플릿과 아이디가 겹치지 않도록함.
+                for(var key in EditorData.childArr){
+
+                    if(EditorData.childArr[key].layoutComponentType != "item")  // 아이템은 무시
+                    if($scope.childIndex <= Number(EditorData.childArr[key]._id.split(template._id + '_')[1])){
+
+
+                        $scope.childIndex = Number(EditorData.childArr[key]._id.split(template._id + '_')[1]) + 1;
+                    }
+                }
+
                 var templateDomId = template._id + '_' + $scope.childIndex;
                 var templateItemDom = '';
 
@@ -104,7 +122,9 @@ define([
                 template.state = 'new';
 
                 // template의 article을 저장.
+                template.target._id = templateDomId;
                 EditorData.childArr[templateDomId] = template.target;
+                SetZOrder(template.target, templateDomId);
 
                 var templateItemArray = template.target.childArr;
 
@@ -130,20 +150,24 @@ define([
                 $compile($('#' + templateDomId))($scope);
 
                 $scope.childIndex++;
+
             }
 
             function createTemplateDiv(template, id) {
                 var domObj = "<div id=" + id + " draggable ng-click common-attribute></div>";
 
                 $(domObj).appendTo('#canvas-content');
-                $compile($(domObj))($scope);
+
+                // 나중에 한번 더 컴파일 하므로 불필요
+//                $compile($(domObj))($scope);
 
                 $('#' + id).css('position', 'absolute');
                 $('#' + id).width(template.target.size.width);
                 $('#' + id).height(template.target.size.height);
                 $('#' + id).css("background-color", "gray");
 
-                $compile($('#canvas-content'))($scope);
+//                다른 요소까지 컴파일 되므로 주석처리 함
+//                $compile($('#canvas-content'))($scope);
 
             }
 

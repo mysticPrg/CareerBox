@@ -20,11 +20,21 @@ define([
 ], function ($, ng, app, Paper) {
     app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper',
         function ($scope, $rootScope, $http, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper) {
-            $scope.paper = new Paper();
+
+            // 페이퍼 속성
+            $('#canvas-content').bind('click', function () {
+                // 포커싱 처리
+                EditorData.focusId = EditorData.paperId;
+            });
+
+
+            $scope.paper;
 
             $scope.paperItemArray = [];
 
             $(document).ready(function () {
+
+
                 $scope.orientation = "horizontal";
                 $scope.panes = [
                     {collapsible: true, size: "300px"},
@@ -32,26 +42,47 @@ define([
                 ];
             });
 
-            $scope.$watch("EditorData.paperId", function() {
-                if(EditorData.paperId === '')
+            $rootScope.$on("deleteArticle", function (e, id) {
+                deleteArticle(id);
+            });
+
+            $scope.$watch("EditorData.paperId", function () {
+                if (EditorData.paperId === '')
                     return;
 
-//                console.log(EditorData.paperId);
+                initPaper();
+
                 LoadPaper($http, EditorData.paperId, function (result) {
                     EditorData.paper = result.result;
                     loadPaper(EditorData.paper);
                 });
             });
 
+            function initPaper(){
+                $('#canvas-content').find('div').remove();
+
+                $scope.paper = new Paper();
+                EditorData.childArr = [];
+
+                // z index 초기화
+                EditorData.end_zOrder = 0;
+                EditorData.start_zOrder = 0;
+            }
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             function loadPaper(paper) {
-                var articleArray = paper.childArr;
+                var paperChildArr = paper.childArr;
+                console.log(paper.childArr);
 
-                var article;
-                for (var index = 0; index < articleArray.length; index++) {
-                    article = articleArray[index];
-                    EditorData.childArr[article._id] = article;
-                    loadArticle(article);
+                var child;
+                for (var index = 0; index < paperChildArr.length; index++) {
+                    child = paperChildArr[index];
+                    if (child.childArr) {
+                        EditorData.childArr[child._id] = child;
+                        loadArticle(child);
+                    }else{
+                        loadItem(child);
+                    }
                 }
             }
 
@@ -63,21 +94,35 @@ define([
                 var width = 0, height = 0;
 
                 var templateItemArray = article.childArr;
-
+                EditorData.end_zOrder++;
                 var itemOption = {draggable: false, resizable: false};
 
                 var articleItemId;
                 for (var index = 0; index < templateItemArray.length; index++) {
                     // Item of article 's id = template id_item id
-                    articleItemId = article._id + '_load_' +templateItemArray[index]._id;
+                    articleItemId = article._id + '_load_' + templateItemArray[index]._id;
                     ArticleDom += HTMLGenerator('loadItem', templateItemArray[index], articleItemId, itemOption);
                 }
 
                 ArticleDom += '</div>';
 
                 $('#canvas-content').append(ArticleDom);
-                $compile($('#'+article._id))($scope);
+                $compile($('#' + article._id))($scope);
             }
+
+            function loadItem(item) {
+                var option = {draggable: true, resizable: true};
+
+                var domObj = HTMLGenerator('loadItem', item, item._id, option);
+
+                $('#canvas-content').append(domObj);
+                $compile($('#' + item._id))($scope);
+
+                //TODO 병진 : 이 부분 확인 좀
+//                EditorData.focusId = id;    // 포커스 지정
+//                EditorData.end_zOrder++;
+            }
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             function getPaperChildArr(childArr) {
@@ -88,6 +133,10 @@ define([
 
                     if (child.state == 'new') {
                         delete child._id;
+                    }
+
+                    if (child.state == 'del') {
+                        continue;
                     }
 
                     delete  child.state;
@@ -103,12 +152,10 @@ define([
                 $scope.paper.childArr = getPaperChildArr(EditorData.childArr);
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: $scope.paper};
 
-                console.log($scope.paper);
-                console.log('//////////////////');
-                console.log($scope.paper.childArr);
-
                 SavePaper($http, data, function (result) {
-                    console.log(result);
+                    if(result === '000'){
+                        alert('저장되었습니다.');
+                    }
                 });
 
             }
@@ -116,9 +163,6 @@ define([
             function updateModel(id, draggable) {
 
                 var child;
-                // child는 포지션이 들어가야할 대상임.
-                // 경우에 따라서 child가 달라짐.
-                // 보람의 아이디 정책 변경 이후 업데이트 모듈을 드래그로 넣어두겠음.
 
                 child = EditorData.childArr[id];
 
@@ -138,5 +182,10 @@ define([
                     updateModel(id, ui.draggable);
                 }
             });
+
+            function deleteArticle(id) {
+                $('#' + id).remove();
+                EditorData.childArr[id].state = 'del';
+            }
         }]);
 });

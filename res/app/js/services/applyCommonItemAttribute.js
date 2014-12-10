@@ -14,7 +14,8 @@ define(['app'
             'alpha' : alpha,
             'all' : all,
             'pos' : pos,
-            'size' : size
+            'size' : size,
+            'zOrder' : zOrder
         };
         return att;
     }]);
@@ -24,6 +25,8 @@ define(['app'
     }
 
     function fill(element, item) {
+//        console.log('item', item);
+//        console.log('element', element);
         if(item.itemType == 'line'){
             element.css({
                 'background-color': 'rgba(0,0,0,0)'
@@ -92,6 +95,12 @@ define(['app'
         });
     }
 
+    function zOrder(element, item){
+        element.css({
+            'z-Index': item.zOrder
+        });
+    }
+
     function all(element, item) {
         fill(element, item);
         outline(element, item);
@@ -100,5 +109,6 @@ define(['app'
         alpha(element, item);
         pos(element, item);
         size(element, item);
+        zOrder(element, item);
     }
 });

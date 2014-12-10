@@ -16,12 +16,13 @@ define([
 
                 element.bind('mouseup', function (){
                     // 사이즈 업데이트
-                    var item = SetAttributeInformation(att.id);
-                    item.size = {width: element.width(), height: element.height()};
-                    if (item.state != 'new') {
-                        item.state = 'edit';
+                    var item = SetAttributeInformation(att.id).attributeInformation;
+                    if(item){
+                        item.size = {width: element.width(), height: element.height()};
+                        if (item.state != 'new') {
+                            item.state = 'edit';
+                        }
                     }
-                    element.trigger('click');   // 없으면 이벤트가 씹힘... 왜 그런지는 모르겟음.
                 });
             }
         };

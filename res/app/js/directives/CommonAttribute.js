@@ -10,19 +10,29 @@ define([
     'services/SetAttributeInformation'
 ], function (app) {
     app.directive('commonAttribute', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation) {
+        function zOrderWatch(scope, element, att){
+            scope.$watch("attributeInformation.zOrder", function () {
+                if(scope.attributeInformation._id == att.id)
+                    ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
+            }, true);
+        };
+
         function setCommonWatch(scope, element, att) {
             // pos
             scope.$watch("attributeInformation.pos",function() {
-                if(EditorData.focusId == att.id){
+                if(EditorData.focusId == att.id)
                     ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
-                }
+
             },true);
 
             // size
             scope.$watch("attributeInformation.size",function() {
-                if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.size(element, scope.attributeInformation);
+//                if(EditorData.focusId == att.id)
+                ApplyCommonItemAttribute.size(element, scope.attributeInformation);
             },true);
+
+            setItemWatch(scope, element, att);
+
         };
 
         function setItemWatch(scope, element, att) {
@@ -30,33 +40,34 @@ define([
             if(scope.attributeInformation.itemType!='line'){
                 // fill 리스너 달기
                 scope.$watch("attributeInformation.fill",function() {
-                    if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
+//                    if(EditorData.focusId == att.id)
+                    ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
                 },true);
 
                 // outline 색
                 scope.$watch("attributeInformation.outline",function() {
-                    if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.outline(element, scope.attributeInformation);
+//                    if(EditorData.focusId == att.id)
+                    ApplyCommonItemAttribute.outline(element, scope.attributeInformation);
                 },true);
 
                 // radius
                 scope.$watch("attributeInformation.radius",function() {
-                    if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
+//                    console.log('radius 설정 후 EditorData',EditorData);
+//                    if(EditorData.focusId == att.id)
+                    ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
                 },true);
 
                 // alpha 리스너 달기
                 scope.$watch("attributeInformation.alpha",function() {
-                    if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.alpha(element, scope.attributeInformation);
+//                    if(EditorData.focusId == att.id)
+                    ApplyCommonItemAttribute.alpha(element, scope.attributeInformation);
                 },true);
 
             };
             // rotate
             scope.$watch("attributeInformation.rotate",function() {
-                if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
+//                if(EditorData.focusId == att.id)
+                ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
             },true);
         };
 
@@ -69,17 +80,19 @@ define([
             link: function (scope, element, att) {
 
                 // 모델 GET
-                scope.attributeInformation = SetAttributeInformation(att.id);
+                var info = SetAttributeInformation(att.id);
+                scope.attributeInformation = info.attributeInformation;
+                scope.type = info.type;
 
-//                console.log('scope.attributeInformation', scope.attributeInformation);
+                // 로딩시 CSS 적용
+                ApplyCommonItemAttribute.all(element, scope.attributeInformation);
 
                 // 아티클, 아이템 공통
                 setCommonWatch(scope, element, att);
 
-                if('itemType' in scope.attributeInformation){
-                    ApplyCommonItemAttribute.all(element, scope.attributeInformation);
-                    setItemWatch(scope, element, att);
-                }
+                // z 인덱스
+                zOrderWatch(scope, element, att);
+
 
             }
         };

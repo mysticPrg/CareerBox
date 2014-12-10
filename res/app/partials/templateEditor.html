@@ -1,5 +1,6 @@
 <div kendo-splitter k-panes="panes" k-orientation="orientation" style="height: 100%">
     <div template-panel></div>
+    <!--<div drag>drag</div>-->
     <div id="canvas">
         <div id="stateBar" class="clearfix">
             <div id="stateGroup">
@@ -15,8 +16,9 @@
             </div>
         </div>
 
-        <div id="canvas-box" class="clearfix">
-            <div resizable id="canvas-content" class="dropzone">
+
+        <div id="canvas-box" class="editzoneWrapper clearfix" ng-click >
+            <div resizable id="canvas-content" class="editzone" common-attribute >
             </div>
         </div>
     </div>

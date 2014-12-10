@@ -1,4 +1,3 @@
-
 define([
     'app',
     'component/attribute/fillAttribute/component',
@@ -26,13 +25,57 @@ define([
 
         $scope.EditorData = EditorData;
 
-        $scope.$watch('EditorData.focusId', function(){
-            $scope.attributeInformation = SetAttributeInformation(EditorData.focusId);
-        });
+        $scope.$watch('EditorData.focusId', function () {
+            var infomation = SetAttributeInformation(EditorData.focusId);
+            $scope.attributeInformation = infomation.attributeInformation;
+            $scope.parentArray = infomation.parentArray;
+            $scope.type = infomation.type;
+        }, true);
 
-        $scope.deleteItem = function (id){
-            $scope.$emit('deleteItem', id);
+        $scope.deleteItem = function (id) {
+            // z index 처리
+            for (var key in $scope.parentArray) {
+                if ($scope.parentArray[key].zOrder > $scope.attributeInformation.zOrder) {
+                    $scope.parentArray[key].zOrder--;
+                }
+            }
+
+            EditorData.end_zOrder--;
+
+            if (window.location.href.split("#/")[1] == 'TemplateEditor') {
+                EditorData.focusId = EditorData.template._id;
+                $scope.$emit('deleteItem', id);
+            } else {
+                EditorData.focusId = EditorData.paperId;
+                $scope.$emit('deleteArticle', id);
+            }
+
         };
+
+        $scope.goFront = function () {
+
+            for (var key in $scope.parentArray) {
+                if ($scope.parentArray[key].zOrder == $scope.attributeInformation.zOrder + 1) {
+                    $scope.parentArray[key].zOrder--;
+                    $scope.attributeInformation.zOrder++;
+                    return;
+                }
+            }
+            console.log('더이상 앞으로 갈수가 없습니다.', $scope);
+        };
+
+        $scope.goBack = function () {
+
+            console.log('$scope', $scope);
+            for (var key in $scope.parentArray) {
+                if ($scope.parentArray[key].zOrder == $scope.attributeInformation.zOrder - 1) {
+                    $scope.parentArray[key].zOrder++;
+                    $scope.attributeInformation.zOrder--;
+                    return;
+                }
+            }
+            console.log('더이상 뒤로 갈수가 없습니다.', $scope);
+        }
     }]);
 
     app.directive('attributePanel', function () {

@@ -188,35 +188,38 @@ img {
 }
 
 /********************************************************************/
-#canvas-box {
+/*#canvas-box {*/
+    /*width: 100%;*/
+    /*height: calc(100% - 54px);*/
+    /*background-color: #eeeeee;*/
+    /*overflow: auto;*/
+/*}*/
+
+/*#canvas-box #canvas-content {*/
+    /*position: relative;*/
+    /*width: 600px;*/
+    /*height: 400px;*/
+    /*background-color: #ffffff;*/
+/*}*/
+
+.editzoneWrapper {
     width: 100%;
     height: calc(100% - 54px);
     background-color: #eeeeee;
     overflow: auto;
 }
 
-#canvas-box #canvas-title {
-    background-color: #f5928f;
-    height: 50px;
-    border-radius: 15px 15px 0 0;
-    text-align: center;
-    line-height: 50px;
-}
-
-#canvas-box #canvas-content {
+.editzoneWrapper .editzone {
+    position: relative;
     width: 600px;
     height: 400px;
     background-color: #ffffff;
+    transition: background-color 0.3s;
 }
 
-.paper {
+.editzoneWrapper .paper {
     width: 960px !important;
     height: 1358px !important;
-}
-
-
-.dropzone {
-    transition: background-color 0.3s;
 }
 
 .drop-target {
@@ -333,6 +336,9 @@ img {
 
 .itemImage .ui-wrapper {
     overflow: visible !important;
+}
+
+.itemShape {
 }
 
 /*************************************************************************************************/

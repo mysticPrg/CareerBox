@@ -15,7 +15,7 @@ define([
 
             //The link function is responsible for registering DOM listeners as well as updating the DOM.
             link: function (scope, element, att) {
-                scope.info = SetAttributeInformation(att.id);
+                scope.info = SetAttributeInformation(att.id).attributeInformation;
 
                 // 쉐이프의 타입에 따라 css 변경
                 scope.$watch("info.shapeType",function() {
