@@ -42,6 +42,10 @@ define([
                 ];
             });
 
+            $rootScope.$on("deleteArticle", function (e, id) {
+                deleteArticle(id);
+            });
+
             $scope.$watch("EditorData.paperId", function () {
                 if (EditorData.paperId === '')
                     return;
@@ -67,14 +71,17 @@ define([
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             function loadPaper(paper) {
-                var articleArray = paper.childArr;
+                var paperChildArr = paper.childArr;
+                console.log(paper.childArr);
 
-                var article;
-                for (var index = 0; index < articleArray.length; index++) {
-                    article = articleArray[index];
-                    if (article.childArr) {
-                        EditorData.childArr[article._id] = article;
-                        loadArticle(article);
+                var child;
+                for (var index = 0; index < paperChildArr.length; index++) {
+                    child = paperChildArr[index];
+                    if (child.childArr) {
+                        EditorData.childArr[child._id] = child;
+                        loadArticle(child);
+                    }else{
+                        loadItem(child);
                     }
                 }
             }
@@ -103,6 +110,19 @@ define([
                 $compile($('#' + article._id))($scope);
             }
 
+            function loadItem(item) {
+                var option = {draggable: true, resizable: true};
+
+                var domObj = HTMLGenerator('loadItem', item, item._id, option);
+
+                $('#canvas-content').append(domObj);
+                $compile($('#' + item._id))($scope);
+
+                //TODO 병진 : 이 부분 확인 좀
+//                EditorData.focusId = id;    // 포커스 지정
+//                EditorData.end_zOrder++;
+            }
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             function getPaperChildArr(childArr) {
@@ -113,6 +133,10 @@ define([
 
                     if (child.state == 'new') {
                         delete child._id;
+                    }
+
+                    if (child.state == 'del') {
+                        continue;
                     }
 
                     delete  child.state;
@@ -156,5 +180,10 @@ define([
                     updateModel(id, ui.draggable);
                 }
             });
+
+            function deleteArticle(id) {
+                $('#' + id).remove();
+                EditorData.childArr[id].state = 'del';
+            }
         }]);
 });
