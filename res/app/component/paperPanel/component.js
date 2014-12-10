@@ -39,7 +39,7 @@ define([
         function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, LoadTemplate, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder) {
             $scope.templates = [];
 
-            console.log('EditorData', EditorData);
+//            console.log('EditorData', EditorData);
             $scope.childIndex = 0;
 
             $scope.initializeSectionEditor = function () {

@@ -52,7 +52,7 @@ define([
 
                 // radius
                 scope.$watch("attributeInformation.radius",function() {
-                    console.log('radius 설정 후 EditorData',EditorData)
+//                    console.log('radius 설정 후 EditorData',EditorData);
 //                    if(EditorData.focusId == att.id)
                     ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
                 },true);

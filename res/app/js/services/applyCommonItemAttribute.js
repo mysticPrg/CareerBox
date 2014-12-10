@@ -25,8 +25,8 @@ define(['app'
     }
 
     function fill(element, item) {
-        console.log('item', item);
-        console.log('element', element);
+//        console.log('item', item);
+//        console.log('element', element);
         if(item.itemType == 'line'){
             element.css({
                 'background-color': 'rgba(0,0,0,0)'
