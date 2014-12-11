@@ -31,8 +31,11 @@ define([
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};
 
                 SavePaper($http, data, function (result) {
-//                    EditorData.paperId = id;
-                    $scope.paperTitle = 'Select Paper';
+                    if(result.returnCode === '000'){
+                        $scope.loadPaperList();
+                        EditorData.paperId = result.result;
+                        $scope.paperTitle = paper.title;
+                    }
                 });
             }
 
