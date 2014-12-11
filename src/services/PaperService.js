@@ -141,7 +141,7 @@ function createOrUpdateService(req, res) {
         });
     } else {
         PaperDB.create(newPaper, function (err, created) {
-            sendResult(err, res, created[0]._id);
+            sendResult(err, res, created[0]._id.toHexString());
         });
     }
 }
