@@ -11,7 +11,7 @@
     <title>Personal Information</title>
 </head>
 
-<body ng-controller="personalInformation">
+<body ng-controller="informationManager">
 
 <!--좌측 메뉴-->
 <menu id="menu" class="aside"></menu>
@@ -24,7 +24,7 @@
     </div>
 
     <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#">기본정보</a></li>
+        <li role="presentation" class="active"><a href="#personalInformationContent">기본정보</a></li>
         <li role="presentation"><a href="#">학력</a></li>
         <li role="presentation"><a href="#">경력</a></li>
         <li role="presentation"><a href="#">보유능력</a></li>
@@ -32,8 +32,12 @@
         <li role="presentation"><a href="#">활동</a></li>
         <li role="presentation"><a href="#">프로젝트</a></li>
         <li role="presentation"><a href="#">칼럼</a></li>
-
     </ul>
+    <div class="tab-content">
+        <div class="tab-pane" id="personalInformationContent">
+            <personal-information></personal-information>
+        </div>
+    </div>
 </div>
 
 <script src="../libs/require/require.js" data-main="../main.js"></script>

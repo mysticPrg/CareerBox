@@ -6,8 +6,9 @@ define([
     'angular',
     'app',
     '../../component/menu/component',
+    '../../component/information/personalInformation/component'
 ], function ($, ng, app) {
-    app.controller('personalInformation', ['$scope', '$http', function ($scope, $http) {
+    app.controller('informationManager', ['$scope', '$http', function ($scope, $http) {
 
     }]);
 });
