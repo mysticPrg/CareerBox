@@ -6,7 +6,8 @@ define([
     'angular',
     'app',
     '../../component/menu/component',
-    '../../component/information/personalInformation/component'
+    '../../component/information/personalInformation/component',
+    'component/information/additionalInformation/component'
 ], function ($, ng, app) {
     app.controller('informationManager', ['$scope', '$http', function ($scope, $http) {
         $scope.initialize = function () {

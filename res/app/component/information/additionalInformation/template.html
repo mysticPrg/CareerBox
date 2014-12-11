@@ -1,0 +1,19 @@
+<div>
+    <!-- 보훈대상 -->
+    <input type="radio" name="veteran" value="true">보훈대상</input>
+    <input type="radio" name="veteran" value="false">보훈비대상</input>
+
+    <!-- 장애여부 -->
+    <input type="radio" name="disability" value="true">장애인</input>
+    <input type="radio" name="disability" value="false">비장애인</input>
+
+    <!-- 병역사항 -->
+    <input type="radio" name="militery-category" value="false">해당없음</input>
+    <input type="radio" name="militery-category" value="false">필</input>
+    <input type="radio" name="militery-category" value="false">면제</input>
+    <input type="radio" name="militery-category" value="false">미필</input>
+    <input type="radio" name="militery-category" value="false">복무중</input>
+
+    <h4>Start date: <span ng-show="startDate">{{startDate | date:"MMM d, yyyy"}}</span></h4>
+    <kendo-calendar ng-model="startDate" k-rebind="endDate" max="endDate"></kendo-calendar>
+</div>
