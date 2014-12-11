@@ -5,15 +5,15 @@
 define([
     'app'
 ], function (app) {
-    app.controller('highschoolInformationContorller', function ($scope) {
+    app.controller('universityInformationContorller', function ($scope) {
 
     });
 
-    app.directive('highschoolInformation', function () {
+    app.directive('universityInformation', function () {
         return {
             restrict: 'E',
-            templateUrl: require.toUrl('component/information/highschoolInformation/template.html'),
-            controller: 'highschoolInformationContorller'
+            templateUrl: require.toUrl('component/information/universityInformation/template.html'),
+            controller: 'universityInformationContorller'
         };
     });
 });

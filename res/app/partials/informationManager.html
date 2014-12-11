@@ -33,7 +33,7 @@
     <div id="information-content" data-ng-init="initialize()">
         <ul class="nav nav-tabs" id="informationTab">
             <li role="presentation"><a href="#personalInformationContent" id="personalInformationLink">기본정보</a></li>
-            <li role="presentation"><a href="#">학력</a></li>
+            <li role="presentation"><a href="#schoolInformationContent">학력</a></li>
             <li role="presentation"><a href="#">경력</a></li>
             <li role="presentation"><a href="#">보유능력</a></li>
             <li role="presentation"><a href="#">수상</a></li>
@@ -47,9 +47,15 @@
 
                 <additional-information></additional-information>
             </div>
+            <div class="tab-pane" id="schoolInformationContent">
+                <highschool-information></highschool-information>
+
+                <university-information></university-information>
+            </div>
         </div>
     </div>
 
+    <button class="btn btn-default">이전</button>
     <button class="btn btn-default">저장</button>
     <button class="btn btn-default">다음</button>
 </div>

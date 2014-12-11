@@ -6,9 +6,11 @@ define([
     'angular',
     'app',
     'bootstrap',
-    '../../component/menu/component',
-    '../../component/information/personalInformation/component',
-    'component/information/additionalInformation/component'
+    'component/menu/component',
+    'component/information/personalInformation/component',
+    'component/information/additionalInformation/component',
+    'component/information/highschoolInformation/component',
+    'component/information/universityInformation/component'
 ], function ($, ng, app) {
     app.controller('informationManager', ['$scope', '$http', function ($scope, $http) {
         $scope.initialize = function () {
