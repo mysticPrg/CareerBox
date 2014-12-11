@@ -5,6 +5,7 @@ define([
     'jquery',
     'angular',
     'app',
+    'bootstrap',
     '../../component/menu/component',
     '../../component/information/personalInformation/component',
     'component/information/additionalInformation/component'

@@ -4,6 +4,9 @@
 define(['app'], function (app) {
 
     app.controller('personalInformationController', function ($scope) {
+        $scope.test = function() {
+            console.log(this);
+        };
     });
 
     app.directive('personalInformation', function () {
