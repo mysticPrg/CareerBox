@@ -26,7 +26,7 @@
             <div class="form-group">
                 <label for="lbl_personal_birthday" class="col-sm-2 control-label">생일</label>
                 <div class="col-sm-10" id="lbl_personal_birthday">
-                    <button class="k-button" ng-click="win_birthday.open()">{{birthDay | date:"yyyy년 MM월 dd일"}}</button>
+                    <button class="k-button" ng-click="win_birthday.center(); win_birthday.open();">{{birthDay | date:"yyyy년 MM월 dd일"}}</button>
                 </div>
                 <div kendo-window="win_birthday" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">
                     <kendo-calendar ng-model="birthDay" k-on-change="win_birthday.close()"></kendo-calendar>
