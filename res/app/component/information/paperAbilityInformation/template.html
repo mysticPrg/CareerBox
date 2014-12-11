@@ -33,7 +33,7 @@
         <div class="form-group">
             <label for="lbl_paper_date" class="col-sm-2 control-label">논문 게재 날짜</label>
             <div class="col-sm-10" id="lbl_paper_date">
-                <button class="k-button" ng-click="win_paper_date.open()">{{paperDate | date:"yyyy년 MM월 dd일"}}</button>
+                <button class="k-button" ng-click="win_paper_date.center(); win_paper_date.open();">{{paperDate | date:"yyyy년 MM월 dd일"}}</button>
             </div>
             <div kendo-window="win_paper_date" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">
                 <kendo-calendar ng-model="paperDate" k-on-change="win_paper_date.close()"></kendo-calendar>

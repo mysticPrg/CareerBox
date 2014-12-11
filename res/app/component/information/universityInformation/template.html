@@ -17,7 +17,8 @@
     <div class="form-group">
         <label for="lbl_university_term" class="col-sm-2 control-label">재학기간</label>
         <div class="col-sm-8" id="lbl_university_term">
-            <button class="k-button" ng-click="win_university_term_start.open()">{{startDate | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_university_term_end.open()">{{endDate | date:"yyyy년 MM월 dd일"}}</button>
+            <button class="k-button" ng-click="win_university_term_start.center(); win_university_term_start.open();">{{startDate | date:"yyyy년 MM월 dd일"}}</button> ~
+            <button class="k-button" ng-click="win_university_term_end.center(); win_university_term_end.open();">{{endDate | date:"yyyy년 MM월 dd일"}}</button>
         </div>
         <div kendo-window="win_university_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
             <kendo-calendar ng-model="startDate" k-on-change="win_university_term_start.close()"></kendo-calendar>
