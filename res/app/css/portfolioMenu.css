@@ -1,0 +1,40 @@
+/*좌측 메뉴 css*/
+#menu {
+    width: 240px;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.9);
+}
+
+#menu a#logo {
+    display:block;
+    width:150px;
+    height:60px;
+    line-height:60px;
+    text-align:center;
+    margin:50px auto;
+    border:solid 2px #fff;
+    color:#fff;
+    font-size:20px;
+    font-weight:bold;
+    font-family:'arial'
+}
+
+#menu ul {
+    text-align:center;
+}
+#menu ul a {
+    display:block;
+    color:#666;
+    height:30px;
+    line-height:30px
+}
+#menu ul a:hover {
+    background-color:#000;
+    color:#fff;
+    text-decoration: none;
+}

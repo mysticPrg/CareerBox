@@ -1,8 +1,11 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 html, body {
     /*width: 100%;*/
     margin:0;
     padding:0;
     overflow:hidden;
+    background-color: #e7e7e7;
 }
 
 div, h1, h2, h3 , ul, li {
@@ -15,6 +18,7 @@ ul {
 }
 a {
     text-decoration:none
+    color: #10152c;
 }
 img {
     border-style:none
@@ -27,59 +31,57 @@ img {
 }
 
 #loginForm {
-    background-color: rgba(0,0,0,0.8);
+    background-color: #fff;
     position: absolute;
     left: 50%;
-    margin-left: -350px;
-    margin-top: 100px;
-    padding: 40px;
-    width: 700px;
-    height: 430px;
+    margin-left: -250px;
+    margin-top: 120px;
+    width: 500px;
+    height: 540px;
     text-align: center;
-}
-
-#loginForm #loginTbl {
-    display: inline-block;
-}
-
-#loginForm #loginTbl #tblStyle1 {
-    width: 190px;
-    border-right:1px solid #5d5d5d;
-    padding-right:35px;
-    text-align:center;
-}
-
-#loginForm #loginTbl #tblStyle2 {
-    padding-left:35px;
-}
-
-#loginForm #loginTbl #tblStyle2 .submitBtn{
-    margin-top: 115px;
+    box-shadow: 0 0 8px #888;
 }
 
 #loginForm .userInput {
     display: inline-block;
-    width: 250px;
-    margin: 0 0 20px 0;
+    width: 385px;
+    height: 40px;
+    margin: 40px 0 0 0;
+}
+
+#loginForm input[type=email] {
+    background: white url(../img/login_img/id_icon.jpg) 12px no-repeat;
+    padding-left: 45px;
+}
+
+#loginForm input[type=password] {
+    background: white url(../img/login_img/pwd_icon.jpg) 14px no-repeat;
+    padding-left: 45px;
 }
 
 #loginForm .submitBtn {
     display: inline-block;
-    width: 250px;
+    width: 385px;
     height: 50px;
-    margin: 30px 0 20px 0;
 }
 
-#loginForm h1{
-    display: inline-block;
-    font-family:'arial';
-    color: #fff;
-    width: 250px;
-    margin-bottom: 50px;
-    border: solid 4px #fff;
-    padding: 10px;
+#loginForm button[type=submit] {
+    background-image: url('../img/login_img/login.png');
+    border-style: none;
+    margin: 40px 0 20px 0;
 }
+
+#loginForm button[type=button] {
+    background-image: url('../img/login_img/facebook_login.png');
+    border-style: none;
+    margin: 20px 0 20px 0;
+}
+
+
 
 #loginForm a{
-    color: #fff;
+    color: #4894c9;
+    font-family: 'Nanum Gothic', serif;
 }
+
+

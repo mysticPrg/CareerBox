@@ -53,7 +53,7 @@ define([
         $scope.loginCallback = function (data){
             console.log(data);
 
-            var href = "portfolioManage.html";
+            var href = "portfolioManager.html";
 
             memberCallback($window, $scope, data, href);
         }

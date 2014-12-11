@@ -72,7 +72,7 @@ define([
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             function loadPaper(paper) {
                 var paperChildArr = paper.childArr;
-                console.log(paper.childArr);
+//                console.log(paper.childArr);
 
                 var child;
                 for (var index = 0; index < paperChildArr.length; index++) {
@@ -153,7 +153,7 @@ define([
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: $scope.paper};
 
                 SavePaper($http, data, function (result) {
-                    if(result === '000'){
+                    if(result.returnCode === '000'){
                         alert('저장되었습니다.');
                     }
                 });

@@ -1,0 +1,47 @@
+html, body {
+    margin:0;
+    padding:0;
+}
+
+div, h1, h2, h3 , ul, li, p{
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type:none;
+}
+
+a {
+    text-decoration:none;
+}
+
+img {
+    border-style:none;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/*컨텐츠 부분 너비는 메뉴 제외한 100%*/
+#content {
+    text-align: center;
+    margin-left: 240px;
+}
+
+/*상단 사용자 정보 css*/
+#content #user-info {
+    width: 100%;
+    height: 120px;
+    background-color: #eeeeee;
+    text-align: center;
+}
+
+#content #user-info h2{
+    font-family:'arial';
+    line-height: 120px;
+}
+
