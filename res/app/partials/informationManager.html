@@ -34,9 +34,9 @@
         <ul class="nav nav-tabs" id="informationTab">
             <li role="presentation"><a href="#personalInformationContent" id="personalInformationLink">기본정보</a></li>
             <li role="presentation"><a href="#schoolInformationContent">학력</a></li>
-            <li role="presentation"><a href="#workingInformationContent" id="workingInformationLink">경력</a></li>
-            <li role="presentation"><a href="#">보유능력</a></li>
-            <li role="presentation"><a href="#awardInformationContent" id="awardInformationLink">수상</a></li>
+            <li role="presentation"><a href="#workingInformationContent">경력</a></li>
+            <li role="presentation"><a href="#abilityInformationContent">보유능력</a></li>
+            <li role="presentation"><a href="#awardInformationContent">수상</a></li>
             <li role="presentation"><a href="#">활동</a></li>
             <li role="presentation"><a href="#">프로젝트</a></li>
             <li role="presentation"><a href="#">칼럼</a></li>
@@ -44,23 +44,27 @@
         <div class="tab-content">
             <div class="tab-pane" id="personalInformationContent">
                 <personal-information></personal-information>
-
                 <additional-information></additional-information>
             </div>
 
             <div class="tab-pane" id="schoolInformationContent">
                 <highschool-information></highschool-information>
-
                 <university-information></university-information>
             </div>
 
             <div class="tab-pane" id="workingInformationContent">
                 <working-information></working-information>
             </div>
+            
+            <div class="tab-pane" id="abilityInformationContent">
+                <certificate-ability-information></certificate-ability-information>
+                <proficiency-information></proficiency-information>
+                <computer-ability-information></computer-ability-information>
+                <paper-ability-information></paper-ability-information>
+            </div>
 
             <div class="tab-pane" id="awardInformationContent">
                 <scholarship-information></scholarship-information>
-
                 <award-information></award-information>
             </div>
         </div>

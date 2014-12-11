@@ -10,7 +10,7 @@ define(['app'], function (app) {
         return {
             restrict: 'E',
             templateUrl: require.toUrl('component/information/paperAbilityInformation/template.html'),
-            controller: 'paperAbilityInformation'
+            controller: 'paperAbilityInformationController'
         };
     });
 
