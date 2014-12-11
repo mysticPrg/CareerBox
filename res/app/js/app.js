@@ -19,5 +19,7 @@ define([
         FacebookProvider.init('883004338385143');
     });
 
+    kendo.culture("ko-KR");
+
     return app;
 });

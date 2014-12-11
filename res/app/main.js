@@ -27,7 +27,7 @@ require.config({
         },
 
         'kendo': {
-            deps: ['angular', 'jquery'],
+            deps: ['angular', 'jquery', '../libs/kendo/js/cultures/kendo.culture.ko-KR.min'],
             exports: 'kendo'
         },
         'angular-bootstrap': {

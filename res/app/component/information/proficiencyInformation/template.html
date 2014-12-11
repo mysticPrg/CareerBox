@@ -35,7 +35,7 @@
     <div class="form-group">
         <label for="lbl_proficiency_date" class="col-sm-2 control-label">취득일자</label>
         <div class="col-sm-10" id="lbl_proficiency_date">
-            <button class="k-button" ng-click="lbl_proficiency_date.open()">{{date | date:"yyyy년 MM월 dd일"}}</button>
+            <button class="k-button" ng-click="lbl_proficiency_date.center(); lbl_proficiency_date.open();">{{date | date:"yyyy년 MM월 dd일"}}</button>
         </div>
         <div kendo-window="lbl_proficiency_date" k-title="'Date'" k-modal="true" k-resizable="false" k-visible="false">
             <kendo-calendar ng-model="date" k-on-change="lbl_proficiency_date.close()"></kendo-calendar>
