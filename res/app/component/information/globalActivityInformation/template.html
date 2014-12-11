@@ -1,0 +1,48 @@
+<div>해외활동</div>
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="lbl_global_activity_country" class="col-sm-2 control-label">국가명</label>
+        <div class="col-sm-10" id="lbl_global_activity_country">
+            <input type="text" class="form-control"  placeholder="국가명">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lbl_global_activity_term" class="col-sm-2 control-label">기간</label>
+        <div class="col-sm-10" id="lbl_global_activity_term">
+            <button class="k-button" ng-click="lbl_global_activity_term_start.open()">{{startDate | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="lbl_global_activity_term_end.open()">{{endDate | date:"yyyy년 MM월 dd일"}}</button>
+        </div>
+        <div kendo-window="lbl_global_activity_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
+            <kendo-calendar ng-model="startDate" k-on-change="lbl_global_activity_term_start.close()"></kendo-calendar>
+        </div>
+        <div kendo-window="lbl_global_activity_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">
+            <kendo-calendar ng-model="endDate" k-on-change="lbl_global_activity_term_end.close()"></kendo-calendar>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="lbl_global_activity_description" class="col-sm-2 control-label">활동설명</label>
+        <div class="col-sm-10" id="lbl_global_activity_description">
+            <textarea class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="lbl_global_activity_image" class="col-sm-2 control-label">대표이미지</label>
+
+        <div class="col-sm-10" id="lbl_global_activity_image">
+            <img src="../img/noImage.png" id="picture"><br>
+            <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lbl_global_activity_file" class="col-sm-2 control-label">첨부파일</label>
+
+        <div class="col-sm-10" id="lbl_global_activity_file">
+            <input type="file">
+        </div>
+    </div>
+    <div>
+        <button type="button" class="btn btn-default">추가</button>
+        <button type="button" class="btn btn-default">삭제</button>
+    </div>
+</form>
