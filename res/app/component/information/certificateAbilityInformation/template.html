@@ -1,0 +1,33 @@
+<div>자격증</div>
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="lbl_certificate_name" class="col-sm-2 control-label">자격증명</label>
+
+        <div class="col-sm-10" id="lbl_certificate_name">
+            <input type="text" class="form-control" placeholder="자격증명">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lbl_certificate_publisher" class="col-sm-2 control-label">발행처</label>
+
+        <div class="col-sm-10" id="lbl_certificate_publisher">
+            <input type="text" class="form-control" placeholder="발행처">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lbl_certificate_date" class="col-sm-2 control-label">취득일자</label>
+        <div class="col-sm-10" id="lbl_certificate_date">
+            <button class="k-button" ng-click="lbl_certificate_date.open()">{{date | date:"yyyy년 MM월 dd일"}}</button>
+        </div>
+        <div kendo-window="lbl_certificate_date" k-title="'Date'" k-modal="true" k-resizable="false" k-visible="false">
+            <kendo-calendar ng-model="date" k-on-change="lbl_certificate_date.close()"></kendo-calendar>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lbl_certificate_file" class="col-sm-2 control-label">파일 첨부</label>
+
+        <div class="col-sm-10" id="lbl_certificate_file">
+            <input type="file">
+        </div>
+    </div>
+</form>
