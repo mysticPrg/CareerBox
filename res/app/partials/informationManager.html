@@ -8,6 +8,9 @@
     <link href="../css/personalInformation.css" rel="stylesheet">
     <link href="../css/portfolioMenu.css" rel="stylesheet">
 
+    <link href="../libs/kendo/styles/web/kendo.flat.min.css" rel="stylesheet">
+    <link href="../libs/kendo/styles/web/kendo.common.core.css" rel="stylesheet">
+
     <title>Personal Information</title>
 </head>
 
@@ -23,19 +26,21 @@
         <h2>Dahye's Portfolio</h2>
     </div>
 
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#personalInformationContent">기본정보</a></li>
-        <li role="presentation"><a href="#">학력</a></li>
-        <li role="presentation"><a href="#">경력</a></li>
-        <li role="presentation"><a href="#">보유능력</a></li>
-        <li role="presentation"><a href="#">수상</a></li>
-        <li role="presentation"><a href="#">활동</a></li>
-        <li role="presentation"><a href="#">프로젝트</a></li>
-        <li role="presentation"><a href="#">칼럼</a></li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" id="personalInformationContent">
-            <personal-information></personal-information>
+    <div id="information-content" data-ng-init="initialize()">
+        <ul class="nav nav-tabs" id="informationTab">
+            <li role="presentation"><a href="#personalInformationContent" id="personalInformationLink">기본정보</a></li>
+            <li role="presentation"><a href="#">학력</a></li>
+            <li role="presentation"><a href="#">경력</a></li>
+            <li role="presentation"><a href="#">보유능력</a></li>
+            <li role="presentation"><a href="#">수상</a></li>
+            <li role="presentation"><a href="#">활동</a></li>
+            <li role="presentation"><a href="#">프로젝트</a></li>
+            <li role="presentation"><a href="#">칼럼</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane" id="personalInformationContent">
+                <personal-information></personal-information>
+            </div>
         </div>
     </div>
 </div>

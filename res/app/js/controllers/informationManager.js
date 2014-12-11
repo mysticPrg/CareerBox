@@ -9,6 +9,14 @@ define([
     '../../component/information/personalInformation/component'
 ], function ($, ng, app) {
     app.controller('informationManager', ['$scope', '$http', function ($scope, $http) {
+        $scope.initialize = function () {
+            $('#informationTab a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+
+            $('#personalInformationLink').click();
+        }
 
     }]);
 });
