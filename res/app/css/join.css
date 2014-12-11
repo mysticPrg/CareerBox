@@ -63,6 +63,16 @@ img {
     margin: 0 0 8px 0;
 }
 
+#joinForm input[type=email] {
+    background: white url(../img/signup_img/id_icon.jpg) 12px no-repeat;
+    padding-left: 45px;
+}
+
+#joinForm input[type=password] {
+    background: white url(../img/signup_img/pwd_icon.jpg) 14px no-repeat;
+    padding-left: 45px;
+}
+
 #joinForm .submitBtn {
     width: 385px;
     height: 50px;

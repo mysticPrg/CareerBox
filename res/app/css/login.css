@@ -49,10 +49,15 @@ img {
     margin: 40px 0 0 0;
 }
 
-/*#loginForm input[type=email] {*/
-    /*background-image: url('./img/login_img/id_icon.jpg');*/
-    /*background-repeat: no-repeat;*/
-/*}*/
+#loginForm input[type=email] {
+    background: white url(../img/login_img/id_icon.jpg) 12px no-repeat;
+    padding-left: 45px;
+}
+
+#loginForm input[type=password] {
+    background: white url(../img/login_img/pwd_icon.jpg) 14px no-repeat;
+    padding-left: 45px;
+}
 
 #loginForm .submitBtn {
     display: inline-block;
@@ -72,8 +77,11 @@ img {
     margin: 20px 0 20px 0;
 }
 
+
+
 #loginForm a{
     color: #4894c9;
     font-family: 'Nanum Gothic', serif;
 }
+
 
