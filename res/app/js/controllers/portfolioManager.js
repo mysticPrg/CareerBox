@@ -9,7 +9,7 @@ define([
     '../../component/newPortfolio/component'
 
 ], function ($, ng, app) {
-    app.controller('portfolioManage', ['$scope', '$http', function ($scope, $http) {
+    app.controller('portfolioManager', ['$scope', '$http', function ($scope, $http) {
 
     }]);
 });
