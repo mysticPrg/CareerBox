@@ -1,7 +1,10 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 html, body {
     margin:0;
     padding:0;
     overflow:hidden;
+    background-color: #e7e7e7;
 }
 
 div, h1, h2, h3 , ul, li {
@@ -13,7 +16,11 @@ ul {
     list-style-type:none
 }
 a {
-    text-decoration:none
+    text-decoration:none;
+    color: #4894c9;
+    font-family: 'Nanum Gothic', serif;
+    font-weight:800;
+    float: right;
 }
 img {
     border-style:none
@@ -31,29 +38,37 @@ img {
 }
 
 #joinForm {
-    background-color: rgba(0,0,0,0.8);
+    background-color: #fff;
     position: absolute;
     left: 50%;
     margin-left: -250px;
-    margin-top: 60px;
-    padding: 30px 50px;
+    margin-top: 150px;
     width: 500px;
-    height: 500px;
+    height: 530px;
+    box-shadow: 0 0 8px #888;
+}
+
+#joinForm #joinFormInner {
+    padding: 40px 57.5px;
 }
 
 #joinForm span {
-    color: #ff9900;
+    color: #a3a3a3;
+    font-family: 'Nanum Gothic', serif;
 }
 
 #joinForm .joinInput {
-    width: 400px;
+    width: 385px;
+    height: 40px;
     margin: 0 0 8px 0;
 }
 
 #joinForm .submitBtn {
-    width: 400px;
+    width: 385px;
     height: 50px;
     margin: 30px 0 20px 0;
+    background-image: url('../img/signup_img/signup.png');
+    border-style: none;
 }
 
 #joinForm #joinHeader #logo{
