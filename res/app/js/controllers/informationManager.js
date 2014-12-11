@@ -11,7 +11,9 @@ define([
     'component/information/additionalInformation/component',
     'component/information/highschoolInformation/component',
     'component/information/universityInformation/component',
-    'component/information/workingInformation/component'
+    'component/information/workingInformation/component',
+    'component/information/scholarshipInformation/component',
+    'component/information/awardInformation/component',
 ], function ($, ng, app) {
     app.controller('informationManager', ['$scope', '$http', function ($scope, $http) {
         $scope.initialize = function () {
