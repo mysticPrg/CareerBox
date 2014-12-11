@@ -21,7 +21,7 @@ define([
     'services/SetAttributeInformation'
 ], function (app) {
 
-    app.controller('attributePanel', ['$scope', '$rootScope', 'EditorData', 'SetAttributeInformation', function ($scope, $rootScope, EditorData, SetAttributeInformation) {
+    app.controller('attributePanel', ['$scope', '$rootScope', '$window', 'EditorData', 'SetAttributeInformation', function ($scope, $rootScope, $window, EditorData, SetAttributeInformation) {
 
         $scope.EditorData = EditorData;
 
@@ -75,6 +75,13 @@ define([
                 }
             }
             console.log('더이상 뒤로 갈수가 없습니다.', $scope);
+        }
+
+        $scope.editTemplate = function (template) {
+            console.log(template);
+            EditorData.template = template;
+            EditorData.templateState = 'edit';
+            $window.location.href = "#/TemplateEditor";
         }
     }]);
 
