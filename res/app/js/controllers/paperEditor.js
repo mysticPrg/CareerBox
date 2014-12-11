@@ -77,8 +77,8 @@ define([
                 var child;
                 for (var index = 0; index < paperChildArr.length; index++) {
                     child = paperChildArr[index];
+                    EditorData.childArr[child._id] = child;
                     if (child.childArr) {
-                        EditorData.childArr[child._id] = child;
                         loadArticle(child);
                     }else{
                         loadItem(child);
