@@ -31,7 +31,7 @@ define([
         };
 
         $scope.callback = function (data) {
-            var href = "portfolioManage.html";
+            var href = "portfolioManager.html";
             memberCallback($window, $scope, data, href);
         };
 

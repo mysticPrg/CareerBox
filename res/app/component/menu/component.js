@@ -1,6 +1,6 @@
 define(['app'], function (app) {
 
-    var menuItems = ['New Portfolio', 'Personal Information', 'Resumes'];
+    var menuItems = ['New Portfolio', 'Personal Information'];
 
     app.controller('menuController', function ($scope) {
         $scope.menuItems = menuItems;
