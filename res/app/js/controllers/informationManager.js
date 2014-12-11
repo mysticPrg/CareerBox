@@ -9,7 +9,7 @@ define([
     'component/menu/component',
     'component/information/personalInformation/component',
     'component/information/additionalInformation/component',
-    'component/information/highschoolInformation/component',
+    'component/information/highSchoolInformation/component',
     'component/information/universityInformation/component',
     'component/information/workingInformation/component',
     'component/information/certificateAbilityInformation/component',
