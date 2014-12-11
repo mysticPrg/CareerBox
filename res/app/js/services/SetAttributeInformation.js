@@ -13,10 +13,12 @@ define([
 
             // 템플릿 에디터의 아이템 요소들일 경우
             if(window.location.href.split("#/")[1] == 'TemplateEditor'){
-                if(EditorData.template._id == id)
+//                if(id == "canvas-content")
+//                    id = EditorData.template._id;
+                if(EditorData.template._id == id || id == "canvas-content")
                     return {
                         parentArray : EditorData,
-                        attributeInformation : EditorData.template,
+                        attributeInformation : EditorData.template.target,
                         type : 'template'
                     }
                 else
@@ -46,8 +48,7 @@ define([
                 var articleId;
                 var childID;
 
-                var indexOfLoad = id.indexOf('load')
-                if(indexOfLoad>=0){
+                if(isLoaded(id)){
                     articleId = id.split("_load_")[0];
                     childID = id.split("_load_")[1];
                 }
@@ -66,6 +67,13 @@ define([
                         }
                 };
             };
+
+            function isLoaded(id){
+                if(id.indexOf('load') >= 0)
+                    return true;
+                else
+                    return false;
+            }
 
             // 페이퍼에디터에서 아티클 자체이거나 아이템인 경우
             return {

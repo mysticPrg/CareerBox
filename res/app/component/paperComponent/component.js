@@ -31,7 +31,8 @@ define([
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};
 
                 SavePaper($http, data, function (result) {
-                    $scope.loadPaperList();
+//                    EditorData.paperId = id;
+                    $scope.paperTitle = 'Select Paper';
                 });
             }
 
@@ -66,7 +67,8 @@ define([
                     var data = {_id: id};
 
                     deletePaper($http, data, function(result){
-                        console.log(result);
+//                        console.log(result);
+                        $scope.paperTitle = 'Select Paper';
                         $scope.loadPaperList();
                     });
                 }, function () {
