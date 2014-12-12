@@ -71,9 +71,7 @@ function refreshTemplateData(template, callback) {
         'childArr.$.size': template.target.size,
         'childArr.$.outline': template.target.outline,
         'childArr.$.fill': template.target.fill,
-        'childArr.$.radius': template.target.radius,
-        'childArr.$.rotate': template.target.rotate,
-        'childArr.$.alpha': template.target.alpha
+        'childArr.$.radius': template.target.radius
     };
 
 
