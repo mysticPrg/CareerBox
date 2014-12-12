@@ -173,17 +173,9 @@ define([
 
             }
 
-            $scope.createTemplate = function (template) {
-                $window.location.href = "#/TemplateEditor";
-                EditorData.templateState = 'new';
-                EditorData.template.title = template.title;
-                EditorData.template.description = template.description;
-            };
-
             $scope.editTemplate = function (template) {
                 EditorData.template = template;
                 EditorData.templateState = 'edit';
-                $window.location.href = "#/TemplateEditor";
             }
 
             $scope.deleteTemplate = function (id) {
@@ -199,11 +191,7 @@ define([
 
             // create template modal
             $scope.popCreateTemplateModal = function () {
-                var modalInstance = $modal.open(createTemplateModal);
-                modalInstance.result.then(function (template) {
-                    $scope.createTemplate(template);
-                }, function () {
-                });
+                EditorData.templateState = 'new';
             };
 
             // delete template modal

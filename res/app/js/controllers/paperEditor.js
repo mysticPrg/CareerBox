@@ -9,6 +9,8 @@ define([
     'angular',
     'app',
     'classes/Paper',
+    'component/createTemplateModal/component',
+    'component/saveConfirmModal/component',
     'directives/draggable',
     'directives/resizable',
     'services/EditorData',
@@ -17,30 +19,32 @@ define([
     'services/SavePaper',
     'services/LoadPaper',
     '../../component/paperPanel/component'
-], function ($, ng, app, Paper) {
-    app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper',
-        function ($scope, $rootScope, $http, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper) {
+], function ($, ng, app, Paper, createTemplateModal, saveConfirmModal) {
+    app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper',
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper) {
             EditorData.editorType = 'paper';
-
-            // 페이퍼 속성
-            $('#canvas-content').bind('click', function () {
-                // 포커싱 처리
-                EditorData.focusId = EditorData.paperId;
-            });
-
+            $scope.paperChanged = false;
 
             $scope.paper;
 
             $scope.paperItemArray = [];
 
             $(document).ready(function () {
-
+                // templateState값이 변경됨에 따라 저장 여부 판단
+                EditorData.templateState = '';
 
                 $scope.orientation = "horizontal";
+
                 $scope.panes = [
                     {collapsible: true, size: "300px"},
                     {collapsible: false}
                 ];
+            });
+
+            // 페이퍼 속성
+            $('#canvas-content').bind('click', function () {
+                // 포커싱 처리
+                EditorData.focusId = EditorData.paperId;
             });
 
             $rootScope.$on("deleteArticle", function (e, id) {
@@ -58,6 +62,43 @@ define([
                     loadPaper(EditorData.paper);
                 });
             });
+
+            $scope.$watch("EditorData.paper", function () {
+                $scope.changed = true;
+            }, true);
+
+            $scope.$watch("EditorData.templateState", function () {
+                if(EditorData.templateState !== ''){
+                    var modalInstance = $modal.open(saveConfirmModal);
+                    modalInstance.result.then(function () {
+                        $scope.save();
+
+                        templateStateProcess();
+                    }, function () {
+                        templateStateProcess();
+                    })
+                }
+            });
+
+            function templateStateProcess(){
+                if(EditorData.templateState === 'new'){
+                    createTemplate();
+                }else if(EditorData.templateState === 'edit'){
+                    $window.location.href = "#/TemplateEditor";
+                }
+
+                EditorData.templateState = '';
+            }
+
+            function createTemplate(){
+                var modalInstance = $modal.open(createTemplateModal);
+                modalInstance.result.then(function (template) {
+                    EditorData.template.title = template.title;
+                    EditorData.template.description = template.description;
+                    $window.location.href = "#/TemplateEditor";
+                }, function () {
+                });
+            }
 
             function initPaper(){
                 $('#canvas-content').find('div').remove();
@@ -118,10 +159,6 @@ define([
 
                 $('#canvas-content').append(domObj);
                 $compile($('#' + item._id))($scope);
-
-                //TODO 병진 : 이 부분 확인 좀
-//                EditorData.focusId = id;    // 포커스 지정
-//                EditorData.end_zOrder++;
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,6 +192,7 @@ define([
 
                 SavePaper($http, data, function (result) {
                     if(result.returnCode === '000'){
+                        $scope.changed = false;
                         alert('저장되었습니다.');
                     }
                 });
