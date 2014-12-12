@@ -17,7 +17,7 @@ define([
     'services/EditorData',
     'services/HTMLGenerator',
     'services/SaveTemplate',
-    'services/LoadTemplate',
+    'services/getTemplateList',
     'services/deleteTemplate',
     'services/ApplyCommonItemAttribute',
     'services/SetZOrder'
@@ -32,15 +32,14 @@ define([
         'EditorData',
         'HTMLGenerator',
         'SaveTemplate',
-        'LoadTemplate',
+        'getTemplateList',
         'DeleteTemplate',
         'ApplyCommonItemAttribute',
         'SetZOrder',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, LoadTemplate, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder) {
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, getTemplateList, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder) {
             $scope.templates = [];
 
 //            console.log('EditorData', EditorData);
-            $scope.childIndex = 0;
 
             $scope.initializeSectionEditor = function () {
                 $('#SectionEditorTab a').click(function (e) {
@@ -55,7 +54,7 @@ define([
             $scope.loadArticleTemplate = function () {
                 var articleTemplateArray = new Array();
 
-                LoadTemplate($http, 'article', function (data) {
+                getTemplateList($http, 'article', function (data) {
                     if (data.returnCode == 000) {
                         $scope.templates = data.result;
                     }
