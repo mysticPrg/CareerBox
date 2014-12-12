@@ -9,6 +9,7 @@ require.config({
         'angular': '../libs/angular/angular',
         'angular-route': '../libs/angular/angular-route',
         'angular-bootstrap': '../libs/bootstrap/ui-bootstrap',
+        'angular-upload': '../libs/angular/angular-file-upload',
         'jquery': '../libs/jquery/jquery.min',
         'jquery-ui': '../libs/jquery/jquery-ui.min',
         'domReady': '../libs/require/domReady',
@@ -40,8 +41,13 @@ require.config({
         },
 
         'angular-route': {
-            deps: ['angular'],
+            deps: ['angular', '../libs/angular/angular-file-upload-shim', ],
             exports: 'ngRoute'
+        },
+
+        'angular-upload': {
+            deps: ['angular'],
+            exports: 'angular-upload'
         },
 
         'jquery-ui': {

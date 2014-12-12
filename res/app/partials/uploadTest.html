@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head lang="kr">
+        <meta charset="UTF-8">
+        <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link href="http://cdn.kendostatic.com/2014.3.1119/styles/kendo.common-material.min.css" rel="stylesheet">
+        <link href="http://cdn.kendostatic.com/2014.3.1119/styles/kendo.material.min.css" rel="stylesheet">
+        <link href="http://cdn.kendostatic.com/2014.3.1119/styles/kendo.material.mobile.min.css" rel="stylesheet">
+        <title>Career Box File Upload Test Page</title>
+    </head>
+
+    <body ng-controller="uploadTest">
+
+        {{status}}
+        <div kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress"></div>
+
+        <input type="text" ng-model="myModelObj">
+        <input type="file" ng-file-select="onFileSelect($files)">
+        <input type="file" ng-file-select="onFileSelect($files)" multiple accept="image/*">
+
+        <div class="button" ng-file-select="onFileSelect($files)" data-multiple="true"></div>
+        <!--<div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class-name-or-function"-->
+             <!--ng-show="dropSupported">drop files here-->
+        <!--</div>-->
+        <!--<div ng-file-drop-available="dropSupported=true"-->
+             <!--ng-show="!dropSupported">HTML5 Drop File is not supported!-->
+        <!--</div>-->
+        <button ng-click="upload.abort()">Cancel Upload</button>
+
+        <script src="../libs/require/require.js" data-main="../main.js"></script>
+    </body>
+</html>

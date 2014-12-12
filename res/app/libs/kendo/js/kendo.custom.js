@@ -12054,6 +12054,3937 @@ function pad(number, digits, end) {
 
 
 
+
+
+(function ($, undefined) {
+    var kendo = window.kendo,
+        ui = kendo.ui,
+        Widget = ui.Widget,
+        HORIZONTAL = "horizontal",
+        VERTICAL = "vertical",
+        DEFAULTMIN = 0,
+        DEFAULTMAX = 100,
+        DEFAULTVALUE = 0,
+        DEFAULTCHUNKCOUNT = 5,
+        KPROGRESSBAR = "k-progressbar",
+        KPROGRESSBARREVERSE = "k-progressbar-reverse",
+        KPROGRESSBARINDETERMINATE = "k-progressbar-indeterminate",
+        KPROGRESSBARCOMPLETE = "k-complete",
+        KPROGRESSWRAPPER = "k-state-selected",
+        KPROGRESSSTATUS = "k-progress-status",
+        KCOMPLETEDCHUNK = "k-state-selected",
+        KUPCOMINGCHUNK = "k-state-default",
+        KSTATEDISABLED = "k-state-disabled",
+        PROGRESSTYPE = {
+            VALUE: "value",
+            PERCENT: "percent",
+            CHUNK: "chunk"
+        },
+        CHANGE = "change",
+        COMPLETE = "complete",
+        BOOLEAN = "boolean",
+        math = Math,
+        extend = $.extend,
+        proxy = $.proxy,
+        HUNDREDPERCENT = 100,
+        DEFAULTANIMATIONDURATION = 400,
+        PRECISION = 3,
+        templates = {
+            progressStatus: "<span class='k-progress-status-wrap'><span class='k-progress-status'></span></span>"
+        };
+
+    var ProgressBar = Widget.extend({
+        init: function(element, options) {
+            var that = this;
+
+            Widget.fn.init.call(this, element, options);
+
+            options = that.options;
+
+            that._progressProperty = (options.orientation === HORIZONTAL) ? "width" : "height";
+
+            that._fields();
+
+            options.value = that._validateValue(options.value);
+
+            that._validateType(options.type);
+
+            that._wrapper();
+
+            that._progressAnimation();
+
+            if ((options.value !== options.min) && (options.value !== false)) {
+               that._updateProgress();
+            }
+        },
+
+        setOptions: function(options) {
+            var that = this;
+            
+            Widget.fn.setOptions.call(that, options);
+
+            if (options.hasOwnProperty("reverse")) {
+                that.wrapper.toggleClass("k-progressbar-reverse", options.reverse);
+            }
+
+            if (options.hasOwnProperty("enable")) {
+                that.enable(options.enable);
+            }
+
+            that._progressAnimation();
+
+            that._validateValue();
+
+            that._updateProgress();
+        },
+
+        events: [
+            CHANGE,
+            COMPLETE
+        ],
+
+        options: {
+            name: "ProgressBar",
+            orientation: HORIZONTAL,
+            reverse: false,
+            min: DEFAULTMIN,
+            max: DEFAULTMAX,
+            value: DEFAULTVALUE,
+            enable: true,
+            type: PROGRESSTYPE.VALUE,
+            chunkCount: DEFAULTCHUNKCOUNT,
+            showStatus: true,
+            animation: { }
+        },
+
+        _fields: function() {
+            var that = this;
+
+            that._isStarted = false;
+
+            that.progressWrapper = that.progressStatus = $();
+        },
+
+        _validateType: function(currentType) {
+            var isValid = false;
+
+            $.each(PROGRESSTYPE, function(k, type) {
+                if (type === currentType) {
+                    isValid = true;
+                    return false;
+                }
+            });
+
+            if (!isValid) {
+                throw new Error(kendo.format("Invalid ProgressBar type '{0}'", currentType));
+            }
+        },
+
+        _wrapper: function() {
+            var that = this;
+            var container = that.wrapper = that.element;
+            var options = that.options;
+            var orientation = options.orientation;
+            var initialStatusValue;
+
+            container.addClass("k-widget " + KPROGRESSBAR);
+
+            container.addClass(KPROGRESSBAR + "-" + ((orientation === HORIZONTAL) ? HORIZONTAL : VERTICAL));
+
+            if(options.enable === false) {
+                container.addClass(KSTATEDISABLED);
+            }
+
+            if (options.reverse) {
+                container.addClass(KPROGRESSBARREVERSE);
+            }
+
+            if (options.value === false) {
+                container.addClass(KPROGRESSBARINDETERMINATE);
+            }
+
+            if (options.type === PROGRESSTYPE.CHUNK) {
+                that._addChunkProgressWrapper();
+            } else {
+                if (options.showStatus){
+                    that.progressStatus = that.wrapper.prepend(templates.progressStatus)
+                                              .find("." + KPROGRESSSTATUS);
+
+                    initialStatusValue = (options.value !== false) ? options.value : options.min;
+
+                    if (options.type === PROGRESSTYPE.VALUE) {
+                        that.progressStatus.text(initialStatusValue);
+                    } else {
+                        that.progressStatus.text(that._calculatePercentage(initialStatusValue) + "%");
+                    }
+                }
+            }
+        },
+
+        value: function(value) {
+            return this._value(value);
+        },
+
+        _value: function(value){
+            var that = this;
+            var options = that.options;
+            var validated;
+
+            if (value === undefined) {
+                return options.value;
+            } else {
+                if (typeof value !== BOOLEAN) {
+                    value = that._roundValue(value);
+
+                    if(!isNaN(value)) {
+                        validated = that._validateValue(value);
+
+                        if (validated !== options.value) {
+                            that.wrapper.removeClass(KPROGRESSBARINDETERMINATE);
+
+                            options.value = validated;
+
+                            that._isStarted = true;
+
+                            that._updateProgress();
+                        }
+                    }
+                } else if (!value) {
+                    that.wrapper.addClass(KPROGRESSBARINDETERMINATE);
+                    options.value = false;
+                }
+            }
+        },
+
+        _roundValue: function(value) {
+            value = parseFloat(value);
+
+            var power = math.pow(10, PRECISION);
+
+            return math.floor(value * power) / power;
+        },
+
+        _validateValue: function(value) {
+            var that = this;
+            var options = that.options;
+
+            if (value !== false) {
+                if (value <= options.min || value === true) {
+                    return options.min;
+                } else if (value >= options.max) {
+                    return options.max;
+                }
+            } else if (value === false) {
+                return false;
+            }
+
+            if(isNaN(that._roundValue(value))) {
+                return options.min;
+            }
+
+            return value;
+        },
+
+        _updateProgress: function() {
+            var that = this;
+            var options = that.options;
+            var percentage = that._calculatePercentage();
+
+            if (options.type === PROGRESSTYPE.CHUNK) {
+                that._updateChunks(percentage);
+                that._onProgressUpdateAlways(options.value);
+            } else {
+                that._updateProgressWrapper(percentage);
+            }
+        },
+
+        _updateChunks: function(percentage) {
+            var that = this;
+            var options = that.options;
+            var chunkCount = options.chunkCount;
+            var percentagesPerChunk =  parseInt((HUNDREDPERCENT / chunkCount) * 100, 10) / 100;
+            var percentageParsed = parseInt(percentage * 100, 10) / 100;
+            var completedChunksCount = math.floor(percentageParsed / percentagesPerChunk);
+            var completedChunks;
+
+            if((options.orientation === HORIZONTAL && !(options.reverse)) ||
+               (options.orientation === VERTICAL && options.reverse)) {
+                completedChunks = that.wrapper.find("li.k-item:lt(" + completedChunksCount + ")");
+            } else {
+                completedChunks = that.wrapper.find("li.k-item:gt(-" + (completedChunksCount + 1) + ")");
+            }
+
+            that.wrapper.find("." + KCOMPLETEDCHUNK)
+                        .removeClass(KCOMPLETEDCHUNK)
+                        .addClass(KUPCOMINGCHUNK);
+
+            completedChunks.removeClass(KUPCOMINGCHUNK)
+                           .addClass(KCOMPLETEDCHUNK);
+        },
+
+        _updateProgressWrapper: function(percentage) {
+            var that = this;
+            var options = that.options;
+            var progressWrapper = that.wrapper.find("." + KPROGRESSWRAPPER);
+            var animationDuration = that._isStarted ? that._animation.duration : 0;
+            var animationCssOptions = { };
+
+            if (progressWrapper.length === 0) {
+                that._addRegularProgressWrapper();
+            }
+
+            animationCssOptions[that._progressProperty] = percentage + "%";
+            that.progressWrapper.animate(animationCssOptions, {
+                duration: animationDuration,
+                start: proxy(that._onProgressAnimateStart, that),
+                progress: proxy(that._onProgressAnimate, that),
+                complete: proxy(that._onProgressAnimateComplete, that, options.value),
+                always: proxy(that._onProgressUpdateAlways, that, options.value)
+            });
+        },
+
+        _onProgressAnimateStart: function() {
+            this.progressWrapper.show();
+        },
+
+        _onProgressAnimate: function(e) {
+            var that = this;
+            var options = that.options;
+            var progressInPercent = parseFloat(e.elem.style[that._progressProperty], 10);
+            var progressStatusWrapSize;
+
+            if (options.showStatus) {
+                progressStatusWrapSize = 10000 / parseFloat(that.progressWrapper[0].style[that._progressProperty]);
+
+                that.progressWrapper.find(".k-progress-status-wrap").css(that._progressProperty, progressStatusWrapSize + "%");
+            }
+
+            if (options.type !== PROGRESSTYPE.CHUNK && progressInPercent <= 98) {
+                that.progressWrapper.removeClass(KPROGRESSBARCOMPLETE);
+            }
+        },
+
+        _onProgressAnimateComplete: function(currentValue) {
+            var that = this;
+            var options = that.options;
+            var progressWrapperSize = parseFloat(that.progressWrapper[0].style[that._progressProperty]);
+
+            if (options.type !== PROGRESSTYPE.CHUNK && progressWrapperSize > 98) {
+                that.progressWrapper.addClass(KPROGRESSBARCOMPLETE);
+            }
+
+            if (options.showStatus) {
+                if (options.type === PROGRESSTYPE.VALUE) {
+                    that.progressStatus.text(currentValue);
+                } else {
+                    that.progressStatus.text(math.floor(that._calculatePercentage(currentValue)) + "%");
+                }
+            }
+
+            if (currentValue === options.min) {
+                that.progressWrapper.hide();
+            }
+        },
+
+        _onProgressUpdateAlways: function(currentValue) {
+            var that = this;
+            var options = that.options;
+
+            if (that._isStarted) {
+                that.trigger(CHANGE, { value: currentValue });
+            }
+
+            if (currentValue === options.max && that._isStarted) {
+                that.trigger(COMPLETE, { value: options.max });
+            }
+        },
+
+        enable: function(enable) {
+            var that = this;
+            var options = that.options;
+
+            options.enable = typeof(enable) === "undefined" ? true : enable;
+            that.wrapper.toggleClass(KSTATEDISABLED, !options.enable);
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+        },
+
+        _addChunkProgressWrapper: function () {
+            var that = this;
+            var options = that.options;
+            var container = that.wrapper;
+            var chunkSize = HUNDREDPERCENT / options.chunkCount;
+            var html = "";
+
+            if (options.chunkCount <= 1) {
+                options.chunkCount = DEFAULTCHUNKCOUNT;
+            }
+
+            html += "<ul class='k-reset'>";
+            for (var i = options.chunkCount - 1; i >= 0; i--) {
+                html += "<li class='k-item k-state-default'></li>";
+            }
+            html += "</ul>";
+
+            container.append(html).find(".k-item").css(that._progressProperty, chunkSize + "%")
+                     .first().addClass("k-first")
+                     .end()
+                     .last().addClass("k-last");
+
+            that._normalizeChunkSize();
+        },
+
+        _normalizeChunkSize: function() {
+            var that = this;
+            var options = that.options;
+            var lastChunk = that.wrapper.find(".k-item:last");
+            var currentSize = parseFloat(lastChunk[0].style[that._progressProperty]);
+            var difference = HUNDREDPERCENT - (options.chunkCount * currentSize);
+
+            if (difference > 0) {
+                lastChunk.css(that._progressProperty, (currentSize + difference) + "%");
+            }
+        },
+
+        _addRegularProgressWrapper: function() {
+            var that = this;
+
+            that.progressWrapper = $("<div class='" + KPROGRESSWRAPPER + "'></div>").appendTo(that.wrapper);
+
+            if (that.options.showStatus) {
+                that.progressWrapper.append(templates.progressStatus);
+
+                that.progressStatus = that.wrapper.find("." + KPROGRESSSTATUS);
+            }
+        },
+
+        _calculateChunkSize: function() {
+            var that = this;
+            var chunkCount = that.options.chunkCount;
+            var chunkContainer = that.wrapper.find("ul.k-reset");
+
+            return (parseInt(chunkContainer.css(that._progressProperty), 10) - (chunkCount - 1)) / chunkCount;
+        },
+
+        _calculatePercentage: function(currentValue) {
+            var that = this;
+            var options = that.options;
+            var value = (currentValue !== undefined) ? currentValue : options.value;
+            var min = options.min;
+            var max = options.max;
+            that._onePercent = math.abs((max - min) / 100);
+
+            return math.abs((value - min) / that._onePercent);
+        },
+
+        _progressAnimation: function() {
+            var that = this;
+            var options = that.options;
+            var animation = options.animation;
+
+            if (animation === false) {
+                that._animation = { duration: 0 };
+            } else {
+                that._animation = extend({
+                    duration: DEFAULTANIMATIONDURATION
+                }, options.animation);
+            }
+        }
+    });
+
+    kendo.ui.plugin(ProgressBar);
+})(window.kendo.jQuery);
+
+
+
+
+
+(function ($, parseFloat, parseInt) {
+    var Color = function(value) {
+        var color = this,
+            formats = Color.formats,
+            re,
+            processor,
+            parts,
+            i,
+            channels;
+
+        if (arguments.length === 1) {
+            value = color.resolveColor(value);
+
+            for (i = 0; i < formats.length; i++) {
+                re = formats[i].re;
+                processor = formats[i].process;
+                parts = re.exec(value);
+
+                if (parts) {
+                    channels = processor(parts);
+                    color.r = channels[0];
+                    color.g = channels[1];
+                    color.b = channels[2];
+                }
+            }
+        } else {
+            color.r = arguments[0];
+            color.g = arguments[1];
+            color.b = arguments[2];
+        }
+
+        color.r = color.normalizeByte(color.r);
+        color.g = color.normalizeByte(color.g);
+        color.b = color.normalizeByte(color.b);
+    };
+
+    Color.prototype = {
+        toHex: function() {
+            var color = this,
+                pad = color.padDigit,
+                r = color.r.toString(16),
+                g = color.g.toString(16),
+                b = color.b.toString(16);
+
+            return "#" + pad(r) + pad(g) + pad(b);
+        },
+
+        resolveColor: function(value) {
+            value = value || "black";
+
+            if (value.charAt(0) == "#") {
+                value = value.substr(1, 6);
+            }
+
+            value = value.replace(/ /g, "");
+            value = value.toLowerCase();
+            value = Color.namedColors[value] || value;
+
+            return value;
+        },
+
+        normalizeByte: function(value) {
+            return (value < 0 || isNaN(value)) ? 0 : ((value > 255) ? 255 : value);
+        },
+
+        padDigit: function(value) {
+            return (value.length === 1) ? "0" + value : value;
+        },
+
+        brightness: function(value) {
+            var color = this,
+                round = Math.round;
+
+            color.r = round(color.normalizeByte(color.r * value));
+            color.g = round(color.normalizeByte(color.g * value));
+            color.b = round(color.normalizeByte(color.b * value));
+
+            return color;
+        },
+
+        percBrightness: function() {
+            var color = this;
+
+            return Math.sqrt(0.241 * color.r * color.r + 0.691 * color.g * color.g + 0.068 * color.b * color.b);
+        }
+    };
+
+    Color.formats = [{
+            re: /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/,
+            process: function(parts) {
+                return [
+                    parseInt(parts[1], 10), parseInt(parts[2], 10), parseInt(parts[3], 10)
+                ];
+            }
+        }, {
+            re: /^(\w{2})(\w{2})(\w{2})$/,
+            process: function(parts) {
+                return [
+                    parseInt(parts[1], 16), parseInt(parts[2], 16), parseInt(parts[3], 16)
+                ];
+            }
+        }, {
+            re: /^(\w{1})(\w{1})(\w{1})$/,
+            process: function(parts) {
+                return [
+                    parseInt(parts[1] + parts[1], 16),
+                    parseInt(parts[2] + parts[2], 16),
+                    parseInt(parts[3] + parts[3], 16)
+                ];
+            }
+        }
+    ];
+
+    Color.namedColors = {
+        aqua: "00ffff", azure: "f0ffff", beige: "f5f5dc",
+        black: "000000", blue: "0000ff", brown: "a52a2a",
+        coral: "ff7f50", cyan: "00ffff", darkblue: "00008b",
+        darkcyan: "008b8b", darkgray: "a9a9a9", darkgreen: "006400",
+        darkorange: "ff8c00", darkred: "8b0000", dimgray: "696969",
+        fuchsia: "ff00ff", gold: "ffd700", goldenrod: "daa520",
+        gray: "808080", green: "008000", greenyellow: "adff2f",
+        indigo: "4b0082", ivory: "fffff0", khaki: "f0e68c",
+        lightblue: "add8e6", lightgrey: "d3d3d3", lightgreen: "90ee90",
+        lightpink: "ffb6c1", lightyellow: "ffffe0", lime: "00ff00",
+        limegreen: "32cd32", linen: "faf0e6", magenta: "ff00ff",
+        maroon: "800000", mediumblue: "0000cd", navy: "000080",
+        olive: "808000", orange: "ffa500", orangered: "ff4500",
+        orchid: "da70d6", pink: "ffc0cb", plum: "dda0dd",
+        purple: "800080", red: "ff0000", royalblue: "4169e1",
+        salmon: "fa8072", silver: "c0c0c0", skyblue: "87ceeb",
+        slateblue: "6a5acd", slategray: "708090", snow: "fffafa",
+        steelblue: "4682b4", tan: "d2b48c", teal: "008080",
+        tomato: "ff6347", turquoise: "40e0d0", violet: "ee82ee",
+        wheat: "f5deb3", white: "ffffff", whitesmoke: "f5f5f5",
+        yellow: "ffff00", yellowgreen: "9acd32"
+    };
+
+    // Tools from ColorPicker =================================================
+
+    /*jshint eqnull:true  */
+
+    function parseColor(color, nothrow) {
+        if (color == null || color == "none") {
+            return null;
+        }
+        if (color == "transparent") {
+            return new _RGB(0, 0, 0, 0);
+        }
+        if (color instanceof _Color) {
+            return color;
+        }
+        color = color.toLowerCase();
+        if (Color.namedColors.hasOwnProperty(color)) {
+            color = Color.namedColors[color];
+        }
+        var m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(color);
+        if (m) {
+            return new _Bytes(parseInt(m[1], 16),
+                              parseInt(m[2], 16),
+                              parseInt(m[3], 16), 1);
+        }
+        m = /^#?([0-9a-f])([0-9a-f])([0-9a-f])$/i.exec(color);
+        if (m) {
+            return new _Bytes(parseInt(m[1] + m[1], 16),
+                              parseInt(m[2] + m[2], 16),
+                              parseInt(m[3] + m[3], 16), 1);
+        }
+        m = /^rgb\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)/.exec(color);
+        if (m) {
+            return new _Bytes(parseInt(m[1], 10),
+                              parseInt(m[2], 10),
+                              parseInt(m[3], 10), 1);
+        }
+        m = /^rgba\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9.]+)\s*\)/.exec(color);
+        if (m) {
+            return new _Bytes(parseInt(m[1], 10),
+                              parseInt(m[2], 10),
+                              parseInt(m[3], 10), parseFloat(m[4]));
+        }
+        m = /^rgb\(\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*\)/.exec(color);
+        if (m) {
+            return new _RGB(parseFloat(m[1]) / 100,
+                            parseFloat(m[2]) / 100,
+                            parseFloat(m[3]) / 100, 1);
+        }
+        m = /^rgba\(\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9.]+)\s*\)/.exec(color);
+        if (m) {
+            return new _RGB(parseFloat(m[1]) / 100,
+                            parseFloat(m[2]) / 100,
+                            parseFloat(m[3]) / 100, parseFloat(m[4]));
+        }
+        if (!nothrow) {
+            throw new Error("Cannot parse color: " + color);
+        }
+        return undefined;
+    }
+
+    function hex(n, width, pad) {
+        if (!pad) { pad = "0"; }
+        n = n.toString(16);
+        while (width > n.length) {
+            n = "0" + n;
+        }
+        return n;
+    }
+
+    var _Color = kendo.Class.extend({
+        toHSV: function() { return this; },
+        toRGB: function() { return this; },
+        toHex: function() { return this.toBytes().toHex(); },
+        toBytes: function() { return this; },
+        toCss: function() { return "#" + this.toHex(); },
+        toCssRgba: function() {
+            var rgb = this.toBytes();
+            return "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", " + parseFloat((+this.a).toFixed(3)) + ")";
+        },
+        toDisplay: function() {
+            if (kendo.support.browser.msie && kendo.support.browser.version < 9) {
+                return this.toCss(); // no RGBA support; does it support any opacity in colors?
+            }
+            return this.toCssRgba();
+        },
+        equals: function(c) { return c === this || c !== null && this.toCssRgba() == parseColor(c).toCssRgba(); },
+        diff: function(c2) {
+            if (c2 == null) {
+                return NaN;
+            }
+            var c1 = this.toBytes();
+            c2 = c2.toBytes();
+            return Math.sqrt(Math.pow((c1.r - c2.r) * 0.30, 2) +
+                             Math.pow((c1.g - c2.g) * 0.59, 2) +
+                             Math.pow((c1.b - c2.b) * 0.11, 2));
+        },
+        clone: function() {
+            var c = this.toBytes();
+            if (c === this) {
+                c = new _Bytes(c.r, c.g, c.b, c.a);
+            }
+            return c;
+        }
+    });
+
+    var _RGB = _Color.extend({
+        init: function(r, g, b, a) {
+            this.r = r; this.g = g; this.b = b; this.a = a;
+        },
+        toHSV: function() {
+            var min, max, delta, h, s, v;
+            var r = this.r, g = this.g, b = this.b;
+            min = Math.min(r, g, b);
+            max = Math.max(r, g, b);
+            v = max;
+            delta = max - min;
+            if (delta === 0) {
+                return new _HSV(0, 0, v, this.a);
+            }
+            if (max !== 0) {
+                s = delta / max;
+                if (r == max) {
+                    h = (g - b) / delta;
+                } else if (g == max) {
+                    h = 2 + (b - r) / delta;
+                } else {
+                    h = 4 + (r - g) / delta;
+                }
+                h *= 60;
+                if (h < 0) {
+                    h += 360;
+                }
+            } else {
+                s = 0;
+                h = -1;
+            }
+            return new _HSV(h, s, v, this.a);
+        },
+        toBytes: function() {
+            return new _Bytes(this.r * 255, this.g * 255, this.b * 255, this.a);
+        }
+    });
+
+    var _Bytes = _RGB.extend({
+        init: function(r, g, b, a) {
+            this.r = Math.round(r); this.g = Math.round(g); this.b = Math.round(b); this.a = a;
+        },
+        toRGB: function() {
+            return new _RGB(this.r / 255, this.g / 255, this.b / 255, this.a);
+        },
+        toHSV: function() {
+            return this.toRGB().toHSV();
+        },
+        toHex: function() {
+            return hex(this.r, 2) + hex(this.g, 2) + hex(this.b, 2);
+        },
+        toBytes: function() {
+            return this;
+        }
+    });
+
+    var _HSV = _Color.extend({
+        init: function(h, s, v, a) {
+            this.h = h; this.s = s; this.v = v; this.a = a;
+        },
+        toRGB: function() {
+            var h = this.h, s = this.s, v = this.v;
+            var i, r, g, b, f, p, q, t;
+            if (s === 0) {
+                r = g = b = v;
+            } else {
+                h /= 60;
+                i = Math.floor(h);
+                f = h - i;
+                p = v * (1 - s);
+                q = v * (1 - s * f);
+                t = v * (1 - s * (1 - f));
+                switch (i) {
+                  case 0  : r = v; g = t; b = p; break;
+                  case 1  : r = q; g = v; b = p; break;
+                  case 2  : r = p; g = v; b = t; break;
+                  case 3  : r = p; g = q; b = v; break;
+                  case 4  : r = t; g = p; b = v; break;
+                  default : r = v; g = p; b = q; break;
+                }
+            }
+            return new _RGB(r, g, b, this.a);
+        },
+        toBytes: function() {
+            return this.toRGB().toBytes();
+        }
+    });
+
+    Color.fromBytes = function(r, g, b, a) {
+        return new _Bytes(r, g, b, a != null ? a : 1);
+    };
+
+    Color.fromRGB = function(r, g, b, a) {
+        return new _RGB(r, g, b, a != null ? a : 1);
+    };
+
+    Color.fromHSV = function(h, s, v, a) {
+        return new _HSV(h, s, v, a != null ? a : 1);
+    };
+
+    // Exports ================================================================
+    kendo.Color = Color;
+    kendo.parseColor = parseColor;
+
+})(window.kendo.jQuery, parseFloat, parseInt);
+
+
+
+(function($, undefined) {
+    var kendo = window.kendo,
+        ui = kendo.ui,
+        Widget = ui.Widget,
+        support = kendo.support,
+        getOffset = kendo.getOffset,
+        activeElement = kendo._activeElement,
+        OPEN = "open",
+        CLOSE = "close",
+        DEACTIVATE = "deactivate",
+        ACTIVATE = "activate",
+        CENTER = "center",
+        LEFT = "left",
+        RIGHT = "right",
+        TOP = "top",
+        BOTTOM = "bottom",
+        ABSOLUTE = "absolute",
+        HIDDEN = "hidden",
+        BODY = "body",
+        LOCATION = "location",
+        POSITION = "position",
+        VISIBLE = "visible",
+        EFFECTS = "effects",
+        ACTIVE = "k-state-active",
+        ACTIVEBORDER = "k-state-border",
+        ACTIVEBORDERREGEXP = /k-state-border-(\w+)/,
+        ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
+        MOUSEDOWN = "down",
+        DOCUMENT_ELEMENT = $(document.documentElement),
+        WINDOW = $(window),
+        SCROLL = "scroll",
+        RESIZE_SCROLL = "resize scroll",
+        cssPrefix = support.transitions.css,
+        TRANSFORM = cssPrefix + "transform",
+        extend = $.extend,
+        NS = ".kendoPopup",
+        styles = ["font-size",
+                  "font-family",
+                  "font-stretch",
+                  "font-style",
+                  "font-weight",
+                  "line-height"];
+
+    function contains(container, target) {
+        return container === target || $.contains(container, target);
+    }
+
+    var Popup = Widget.extend({
+        init: function(element, options) {
+            var that = this, parentPopup;
+
+            options = options || {};
+
+            if (options.isRtl) {
+                options.origin = options.origin || BOTTOM + " " + RIGHT;
+                options.position = options.position || TOP + " " + RIGHT;
+            }
+
+            Widget.fn.init.call(that, element, options);
+
+            element = that.element;
+            options = that.options;
+
+            that.collisions = options.collision ? options.collision.split(" ") : [];
+            that.downEvent = kendo.applyEventMap(MOUSEDOWN, kendo.guid());
+
+            if (that.collisions.length === 1) {
+                that.collisions.push(that.collisions[0]);
+            }
+
+            parentPopup = $(that.options.anchor).closest(".k-popup,.k-group").filter(":not([class^=km-])"); // When popup is in another popup, make it relative.
+            options.appendTo = $($(options.appendTo)[0] || parentPopup[0] || BODY);
+
+            that.element.hide()
+                .addClass("k-popup k-group k-reset")
+                .toggleClass("k-rtl", !!options.isRtl)
+                .css({ position : ABSOLUTE })
+                .appendTo(options.appendTo)
+                .on("mouseenter" + NS, function() {
+                    that._hovered = true;
+                })
+                .on("mouseleave" + NS, function() {
+                    that._hovered = false;
+                });
+
+            that.wrapper = $();
+
+            if (options.animation === false) {
+                options.animation = { open: { effects: {} }, close: { hide: true, effects: {} } };
+            }
+
+            extend(options.animation.open, {
+                complete: function() {
+                    that.wrapper.css({ overflow: VISIBLE }); // Forcing refresh causes flickering in mobile.
+                    that._trigger(ACTIVATE);
+                }
+            });
+
+            extend(options.animation.close, {
+                complete: function() {
+                    that._animationClose();
+                }
+            });
+
+            that._mousedownProxy = function(e) {
+                that._mousedown(e);
+            };
+
+            that._resizeProxy = function(e) {
+                that._resize(e);
+            };
+
+            if (options.toggleTarget) {
+                $(options.toggleTarget).on(options.toggleEvent + NS, $.proxy(that.toggle, that));
+            }
+        },
+
+        events: [
+            OPEN,
+            ACTIVATE,
+            CLOSE,
+            DEACTIVATE
+        ],
+
+        options: {
+            name: "Popup",
+            toggleEvent: "click",
+            origin: BOTTOM + " " + LEFT,
+            position: TOP + " " + LEFT,
+            anchor: BODY,
+            appendTo: null,
+            collision: "flip fit",
+            viewport: window,
+            copyAnchorStyles: true,
+            autosize: false,
+            modal: false,
+            animation: {
+                open: {
+                    effects: "slideIn:down",
+                    transition: true,
+                    duration: 200
+                },
+                close: { // if close animation effects are defined, they will be used instead of open.reverse
+                    duration: 100,
+                    hide: true
+                }
+            }
+        },
+
+        _animationClose: function() {
+            var that = this,
+                options = that.options;
+
+            that.wrapper.hide();
+
+            var location = that.wrapper.data(LOCATION),
+                anchor = $(options.anchor),
+                direction, dirClass;
+
+            if (location) {
+                that.wrapper.css(location);
+            }
+
+            if (options.anchor != BODY) {
+                direction = (anchor[0].className.match(ACTIVEBORDERREGEXP) || ["", "down"])[1];
+                dirClass = ACTIVEBORDER + "-" + direction;
+
+                anchor
+                    .removeClass(dirClass)
+                    .children(ACTIVECHILDREN)
+                    .removeClass(ACTIVE)
+                    .removeClass(dirClass);
+
+                that.element.removeClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
+            }
+
+            that._closing = false;
+            that._trigger(DEACTIVATE);
+        },
+
+        destroy: function() {
+            var that = this,
+                options = that.options,
+                element = that.element.off(NS),
+                parent;
+
+            Widget.fn.destroy.call(that);
+
+            if (options.toggleTarget) {
+                $(options.toggleTarget).off(NS);
+            }
+
+            if (!options.modal) {
+                DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy);
+                that._scrollableParents().unbind(SCROLL, that._resizeProxy);
+                WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
+            }
+
+            kendo.destroy(that.element.children());
+            element.removeData();
+
+            if (options.appendTo[0] === document.body) {
+                parent = element.parent(".k-animation-container");
+
+                if (parent[0]) {
+                    parent.remove();
+                } else {
+                    element.remove();
+                }
+            }
+        },
+
+        open: function(x, y) {
+            var that = this,
+                fixed = { isFixed: !isNaN(parseInt(y,10)), x: x, y: y },
+                element = that.element,
+                options = that.options,
+                direction = "down",
+                animation, wrapper,
+                anchor = $(options.anchor),
+                mobile = element[0] && element.hasClass("km-widget");
+
+            if (!that.visible()) {
+                if (options.copyAnchorStyles) {
+                    if (mobile && styles[0] == "font-size") {
+                        styles.shift();
+                    }
+                    element.css(kendo.getComputedStyles(anchor[0], styles));
+                }
+
+                if (element.data("animating") || that._trigger(OPEN)) {
+                    return;
+                }
+
+                if (!options.modal) {
+                    DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy)
+                                .bind(that.downEvent, that._mousedownProxy);
+
+                    // this binding hangs iOS in editor
+                    if (!(support.mobileOS.ios || support.mobileOS.android)) {
+                        // all elements in IE7/8 fire resize event, causing mayhem
+                        that._scrollableParents()
+                            .unbind(SCROLL, that._resizeProxy)
+                            .bind(SCROLL, that._resizeProxy);
+                        WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy)
+                              .bind(RESIZE_SCROLL, that._resizeProxy);
+                    }
+                }
+
+                that.wrapper = wrapper = kendo.wrap(element, options.autosize)
+                                        .css({
+                                            overflow: HIDDEN,
+                                            display: "block",
+                                            position: ABSOLUTE
+                                        });
+
+                if (support.mobileOS.android) {
+                    wrapper.css(TRANSFORM, "translatez(0)"); // Android is VERY slow otherwise. Should be tested in other droids as well since it may cause blur.
+                }
+
+                wrapper.css(POSITION);
+
+                if ($(options.appendTo)[0] == document.body) {
+                    wrapper.css(TOP, "-10000px");
+                }
+
+                animation = extend(true, {}, options.animation.open);
+                that.flipped = that._position(fixed);
+                animation.effects = kendo.parseEffects(animation.effects, that.flipped);
+
+                direction = animation.effects.slideIn ? animation.effects.slideIn.direction : direction;
+
+                if (options.anchor != BODY) {
+                    var dirClass = ACTIVEBORDER + "-" + direction;
+
+                    element.addClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
+
+                    anchor
+                        .addClass(dirClass)
+                        .children(ACTIVECHILDREN)
+                        .addClass(ACTIVE)
+                        .addClass(dirClass);
+                }
+
+                element.data(EFFECTS, animation.effects)
+                       .kendoStop(true)
+                       .kendoAnimate(animation);
+            }
+        },
+
+        toggle: function() {
+            var that = this;
+
+            that[that.visible() ? CLOSE : OPEN]();
+        },
+
+        visible: function() {
+            return this.element.is(":" + VISIBLE);
+        },
+
+        close: function(skipEffects) {
+            var that = this,
+                options = that.options, wrap,
+                animation, openEffects, closeEffects;
+
+            if (that.visible()) {
+                wrap = (that.wrapper[0] ? that.wrapper : kendo.wrap(that.element).hide());
+
+                if (that._closing || that._trigger(CLOSE)) {
+                    return;
+                }
+
+                // Close all inclusive popups.
+                that.element.find(".k-popup").each(function () {
+                    var that = $(this),
+                        popup = that.data("kendoPopup");
+
+                    if (popup) {
+                        popup.close(skipEffects);
+                    }
+                });
+
+                DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy);
+                that._scrollableParents().unbind(SCROLL, that._resizeProxy);
+                WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
+
+                if (skipEffects) {
+                    animation = { hide: true, effects: {} };
+                } else {
+                    animation = extend(true, {}, options.animation.close);
+                    openEffects = that.element.data(EFFECTS);
+                    closeEffects = animation.effects;
+
+                    if (!closeEffects && !kendo.size(closeEffects) && openEffects && kendo.size(openEffects)) {
+                        animation.effects = openEffects;
+                        animation.reverse = true;
+                    }
+
+                    that._closing = true;
+                }
+
+                that.element.kendoStop(true);
+                wrap.css({ overflow: HIDDEN }); // stop callback will remove hidden overflow
+                that.element.kendoAnimate(animation);
+            }
+        },
+
+        _trigger: function(ev) {
+            return this.trigger(ev, { type: ev });
+        },
+
+        _resize: function(e) {
+            var that = this;
+
+            if (e.type === "resize") {
+                clearTimeout(that._resizeTimeout);
+                that._resizeTimeout = setTimeout(function() {
+                    that._position();
+                    that._resizeTimeout = null;
+                }, 50);
+            } else {
+                if (!that._hovered && !contains(that.element[0], activeElement())) {
+                    that.close();
+                }
+            }
+        },
+
+        _mousedown: function(e) {
+            var that = this,
+                container = that.element[0],
+                options = that.options,
+                anchor = $(options.anchor)[0],
+                toggleTarget = options.toggleTarget,
+                target = kendo.eventTarget(e),
+                popup = $(target).closest(".k-popup"),
+                mobile = popup.parent().parent(".km-shim").length;
+
+            popup = popup[0];
+            if (!mobile && popup && popup !== that.element[0]){
+                return;
+            }
+
+            // This MAY result in popup not closing in certain cases.
+            if ($(e.target).closest("a").data("rel") === "popover") {
+                return;
+            }
+
+            if (!contains(container, target) && !contains(anchor, target) && !(toggleTarget && contains($(toggleTarget)[0], target))) {
+                that.close();
+            }
+        },
+
+        _fit: function(position, size, viewPortSize) {
+            var output = 0;
+
+            if (position + size > viewPortSize) {
+                output = viewPortSize - (position + size);
+            }
+
+            if (position < 0) {
+                output = -position;
+            }
+
+            return output;
+        },
+
+        _flip: function(offset, size, anchorSize, viewPortSize, origin, position, boxSize) {
+            var output = 0;
+                boxSize = boxSize || size;
+
+            if (position !== origin && position !== CENTER && origin !== CENTER) {
+                if (offset + boxSize > viewPortSize) {
+                    output += -(anchorSize + size);
+                }
+
+                if (offset + output < 0) {
+                    output += anchorSize + size;
+                }
+            }
+            return output;
+        },
+
+        _scrollableParents: function() {
+            return $(this.options.anchor)
+                       .parentsUntil("body")
+                       .filter(function(index, element) {
+                            var computedStyle = kendo.getComputedStyles(element, ["overflow"]);
+                            return computedStyle.overflow != "visible";
+                       });
+        },
+
+        _position: function(fixed) {
+            var that = this,
+                element = that.element.css(POSITION, ""),
+                wrapper = that.wrapper,
+                options = that.options,
+                viewport = $(options.viewport),
+                viewportOffset = viewport.offset(),
+                anchor = $(options.anchor),
+                origins = options.origin.toLowerCase().split(" "),
+                positions = options.position.toLowerCase().split(" "),
+                collisions = that.collisions,
+                zoomLevel = support.zoomLevel(),
+                siblingContainer, parents,
+                parentZIndex, zIndex = 10002,
+                isWindow = !!((viewport[0] == window) && window.innerWidth && (zoomLevel <= 1.02)),
+                idx = 0, length, viewportWidth, viewportHeight;
+
+            // $(window).height() uses documentElement to get the height
+            viewportWidth = isWindow ? window.innerWidth : viewport.width();
+            viewportHeight = isWindow ? window.innerHeight : viewport.height();
+
+            siblingContainer = anchor.parents().filter(wrapper.siblings());
+
+            if (siblingContainer[0]) {
+                parentZIndex = Math.max(Number(siblingContainer.css("zIndex")), 0);
+
+                // set z-index to be more than that of the container/sibling
+                // compensate with more units for window z-stack
+                if (parentZIndex) {
+                    zIndex = parentZIndex + 10;
+                } else {
+                    parents = anchor.parentsUntil(siblingContainer);
+                    for (length = parents.length; idx < length; idx++) {
+                        parentZIndex = Number($(parents[idx]).css("zIndex"));
+                        if (parentZIndex && zIndex < parentZIndex) {
+                            zIndex = parentZIndex + 10;
+                        }
+                    }
+                }
+            }
+
+            wrapper.css("zIndex", zIndex);
+
+            if (fixed && fixed.isFixed) {
+                wrapper.css({ left: fixed.x, top: fixed.y });
+            } else {
+                wrapper.css(that._align(origins, positions));
+            }
+
+            var pos = getOffset(wrapper, POSITION, anchor[0] === wrapper.offsetParent()[0]),
+                offset = getOffset(wrapper),
+                anchorParent = anchor.offsetParent().parent(".k-animation-container,.k-popup,.k-group"); // If the parent is positioned, get the current positions
+
+            if (anchorParent.length) {
+                pos = getOffset(wrapper, POSITION, true);
+                offset = getOffset(wrapper);
+            }
+
+            if (viewport[0] === window) {
+                offset.top -= (window.pageYOffset || document.documentElement.scrollTop || 0);
+                offset.left -= (window.pageXOffset || document.documentElement.scrollLeft || 0);
+            }
+            else {
+                offset.top -= viewportOffset.top;
+                offset.left -= viewportOffset.left;
+            }
+
+            if (!that.wrapper.data(LOCATION)) { // Needed to reset the popup location after every closure - fixes the resize bugs.
+                wrapper.data(LOCATION, extend({}, pos));
+            }
+
+            var offsets = extend({}, offset),
+                location = extend({}, pos);
+
+            if (collisions[0] === "fit") {
+                location.top += that._fit(offsets.top, wrapper.outerHeight(), viewportHeight / zoomLevel);
+            }
+
+            if (collisions[1] === "fit") {
+                location.left += that._fit(offsets.left, wrapper.outerWidth(), viewportWidth / zoomLevel);
+            }
+
+            var flipPos = extend({}, location);
+
+            if (collisions[0] === "flip") {
+                location.top += that._flip(offsets.top, element.outerHeight(), anchor.outerHeight(), viewportHeight / zoomLevel, origins[0], positions[0], wrapper.outerHeight());
+            }
+
+            if (collisions[1] === "flip") {
+                location.left += that._flip(offsets.left, element.outerWidth(), anchor.outerWidth(), viewportWidth / zoomLevel, origins[1], positions[1], wrapper.outerWidth());
+            }
+
+            element.css(POSITION, ABSOLUTE);
+            wrapper.css(location);
+
+            return (location.left != flipPos.left || location.top != flipPos.top);
+        },
+
+        _align: function(origin, position) {
+            var that = this,
+                element = that.wrapper,
+                anchor = $(that.options.anchor),
+                verticalOrigin = origin[0],
+                horizontalOrigin = origin[1],
+                verticalPosition = position[0],
+                horizontalPosition = position[1],
+                anchorOffset = getOffset(anchor),
+                appendTo = $(that.options.appendTo),
+                appendToOffset,
+                width = element.outerWidth(),
+                height = element.outerHeight(),
+                anchorWidth = anchor.outerWidth(),
+                anchorHeight = anchor.outerHeight(),
+                top = anchorOffset.top,
+                left = anchorOffset.left,
+                round = Math.round;
+
+            if (appendTo[0] != document.body) {
+                appendToOffset = getOffset(appendTo);
+                top -= appendToOffset.top;
+                left -= appendToOffset.left;
+            }
+
+
+            if (verticalOrigin === BOTTOM) {
+                top += anchorHeight;
+            }
+
+            if (verticalOrigin === CENTER) {
+                top += round(anchorHeight / 2);
+            }
+
+            if (verticalPosition === BOTTOM) {
+                top -= height;
+            }
+
+            if (verticalPosition === CENTER) {
+                top -= round(height / 2);
+            }
+
+            if (horizontalOrigin === RIGHT) {
+                left += anchorWidth;
+            }
+
+            if (horizontalOrigin === CENTER) {
+                left += round(anchorWidth / 2);
+            }
+
+            if (horizontalPosition === RIGHT) {
+                left -= width;
+            }
+
+            if (horizontalPosition === CENTER) {
+                left -= round(width / 2);
+            }
+
+            return {
+                top: top,
+                left: left
+            };
+        }
+    });
+
+    ui.plugin(Popup);
+})(window.kendo.jQuery);
+
+
+
+
+
+(function($, undefined) {
+    var kendo = window.kendo,
+        Widget = kendo.ui.Widget,
+        Draggable = kendo.ui.Draggable,
+        extend = $.extend,
+        format = kendo.format,
+        parse = kendo.parseFloat,
+        proxy = $.proxy,
+        isArray = $.isArray,
+        math = Math,
+        support = kendo.support,
+        pointers = support.pointers,
+        msPointers = support.msPointers,
+        CHANGE = "change",
+        SLIDE = "slide",
+        NS = ".slider",
+        MOUSE_DOWN = "touchstart" + NS + " mousedown" + NS,
+        TRACK_MOUSE_DOWN = pointers ? "pointerdown" + NS : (msPointers ? "MSPointerDown" + NS : MOUSE_DOWN),
+        MOUSE_UP = "touchend" + NS + " mouseup" + NS,
+        TRACK_MOUSE_UP = pointers ? "pointerup" : (msPointers ? "MSPointerUp" + NS : MOUSE_UP),
+        MOVE_SELECTION = "moveSelection",
+        KEY_DOWN = "keydown" + NS,
+        CLICK = "click" + NS,
+        MOUSE_OVER = "mouseover" + NS,
+        FOCUS = "focus" + NS,
+        BLUR = "blur" + NS,
+        DRAG_HANDLE = ".k-draghandle",
+        TRACK_SELECTOR = ".k-slider-track",
+        TICK_SELECTOR = ".k-tick",
+        STATE_SELECTED = "k-state-selected",
+        STATE_FOCUSED = "k-state-focused",
+        STATE_DEFAULT = "k-state-default",
+        STATE_DISABLED = "k-state-disabled",
+        PRECISION = 3,
+        DISABLED = "disabled",
+        UNDEFINED = "undefined",
+        TABINDEX = "tabindex",
+        getTouches = kendo.getTouches;
+
+    var SliderBase = Widget.extend({
+        init: function(element, options) {
+            var that = this;
+
+            Widget.fn.init.call(that, element, options);
+
+            options = that.options;
+
+            that._distance = round(options.max - options.min);
+            that._isHorizontal = options.orientation == "horizontal";
+            that._isRtl = that._isHorizontal && kendo.support.isRtl(element);
+            that._position = that._isHorizontal ? "left" : "bottom";
+            that._sizeFn = that._isHorizontal ? "width" : "height";
+            that._outerSize = that._isHorizontal ? "outerWidth" : "outerHeight";
+
+            options.tooltip.format = options.tooltip.enabled ? options.tooltip.format || "{0}" : "{0}";
+
+            that._createHtml();
+            that.wrapper = that.element.closest(".k-slider");
+            that._trackDiv = that.wrapper.find(TRACK_SELECTOR);
+
+            that._setTrackDivWidth();
+
+            that._maxSelection = that._trackDiv[that._sizeFn]();
+
+            that._sliderItemsInit();
+
+            that._tabindex(that.wrapper.find(DRAG_HANDLE));
+            that[options.enabled ? "enable" : "disable"]();
+
+            var rtlDirectionSign = kendo.support.isRtl(that.wrapper) ? -1 : 1;
+
+            that._keyMap = {
+                37: step(-1 * rtlDirectionSign * options.smallStep), // left arrow
+                40: step(-options.smallStep), // down arrow
+                39: step(+1 * rtlDirectionSign * options.smallStep), // right arrow
+                38: step(+options.smallStep), // up arrow
+                35: setValue(options.max), // end
+                36: setValue(options.min), // home
+                33: step(+options.largeStep), // page up
+                34: step(-options.largeStep)  // page down
+            };
+
+            kendo.notify(that);
+        },
+
+        events: [
+            CHANGE,
+            SLIDE
+        ],
+
+        options: {
+            enabled: true,
+            min: 0,
+            max: 10,
+            smallStep: 1,
+            largeStep: 5,
+            orientation: "horizontal",
+            tickPlacement: "both",
+            tooltip: { enabled: true, format: "{0}" }
+        },
+
+        _resize: function() {
+            this._setTrackDivWidth();
+            this.wrapper.find(".k-slider-items").remove();
+
+            this._maxSelection = this._trackDiv[this._sizeFn]();
+            this._sliderItemsInit();
+            this._refresh();
+        },
+
+        _sliderItemsInit: function() {
+            var that = this,
+                options = that.options;
+
+            var sizeBetweenTicks = that._maxSelection / ((options.max - options.min) / options.smallStep);
+            var pixelWidths = that._calculateItemsWidth(math.floor(that._distance / options.smallStep));
+
+            if (options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
+                that._trackDiv.before(createSliderItems(options, that._distance));
+                that._setItemsWidth(pixelWidths);
+                that._setItemsTitle();
+            }
+
+            that._calculateSteps(pixelWidths);
+
+            if (options.tickPlacement != "none" && sizeBetweenTicks >= 2 &&
+                options.largeStep >= options.smallStep) {
+                that._setItemsLargeTick();
+            }
+        },
+
+        getSize: function() {
+            return kendo.dimensions(this.wrapper);
+        },
+
+        _setTrackDivWidth: function() {
+            var that = this,
+                trackDivPosition = parseFloat(that._trackDiv.css(that._isRtl ? "right" : that._position), 10) * 2;
+
+            that._trackDiv[that._sizeFn]((that.wrapper[that._sizeFn]() - 2) - trackDivPosition);
+        },
+
+        _setItemsWidth: function(pixelWidths) {
+            var that = this,
+                options = that.options,
+                first = 0,
+                last = pixelWidths.length - 1,
+                items = that.wrapper.find(TICK_SELECTOR),
+                i,
+                paddingTop = 0,
+                bordersWidth = 2,
+                count = items.length,
+                selection = 0;
+
+            for (i = 0; i < count - 2; i++) {
+                $(items[i + 1])[that._sizeFn](pixelWidths[i]);
+            }
+
+            if (that._isHorizontal) {
+                $(items[first]).addClass("k-first")[that._sizeFn](pixelWidths[last - 1]);
+                $(items[last]).addClass("k-last")[that._sizeFn](pixelWidths[last]);
+            } else {
+                $(items[last]).addClass("k-first")[that._sizeFn](pixelWidths[last]);
+                $(items[first]).addClass("k-last")[that._sizeFn](pixelWidths[last - 1]);
+            }
+
+            if (that._distance % options.smallStep !== 0 && !that._isHorizontal) {
+                for (i = 0; i < pixelWidths.length; i++) {
+                    selection += pixelWidths[i];
+                }
+
+                paddingTop = that._maxSelection - selection;
+                paddingTop += parseFloat(that._trackDiv.css(that._position), 10) + bordersWidth;
+
+                that.wrapper.find(".k-slider-items").css("padding-top", paddingTop);
+            }
+        },
+
+        _setItemsTitle: function() {
+            var that = this,
+                options = that.options,
+                items = that.wrapper.find(TICK_SELECTOR),
+                titleNumber = options.min,
+                count = items.length,
+                i = that._isHorizontal && !that._isRtl ? 0 : count - 1,
+                limit = that._isHorizontal && !that._isRtl ? count : -1,
+                increment = that._isHorizontal && !that._isRtl ? 1 : -1;
+
+            for (; i - limit !== 0 ; i += increment) {
+                $(items[i]).attr("title", format(options.tooltip.format, round(titleNumber)));
+                titleNumber += options.smallStep;
+            }
+        },
+
+        _setItemsLargeTick: function() {
+            var that = this,
+                options = that.options,
+                items = that.wrapper.find(TICK_SELECTOR),
+                i = 0, item, value;
+
+            if (removeFraction(options.largeStep) % removeFraction(options.smallStep) === 0 || that._distance / options.largeStep >= 3) {
+                if (!that._isHorizontal && !that._isRtl) {
+                    items = $.makeArray(items).reverse();
+                }
+
+                for (i = 0; i < items.length; i++) {
+                    item = $(items[i]);
+                    value = that._values[i];
+                    var valueWithoutFraction = removeFraction(value - this.options.min);
+                    if (valueWithoutFraction % removeFraction(options.smallStep) === 0 && valueWithoutFraction % removeFraction(options.largeStep) === 0) {
+                        item.addClass("k-tick-large")
+                            .html("<span class='k-label'>" + item.attr("title") + "</span>");
+
+                        if (i !== 0 && i !== items.length - 1) {
+                            item.css("line-height", item[that._sizeFn]() + "px");
+                        }
+                    }
+                }
+            }
+        },
+
+        _calculateItemsWidth: function(itemsCount) {
+            var that = this,
+                options = that.options,
+                trackDivSize = parseFloat(that._trackDiv.css(that._sizeFn)) + 1,
+                pixelStep = trackDivSize / that._distance,
+                itemWidth,
+                pixelWidths,
+                i;
+
+            if ((that._distance / options.smallStep) - math.floor(that._distance / options.smallStep) > 0) {
+                trackDivSize -= ((that._distance % options.smallStep) * pixelStep);
+            }
+
+            itemWidth = trackDivSize / itemsCount;
+            pixelWidths = [];
+
+            for (i = 0; i < itemsCount - 1; i++) {
+                pixelWidths[i] = itemWidth;
+            }
+
+            pixelWidths[itemsCount - 1] = pixelWidths[itemsCount] = itemWidth / 2;
+            return that._roundWidths(pixelWidths);
+        },
+
+        _roundWidths: function(pixelWidthsArray) {
+            var balance = 0,
+                count = pixelWidthsArray.length,
+                i;
+
+            for (i = 0; i < count; i++) {
+                balance += (pixelWidthsArray[i] - math.floor(pixelWidthsArray[i]));
+                pixelWidthsArray[i] = math.floor(pixelWidthsArray[i]);
+            }
+
+            balance = math.round(balance);
+
+            return this._addAdditionalSize(balance, pixelWidthsArray);
+        },
+
+        _addAdditionalSize: function(additionalSize, pixelWidthsArray) {
+            if (additionalSize === 0) {
+                return pixelWidthsArray;
+            }
+
+            //set step size
+            var step = parseFloat(pixelWidthsArray.length - 1) / parseFloat(additionalSize == 1 ? additionalSize : additionalSize - 1),
+                i;
+
+            for (i = 0; i < additionalSize; i++) {
+                pixelWidthsArray[parseInt(math.round(step * i), 10)] += 1;
+            }
+
+            return pixelWidthsArray;
+        },
+
+        _calculateSteps: function(pixelWidths) {
+            var that = this,
+                options = that.options,
+                val = options.min,
+                selection = 0,
+                itemsCount = math.ceil(that._distance / options.smallStep),
+                i = 1,
+                lastItem;
+
+            itemsCount += (that._distance / options.smallStep) % 1 === 0 ? 1 : 0;
+            pixelWidths.splice(0, 0, pixelWidths[itemsCount - 2] * 2);
+            pixelWidths.splice(itemsCount -1, 1, pixelWidths.pop() * 2);
+
+            that._pixelSteps = [selection];
+            that._values = [val];
+
+            if (itemsCount === 0) {
+                return;
+            }
+
+            while (i < itemsCount) {
+                selection += (pixelWidths[i - 1] + pixelWidths[i]) / 2;
+                that._pixelSteps[i] = selection;
+                val += options.smallStep;
+                that._values[i] = round(val);
+
+                i++;
+            }
+
+            lastItem = that._distance % options.smallStep === 0 ? itemsCount - 1 : itemsCount;
+
+            that._pixelSteps[lastItem] = that._maxSelection;
+            that._values[lastItem] = options.max;
+
+            if (that._isRtl) {
+                that._pixelSteps.reverse();
+                that._values.reverse();
+            }
+        },
+
+        _getValueFromPosition: function(mousePosition, dragableArea) {
+            var that = this,
+                options = that.options,
+                step = math.max(options.smallStep * (that._maxSelection / that._distance), 0),
+                position = 0,
+                halfStep = (step / 2),
+                i;
+
+            if (that._isHorizontal) {
+                position = mousePosition - dragableArea.startPoint;
+                if (that._isRtl) {
+                    position = that._maxSelection - position;
+                }
+            } else {
+                position = dragableArea.startPoint - mousePosition;
+            }
+
+            if (that._maxSelection - ((parseInt(that._maxSelection % step, 10) - 3) / 2) < position) {
+                return options.max;
+            }
+
+            for (i = 0; i < that._pixelSteps.length; i++) {
+                if (math.abs(that._pixelSteps[i] - position) - 1 <= halfStep) {
+                    return round(that._values[i]);
+                }
+            }
+        },
+
+        _getFormattedValue: function(val, drag) {
+            var that = this,
+                html = "",
+                tooltip = that.options.tooltip,
+                tooltipTemplate,
+                selectionStart,
+                selectionEnd;
+
+            if (isArray(val)) {
+                selectionStart = val[0];
+                selectionEnd = val[1];
+            } else if (drag && drag.type) {
+                selectionStart = drag.selectionStart;
+                selectionEnd = drag.selectionEnd;
+            }
+
+            if (drag) {
+                tooltipTemplate = drag.tooltipTemplate;
+            }
+
+            if (!tooltipTemplate && tooltip.template) {
+                tooltipTemplate = kendo.template(tooltip.template);
+            }
+
+            if (isArray(val) || (drag && drag.type)) {
+
+                if (tooltipTemplate) {
+                    html = tooltipTemplate({
+                        selectionStart: selectionStart,
+                        selectionEnd: selectionEnd
+                    });
+                } else {
+                    selectionStart = format(tooltip.format, selectionStart);
+                    selectionEnd = format(tooltip.format, selectionEnd);
+                    html = selectionStart + " - " + selectionEnd;
+                }
+            } else {
+                if (drag) {
+                    drag.val = val;
+                }
+
+                if (tooltipTemplate) {
+                    html = tooltipTemplate({
+                        value: val
+                    });
+                } else {
+                    html = format(tooltip.format, val);
+                }
+            }
+            return html;
+        },
+
+        _getDraggableArea: function() {
+            var that = this,
+                offset = kendo.getOffset(that._trackDiv);
+
+            return {
+                startPoint: that._isHorizontal ? offset.left : offset.top + that._maxSelection,
+                endPoint: that._isHorizontal ? offset.left + that._maxSelection : offset.top
+            };
+        },
+
+        _createHtml: function() {
+            var that = this,
+                element = that.element,
+                options = that.options,
+                inputs = element.find("input");
+
+            if (inputs.length == 2) {
+                inputs.eq(0).prop("value", formatValue(options.selectionStart));
+                inputs.eq(1).prop("value", formatValue(options.selectionEnd));
+            } else {
+                element.prop("value", formatValue(options.value));
+            }
+
+            element.wrap(createWrapper(options, element, that._isHorizontal)).hide();
+
+            if (options.showButtons) {
+                element.before(createButton(options, "increase", that._isHorizontal))
+                       .before(createButton(options, "decrease", that._isHorizontal));
+            }
+
+            element.before(createTrack(options, element));
+        },
+
+        _focus: function(e) {
+            var that = this,
+                target = e.target,
+                val = that.value(),
+                drag = that._drag;
+
+            if (!drag) {
+                if (target == that.wrapper.find(DRAG_HANDLE).eq(0)[0]) {
+                    drag = that._firstHandleDrag;
+                    that._activeHandle = 0;
+                } else {
+                    drag = that._lastHandleDrag;
+                    that._activeHandle = 1;
+                }
+                val = val[that._activeHandle];
+            }
+
+            $(target).addClass(STATE_FOCUSED + " " + STATE_SELECTED);
+
+            if (drag) {
+                that._activeHandleDrag = drag;
+
+                drag.selectionStart = that.options.selectionStart;
+                drag.selectionEnd = that.options.selectionEnd;
+
+                drag._updateTooltip(val);
+            }
+        },
+
+        _focusWithMouse: function(target) {
+            target = $(target);
+
+            var that = this,
+                idx = target.is(DRAG_HANDLE) ? target.index() : 0;
+
+            window.setTimeout(function(){
+                that.wrapper.find(DRAG_HANDLE)[idx == 2 ? 1 : 0].focus();
+            }, 1);
+
+            that._setTooltipTimeout();
+        },
+
+        _blur: function(e) {
+            var that = this,
+                drag = that._activeHandleDrag;
+
+            $(e.target).removeClass(STATE_FOCUSED + " " + STATE_SELECTED);
+
+            if (drag) {
+                drag._removeTooltip();
+                delete that._activeHandleDrag;
+                delete that._activeHandle;
+            }
+        },
+
+        _setTooltipTimeout: function() {
+            var that = this;
+            that._tooltipTimeout = window.setTimeout(function(){
+                var drag = that._drag || that._activeHandleDrag;
+                if (drag) {
+                    drag._removeTooltip();
+                }
+            }, 300);
+        },
+
+        _clearTooltipTimeout: function() {
+            var that = this;
+            window.clearTimeout(this._tooltipTimeout);
+            var drag = that._drag || that._activeHandleDrag;
+            if (drag && drag.tooltipDiv) {
+                drag.tooltipDiv.stop(true, false).css("opacity", 1);
+            }
+        }
+    });
+
+    function createWrapper (options, element, isHorizontal) {
+        var orientationCssClass = isHorizontal ? " k-slider-horizontal" : " k-slider-vertical",
+            style = options.style ? options.style : element.attr("style"),
+            cssClasses = element.attr("class") ? (" " + element.attr("class")) : "",
+            tickPlacementCssClass = "";
+
+        if (options.tickPlacement == "bottomRight") {
+            tickPlacementCssClass = " k-slider-bottomright";
+        } else if (options.tickPlacement == "topLeft") {
+            tickPlacementCssClass = " k-slider-topleft";
+        }
+
+        style = style ? " style='" + style + "'" : "";
+
+        return "<div class='k-widget k-slider" + orientationCssClass + cssClasses + "'" + style + ">" +
+               "<div class='k-slider-wrap" + (options.showButtons ? " k-slider-buttons" : "") + tickPlacementCssClass +
+               "'></div></div>";
+    }
+
+    function createButton (options, type, isHorizontal) {
+        var buttonCssClass = "";
+
+        if (type == "increase") {
+            buttonCssClass = isHorizontal ? "k-i-arrow-e" : "k-i-arrow-n";
+        } else {
+            buttonCssClass = isHorizontal ? "k-i-arrow-w" : "k-i-arrow-s";
+        }
+
+        return "<a class='k-button k-button-" + type + "'><span class='k-icon " + buttonCssClass +
+               "' title='" + options[type + "ButtonTitle"] + "'>" + options[type + "ButtonTitle"] + "</span></a>";
+    }
+
+    function createSliderItems (options, distance) {
+        var result = "<ul class='k-reset k-slider-items'>",
+            count = math.floor(round(distance / options.smallStep)) + 1,
+            i;
+
+        for(i = 0; i < count; i++) {
+            result += "<li class='k-tick' role='presentation'>&nbsp;</li>";
+        }
+
+        result += "</ul>";
+
+        return result;
+    }
+
+    function createTrack (options, element) {
+        var dragHandleCount = element.is("input") ? 1 : 2,
+            firstDragHandleTitle = dragHandleCount == 2 ? options.leftDragHandleTitle : options.dragHandleTitle;
+
+        return "<div class='k-slider-track'><div class='k-slider-selection'><!-- --></div>" +
+               "<a href='#' class='k-draghandle' title='" + firstDragHandleTitle + "' role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (dragHandleCount > 1 ? (options.selectionStart || options.min) : options.value || options.min) + "'>Drag</a>" +
+               (dragHandleCount > 1 ? "<a href='#' class='k-draghandle' title='" + options.rightDragHandleTitle + "'role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (options.selectionEnd || options.max) + "'>Drag</a>" : "") +
+               "</div>";
+    }
+
+    function step(stepValue) {
+        return function (value) {
+            return value + stepValue;
+        };
+    }
+
+    function setValue(value) {
+        return function () {
+            return value;
+        };
+    }
+
+    function formatValue(value) {
+        return (value + "").replace(".", kendo.cultures.current.numberFormat["."]);
+    }
+
+    function round(value) {
+        value = parseFloat(value, 10);
+        var power = math.pow(10, PRECISION || 0);
+        return math.round(value * power) / power;
+    }
+
+    function parseAttr(element, name) {
+        var value = parse(element.getAttribute(name));
+        if (value === null) {
+            value = undefined;
+        }
+        return value;
+    }
+
+    function defined(value) {
+        return typeof value !== UNDEFINED;
+    }
+
+    function removeFraction(value) {
+        return value * 10000;
+    }
+
+    var Slider = SliderBase.extend({
+        init: function(element, options) {
+            var that = this,
+                dragHandle;
+
+            element.type = "text";
+            options = extend({}, {
+                value: parseAttr(element, "value"),
+                min: parseAttr(element, "min"),
+                max: parseAttr(element, "max"),
+                smallStep: parseAttr(element, "step")
+            }, options);
+
+            element = $(element);
+
+            if (options && options.enabled === undefined) {
+                options.enabled = !element.is("[disabled]");
+            }
+
+            SliderBase.fn.init.call(that, element, options);
+            options = that.options;
+            if (!defined(options.value) || options.value === null) {
+                options.value = options.min;
+                element.prop("value", formatValue(options.min));
+            }
+            options.value = math.max(math.min(options.value, options.max), options.min);
+
+            dragHandle = that.wrapper.find(DRAG_HANDLE);
+
+            new Slider.Selection(dragHandle, that, options);
+            that._drag = new Slider.Drag(dragHandle, "", that, options);
+        },
+
+        options: {
+            name: "Slider",
+            showButtons: true,
+            increaseButtonTitle: "Increase",
+            decreaseButtonTitle: "Decrease",
+            dragHandleTitle: "drag",
+            tooltip: { format: "{0:#,#.##}" },
+            value: null
+        },
+
+        enable: function (enable) {
+            var that = this,
+                options = that.options,
+                clickHandler,
+                move;
+
+            that.disable();
+            if (enable === false) {
+                return;
+            }
+
+            that.wrapper
+                .removeClass(STATE_DISABLED)
+                .addClass(STATE_DEFAULT);
+
+            that.wrapper.find("input").removeAttr(DISABLED);
+
+            clickHandler = function (e) {
+                var touch = getTouches(e)[0];
+
+                if (!touch) {
+                    return;
+                }
+
+                var mousePosition = that._isHorizontal ? touch.location.pageX : touch.location.pageY,
+                    dragableArea = that._getDraggableArea(),
+                    target = $(e.target);
+
+                if (target.hasClass("k-draghandle")) {
+                    target.addClass(STATE_FOCUSED + " " + STATE_SELECTED);
+                    return;
+                }
+
+                that._update(that._getValueFromPosition(mousePosition, dragableArea));
+
+                that._focusWithMouse(e.target);
+
+                that._drag.dragstart(e);
+                e.preventDefault();
+            };
+
+            that.wrapper
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
+                    .on(TRACK_MOUSE_DOWN, clickHandler)
+                    .end()
+                    .on(TRACK_MOUSE_DOWN, function() {
+                        $(document.documentElement).one("selectstart", kendo.preventDefault);
+                    })
+                    .on(TRACK_MOUSE_UP, function() {
+                        that._drag._end();
+                    });
+
+            that.wrapper
+                .find(DRAG_HANDLE)
+                .attr(TABINDEX, 0)
+                .on(MOUSE_UP, function () {
+                    that._setTooltipTimeout();
+                })
+                .on(CLICK, function (e) {
+                    that._focusWithMouse(e.target);
+                    e.preventDefault();
+                })
+                .on(FOCUS, proxy(that._focus, that))
+                .on(BLUR, proxy(that._blur, that));
+
+            move = proxy(function (sign) {
+                var newVal = that._nextValueByIndex(that._valueIndex + (sign * 1));
+                that._setValueInRange(newVal);
+                that._drag._updateTooltip(newVal);
+            }, that);
+
+            if (options.showButtons) {
+                var mouseDownHandler = proxy(function(e, sign) {
+                    this._clearTooltipTimeout();
+                    if (e.which === 1 || (support.touch && e.which === 0)) {
+                        move(sign);
+
+                        this.timeout = setTimeout(proxy(function () {
+                            this.timer = setInterval(function () {
+                                move(sign);
+                            }, 60);
+                        }, this), 200);
+                    }
+                }, that);
+
+                that.wrapper.find(".k-button")
+                    .on(MOUSE_UP, proxy(function (e) {
+                        this._clearTimer();
+                        that._focusWithMouse(e.target);
+                    }, that))
+                    .on(MOUSE_OVER, function (e) {
+                        $(e.currentTarget).addClass("k-state-hover");
+                    })
+                    .on("mouseout" + NS, proxy(function (e) {
+                        $(e.currentTarget).removeClass("k-state-hover");
+                        this._clearTimer();
+                    }, that))
+                    .eq(0)
+                    .on(MOUSE_DOWN, proxy(function (e) {
+                        mouseDownHandler(e, 1);
+                    }, that))
+                    .click(false)
+                    .end()
+                    .eq(1)
+                    .on(MOUSE_DOWN, proxy(function (e) {
+                        mouseDownHandler(e, -1);
+                    }, that))
+                    .click(kendo.preventDefault);
+            }
+
+            that.wrapper
+                .find(DRAG_HANDLE)
+                .off(KEY_DOWN, false)
+                .on(KEY_DOWN, proxy(this._keydown, that));
+
+            options.enabled = true;
+        },
+
+        disable: function () {
+            var that = this;
+
+            that.wrapper
+                .removeClass(STATE_DEFAULT)
+                .addClass(STATE_DISABLED);
+
+            $(that.element).prop(DISABLED, DISABLED);
+
+            that.wrapper
+                .find(".k-button")
+                .off(MOUSE_DOWN)
+                .on(MOUSE_DOWN, kendo.preventDefault)
+                .off(MOUSE_UP)
+                .on(MOUSE_UP, kendo.preventDefault)
+                .off("mouseleave" + NS)
+                .on("mouseleave" + NS, kendo.preventDefault)
+                .off(MOUSE_OVER)
+                .on(MOUSE_OVER, kendo.preventDefault);
+
+            that.wrapper
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN).off(TRACK_MOUSE_UP);
+
+            that.wrapper
+                .find(DRAG_HANDLE)
+                .attr(TABINDEX, -1)
+                .off(MOUSE_UP)
+                .off(KEY_DOWN)
+                .off(CLICK)
+                .off(FOCUS)
+                .off(BLUR);
+
+            that.options.enabled = false;
+        },
+
+        _update: function (val) {
+            var that = this,
+                change = that.value() != val;
+
+            that.value(val);
+
+            if (change) {
+                that.trigger(CHANGE, { value: that.options.value });
+            }
+        },
+
+        value: function (value) {
+            var that = this,
+                options = that.options;
+
+            value = round(value);
+            if (isNaN(value)) {
+                return options.value;
+            }
+
+            if (value >= options.min && value <= options.max) {
+                if (options.value != value) {
+                    that.element.prop("value", formatValue(value));
+                    options.value = value;
+                    that._refreshAriaAttr(value);
+                    that._refresh();
+                }
+            }
+        },
+
+        _refresh: function () {
+            this.trigger(MOVE_SELECTION, { value: this.options.value });
+        },
+
+        _refreshAriaAttr: function(value) {
+            var that = this,
+                drag = that._drag,
+                formattedValue;
+
+            if (drag && drag._tooltipDiv) {
+                formattedValue = drag._tooltipDiv.text();
+            } else {
+                formattedValue = that._getFormattedValue(value, null);
+            }
+            this.wrapper.find(DRAG_HANDLE).attr("aria-valuenow", value).attr("aria-valuetext", formattedValue);
+        },
+
+        _clearTimer: function () {
+            clearTimeout(this.timeout);
+            clearInterval(this.timer);
+        },
+
+        _keydown: function (e) {
+            var that = this;
+
+            if (e.keyCode in that._keyMap) {
+                that._clearTooltipTimeout();
+                that._setValueInRange(that._keyMap[e.keyCode](that.options.value));
+                that._drag._updateTooltip(that.value());
+                e.preventDefault();
+            }
+        },
+
+        _setValueInRange: function (val) {
+            var that = this,
+                options = that.options;
+
+            val = round(val);
+            if (isNaN(val)) {
+                that._update(options.min);
+                return;
+            }
+
+            val = math.max(math.min(val, options.max), options.min);
+            that._update(val);
+        },
+
+        _nextValueByIndex: function (index) {
+            var count = this._values.length;
+            if (this._isRtl) {
+                index = count - 1 - index;
+            }
+            return this._values[math.max(0, math.min(index, count - 1))];
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.wrapper.off(NS)
+                .find(".k-button").off(NS)
+                .end()
+                .find(DRAG_HANDLE).off(NS)
+                .end()
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(NS)
+                .end();
+
+            that._drag.draggable.destroy();
+            that._drag._removeTooltip(true);
+        }
+    });
+
+    Slider.Selection = function (dragHandle, that, options) {
+        function moveSelection (val) {
+            var selectionValue = val - options.min,
+                index = that._valueIndex = math.ceil(round(selectionValue / options.smallStep)),
+                selection = parseInt(that._pixelSteps[index], 10),
+                selectionDiv = that._trackDiv.find(".k-slider-selection"),
+                halfDragHanndle = parseInt(dragHandle[that._outerSize]() / 2, 10),
+                rtlCorrection = that._isRtl ? 2 : 0;
+
+            selectionDiv[that._sizeFn](that._isRtl ? that._maxSelection - selection : selection);
+            dragHandle.css(that._position, selection - halfDragHanndle - rtlCorrection);
+        }
+
+        moveSelection(options.value);
+
+        that.bind([CHANGE, SLIDE, MOVE_SELECTION], function (e) {
+            moveSelection(parseFloat(e.value, 10));
+        });
+    };
+
+    Slider.Drag = function (element, type, owner, options) {
+        var that = this;
+        that.owner = owner;
+        that.options = options;
+        that.element = element;
+        that.type = type;
+
+        that.draggable = new Draggable(element, {
+            distance: 0,
+            dragstart: proxy(that._dragstart, that),
+            drag: proxy(that.drag, that),
+            dragend: proxy(that.dragend, that),
+            dragcancel: proxy(that.dragcancel, that)
+        });
+
+        element.click(false);
+    };
+
+    Slider.Drag.prototype = {
+        dragstart: function(e) {
+            // add reference to the last active drag handle.
+            this.owner._activeDragHandle = this;
+            // HACK to initiate click on the line
+            this.draggable.userEvents.cancel();
+            this.draggable.userEvents._start(e);
+        },
+
+        _dragstart: function(e) {
+            var that = this,
+                owner = that.owner,
+                options = that.options;
+
+            if (!options.enabled) {
+                e.preventDefault();
+                return;
+            }
+
+            // add reference to the last active drag handle.
+            this.owner._activeDragHandle = this;
+
+            owner.element.off(MOUSE_OVER);
+            owner.wrapper.find("." + STATE_FOCUSED).removeClass(STATE_FOCUSED + " " + STATE_SELECTED);
+            that.element.addClass(STATE_FOCUSED + " " + STATE_SELECTED);
+            $(document.documentElement).css("cursor", "pointer");
+
+            that.dragableArea = owner._getDraggableArea();
+            that.step = math.max(options.smallStep * (owner._maxSelection / owner._distance), 0);
+
+            if (that.type) {
+                that.selectionStart = options.selectionStart;
+                that.selectionEnd = options.selectionEnd;
+                owner._setZIndex(that.type);
+            } else {
+                that.oldVal = that.val = options.value;
+            }
+
+            that._removeTooltip(true);
+            that._createTooltip();
+        },
+
+        _createTooltip: function() {
+            var that = this,
+                owner = that.owner,
+                tooltip = that.options.tooltip,
+                html = '',
+                wnd = $(window),
+                tooltipTemplate, colloutCssClass;
+
+            if (!tooltip.enabled) {
+                return;
+            }
+
+            if (tooltip.template) {
+                tooltipTemplate = that.tooltipTemplate = kendo.template(tooltip.template);
+            }
+
+            $(".k-slider-tooltip").remove(); // if user changes window while tooltip is visible, a second one will be created
+            that.tooltipDiv = $("<div class='k-widget k-tooltip k-slider-tooltip'><!-- --></div>").appendTo(document.body);
+
+            html = owner._getFormattedValue(that.val || owner.value(), that);
+
+            if (!that.type) {
+                colloutCssClass = "k-callout-" + (owner._isHorizontal ? 's' : 'e');
+                that.tooltipInnerDiv = "<div class='k-callout " + colloutCssClass + "'><!-- --></div>";
+                html += that.tooltipInnerDiv;
+            }
+
+            that.tooltipDiv.html(html);
+
+            that._scrollOffset = {
+                top: wnd.scrollTop(),
+                left: wnd.scrollLeft()
+            };
+
+            that.moveTooltip();
+        },
+
+        drag: function (e) {
+            var that = this,
+                owner = that.owner,
+                x = e.x.location,
+                y = e.y.location,
+                startPoint = that.dragableArea.startPoint,
+                endPoint = that.dragableArea.endPoint,
+                slideParams;
+
+            e.preventDefault();
+
+            if (owner._isHorizontal) {
+                if (owner._isRtl) {
+                    that.val = that.constrainValue(x, startPoint, endPoint, x < endPoint);
+                } else {
+                    that.val = that.constrainValue(x, startPoint, endPoint, x >= endPoint);
+                }
+            } else {
+                that.val = that.constrainValue(y, endPoint, startPoint, y <= endPoint);
+            }
+
+            if (that.oldVal != that.val) {
+                that.oldVal = that.val;
+
+                if (that.type) {
+                    if (that.type == "firstHandle") {
+                        if (that.val < that.selectionEnd) {
+                            that.selectionStart = that.val;
+                        } else {
+                            that.selectionStart = that.selectionEnd = that.val;
+                        }
+                    } else {
+                        if (that.val > that.selectionStart) {
+                            that.selectionEnd = that.val;
+                        } else {
+                            that.selectionStart = that.selectionEnd = that.val;
+                        }
+                    }
+                    slideParams = {
+                        values: [that.selectionStart, that.selectionEnd],
+                        value: [that.selectionStart, that.selectionEnd]
+                    };
+                } else {
+                    slideParams = { value: that.val };
+                }
+
+                owner.trigger(SLIDE, slideParams);
+            }
+
+            that._updateTooltip(that.val);
+        },
+
+        _updateTooltip: function(val) {
+            var that = this,
+                options = that.options,
+                tooltip = options.tooltip,
+                html = "";
+
+            if (!tooltip.enabled) {
+                return;
+            }
+
+            if (!that.tooltipDiv) {
+                that._createTooltip();
+            }
+
+            html = that.owner._getFormattedValue(round(val), that);
+
+            if (!that.type) {
+                html += that.tooltipInnerDiv;
+            }
+
+            that.tooltipDiv.html(html);
+            that.moveTooltip();
+        },
+
+        dragcancel: function() {
+            this.owner._refresh();
+            $(document.documentElement).css("cursor", "");
+            return this._end();
+        },
+
+        dragend: function() {
+            var that = this,
+                owner = that.owner;
+
+            $(document.documentElement).css("cursor", "");
+
+            if (that.type) {
+                owner._update(that.selectionStart, that.selectionEnd);
+            } else {
+                owner._update(that.val);
+                that.draggable.userEvents._disposeAll();
+            }
+
+            return that._end();
+        },
+
+        _end: function() {
+            var that = this,
+                owner = that.owner;
+
+            owner._focusWithMouse(that.element);
+
+            owner.element.on(MOUSE_OVER);
+
+            return false;
+        },
+
+        _removeTooltip: function(noAnimation) {
+            var that = this,
+                owner = that.owner;
+
+            if (that.tooltipDiv && owner.options.tooltip.enabled && owner.options.enabled) {
+                if (noAnimation) {
+                    that.tooltipDiv.remove();
+                    that.tooltipDiv = null;
+                } else {
+                    that.tooltipDiv.fadeOut("slow", function(){
+                        $(this).remove();
+                        that.tooltipDiv = null;
+                    });
+                }
+            }
+        },
+
+        moveTooltip: function () {
+            var that = this,
+                owner = that.owner,
+                top = 0,
+                left = 0,
+                element = that.element,
+                offset = kendo.getOffset(element),
+                margin = 8,
+                viewport = $(window),
+                callout = that.tooltipDiv.find(".k-callout"),
+                width = that.tooltipDiv.outerWidth(),
+                height = that.tooltipDiv.outerHeight(),
+                dragHandles, sdhOffset, diff, anchorSize;
+
+            if (that.type) {
+                dragHandles = owner.wrapper.find(DRAG_HANDLE);
+                offset = kendo.getOffset(dragHandles.eq(0));
+                sdhOffset = kendo.getOffset(dragHandles.eq(1));
+
+                if (owner._isHorizontal) {
+                    top = sdhOffset.top;
+                    left = offset.left + ((sdhOffset.left - offset.left) / 2);
+                } else {
+                    top = offset.top + ((sdhOffset.top - offset.top) / 2);
+                    left = sdhOffset.left;
+                }
+
+                anchorSize = dragHandles.eq(0).outerWidth() + 2 * margin;
+            } else {
+                top = offset.top;
+                left = offset.left;
+                anchorSize = element.outerWidth() + 2 * margin;
+            }
+
+            if (owner._isHorizontal) {
+                left -= parseInt((width - element[owner._outerSize]()) / 2, 10);
+                top -= height + callout.height() + margin;
+            } else {
+                top -= parseInt((height - element[owner._outerSize]()) / 2, 10);
+                left -= width + callout.width() + margin;
+            }
+
+            if (owner._isHorizontal) {
+                diff = that._flip(top, height, anchorSize, viewport.outerHeight() + that._scrollOffset.top);
+                top += diff;
+                left += that._fit(left, width, viewport.outerWidth() + that._scrollOffset.left);
+            } else {
+                diff = that._flip(left, width, anchorSize, viewport.outerWidth() + that._scrollOffset.left);
+                top += that._fit(top, height, viewport.outerHeight() + that._scrollOffset.top);
+                left += diff;
+            }
+
+            if (diff > 0 && callout) {
+                callout.removeClass();
+                callout.addClass("k-callout k-callout-" + (owner._isHorizontal ? "n" : "w"));
+            }
+
+            that.tooltipDiv.css({ top: top, left: left });
+        },
+
+        _fit: function(position, size, viewPortEnd) {
+            var output = 0;
+
+            if (position + size > viewPortEnd) {
+                output = viewPortEnd - (position + size);
+            }
+
+            if (position < 0) {
+                output = -position;
+            }
+
+            return output;
+        },
+
+        _flip: function(offset, size, anchorSize, viewPortEnd) {
+            var output = 0;
+
+            if (offset + size > viewPortEnd) {
+                output += -(anchorSize + size);
+            }
+
+            if (offset + output < 0) {
+                output += anchorSize + size;
+            }
+
+            return output;
+        },
+
+        constrainValue: function (position, min, max, maxOverflow) {
+            var that = this,
+                val = 0;
+
+            if (min < position && position < max) {
+                val = that.owner._getValueFromPosition(position, that.dragableArea);
+            } else {
+                if (maxOverflow ) {
+                    val = that.options.max;
+                } else {
+                    val = that.options.min;
+                }
+            }
+
+            return val;
+        }
+
+    };
+
+    kendo.ui.plugin(Slider);
+
+    var RangeSlider = SliderBase.extend({
+        init: function(element, options) {
+            var that = this,
+                inputs = $(element).find("input"),
+                firstInput = inputs.eq(0)[0],
+                secondInput = inputs.eq(1)[0];
+
+            firstInput.type = "text";
+            secondInput.type = "text";
+
+            options = extend({}, {
+                selectionStart: parseAttr(firstInput, "value"),
+                min: parseAttr(firstInput, "min"),
+                max: parseAttr(firstInput, "max"),
+                smallStep: parseAttr(firstInput, "step")
+            }, {
+                selectionEnd: parseAttr(secondInput, "value"),
+                min: parseAttr(secondInput, "min"),
+                max: parseAttr(secondInput, "max"),
+                smallStep: parseAttr(secondInput, "step")
+            }, options);
+
+            if (options && options.enabled === undefined) {
+                options.enabled = !inputs.is("[disabled]");
+            }
+
+            SliderBase.fn.init.call(that, element, options);
+            options = that.options;
+            if (!defined(options.selectionStart) || options.selectionStart === null) {
+                options.selectionStart = options.min;
+                inputs.eq(0).prop("value", formatValue(options.min));
+            }
+
+            if (!defined(options.selectionEnd) || options.selectionEnd === null) {
+                options.selectionEnd = options.max;
+                inputs.eq(1).prop("value", formatValue(options.max));
+            }
+
+            var dragHandles = that.wrapper.find(DRAG_HANDLE);
+
+            new RangeSlider.Selection(dragHandles, that, options);
+            that._firstHandleDrag = new Slider.Drag(dragHandles.eq(0), "firstHandle", that, options);
+            that._lastHandleDrag = new Slider.Drag(dragHandles.eq(1), "lastHandle" , that, options);
+        },
+
+        options: {
+            name: "RangeSlider",
+            leftDragHandleTitle: "drag",
+            rightDragHandleTitle: "drag",
+            tooltip: { format: "{0:#,#.##}" },
+            selectionStart: null,
+            selectionEnd: null
+        },
+
+        enable: function (enable) {
+            var that = this,
+                options = that.options,
+                clickHandler;
+
+            that.disable();
+            if (enable === false) {
+                return;
+            }
+
+            that.wrapper
+                .removeClass(STATE_DISABLED)
+                .addClass(STATE_DEFAULT);
+
+            that.wrapper.find("input").removeAttr(DISABLED);
+
+            clickHandler = function (e) {
+                var touch = getTouches(e)[0];
+
+                if (!touch) {
+                    return;
+                }
+
+                var mousePosition = that._isHorizontal ? touch.location.pageX : touch.location.pageY,
+                    dragableArea = that._getDraggableArea(),
+                    val = that._getValueFromPosition(mousePosition, dragableArea),
+                    target = $(e.target),
+                    from, to, drag;
+
+                if (target.hasClass("k-draghandle")) {
+                    that.wrapper.find("." + STATE_FOCUSED).removeClass(STATE_FOCUSED + " " + STATE_SELECTED);
+                    target.addClass(STATE_FOCUSED + " " + STATE_SELECTED);
+                    return;
+                }
+
+                if (val < options.selectionStart) {
+                    from = val;
+                    to = options.selectionEnd;
+                    drag = that._firstHandleDrag;
+                } else if (val > that.selectionEnd) {
+                    from = options.selectionStart;
+                    to = val;
+                    drag = that._lastHandleDrag;
+                } else {
+                    if (val - options.selectionStart <= options.selectionEnd - val) {
+                        from = val;
+                        to = options.selectionEnd;
+                        drag = that._firstHandleDrag;
+                    } else {
+                        from = options.selectionStart;
+                        to = val;
+                        drag = that._lastHandleDrag;
+                    }
+                }
+
+                drag.dragstart(e);
+                that._setValueInRange(from, to);
+                that._focusWithMouse(drag.element);
+            };
+
+            that.wrapper
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
+                    .on(TRACK_MOUSE_DOWN, clickHandler)
+                    .end()
+                    .on(TRACK_MOUSE_DOWN, function() {
+                        $(document.documentElement).one("selectstart", kendo.preventDefault);
+                    })
+                    .on(TRACK_MOUSE_UP, function() {
+                        if (that._activeDragHandle) {
+                            that._activeDragHandle._end();
+                        }
+                    });
+
+            that.wrapper
+                .find(DRAG_HANDLE)
+                .attr(TABINDEX, 0)
+                .on(MOUSE_UP, function () {
+                    that._setTooltipTimeout();
+                })
+                .on(CLICK, function (e) {
+                    that._focusWithMouse(e.target);
+                    e.preventDefault();
+                })
+                .on(FOCUS, proxy(that._focus, that))
+                .on(BLUR, proxy(that._blur, that));
+
+            that.wrapper.find(DRAG_HANDLE)
+                .off(KEY_DOWN, kendo.preventDefault)
+                .eq(0).on(KEY_DOWN,
+                    proxy(function(e) {
+                        this._keydown(e, "firstHandle");
+                    }, that)
+                )
+                .end()
+                .eq(1).on(KEY_DOWN,
+                    proxy(function(e) {
+                        this._keydown(e, "lastHandle");
+                    }, that)
+                );
+
+            that.options.enabled = true;
+        },
+
+        disable: function () {
+            var that = this;
+
+            that.wrapper
+                .removeClass(STATE_DEFAULT)
+                .addClass(STATE_DISABLED);
+
+            that.wrapper.find("input").prop(DISABLED, DISABLED);
+
+            that.wrapper
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN).off(TRACK_MOUSE_UP);
+
+            that.wrapper
+                .find(DRAG_HANDLE)
+                .attr(TABINDEX, -1)
+                .off(MOUSE_UP)
+                .off(KEY_DOWN)
+                .off(CLICK)
+                .off(FOCUS)
+                .off(BLUR);
+
+            that.options.enabled = false;
+        },
+
+        _keydown: function (e, handle) {
+            var that = this,
+                selectionStartValue = that.options.selectionStart,
+                selectionEndValue = that.options.selectionEnd,
+                dragSelectionStart,
+                dragSelectionEnd,
+                activeHandleDrag;
+
+            if (e.keyCode in that._keyMap) {
+
+                that._clearTooltipTimeout();
+
+                if (handle == "firstHandle") {
+                    activeHandleDrag = that._activeHandleDrag = that._firstHandleDrag;
+                    selectionStartValue = that._keyMap[e.keyCode](selectionStartValue);
+
+                    if (selectionStartValue > selectionEndValue) {
+                        selectionEndValue = selectionStartValue;
+                    }
+                } else {
+                    activeHandleDrag = that._activeHandleDrag = that._lastHandleDrag;
+                    selectionEndValue = that._keyMap[e.keyCode](selectionEndValue);
+
+                    if (selectionStartValue > selectionEndValue) {
+                        selectionStartValue = selectionEndValue;
+                    }
+                }
+
+                that._setValueInRange(selectionStartValue, selectionEndValue);
+
+                dragSelectionStart = Math.max(selectionStartValue, that.options.selectionStart);
+                dragSelectionEnd = Math.min(selectionEndValue, that.options.selectionEnd);
+
+                activeHandleDrag.selectionEnd = Math.max(dragSelectionEnd, that.options.selectionStart);
+                activeHandleDrag.selectionStart = Math.min(dragSelectionStart, that.options.selectionEnd);
+
+                activeHandleDrag._updateTooltip(that.value()[that._activeHandle]);
+
+                e.preventDefault();
+            }
+        },
+
+        _update: function (selectionStart, selectionEnd) {
+            var that = this,
+                values = that.value();
+
+            var change = values[0] != selectionStart || values[1] != selectionEnd;
+
+            that.value([selectionStart, selectionEnd]);
+
+            if (change) {
+                that.trigger(CHANGE, {
+                    values: [selectionStart, selectionEnd],
+                    value: [selectionStart, selectionEnd]
+                });
+            }
+        },
+
+        value: function(value) {
+            if (value && value.length) {
+                return this._value(value[0], value[1]);
+            } else {
+                return this._value();
+            }
+        },
+
+        _value: function(start, end) {
+            var that = this,
+                options = that.options,
+                selectionStart = options.selectionStart,
+                selectionEnd = options.selectionEnd;
+
+            if (isNaN(start) && isNaN(end)) {
+                return [selectionStart, selectionEnd];
+            } else {
+                start = round(start);
+                end = round(end);
+            }
+
+            if (start >= options.min && start <= options.max &&
+                end >= options.min && end <= options.max && start <= end) {
+                if (selectionStart != start || selectionEnd != end) {
+                    that.element.find("input")
+                        .eq(0).prop("value", formatValue(start))
+                        .end()
+                        .eq(1).prop("value", formatValue(end));
+
+                    options.selectionStart = start;
+                    options.selectionEnd = end;
+                    that._refresh();
+                    that._refreshAriaAttr(start, end);
+                }
+            }
+        },
+
+        values: function (start, end) {
+            if (isArray(start)) {
+                return this._value(start[0], start[1]);
+            } else {
+                return this._value(start, end);
+            }
+        },
+
+        _refresh: function() {
+            var that = this,
+                options = that.options;
+
+            that.trigger(MOVE_SELECTION, {
+                values: [options.selectionStart, options.selectionEnd],
+                value: [options.selectionStart, options.selectionEnd]
+            });
+
+            if (options.selectionStart == options.max && options.selectionEnd == options.max) {
+                that._setZIndex("firstHandle");
+            }
+        },
+
+        _refreshAriaAttr: function(start, end) {
+            var that = this,
+                dragHandles = that.wrapper.find(DRAG_HANDLE),
+                drag = that._activeHandleDrag,
+                formattedValue;
+
+            formattedValue = that._getFormattedValue([start, end], drag);
+
+            dragHandles.eq(0).attr("aria-valuenow", start);
+            dragHandles.eq(1).attr("aria-valuenow", end);
+            dragHandles.attr("aria-valuetext", formattedValue);
+        },
+
+        _setValueInRange: function (selectionStart, selectionEnd) {
+            var options = this.options;
+
+            selectionStart = math.max(math.min(selectionStart, options.max), options.min);
+
+            selectionEnd = math.max(math.min(selectionEnd, options.max), options.min);
+
+            if (selectionStart == options.max && selectionEnd == options.max) {
+                this._setZIndex("firstHandle");
+            }
+
+            this._update(math.min(selectionStart, selectionEnd), math.max(selectionStart, selectionEnd));
+        },
+
+        _setZIndex: function (type) {
+            this.wrapper.find(DRAG_HANDLE).each(function (index) {
+                $(this).css("z-index", type == "firstHandle" ? 1 - index : index);
+            });
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.wrapper.off(NS)
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(NS)
+                .end()
+                .find(DRAG_HANDLE).off(NS);
+
+            that._firstHandleDrag.draggable.destroy();
+            that._lastHandleDrag.draggable.destroy();
+        }
+    });
+
+    RangeSlider.Selection = function (dragHandles, that, options) {
+        function moveSelection(value) {
+            value = value || [];
+            var selectionStartValue = value[0] - options.min,
+                selectionEndValue = value[1] - options.min,
+                selectionStartIndex = math.ceil(round(selectionStartValue / options.smallStep)),
+                selectionEndIndex = math.ceil(round(selectionEndValue / options.smallStep)),
+                selectionStart = that._pixelSteps[selectionStartIndex],
+                selectionEnd = that._pixelSteps[selectionEndIndex],
+                halfHandle = parseInt(dragHandles.eq(0)[that._outerSize]() / 2, 10),
+                rtlCorrection = that._isRtl ? 2 : 0;
+
+            dragHandles.eq(0).css(that._position, selectionStart - halfHandle - rtlCorrection)
+                       .end()
+                       .eq(1).css(that._position, selectionEnd - halfHandle - rtlCorrection);
+
+            makeSelection(selectionStart, selectionEnd);
+        }
+
+        function makeSelection(selectionStart, selectionEnd) {
+            var selection,
+                selectionPosition,
+                selectionDiv = that._trackDiv.find(".k-slider-selection");
+
+            selection = math.abs(selectionStart - selectionEnd);
+
+            selectionDiv[that._sizeFn](selection);
+            if (that._isRtl) {
+                selectionPosition = math.max(selectionStart, selectionEnd);
+                selectionDiv.css("right", that._maxSelection - selectionPosition - 1);
+            } else {
+                selectionPosition = math.min(selectionStart, selectionEnd);
+                selectionDiv.css(that._position, selectionPosition - 1);
+            }
+        }
+
+        moveSelection(that.value());
+
+        that.bind([ CHANGE, SLIDE, MOVE_SELECTION ], function (e) {
+            moveSelection(e.values);
+        });
+    };
+
+    kendo.ui.plugin(RangeSlider);
+
+})(window.kendo.jQuery);
+
+
+
+
+
+(function($, parseInt, undefined){
+    // WARNING: removing the following jshint declaration and turning
+    // == into === to make JSHint happy will break functionality.
+    /*jshint eqnull:true  */
+    var kendo = window.kendo,
+        ui = kendo.ui,
+        Widget = ui.Widget,
+        parseColor = kendo.parseColor,
+        Color = kendo.Color,
+        KEYS = kendo.keys,
+        BACKGROUNDCOLOR = "background-color",
+        ITEMSELECTEDCLASS = "k-state-selected",
+        SIMPLEPALETTE = "000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7",
+        WEBPALETTE = "FFFFFF,FFCCFF,FF99FF,FF66FF,FF33FF,FF00FF,CCFFFF,CCCCFF,CC99FF,CC66FF,CC33FF,CC00FF,99FFFF,99CCFF,9999FF,9966FF,9933FF,9900FF,FFFFCC,FFCCCC,FF99CC,FF66CC,FF33CC,FF00CC,CCFFCC,CCCCCC,CC99CC,CC66CC,CC33CC,CC00CC,99FFCC,99CCCC,9999CC,9966CC,9933CC,9900CC,FFFF99,FFCC99,FF9999,FF6699,FF3399,FF0099,CCFF99,CCCC99,CC9999,CC6699,CC3399,CC0099,99FF99,99CC99,999999,996699,993399,990099,FFFF66,FFCC66,FF9966,FF6666,FF3366,FF0066,CCFF66,CCCC66,CC9966,CC6666,CC3366,CC0066,99FF66,99CC66,999966,996666,993366,990066,FFFF33,FFCC33,FF9933,FF6633,FF3333,FF0033,CCFF33,CCCC33,CC9933,CC6633,CC3333,CC0033,99FF33,99CC33,999933,996633,993333,990033,FFFF00,FFCC00,FF9900,FF6600,FF3300,FF0000,CCFF00,CCCC00,CC9900,CC6600,CC3300,CC0000,99FF00,99CC00,999900,996600,993300,990000,66FFFF,66CCFF,6699FF,6666FF,6633FF,6600FF,33FFFF,33CCFF,3399FF,3366FF,3333FF,3300FF,00FFFF,00CCFF,0099FF,0066FF,0033FF,0000FF,66FFCC,66CCCC,6699CC,6666CC,6633CC,6600CC,33FFCC,33CCCC,3399CC,3366CC,3333CC,3300CC,00FFCC,00CCCC,0099CC,0066CC,0033CC,0000CC,66FF99,66CC99,669999,666699,663399,660099,33FF99,33CC99,339999,336699,333399,330099,00FF99,00CC99,009999,006699,003399,000099,66FF66,66CC66,669966,666666,663366,660066,33FF66,33CC66,339966,336666,333366,330066,00FF66,00CC66,009966,006666,003366,000066,66FF33,66CC33,669933,666633,663333,660033,33FF33,33CC33,339933,336633,333333,330033,00FF33,00CC33,009933,006633,003333,000033,66FF00,66CC00,669900,666600,663300,660000,33FF00,33CC00,339900,336600,333300,330000,00FF00,00CC00,009900,006600,003300,000000",
+        APPLY_CANCEL = {
+            apply  : "Apply",
+            cancel : "Cancel"
+        },
+        NS = ".kendoColorTools",
+        CLICK_NS = "click" + NS,
+        KEYDOWN_NS = "keydown" + NS,
+
+        browser = kendo.support.browser,
+        isIE8 = browser.msie && browser.version < 9;
+
+    var ColorSelector = Widget.extend({
+        init: function(element, options) {
+            var that = this, ariaId;
+
+            Widget.fn.init.call(that, element, options);
+            element = that.element;
+            options = that.options;
+            that._value = options.value = parseColor(options.value);
+            that._tabIndex = element.attr("tabIndex") || 0;
+
+            ariaId = that._ariaId = options.ariaId;
+            if (ariaId) {
+                element.attr("aria-labelledby", ariaId);
+            }
+
+            if (options._standalone) {
+                that._triggerSelect = that._triggerChange;
+            }
+        },
+        options: {
+            name: "ColorSelector",
+            value: null,
+            _standalone: true
+        },
+        events: [
+            "change",
+            "select",
+            "cancel"
+        ],
+        color: function(value) {
+            if (value !== undefined) {
+                this._value = parseColor(value);
+                this._updateUI(this._value);
+            }
+
+            return this._value;
+        },
+        value: function(color) {
+            color = this.color(color);
+
+            if (color) {
+                if (this.options.opacity) {
+                    color = color.toCssRgba();
+                } else {
+                    color = color.toCss();
+                }
+            }
+
+            return color || null;
+        },
+        enable: function(enable) {
+            if (arguments.length === 0) {
+                enable = true;
+            }
+            $(".k-disabled-overlay", this.wrapper).remove();
+            if (!enable) {
+                this.wrapper.append("<div class='k-disabled-overlay'></div>");
+            }
+            this._onEnable(enable);
+        },
+        _select: function(color, nohooks) {
+            var prev = this._value;
+            color = this.color(color);
+            if (!nohooks) {
+                this.element.trigger("change");
+                if (!color.equals(prev)) {
+                    this.trigger("change", { value: this.value() });
+                } else if (!this._standalone) {
+                    this.trigger("cancel");
+                }
+            }
+        },
+        _triggerSelect: function(color) {
+            triggerEvent(this, "select", color);
+        },
+        _triggerChange: function(color) {
+            triggerEvent(this, "change", color);
+        },
+        destroy: function() {
+            if (this.element) {
+                this.element.off(NS);
+            }
+            if (this.wrapper) {
+                this.wrapper.off(NS).find("*").off(NS);
+            }
+            this.wrapper = null;
+            Widget.fn.destroy.call(this);
+        },
+        _updateUI: $.noop,
+        _selectOnHide: function() {
+            return null;
+        },
+        _cancel: function() {
+            this.trigger("cancel");
+        }
+    });
+
+    function triggerEvent(self, type, color) {
+        color = parseColor(color);
+        if (color && !color.equals(self.color())) {
+            if (type == "change") {
+                // UI is already updated.  setting _value directly
+                // rather than calling self.color(color) to avoid an
+                // endless loop.
+                self._value = color;
+            }
+            if (color.a != 1) {
+                color = color.toCssRgba();
+            } else {
+                color = color.toCss();
+            }
+            self.trigger(type, { value: color });
+        }
+    }
+
+    var ColorPalette = ColorSelector.extend({
+        init: function(element, options) {
+            var that = this;
+            ColorSelector.fn.init.call(that, element, options);
+            element = that.wrapper = that.element;
+            options = that.options;
+            var colors = options.palette;
+
+            if (colors == "websafe") {
+                colors = WEBPALETTE;
+                options.columns = 18;
+            } else if (colors == "basic") {
+                colors = SIMPLEPALETTE;
+            }
+
+            if (typeof colors == "string") {
+                colors = colors.split(",");
+            }
+
+            if ($.isArray(colors)) {
+                colors = $.map(colors, function(x) { return parseColor(x); });
+            }
+
+            that._selectedID = (options.ariaId || kendo.guid()) + "_selected";
+
+            element.addClass("k-widget k-colorpalette")
+                .attr("role", "grid")
+                .attr("aria-readonly", "true")
+                .append($(that._template({
+                    colors   : colors,
+                    columns  : options.columns,
+                    tileSize : options.tileSize,
+                    value    : that._value,
+                    id       : options.ariaId
+                })))
+                .on(CLICK_NS, ".k-item", function(ev){
+                    that._select($(ev.currentTarget).css(BACKGROUNDCOLOR));
+                })
+                .attr("tabIndex", that._tabIndex)
+                .on(KEYDOWN_NS, bind(that._keydown, that));
+
+            var tileSize = options.tileSize, width, height;
+            if (tileSize) {
+                if (/number|string/.test(typeof tileSize)) {
+                    width = height = parseFloat(tileSize);
+                } else if (typeof tileSize == "object") {
+                    width = parseFloat(tileSize.width);
+                    height = parseFloat(tileSize.height);
+                } else {
+                    throw new Error("Unsupported value for the 'tileSize' argument");
+                }
+                element.find(".k-item").css({ width: width, height: height });
+            }
+        },
+        focus: function(){
+            this.wrapper.focus();
+        },
+        options: {
+            name: "ColorPalette",
+            columns: 10,
+            tileSize: null,
+            palette: "basic"
+        },
+        _onEnable: function(enable) {
+            if (enable) {
+                this.wrapper.attr("tabIndex", this._tabIndex);
+            } else {
+                this.wrapper.removeAttr("tabIndex");
+            }
+        },
+        _keydown: function(e) {
+            var selected,
+                wrapper = this.wrapper,
+                items = wrapper.find(".k-item"),
+                current = items.filter("." + ITEMSELECTEDCLASS).get(0),
+                keyCode = e.keyCode;
+
+            if (keyCode == KEYS.LEFT) {
+                selected = relative(items, current, -1);
+            } else if (keyCode == KEYS.RIGHT) {
+                selected = relative(items, current, 1);
+            } else if (keyCode == KEYS.DOWN) {
+                selected = relative(items, current, this.options.columns);
+            } else if (keyCode == KEYS.UP) {
+                selected = relative(items, current, -this.options.columns);
+            } else if (keyCode == KEYS.ENTER) {
+                preventDefault(e);
+                if (current) {
+                    this._select($(current).css(BACKGROUNDCOLOR));
+                }
+            } else if (keyCode == KEYS.ESC) {
+                this._cancel();
+            }
+
+            if (selected) {
+                preventDefault(e);
+
+                this._current(selected);
+
+                try {
+                    var color = parseColor(selected.css(BACKGROUNDCOLOR));
+                    this._triggerSelect(color);
+                } catch(ex) {}
+            }
+        },
+        _current: function(item) {
+            this.wrapper.find("." + ITEMSELECTEDCLASS)
+                .removeClass(ITEMSELECTEDCLASS)
+                .attr("aria-selected", false)
+                .removeAttr("id");
+
+            $(item)
+                .addClass(ITEMSELECTEDCLASS)
+                .attr("aria-selected", true)
+                .attr("id", this._selectedID);
+
+            this.element
+                .removeAttr("aria-activedescendant")
+                .attr("aria-activedescendant", this._selectedID);
+        },
+        _updateUI: function(color) {
+            var item = null;
+
+            this.wrapper.find(".k-item").each(function(){
+                var c = parseColor($(this).css(BACKGROUNDCOLOR));
+
+                if (c && c.equals(color)) {
+                    item = this;
+
+                    return false;
+                }
+            });
+
+            this._current(item);
+        },
+        _template: kendo.template(
+            '<table class="k-palette k-reset" role="presentation"><tr role="row">' +
+              '# for (var i = 0; i < colors.length; ++i) { #' +
+                '# var selected = colors[i].equals(value); #' +
+                '# if (i && i % columns == 0) { # </tr><tr role="row"> # } #' +
+                '<td role="gridcell" unselectable="on" style="background-color:#= colors[i].toCss() #"' +
+                    '#= selected ? " aria-selected=true" : "" # ' +
+                    '#=(id && i === 0) ? "id=\\""+id+"\\" " : "" # ' +
+                    'class="k-item#= selected ? " ' + ITEMSELECTEDCLASS + '" : "" #" ' +
+                    'aria-label="#= colors[i].toCss() #"></td>' +
+              '# } #' +
+            '</tr></table>'
+        )
+    });
+
+    var FlatColorPicker = ColorSelector.extend({
+        init: function(element, options) {
+            var that = this;
+            ColorSelector.fn.init.call(that, element, options);
+            options = that.options;
+            element = that.element;
+
+            that.wrapper = element.addClass("k-widget k-flatcolorpicker")
+                .append(that._template(options));
+
+            that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", element);
+
+            that._selectedColor = $(".k-selected-color-display", element);
+
+            that._colorAsText = $("input.k-color-value", element);
+
+            that._sliders();
+
+            that._hsvArea();
+
+            that._updateUI(that._value || parseColor("#f00"));
+
+            element
+                .find("input.k-color-value").on(KEYDOWN_NS, function(ev){
+                    var input = this;
+                    if (ev.keyCode == KEYS.ENTER) {
+                        try {
+                            var color = parseColor(input.value);
+                            var val = that.color();
+                            that._select(color, color.equals(val));
+                        } catch(ex) {
+                            $(input).addClass("k-state-error");
+                        }
+                    } else if (that.options.autoupdate) {
+                        setTimeout(function(){
+                            var color = parseColor(input.value, true);
+                            if (color) {
+                                that._updateUI(color, true);
+                            }
+                        }, 10);
+                    }
+                }).end()
+
+                .on(CLICK_NS, ".k-controls button.apply", function(){
+                    // calling select for the currently displayed
+                    // color will trigger the "change" event.
+                    that._select(that._getHSV());
+                })
+                .on(CLICK_NS, ".k-controls button.cancel", function(){
+                    // but on cancel, we simply select the previous
+                    // value (again, triggers "change" event).
+                    that._updateUI(that.color());
+                    that._cancel();
+                });
+
+            if (isIE8) {
+                // IE filters require absolute URLs
+                that._applyIEFilter();
+            }
+        },
+        destroy: function() {
+            this._hueSlider.destroy();
+            if (this._opacitySlider) {
+                this._opacitySlider.destroy();
+            }
+            this._hueSlider = this._opacitySlider = this._hsvRect = this._hsvHandle =
+                this._hueElements = this._selectedColor = this._colorAsText = null;
+            ColorSelector.fn.destroy.call(this);
+        },
+        options: {
+            name       : "FlatColorPicker",
+            opacity    : false,
+            buttons    : false,
+            input      : true,
+            preview    : true,
+            autoupdate : true,
+            messages   : APPLY_CANCEL
+        },
+        _applyIEFilter: function() {
+            var track = this.element.find(".k-hue-slider .k-slider-track")[0],
+                url = track.currentStyle.backgroundImage;
+
+            url = url.replace(/^url\([\'\"]?|[\'\"]?\)$/g, "");
+            track.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + url + "', sizingMethod='scale')";
+        },
+        _sliders: function() {
+            var that = this,
+                element = that.element;
+
+            function hueChange(e) {
+                that._updateUI(that._getHSV(e.value, null, null, null));
+            }
+
+            that._hueSlider = element.find(".k-hue-slider").kendoSlider({
+                min: 0,
+                max: 359,
+                tickPlacement: "none",
+                showButtons: false,
+                slide: hueChange,
+                change: hueChange
+            }).data("kendoSlider");
+
+            function opacityChange(e) {
+                that._updateUI(that._getHSV(null, null, null, e.value / 100));
+            }
+
+            that._opacitySlider = element.find(".k-transparency-slider").kendoSlider({
+                min: 0,
+                max: 100,
+                tickPlacement: "none",
+                showButtons: false,
+                slide: opacityChange,
+                change: opacityChange
+            }).data("kendoSlider");
+        },
+        _hsvArea: function() {
+            var that = this,
+                element = that.element,
+                hsvRect = element.find(".k-hsv-rectangle"),
+                hsvHandle = hsvRect.find(".k-draghandle").attr("tabIndex", 0).on(KEYDOWN_NS, bind(that._keydown, that));
+
+            function update(x, y) {
+                var offset = this.offset,
+                    dx = x - offset.left, dy = y - offset.top,
+                    rw = this.width, rh = this.height;
+
+                dx = dx < 0 ? 0 : dx > rw ? rw : dx;
+                dy = dy < 0 ? 0 : dy > rh ? rh : dy;
+                that._svChange(dx / rw, 1 - dy / rh);
+            }
+
+            that._hsvEvents = new kendo.UserEvents(hsvRect, {
+                global: true,
+                press: function(e) {
+                    this.offset = kendo.getOffset(hsvRect);
+                    this.width = hsvRect.width();
+                    this.height = hsvRect.height();
+                    hsvHandle.focus();
+                    update.call(this, e.x.location, e.y.location);
+                },
+                start: function() {
+                    hsvRect.addClass("k-dragging");
+                    hsvHandle.focus();
+                },
+                move: function(e) {
+                    e.preventDefault();
+                    update.call(this, e.x.location, e.y.location);
+                },
+                end: function() {
+                    hsvRect.removeClass("k-dragging");
+                }
+            });
+
+            that._hsvRect = hsvRect;
+            that._hsvHandle = hsvHandle;
+        },
+        _onEnable: function(enable) {
+            this._hueSlider.enable(enable);
+
+            if (this._opacitySlider) {
+                this._opacitySlider.enable(enable);
+            }
+
+            this.wrapper.find("input").attr("disabled", !enable);
+
+            var handle = this._hsvRect.find(".k-draghandle");
+
+            if (enable) {
+                handle.attr("tabIndex", this._tabIndex);
+            } else {
+                handle.removeAttr("tabIndex");
+            }
+        },
+        _keydown: function(ev) {
+            var that = this;
+            function move(prop, d) {
+                var c = that._getHSV();
+                c[prop] += d * (ev.shiftKey ? 0.01 : 0.05);
+                if (c[prop] < 0) { c[prop] = 0; }
+                if (c[prop] > 1) { c[prop] = 1; }
+                that._updateUI(c);
+                preventDefault(ev);
+            }
+            function hue(d) {
+                var c = that._getHSV();
+                c.h += d * (ev.shiftKey ? 1 : 5);
+                if (c.h < 0) { c.h = 0; }
+                if (c.h > 359) { c.h = 359; }
+                that._updateUI(c);
+                preventDefault(ev);
+            }
+            switch (ev.keyCode) {
+              case KEYS.LEFT:
+                if (ev.ctrlKey) {
+                    hue(-1);
+                } else {
+                    move("s", -1);
+                }
+                break;
+              case KEYS.RIGHT:
+                if (ev.ctrlKey) {
+                    hue(1);
+                } else {
+                    move("s", 1);
+                }
+                break;
+              case KEYS.UP:
+                move(ev.ctrlKey && that._opacitySlider ? "a" : "v", 1);
+                break;
+              case KEYS.DOWN:
+                move(ev.ctrlKey && that._opacitySlider ? "a" : "v", -1);
+                break;
+              case KEYS.ENTER:
+                that._select(that._getHSV());
+                break;
+              case KEYS.F2:
+                that.wrapper.find("input.k-color-value").focus().select();
+                break;
+              case KEYS.ESC:
+                that._cancel();
+                break;
+            }
+        },
+        focus: function() {
+            this._hsvHandle.focus();
+        },
+        _getHSV: function(h, s, v, a) {
+            var rect = this._hsvRect,
+                width = rect.width(),
+                height = rect.height(),
+                handlePosition = this._hsvHandle.position();
+
+            if (h == null) {
+                h = this._hueSlider.value();
+            }
+            if (s == null) {
+                s = handlePosition.left / width;
+            }
+            if (v == null) {
+                v = 1 - handlePosition.top / height;
+            }
+            if (a == null) {
+                a = this._opacitySlider ? this._opacitySlider.value() / 100 : 1;
+            }
+            return Color.fromHSV(h, s, v, a);
+        },
+        _svChange: function(s, v) {
+            var color = this._getHSV(null, s, v, null);
+            this._updateUI(color);
+        },
+        _updateUI: function(color, dontChangeInput) {
+            var that = this,
+                rect = that._hsvRect;
+
+            if (!color) {
+                return;
+            }
+
+            this._colorAsText.removeClass("k-state-error");
+
+            that._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
+            if (!dontChangeInput) {
+                that._colorAsText.val(that._opacitySlider ? color.toCssRgba() : color.toCss());
+            }
+            that._triggerSelect(color);
+
+            color = color.toHSV();
+            that._hsvHandle.css({
+                // saturation is 0 on the left side, full (1) on the right
+                left: color.s * rect.width() + "px",
+                // value is 0 on the bottom, full on the top.
+                top: (1 - color.v) * rect.height() + "px"
+            });
+
+            that._hueElements.css(BACKGROUNDCOLOR, Color.fromHSV(color.h, 1, 1, 1).toCss());
+            that._hueSlider.value(color.h);
+
+            if (that._opacitySlider) {
+                that._opacitySlider.value(100 * color.a);
+            }
+        },
+        _selectOnHide: function() {
+            return this.options.buttons ? null : this._getHSV();
+        },
+        _template: kendo.template(
+            '# if (preview) { #' +
+                '<div class="k-selected-color"><div class="k-selected-color-display"><input class="k-color-value" #= !data.input ? \'style=\"visibility: hidden;\"\' : \"\" #></div></div>' +
+            '# } #' +
+            '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
+            '<input class="k-hue-slider" />' +
+            '# if (opacity) { #' +
+                '<input class="k-transparency-slider" />' +
+            '# } #' +
+            '# if (buttons) { #' +
+                '<div unselectable="on" class="k-controls"><button class="k-button k-primary apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
+            '# } #'
+        )
+    });
+
+    function relative(array, element, delta) {
+        array = Array.prototype.slice.call(array);
+        var n = array.length;
+        var pos = array.indexOf(element);
+        if (pos < 0) {
+            return delta < 0 ? array[n - 1] : array[0];
+        }
+        pos += delta;
+        if (pos < 0) {
+            pos += n;
+        } else {
+            pos %= n;
+        }
+        return array[pos];
+    }
+
+    /* -----[ The ColorPicker widget ]----- */
+
+    var ColorPicker = Widget.extend({
+        init: function(element, options) {
+            var that = this;
+            Widget.fn.init.call(that, element, options);
+            options = that.options;
+            element = that.element;
+
+            var value = element.attr("value") || element.val();
+            if (value) {
+                value = parseColor(value, true);
+            } else {
+                value = parseColor(options.value, true);
+            }
+            that._value = options.value = value;
+
+            var content = that.wrapper = $(that._template(options));
+            element.hide().after(content);
+
+            if (element.is("input")) {
+                element.appendTo(content);
+
+                // if there exists a <label> associated with this
+                // input field, we must catch clicks on it to prevent
+                // the built-in color picker from showing up.
+                // https://github.com/telerik/kendo-ui-core/issues/292
+
+                var label = element.closest("label");
+                var id = element.attr("id");
+                if (id) {
+                    label = label.add('label[for="' + id + '"]');
+                }
+                label.click(function(ev){
+                    that.open();
+                    ev.preventDefault();
+                });
+            }
+
+            that._tabIndex = element.attr("tabIndex") || 0;
+
+            that.enable(!element.attr("disabled"));
+
+            var accesskey = element.attr("accesskey");
+            if (accesskey) {
+                element.attr("accesskey", null);
+                content.attr("accesskey", accesskey);
+            }
+
+            that.bind("activate", function(ev){
+                if (!ev.isDefaultPrevented()) {
+                    that.toggle();
+                }
+            });
+
+            that._updateUI(value);
+        },
+        destroy: function() {
+            this.wrapper.off(NS).find("*").off(NS);
+            if (this._popup) {
+                this._selector.destroy();
+                this._popup.destroy();
+            }
+            this._selector = this._popup = this.wrapper = null;
+            Widget.fn.destroy.call(this);
+        },
+        enable: function(enable) {
+            var that = this,
+                wrapper = that.wrapper,
+                innerWrapper = wrapper.children(".k-picker-wrap"),
+                icon = innerWrapper.find(".k-select");
+
+            if (arguments.length === 0) {
+                enable = true;
+            }
+
+            that.element.attr("disabled", !enable);
+            wrapper.attr("aria-disabled", !enable);
+
+            icon.off(NS).on("mousedown" + NS, preventDefault);
+
+            wrapper.addClass("k-state-disabled")
+                .removeAttr("tabIndex")
+                .add("*", wrapper).off(NS);
+
+            if (enable) {
+                wrapper.removeClass("k-state-disabled")
+                    .attr("tabIndex", that._tabIndex)
+                    .on("mouseenter" + NS, function() { innerWrapper.addClass("k-state-hover"); })
+                    .on("mouseleave" + NS, function() { innerWrapper.removeClass("k-state-hover"); })
+                    .on("focus" + NS, function () { innerWrapper.addClass("k-state-focused"); })
+                    .on("blur" + NS, function () { innerWrapper.removeClass("k-state-focused"); })
+                    .on(KEYDOWN_NS, bind(that._keydown, that))
+                    .on(CLICK_NS, ".k-icon", bind(that.toggle, that))
+                    .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
+                        that.trigger("activate");
+                    });
+            }
+        },
+
+        _template: kendo.template(
+            '<span role="textbox" aria-haspopup="true" class="k-widget k-colorpicker k-header">' +
+                '<span class="k-picker-wrap k-state-default">' +
+                    '# if (toolIcon) { #' +
+                        '<span class="k-tool-icon #= toolIcon #">' +
+                            '<span class="k-selected-color"></span>' +
+                        '</span>' +
+                    '# } else { #' +
+                        '<span class="k-selected-color"></span>' +
+                    '# } #' +
+                    '<span class="k-select" unselectable="on">' +
+                        '<span class="k-icon k-i-arrow-s" unselectable="on"></span>' +
+                    '</span>' +
+                '</span>' +
+            '</span>'
+        ),
+
+        options: {
+            name: "ColorPicker",
+            palette: null,
+            columns: 10,
+            toolIcon: null,
+            value: null,
+            messages: APPLY_CANCEL,
+            opacity: false,
+            buttons: true,
+            preview: true,
+            ARIATemplate: 'Current selected color is #=data || ""#'
+        },
+
+        events: [ "activate", "change", "select", "open", "close" ],
+
+        open: function() {
+            this._getPopup().open();
+        },
+        close: function() {
+            this._getPopup().close();
+        },
+        toggle: function() {
+            this._getPopup().toggle();
+        },
+        color: ColorSelector.fn.color,
+        value: ColorSelector.fn.value,
+        _select: ColorSelector.fn._select,
+        _triggerSelect: ColorSelector.fn._triggerSelect,
+        _isInputTypeColor: function() {
+            var el = this.element[0];
+            return (/^input$/i).test(el.tagName) && (/^color$/i).test(el.type);
+        },
+
+        _updateUI: function(value) {
+            var formattedValue = "";
+
+            if (value) {
+                if (this._isInputTypeColor() || value.a == 1) {
+                    // seems that input type="color" doesn't support opacity
+                    // in colors; the only accepted format is hex #RRGGBB
+                    formattedValue = value.toCss();
+                } else {
+                    formattedValue = value.toCssRgba();
+                }
+
+                this.element.val(formattedValue);
+            }
+
+            if (!this._ariaTemplate) {
+                this._ariaTemplate = kendo.template(this.options.ARIATemplate);
+            }
+
+            this.wrapper.attr("aria-label", this._ariaTemplate(formattedValue));
+
+            this._triggerSelect(value);
+            this.wrapper.find(".k-selected-color").css(
+                BACKGROUNDCOLOR,
+                value ? value.toDisplay() : "transparent"
+            );
+        },
+        _keydown: function(ev) {
+            var key = ev.keyCode;
+            if (this._getPopup().visible()) {
+                if (key == KEYS.ESC) {
+                    this._selector._cancel();
+                } else {
+                    this._selector._keydown(ev);
+                }
+                preventDefault(ev);
+            }
+            else if (key == KEYS.ENTER || key == KEYS.DOWN) {
+                this.open();
+                preventDefault(ev);
+            }
+        },
+        _getPopup: function() {
+            var that = this, popup = that._popup;
+
+            if (!popup) {
+                var options = that.options;
+                var selectorType;
+
+                if (options.palette) {
+                    selectorType = ColorPalette;
+                } else {
+                    selectorType = FlatColorPicker;
+                }
+
+                options._standalone = false;
+                delete options.select;
+                delete options.change;
+                delete options.cancel;
+
+                var id = kendo.guid();
+                var selector = that._selector = new selectorType($('<div id="' + id +'"/>').appendTo(document.body), options);
+
+                that.wrapper.attr("aria-owns", id);
+
+                that._popup = popup = selector.wrapper.kendoPopup({
+                    anchor: that.wrapper
+                }).data("kendoPopup");
+
+                selector.bind({
+                    select: function(ev){
+                        that._updateUI(parseColor(ev.value));
+                    },
+                    change: function(){
+                        that._select(selector.color());
+                        that.close();
+                    },
+                    cancel: function() {
+                        that.close();
+                    }
+                });
+                popup.bind({
+                    close: function(ev){
+                        if (that.trigger("close")) {
+                            ev.preventDefault();
+                            return;
+                        }
+                        that.wrapper.children(".k-picker-wrap").removeClass("k-state-focused");
+                        var color = selector._selectOnHide();
+                        if (!color) {
+                            that.wrapper.focus();
+                            that._updateUI(that.color());
+                        } else {
+                            that._select(color);
+                        }
+                    },
+                    open: function(ev) {
+                        if (that.trigger("open")) {
+                            ev.preventDefault();
+                        } else {
+                            that.wrapper.children(".k-picker-wrap").addClass("k-state-focused");
+                        }
+                    },
+                    activate: function(){
+                        selector._select(that.color(), true);
+                        selector.focus();
+                        that.wrapper.children(".k-picker-wrap").addClass("k-state-focused");
+                    }
+                });
+            }
+            return popup;
+        }
+    });
+
+    function preventDefault(ev) { ev.preventDefault(); }
+
+    function bind(callback, obj) {
+        return function() {
+            return callback.apply(obj, arguments);
+        };
+    }
+
+    ui.plugin(ColorPalette);
+    ui.plugin(FlatColorPicker);
+    ui.plugin(ColorPicker);
+
+})(jQuery, parseInt);
+
+
+
 return window.kendo;
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
