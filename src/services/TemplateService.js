@@ -4,7 +4,6 @@
 
 var requirejs = require('../require.config');
 
-var TemplateType = requirejs('classes/Enums/TemplateType');
 var Template = requirejs('classes/Templates/Template');
 var Article = requirejs('classes/LayoutComponents/Article');
 
@@ -94,21 +93,6 @@ function checkArgForIdOnParams(req, res) {
     return true;
 }
 
-function checkArgForType(req, res) {
-
-    var type = req.params.templateType;
-    if (!type || (type !== TemplateType.article) && (type !== TemplateType.section)) {
-
-        var result = new Result(null);
-        result.setCode('001');
-        res.end(result.toString());
-
-        return false;
-    }
-
-    return true;
-}
-
 function sendResult(err, res, data) {
     if (!checkErr(err)) {
         return;
@@ -171,17 +155,12 @@ function deleteService(req, res) {
 }
 
 function getTemplateListService(req, res) {
-    var templateType = req.params.templateType;
-
     setResHeader(res);
     if (!checkSession(req, res)) {
         return;
     }
-    if (!checkArgForType(req, res)) {
-        return;
-    }
 
-    TemplateDB.getList(req.session._id, templateType, function (err, list) {
+    TemplateDB.getList(req.session._id, function (err, list) {
         sendResult(err, res, list);
     });
 }

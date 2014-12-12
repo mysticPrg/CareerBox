@@ -6,7 +6,6 @@
 var requirejs = require('../require.config');
 var Paper = requirejs('classes/Paper');
 var PaperInfo = requirejs('classes/Structs/PaperInfo');
-var TemplateType = requirejs('classes/Enums/TemplateType');
 
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
@@ -90,7 +89,7 @@ function refreshTemplateData(template, callback) {
     paperCollection.update(
         {
             _member_id: template._member_id,
-            childArr: {$elemMatch: {_template_id: template._id}}
+            childArr: {$elemMatch: {_template_id: template._id.toHexString()}}
         },
         {
             $set: setData

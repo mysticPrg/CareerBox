@@ -31,12 +31,11 @@ function get(data, callback) {
     });
 }
 
-function getList(_member_id, templateType, callback) {
+function getList(_member_id, callback) {
     var templateCollection = require('../util/DBCollections').getInstance().collections.template;
 
     templateCollection.find({
-        _member_id: _member_id,
-        templateType: templateType
+        _member_id: _member_id
     }).toArray(function (err, list) {
         async.each(list, function (t, cb) {
             delete t._member_id;
