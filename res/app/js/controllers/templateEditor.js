@@ -24,7 +24,7 @@ define([
 ], function ($, ng, app, Template, Article, saveConfirmModal) {
     app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation) {
         EditorData.editorType = 'template';
-        $scope.changed = false;
+        $scope.changed = true;
 
         // z index 초기화
         EditorData.end_zOrder = 0;
