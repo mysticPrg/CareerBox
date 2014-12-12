@@ -24,7 +24,7 @@ define([
 ], function ($, ng, app, Template, Article, saveConfirmModal) {
     app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation) {
         EditorData.editorType = 'template';
-        $scope.changed = true;
+        $scope.changed = false;
 
         // z index 초기화
         EditorData.end_zOrder = 0;
@@ -54,6 +54,10 @@ define([
                 loadTemplate();
             }
         });
+
+        $scope.$watch("EditorData.templateItemArray", function () {
+            $scope.changed = true;
+        }, true);
 
         $rootScope.$on("deleteItem", function (e, id) {
             deleteItem(id);
