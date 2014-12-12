@@ -1,11 +1,15 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 html, body {
     margin:0;
     padding:0;
+    height: 100%;
 }
 
-div, h1, h2, h3 , ul, li, p{
+div, h1, h2, h3 , h4, ul, li, p{
     margin: 0;
     padding: 0;
+    font-family: nanumgothic;
 }
 
 ul {
@@ -30,19 +34,61 @@ img {
 #content {
     text-align: center;
     margin-left: 240px;
+    height: calc(100% - 120px);
 }
 
 /*상단 사용자 정보 css*/
 #content #user-info {
+    position: relative;
     width: 100%;
     height: 120px;
-    background-color: #eeeeee;
+    background-color: #e3f0f7;
     text-align: center;
+    box-shadow: 0 0px 8px #565656;
 }
 
 #content #user-info h2{
-    font-family:'arial';
     line-height: 120px;
+}
+
+#content #user-info #userImg {
+    position: absolute;
+    left: 325px;
+    bottom: -81px;
+    width: 162px;
+    height: 162px;
+    padding: 5px;
+    border-radius: 100%;
+    background-color: #10152c;
+    text-align: center;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.4);
+}
+
+#content #user-info #userImg img {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+}
+
+#content #user-info #horizonLine {
+    position: absolute;
+    /*margin: 0;*/
+    left: 475px;
+    bottom: 0px;
+    width: 680px;
+    /*color: #10152c;*/
+    /*border: 3px solid #10152c;*/
+
+}
+
+#content #user-info #newPortfolioBtn {
+    position: absolute;
+    width: 95px;
+    height: 110px;
+    bottom: -66px;
+    right: 325px;
+    cursor: pointer;
 }
 
 /*포트폴리오 생성 버튼*/
@@ -53,14 +99,23 @@ img {
 /*portfolio list - wrapper*/
 #content #portfolio-list {
     width: 100%;
+    height: 100%;
     text-align: center;
+    background-color: #f8f8f8;
+    padding-top: 35px;
+}
+
+#content #portfolio-list > #portfolioNum {
+    font-family: nanumgothic;
+    color: #797979;
+    font-size: 22px;
 }
 
 /*portfolio list - ul*/
 #content #portfolio-list > ul{
     display: inline-block;
     width: 900px;
-    margin-top: 25px;
+    margin-top: 65px;
 }
 
 /*portfolio list - ul*/
@@ -70,7 +125,9 @@ img {
     width: 250px;
     height: 350px;
     position: relative;
-    box-shadow:0 1px 2px #3e3e3e;
+    box-shadow:0 1px 5px rgba(0,0,0,0.5);;
+    border-radius: 4px;
+    background-color: #fff;
 }
 
 #content #portfolio-list > ul > li .img{
@@ -82,13 +139,15 @@ img {
 
 /*포트폴리오 정보*/
 #content #portfolio-list .portfolioInfo{
-    background: rgba(0,0,0,0.74);
+    background: rgba(0,0,0,0.75);
     color: #fff;
-    font-family:'arial';
+    font-family:'nanumgothic';
     width: 100%;
     height: 100px;
     position: absolute;
     bottom: 0;
+    border-radius: 0 0 4px 4px;
+    padding-top: 15px;
 }
 
 /*포트폴리오 부연설명*/
@@ -96,29 +155,43 @@ img {
     padding: 7px;
 }
 
+#content #portfolio-list .portfolioInfo #description #title {
+    font-family: nanumgothic;
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+#content #portfolio-list .portfolioInfo #description > p {
+    color: #a6a6a6;
+}
+
 /*포트폴리오 관리 버튼들*/
-#content #portfolio-list .portfolioInfo #btnGroup {
+#content #portfolio-list #editGroup {
+    position: absolute;
+    top : 15px;
+    left: 15px;
+}
+
+#content #portfolio-list #editGroup #editBtn {
+    width: 46px;
+    height: 48px;
+    background-image: url('../img/manage_img/editBtn.png');
+    border-style: none;
+
+}
+
+#content #portfolio-list #editGroup #editBtn:focus {
+    outline: none;
+}
+
+#content #portfolio-list #editGroup .dropdown-menu {
+    min-width: 75px;
+    height: 126px;
+}
+
+#content #portfolio-list #editGroup .dropdown-menu li {
     text-align: center;
-}
-
-#content #portfolio-list .portfolioInfo #btnGroup ul{
-    display: inline-block;
-}
-
-#content #portfolio-list .portfolioInfo #btnGroup ul li{
-    float: left;
-}
-
-#content #portfolio-list .portfolioInfo #btnGroup .btn {
-    background-color: rgba(0,0,0,0.5);
-    border-radius: 0;
-    border: none;
-    color: #ccc;
-    padding: 5px 0;
-    text-align: center;
-    font-size: 12px;
-    width: 65px;
-    margin: 0 5px;
+    cursor: pointer;
 }
 
 
