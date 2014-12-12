@@ -171,13 +171,13 @@ define([
                 var modalInstance = $modal.open(saveConfirmModal);
                 modalInstance.result.then(function () {
                     $.when($scope.save()).then(function(){
-                        $window.location.href = "#PaperEditor";
+                        history.back();
                     });
                 }, function () {
-                    $window.location.href = "#PaperEditor";
+                    history.back();
                 });
             }else{
-                $window.location.href = "#PaperEditor";
+                history.back();
             }
         }
 
