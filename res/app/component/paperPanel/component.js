@@ -38,6 +38,7 @@ define([
         'SetZOrder',
         function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, getTemplateList, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder) {
             $scope.templates = [];
+            $scope.childIndex = 0;
 
 //            console.log('EditorData', EditorData);
 
@@ -123,6 +124,7 @@ define([
                 // template의 article을 저장.
                 template.target._id = templateDomId;
                 template.target._template_id = template._id;
+
                 EditorData.childArr[templateDomId] = template.target;
                 SetZOrder(template.target, templateDomId);
 
