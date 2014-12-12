@@ -26,10 +26,13 @@ define([
         $scope.EditorData = EditorData;
 
         $scope.$watch('EditorData.focusId', function () {
-            var infomation = SetAttributeInformation(EditorData.focusId);
-            $scope.attributeInformation = infomation.attributeInformation;
-            $scope.parentArray = infomation.parentArray;
-            $scope.type = infomation.type;
+            if(EditorData.focusId){
+                var infomation = SetAttributeInformation(EditorData.focusId);
+                $scope.attributeInformation = infomation.attributeInformation;
+                console.log('EditorData $scope.attributeInformation', $scope.attributeInformation);
+                $scope.parentArray = infomation.parentArray;
+                $scope.type = infomation.type;
+            }
         }, true);
 
         $scope.deleteItem = function (id) {

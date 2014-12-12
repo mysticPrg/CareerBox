@@ -30,6 +30,7 @@ define([
             $scope.paperItemArray = [];
 
             $(document).ready(function () {
+                console.log('ready');
                 // templateState값이 변경됨에 따라 저장 여부 판단
                 EditorData.templateState = '';
 
@@ -59,7 +60,12 @@ define([
 
                 LoadPaper($http, EditorData.paperId, function (result) {
                     EditorData.paper = result.result;
+
                     loadPaper(EditorData.paper);
+
+//                    $('#canvas-content').prop("common-attribute");
+
+                    $compile($('#canvas-content'))($scope);
                 });
             });
 

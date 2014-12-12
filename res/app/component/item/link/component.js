@@ -12,6 +12,7 @@ define([
         return {
             // A = attribute, E = Element, C = Class and M = HTML Comment
             restrict: 'A',
+            scope : true,   // 새로운 스코프
             link: function(scope, element, att) {
                 scope.info = SetAttributeInformation(att.id).attributeInformation;
                 scope.style = {};

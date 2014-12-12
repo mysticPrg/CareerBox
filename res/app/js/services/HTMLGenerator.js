@@ -3,7 +3,7 @@
  */
 define(['app'], function (app) {
     function loadItem(item, id, option) {
-        var domObj = '<div id="' + id + '" ng-click common-attribute ';
+        var domObj = '<div id="' + id + '" ng-click ';
 
         if(option.draggable === true){
             domObj += 'draggable ';
@@ -15,15 +15,15 @@ define(['app'], function (app) {
         var itemType = item.itemType;
 
         if (itemType === 'text') {
-            domObj += 'text class="itemText" ';
+            domObj += 'text class="itemText" common-attribute ';
         } else if (itemType === 'image') {
-            domObj += 'image class="itemImage" ';
+            domObj += 'image class="itemImage" common-attribute ';
         } else if (itemType === 'line') {
             domObj += 'line ';
         } else if (itemType === 'link') {
-            domObj += 'link class="itemLink" ';
+            domObj += 'link class="itemLink" common-attribute ';
         } else if (itemType === 'shape') {
-            domObj += 'shape class="itemShape" ';
+            domObj += 'shape class="itemShape" common-attribute ';
         }
 
         domObj += 'style="position: absolute; top: ' + item.pos.y + 'px; left: ' + item.pos.x + 'px; width: ' + item.size.width + 'px; height: ' + item.size.height + 'px;"></div>';

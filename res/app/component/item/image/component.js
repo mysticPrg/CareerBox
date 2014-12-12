@@ -8,8 +8,9 @@ define([
     app.directive('image', ['SetAttributeInformation', function (SetAttributeInformation) {
         return {
             // A = attribute, E = Element, C = Class and M = HTML Comment
-            restrict: 'A',
 
+            restrict: 'A',
+            scope : true,   // 새로운 스코프
             link: function(scope, element, att) {
 
                 element.css ({

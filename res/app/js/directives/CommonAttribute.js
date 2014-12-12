@@ -10,38 +10,13 @@ define([
     'services/SetAttributeInformation'
 ], function (app) {
     app.directive('commonAttribute', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation) {
-        function zOrderWatch(scope, element, att){
-            scope.$watch("attributeInformation.zOrder", function () {
-                if(scope.attributeInformation._id == att.id)
-                    ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
-            }, true);
-        };
-
         function setCommonWatch(scope, element, att) {
-            // pos
-            scope.$watch("attributeInformation.pos",function() {
-                if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
+            if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
+                // pos
+                scope.$watch("attributeInformation.pos",function() {
+                    if(EditorData.focusId == att.id)
+                        ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
 
-            },true);
-
-            // size
-            scope.$watch("attributeInformation.size",function() {
-//                if(EditorData.focusId == att.id)
-                ApplyCommonItemAttribute.size(element, scope.attributeInformation);
-            },true);
-
-            setItemWatch(scope, element, att);
-
-        };
-
-        function setItemWatch(scope, element, att) {
-            // 라인은 제외
-            if(scope.attributeInformation.itemType!='line'){
-                // fill 리스너 달기
-                scope.$watch("attributeInformation.fill",function() {
-//                    if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
                 },true);
 
                 // outline 색
@@ -62,12 +37,32 @@ define([
 //                    if(EditorData.focusId == att.id)
                     ApplyCommonItemAttribute.alpha(element, scope.attributeInformation);
                 },true);
-
-            };
-            // rotate
-            scope.$watch("attributeInformation.rotate",function() {
+                // rotate
+                scope.$watch("attributeInformation.rotate",function() {
 //                if(EditorData.focusId == att.id)
-                ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
+                    ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
+                },true);
+
+                // z - index
+                scope.$watch("attributeInformation.zOrder", function () {
+                    if(scope.attributeInformation._id == att.id)
+                        ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
+                }, true);
+            }
+
+            // fill 리스너 달기
+            scope.$watch("attributeInformation.fill",function() {
+                ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
+
+            },true);
+
+            // size
+            scope.$watch("attributeInformation.size",function() {
+//                if(EditorData.focusId == att.id)
+                ApplyCommonItemAttribute.size(element, scope.attributeInformation);
+                console.log('after size attributeInformation', scope.attributeInformation);
+                console.log('element', element);
+
             },true);
         };
 
@@ -82,17 +77,23 @@ define([
                 // 모델 GET
                 var info = SetAttributeInformation(att.id);
                 scope.attributeInformation = info.attributeInformation;
+
+                console.log('scope.attributeInformation', scope.attributeInformation);
+
                 scope.type = info.type;
 
                 // 로딩시 CSS 적용
-                ApplyCommonItemAttribute.all(element, scope.attributeInformation);
+                if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
+                    ApplyCommonItemAttribute.all(element, scope.attributeInformation);
+                }
+                else{
+                    ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
+                    ApplyCommonItemAttribute.size(element, scope.attributeInformation);
+                }
+
 
                 // 아티클, 아이템 공통
                 setCommonWatch(scope, element, att);
-
-                // z 인덱스
-                zOrderWatch(scope, element, att);
-
 
             }
         };

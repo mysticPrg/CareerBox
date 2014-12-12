@@ -12,7 +12,7 @@ define([
         return {
             // A = attribute, E = Element, C = Class and M = HTML Comment
             restrict: 'A',
-
+            scope : true,   // 새로운 스코프
             //The link function is responsible for registering DOM listeners as well as updating the DOM.
             link: function (scope, element, att) {
                 scope.info = SetAttributeInformation(att.id).attributeInformation;

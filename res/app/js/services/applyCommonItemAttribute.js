@@ -15,7 +15,9 @@ define(['app'
             'all' : all,
             'pos' : pos,
             'size' : size,
-            'zOrder' : zOrder
+            'zOrder' : zOrder,
+            'alphaLine' : alphaLine,
+            'fillLine' : fillLine
         };
         return att;
     }]);
@@ -25,29 +27,41 @@ define(['app'
     }
 
     function fill(element, item) {
-//        console.log('item', item);
-//        console.log('element', element);
-        if(item.itemType == 'line'){
+
+        if(typeof item.alpha != 'undefined') {
             element.css({
-                'background-color': 'rgba(0,0,0,0)'
+                'background-color': 'rgba(' + HexTo10(item.fill.color.R) + ', ' + HexTo10(item.fill.color.G) + ', ' + HexTo10(item.fill.color.B) + ', ' + item.alpha / 100 + ')'
             });
-        } else{
+        }
+        else{
+            console.log('element', element);
+            console.log('item', item);
+            console.log('ok');
             element.css({
-                'background-color' : 'rgba(' + HexTo10(item.fill.color.R) + ', '+ HexTo10(item.fill.color.G)+', '+HexTo10(item.fill.color.B)+', '+item.alpha/100+')'
+                'background-color' : 'rgba(' + HexTo10(item.fill.color.R) + ', '+ HexTo10(item.fill.color.G)+', '+HexTo10(item.fill.color.B)+', '+1+')'
             });
         }
     };
 
-    function outline(element, item) {
-        if(item.itemType == 'line'){
+    function fillLine(element, item) {
+        element.css({
+            'background-color': 'rgba(0,0,0,0)'
+        });
+    };
 
-        } else {
+    function outline(element, item) {
+        if(typeof item.alpha != 'undefined')
+        element.css({
+            'border' : "10px solid #ffffff",
+            'border-width' : item.outline.weight + "px",
+            'border-color' : 'rgba(' + HexTo10(item.outline.color.R) + ', '+HexTo10(item.outline.color.G)+', '+HexTo10(item.outline.color.B)+', '+item.alpha/100+')'
+        });
+        else
             element.css({
                 'border' : "10px solid #ffffff",
                 'border-width' : item.outline.weight + "px",
-                'border-color' : 'rgba(' + HexTo10(item.outline.color.R) + ', '+HexTo10(item.outline.color.G)+', '+HexTo10(item.outline.color.B)+', '+item.alpha/100+')'
+                'border-color' : 'rgba(' + HexTo10(item.outline.color.R) + ', '+HexTo10(item.outline.color.G)+', '+HexTo10(item.outline.color.B)+', '+1+')'
             });
-        }
     };
 
     function radius(element, item) {
@@ -67,18 +81,17 @@ define(['app'
     };
 
     function alpha(element, item){
-        if(item.itemType == 'line') {
-            element.css({
-                'background-color': 'rgba(0,0,0,0)',
-                'border-color': 'rgba(0,0,0,0)'
-            });
-        } else{
-            element.css({
-                'background-color': 'rgba(' + HexTo10(item.fill.color.R) + ', ' + HexTo10(item.fill.color.G) + ', ' + HexTo10(item.fill.color.B) + ', ' + item.alpha / 100 + ')',
-                'border-color': 'rgba(' + HexTo10(item.outline.color.R) + ', ' + HexTo10(item.outline.color.G) + ', ' + HexTo10(item.outline.color.B) + ', ' + item.alpha / 100 + ')'
-            });
-        }
+        element.css({
+            'background-color': 'rgba(' + HexTo10(item.fill.color.R) + ', ' + HexTo10(item.fill.color.G) + ', ' + HexTo10(item.fill.color.B) + ', ' + item.alpha / 100 + ')',
+            'border-color': 'rgba(' + HexTo10(item.outline.color.R) + ', ' + HexTo10(item.outline.color.G) + ', ' + HexTo10(item.outline.color.B) + ', ' + item.alpha / 100 + ')'
+        });
+    }
 
+    function alphaLine(element, item){
+        element.css({
+            'background-color': 'rgba(0,0,0,0)',
+            'border-color': 'rgba(0,0,0,0)'
+        });
     }
 
     function pos(element, item){

@@ -37,6 +37,8 @@ define([
                     if (item.state != 'new') {
                         item.state = 'edit';
                     }
+
+                    element.trigger('click');
                 });
 
                 element.bind('mouseout', function (event){
@@ -47,9 +49,7 @@ define([
                             EditorData.focusId = EditorData.template._id;
                         else
                             EditorData.focusId = EditorData.paperId;
-
                     });
-
                 });
 
                 element.bind('mouseover', function (event){

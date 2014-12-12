@@ -1,24 +1,24 @@
-<ANY ng-switch = "attribute.arrow.use">
+<ANY ng-switch = "attributeInformation.arrow.use">
     <ANY ng-switch-when="false">
         <svg  ng-model="lineEnd" style="width: 100%; height: 100%">
-            <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} stroke = {{style.fill}} stroke-width={{attribute.outline.weight}} />
+            <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
         </svg>
     </ANY>
     <ANY ng-switch-default>
-        <ANY ng-switch = "attribute.arrow.direction">
+        <ANY ng-switch = "attributeInformation.arrow.direction">
             <ANY ng-switch-when="start">
                 <svg style="width: 100%; height: 100%" ng-model=lineEnd>
-                    <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} marker-start = "url(#startArrow)" stroke = {{style.fill}} stroke-width={{attribute.outline.weight}} />
+                    <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} marker-start = "url(#startArrow)" stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
                 </svg>
             </ANY>
             <ANY ng-switch-when="end">
                 <svg style="width: 100%; height: 100%" ng-model=lineEnd>
-                    <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} marker-end = "url(#endArrow)" stroke = {{style.fill}} stroke-width={{attribute.outline.weight}} />
+                    <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} marker-end = "url(#endArrow)" stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
                 </svg>
             </ANY>
             <ANY ng-switch-when="both">
                 <svg style="width: 100%; height: 100%" ng-model=lineEnd>
-                    <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} marker-start = "url(#startArrow)" marker-end = "url(#endArrow)" stroke = {{style.fill}} stroke-width={{attribute.outline.weight}} />
+                    <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} marker-start = "url(#startArrow)" marker-end = "url(#endArrow)" stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
                 </svg>
             </ANY>
         </ANY>
