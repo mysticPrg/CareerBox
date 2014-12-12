@@ -141,18 +141,18 @@ define([
 
             EditorData.focusId = '';
 
-//            var article = new Article();
-//            article.template = $scope.template._template_id;
-//
-//            article.size.width = $('#canvas-content').width();
-//            article.size.height = $('#canvas-content').height();
-//
-//            article.childArr = getTemplateChildArr(EditorData.templateItemArray);
-////            article.childArr = EditorData.templateItemArray;
-//            article.rowCount = 0;
-//            article.colCount = 0;
+            var article = new Article();
+            article.template = $scope.template._template_id;
 
-//            $scope.template.target = article;
+            article.size.width = $('#canvas-content').width();
+            article.size.height = $('#canvas-content').height();
+
+            article.childArr = getTemplateChildArr(EditorData.templateItemArray);
+//            article.childArr = EditorData.templateItemArray;
+            article.rowCount = 0;
+            article.colCount = 0;
+
+            $scope.template.target = article;
 
             $scope.thumbnail = '';
             $scope.description = '';

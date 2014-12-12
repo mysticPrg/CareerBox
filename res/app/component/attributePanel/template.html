@@ -14,20 +14,12 @@
 
                     <div ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
                         <button class="btn btn-default"
-                                ng-click="deleteItem(attributeInformation._id)">삭제
-                        </button>
-
-                        <button class="btn btn-default"
-                                ng-click="goFront()">앞으로
-                        </button>
-
-                        <button class="btn btn-default"
-                                ng-click="goBack()">뒤로
+                                ng-click="editTemplate(attributeInformation)">수정
                         </button>
                     </div>
-
-
                 </div>
+
+
 
                 <li ng-repeat="(key, att) in attributeInformation track by $index"
                     ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType'
@@ -110,12 +102,23 @@
                             <p>{{key}} : {{att}}</p>
                         </ANY>
                     </ANY>
-
-
                 </li>
+
+                <div ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
+                    <button class="btn btn-default"
+                            ng-click="deleteItem(attributeInformation._id)">삭제
+                    </button>
+
+                    <button class="btn btn-default"
+                            ng-click="goFront()">앞으로
+                    </button>
+
+                    <button class="btn btn-default"
+                            ng-click="goBack()">뒤로
+                    </button>
+                </div>
             </ul>
         </div>
-
 
         <div class="tab-pane" id="articleAttr">article attribute</div>
         <div class="tab-pane" id="itemAttr">item attribute</div>
