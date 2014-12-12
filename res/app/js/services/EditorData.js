@@ -4,6 +4,7 @@
 define(['app', 'classes/Paper', 'classes/Portfolio', 'classes/Templates/Template'], function(app, Paper, Portfolio, Template) {
 
     var EditorData = {
+        editorType : '',
         portfolio : new Portfolio,
         paper : new Paper,
         paperId : '',

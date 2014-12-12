@@ -20,6 +20,7 @@ define([
 ], function ($, ng, app, Paper) {
     app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper',
         function ($scope, $rootScope, $http, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper) {
+            EditorData.editorType = 'paper';
 
             // 페이퍼 속성
             $('#canvas-content').bind('click', function () {

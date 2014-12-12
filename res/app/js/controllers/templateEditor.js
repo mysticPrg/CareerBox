@@ -29,6 +29,8 @@ define([
     'component/templatePanel/component'
 ], function ($, ng, app, Template, Article, Icon, Image, Item, Line, Link, Shape, Text) {
     app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', function ($scope, $rootScope, $http, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation) {
+        EditorData.editorType = 'template';
+
         // z index 초기화
         EditorData.end_zOrder = 0;
         EditorData.start_zOrder = 0;
