@@ -1,29 +1,43 @@
 <!--사용자 포트폴리오 리스트-->
 <div id="portfolio-list">
+    <!--포트폴리오 개수 정보-->
+    <div id="portfolioNum">총 3개의 포트폴리오가 있습니다.</div>
+
     <ul>
         <li ng-repeat="portfolio in portfolios track by $index">
+            <div id="editGroup" class="dropdown">
+                <button id="editBtn" data-toggle="dropdown" class="btn btn-default" href="#"></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        
+                    <li><a ng-click="goToPortfolioEditor(portfolio._id)">에디터</a></li>
+                    <li><a ng-click="modifyPortfolio($index)">설명수정</a></li>
+                    <li><a ng-click="deletePortfolio($index)">삭제</a></li>
+                      
+                </ul>
+            </div>
+
             <img src="../img/testImage.png"/>
 
             <div class="portfolioInfo">
 
                 <div id="description">
-                    <h3>{{portfolio.title}}</h3>
+                    <div id="title">{{portfolio.title}}</div>
                     <p>{{portfolio.description}}</p>
                 </div>
 
-                <div id="btnGroup">
-                    <ul class="clearfix">
-                        <li>
-                            <button class='btnManage btn btn-default' ng-click="goToPortfolioEditor(portfolio._id)">에디터</button>
-                        </li>
-                        <li>
-                             <button class='btnManage btn btn-default' ng-click="modifyPortfolio($index)">정보수정</button>
-                        </li>
-                        <li>
-                            <button class='btnManage btn btn-default' ng-click="deletePortfolio($index)">삭제</button>
-                        </li>
-                    </ul>
-                </div>
+                <!--<div id="btnGroup">-->
+                    <!--<ul class="clearfix">-->
+                        <!--<li>-->
+                            <!--<button class='btnManage btn btn-default' ng-click="goToPortfolioEditor(portfolio._id)">에디터</button>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                             <!--<button class='btnManage btn btn-default' ng-click="modifyPortfolio($index)">정보수정</button>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<button class='btnManage btn btn-default' ng-click="deletePortfolio($index)">삭제</button>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
 
             </div>
         </li>

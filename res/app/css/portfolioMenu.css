@@ -7,21 +7,16 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.9);
+    background-color: #10152c;
 }
 
-#menu a#logo {
-    display:block;
-    width:150px;
-    height:60px;
-    line-height:60px;
-    text-align:center;
-    margin:50px auto;
-    border:solid 2px #fff;
-    color:#fff;
-    font-size:20px;
-    font-weight:bold;
-    font-family:'arial'
+#menu #logo {
+    text-align: center;
+    padding: 45px 0 60px 0;
+}
+
+#menu #logo img {
+    display: inline-block;
 }
 
 #menu ul {
