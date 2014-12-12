@@ -174,6 +174,7 @@ define([
                         $window.location.href = "#PaperEditor";
                     });
                 }, function () {
+                    $window.location.href = "#PaperEditor";
                 });
             }else{
                 $window.location.href = "#PaperEditor";
