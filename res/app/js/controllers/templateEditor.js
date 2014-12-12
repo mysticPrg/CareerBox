@@ -7,13 +7,7 @@ define([
     'app',
     'classes/Templates/Template',
     'classes/LayoutComponents/Article',
-    'classes/LayoutComponents/Items/Icon',
-    'classes/LayoutComponents/Items/Image',
-    'classes/LayoutComponents/Items/Item',
-    'classes/LayoutComponents/Items/Line',
-    'classes/LayoutComponents/Items/Link',
-    'classes/LayoutComponents/Items/Shape',
-    'classes/LayoutComponents/Items/Text',
+    'component/saveConfirmModal/component',
     'component/item/line/component',
     'component/item/shape/component',
     'component/item/text/component',
@@ -27,9 +21,10 @@ define([
     'services/SaveTemplate',
     'services/SetAttributeInformation',
     'component/templatePanel/component'
-], function ($, ng, app, Template, Article, Icon, Image, Item, Line, Link, Shape, Text) {
-    app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', function ($scope, $rootScope, $http, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation) {
+], function ($, ng, app, Template, Article, saveConfirmModal) {
+    app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation) {
         EditorData.editorType = 'template';
+        $scope.changed = false;
 
         // z index 초기화
         EditorData.end_zOrder = 0;
@@ -63,10 +58,6 @@ define([
         $rootScope.$on("deleteItem", function (e, id) {
             deleteItem(id);
         });
-
-        $scope.linkSectionEditor = function () {
-            window.history.back();
-        }
 
         // Load Element
         function loadTemplate() {
@@ -160,8 +151,8 @@ define([
             $scope.description = '';
 
             SaveTemplate($http, $scope.template, function (resultCode) {
-                console.log(resultCode);
                 if (resultCode == 000) {
+                    $scope.changed = false;
                     alert('Success');
                 } else if (resultCode === 001) {
                     alert('Invalid Arguments');
@@ -171,20 +162,19 @@ define([
             });
         }
 
-        $scope.cancel = function () {
-            window.history.back();
-        }
-
-        $scope.canvasClick = function (){
-            alert(test);
-        }
-
-        $('#canvas-content').droppable({
-            activeClass: "drop-area",
-            drop: function (e, ui) {            // 드롭될 경우
-                // 업데이트 모듈 함수는 draggable, resize 디렉티브에서 인수해감.
+        $scope.movePaperEditor = function () {
+            if($scope.changed == true){
+                var modalInstance = $modal.open(saveConfirmModal);
+                modalInstance.result.then(function () {
+                    $.when($scope.save()).then(function(){
+                        $window.location.href = "#PaperEditor";
+                    });
+                }, function () {
+                });
+            }else{
+                $window.location.href = "#PaperEditor";
             }
-        });
+        }
 
         function deleteItem(id) {
             $('#' + id).remove();
