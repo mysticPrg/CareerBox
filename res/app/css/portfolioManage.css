@@ -4,12 +4,13 @@ html, body {
     margin:0;
     padding:0;
     height: 100%;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 div, h1, h2, h3 , h4, ul, li, p{
     margin: 0;
     padding: 0;
-    font-family: nanumgothic;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 ul {
@@ -41,53 +42,66 @@ img {
 #content #user-info {
     position: relative;
     width: 100%;
-    height: 120px;
-    background-color: #e3f0f7;
+    height: 110px;
+    /*background-color: #e3f0f7;*/
+    background-color: #f9f9f9;
     text-align: center;
-    box-shadow: 0 0px 8px #565656;
+    box-shadow: 0px 3px 12px rgba(0,0,0,0.2);
 }
 
 #content #user-info h2{
-    line-height: 120px;
+    line-height: 110px;
+    font-weight: 700;
+    color: #040404;
 }
 
 #content #user-info #userImg {
     position: absolute;
     left: 325px;
     bottom: -81px;
-    width: 162px;
-    height: 162px;
-    padding: 5px;
+    width: 172px;
+    height: 172px;
+    padding: 6px;
     border-radius: 100%;
-    background-color: #10152c;
+    background-color: rgba();
     text-align: center;
     box-shadow: 0px 4px 4px rgba(0,0,0,0.4);
 }
 
 #content #user-info #userImg img {
     display: inline-block;
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     border-radius: 100%;
 }
 
 #content #user-info #horizonLine {
     position: absolute;
-    /*margin: 0;*/
+    margin: 0;
     left: 475px;
     bottom: 0px;
-    width: 680px;
-    /*color: #10152c;*/
-    /*border: 3px solid #10152c;*/
+    /*width: 680px;*/
+    width: 45%;
+    color: #10152c;
+    border: 3px solid #10152c;
 
 }
 
 #content #user-info #newPortfolioBtn {
     position: absolute;
-    width: 95px;
-    height: 110px;
-    bottom: -66px;
+    /*width: 95px;*/
+    /*height: 110px;*/
+    bottom: -63px;
     right: 325px;
+    cursor: pointer;
+}
+
+#content #user-info #editProfileBtn {
+    position: absolute;
+    /*width: 95px;*/
+    /*height: 110px;*/
+    bottom: -63px;
+    right: 445px;
     cursor: pointer;
 }
 
@@ -101,12 +115,12 @@ img {
     width: 100%;
     height: 100%;
     text-align: center;
-    background-color: #f8f8f8;
+    background-color: #ececec;
     padding-top: 35px;
 }
 
 #content #portfolio-list > #portfolioNum {
-    font-family: nanumgothic;
+    font-family: 'Nanum Gothic', sans-serif;
     color: #797979;
     font-size: 22px;
 }
@@ -115,7 +129,7 @@ img {
 #content #portfolio-list > ul{
     display: inline-block;
     width: 900px;
-    margin-top: 65px;
+    margin-top: 85px;
 }
 
 /*portfolio list - ul*/
@@ -125,7 +139,7 @@ img {
     width: 250px;
     height: 350px;
     position: relative;
-    box-shadow:0 1px 5px rgba(0,0,0,0.5);;
+    box-shadow: 1px 2px 6px rgba(0,0,0,0.4);
     border-radius: 4px;
     background-color: #fff;
 }
@@ -139,9 +153,9 @@ img {
 
 /*포트폴리오 정보*/
 #content #portfolio-list .portfolioInfo{
-    background: rgba(0,0,0,0.75);
+    background: rgba(0,0,0,0.76);
     color: #fff;
-    font-family:'nanumgothic';
+    font-family: 'Nanum Gothic', sans-serif;
     width: 100%;
     height: 100px;
     position: absolute;
@@ -156,7 +170,7 @@ img {
 }
 
 #content #portfolio-list .portfolioInfo #description #title {
-    font-family: nanumgothic;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 21px;
     margin-bottom: 5px;
 }
@@ -232,4 +246,88 @@ img {
         float: left;
         margin: 20px;
     }
+}
+
+/********************transition test**********************************/
+.valign {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+}
+.vertical {
+    word-wrap: break-word;
+    width: 10px;
+    display: inline-block;
+    line-height: 18px;
+}
+
+.navbar {
+    /*background-color: #444;*/
+    position: fixed;
+    left: 0;
+    width: 240px;
+    height: 100%;
+
+    -webkit-box-shadow: 1px 0 1px 0 rgba(0,0,0,.15);
+    border-style: none;
+    border-radius: 0;
+    /*box-shadow: 1px 0 1px 0 rgba(0,0,0,.15);*/
+}
+
+.navbar a.menu {
+    display: block;
+    margin: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #ccc;
+    font-size: 23px;
+    line-height: 50px;
+}
+.navbar a.link {
+    position: relative;
+    display: block;
+    margin: 0;
+    /*width: 100%;*/
+    height: 135px;
+    /*background-color: #444;*/
+}
+.navbar a.link span.active,
+.navbar a.link span.hover {
+    display: table;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    transform-origin: 0% 50% 0px;
+    -webkit-transform-origin: 0% 50% 0px;
+    transition: .3s;
+    -webkit-transition: .3s;
+
+    /*border-bottom: 1px solid #555;*/
+}
+.navbar a.link span.active {
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+
+    left: 0;
+    /*background-color: #444;*/
+}
+.navbar a.link:hover span.active {
+    /*background-color: #999;*/
+    transform: matrix3d(0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, -240, 0, 0, 1);
+    -webkit-transform: matrix3d(0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, -240, 0, 0, 1);
+}
+.navbar a.link span.active .vertical {
+    /*color: #aaa;*/
+}
+.navbar a.link span.hover {
+    transform: matrix3d(0, 0, -1, 0.00166, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1);
+    -webkit-transform: matrix3d(0, 0, -1, 0.00166, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1);
+
+    left: 100%;
+    /*background-color: #ccc;*/
+}
+.navbar a.link:hover span.hover {
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.00166, -240, 0, 0, 1);
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.00166, -240, 0, 0, 1);
 }
