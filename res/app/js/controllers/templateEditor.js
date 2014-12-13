@@ -102,7 +102,7 @@ define([
             $('#canvas-content').append(domObj);
             $compile($('#' + item._id))($scope);
 
-            EditorData.focusId = id;    // 포커스 지정
+//            EditorData.focusId = id;    // 포커스 지정
             EditorData.end_zOrder++;
         }
 
