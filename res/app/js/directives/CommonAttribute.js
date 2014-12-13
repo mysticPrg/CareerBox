@@ -27,7 +27,6 @@ define([
 
                 // radius
                 scope.$watch("attributeInformation.radius",function() {
-//                    console.log('radius 설정 후 EditorData',EditorData);
 //                    if(EditorData.focusId == att.id)
                     ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
                 },true);
@@ -60,8 +59,6 @@ define([
             scope.$watch("attributeInformation.size",function() {
 //                if(EditorData.focusId == att.id)
                 ApplyCommonItemAttribute.size(element, scope.attributeInformation);
-                console.log('after size attributeInformation', scope.attributeInformation);
-                console.log('element', element);
 
             },true);
         };
@@ -77,8 +74,6 @@ define([
                 // 모델 GET
                 var info = SetAttributeInformation(att.id);
                 scope.attributeInformation = info.attributeInformation;
-
-                console.log('scope.attributeInformation', scope.attributeInformation);
 
                 scope.type = info.type;
 

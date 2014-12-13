@@ -34,9 +34,6 @@ define(['app'
             });
         }
         else{
-            console.log('element', element);
-            console.log('item', item);
-            console.log('ok');
             element.css({
                 'background-color' : 'rgba(' + HexTo10(item.fill.color.R) + ', '+ HexTo10(item.fill.color.G)+', '+HexTo10(item.fill.color.B)+', '+1+')'
             });
