@@ -50,7 +50,10 @@ define([
             $('#canvas-content').find('div').remove();
             EditorData.templateItemArray = [];
 
-            if (EditorData.templateState == 'edit') {
+
+            // [병진] EditorData.templateState 가 edit가 되었지 않아서 실행이 안되기 때문에 주석처리를 해줌.
+//            if (EditorData.templateState == 'edit')
+            {
                 loadTemplate();
             }
         });
@@ -73,7 +76,6 @@ define([
                 delete itemArray[index].state;
                 EditorData.templateItemArray[itemArray[index]._id] = itemArray[index];
             }
-
             loadTemplateElement();
 
         }
@@ -138,18 +140,22 @@ define([
 
             EditorData.focusId = '';
 
-            var article = new Article();
-            article.template = $scope.template._template_id;
+            // [병진] 주석처리 안하면 템플릿 속성이 저장되지 않게됨. 보람 확인바람.
 
-            article.size.width = $('#canvas-content').width();
-            article.size.height = $('#canvas-content').height();
+//            var article = new Article();
+//            article.template = $scope.template._template_id;
+//
+//            article.size.width = $('#canvas-content').width();
+//            article.size.height = $('#canvas-content').height();
+//
+//            article.childArr = getTemplateChildArr(EditorData.templateItemArray);
+////            article.childArr = EditorData.templateItemArray;
+//            article.rowCount = 0;
+//            article.colCount = 0;
 
-            article.childArr = getTemplateChildArr(EditorData.templateItemArray);
-//            article.childArr = EditorData.templateItemArray;
-            article.rowCount = 0;
-            article.colCount = 0;
+//            $scope.template.target = article;
 
-            $scope.template.target = article;
+            $scope.template.target.childArr = getTemplateChildArr(EditorData.templateItemArray);
 
             $scope.thumbnail = '';
             $scope.description = '';

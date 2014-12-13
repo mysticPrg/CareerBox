@@ -30,7 +30,6 @@ define([
             $scope.paperItemArray = [];
 
             $(document).ready(function () {
-                console.log('ready');
                 // templateState값이 변경됨에 따라 저장 여부 판단
                 EditorData.templateState = '';
 
@@ -63,9 +62,8 @@ define([
 
                     loadPaper(EditorData.paper);
 
-//                    $('#canvas-content').prop("common-attribute");
-
-                    $compile($('#canvas-content'))($scope);
+//                    $compile($('#canvas-content'))($scope);
+                    // 이후에 child가 로드되어야함.
                 });
             });
 
@@ -120,7 +118,8 @@ define([
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             function loadPaper(paper) {
                 var paperChildArr = paper.childArr;
-//                console.log(paper.childArr);
+
+                $compile($('#canvas-content'))($scope); // 페이퍼 속성을 적용시켜줌.
 
                 var child;
                 for (var index = 0; index < paperChildArr.length; index++) {
