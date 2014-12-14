@@ -8,23 +8,16 @@ define([
     app.factory('SetAttributeInformation', function (EditorData) {
 
         return function(id) {
-            console.log('id',id);
-
-            var idArray = "";
-            if(typeof id == 'string')if(id.indexOf("_")) idArray = id.split("_");
-
-            console.log('EditorData', EditorData);
-            console.log('EditorData.paperList', EditorData.paperList);
-            console.log('EditorData["focusId"]', EditorData['focusId']);
-
-            // 템플릿 에디터의 아이템 요소들일 경우
+            // 템플릿
             if(window.location.href.split("#/")[1] == 'TemplateEditor'){
+                // 템플릿일 경우
                 if(EditorData.template._id == id || id == "canvas-content")
                     return {
                         parentArray : EditorData,
                         attributeInformation : EditorData.template.target,
                         type : 'template'
                     }
+                // 템플릿 안의 요소들일 경우
                 else
                     return {
                         parentArray : EditorData.templateItemArray,
@@ -33,20 +26,30 @@ define([
                     }
             };
 
+            // 페이퍼
+
             // 페이퍼일 경우
             if(id == 'canvas-content' || id == EditorData.paper._id){
-                console.log('paper', EditorData.paperList);
-                for(var key in EditorData.paperList){
-                    if(EditorData.paperList[key]._id == EditorData.paperId)
-                        return {
+
+                return {
                             parentArray : EditorData,
-                            attributeInformation : EditorData.paperList[key],
+                            attributeInformation : EditorData.paper,
                             type : 'paper'
                         }
-                }
+
+//                for(var key in EditorData.paperList){
+//                    if(EditorData.paperList[key]._id == EditorData.paperId)
+//                        return {
+//                            parentArray : EditorData,
+//                            attributeInformation : EditorData.paperList[key],
+//                            type : 'paper'
+//                        }
+//                }
             }
 
             // 아티클 안의 요소들일 경우
+            var idArray = "";
+            if(typeof id == 'string')if(id.indexOf("_")) idArray = id.split("_");
             if(idArray.length >= 3){
                 // 아이디 파싱
                 var articleId;

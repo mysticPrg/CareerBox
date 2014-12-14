@@ -37,12 +37,10 @@ define([
                     if (item.state != 'new') {
                         item.state = 'edit';
                     }
-
                     element.trigger('click');
                 });
 
                 element.bind('mouseout', function (event){
-                    EditorData.focusId = att.id;
                     $('#canvas-content').bind('click', function (event){
                         // 포커싱 처리
                         if(window.location.href.split("#/")[1] == 'TemplateEditor')

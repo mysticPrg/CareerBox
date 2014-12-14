@@ -29,7 +29,6 @@ define([
             if(EditorData.focusId){
                 var infomation = SetAttributeInformation(EditorData.focusId);
                 $scope.attributeInformation = infomation.attributeInformation;
-                console.log('EditorData $scope.attributeInformation', $scope.attributeInformation);
                 $scope.parentArray = infomation.parentArray;
                 $scope.type = infomation.type;
             }
@@ -69,7 +68,6 @@ define([
 
         $scope.goBack = function () {
 
-            console.log('$scope', $scope);
             for (var key in $scope.parentArray) {
                 if ($scope.parentArray[key].zOrder == $scope.attributeInformation.zOrder - 1) {
                     $scope.parentArray[key].zOrder++;
@@ -81,7 +79,6 @@ define([
         }
 
         $scope.editTemplate = function (template) {
-            console.log(template);
             EditorData.template = template;
             EditorData.templateState = 'edit';
             $window.location.href = "#/TemplateEditor";
