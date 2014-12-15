@@ -34,7 +34,9 @@ function _DBCollections() {
         additionalInfo: null,
         highSchoolInfo: null,
         univSchoolInfo: null,
-        workingInfo: null
+        workingInfo: null,
+
+        certificationAbilityInfo: null
     };
 }
 
@@ -55,6 +57,8 @@ _DBCollections.prototype.open = function open(callback) {
             self.collections.highSchoolInfo = db.collection('highSchoolInfo');
             self.collections.univSchoolInfo = db.collection('univSchoolInfo');
             self.collections.workingInfo = db.collection('workingInfo');
+
+            self.collections.certificationAbilityInfo = db.collection('certificationAbilityInfo');
 
             self.isOpen = true;
 
@@ -78,7 +82,9 @@ _DBCollections.prototype.close = function close() {
             additionalInfo: null,
             highSchoolInfo: null,
             univSchoolInfo: null,
-            workingInfo: null
+            workingInfo: null,
+
+            certificationAbilityInfo: null
         };
     }
 };

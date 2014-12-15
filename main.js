@@ -12,6 +12,11 @@ var PaperService = require('./src/services/PaperService');
 var UploadService = require('./src/services/UploadServicer');
 
 var PersonalInfoService = require('./src/services/Info/PersonalInfoService');
+var AdditionalInfoService = require('./src/services/info/AdditionalInfoService');
+var HighSchoolInfoService = require('./src/services/Info/HighSchoolInfoService');
+var UnivSchoolInfoService = require('./src/services/Info/UnivSchoolInfoService');
+var WorkingInfoService = require('./src/services/Info/WorkingInfoService');
+var CertificationAbilityInfoService = require('./src/services/Info/CertificationAbilityInfoService');
 
 MemberService.set(server);
 PortfolioService.set(server);
@@ -20,6 +25,11 @@ PaperService.set(server);
 UploadService.set(server);
 
 PersonalInfoService.set(server);
+AdditionalInfoService.set(server);
+HighSchoolInfoService.set(server);
+UnivSchoolInfoService.set(server);
+WorkingInfoService.set(server);
+CertificationAbilityInfoService.set(server);
 
 server.start(8123);
 
