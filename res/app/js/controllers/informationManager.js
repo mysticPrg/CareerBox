@@ -7,6 +7,7 @@ define([
     'app',
     'bootstrap',
     'component/menu/component',
+    'services/InformationData',
     'component/information/personalInformation/component',
     'component/information/additionalInformation/component',
     'component/information/highSchoolInformation/component',
@@ -21,9 +22,10 @@ define([
     'component/information/localActivityInformation/component',
     'component/information/globalActivityInformation/component',
     'component/information/projectInformation/component',
-    'component/information/columnInformation/component'
-], function ($, ng, app) {
-    app.controller('informationManager', ['$scope', '$http', function ($scope, $http) {
+    'component/information/columnInformation/component',
+    'services/info/savePersonal'
+], function ($, ng, app, InformationData) {
+    app.controller('informationManager', ['$scope', '$http', 'InformationData', 'savePersonal', function ($scope, $http, InformationData, savePersonal) {
         $scope.initialize = function () {
             $('#informationTab a').click(function (e) {
                 e.preventDefault();
@@ -32,6 +34,17 @@ define([
 
             $('#personalInformationLink').click();
         }
+
+        $scope.save = function (info){
+            if(info === 'personalInfo'){
+                savePersonal($http, InformationData.personalInfo, function (result) {
+                    console.log(result);
+                });
+            }
+
+        }
+
+
 
     }]);
 });
