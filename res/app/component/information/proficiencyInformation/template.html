@@ -1,55 +1,113 @@
-<div>외국어능력</div>
+<div style="margin: 30px 0 10px 0">외국어능력</div>
 <form class="form-horizontal" role="form">
-    <div class="form-group">
-        <label for="lbl_proficiency_name" class="col-sm-2 control-label">외국어명</label>
 
-        <div class="col-sm-8" id="lbl_proficiency_name">
+    <!--외국어명-->
+    <div class="form-group">
+        <label for="lbl_proficiency_name" class="col-md-2 control-label">외국어명</label>
+        <div class="col-md-2" id="lbl_proficiency_name">
             <input type="text" class="form-control" placeholder="외국어명">
         </div>
-
-        <div class="col-sm-2">
+        <div class="col-md-2">
             <label><input type="checkbox" name="exam">공인시험</label>
         </div>
     </div>
-    <div class="form-group">
-        <label for="lbl_proficiency_grade" class="col-sm-2 control-label">등급</label>
 
-        <div class="col-sm-10" id="lbl_proficiency_grade">
-            <input type="text" class="form-control" placeholder="등급">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="lbl_proficiency_proficiency" class="col-sm-2 control-label">활용수준</label>
-
-        <div class="col-sm-10" id="lbl_proficiency_proficiency">
-            <input type="text" class="form-control" placeholder="활용수준">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="lbl_proficiency_reg.number" class="col-sm-2 control-label">등록번호</label>
-
-        <div class="col-sm-10" id="lbl_proficiency_reg.number">
+    <!--등록번호, 취득일자-->
+    <div class="form-group row">
+        <label for="lbl_proficiency_reg.number" class="col-md-2 control-label">등록번호</label>
+        <div class="col-md-2" id="lbl_proficiency_reg.number">
             <input type="text" class="form-control" placeholder="등록번호">
         </div>
-    </div>
-    <div class="form-group">
-        <label for="lbl_proficiency_date" class="col-sm-2 control-label">취득일자</label>
-        <div class="col-sm-10" id="lbl_proficiency_date">
+
+        <label for="lbl_proficiency_date" class="col-md-2 control-label">취득일자</label>
+        <div class="col-md-2" id="lbl_proficiency_date">
             <button class="k-button" ng-click="lbl_proficiency_date.center(); lbl_proficiency_date.open();">{{date | date:"yyyy년 MM월 dd일"}}</button>
         </div>
         <div kendo-window="lbl_proficiency_date" k-title="'Date'" k-modal="true" k-resizable="false" k-visible="false">
             <kendo-calendar ng-model="date" k-on-change="lbl_proficiency_date.close()"></kendo-calendar>
         </div>
     </div>
-    <div class="form-group">
-        <label for="lbl_certificate_file" class="col-sm-2 control-label">첨부파일</label>
 
-        <div class="col-sm-10" id="lbl_certificate_file">
+    <!--등급, 활용수준-->
+    <div class="form-group row">
+        <label for="lbl_proficiency_grade" class="col-md-2 control-label">등급</label>
+        <div class="col-md-2" id="lbl_proficiency_grade">
+            <input type="text" class="form-control" placeholder="등급">
+        </div>
+
+        <label for="lbl_proficiency_proficiency" class="col-md-2 control-label">활용수준</label>
+        <div class="col-md-2" id="lbl_proficiency_proficiency">
+            <input type="text" class="form-control" placeholder="활용수준">
+        </div>
+    </div>
+
+    <!--첨부파일-->
+    <div class="form-group">
+        <label for="lbl_certificate_file" class="col-md-2 control-label">첨부파일</label>
+        <div class="col-md-2" id="lbl_certificate_file">
             <input type="file">
         </div>
     </div>
+
     <div>
         <button type="button" class="btn btn-default">추가</button>
         <button type="button" class="btn btn-default">삭제</button>
     </div>
 </form>
+
+
+<!--<div>외국어능력</div>-->
+<!--<form class="form-horizontal" role="form">-->
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_proficiency_name" class="col-sm-2 control-label">외국어명</label>-->
+
+        <!--<div class="col-sm-8" id="lbl_proficiency_name">-->
+            <!--<input type="text" class="form-control" placeholder="외국어명">-->
+        <!--</div>-->
+
+        <!--<div class="col-sm-2">-->
+            <!--<label><input type="checkbox" name="exam">공인시험</label>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_proficiency_grade" class="col-sm-2 control-label">등급</label>-->
+
+        <!--<div class="col-sm-10" id="lbl_proficiency_grade">-->
+            <!--<input type="text" class="form-control" placeholder="등급">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_proficiency_proficiency" class="col-sm-2 control-label">활용수준</label>-->
+
+        <!--<div class="col-sm-10" id="lbl_proficiency_proficiency">-->
+            <!--<input type="text" class="form-control" placeholder="활용수준">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_proficiency_reg.number" class="col-sm-2 control-label">등록번호</label>-->
+
+        <!--<div class="col-sm-10" id="lbl_proficiency_reg.number">-->
+            <!--<input type="text" class="form-control" placeholder="등록번호">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_proficiency_date" class="col-sm-2 control-label">취득일자</label>-->
+        <!--<div class="col-sm-10" id="lbl_proficiency_date">-->
+            <!--<button class="k-button" ng-click="lbl_proficiency_date.center(); lbl_proficiency_date.open();">{{date | date:"yyyy년 MM월 dd일"}}</button>-->
+        <!--</div>-->
+        <!--<div kendo-window="lbl_proficiency_date" k-title="'Date'" k-modal="true" k-resizable="false" k-visible="false">-->
+            <!--<kendo-calendar ng-model="date" k-on-change="lbl_proficiency_date.close()"></kendo-calendar>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_certificate_file" class="col-sm-2 control-label">첨부파일</label>-->
+
+        <!--<div class="col-sm-10" id="lbl_certificate_file">-->
+            <!--<input type="file">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<button type="button" class="btn btn-default">추가</button>-->
+        <!--<button type="button" class="btn btn-default">삭제</button>-->
+    <!--</div>-->
+<!--</form>-->

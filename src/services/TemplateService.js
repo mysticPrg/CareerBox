@@ -8,6 +8,7 @@ var Template = requirejs('classes/Templates/Template');
 var Article = requirejs('classes/LayoutComponents/Article');
 
 var TemplateDB = require('../db/TemplateDB');
+var ServiceUtil = require('../util/ServiceUtil');
 
 var async = require('async');
 var Result = require('./result');
@@ -24,34 +25,6 @@ module.exports.set = function (server) {
     server.get('/template', getTemplateListService);
     server.get('/template/check/:_id', getTemplateUsingCheckService);
 };
-
-function checkErr(err) {
-    if (err) {
-        console.log(err.message);
-        return false;
-    }
-
-    return true;
-}
-
-function setResHeader(res) {
-    res.writeHead(200, {
-        'Content-Type': 'application/json'
-    });
-}
-
-function checkSession(req, res) {
-    if (!req.session._id) {
-
-        var result = new Result(null);
-        result.setCode('002');
-        res.end(result.toString());
-
-        return false;
-    }
-
-    return true;
-}
 
 function checkArgForTemplate(req, res) {
     if (!req.body.template) {
@@ -93,20 +66,11 @@ function checkArgForIdOnParams(req, res) {
     return true;
 }
 
-function sendResult(err, res, data) {
-    if (!checkErr(err)) {
-        return;
-    }
-
-    var result = new Result(data);
-    res.end(result.toString());
-}
-
 function createOrUpdateService(req, res) {
     var newTemplate = req.body.template;
 
-    setResHeader(res);
-    if (!checkSession(req, res)) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
     if (!checkArgForTemplate(req, res)) {
@@ -129,11 +93,11 @@ function createOrUpdateService(req, res) {
         newTemplate._id = new ObjectID(newTemplate._id);
 
         TemplateDB.update(newTemplate, function (err) {
-            sendResult(err, res, null);
+            ServiceUtil.sendResult(err, res, null);
         });
     } else {
         TemplateDB.create(newTemplate, function (err, created) {
-            sendResult(err, res, created[0]._id.toHexString());
+            ServiceUtil.sendResult(err, res, created[0]._id.toHexString());
         });
     }
 }
@@ -141,8 +105,8 @@ function createOrUpdateService(req, res) {
 function deleteService(req, res) {
     var _template_id = req.body._id;
 
-    setResHeader(res);
-    if (!checkSession(req, res)) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
     if (!checkArgForId(req, res)) {
@@ -150,26 +114,26 @@ function deleteService(req, res) {
     }
 
     TemplateDB.remove(_template_id, function (err) {
-        sendResult(err, res, null);
+        ServiceUtil.sendResult(err, res, null);
     });
 }
 
 function getTemplateListService(req, res) {
-    setResHeader(res);
-    if (!checkSession(req, res)) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
 
     TemplateDB.getList(req.session._id, function (err, list) {
-        sendResult(err, res, list);
+        ServiceUtil.sendResult(err, res, list);
     });
 }
 
 function getTemplateUsingCheckService(req, res) {
     var _template_id = req.params._id;
 
-    setResHeader(res);
-    if (!checkSession(req, res)) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
     if (!checkArgForIdOnParams(req, res)) {
@@ -177,6 +141,6 @@ function getTemplateUsingCheckService(req, res) {
     }
 
     TemplateDB.checkUsingTemplate(_template_id, function(err, check) {
-       sendResult(err, res, check);
+        ServiceUtil.sendResult(err, res, check);
     });
 }

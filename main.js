@@ -11,11 +11,15 @@ var TemplateService = require('./src/services/TemplateService');
 var PaperService = require('./src/services/PaperService');
 var UploadService = require('./src/services/UploadServicer');
 
+var PersonalInfoService = require('./src/services/Info/PersonalInfoService');
+
 MemberService.set(server);
 PortfolioService.set(server);
 TemplateService.set(server);
 PaperService.set(server);
 UploadService.set(server);
+
+PersonalInfoService.set(server);
 
 server.start(8123);
 

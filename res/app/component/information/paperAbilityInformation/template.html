@@ -1,26 +1,34 @@
-<div>논문</div>
+<div style="margin: 30px 0 10px 0">논문</div>
 <form class="form-horizontal" role="form">
     <div class="form-group">
         <!-- 논문 제목 -->
         <div class="form-group">
-            <label for="lbl_paper_title" class="col-sm-2 control-label">논문 제목</label>
-            <div class="col-sm-10" id="lbl_paper_title">
+            <label for="lbl_paper_title" class="col-md-2 control-label">논문 제목</label>
+            <div class="col-md-3" id="lbl_paper_title">
                 <input type="text" class="form-control"  placeholder="논문 제목">
             </div>
         </div>
 
         <!-- 논문게재 학회 -->
         <div class="form-group">
-            <label for="lbl_paper_academy" class="col-sm-2 control-label">논문게재 학회</label>
-            <div class="col-sm-10" id="lbl_paper_academy">
+            <label for="lbl_paper_academy" class="col-md-2 control-label">논문게재 학회</label>
+            <div class="col-md-3" id="lbl_paper_academy">
                 <input type="text" class="form-control"  placeholder="논문게재 학회">
             </div>
         </div>
 
-        <!-- 참여 정도 -->
-        <div class="form-group">
-            <label for="lbl_paper_ratio" class="col-sm-2 control-label">참여 정도</label>
-            <div class="col-sm-10" id="lbl_paper_ratio">
+        <!-- 논문 게재 날짜, 참여정도 -->
+        <div class="form-group row">
+            <label for="lbl_paper_date" class="col-md-2 control-label">논문 게재 날짜</label>
+            <div class="col-md-2" id="lbl_paper_date">
+                <button class="k-button" ng-click="win_paper_date.center(); win_paper_date.open();">{{paperDate | date:"yyyy년 MM월 dd일"}}</button>
+            </div>
+            <div kendo-window="win_paper_date" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">
+                <kendo-calendar ng-model="paperDate" k-on-change="win_paper_date.close()"></kendo-calendar>
+            </div>
+
+            <label for="lbl_paper_ratio" class="col-md-2 control-label">참여 정도</label>
+            <div class="col-md-1" id="lbl_paper_ratio">
                 <select class="form-control">
                     <option>제1저자</option>
                     <option>교신저자</option>
@@ -29,29 +37,72 @@
             </div>
         </div>
 
-        <!-- 논문 게재 날짜 -->
-        <div class="form-group">
-            <label for="lbl_paper_date" class="col-sm-2 control-label">논문 게재 날짜</label>
-            <div class="col-sm-10" id="lbl_paper_date">
-                <button class="k-button" ng-click="win_paper_date.center(); win_paper_date.open();">{{paperDate | date:"yyyy년 MM월 dd일"}}</button>
-            </div>
-            <div kendo-window="win_paper_date" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">
-                <kendo-calendar ng-model="paperDate" k-on-change="win_paper_date.close()"></kendo-calendar>
-            </div>
-        </div>
-
         <!-- 논문 내용-->
         <div class="form-group">
-            <label for="lbl_paper_detail" class="col-sm-2 control-label">논문 내용</label>
-            <div class="col-sm-10" id="lbl_paper_detail">
+            <label for="lbl_paper_detail" class="col-md-2 control-label">논문 내용</label>
+            <div class="col-md-5" id="lbl_paper_detail">
                 <textarea class="form-control"></textarea>
             </div>
         </div>
 
     </div>
 
+    <!-- 추가, 삭제 버튼-->
     <div>
         <button type="button" class="btn btn-default">추가</button>
         <button type="button" class="btn btn-default">삭제</button>
     </div>
 </form>
+
+<!--<div>논문</div>-->
+<!--<form class="form-horizontal" role="form">-->
+    <!--<div class="form-group">-->
+        <!--<div class="form-group">-->
+            <!--<label for="lbl_paper_title" class="col-sm-2 control-label">논문 제목</label>-->
+            <!--<div class="col-sm-10" id="lbl_paper_title">-->
+                <!--<input type="text" class="form-control"  placeholder="논문 제목">-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label for="lbl_paper_academy" class="col-sm-2 control-label">논문게재 학회</label>-->
+            <!--<div class="col-sm-10" id="lbl_paper_academy">-->
+                <!--<input type="text" class="form-control"  placeholder="논문게재 학회">-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label for="lbl_paper_ratio" class="col-sm-2 control-label">참여 정도</label>-->
+            <!--<div class="col-sm-10" id="lbl_paper_ratio">-->
+                <!--<select class="form-control">-->
+                    <!--<option>제1저자</option>-->
+                    <!--<option>교신저자</option>-->
+                    <!--<option>제2저자</option>-->
+                <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label for="lbl_paper_date" class="col-sm-2 control-label">논문 게재 날짜</label>-->
+            <!--<div class="col-sm-10" id="lbl_paper_date">-->
+                <!--<button class="k-button" ng-click="win_paper_date.center(); win_paper_date.open();">{{paperDate | date:"yyyy년 MM월 dd일"}}</button>-->
+            <!--</div>-->
+            <!--<div kendo-window="win_paper_date" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">-->
+                <!--<kendo-calendar ng-model="paperDate" k-on-change="win_paper_date.close()"></kendo-calendar>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label for="lbl_paper_detail" class="col-sm-2 control-label">논문 내용</label>-->
+            <!--<div class="col-sm-10" id="lbl_paper_detail">-->
+                <!--<textarea class="form-control"></textarea>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<button type="button" class="btn btn-default">추가</button>-->
+        <!--<button type="button" class="btn btn-default">삭제</button>-->
+    <!--</div>-->
+<!--</form>-->

@@ -1,67 +1,171 @@
 <form class="form-horizontal" role="form">
-    <div class="form-group">
-        <div class="col-md-2">
-            <img src="../img/noImage.png" id="personal_picture"><br>
-            <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
-        </div>
+    <div class="personalInfoForm form-group">
+        <!--개인정보 입력-->
         <div class="col-md-10">
+            <!--성명-->
             <div class="form-group">
-                <label for="lbl_personal_name_kr" class="col-sm-2 control-label">이름 (한글)</label>
-                <div class="col-sm-10" id="lbl_personal_name_kr">
-                    <input type="text" class="form-control"  placeholder="이름 (한글)">
+                <label class="col-md-2 control-label">이름</label>
+                <div class="col-md-10 clearfix">
+                    <div class="form-group row">
+                        <span for="lbl_personal_name_kr" class="col-md-2 control-label">한글</span>
+                        <div class="col-md-3" id="lbl_personal_name_kr" style="padding: 0 ; width: 100px;">
+                            <input type="text" class="form-control"  placeholder="이름 (한글)">
+                        </div>
+
+                        <span for="lbl_personal_name_en" class="col-md-2 control-label">한문</span>
+                        <div class="col-md-3" id="lbl_personal_name_en" style="padding: 0 ; width: 100px;">
+                            <input type="text" class="form-control"  placeholder="이름 (한문)">
+                        </div>
+
+                        <span for="lbl_personal_name_ch" class="col-md-2 control-label">영문</span>
+                        <div class="col-md-3" id="lbl_personal_name_ch" style="padding: 0 ; width: 100px;">
+                            <input type="text" class="form-control"  placeholder="이름 (영문)">
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!--생일-->
             <div class="form-group">
-                <label for="lbl_personal_name_en" class="col-sm-2 control-label">이름 (한문)</label>
-                <div class="col-sm-10" id="lbl_personal_name_en">
-                    <input type="text" class="form-control"  placeholder="이름 (한문)">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="lbl_personal_name_ch" class="col-sm-2 control-label">이름 (영문)</label>
-                <div class="col-sm-10" id="lbl_personal_name_ch">
-                    <input type="text" class="form-control"  placeholder="이름 (영문)">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="lbl_personal_birthday" class="col-sm-2 control-label">생일</label>
-                <div class="col-sm-10" id="lbl_personal_birthday">
+                <label for="lbl_personal_birthday" class="col-md-2 control-label">생일</label>
+                <div class="col-md-3" id="lbl_personal_birthday">
                     <button class="k-button" ng-click="win_birthday.center(); win_birthday.open();">{{birthDay | date:"yyyy년 MM월 dd일"}}</button>
                 </div>
                 <div kendo-window="win_birthday" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">
                     <kendo-calendar ng-model="birthDay" k-on-change="win_birthday.close()"></kendo-calendar>
                 </div>
             </div>
+
+            <!--이메일-->
             <div class="form-group">
-                <label for="lbl_personal_email" class="col-sm-2 control-label">이메일</label>
-                <div class="col-sm-10" id="lbl_personal_email">
+                <label for="lbl_personal_email" class="col-md-2 control-label">이메일</label>
+                <div class="col-md-10" id="lbl_personal_email">
                     <input type="email" class="form-control"  placeholder="이메일">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="lbl_personal_phone" class="col-sm-2 control-label">전화번호</label>
-                <div class="col-sm-10" id="lbl_personal_phone">
+
+            <!--번호-->
+            <div class="form-group row">
+                <label for="lbl_personal_phone" class="col-md-2 control-label">전화번호</label>
+                <div class="col-md-4" id="lbl_personal_phone">
                     <input type="text" class="form-control"  placeholder="전화번호">
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="lbl_personal_cellphone" class="col-sm-2 control-label">핸드폰</label>
-                <div class="col-sm-10" id="lbl_personal_cellphone">
+
+                <label for="lbl_personal_cellphone" class="col-md-2 control-label">핸드폰</label>
+                <div class="col-md-4" id="lbl_personal_cellphone">
                     <input type="text" class="form-control"  placeholder="핸드폰">
                 </div>
             </div>
+
+
+            <!--주소-->
             <div class="form-group">
-                <label for="lbl_personal_address1" class="col-sm-2 control-label">주소</label>
-                <div class="col-sm-10"  id="lbl_personal_address1">
+                <label for="lbl_personal_address1" class="col-md-2 control-label">주소</label>
+                <div class="col-md-10"  id="lbl_personal_address1">
                     <input type="text" class="form-control" placeholder="주소">
                 </div>
             </div>
             <div class="form-group">
-                <label for="lbl_personal_address2" class="col-sm-2 control-label">상세주소</label>
-                <div class="col-sm-10" id="lbl_personal_address2">
+                <label for="lbl_personal_address2" class="col-md-2 control-label">상세주소</label>
+                <div class="col-md-10" id="lbl_personal_address2">
                     <input type="text" class="form-control"  placeholder="상세주소">
                 </div>
             </div>
+
+        </div>
+
+        <!--사진 첨부-->
+        <div class="col-md-2">
+            <img src="../img/noImage.png" id="personal_picture"><br>
+            <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
         </div>
     </div>
 </form>
+<!--<form class="form-horizontal" role="form">-->
+    <!--<div class="personalInfoForm form-group">-->
+
+        <!--<div class="col-md-10">-->
+
+            <!--<div class="form-group">-->
+                <!--<label for="lbl_personal_name" class="col-sm-2 control-label">이름</label>-->
+                <!--<div class="col-sm-10 clearfix" id="lbl_personal_name">-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="lbl_personal_name_kr" class="col-sm-2 control-label">한글</label>-->
+                        <!--<div class="col-sm-10" id="lbl_personal_name_kr">-->
+                            <!--<input type="text" class="form-control"  placeholder="이름 (한글)">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="lbl_personal_name_en" class="col-sm-2 control-label">한문</label>-->
+                        <!--<div class="col-sm-10" id="lbl_personal_name_en">-->
+                            <!--<input type="text" class="form-control"  placeholder="이름 (한문)">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="lbl_personal_name_ch" class="col-sm-2 control-label">영문</label>-->
+                        <!--<div class="col-sm-10" id="lbl_personal_name_ch">-->
+                            <!--<input type="text" class="form-control"  placeholder="이름 (영문)">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<div class="form-group">-->
+                <!--<label for="lbl_personal_birthday" class="col-sm-2 control-label">생일</label>-->
+                <!--<div class="col-sm-10" id="lbl_personal_birthday">-->
+                    <!--<button class="k-button" ng-click="win_birthday.center(); win_birthday.open();">{{birthDay | date:"yyyy년 MM월 dd일"}}</button>-->
+                <!--</div>-->
+                <!--<div kendo-window="win_birthday" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">-->
+                    <!--<kendo-calendar ng-model="birthDay" k-on-change="win_birthday.close()"></kendo-calendar>-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<div class="form-group">-->
+                <!--<label for="lbl_personal_email" class="col-sm-2 control-label">이메일</label>-->
+                <!--<div class="col-sm-10" id="lbl_personal_email">-->
+                    <!--<input type="email" class="form-control"  placeholder="이메일">-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<div id="lbl_phone" class="col-md-10 clearfix">-->
+                <!--<div class="form-group">-->
+                    <!--<label for="lbl_personal_phone" class="col-sm-2 control-label">전화번호</label>-->
+                    <!--<div class="col-sm-10" id="lbl_personal_phone">-->
+                        <!--<input type="text" class="form-control"  placeholder="전화번호">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="lbl_personal_cellphone" class="col-sm-2 control-label">핸드폰</label>-->
+                    <!--<div class="col-sm-10" id="lbl_personal_cellphone">-->
+                        <!--<input type="text" class="form-control"  placeholder="핸드폰">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<div class="form-group">-->
+                <!--<label for="lbl_personal_address1" class="col-sm-2 control-label">주소</label>-->
+                <!--<div class="col-sm-10"  id="lbl_personal_address1">-->
+                    <!--<input type="text" class="form-control" placeholder="주소">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<label for="lbl_personal_address2" class="col-sm-2 control-label">상세주소</label>-->
+                <!--<div class="col-sm-10" id="lbl_personal_address2">-->
+                    <!--<input type="text" class="form-control"  placeholder="상세주소">-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</div>-->
+
+
+        <!--<div class="col-md-2">-->
+            <!--<img src="../img/noImage.png" id="personal_picture"><br>-->
+            <!--<button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</form>-->
+
