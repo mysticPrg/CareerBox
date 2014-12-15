@@ -17,6 +17,7 @@ function create(data, callback) {
     var portfolioCollection = require('../util/DBCollections').getInstance().collections.portfolio;
     portfolioCollection.insert(portfolio, function (err, createdPortfolio) {
         var paper = new Paper({title: 'Paper 1'});
+        paper.isIndex = true;
         paper._portfolio_id = createdPortfolio[0]._id.toHexString();
         PaperDB.create(paper, function () {
             callback(err, createdPortfolio[0]);
