@@ -30,8 +30,8 @@ function _DBCollections() {
         portfolio: null,
         template: null,
 
-        member2: null,
-        template2: null
+        personalInfo: null,
+        additionalInfo: null
     };
 }
 
@@ -47,8 +47,8 @@ _DBCollections.prototype.open = function open(callback) {
             self.collections.portfolio = db.collection('portfolio');
             self.collections.template = db.collection('template');
 
-            self.collections.member2 = db.collection('member2');
-            self.collections.template2 = db.collection('template2');
+            self.collections.personalInfo = db.collection('personalInfo');
+            self.collections.additionalInfo = db.collection('additionalInfo');
 
             self.isOpen = true;
 
@@ -67,8 +67,9 @@ _DBCollections.prototype.close = function close() {
             paper: null,
             portfolio: null,
             template: null,
-            member2: null,
-            template2: null
+
+            personalInfo: null,
+            additionalInfo: null
         };
     }
 };

@@ -12,7 +12,7 @@ define([], function () {
 
         this._id = null;
         this.title = '';
-        this.timestamp = new Date();;
+        this.timestamp = new Date();
         this.description = '';
         this.thumbnail = null;
         this.papers = [];
