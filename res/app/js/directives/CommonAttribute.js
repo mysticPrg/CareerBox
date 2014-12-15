@@ -81,19 +81,20 @@ define([
 
                 scope.type = info.type;
 
-                // 로딩시 CSS 적용
-                if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
-                    ApplyCommonItemAttribute.all(element, scope.attributeInformation);
+                if(scope.attributeInformation){
+                    // 로딩시 CSS 적용
+                    if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
+                        ApplyCommonItemAttribute.all(element, scope.attributeInformation);
+                    }
+                    else {
+                        ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
+                        ApplyCommonItemAttribute.size(element, scope.attributeInformation);
+                    }
+
+
+                    // 아티클, 아이템 공통
+                    setCommonWatch(scope, element, att);
                 }
-                else{
-                    ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
-                    ApplyCommonItemAttribute.size(element, scope.attributeInformation);
-                }
-
-
-                // 아티클, 아이템 공통
-                setCommonWatch(scope, element, att);
-
             }
         };
     }]);
