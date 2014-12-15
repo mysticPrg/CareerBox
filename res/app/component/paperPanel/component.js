@@ -182,6 +182,7 @@ define([
                 DeleteTemplate($http, id, function (result) {
                     if (result.returnCode == 000) {
                         $scope.loadArticleTemplate();
+                        window.location.reload();
                     } else {
                         alert('실패하였습니다.');
                         console.log('error: ' + result);
