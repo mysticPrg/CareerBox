@@ -13,7 +13,9 @@ function save(data, callback) {
     var highSchoolInfo = new HighSchoolInfo(data);
     highSchoolInfo._id = new ObjectID(highSchoolInfo._id);
 
-    highSchoolInfoCollection.save(highSchoolInfo, callback);
+    highSchoolInfoCollection.save(highSchoolInfo, function(err, savedCount, result) {
+        callback(err, result.upserted[0]);
+    });
 }
 
 function readList(_member_id, callback) {

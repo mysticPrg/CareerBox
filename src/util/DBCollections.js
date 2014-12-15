@@ -33,7 +33,8 @@ function _DBCollections() {
         personalInfo: null,
         additionalInfo: null,
         highSchoolInfo: null,
-        univSchoolInfo: null
+        univSchoolInfo: null,
+        workingInfo: null
     };
 }
 
@@ -53,6 +54,7 @@ _DBCollections.prototype.open = function open(callback) {
             self.collections.additionalInfo = db.collection('additionalInfo');
             self.collections.highSchoolInfo = db.collection('highSchoolInfo');
             self.collections.univSchoolInfo = db.collection('univSchoolInfo');
+            self.collections.workingInfo = db.collection('workingInfo');
 
             self.isOpen = true;
 
@@ -75,7 +77,8 @@ _DBCollections.prototype.close = function close() {
             personalInfo: null,
             additionalInfo: null,
             highSchoolInfo: null,
-            univSchoolInfo: null
+            univSchoolInfo: null,
+            workingInfo: null
         };
     }
 };

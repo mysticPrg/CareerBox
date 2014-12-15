@@ -3,17 +3,17 @@
  */
 
 
-var HighSchoolInfoDB = require('../../db/Info/HighSchoolInfoDB');
+var WorkingInfoDB = require('../../db/Info/WorkingInfoDB');
 var Result = require('../result');
 var ServiceUtil = require('../../util/ServiceUtil');
 
 module.exports.set = function (server) {
-    server.post('/info/highSchool', saveService);
-    server.get('/info/highSchool', readListService);
+    server.post('/info/working', saveService);
+    server.get('/info/working', readListService);
 };
 
-function checkArgForHighSchoolInfo(req, res) {
-    if (!req.body.highSchoolInfo) {
+function checkArgForWorkingInfo(req, res) {
+    if (!req.body.workingInfo) {
 
         var result = new Result(null);
         result.setCode('001');
@@ -31,14 +31,14 @@ function saveService(req, res) {
     if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
-    if (!checkArgForHighSchoolInfo(req, res)) {
+    if (!checkArgForWorkingInfo(req, res)) {
         return;
     }
 
-    var data = req.body.highSchoolInfo;
+    var data = req.body.workingInfo;
     data._member_id = req.session._id;
 
-    HighSchoolInfoDB.save(data, function (err, saved) {
+    WorkingInfoDB.save(data, function (err, saved) {
         ServiceUtil.sendResult(err, res, saved._id);
     });
 
@@ -53,7 +53,7 @@ function readListService(req, res) {
 
     var _member_id = req.session._id;
 
-    HighSchoolInfoDB.readList(_member_id, function (err, findedList) {
+    WorkingInfoDB.readList(_member_id, function (err, findedList) {
         ServiceUtil.sendResult(err, res, findedList);
     });
 }
