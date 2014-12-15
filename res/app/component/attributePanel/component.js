@@ -45,11 +45,13 @@ define([
 
             EditorData.end_zOrder--;
 
+            EditorData.focusId = 'canvas-content';
+
             if (window.location.href.split("#/")[1] == 'TemplateEditor') {
-                EditorData.focusId = EditorData.template._id;
+//                EditorData.focusId = EditorData.template._id;
                 $scope.$emit('deleteItem', id);
             } else {
-                EditorData.focusId = EditorData.paperId;
+//                EditorData.focusId = EditorData.paperId;
                 $scope.$emit('deleteArticle', id);
             }
 

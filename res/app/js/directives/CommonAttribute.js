@@ -41,10 +41,10 @@ define([
                     ApplyCommonItemAttribute.alpha(element, scope.attributeInformation);
                 },true);
                 // rotate
-                scope.$watch("attributeInformation.rotate",function() {
-//                if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
-                },true);
+//                scope.$watch("attributeInformation.rotate",function() {
+////                if(EditorData.focusId == att.id)
+//                    ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
+//                },true);
 
                 // z - index
                 scope.$watch("attributeInformation.zOrder", function () {

@@ -60,6 +60,7 @@ define([
             $scope.changePage = function (id, title){
                 EditorData.paperId = id;
                 $scope.paperTitle = title;
+                EditorData.focusId = "";
             }
 
             $scope.popCreatePaperModal = function () {

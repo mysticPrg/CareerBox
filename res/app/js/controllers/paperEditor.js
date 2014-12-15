@@ -13,12 +13,13 @@ define([
     'component/saveConfirmModal/component',
     'directives/draggable',
     'directives/resizable',
+    'directives/rotatable',
     'services/EditorData',
     'services/HTMLGenerator',
     'services/LoadPaperList',
     'services/SavePaper',
     'services/LoadPaper',
-    '../../component/paperPanel/component'
+    'component/paperPanel/component'
 ], function ($, ng, app, Paper, createTemplateModal, saveConfirmModal) {
     app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper',
         function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper) {

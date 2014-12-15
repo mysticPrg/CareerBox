@@ -3,7 +3,7 @@
  */
 define(['app'], function (app) {
     function loadItem(item, id, option) {
-        var domObj = '<div id="' + id + '" ng-click ';
+        var domObj = '<div id="' + id + '" ng-click rotatable ';
 
         if(option.draggable === true){
             domObj += 'draggable ';
