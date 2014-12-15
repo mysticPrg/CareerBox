@@ -6,18 +6,47 @@ define([
     'angular',
     'app',
     'classes/Paper',
-    'services/EditorData',
+    'services/PreviewData',
     'services/HTMLGenerator',
+    'services/LoadPaperList',
     'services/LoadPaper'
-], function ($, ng, app, Paper, EditorData) {
-    app.controller('portfolioPreview', ['$scope', 'EditorData', 'LoadPaper', function ($scope, EditorData, HTMLGenerator, LoadPaper) {
+], function ($, ng, app, Paper, PreviewData) {
+    app.controller('portfolioPreview', ['$scope', '$http', '$compile', 'PreviewData', 'HTMLGenerator', 'LoadPaperList', 'LoadPaper', function ($scope, $http, $compile, PreviewData, HTMLGenerator, LoadPaperList, LoadPaper) {
         $(document).ready(function () {
-            LoadPaper($http, EditorData.paperId, function (result) {
-                EditorData.paper = result.result;
+            PreviewData.portfolio._id = window.location.href.split("id=")[1].split('#/')[0];
 
-                loadPaper(EditorData.paper);
+            initPaper();
+
+            LoadPaperList($http, PreviewData.portfolio._id, function (result) {
+                PreviewData.paperList = result.result;
+                $scope.papers = result.result;
+
+                var paper;
+                for(var idx = 0; idx < $scope.papers.length; idx++){
+                    paper = $scope.papers[idx];
+                    if(paper.isIndex === true){
+                        PreviewData.paperId = paper._id;
+
+                        LoadPaper($http, PreviewData.paperId, function (result) {
+                            PreviewData.paper = result.result;
+
+                            loadPaper(PreviewData.paper);
+                        });
+                    }
+                }
             });
         });
+
+        function initPaper(){
+            $('#canvas-content').find('div').remove();
+
+            $scope.paper = new Paper();
+            PreviewData.childArr = [];
+
+            // z index 초기화
+            PreviewData.end_zOrder = 0;
+            PreviewData.start_zOrder = 0;
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         function loadPaper(paper) {
@@ -28,7 +57,7 @@ define([
             var child;
             for (var index = 0; index < paperChildArr.length; index++) {
                 child = paperChildArr[index];
-                EditorData.childArr[child._id] = child;
+                PreviewData.childArr[child._id] = child;
                 if (child.childArr) {
                     loadArticle(child);
                 }else{
@@ -38,14 +67,14 @@ define([
         }
 
         function loadArticle(article) {
-            var option = {draggable: true, resizable: false};
+            var option = {draggable: false, resizable: false};
 
             var ArticleDom = HTMLGenerator('loadDivDom', article, '', option);
 
             var width = 0, height = 0;
 
             var templateItemArray = article.childArr;
-            EditorData.end_zOrder++;
+            PreviewData.end_zOrder++;
             var itemOption = {draggable: false, resizable: false};
 
             var articleItemId;
@@ -62,7 +91,7 @@ define([
         }
 
         function loadItem(item) {
-            var option = {draggable: true, resizable: true};
+            var option = {draggable: false, resizable: false};
 
             var domObj = HTMLGenerator('loadItem', item, item._id, option);
 
@@ -71,28 +100,6 @@ define([
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        function getPaperChildArr(childArr) {
-            var paperChildArr = new Array();
-
-            for (var key in childArr) {
-                var child = childArr[key];
-
-                if (child.state == 'new') {
-                    delete child._id;
-                }
-
-                if (child.state == 'del') {
-                    continue;
-                }
-
-                delete  child.state;
-
-                paperChildArr.push(child);
-            }
-
-            return paperChildArr;
-        }
     }]);
 });
 
