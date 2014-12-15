@@ -9,7 +9,8 @@ if (typeof define !== 'function') {
 define([], function () {
 
     var InfoType = {
-        personalInfo: 'personalInfo'
+        personalInfo: 'personalInfo',
+        additionalInfo: 'additionalInfo'
     };
 
     return InfoType;
