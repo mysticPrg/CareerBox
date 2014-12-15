@@ -1,34 +1,36 @@
 <form class="form-horizontal" role="form">
+
+    <!--보훈대상-->
     <div class="form-group">
-        <label for="lbl_veteran" class="col-sm-2 control-label">보훈대상</label>
-        <div class="col-sm-10" id="lbl_veteran">
+        <label for="lbl_veteran" class="col-md-2 control-label">보훈대상</label>
+        <div class="col-md-3" id="lbl_veteran">
             <label><input type="radio" name="veteran" value="true">보훈대상</input></label>
             <label><input type="radio" name="veteran" value="false">보훈비대상</input></label>
         </div>
     </div>
 
+    <!--장애여부-->
     <div class="form-group">
-        <label for="lbl_disability" class="col-sm-2 control-label">장애여부</label>
-        <div class="col-sm-10" id="lbl_disability">
+        <label for="lbl_disability" class="col-md-2 control-label">장애여부</label>
+        <div class="col-md-3" id="lbl_disability">
             <label><input type="radio" name="disability" value="true">장애인</input></label>
             <label><input type="radio" name="disability" value="false">비장애인</input></label>
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="lbl_militery_category" class="col-sm-2 control-label">병역사항</label>
-        <div class="col-sm-10" id="lbl_militery_category">
+    <!--병역-->
+    <div class="form-group row">
+        <label for="lbl_militery_category" class="col-md-2 control-label">병역사항</label>
+        <div class="col-md-4" id="lbl_militery_category">
             <label><input type="radio" name="militery_category" value="false">해당없음</input></label>
             <label><input type="radio" name="militery_category" value="false">필</input></label>
             <label><input type="radio" name="militery_category" value="false">면제</input></label>
             <label><input type="radio" name="militery_category" value="false">미필</input></label>
             <label><input type="radio" name="militery_category" value="false">복무중</input></label>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="lbl_militery_term" class="col-sm-2 control-label">복무기간</label>
-        <div class="col-sm-10" id="lbl_militery_term">
+        <label for="lbl_militery_term" class="col-md-2 control-label">복무기간</label>
+        <div class="col-md-2" id="lbl_militery_term">
             <button class="k-button" ng-click="win_militery_term_start.center(); win_militery_term_start.open();">{{startDate | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_militery_term_end.center(); win_militery_term_end.open();">{{endDate | date:"yyyy년 MM월 dd일"}}</button>
         </div>
         <div kendo-window="win_militery_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
@@ -39,9 +41,10 @@
         </div>
     </div>
 
+    <!--종교-->
     <div class="form-group">
-        <label for="lbl_religion" class="col-sm-2 control-label">종교</label>
-        <div class="col-sm-10" id="lbl_religion">
+        <label for="lbl_religion" class="col-md-2 control-label">종교</label>
+        <div class="col-md-4" id="lbl_religion">
             <label><input type="radio" name="religion" value="false">무교</input></label>
             <label><input type="radio" name="religion" value="false">기독교</input></label>
             <label><input type="radio" name="religion" value="false">천주교</input></label>
@@ -50,58 +53,164 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="lbl_physical_tall" class="col-sm-2 control-label">신장</label>
-        <div class="col-sm-8" id="lbl_physical_tall">
+    <!--신체 : 신장, 몸무게-->
+    <div class="form-group row">
+        <label for="lbl_physical_tall" class="col-md-2 control-label">신장</label>
+        <div class="col-md-2" id="lbl_physical_tall">
             <input type="text" class="form-control"  placeholder="신장">
         </div>
-        <div class="col-sm-2">cm</div>
-    </div>
+        <div class="col-md-1">cm</div>
 
-    <div class="form-group">
-        <label for="lbl_physical_weight" class="col-sm-2 control-label">몸무게</label>
-        <div class="col-sm-8" id="lbl_physical_weight">
+        <label for="lbl_physical_weight" class="col-md-1 control-label">몸무게</label>
+        <div class="col-md-2" id="lbl_physical_weight">
             <input type="text" class="form-control"  placeholder="몸무게">
         </div>
-        <div class="col-sm-2">kg</div>
+        <div class="col-md-1">kg</div>
     </div>
 
-    <div class="form-group">
-        <label for="lbl_physical_blood" class="col-sm-2 control-label">혈액형</label>
-        <div class="col-sm-10" id="lbl_physical_blood">
+    <!--혈액형, 시력-->
+    <div class="form-group row">
+        <label for="lbl_physical_blood" class="col-md-2 control-label">혈액형</label>
+        <div class="col-md-2" id="lbl_physical_blood">
             <input type="text" class="form-control"  placeholder="혈액형">
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="lbl_physical_sight" class="col-sm-2 control-label">시력</label>
-        <div class="col-sm-4" id="lbl_physical_sight">
+        <label for="lbl_physical_sight" class="col-md-2 control-label">시력</label>
+        <div class="col-md-2" id="lbl_physical_sight">
             <input type="text" class="form-control"  placeholder="좌안">
         </div>
-        <div class="col-sm-2">/</div>
-        <div class="col-sm-4">
+        <div class="col-md-1">/</div>
+        <div class="col-md-2">
             <input type="text" class="form-control"  placeholder="우안">
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="lbl_favorite" class="col-sm-2 control-label">취미</label>
-        <div class="col-sm-10" id="lbl_favorite">
+    <!--취미, 특기-->
+    <div class="form-group row">
+        <label for="lbl_favorite" class="col-md-2 control-label">취미</label>
+        <div class="col-md-3" id="lbl_favorite">
             <input type="text" class="form-control"  placeholder="취미">
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="lbl_forte" class="col-sm-2 control-label">특기</label>
-        <div class="col-sm-10" id="lbl_forte">
+        <label for="lbl_forte" class="col-md-1 control-label">특기</label>
+        <div class="col-md-3" id="lbl_forte">
             <input type="text" class="form-control"  placeholder="특기">
         </div>
     </div>
 
+    <!--존경인물-->
     <div class="form-group">
-        <label for="lbl_respect" class="col-sm-2 control-label">존경인물</label>
-        <div class="col-sm-10" id="lbl_respect">
+        <label for="lbl_respect" class="col-md-2 control-label">존경인물</label>
+        <div class="col-md-3" id="lbl_respect">
             <input type="text" class="form-control"  placeholder="존경인물">
         </div>
     </div>
+
 </form>
+<!--<form class="form-horizontal" role="form">-->
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_veteran" class="col-sm-2 control-label">보훈대상</label>-->
+        <!--<div class="col-sm-10" id="lbl_veteran">-->
+            <!--<label><input type="radio" name="veteran" value="true">보훈대상</input></label>-->
+            <!--<label><input type="radio" name="veteran" value="false">보훈비대상</input></label>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_disability" class="col-sm-2 control-label">장애여부</label>-->
+        <!--<div class="col-sm-10" id="lbl_disability">-->
+            <!--<label><input type="radio" name="disability" value="true">장애인</input></label>-->
+            <!--<label><input type="radio" name="disability" value="false">비장애인</input></label>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_militery_category" class="col-sm-2 control-label">병역사항</label>-->
+        <!--<div class="col-sm-10" id="lbl_militery_category">-->
+            <!--<label><input type="radio" name="militery_category" value="false">해당없음</input></label>-->
+            <!--<label><input type="radio" name="militery_category" value="false">필</input></label>-->
+            <!--<label><input type="radio" name="militery_category" value="false">면제</input></label>-->
+            <!--<label><input type="radio" name="militery_category" value="false">미필</input></label>-->
+            <!--<label><input type="radio" name="militery_category" value="false">복무중</input></label>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_militery_term" class="col-sm-2 control-label">복무기간</label>-->
+        <!--<div class="col-sm-10" id="lbl_militery_term">-->
+            <!--<button class="k-button" ng-click="win_militery_term_start.center(); win_militery_term_start.open();">{{startDate | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_militery_term_end.center(); win_militery_term_end.open();">{{endDate | date:"yyyy년 MM월 dd일"}}</button>-->
+        <!--</div>-->
+        <!--<div kendo-window="win_militery_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">-->
+            <!--<kendo-calendar ng-model="startDate" k-on-change="win_militery_term_start.close()"></kendo-calendar>-->
+        <!--</div>-->
+        <!--<div kendo-window="win_militery_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">-->
+            <!--<kendo-calendar ng-model="endDate" k-on-change="win_militery_term_end.close()"></kendo-calendar>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_religion" class="col-sm-2 control-label">종교</label>-->
+        <!--<div class="col-sm-10" id="lbl_religion">-->
+            <!--<label><input type="radio" name="religion" value="false">무교</input></label>-->
+            <!--<label><input type="radio" name="religion" value="false">기독교</input></label>-->
+            <!--<label><input type="radio" name="religion" value="false">천주교</input></label>-->
+            <!--<label><input type="radio" name="religion" value="false">불교</input></label>-->
+            <!--<label><input type="radio" name="religion" value="false">기타</input></label>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_physical_tall" class="col-sm-2 control-label">신장</label>-->
+        <!--<div class="col-sm-8" id="lbl_physical_tall">-->
+            <!--<input type="text" class="form-control"  placeholder="신장">-->
+        <!--</div>-->
+        <!--<div class="col-sm-2">cm</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_physical_weight" class="col-sm-2 control-label">몸무게</label>-->
+        <!--<div class="col-sm-8" id="lbl_physical_weight">-->
+            <!--<input type="text" class="form-control"  placeholder="몸무게">-->
+        <!--</div>-->
+        <!--<div class="col-sm-2">kg</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_physical_blood" class="col-sm-2 control-label">혈액형</label>-->
+        <!--<div class="col-sm-10" id="lbl_physical_blood">-->
+            <!--<input type="text" class="form-control"  placeholder="혈액형">-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_physical_sight" class="col-sm-2 control-label">시력</label>-->
+        <!--<div class="col-sm-4" id="lbl_physical_sight">-->
+            <!--<input type="text" class="form-control"  placeholder="좌안">-->
+        <!--</div>-->
+        <!--<div class="col-sm-2">/</div>-->
+        <!--<div class="col-sm-4">-->
+            <!--<input type="text" class="form-control"  placeholder="우안">-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_favorite" class="col-sm-2 control-label">취미</label>-->
+        <!--<div class="col-sm-10" id="lbl_favorite">-->
+            <!--<input type="text" class="form-control"  placeholder="취미">-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_forte" class="col-sm-2 control-label">특기</label>-->
+        <!--<div class="col-sm-10" id="lbl_forte">-->
+            <!--<input type="text" class="form-control"  placeholder="특기">-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="lbl_respect" class="col-sm-2 control-label">존경인물</label>-->
+        <!--<div class="col-sm-10" id="lbl_respect">-->
+            <!--<input type="text" class="form-control"  placeholder="존경인물">-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</form>-->
