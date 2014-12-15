@@ -41,7 +41,6 @@ function saveService(req, res) {
     WorkingInfoDB.save(data, function (err, saved) {
         ServiceUtil.sendResult(err, res, saved._id);
     });
-
 }
 
 function readListService(req, res) {
