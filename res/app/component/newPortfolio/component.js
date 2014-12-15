@@ -98,6 +98,11 @@ define([
 //            $scope.$emit("createPortfolio", portfolio);
         }
 
+        $scope.goToPortfolio = function (portfolioId) {
+            var href = 'portfolioPreview.html?id=' + portfolioId;
+            $window.location.href = href;
+        }
+
     }]);
 
     app.directive('newPortfolio', function () {
