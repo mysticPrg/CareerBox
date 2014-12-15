@@ -36,12 +36,17 @@ define([
         }
 
         $scope.save = function (info){
-            if(info === 'personalInfo'){
-                savePersonal($http, InformationData.personalInfo, function (result) {
-                    console.log(result);
-                });
-            }
+            showNotification();
+//            if(info === 'personalInfo'){
+//                savePersonal($http, InformationData.personalInfo, function (result) {
+//                    console.log(result);
+//                });
+//            }
+        }
 
+        function showNotification(){
+            var notification = kendo.toString('성공하였습니다.');
+            $scope.noti.show(notification, "info");
         }
 
 
