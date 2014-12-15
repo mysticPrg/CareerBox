@@ -19,6 +19,7 @@ define([
         this.childArr = [];
         this.fill = new Fill();
         this.size = new Size();
+        this.isIndex = false;
 
         // server only
         this._member_id = null;
@@ -31,6 +32,7 @@ define([
             this.childArr = props.childArr ? props.childArr : this.childArr;
             this.fill = props.fill ? props.fill : this.fill;
             this.size = props.size ? props.size : this.size;
+            this.isIndex = props.isIndex ? props.isIndex : this.isIndex;
 
             this._member_id = props._member_id ? props._member_id : this._member_id;
         }
