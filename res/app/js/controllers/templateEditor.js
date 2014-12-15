@@ -159,28 +159,14 @@ define([
 
 
         $scope.save = function () {
-
             EditorData.focusId = '';
-
-            // [병진] 주석처리 안하면 템플릿 속성이 저장되지 않게됨. 보람 확인바람.
-
-//            var article = new Article();
-//            article.template = $scope.template._template_id;
-//
-//            article.size.width = $('#canvas-content').width();
-//            article.size.height = $('#canvas-content').height();
-//
-//            article.childArr = getTemplateChildArr(EditorData.templateItemArray);
-////            article.childArr = EditorData.templateItemArray;
-//            article.rowCount = 0;
-//            article.colCount = 0;
-
-//            $scope.template.target = article;
 
             $scope.template.target.childArr = getTemplateChildArr(EditorData.templateItemArray);
 
             $scope.thumbnail = '';
             $scope.description = '';
+
+            console.log('$scope.template.target', $scope.template.target);
 
             SaveTemplate($http, $scope.template, function (resultCode) {
                 if (resultCode == 000) {
