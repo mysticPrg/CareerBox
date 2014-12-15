@@ -16,7 +16,7 @@ require.config({
         'twitter-bootstrap': '../libs/bootstrap/bootstrap.min',
         'kendo': '../libs/kendo/js/kendo.custom',
         'facebook': '../libs/facebook/angular-facebook',
-
+        'rotatable': '../libs/jquery/rotatable/jquery.ui.rotatable.min',
         'component': '../component',
         'classes': '../../../src/classes'
     },
@@ -42,13 +42,18 @@ require.config({
         },
 
         'angular-route': {
-            deps: ['angular', '../libs/angular/angular-file-upload-shim', ],
+            deps: ['angular', '../libs/angular/angular-file-upload-shim'],
             exports: 'ngRoute'
         },
 
         'angular-upload': {
             deps: ['angular'],
             exports: 'angular-upload'
+        },
+
+        'rotatable': {
+            deps: ['jquery', 'jquery-ui'],
+            exports: 'rotatable'
         },
 
         'jquery-ui': {

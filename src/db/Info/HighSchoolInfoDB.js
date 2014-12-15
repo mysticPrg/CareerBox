@@ -3,7 +3,7 @@
  */
 
 var requirejs = require('../../require.config');
-var HighSchoolInfo = requirejs('classes/Info/highSchoolInfo');
+var HighSchoolInfo = requirejs('classes/Info/HighSchoolInfo');
 
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
@@ -27,7 +27,7 @@ function readList(_member_id, callback) {
 
 var exports = {
     save: save,
-    read: readList
+    readList: readList
 };
 
 module.exports = exports;

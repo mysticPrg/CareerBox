@@ -10,7 +10,9 @@ define([], function () {
 
     var InfoType = {
         personalInfo: 'personalInfo',
-        additionalInfo: 'additionalInfo'
+        additionalInfo: 'additionalInfo',
+        highSchoolInfo: 'highSchoolInfo',
+        univSchoolInfo: 'univSchoolInfo'
     };
 
     return InfoType;

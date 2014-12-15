@@ -68,12 +68,13 @@ define(['app'
     };
 
     function rotate(element, item) {
-        var r = 'rotate(' + item.rotate + 'deg)';
+        var r = 'rotate(' + item.rotate + 'rad)';
         element.css({
-            '-moz-transform': r,
+//            '-moz-transform': r,
             '-webkit-transform': r,
-            '-o-transform': r,
-            '-ms-transform': r
+//            '-o-transform': r,
+//            '-ms-transform': r,
+            'transform': r
         });
     };
 
@@ -92,10 +93,12 @@ define(['app'
     }
 
     function pos(element, item){
-        element.css({
-            top: item.pos.y + "px",
-            left: item.pos.x + "px"
-        });
+        if( !(item.pos.x == element.position().left && item.pos.y == element.position().top) ){
+            element.css({
+                top: item.pos.y + "px",
+                left: item.pos.x + "px"
+            });
+        }
     }
 
     function size(element, item){

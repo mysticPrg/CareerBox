@@ -1,18 +1,19 @@
 /**
- * Created by careerBox on 2014-12-15.
+ * Created by careerBox on 2014-12-16.
  */
 
-var AdditionalInfoDB = require('../../db/Info/AdditionalInfoDB');
+
+var HighSchoolInfoDB = require('../../db/Info/HighSchoolInfoDB');
 var Result = require('../result');
 var ServiceUtil = require('../../util/ServiceUtil');
 
 module.exports.set = function (server) {
-    server.post('/info/additional', saveService);
-    server.get('/info/additional', readService);
+    server.post('/info/highSchool', saveService);
+    server.get('/info/highSchool', readListService);
 };
 
-function checkArgForAdditionalInfo(req, res) {
-    if (!req.body.additionalInfo) {
+function checkArgForHighSchoolInfo(req, res) {
+    if (!req.body.highSchoolInfo) {
 
         var result = new Result(null);
         result.setCode('001');
@@ -30,20 +31,20 @@ function saveService(req, res) {
     if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
-    if (!checkArgForAdditionalInfo(req, res)) {
+    if (!checkArgForHighSchoolInfo(req, res)) {
         return;
     }
 
-    var data = req.body.additionalInfo;
+    var data = req.body.highSchoolInfo;
     data._member_id = req.session._id;
 
-    AdditionalInfoDB.save(data, function (err, saved) {
+    HighSchoolInfoDB.save(data, function (err, saved) {
         ServiceUtil.sendResult(err, res, saved[0]._id);
     });
 
 }
 
-function readService(req, res) {
+function readListService(req, res) {
 
     ServiceUtil.setResHeader(res);
     if (!ServiceUtil.checkSession(req, res)) {
@@ -52,7 +53,7 @@ function readService(req, res) {
 
     var _member_id = req.session._id;
 
-    AdditionalInfoDB.read(_member_id, function (err, finded) {
-        ServiceUtil.sendResult(err, res, finded);
+    HighSchoolInfoDB.readList(_member_id, function (err, findedList) {
+        ServiceUtil.sendResult(err, res, findedList);
     });
 }

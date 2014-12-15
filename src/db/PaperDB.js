@@ -100,29 +100,6 @@ function refreshTemplateData(template, callback) {
                 , cb);
         }, callback);
     });
-
-//    var setData = {
-//        'childArr.$.size': template.target.size,
-//        'childArr.$.outline': template.target.outline,
-//        'childArr.$.fill': template.target.fill,
-//        'childArr.$.radius': template.target.radius,
-//        'childArr.$.childArr': template.target.childArr,
-//        'childArr.$.rowCount': template.target.rowCount,
-//        'childArr.$.colCount': template.target.colCount
-//    };
-//
-//    paperCollection.update(
-//        {
-//            _member_id: template._member_id,
-//            childArr: {$elemMatch: {_template_id: template._id.toHexString()}}
-//        },
-//        {
-//            $set: setData
-//        },
-//        {
-//            multi: true
-//        },
-//        callback);
 }
 
 function removeTemplateData(_template_id, callback) {
@@ -151,19 +128,6 @@ function removeTemplateData(_template_id, callback) {
         }, callback);
     });
 
-//    paperCollection.update(
-//        {
-//            childArr: {$elemMatch: {_template_id: _template_id}}
-//        },
-//        {
-//            $unset: {
-//                'childArr.$': 1
-//            }
-//        },
-//        {
-//            multi: true
-//        },
-//        callback);
 }
 
 function setIndex(_portfolio_id, _paper_id, callback) {
