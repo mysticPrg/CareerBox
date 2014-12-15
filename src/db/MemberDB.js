@@ -55,6 +55,6 @@ var exports = {
     isExistEmail: isExistEmail,
     remove: remove,
     update: update
-}
+};
 
 module.exports = exports;
