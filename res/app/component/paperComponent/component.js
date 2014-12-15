@@ -45,8 +45,14 @@ define([
                     $scope.papers = result.result;
 
                     if(EditorData.paperId === ''){
-                        EditorData.paperId = EditorData.paperList[0]._id;
-                        $scope.paperTitle = $scope.papers[0].title;
+                        var paper;
+                        for(var idx = 0; idx < $scope.papers.length; idx++){
+                            paper = $scope.papers[idx];
+                            if(paper.isIndex === true){
+                                EditorData.paperId = paper._id;
+                                $scope.paperTitle = paper.title;
+                            }
+                        }
                     }
                 });
             }

@@ -12,15 +12,7 @@
                     <h3>{{attributeInformation.layoutComponentType}}</h3>
                     <h3>{{attributeInformation.itemType}}</h3>
                     <h3>{{attributeInformation.templateType}}</h3>
-
-                    <div ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
-                        <button class="btn btn-default"
-                                ng-click="editTemplate(attributeInformation)">수정
-                        </button>
-                    </div>
                 </div>
-
-
 
                 <li ng-repeat="(key, att) in attributeInformation track by $index"
                     ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType'
@@ -97,6 +89,10 @@
 
                         <ANY ng-switch-when="url">
                             <div url-attribute to="attributeInformation"></div>
+                        </ANY>
+
+                        <ANY ng-switch-when="isIndex">
+                            <div is-index-attribute to="attributeInformation"></div>
                         </ANY>
 
                         <ANY ng-switch-default>
