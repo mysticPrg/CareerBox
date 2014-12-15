@@ -83,6 +83,9 @@ define([
             article.colCount = 0;
 
             $scope.template.target = article;
+
+            // 템플릿 생성하고 나면 캔버스 속성이 나오도록함.
+            EditorData.focusId = 'canvas-content';
         }
 
         // Load Element
