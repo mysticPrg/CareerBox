@@ -27,8 +27,12 @@ define([
 
                 // radius
                 scope.$watch("attributeInformation.radius",function() {
+                    // 쉐이프일 경우에는 적용되지 않도록함.
+                    if(typeof att.shape == 'undefined'){
 //                    if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
+                        ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
+                    }
+
                 },true);
 
                 // alpha 리스너 달기

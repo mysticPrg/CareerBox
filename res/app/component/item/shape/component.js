@@ -9,6 +9,17 @@ define([
     'app', 'jquery-ui', 'services/SetAttributeInformation'
 ], function (app) {
     app.directive('shape', ['SetAttributeInformation', function (SetAttributeInformation) {
+        function modifyShapeType(scope, element){
+            if(scope.info.shapeType == "box")
+                element.css({
+                    'border-radius': '0%'
+                });
+            else
+                element.css({
+                    'border-radius': '50%'
+                });
+        }
+
         return {
             // A = attribute, E = Element, C = Class and M = HTML Comment
             restrict: 'A',
@@ -19,14 +30,7 @@ define([
 
                 // 쉐이프의 타입에 따라 css 변경
                 scope.$watch("info.shapeType",function() {
-                    if(scope.info.shapeType == "box")
-                        element.css({
-                            'border-radius': '0%'
-                        });
-                    else
-                        element.css({
-                            'border-radius': '50%'
-                        });
+                    modifyShapeType(scope, element)
                 },true);
             },
             templateUrl: require.toUrl('component/item/shape/template.html')
