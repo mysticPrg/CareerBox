@@ -15,15 +15,15 @@ define(['app'], function (app) {
         var itemType = item.itemType;
 
         if (itemType === 'text') {
-            domObj += 'text class="itemText" common-attribute ';
+            domObj += 'common-attribute text class="itemText" ';
         } else if (itemType === 'image') {
-            domObj += 'image class="itemImage" common-attribute ';
+            domObj += 'common-attribute image class="itemImage" ';
         } else if (itemType === 'line') {
             domObj += 'line ';
         } else if (itemType === 'link') {
-            domObj += 'link class="itemLink" common-attribute ';
+            domObj += 'common-attribute link class="itemLink" ';
         } else if (itemType === 'shape') {
-            domObj += 'shape class="itemShape" common-attribute ';
+            domObj += 'common-attribute shape class="itemShape" ';
         }
 
         domObj += 'style="position: absolute; top: ' + item.pos.y + 'px; left: ' + item.pos.x + 'px; width: ' + item.size.width + 'px; height: ' + item.size.height + 'px;"></div>';

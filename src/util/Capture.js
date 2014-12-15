@@ -8,7 +8,6 @@ var $ = require('jquerygo');
 var async = require('async');
 
 var Thumbnail = require('thumbnail');
-//var thumb = require('node-thumbnail').thumb;
 var HTMLGen = require('./HTMLGen');
 
 var screenShotPath = 'res/screenshot/';

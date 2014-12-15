@@ -27,8 +27,12 @@ define([
 
                 // radius
                 scope.$watch("attributeInformation.radius",function() {
+                    // 쉐이프일 경우에는 적용되지 않도록함.
+                    if(typeof att.shape == 'undefined'){
 //                    if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
+                        ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
+                    }
+
                 },true);
 
                 // alpha 리스너 달기
@@ -77,19 +81,20 @@ define([
 
                 scope.type = info.type;
 
-                // 로딩시 CSS 적용
-                if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
-                    ApplyCommonItemAttribute.all(element, scope.attributeInformation);
+                if(scope.attributeInformation){
+                    // 로딩시 CSS 적용
+                    if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
+                        ApplyCommonItemAttribute.all(element, scope.attributeInformation);
+                    }
+                    else {
+                        ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
+                        ApplyCommonItemAttribute.size(element, scope.attributeInformation);
+                    }
+
+
+                    // 아티클, 아이템 공통
+                    setCommonWatch(scope, element, att);
                 }
-                else{
-                    ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
-                    ApplyCommonItemAttribute.size(element, scope.attributeInformation);
-                }
-
-
-                // 아티클, 아이템 공통
-                setCommonWatch(scope, element, att);
-
             }
         };
     }]);

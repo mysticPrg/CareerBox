@@ -35,7 +35,7 @@ define([
         // 템플릿 속성
         $('#canvas-content').bind('click', function (){
             // 포커싱 처리
-            EditorData.focusId = EditorData.template._id;
+            EditorData.focusId = 'canvas-content';
         });
 
         $(document).ready(function () {
@@ -52,9 +52,14 @@ define([
 
 
             // [병진] EditorData.templateState 가 edit가 되었지 않아서 실행이 안되기 때문에 주석처리를 해줌.
-//            if (EditorData.templateState == 'edit')
+            if (EditorData.templateState == 'edit')
+
+//            if($scope.template.target != null)
             {
                 loadTemplate();
+            }
+            else{
+                getTemplateInstance();
             }
         });
 
@@ -65,6 +70,24 @@ define([
         $rootScope.$on("deleteItem", function (e, id) {
             deleteItem(id);
         });
+
+        // Get Template Instance
+        function getTemplateInstance() {
+            var article = new Article();
+            article.template = $scope.template._template_id;
+
+            article.size.width = $('#canvas-content').width();
+            article.size.height = $('#canvas-content').height();
+
+            article.childArr = getTemplateChildArr(EditorData.templateItemArray);
+            article.rowCount = 0;
+            article.colCount = 0;
+
+            $scope.template.target = article;
+
+            // 템플릿 생성하고 나면 캔버스 속성이 나오도록함.
+            EditorData.focusId = 'canvas-content';
+        }
 
         // Load Element
         function loadTemplate() {
@@ -77,7 +100,6 @@ define([
                 EditorData.templateItemArray[itemArray[index]._id] = itemArray[index];
             }
             loadTemplateElement();
-
         }
 
         function loadEditorCanvas(size){
@@ -137,28 +159,14 @@ define([
 
 
         $scope.save = function () {
-
             EditorData.focusId = '';
-
-            // [병진] 주석처리 안하면 템플릿 속성이 저장되지 않게됨. 보람 확인바람.
-
-//            var article = new Article();
-//            article.template = $scope.template._template_id;
-//
-//            article.size.width = $('#canvas-content').width();
-//            article.size.height = $('#canvas-content').height();
-//
-//            article.childArr = getTemplateChildArr(EditorData.templateItemArray);
-////            article.childArr = EditorData.templateItemArray;
-//            article.rowCount = 0;
-//            article.colCount = 0;
-
-//            $scope.template.target = article;
 
             $scope.template.target.childArr = getTemplateChildArr(EditorData.templateItemArray);
 
             $scope.thumbnail = '';
             $scope.description = '';
+
+            console.log('$scope.template.target', $scope.template.target);
 
             SaveTemplate($http, $scope.template, function (resultCode) {
                 if (resultCode == 000) {

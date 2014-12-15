@@ -70,9 +70,9 @@ define([
                     var data = {_id: id};
 
                     deletePaper($http, data, function(result){
-//                        console.log(result);
                         $scope.paperTitle = 'Select Paper';
                         $scope.loadPaperList();
+                        window.location.reload();
                     });
                 }, function () {
                 });

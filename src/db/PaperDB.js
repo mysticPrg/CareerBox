@@ -6,6 +6,8 @@
 var requirejs = require('../require.config');
 var Paper = requirejs('classes/Paper');
 var PaperInfo = requirejs('classes/Structs/PaperInfo');
+var Template = requirejs('classes/Templates/Template');
+var Article = requirejs('classes/LayoutComponents/Article');
 
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
@@ -48,7 +50,7 @@ function remove(_id, callback) {
 function removeByPortfolio(_portfolio_id, callback) {
     var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
 
-    paperCollection.remove({'_portfolio_id': new ObjectID(_portfolio_id)}, callback);
+    paperCollection.remove({'_portfolio_id': _portfolio_id}, callback);
 }
 
 function update(data, callback) {
@@ -66,56 +68,102 @@ function update(data, callback) {
 
 function refreshTemplateData(template, callback) {
     var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
-    var setData = {
-        'childArr.$.size': template.target.size,
-        'childArr.$.outline': template.target.outline,
-        'childArr.$.fill': template.target.fill,
-        'childArr.$.radius': template.target.radius
-    };
 
+    paperCollection.find({
+        _member_id: template._member_id,
+        childArr: {$elemMatch: {_template_id: template._id.toHexString()}}
+    }).toArray(function (err, arr) {
+        async.each(arr, function (p, cb) {
 
-    switch (template.templateType) {
-        case TemplateType.article:
-            setData['childArr.$.childArr'] = template.target.childArr;
-            setData['childArr.$.rowCount'] = template.target.rowCount;
-            setData['childArr.$.colCount'] = template.target.colCount;
-            break;
+            var newArr = [];
+            for (var i = 0; i < p.childArr.length; i++) {
+                if (p.childArr[i]._template_id !== template._id.toHexString()) {
+                    newArr.push(p.childArr[i]);
+                } else {
+                    var cloneArticle = new Article(template.target);
+                    cloneArticle.pos = p.childArr[i].pos;
+                    cloneArticle.zOrder = p.childArr[i].zOrder;
+                    cloneArticle._id = p.childArr[i]._id;
+                    cloneArticle._template_id = p.childArr[i]._template_id;
 
-        case TemplateType.section:
-            setData['childArr.$.childArr'] = template.target.childArr;
-            break;
-    }
+                    newArr.push(cloneArticle);
+                }
+            }
 
-    paperCollection.update(
-        {
-            _member_id: template._member_id,
-            childArr: {$elemMatch: {_template_id: template._id.toHexString()}}
-        },
-        {
-            $set: setData
-        },
-        {
-            multi: true
-        },
-        callback);
+            paperCollection.update(
+                {
+                    _id: p._id
+                },
+                {
+                    $set: {childArr: newArr}
+                }
+                , cb);
+        }, callback);
+    });
+
+//    var setData = {
+//        'childArr.$.size': template.target.size,
+//        'childArr.$.outline': template.target.outline,
+//        'childArr.$.fill': template.target.fill,
+//        'childArr.$.radius': template.target.radius,
+//        'childArr.$.childArr': template.target.childArr,
+//        'childArr.$.rowCount': template.target.rowCount,
+//        'childArr.$.colCount': template.target.colCount
+//    };
+//
+//    paperCollection.update(
+//        {
+//            _member_id: template._member_id,
+//            childArr: {$elemMatch: {_template_id: template._id.toHexString()}}
+//        },
+//        {
+//            $set: setData
+//        },
+//        {
+//            multi: true
+//        },
+//        callback);
 }
 
 function removeTemplateData(_template_id, callback) {
     var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
 
-    paperCollection.update(
-        {
-            childArr: {$elemMatch: {_template_id: _template_id}}
-        },
-        {
-            $unset: {
-                'childArr.$': 1
+    paperCollection.find({
+        childArr: {$elemMatch: {_template_id: _template_id}}
+    }).toArray(function (err, arr) {
+        async.each(arr, function (p, cb) {
+
+            var newArr = [];
+            for (var i = 0; i < p.childArr.length; i++) {
+                if (p.childArr[i]._template_id !== _template_id) {
+                    newArr.push(p.childArr[i]);
+                }
             }
-        },
-        {
-            multi: true
-        },
-        callback);
+
+            paperCollection.update(
+                {
+                    _id: p._id
+                },
+                {
+                    $set: {childArr: newArr}
+                }
+                , cb);
+        }, callback);
+    });
+
+//    paperCollection.update(
+//        {
+//            childArr: {$elemMatch: {_template_id: _template_id}}
+//        },
+//        {
+//            $unset: {
+//                'childArr.$': 1
+//            }
+//        },
+//        {
+//            multi: true
+//        },
+//        callback);
 }
 
 var exports = {

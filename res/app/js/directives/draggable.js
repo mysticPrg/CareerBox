@@ -43,10 +43,7 @@ define([
                 element.bind('mouseout', function (event){
                     $('#canvas-content').bind('click', function (event){
                         // 포커싱 처리
-                        if(window.location.href.split("#/")[1] == 'TemplateEditor')
-                            EditorData.focusId = EditorData.template._id;
-                        else
-                            EditorData.focusId = EditorData.paperId;
+                        EditorData.focusId = 'canvas-content';
                     });
                 });
 

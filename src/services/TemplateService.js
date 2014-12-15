@@ -21,7 +21,7 @@ module.exports.set = function (server) {
 
     server.post('/template', createOrUpdateService);
     server.delete('/template', deleteService);
-    server.get('/template/:templateType', getTemplateListService);
+    server.get('/template', getTemplateListService);
     server.get('/template/check/:_id', getTemplateUsingCheckService);
 };
 

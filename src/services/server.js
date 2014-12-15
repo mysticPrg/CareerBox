@@ -8,6 +8,7 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 var DBHelper = require('../util/DBHelper');
 
@@ -52,7 +53,10 @@ app.use(cookieParser());
 app.use(session({
     secret: 'careerkey',
     resave: true,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new MongoStore({
+        url: 'mongodb://localhost:27017/careerbox'
+    })
 //    cookie: { secure: true },
 //    name: 'careerbox.session',
 //    rolling: true

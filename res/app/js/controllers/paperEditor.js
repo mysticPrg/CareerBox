@@ -44,7 +44,7 @@ define([
             // 페이퍼 속성
             $('#canvas-content').bind('click', function () {
                 // 포커싱 처리
-                EditorData.focusId = EditorData.paperId;
+                EditorData.focusId = 'canvas-content';
             });
 
             $rootScope.$on("deleteArticle", function (e, id) {
@@ -91,7 +91,8 @@ define([
                     $window.location.href = "#/TemplateEditor";
                 }
 
-                EditorData.templateState = '';
+                // TemplateEditor 에서도 templateState를 사용하기 때문에 일단 주석처리했음.
+//                EditorData.templateState = '';
             }
 
             function createTemplate(){

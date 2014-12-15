@@ -30,6 +30,7 @@ define(['app'
             else if (data.returnCode == '002') {
                 // 로그인 안됬다. 메세지
                 stateText = "로그인이 안되어있습니다.";
+                window.location.href = "../partials/login.html";
             }
 
             // Incorrect ID or PW
