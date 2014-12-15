@@ -18,7 +18,10 @@ define([
         this.description = '';
         this.childArr = [];
         this.fill = new Fill();
-        this.size = new Size();
+        this.size = new Size({
+            width: 960,
+            height: 1358
+        });
         this.isIndex = false;
 
         // server only

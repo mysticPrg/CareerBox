@@ -166,6 +166,38 @@ function removeTemplateData(_template_id, callback) {
 //        callback);
 }
 
+function setIndex(_portfolio_id, _paper_id, callback) {
+    var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
+
+    paperCollection.find({
+        _portfolio_id: _portfolio_id
+    }).toArray(function (err, arr) {
+        async.each(arr, function (p, cb) {
+            if (p._id.toHexString() === _paper_id) {
+                paperCollection.update(
+                    {
+                        _id: _paper_id
+                    },
+                    {
+                        $set: {isIndex: true}
+                    }
+                    , cb);
+            } else if (p.isIndex === false) {
+                paperCollection.update(
+                    {
+                        _id: p._id
+                    },
+                    {
+                        $set: {isIndex: false}
+                    }
+                    , cb);
+            } else {
+                cb(null);
+            }
+        }, callback);
+    });
+}
+
 var exports = {
     create: create,
     get: get,
@@ -174,7 +206,8 @@ var exports = {
     removeByPortfolio: removeByPortfolio,
     update: update,
     refreshTempalteData: refreshTemplateData,
-    removeTemplateData: removeTemplateData
+    removeTemplateData: removeTemplateData,
+    setIndex: setIndex
 }
 
 module.exports = exports;
