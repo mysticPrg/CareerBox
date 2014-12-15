@@ -45,3 +45,17 @@ img {
     line-height: 120px;
 }
 
+/*정보 입력 div 너비 지정*/
+#content #information-content {
+    width: 900px;
+}
+
+/*personalInformation : 기본정보*/
+#personalInfoForm {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+#personalInfoForm #lbl_personal_name > .form-group{
+    float:  left;
+}
