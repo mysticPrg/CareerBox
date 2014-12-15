@@ -5,6 +5,7 @@
 
 
 var PaperDB = require('../db/PaperDB');
+var ServiceUtil = require('../util/ServiceUtil');
 
 var Result = require('./result');
 var ObjectID = require('mongodb').ObjectID;
@@ -17,34 +18,6 @@ module.exports.set = function (server) {
     server.get('/portfolio/paper/:_id', loadService);
     server.post('/portfolio/paperList', loadListService);
 };
-
-function checkErr(err) {
-    if (err) {
-        console.log(err.message);
-        return false;
-    }
-
-    return true;
-}
-
-function setResHeader(res) {
-    res.writeHead(200, {
-        'Content-Type': 'application/json'
-    });
-}
-
-function checkSession(req, res) {
-    if (!req.session._id) {
-
-        var result = new Result(null);
-        result.setCode('002');
-        res.end(result.toString());
-
-        return false;
-    }
-
-    return true;
-}
 
 function checkArgForPaper(req, res) {
     if (!req.body.paper) {
@@ -100,22 +73,13 @@ function checkArgForPortfolioId(req, res) {
     return true;
 }
 
-function sendResult(err, res, data) {
-    if (!checkErr(err)) {
-        return;
-    }
-
-    var result = new Result(data);
-    res.end(result.toString());
-}
-
 function createOrUpdateService(req, res) {
     var session = req.session;
     var newPaper = req.body.paper;
     var _portfolio_id = req.body._portfolio_id;
 
-    setResHeader(res);
-    if (!checkSession(req, res)) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
     if (!checkArgForPaper(req, res)) {
@@ -137,11 +101,11 @@ function createOrUpdateService(req, res) {
     if (newPaper._id) {
         newPaper._id = new ObjectID(newPaper._id);
         PaperDB.update(newPaper, function(err) {
-            sendResult(err, res, null);
+            ServiceUtil.sendResult(err, res, null);
         });
     } else {
         PaperDB.create(newPaper, function (err, created) {
-            sendResult(err, res, created[0]._id.toHexString());
+            ServiceUtil.sendResult(err, res, created[0]._id.toHexString());
         });
     }
 }
@@ -149,8 +113,8 @@ function createOrUpdateService(req, res) {
 function deleteService(req, res) {
     var _paper_id = req.body._id;
 
-    setResHeader(res);
-    if (!checkSession(req, res)) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
     if (!checkArgForIdOnBody(req, res)) {
@@ -158,15 +122,15 @@ function deleteService(req, res) {
     }
 
     PaperDB.remove(_paper_id, function (err) {
-        sendResult(err, res, null);
+        ServiceUtil.sendResult(err, res, null);
     });
 }
 
 function loadService(req, res) {
     var _paper_id = req.params._id;
 
-    setResHeader(res);
-    if (!checkSession(req, res)) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
     if (!checkArgForIdOnParams(req, res)) {
@@ -174,15 +138,15 @@ function loadService(req, res) {
     }
 
     PaperDB.get(_paper_id, function(err, paper) {
-        sendResult(err, res, paper);
+        ServiceUtil.sendResult(err, res, paper);
     });
 }
 
 function loadListService(req, res) {
     var _portfolio_id = req.body._portfolio_id;
 
-    setResHeader(res);
-    if (!checkSession(req, res)) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
     if (!checkArgForPortfolioId(req, res)) {
@@ -190,6 +154,6 @@ function loadListService(req, res) {
     }
 
     PaperDB.getList(_portfolio_id, function(err, list) {
-        sendResult(err, res, list);
+        ServiceUtil.sendResult(err, res, list);
     });
 }

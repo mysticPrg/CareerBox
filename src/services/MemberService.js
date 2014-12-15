@@ -3,6 +3,7 @@
  */
 
 var MemberDB = require('../db/MemberDB');
+var ServiceUtil = require('../util/ServiceUtil');
 
 var Result = require('./result');
 
@@ -12,36 +13,7 @@ module.exports.set = function (server) {
     server.get('/member/logout', logoutService);
 };
 
-
-function checkErr(err) {
-    if (err) {
-        console.log(err.message);
-        return false;
-    }
-
-    return true;
-}
-
-function setResHeader(res) {
-    res.writeHead(200, {
-        'Content-Type': 'application/json'
-    });
-}
-
-function checkSession(req, res) {
-    if (!req.session._id) {
-
-        var result = new Result(null);
-        result.setCode('002');
-        res.end(result.toString());
-
-        return false;
-    }
-
-    return true;
-}
-
-function checkArgForMember(req, res) {
+function checkArgForMemberOnBody(req, res) {
     if (!req.body.member) {
 
         var result = new Result(null);
@@ -54,19 +26,6 @@ function checkArgForMember(req, res) {
     return true;
 }
 
-function sendResult(err, res, data, returnCode) {
-    if (!checkErr(err)) {
-        return;
-    }
-
-    var result = new Result(data);
-    if (returnCode) {
-        result.setCode(returnCode);
-    }
-    res.end(result.toString());
-}
-
-
 function joinService(req, res) {
     var session = req.session;
     var member = req.body.member;
@@ -74,14 +33,14 @@ function joinService(req, res) {
     session._id = '';
     session.email = '';
 
-    setResHeader(res);
-    if (!checkArgForMember(req, res)) {
+    ServiceUtil.setResHeader(res);
+    if (!checkArgForMemberOnBody(req, res)) {
         return;
     }
 
     MemberDB.isExistEmail(member.email, member.isFacebook, function (err, findMember) {
         if (findMember) {
-            sendResult(err, res, null, '102');
+            ServiceUtil.sendResult(err, res, null, '102');
             return;
         }
 
@@ -89,7 +48,7 @@ function joinService(req, res) {
             session._id = created._id;
             session.email = created.email;
 
-            sendResult(err, res, null);
+            ServiceUtil.sendResult(err, res, null);
         });
     });
 }
@@ -101,8 +60,8 @@ function loginService(req, res) {
     session._id = '';
     session.email = '';
 
-    setResHeader(res);
-    if (!checkArgForMember(req, res)) {
+    ServiceUtil.setResHeader(res);
+    if (!checkArgForMemberOnBody(req, res)) {
         return;
     }
 
@@ -111,16 +70,16 @@ function loginService(req, res) {
             session._id = findMember._id.toHexString();
             session.email = findMember.email;
 
-            sendResult(err, res, null);
+            ServiceUtil.sendResult(err, res, null);
         } else if (member.isFacebook) {
             MemberDB.create(member, function (err, created) {
                 session._id = created[0]._id.toHexString();
                 session.email = created[0].email;
 
-                sendResult(err, res, null);
+                ServiceUtil.sendResult(err, res, null);
             });
         } else {
-            sendResult(err, res, null, '101');
+            ServiceUtil.sendResult(err, res, null, '101');
         }
 
     });
@@ -129,7 +88,7 @@ function loginService(req, res) {
 function logoutService(req, res) {
     var session = req.session;
 
-    setResHeader(res);
+    ServiceUtil.setResHeader(res);
     if (session._id) {
         delete session._id;
     }
@@ -137,5 +96,5 @@ function logoutService(req, res) {
         delete session.email;
     }
 
-    sendResult(null, res, null);
+    ServiceUtil.sendResult(null, res, null);
 }
