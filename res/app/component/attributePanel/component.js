@@ -17,6 +17,7 @@ define([
     'component/attribute/verticalAlignAttribute/component',
     'component/attribute/nameAttribute/component',
     'component/attribute/urlAttribute/component',
+    'component/attribute/isIndexAttribute/component',
     'services/EditorData',
     'services/SetAttributeInformation'
 ], function (app) {
