@@ -52,8 +52,9 @@ define([
 
 
             // [병진] EditorData.templateState 가 edit가 되었지 않아서 실행이 안되기 때문에 주석처리를 해줌.
-//            if (EditorData.templateState == 'edit')
-            if($scope.template.target != null)
+            if (EditorData.templateState == 'edit')
+
+//            if($scope.template.target != null)
             {
                 loadTemplate();
             }
