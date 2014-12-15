@@ -27,7 +27,7 @@ function readList(_member_id, callback) {
 
 var exports = {
     save: save,
-    read: readList
+    readList: readList
 };
 
 module.exports = exports;
