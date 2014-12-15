@@ -6,31 +6,41 @@ define([
     'angular',
     'app',
     'classes/Paper',
-    'services/PreviewData',
+    'services/EditorData',
     'services/HTMLGenerator',
     'services/LoadPaperList',
-    'services/LoadPaper'
-], function ($, ng, app, Paper, PreviewData) {
-    app.controller('portfolioPreview', ['$scope', '$http', '$compile', 'PreviewData', 'HTMLGenerator', 'LoadPaperList', 'LoadPaper', function ($scope, $http, $compile, PreviewData, HTMLGenerator, LoadPaperList, LoadPaper) {
+    'services/LoadPaper',
+    'component/item/line/component',
+    'component/item/shape/component',
+    'component/item/text/component',
+    'component/item/link/component',
+    'component/item/image/component',
+    'directives/CommonAttribute'
+], function ($, ng, app, Paper, EditorData) {
+    app.controller('portfolioPreview', ['$scope', '$http', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'LoadPaper', function ($scope, $http, $compile, EditorData, HTMLGenerator, LoadPaperList, LoadPaper) {
+        $scope.paper;
+
+        $scope.paperItemArray = [];
+
         $(document).ready(function () {
-            PreviewData.portfolio._id = window.location.href.split("id=")[1].split('#/')[0];
+            EditorData.portfolio._id = window.location.href.split("id=")[1].split('#/')[0];
 
             initPaper();
 
-            LoadPaperList($http, PreviewData.portfolio._id, function (result) {
-                PreviewData.paperList = result.result;
+            LoadPaperList($http, EditorData.portfolio._id, function (result) {
+                EditorData.paperList = result.result;
                 $scope.papers = result.result;
 
                 var paper;
                 for(var idx = 0; idx < $scope.papers.length; idx++){
                     paper = $scope.papers[idx];
                     if(paper.isIndex === true){
-                        PreviewData.paperId = paper._id;
+                        EditorData.paperId = paper._id;
 
-                        LoadPaper($http, PreviewData.paperId, function (result) {
-                            PreviewData.paper = result.result;
+                        LoadPaper($http, EditorData.paperId, function (result) {
+                            EditorData.paper = result.result;
 
-                            loadPaper(PreviewData.paper);
+                            loadPaper(EditorData.paper);
                         });
                     }
                 }
@@ -41,23 +51,27 @@ define([
             $('#canvas-content').find('div').remove();
 
             $scope.paper = new Paper();
-            PreviewData.childArr = [];
+            EditorData.childArr = [];
 
             // z index 초기화
-            PreviewData.end_zOrder = 0;
-            PreviewData.start_zOrder = 0;
+            EditorData.end_zOrder = 0;
+            EditorData.start_zOrder = 0;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         function loadPaper(paper) {
             var paperChildArr = paper.childArr;
 
+            console.log('///////');
+            console.log(paper);
+            console.log('///////');
+
             $compile($('#canvas-content'))($scope); // 페이퍼 속성을 적용시켜줌.
 
             var child;
             for (var index = 0; index < paperChildArr.length; index++) {
                 child = paperChildArr[index];
-                PreviewData.childArr[child._id] = child;
+                EditorData.childArr[child._id] = child;
                 if (child.childArr) {
                     loadArticle(child);
                 }else{
@@ -74,7 +88,7 @@ define([
             var width = 0, height = 0;
 
             var templateItemArray = article.childArr;
-            PreviewData.end_zOrder++;
+            EditorData.end_zOrder++;
             var itemOption = {draggable: false, resizable: false};
 
             var articleItemId;
