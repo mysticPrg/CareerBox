@@ -3,7 +3,7 @@
  */
 
 var requirejs = require('../../require.config');
-var HighSchoolInfo = requirejs('classes/Info/highSchoolInfo');
+var HighSchoolInfo = requirejs('classes/Info/HighSchoolInfo');
 
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
