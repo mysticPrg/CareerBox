@@ -35,7 +35,7 @@ define([
         // 템플릿 속성
         $('#canvas-content').bind('click', function (){
             // 포커싱 처리
-            EditorData.focusId = EditorData.template._id;
+            EditorData.focusId = 'canvas-content';
         });
 
         $(document).ready(function () {
@@ -53,7 +53,6 @@ define([
 
             // [병진] EditorData.templateState 가 edit가 되었지 않아서 실행이 안되기 때문에 주석처리를 해줌.
 //            if (EditorData.templateState == 'edit')
-            console.log('$scope.template.target',$scope.template.target);
             if($scope.template.target != null)
             {
                 loadTemplate();
@@ -84,8 +83,6 @@ define([
             article.colCount = 0;
 
             $scope.template.target = article;
-
-            $compile($('#canvas-content'))($scope); // 템플릿 속성을 적용시켜줌.
         }
 
         // Load Element

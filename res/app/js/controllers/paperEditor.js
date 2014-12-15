@@ -44,7 +44,7 @@ define([
             // 페이퍼 속성
             $('#canvas-content').bind('click', function () {
                 // 포커싱 처리
-                EditorData.focusId = EditorData.paperId;
+                EditorData.focusId = 'canvas-content';
             });
 
             $rootScope.$on("deleteArticle", function (e, id) {
