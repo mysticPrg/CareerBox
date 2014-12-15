@@ -31,7 +31,8 @@ function _DBCollections() {
         template: null,
 
         personalInfo: null,
-        additionalInfo: null
+        additionalInfo: null,
+        highSchoolInfo: null
     };
 }
 
@@ -49,6 +50,7 @@ _DBCollections.prototype.open = function open(callback) {
 
             self.collections.personalInfo = db.collection('personalInfo');
             self.collections.additionalInfo = db.collection('additionalInfo');
+            self.collections.highSchoolInfo = db.collection('highSchoolInfo');
 
             self.isOpen = true;
 
@@ -69,7 +71,8 @@ _DBCollections.prototype.close = function close() {
             template: null,
 
             personalInfo: null,
-            additionalInfo: null
+            additionalInfo: null,
+            highSchoolInfo: null
         };
     }
 };
