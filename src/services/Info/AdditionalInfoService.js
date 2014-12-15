@@ -37,8 +37,8 @@ function saveService(req, res) {
     var data = req.body.additionalInfo;
     data._member_id = req.session._id;
 
-    AdditionalInfoDB.save(data, function (err) {
-        ServiceUtil.sendResult(err, res, null);
+    AdditionalInfoDB.save(data, function (err, saved) {
+        ServiceUtil.sendResult(err, res, saved[0]._id);
     });
 
 }

@@ -37,8 +37,8 @@ function saveService(req, res) {
     var data = req.body.personalInfo;
     data._member_id = req.session._id;
 
-    PersonalInfoDB.save(data, function (err) {
-        ServiceUtil.sendResult(err, res, null);
+    PersonalInfoDB.save(data, function (err, saved) {
+        ServiceUtil.sendResult(err, res, saved[0]._id);
     });
 
 }
