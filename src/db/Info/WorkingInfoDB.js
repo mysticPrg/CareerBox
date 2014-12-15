@@ -13,7 +13,9 @@ function save(data, callback) {
     var workingInfo = new WorkingInfo(data);
     workingInfo._id = new ObjectID(workingInfo._id);
 
-    workingInfoCollection.save(workingInfo, callback);
+    workingInfoCollection.save(workingInfo, function(err, savedCount, result) {
+        callback(err, result.upserted[0]);
+    });
 }
 
 function readList(_member_id, callback) {

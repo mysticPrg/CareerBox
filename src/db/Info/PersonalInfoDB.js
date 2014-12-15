@@ -13,7 +13,9 @@ function save(data, callback) {
     var personalInfo = new PersonalInfo(data);
     personalInfo._id = new ObjectID(personalInfo._id);
 
-    personalInfoCollection.save(personalInfo, callback);
+    personalInfoCollection.save(personalInfo, function(err, savedCount, result) {
+        callback(err, result.upserted[0]);
+    });
 }
 
 function read(_member_id, callback) {

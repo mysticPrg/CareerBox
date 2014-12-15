@@ -13,7 +13,9 @@ function save(data, callback) {
     var univSchoolInfo = new UnivSchoolInfo(data);
     univSchoolInfo._id = new ObjectID(univSchoolInfo._id);
 
-    univSchoolInfoCollection.save(univSchoolInfo, callback);
+    univSchoolInfoCollection.save(univSchoolInfo, function(err, savedCount, result) {
+        callback(err, result.upserted[0]);
+    });
 }
 
 function readList(_member_id, callback) {
