@@ -41,7 +41,7 @@ define(['app'], function (app) {
             domObj += 'resizable ';
         }
 
-        domObj += 'style="position: absolute; top: ' + item.pos.y + 'px; left: ' + item.pos.x + 'px; width: ' + item.size.width + 'px; height: ' + item.size.height + 'px; box-shadow: 4px 4px 2px #888888;">';
+        domObj += 'style="position: absolute; top: ' + item.pos.y + 'px; left: ' + item.pos.x + 'px; width: ' + item.size.width + 'px; height: ' + item.size.height + 'px;">';
 
         return domObj;
     }

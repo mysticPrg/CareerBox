@@ -33,7 +33,7 @@ define(['app'
                 console.log(stateText);
                 console.log(data);
             }
-            console.log(stateText);
+//            console.log(stateText);
         }
     }]);
 });

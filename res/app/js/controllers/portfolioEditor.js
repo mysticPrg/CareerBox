@@ -4,7 +4,13 @@ define([
     'app',
     'services/EditorData',
     '../route',
-    '../../component/attributePanel/component'
+    '../../component/attributePanel/component',
+    'component/item/line/component',
+    'component/item/shape/component',
+    'component/item/text/component',
+    'component/item/link/component',
+    'component/item/image/component',
+    'directives/CommonAttribute'
 ], function ($, ng, app) {
     app.controller('portfolioEditor', ['$scope', 'EditorData', function ($scope, EditorData) {
 
