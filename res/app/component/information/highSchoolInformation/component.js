@@ -7,7 +7,7 @@ define([
     'services/InformationData',
     'classes/Info/HighSchoolInfo'
 ], function (app, InformationData, HighSchoolInfo) {
-    app.controller('highSchoolInformationContorller', ['$scope', '$compile', function ($scope, $compile) {
+    app.controller('highSchoolInformationContorller', ['$scope', function ($scope) {
         $scope.highSchoolInfo = new HighSchoolInfo();
 
         $scope.InformationData = InformationData;
