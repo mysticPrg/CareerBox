@@ -10,25 +10,30 @@ var ObjectID = require('mongodb').ObjectID;
 
 function save(data, callback) {
     var workingInfoCollection = require('../../util/DBCollections').getInstance().collections.workingInfo;
+
     var workingInfo = new WorkingInfo(data);
     workingInfo._id = new ObjectID(workingInfo._id);
 
     workingInfoCollection.save(workingInfo, function(err, savedCount, result) {
-        callback(err, result.upserted[0]);
+        var returnObject = null;
+        if ( result.updatedExisting ) {
+            returnObject = workingInfo;
+        } else {
+            returnObject = result.upserted[0];
+        }
+        callback(err, returnObject);
     });
 }
 
-function readList(_member_id, callback) {
+function read(_member_id, callback) {
     var workingInfoCollection = require('../../util/DBCollections').getInstance().collections.workingInfo;
 
-    workingInfoCollection.find({'_member_id': _member_id}).toArray(function(err, arr) {
-        callback(err, arr);
-    });
+    workingInfoCollection.findOne({'_member_id': _member_id}, callback);
 }
 
 var exports = {
     save: save,
-    readList: readList
+    read: read
 };
 
 module.exports = exports;
