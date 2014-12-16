@@ -14,7 +14,7 @@ define([
 
         this.S_title = ''; // 논문 제목
         this.S_academy = ''; // 논문게재 학회
-        this.D_date = ''; // 논문게재 날짜
+        this.D_date = new Date(); // 논문게재 날짜
         this.S_ratio = ''; // 참여 정도
         this.L_detail = ''; // 논문 내용
 
