@@ -1,9 +1,30 @@
 /**
  * Created by mysticPrg on 2014-12-11.
  */
-define(['app'], function (app) {
+define([
+    'app',
+    'services/InformationData',
+    'classes/Info/WorkingInfo'
+], function (app, InformationData, WorkingInfo) {
 
     app.controller('workingInformationController', function ($scope) {
+        $scope.workingInfo = new WorkingInfo();
+
+        $scope.InformationData = InformationData;
+
+        $scope.$watch("InformationData.workingInfos", function () {
+            $scope.workingInfos = InformationData.workingInfos;
+        }, true);
+
+        $scope.addWorking = function () {
+            var newWorkingInfo = new WorkingInfo($scope.workingInfo);
+            $scope.workingInfos.push(newWorkingInfo);
+            $scope.workingInfo = new WorkingInfo();
+        }
+
+        $scope.delWorking = function (index) {
+            $scope.workingInfos.splice(index, 1);
+        }
     });
 
     app.directive('workingInformation', function () {
