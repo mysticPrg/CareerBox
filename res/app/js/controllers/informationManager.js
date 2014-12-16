@@ -24,7 +24,7 @@ define([
     'component/information/projectInformation/component',
     'component/information/columnInformation/component'
 ], function ($, ng, app, InformationData) {
-    app.controller('informationManager', ['$scope', '$http', '$q', 'InformationData', 'savePersonal', 'saveAdditional', function ($scope, $http, $q, InformationData) {
+    app.controller('informationManager', ['$scope', '$http', '$q', 'InformationData', function ($scope, $http, $q, InformationData) {
         $scope.initialize = function () {
             $('#informationTab a').click(function (e) {
                 e.preventDefault();
@@ -37,6 +37,9 @@ define([
         $scope.save = function (info) {
             var savePersonalPromiss = $http.post('http://210.118.74.166:8123/info/personal', {personalInfo :InformationData.personalInfo});
             var saveAdditionalPromiss = $http.post('http://210.118.74.166:8123/info/additional', {additionalInfo :InformationData.additionalInfo});
+
+            console.log(InformationData.personalInfo);
+            console.log(InformationData.additionalInfo);
 
             $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
