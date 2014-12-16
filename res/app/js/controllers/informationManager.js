@@ -49,7 +49,6 @@ define([
             var saveAdditionalPromiss = $http.get('http://210.118.74.166:8123/info/additional', {withCredentials: true});
 
             $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
-                console.log(InformationData.personalInfo);
                 InformationData.personalInfo = resultArray[0].data.result;
                 InformationData.additionalInfo = resultArray[1].data.result;
             });
@@ -57,9 +56,11 @@ define([
 
         function loadSchoolInfo() {
             var saveHighSchoolPromiss = $http.get('http://210.118.74.166:8123/info/highSchool', {withCredentials: true});
+            var saveUnivSchoolPromiss = $http.get('http://210.118.74.166:8123/info/univSchool', {withCredentials: true});
 
-            $q.all([saveHighSchoolPromiss]).then(function (resultArray) {
+            $q.all([saveHighSchoolPromiss, saveUnivSchoolPromiss]).then(function (resultArray) {
                 InformationData.highSchoolInfos = resultArray[0].data.result;
+                InformationData.univSchoolInfos = resultArray[1].data.result;
             });
         }
 
@@ -70,7 +71,8 @@ define([
 //                console.log(InformationData.additionalInfo);
                 savePersonalInfo();
             }else if(info === 'schoolInfo'){
-//                console.log(InformationData.highSchoolInfo);
+//                console.log(InformationData.highSchoolInfos['0']);
+//                console.log(InformationData.univSchoolInfos['0']);
                 saveSchoolInfo();
             }
 
@@ -80,7 +82,7 @@ define([
             var savePersonalPromiss = $http.post('http://210.118.74.166:8123/info/personal', {personalInfo: InformationData.personalInfo}, {withCredentials: true});
             var saveAdditionalPromiss = $http.post('http://210.118.74.166:8123/info/additional', {additionalInfo: InformationData.additionalInfo}, {withCredentials: true});
 
-            $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
+            $q.all([savePersonalPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
                     if (value.data.returnCode !== '000') {
                         return;
@@ -92,9 +94,10 @@ define([
         }
 
         function saveSchoolInfo() {
-            var saveHighSchoolPromiss = $http.post('http://210.118.74.166:8123/info/highSchool', {highSchoolInfo: InformationData.highSchoolInfo}, {withCredentials: true});
+            var saveHighSchoolPromiss = $http.post('http://210.118.74.166:8123/info/highSchool', {highSchoolInfo: InformationData.highSchoolInfos['0']}, {withCredentials: true});
+            var saveUnivSchoolPromiss = $http.post('http://210.118.74.166:8123/info/univSchool', {univSchoolInfo: InformationData.univSchoolInfos['0']}, {withCredentials: true});
 
-            $q.all([saveHighSchoolPromiss]).then(function (resultArray) {
+            $q.all([saveHighSchoolPromiss, saveUnivSchoolPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
                     if (value.data.returnCode !== '000') {
                         return;
