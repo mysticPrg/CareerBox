@@ -58,6 +58,9 @@ define([
 //                console.log(InformationData.personalInfo);
 //                console.log(InformationData.additionalInfo);
                 savePersonalInfo();
+            }else if(info === 'schoolInfo'){
+//                console.log(InformationData.highSchoolInfo);
+                saveSchoolInfo();
             }
 
         }
@@ -68,7 +71,20 @@ define([
 
             $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
-                    console.log(value.data.returnCode);
+                    if (value.data.returnCode !== '000') {
+                        return;
+                    }
+                });
+
+                showNotification();
+            });
+        }
+
+        function saveSchoolInfo() {
+            var saveHighSchoolPromiss = $http.post('http://210.118.74.166:8123/info/highSchool', {highSchoolInfo: InformationData.highSchoolInfo}, {withCredentials: true});
+
+            $q.all([saveHighSchoolPromiss]).then(function (resultArray) {
+                angular.forEach(resultArray, function (value, key) {
                     if (value.data.returnCode !== '000') {
                         return;
                     }

@@ -3,10 +3,16 @@
  */
 
 define([
-    'app'
-], function (app) {
+    'app',
+    'services/InformationData'
+], function (app, InformationData) {
     app.controller('highSchoolInformationContorller', function ($scope) {
+        $scope.InformationData = InformationData;
 
+        $scope.$watch("InformationData.highSchoolInfo", function () {
+            $scope.highSchoolInfo = InformationData.highSchoolInfo;
+        }, true);
+//        $scope.highSchoolInfos = new Array();
     });
 
     app.directive('highSchoolInformation', function () {

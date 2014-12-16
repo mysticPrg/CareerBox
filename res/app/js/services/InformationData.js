@@ -4,12 +4,14 @@
 define([
     'app',
     'classes/Info/PersonalInfo',
-    'classes/Info/AdditionalInfo'
-], function (app, PersonalInfo, AdditionalInfo) {
+    'classes/Info/AdditionalInfo',
+    'classes/Info/HighSchoolInfo'
+], function (app, PersonalInfo, AdditionalInfo, HighSchoolInfo) {
 
     var InformationData = {
         personalInfo : new PersonalInfo(),
-        additionalInfo : new AdditionalInfo()
+        additionalInfo : new AdditionalInfo(),
+        highSchoolInfo : new HighSchoolInfo()
     };
 
     app.factory('InformationData', function () {
