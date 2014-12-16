@@ -9,7 +9,7 @@ var ServiceUtil = require('../../util/ServiceUtil');
 
 module.exports.set = function (server) {
     server.post('/info/working', saveService);
-    server.get('/info/working', readListService);
+    server.get('/info/working', readService);
 };
 
 function checkArgForWorkingInfo(req, res) {
@@ -43,7 +43,7 @@ function saveService(req, res) {
     });
 }
 
-function readListService(req, res) {
+function readService(req, res) {
 
     ServiceUtil.setResHeader(res);
     if (!ServiceUtil.checkSession(req, res)) {
@@ -52,7 +52,7 @@ function readListService(req, res) {
 
     var _member_id = req.session._id;
 
-    WorkingInfoDB.readList(_member_id, function (err, findedList) {
-        ServiceUtil.sendResult(err, res, findedList);
+    WorkingInfoDB.read(_member_id, function (err, finded) {
+        ServiceUtil.sendResult(err, res, finded);
     });
 }

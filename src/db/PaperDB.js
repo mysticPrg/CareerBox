@@ -146,7 +146,7 @@ function setIndex(_portfolio_id, _paper_id, callback) {
                         $set: {isIndex: true}
                     }
                     , cb);
-            } else if (p.isIndex === false) {
+            } else {
                 paperCollection.update(
                     {
                         _id: p._id
@@ -155,9 +155,8 @@ function setIndex(_portfolio_id, _paper_id, callback) {
                         $set: {isIndex: false}
                     }
                     , cb);
-            } else {
-                cb(null);
             }
+
         }, callback);
     });
 }
