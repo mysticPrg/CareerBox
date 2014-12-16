@@ -30,21 +30,11 @@ define([
 
             // 페이퍼일 경우
             if(id == 'canvas-content' || id == EditorData.paper._id){
-
                 return {
                             parentArray : EditorData,
                             attributeInformation : EditorData.paper,
                             type : 'paper'
                         }
-
-//                for(var key in EditorData.paperList){
-//                    if(EditorData.paperList[key]._id == EditorData.paperId)
-//                        return {
-//                            parentArray : EditorData,
-//                            attributeInformation : EditorData.paperList[key],
-//                            type : 'paper'
-//                        }
-//                }
             }
 
             // 아티클 안의 요소들일 경우

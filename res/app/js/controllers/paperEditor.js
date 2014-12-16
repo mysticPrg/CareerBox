@@ -66,23 +66,42 @@ define([
                     // 속성창 갱신 Second Task
                     EditorData.focusId = "canvas-content";
 
+                    // changed 초기화
+                    $scope.changed = false;
+                    isFirst = true;
                 });
             });
 
+            // 로딩된 처음은 무조건 EditorData.paper watch가 발생하기 때문에 첫번째는 무시
+            var isFirst = true;
+            $scope.EditorData.paper = EditorData.paper;
             $scope.$watch("EditorData.paper", function () {
-                $scope.changed = true;
+                if(!isFirst && EditorData.paper){
+                    $scope.changed = true;
+                } else {isFirst = false;}
+            }, true);
+
+            // childArr watch 하지만 acticle은 object로 인식 >> watch가 안됨..
+            $scope.EditorData.childArr = EditorData.childArr;
+            $scope.$watch("EditorData.childArr", function () {
+                if(EditorData.childArr){
+                    $scope.changed = true;
+                    console.log('$scope.EditorData.childArr', $scope.EditorData.childArr);
+                }
             }, true);
 
             $scope.$watch("EditorData.templateState", function () {
                 if(EditorData.templateState !== ''){
-                    var modalInstance = $modal.open(saveConfirmModal);
-                    modalInstance.result.then(function () {
-                        $scope.save();
+                    if($scope.changed){
+                        var modalInstance = $modal.open(saveConfirmModal);
+                        modalInstance.result.then(function () {
+                            $scope.save();
 
-                        templateStateProcess();
-                    }, function () {
-                        templateStateProcess();
-                    })
+                            templateStateProcess();
+                        }, function () {
+                            templateStateProcess();
+                        })
+                    } else templateStateProcess();
                 }
             });
 

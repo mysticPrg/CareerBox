@@ -55,10 +55,19 @@ define([
             else{
                 getTemplateInstance();
             }
+
+            // changed 초기화
+            $scope.changed = false;
+            isFirst = true;
         });
 
+        // 로딩된 처음은 무조건 EditorData.templateItemArray watch가 발생하기 때문에 첫번째는 무시
+        var isFirst = true;
         $scope.$watch("EditorData.templateItemArray", function () {
-            $scope.changed = true;
+            if(!isFirst && EditorData.paper){
+                $scope.changed = true;
+                console.log('EditorData.templateItemArray', EditorData.templateItemArray);
+            } else {isFirst = false;}
         }, true);
 
         $rootScope.$on("deleteItem", function (e, id) {
