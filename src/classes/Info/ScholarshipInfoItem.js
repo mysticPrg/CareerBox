@@ -13,8 +13,8 @@ define([], function () {
 
         this.S_name = ''; // 장학금명
         this.S_school = ''; // 학교명
-        this.N_year = ''; // 수여 년도
-        this.N_term = ''; // 수여 학기
+        this.N_year = 0; // 수여 년도
+        this.N_term = 0; // 수여 학기
 
         if ( props ) {
             this.S_name = props.S_name ? props.S_name : this.S_name;
