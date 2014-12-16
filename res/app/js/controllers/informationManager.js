@@ -24,7 +24,7 @@ define([
     'component/information/projectInformation/component',
     'component/information/columnInformation/component'
 ], function ($, ng, app, InformationData) {
-    app.controller('informationManager', ['$scope', '$http', '$q', 'InformationData', 'savePersonal', 'saveAdditional', function ($scope, $http, $q, InformationData, savePersonal, saveAdditional) {
+    app.controller('informationManager', ['$scope', '$http', '$q', 'InformationData', 'savePersonal', 'saveAdditional', function ($scope, $http, $q, InformationData) {
         $scope.initialize = function () {
             $('#informationTab a').click(function (e) {
                 e.preventDefault();
