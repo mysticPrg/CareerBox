@@ -38,8 +38,8 @@ function saveService(req, res) {
     var data = req.body.highSchoolInfo;
     data._member_id = req.session._id;
 
-    HighSchoolInfoDB.saveList(data, function (err) {
-        ServiceUtil.sendResult(err, res, null);
+    HighSchoolInfoDB.saveList(data, function (err, saved) {
+        ServiceUtil.sendResult(err, res, saved._id);
     });
 
 }

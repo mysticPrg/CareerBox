@@ -8,25 +8,27 @@ var UnivSchoolInfo = requirejs('classes/Info/UnivSchoolInfo');
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
-function saveList(arrData, callback) {
+function saveList(data, callback) {
     var univSchoolInfoCollection = require('../../util/DBCollections').getInstance().collections.univSchoolInfo;
 
-    async.each(arrData, function (data, cb) {
-        var univSchoolInfo = new UnivSchoolInfo(arrData);
-        univSchoolInfo._id = new ObjectID(univSchoolInfo._id);
+    var univSchoolInfo = new UnivSchoolInfo(data);
+    univSchoolInfo._id = new ObjectID(univSchoolInfo._id);
 
-        univSchoolInfoCollection.save(univSchoolInfo, cb);
-    }, function (err) {
-        callback(err);
+    univSchoolInfoCollection.save(univSchoolInfo, function(err, savedCount, result) {
+        var returnObject = null;
+        if ( result.updatedExisting ) {
+            returnObject = univSchoolInfo;
+        } else {
+            returnObject = result.upserted[0];
+        }
+        callback(err, returnObject);
     });
 }
 
 function readList(_member_id, callback) {
     var univSchoolInfoCollection = require('../../util/DBCollections').getInstance().collections.univSchoolInfo;
 
-    univSchoolInfoCollection.find({'_member_id': _member_id}).toArray(function(err, arr) {
-        callback(err, arr);
-    });
+    univSchoolInfoCollection.findOne({'_member_id': _member_id}, callback);
 }
 
 

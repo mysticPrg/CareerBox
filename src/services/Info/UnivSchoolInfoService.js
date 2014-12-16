@@ -12,8 +12,8 @@ module.exports.set = function (server) {
     server.get('/info/univSchool', readListService);
 };
 
-function checkArgForUnivSchoolInfos(req, res) {
-    if (!req.body.univSchoolInfos) {
+function checkArgForUnivSchoolInfo(req, res) {
+    if (!req.body.univSchoolInfo) {
 
         var result = new Result(null);
         result.setCode('001');
@@ -31,16 +31,14 @@ function saveService(req, res) {
     if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
-    if (!checkArgForUnivSchoolInfos(req, res)) {
+    if (!checkArgForUnivSchoolInfo(req, res)) {
         return;
     }
 
-    var arrData = req.body.univSchoolInfos;
-    for ( var i=0 ; i<arrData.length ; i++ ) {
-        arrData[i]._member_id = req.session._id;
-    }
+    var data = req.body.univSchoolInfo;
+    data._member_id = req.session._id;
 
-    UnivSchoolInfoDB.saveList(arrData, function (err, saved) {
+    UnivSchoolInfoDB.saveList(data, function (err, saved) {
         ServiceUtil.sendResult(err, res, saved._id);
     });
 
@@ -55,7 +53,7 @@ function readListService(req, res) {
 
     var _member_id = req.session._id;
 
-    UnivSchoolInfoDB.readList(_member_id, function (err, findedList) {
-        ServiceUtil.sendResult(err, res, findedList);
+    UnivSchoolInfoDB.readList(_member_id, function (err, finded) {
+        ServiceUtil.sendResult(err, res, finded);
     });
 }

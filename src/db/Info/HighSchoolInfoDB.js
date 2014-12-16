@@ -15,13 +15,13 @@ function saveList(data, callback) {
     highSchoolInfo._id = new ObjectID(highSchoolInfo._id);
 
     highSchoolInfoCollection.save(highSchoolInfo, function(err, savedCount, result) {
-        var returnID = null;
+        var returnObject = null;
         if ( result.updatedExisting ) {
-            returnID = highSchoolInfo;
+            returnObject = highSchoolInfo;
         } else {
-            returnID = result.upserted[0];
+            returnObject = result.upserted[0];
         }
-        callback(err, returnID);
+        callback(err, returnObject);
     });
 }
 
