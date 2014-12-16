@@ -3,13 +3,16 @@
  */
 define(['app'], function (app) {
     function loadItem(item, id, option) {
-        var domObj = '<div id="' + id + '" ng-click rotatable ';
+        var domObj = '<div id="' + id + '" ng-click ';
 
         if(option.draggable === true){
             domObj += 'draggable ';
         }
         if(option.resizable === true){
             domObj += 'resizable ';
+        }
+        if(option.rotatable === true){
+            domObj += 'rotatable ';
         }
 
         var itemType = item.itemType;

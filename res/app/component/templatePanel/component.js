@@ -50,7 +50,7 @@ define([
 
                 EditorData.templateItemArray[item._id] = item;
 
-                var option = {draggable: true, resizable: true};
+                var option = {draggable: true, resizable: true, rotatable: true};
 
                 var domObj = HTMLGenerator('loadItem', item, item._id, option);
 

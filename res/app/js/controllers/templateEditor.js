@@ -111,7 +111,7 @@ define([
         function loadElement(item) {
             var id = EditorData.template._id + '_' + item._id;
 
-            var option = {draggable: true, resizable: true};
+            var option = {draggable: true, resizable: true, rotatable: true};
 
             var domObj = HTMLGenerator('loadItem', item, item._id, option);
 
