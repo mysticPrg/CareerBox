@@ -49,8 +49,10 @@ define([
             var saveAdditionalPromiss = $http.get('http://210.118.74.166:8123/info/additional', {withCredentials: true});
 
             $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
-                InformationData.personalInfo = resultArray[0].data.result;
-                InformationData.additionalInfo = resultArray[1].data.result;
+                if(resultArray[0].data.result !== null)
+                    InformationData.personalInfo = resultArray[0].data.result;
+                if(resultArray[1].data.result !== null)
+                    InformationData.additionalInfo = resultArray[1].data.result;
             });
         }
 
@@ -68,7 +70,7 @@ define([
         $scope.save = function (info) {
             if (info === 'personalInfo') {
 //                console.log(InformationData.personalInfo);
-//                console.log(InformationData.additionalInfo);
+                console.log(InformationData.additionalInfo);
                 savePersonalInfo();
             }else if(info === 'schoolInfo'){
 //                console.log(InformationData.highSchoolInfos['0']);
