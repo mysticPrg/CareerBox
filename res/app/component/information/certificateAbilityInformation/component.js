@@ -3,11 +3,30 @@
  */
 
 define([
-    'app'
-], function (app) {
-    app.controller('certificateAbilityInformationContorller', function ($scope) {
+    'app',
+    'services/InformationData',
+    'classes/Info/CertificationAbilityInfo'
+], function (app, InformationData, CertificateAbilityInfo) {
+    app.controller('certificateAbilityInformationContorller', ['$scope', function ($scope) {
+        $scope.certificateAbilityInfo = new CertificateAbilityInfo();
 
-    });
+        $scope.InformationData = InformationData;
+
+        $scope.$watch("InformationData.certificateAbilityInfos", function () {
+            $scope.certificateAbilityInfos = InformationData.certificateAbilityInfos;
+        }, true);
+
+        $scope.addCertificateAbility = function () {
+            var newCertificateAbilityInfo = new CertificateAbilityInfo($scope.certificateAbilityInfo);
+            $scope.certificateAbilityInfos.push(newCertificateAbilityInfo);
+            $scope.certificateAbilityInfo = new CertificateAbilityInfo();
+        }
+
+        $scope.delCertificateAbility = function (index) {
+            $scope.certificateAbilityInfos.splice(index, 1);
+        }
+
+    }]);
 
     app.directive('certificateAbilityInformation', function () {
         return {
