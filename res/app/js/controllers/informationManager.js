@@ -85,12 +85,15 @@ define([
         function loadAbilityInfo() {
             var loadCertificationAbilityPromiss = $http.get('http://210.118.74.166:8123/info/certificationAbility', {withCredentials: true});
             var loadProficiencyPromiss = $http.get('http://210.118.74.166:8123/info/proficiency', {withCredentials: true});
+            var loadComputerAbilityPromiss = $http.get('http://210.118.74.166:8123/info/computerAbility', {withCredentials: true});
 
-            $q.all([loadCertificationAbilityPromiss, loadProficiencyPromiss]).then(function (resultArray) {
+            $q.all([loadCertificationAbilityPromiss, loadProficiencyPromiss, loadComputerAbilityPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null)
                     InformationData.certificateAbilityInfo = resultArray[0].data.result;
                 if(resultArray[1].data.result !== null)
                     InformationData.proficiencyInfo = resultArray[1].data.result;
+                if(resultArray[2].data.result !== null)
+                    InformationData.computerAbilityInfo = resultArray[2].data.result;
             });
         }
 
@@ -155,8 +158,9 @@ define([
         function saveAbilityInfo() {
             var saveCertificationAbilityPromiss = $http.post('http://210.118.74.166:8123/info/certificationAbility', {certificationAbilityInfo: InformationData.certificateAbilityInfo}, {withCredentials: true});
             var saveProficiencyPromiss = $http.post('http://210.118.74.166:8123/info/proficiency', {proficiencyInfo: InformationData.proficiencyInfo}, {withCredentials: true});
+            var saveComputerAbilityPromiss = $http.post('http://210.118.74.166:8123/info/computerAbility', {computerAbilityInfo: InformationData.computerAbilityInfo}, {withCredentials: true});
 
-            $q.all([saveCertificationAbilityPromiss, saveProficiencyPromiss]).then(function (resultArray) {
+            $q.all([saveCertificationAbilityPromiss, saveProficiencyPromiss, saveComputerAbilityPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
                     if (value.data.returnCode !== '000') {
                         return;

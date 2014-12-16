@@ -14,12 +14,12 @@ define([
 
         this.S_name = '';              // 기능
         this.S_grade = '';             // 활용 수준
-        this.T_term = new Term();     // 활용 기간
+        this.N_term = 0;     // 활용 기간
 
         if ( props ) {
             this.S_name = props.S_name ? props.S_name : this.S_name;
             this.S_grade = props.S_grade ? props.S_grade : this.S_grade;
-            this.T_term = props.T_term ? props.T_term : this.T_term;
+            this.N_term = props.N_term ? props.N_term : this.N_term;
         }
     }
 
