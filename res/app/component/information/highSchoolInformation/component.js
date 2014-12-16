@@ -5,25 +5,25 @@
 define([
     'app',
     'services/InformationData',
-    'classes/Info/HighSchoolInfo'
-], function (app, InformationData, HighSchoolInfo) {
+    'classes/Info/HighSchoolInfoItem'
+], function (app, InformationData, HighSchoolInfoItem) {
     app.controller('highSchoolInformationContorller', ['$scope', function ($scope) {
-        $scope.highSchoolInfo = new HighSchoolInfo();
+        $scope.highSchoolInfoItem = new HighSchoolInfoItem();
 
         $scope.InformationData = InformationData;
 
-        $scope.$watch("InformationData.highSchoolInfos", function () {
-            $scope.highSchoolInfos = InformationData.highSchoolInfos;
+        $scope.$watch("InformationData.highSchoolInfo", function () {
+            $scope.highSchoolInfoItems = InformationData.highSchoolInfo.items;
         }, true);
 
-        $scope.addHighSchool = function () {
-            var newHighSchoolInfo = new HighSchoolInfo($scope.highSchoolInfo);
-            $scope.highSchoolInfos.push(newHighSchoolInfo);
-            $scope.highSchoolInfo = new HighSchoolInfo();
+        $scope.addHighSchoolInfo = function () {
+            var newHighSchoolInfoItem = new HighSchoolInfoItem($scope.highSchoolInfoItem);
+            $scope.highSchoolInfoItems.push(newHighSchoolInfoItem);
+            $scope.highSchoolInfoItem = new HighSchoolInfoItem();
         }
 
-        $scope.delHighSchool = function (index) {
-            $scope.highSchoolInfos.splice(index, 1);
+        $scope.delHighSchoolInfo = function (index) {
+            $scope.highSchoolInfoItems.splice(index, 1);
         }
 
     }]);

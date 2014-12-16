@@ -42,17 +42,17 @@ define([
             }else if(info === 'schoolInfo'){
                 loadSchoolInfo();
             }else if(info === 'workingInfo'){
-                loadSchoolInfo();
+                loadWorkingInfo();
             }else if(info === 'abilityInfo'){
-
+                loadAbilityInfo();
             }
         }
 
         function loadPersonalInfo() {
-            var savePersonalPromiss = $http.get('http://210.118.74.166:8123/info/personal', {withCredentials: true});
-            var saveAdditionalPromiss = $http.get('http://210.118.74.166:8123/info/additional', {withCredentials: true});
+            var loadPersonalPromiss = $http.get('http://210.118.74.166:8123/info/personal', {withCredentials: true});
+            var loadAdditionalPromiss = $http.get('http://210.118.74.166:8123/info/additional', {withCredentials: true});
 
-            $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
+            $q.all([loadPersonalPromiss, loadAdditionalPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null)
                     InformationData.personalInfo = resultArray[0].data.result;
                 if(resultArray[1].data.result !== null)
@@ -61,27 +61,30 @@ define([
         }
 
         function loadSchoolInfo() {
-            var saveHighSchoolPromiss = $http.get('http://210.118.74.166:8123/info/highSchool', {withCredentials: true});
-            var saveUnivSchoolPromiss = $http.get('http://210.118.74.166:8123/info/univSchool', {withCredentials: true});
+            var loadHighSchoolPromiss = $http.get('http://210.118.74.166:8123/info/highSchool', {withCredentials: true});
+            var loadUnivSchoolPromiss = $http.get('http://210.118.74.166:8123/info/univSchool', {withCredentials: true});
 
-            $q.all([saveHighSchoolPromiss, saveUnivSchoolPromiss]).then(function (resultArray) {
-                InformationData.highSchoolInfos = resultArray[0].data.result;
-                InformationData.univSchoolInfos = resultArray[1].data.result;
+            $q.all([loadHighSchoolPromiss, loadUnivSchoolPromiss]).then(function (resultArray) {
+                if(resultArray[0].data.result !== null)
+                    InformationData.highSchoolInfo = resultArray[0].data.result;
+
+                if(resultArray[1].data.result !== null)
+                    InformationData.univSchoolInfo = resultArray[1].data.result;
             });
         }
 
         function loadWorkingInfo() {
-            var saveHighSchoolPromiss = $http.get('http://210.118.74.166:8123/info/working', {withCredentials: true});
+            var loadWorkingPromiss = $http.get('http://210.118.74.166:8123/info/working', {withCredentials: true});
 
-            $q.all([saveHighSchoolPromiss]).then(function (resultArray) {
+            $q.all([loadWorkingPromiss]).then(function (resultArray) {
                 InformationData.workingInfos = resultArray[0].data.result;
             });
         }
 
         function loadAbilityInfo() {
-            var saveCertificationAbilityPromiss = $http.get('http://210.118.74.166:8123/info/certificationAbility', {withCredentials: true});
+            var loadCertificationAbilityPromiss = $http.get('http://210.118.74.166:8123/info/certificationAbility', {withCredentials: true});
 
-            $q.all([saveCertificationAbilityPromiss]).then(function (resultArray) {
+            $q.all([loadCertificationAbilityPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result.length !== 0)
                     InformationData.certificateAbilityInfos = resultArray[0].data.result;
             });
@@ -94,7 +97,6 @@ define([
             }else if(info === 'schoolInfo'){
                 saveSchoolInfo();
             }else if(info === 'workingInfo'){
-//                console.log(InformationData.highSchoolInfo);
                 saveWorkingInfo();
             }else if(info === 'abilityInfo'){
                 saveAbilityInfo();
@@ -118,8 +120,8 @@ define([
         }
 
         function saveSchoolInfo() {
-            var saveHighSchoolPromiss = $http.post('http://210.118.74.166:8123/info/highSchool', {highSchoolInfos: InformationData.highSchoolInfos}, {withCredentials: true});
-            var saveUnivSchoolPromiss = $http.post('http://210.118.74.166:8123/info/univSchool', {univSchoolInfos: InformationData.univSchoolInfos}, {withCredentials: true});
+            var saveHighSchoolPromiss = $http.post('http://210.118.74.166:8123/info/highSchool', {highSchoolInfo: InformationData.highSchoolInfo}, {withCredentials: true});
+            var saveUnivSchoolPromiss = $http.post('http://210.118.74.166:8123/info/univSchool', {univSchoolInfo: InformationData.univSchoolInfo}, {withCredentials: true});
 
             $q.all([saveHighSchoolPromiss, saveUnivSchoolPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
@@ -165,7 +167,5 @@ define([
             var notification = kendo.toString('성공하였습니다.');
             $scope.noti.show(notification, "info");
         }
-
-
     }]);
 });
