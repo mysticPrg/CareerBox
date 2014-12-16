@@ -8,7 +8,7 @@ define([
 ], function (app, InformationData, WorkingInfo) {
 
     app.controller('workingInformationController', function ($scope) {
-        $scope.workingInfo = new ComputerAbilityInfo();
+        $scope.workingInfo = new PaperAbilityInfo();
 
         $scope.InformationData = InformationData;
 
@@ -17,9 +17,9 @@ define([
         }, true);
 
         $scope.addWorking = function () {
-            var newWorkingInfo = new ComputerAbilityInfo($scope.workingInfo);
+            var newWorkingInfo = new PaperAbilityInfo($scope.workingInfo);
             $scope.workingInfos.push(newWorkingInfo);
-            $scope.workingInfo = new ComputerAbilityInfo();
+            $scope.workingInfo = new PaperAbilityInfo();
         }
 
         $scope.delWorking = function (index) {
