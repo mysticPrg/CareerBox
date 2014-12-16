@@ -37,7 +37,8 @@ function _DBCollections() {
         workingInfo: null,
 
         certificationAbilityInfo: null,
-        proficiencyInfo: null
+        proficiencyInfo: null,
+        computerAbilityInfo: null
     };
 }
 
@@ -61,6 +62,7 @@ _DBCollections.prototype.open = function open(callback) {
 
             self.collections.certificationAbilityInfo = db.collection('certificationAbilityInfo');
             self.collections.proficiencyInfo = db.collection('proficiencyInfo');
+            self.collections.computerAbilityInfo = db.collection('computerAbilityInfo');
 
             self.isOpen = true;
 
@@ -87,7 +89,8 @@ _DBCollections.prototype.close = function close() {
             workingInfo: null,
 
             certificationAbilityInfo: null,
-            proficiencyInfo: null
+            proficiencyInfo: null,
+            computerAbilityInfo: null
         };
     }
 };

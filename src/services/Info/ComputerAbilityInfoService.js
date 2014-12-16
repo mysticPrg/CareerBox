@@ -3,17 +3,17 @@
  */
 
 
-var ProficiencyInfoDB = require('../../db/Info/ProficiencyInfoDB');
+var ComputerAbilityInfoDB = require('../../db/Info/ComputerAbilityInfoDB');
 var Result = require('../result');
 var ServiceUtil = require('../../util/ServiceUtil');
 
 module.exports.set = function (server) {
-    server.post('/info/proficiency', saveService);
-    server.get('/info/proficiency', readService);
+    server.post('/info/computerAbility', saveService);
+    server.get('/info/computerAbility', readService);
 };
 
-function checkArgForProficiencyInfoInfo(req, res) {
-    if (!req.body.proficiencyInfo) {
+function checkArgForComputerAbilityInfo(req, res) {
+    if (!req.body.computerAbilityInfo) {
 
         var result = new Result(null);
         result.setCode('001');
@@ -31,16 +31,17 @@ function saveService(req, res) {
     if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
-    if (!checkArgForProficiencyInfoInfo(req, res)) {
+    if (!checkArgForComputerAbilityInfo(req, res)) {
         return;
     }
 
-    var data = req.body.proficiencyInfo;
+    var data = req.body.computerAbilityInfo;
     data._member_id = req.session._id;
 
-    ProficiencyInfoDB.save(data, function (err, saved) {
+    ComputerAbilityInfoDB.save(data, function (err, saved) {
         ServiceUtil.sendResult(err, res, saved._id);
     });
+
 }
 
 function readService(req, res) {
@@ -52,7 +53,7 @@ function readService(req, res) {
 
     var _member_id = req.session._id;
 
-    ProficiencyInfoDB.read(_member_id, function (err, finded) {
+    ComputerAbilityInfoDB.read(_member_id, function (err, finded) {
         ServiceUtil.sendResult(err, res, finded);
     });
 }

@@ -17,6 +17,8 @@ var HighSchoolInfoService = require('./src/services/Info/HighSchoolInfoService')
 var UnivSchoolInfoService = require('./src/services/Info/UnivSchoolInfoService');
 var WorkingInfoService = require('./src/services/Info/WorkingInfoService');
 var CertificationAbilityInfoService = require('./src/services/Info/CertificationAbilityInfoService');
+var ProficiencyInfoService = require('./src/services/Info/ProficiencyInfoService');
+var ComputerAbilityInfoService = require('./src/services/Info/ComputerAbilityInfoService');
 
 MemberService.set(server);
 PortfolioService.set(server);
@@ -30,6 +32,8 @@ HighSchoolInfoService.set(server);
 UnivSchoolInfoService.set(server);
 WorkingInfoService.set(server);
 CertificationAbilityInfoService.set(server);
+ProficiencyInfoService.set(server);
+ComputerAbilityInfoService.set(server);
 
 server.start(8123);
 
