@@ -4,28 +4,29 @@
 define([
     'app',
     'services/InformationData',
-    'classes/Info/WorkingInfo'
-], function (app, InformationData, WorkingInfo) {
+    'classes/Info/WorkingInfoItem'
+], function (app, InformationData, WorkingInfoItem) {
 
-    app.controller('workingInformationController', function ($scope) {
-        $scope.workingInfo = new PaperAbilityInfo();
+    app.controller('workingInformationController', ['$scope', function ($scope) {
+        $scope.workingInfoItem = new WorkingInfoItem();
 
         $scope.InformationData = InformationData;
 
-        $scope.$watch("InformationData.workingInfos", function () {
-            $scope.workingInfos = InformationData.workingInfos;
+        $scope.$watch("InformationData.workingInfo", function () {
+            $scope.workingInfoItems = InformationData.workingInfo.items;
         }, true);
 
-        $scope.addWorking = function () {
-            var newWorkingInfo = new PaperAbilityInfo($scope.workingInfo);
-            $scope.workingInfos.push(newWorkingInfo);
-            $scope.workingInfo = new PaperAbilityInfo();
+        $scope.addWorkingInfo = function () {
+            var newWorkingInfoItem = new WorkingInfoItem($scope.workingInfoItem);
+            $scope.workingInfoItems.push(newWorkingInfoItem);
+            $scope.workingInfoItem = new WorkingInfoItem();
         }
 
-        $scope.delWorking = function (index) {
-            $scope.workingInfos.splice(index, 1);
+        $scope.delWorkingInfo = function (index) {
+            $scope.workingInfoItems.splice(index, 1);
         }
-    });
+
+    }]);
 
     app.directive('workingInformation', function () {
         return {

@@ -1,9 +1,8 @@
 <form class="form-horizontal" role="form">
-<div class="workingInfoForm form-group">
     <!-- 회사 로고 -->
     <div  class="col-md-2">
         <div class="form-group">
-            <img src="../img/noImage.png" id="picture"><br>
+            <img src="../img/noImage.png" ng-model="workingInfoItem.I_logo"><br>
             <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
         </div>
     </div>
@@ -12,12 +11,12 @@
         <div class="form-group row">
             <label for="lbl_working_name" class="col-md-2 control-label">회사명</label>
             <div class="col-md-2" id="lbl_working_name">
-                <input type="text" class="form-control"  placeholder="회사명" ng-model="workingInfo.S_name">
+                <input type="text" class="form-control"  placeholder="회사명" ng-model="workingInfoItem.S_name">
             </div>
 
             <label for="lbl_working_hire_type" class="col-md-1 control-label">구분</label>
             <div class="col-md-2" id="lbl_working_hire_type">
-                <select class="form-control" ng-model="workingInfo.S_hireType">
+                <select class="form-control" ng-model="workingInfoItem.S_hireType">
                     <option>정규직</option>
                     <option>계약직</option>
                     <option>병역특례</option>
@@ -33,7 +32,7 @@
         <div class="form-group">
             <label for="lbl_working_address" class="col-md-2 control-label">회사 주소</label>
             <div class="col-md-5" id="lbl_working_address">
-                <input type="text" class="form-control"  placeholder="회사 주소" ng-model="workingInfo.S_address" ng-model="workingInfo.S_address">
+                <input type="text" class="form-control" placeholder="회사 주소" ng-model="workingInfoItem.S_address">
             </div>
         </div>
 
@@ -41,20 +40,20 @@
         <div class="form-group row">
             <label for="lbl_working_term" class="col-md-2 control-label">복무기간</label>
             <div class="col-md-2" id="lbl_working_term">
-                <button class="k-button" ng-click="win_working_term_start.center(); win_working_term_start.open();">{{startDate | date:"yyyy년 MM월 dd일"}}</button> ~
-                <button class="k-button" ng-click="win_working_term_end.center(); win_working_term_end.open();">{{endDate | date:"yyyy년 MM월 dd일"}}</button>
+                <button class="k-button" ng-click="win_working_term_start.center(); win_working_term_start.open();">{{workingInfoItem.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~
+                <button class="k-button" ng-click="win_working_term_end.center(); win_working_term_end.open();">{{workingInfoItem.T_term.end | date:"yyyy년 MM월 dd일"}}</button>
             </div>
             <div kendo-window="win_working_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
-                <kendo-calendar ng-model="workingInfo.T_term.start" k-on-change="win_working_term_start.close()"></kendo-calendar>
+                <kendo-calendar ng-model="workingInfoItem.T_term.start" k-on-change="win_working_term_start.close()"></kendo-calendar>
             </div>
             <div kendo-window="win_working_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">
-                <kendo-calendar ng-model="workingInfo.T_term.end" k-on-change="win_working_term_end.close()"></kendo-calendar>
+                <kendo-calendar ng-model="workingInfoItem.T_term.end" k-on-change="win_working_term_end.close()"></kendo-calendar>
             </div>
 
             <label for="lbl_working_resignation" class="col-md-2 control-label">재직여부</label>
             <div class="col-md-2" id="lbl_working_resignation">
-                <label><input type="radio" name="disability" value="true" >재직</input></label>
-                <label><input type="radio" name="disability" value="false" ng-model="workingInfo.B_resignation">퇴직</input></label>
+                <label><input type="radio" name="disability" value="true" ng-model="workingInfoItem.B_resignation" value="재직">재직</input></label>
+                <label><input type="radio" name="disability" value="false" ng-model="workingInfoItem.B_resignation" value="퇴직">퇴직</input></label>
             </div>
         </div>
 
@@ -62,12 +61,12 @@
         <div class="form-group row">
             <label for="lbl_working_job_type" class="col-md-2 control-label">직종</label>
             <div class="col-md-2" id="lbl_working_job_type">
-                <input type="text" class="form-control"  placeholder="직종" ng-model="workingInfo.S_jobType">
+                <input type="text" class="form-control"  placeholder="직종" ng-model="workingInfoItem.S_jobType">
             </div>
 
             <label for="lbl_working_department" class="col-md-1 control-label">부서</label>
             <div class="col-md-2" id="lbl_working_department">
-                <input type="text" class="form-control"  placeholder="부서" ng-model="workingInfo.S_department">
+                <input type="text" class="form-control"  placeholder="부서" ng-model="workingInfoItem.S_department">
             </div>
         </div>
 
@@ -75,12 +74,12 @@
         <div class="form-group">
             <label for="lbl_working_position" class="col-md-2 control-label">직위</label>
             <div class="col-md-2" id="lbl_working_position">
-                <input type="text" class="form-control"  placeholder="직위" ng-model="workingInfo.S_position">
+                <input type="text" class="form-control"  placeholder="직위" ng-model="workingInfoItem.S_position">
             </div>
 
             <label for="lbl_working_job_title" class="col-md-1 control-label">직책</label>
             <div class="col-md-2" id="lbl_working_job_title">
-                <input type="text" class="form-control"  placeholder="직책" ng-model="workingInfo.S_jobTitle">
+                <input type="text" class="form-control"  placeholder="직책" ng-model="workingInfoItem.S_jobTitle">
             </div>
         </div>
 
@@ -89,7 +88,7 @@
         <div class="form-group">
             <label for="lbl_working_business" class="col-md-2 control-label">주요업무</label>
             <div class="col-md-5" id="lbl_working_business">
-                <textarea class="form-control" ng-model="workingInfo.L_business"></textarea>
+                <textarea class="form-control" ng-model="workingInfoItem.L_business"></textarea>
             </div>
         </div>
 
@@ -97,240 +96,123 @@
         <div class="form-group">
             <label for="lbl_working_archive" class="col-md-2 control-label">주요성과</label>
             <div class="col-md-5" id="lbl_working_archive">
-                <textarea class="form-control" ng-model="workingInfo.L_achive"></textarea>
+                <textarea class="form-control" ng-model="workingInfoItem.L_achive"></textarea>
             </div>
         </div>
     </div>
 
     <!--추가 버튼-->
     <div>
-        <button type="button" class="btn btn-default" ng-click="addWorking()">추가</button>
+        <button type="button" class="btn btn-default" ng-click="addWorkingInfo()">추가</button>
     </div>
 
     <hr>
-</div>
 
-    <div ng-repeat="workingInfo in workingInfos track by $index">
-
-        <div class="workingInfoForm form-group">
-            <!-- 회사 로고 -->
-            <div  class="col-md-2">
-                <div class="form-group">
-                    <img src="../img/noImage.png" id="picture_load"><br>
-                    <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
-                </div>
+    <div ng-repeat="item in workingInfoItems track by $index">
+        <!-- 회사 로고 -->
+        <div  class="col-md-2">
+            <div class="form-group">
+                <img src="../img/noImage.png" ng-model="item.I_logo"><br>
+                <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
             </div>
-            <div  class="col-md-10">
-                <!-- 회사명, 구분 -->
-                <div class="form-group row">
-                    <label for="lbl_working_name" class="col-md-2 control-label">회사명</label>
-                    <div class="col-md-2" id="lbl_working_name_load">
-                        <input type="text" class="form-control"  placeholder="회사명" ng-model="workingInfo.S_name">
-                    </div>
-
-                    <label for="lbl_working_hire_type" class="col-md-1 control-label">구분</label>
-                    <div class="col-md-2" id="lbl_working_hire_type_load">
-                        <select class="form-control" ng-model="workingInfo.S_hireType">
-                            <option>정규직</option>
-                            <option>계약직</option>
-                            <option>병역특례</option>
-                            <option>인턴</option>
-                            <option>파견직</option>
-                            <option>헤드헌팅</option>
-                            <option>프리랜서</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- 주소 -->
-                <div class="form-group">
-                    <label for="lbl_working_address" class="col-md-2 control-label">회사 주소</label>
-                    <div class="col-md-5" id="lbl_working_address_load">
-                        <input type="text" class="form-control"  placeholder="회사 주소" ng-model="workingInfo.S_address" ng-model="workingInfo.S_address">
-                    </div>
-                </div>
-
-                <!-- 근무기간, 재직여부 -->
-                <div class="form-group row">
-                    <label for="lbl_working_term" class="col-md-2 control-label">복무기간</label>
-                    <div class="col-md-2" id="lbl_working_term_load">
-                        <button class="k-button" ng-click="win_working_term_start.center(); win_working_term_start.open();">{{startDate | date:"yyyy년 MM월 dd일"}}</button> ~
-                        <button class="k-button" ng-click="win_working_term_end.center(); win_working_term_end.open();">{{endDate | date:"yyyy년 MM월 dd일"}}</button>
-                    </div>
-                    <div kendo-window="win_working_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
-                        <kendo-calendar ng-model="workingInfo.T_term.start" k-on-change="win_working_term_start.close()"></kendo-calendar>
-                    </div>
-                    <div kendo-window="win_working_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">
-                        <kendo-calendar ng-model="workingInfo.T_term.end" k-on-change="win_working_term_end.close()"></kendo-calendar>
-                    </div>
-
-                    <label for="lbl_working_resignation" class="col-md-2 control-label">재직여부</label>
-                    <div class="col-md-2" id="lbl_working_resignation_load">
-                        <label><input type="radio" name="disability" value="true" >재직</input></label>
-                        <label><input type="radio" name="disability" value="false" ng-model="workingInfo.B_resignation">퇴직</input></label>
-                    </div>
-                </div>
-
-                <!-- 직종, 부서 -->
-                <div class="form-group row">
-                    <label for="lbl_working_job_type" class="col-md-2 control-label">직종</label>
-                    <div class="col-md-2" id="lbl_working_job_type_load">
-                        <input type="text" class="form-control"  placeholder="직종" ng-model="workingInfo.S_jobType">
-                    </div>
-
-                    <label for="lbl_working_department" class="col-md-1 control-label">부서</label>
-                    <div class="col-md-2" id="lbl_working_department_load">
-                        <input type="text" class="form-control"  placeholder="부서" ng-model="workingInfo.S_department">
-                    </div>
-                </div>
-
-                <!-- 직위, 직책 -->
-                <div class="form-group">
-                    <label for="lbl_working_position" class="col-md-2 control-label">직위</label>
-                    <div class="col-md-2" id="lbl_working_position_load">
-                        <input type="text" class="form-control"  placeholder="직위" ng-model="workingInfo.S_position">
-                    </div>
-
-                    <label for="lbl_working_job_title" class="col-md-1 control-label">직책</label>
-                    <div class="col-md-2" id="lbl_working_job_title_load">
-                        <input type="text" class="form-control"  placeholder="직책" ng-model="workingInfo.S_jobTitle">
-                    </div>
-                </div>
-
-
-                <!-- 주요업무 -->
-                <div class="form-group">
-                    <label for="lbl_working_business" class="col-md-2 control-label">주요업무</label>
-                    <div class="col-md-5" id="lbl_working_business_load">
-                        <textarea class="form-control" ng-model="workingInfo.L_business"></textarea>
-                    </div>
-                </div>
-
-                <!-- 주요성과 -->
-                <div class="form-group">
-                    <label for="lbl_working_archive" class="col-md-2 control-label">주요성과</label>
-                    <div class="col-md-5" id="lbl_working_archive_load">
-                        <textarea class="form-control" ng-model="workingInfo.L_achive"></textarea>
-                    </div>
-                </div>
-            </div>
-
-
         </div>
+        <div  class="col-md-10">
+            <!-- 회사명, 구분 -->
+            <div class="form-group row">
+                <label for="lbl_working_name_load" class="col-md-2 control-label">회사명</label>
+                <div class="col-md-2" id="lbl_working_name_load">
+                    <input type="text" class="form-control"  placeholder="회사명" ng-model="item.S_name">
+                </div>
 
-        <!--삭제 버튼-->
+                <label for="lbl_working_hire_type_load" class="col-md-1 control-label">구분</label>
+                <div class="col-md-2" id="lbl_working_hire_type_load">
+                    <select class="form-control" ng-model="item.S_hireType">
+                        <option>정규직</option>
+                        <option>계약직</option>
+                        <option>병역특례</option>
+                        <option>인턴</option>
+                        <option>파견직</option>
+                        <option>헤드헌팅</option>
+                        <option>프리랜서</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 주소 -->
+            <div class="form-group">
+                <label for="lbl_working_address_load" class="col-md-2 control-label">회사 주소</label>
+                <div class="col-md-5" id="lbl_working_address_load">
+                    <input type="text" class="form-control" placeholder="회사 주소" ng-model="item.S_address">
+                </div>
+            </div>
+
+            <!-- 근무기간, 재직여부 -->
+            <div class="form-group row">
+                <label for="lbl_working_term_load" class="col-md-2 control-label">복무기간</label>
+                <div class="col-md-2" id="lbl_working_term_load">
+                    <button class="k-button" ng-click="win_working_term_start.center(); win_working_term_start.open();">{{item.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~
+                    <button class="k-button" ng-click="win_working_term_end.center(); win_working_term_end.open();">{{item.T_term.end | date:"yyyy년 MM월 dd일"}}</button>
+                </div>
+                <div kendo-window="win_working_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
+                    <kendo-calendar ng-model="item.T_term.start" k-on-change="win_working_term_start.close()"></kendo-calendar>
+                </div>
+                <div kendo-window="win_working_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">
+                    <kendo-calendar ng-model="item.T_term.end" k-on-change="win_working_term_end.close()"></kendo-calendar>
+                </div>
+
+                <label for="lbl_working_resignation_load" class="col-md-2 control-label">재직여부</label>
+                <div class="col-md-2" id="lbl_working_resignation_load">
+                    <label><input type="radio" name="disability" value="true" ng-model="item.B_resignation" value="재직">재직</input></label>
+                    <label><input type="radio" name="disability" value="false" ng-model="item.B_resignation" value="퇴직">퇴직</input></label>
+                </div>
+            </div>
+
+            <!-- 직종, 부서 -->
+            <div class="form-group row">
+                <label for="lbl_working_job_type_load" class="col-md-2 control-label">직종</label>
+                <div class="col-md-2" id="lbl_working_job_type_load">
+                    <input type="text" class="form-control"  placeholder="직종" ng-model="item.S_jobType">
+                </div>
+
+                <label for="lbl_working_department_load" class="col-md-1 control-label">부서</label>
+                <div class="col-md-2" id="lbl_working_department_load">
+                    <input type="text" class="form-control"  placeholder="부서" ng-model="item.S_department">
+                </div>
+            </div>
+
+            <!-- 직위, 직책 -->
+            <div class="form-group">
+                <label for="lbl_working_position_load" class="col-md-2 control-label">직위</label>
+                <div class="col-md-2" id="lbl_working_position_load">
+                    <input type="text" class="form-control"  placeholder="직위" ng-model="item.S_position">
+                </div>
+
+                <label for="lbl_working_job_title_load" class="col-md-1 control-label">직책</label>
+                <div class="col-md-2" id="lbl_working_job_title_load">
+                    <input type="text" class="form-control"  placeholder="직책" ng-model="item.S_jobTitle">
+                </div>
+            </div>
+
+
+            <!-- 주요업무 -->
+            <div class="form-group">
+                <label for="lbl_working_business_load" class="col-md-2 control-label">주요업무</label>
+                <div class="col-md-5" id="lbl_working_business_load">
+                    <textarea class="form-control" ng-model="item.L_business"></textarea>
+                </div>
+            </div>
+
+            <!-- 주요성과 -->
+            <div class="form-group">
+                <label for="lbl_working_archive_load" class="col-md-2 control-label">주요성과</label>
+                <div class="col-md-5" id="lbl_working_archive_load">
+                    <textarea class="form-control" ng-model="item.L_achive"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- 삭제 버튼-->
         <div>
-            <button type="button" class="btn btn-default" ng-click="delWorking($index)">삭제</button>
+            <button type="button" class="btn btn-default" ng-click="delWorkingInfo($index)">삭제</button>
         </div>
-
-        <hr>
     </div>
-
 </form>
-
-<!--<form class="form-horizontal" role="form">-->
-<!--<div class="form-group">-->
-<!--<div class="form-group">-->
-<!--<img src="../img/noImage.png" id="picture"><br>-->
-<!--<button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="lbl_working_name" class="col-sm-2 control-label">회사명</label>-->
-<!--<div class="col-sm-10" id="lbl_working_name">-->
-<!--<input type="text" class="form-control"  placeholder="회사명">-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="lbl_working_address" class="col-sm-2 control-label">회사 주소</label>-->
-<!--<div class="col-sm-10" id="lbl_working_address">-->
-<!--<input type="text" class="form-control"  placeholder="회사 주소">-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="lbl_working_hire_type" class="col-sm-2 control-label">회사 주소</label>-->
-<!--<div class="col-sm-10" id="lbl_working_hire_type">-->
-<!--<select class="form-control">-->
-<!--<option>정규직</option>-->
-<!--<option>계약직</option>-->
-<!--<option>병역특례</option>-->
-<!--<option>인턴</option>-->
-<!--<option>파견직</option>-->
-<!--<option>헤드헌팅</option>-->
-<!--<option>프리랜서</option>-->
-<!--</select>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="lbl_working_resignation" class="col-sm-2 control-label">재직여부</label>-->
-<!--<div class="col-sm-10" id="lbl_working_resignation">-->
-<!--<label><input type="radio" name="disability" value="true">재직</input></label>-->
-<!--<label><input type="radio" name="disability" value="false">퇴직</input></label>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="lbl_working_term" class="col-sm-2 control-label">복무기간</label>-->
-<!--<div class="col-sm-10" id="lbl_working_term">-->
-<!--<button class="k-button" ng-click="win_working_term_start.center(); win_working_term_start.open();">{{startDate | date:"yyyy년 MM월 dd일"}}</button> ~-->
-<!--<button class="k-button" ng-click="win_working_term_end.center(); win_working_term_end.open();">{{endDate | date:"yyyy년 MM월 dd일"}}</button>-->
-<!--</div>-->
-<!--<div kendo-window="win_working_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">-->
-<!--<kendo-calendar ng-model="startDate" k-on-change="win_working_term_start.close()"></kendo-calendar>-->
-<!--</div>-->
-<!--<div kendo-window="win_working_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">-->
-<!--<kendo-calendar ng-model="endDate" k-on-change="win_working_term_end.close()"></kendo-calendar>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="lbl_working_department" class="col-sm-2 control-label">부서</label>-->
-<!--<div class="col-sm-10" id="lbl_working_department">-->
-<!--<input type="text" class="form-control"  placeholder="부서">-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="lbl_working_position" class="col-sm-2 control-label">직위</label>-->
-<!--<div class="col-sm-10" id="lbl_working_position">-->
-<!--<input type="text" class="form-control"  placeholder="직위">-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="lbl_working_job_title" class="col-sm-2 control-label">직책</label>-->
-<!--<div class="col-sm-10" id="lbl_working_job_title">-->
-<!--<input type="text" class="form-control"  placeholder="직책">-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="lbl_working_job_type" class="col-sm-2 control-label">직종</label>-->
-<!--<div class="col-sm-10" id="lbl_working_job_type">-->
-<!--<input type="text" class="form-control"  placeholder="직종">-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="lbl_working_business" class="col-sm-2 control-label">주요업무</label>-->
-<!--<div class="col-sm-10" id="lbl_working_business">-->
-<!--<textarea class="form-control"></textarea>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="lbl_working_archive" class="col-sm-2 control-label">주요성과</label>-->
-<!--<div class="col-sm-10" id="lbl_working_archive">-->
-<!--<textarea class="form-control"></textarea>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div>-->
-<!--<button type="button" class="btn btn-default">추가</button>-->
-<!--<button type="button" class="btn btn-default">삭제</button>-->
-<!--</div>-->
-<!--</form>-->
