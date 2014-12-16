@@ -83,10 +83,13 @@ define([
 
         function loadAbilityInfo() {
             var loadCertificationAbilityPromiss = $http.get('http://210.118.74.166:8123/info/certificationAbility', {withCredentials: true});
+            var loadProficiencyPromiss = $http.get('http://210.118.74.166:8123/info/proficiency', {withCredentials: true});
 
-            $q.all([loadCertificationAbilityPromiss]).then(function (resultArray) {
+            $q.all([loadCertificationAbilityPromiss, loadProficiencyPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null)
                     InformationData.certificateAbilityInfo = resultArray[0].data.result;
+                if(resultArray[1].data.result !== null)
+                    InformationData.proficiencyInfo = resultArray[1].data.result;
             });
         }
 
@@ -150,8 +153,9 @@ define([
 
         function saveAbilityInfo() {
             var saveCertificationAbilityPromiss = $http.post('http://210.118.74.166:8123/info/certificationAbility', {certificationAbilityInfo: InformationData.certificateAbilityInfo}, {withCredentials: true});
+            var saveProficiencyPromiss = $http.post('http://210.118.74.166:8123/info/proficiency', {proficiencyInfo: InformationData.proficiencyInfo}, {withCredentials: true});
 
-            $q.all([saveCertificationAbilityPromiss]).then(function (resultArray) {
+            $q.all([saveCertificationAbilityPromiss, saveProficiencyPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
                     if (value.data.returnCode !== '000') {
                         return;
