@@ -30,6 +30,7 @@ define([
         this.N_physical_sight_left = 0;
         this.N_physical_sight_right = 0;
         this.S_favorite = '';
+        this.S_skill = '';
         this.S_respect = '';
 
 
@@ -45,6 +46,7 @@ define([
             this.N_physical_sight_left = props.N_physical_sight_left ? props.N_physical_sight_left : this.N_physical_sight_left;
             this.N_physical_sight_right = props.N_physical_sight_right ? props.N_physical_sight_right : this.N_physical_sight_right;
             this.S_favorite = props.S_favorite ? props.S_favorite : this.S_favorite;
+            this.S_skill = props.S_skill ? props.S_skill : this.S_skill;
             this.S_respect = props.S_respect ? props.S_respect : this.S_respect;
         }
     }

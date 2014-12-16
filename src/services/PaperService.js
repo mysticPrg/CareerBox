@@ -17,6 +17,7 @@ module.exports.set = function (server) {
     server.delete('/portfolio/paper', deleteService);
     server.get('/portfolio/paper/:_id', loadService);
     server.post('/portfolio/paperList', loadListService);
+    server.post('/portfolio/paper/setIndex', setIndexService);
 };
 
 function checkArgForPaper(req, res) {
@@ -155,5 +156,23 @@ function loadListService(req, res) {
 
     PaperDB.getList(_portfolio_id, function(err, list) {
         ServiceUtil.sendResult(err, res, list);
+    });
+}
+
+function setIndexService(req, res) {
+
+    var _portfolio_id = req.body._portfolio_id;
+    var _paper_id = req.body._paper_id;
+
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
+        return;
+    }
+    if (!checkArgForPortfolioId(req, res)) {
+        return;
+    }
+
+    PaperDB.setIndex(_portfolio_id, _paper_id,function (err){
+        ServiceUtil.sendResult(err,res,null);
     });
 }

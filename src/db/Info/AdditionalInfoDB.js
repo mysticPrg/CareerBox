@@ -14,7 +14,13 @@ function save(data, callback) {
     additionalInfo._id = new ObjectID(additionalInfo._id);
 
     additionalInfoCollection.save(additionalInfo, function(err, savedCount, result) {
-        callback(err, result.upserted[0]);
+        var returnVal = null;
+        if ( result.updatedExisting ) {
+            returnVal = additionalInfo;
+        } else {
+            returnVal = result.upserted[0];
+        }
+        callback(err, returnVal);
     });
 }
 

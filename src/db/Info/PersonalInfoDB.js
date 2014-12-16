@@ -14,7 +14,13 @@ function save(data, callback) {
     personalInfo._id = new ObjectID(personalInfo._id);
 
     personalInfoCollection.save(personalInfo, function(err, savedCount, result) {
-        callback(err, result.upserted[0]);
+        var returnVal = null;
+        if ( result.updatedExisting ) {
+            returnVal = personalInfo;
+        } else {
+            returnVal = result.upserted[0];
+        }
+        callback(err, returnVal);
     });
 }
 
