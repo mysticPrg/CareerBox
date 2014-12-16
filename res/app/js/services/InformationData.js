@@ -3,11 +3,16 @@
  */
 define([
     'app',
-    'classes/Info/PersonalInfo'
-], function (app, PersonalInfo) {
+    'classes/Info/PersonalInfo',
+    'classes/Info/AdditionalInfo'
+], function (app, PersonalInfo, AdditionalInfo) {
 
     var InformationData = {
-        personalInfo : new PersonalInfo()
+        personalInfo : new PersonalInfo(),
+        additionalInfo : new AdditionalInfo(),
+        highSchoolInfos : [],
+        univSchoolInfos : [],
+        workingInfos : []
     };
 
     app.factory('InformationData', function () {

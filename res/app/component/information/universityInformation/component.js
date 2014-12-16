@@ -3,11 +3,30 @@
  */
 
 define([
-    'app'
-], function (app) {
-    app.controller('universityInformationContorller', function ($scope) {
+    'app',
+    'services/InformationData',
+    'classes/Info/UnivSchoolInfo'
+], function (app, InformationData, UnivSchoolInfo) {
+    app.controller('universityInformationContorller', ['$scope', function ($scope) {
+        $scope.univSchoolInfo = new UnivSchoolInfo();
 
-    });
+        $scope.InformationData = InformationData;
+
+        $scope.$watch("InformationData.univSchoolInfos", function () {
+            $scope.univSchoolInfos = InformationData.univSchoolInfos;
+        }, true);
+
+        $scope.addUnivSchool = function () {
+            var newUnivSchoolInfo = new UnivSchoolInfo($scope.univSchoolInfo);
+            $scope.univSchoolInfos.push(newUnivSchoolInfo);
+            $scope.univSchoolInfo = new UnivSchoolInfo();
+        }
+
+        $scope.delUnivSchool = function (index) {
+            $scope.univSchoolInfos.splice(index, 1);
+        }
+
+    }]);
 
     app.directive('universityInformation', function () {
         return {

@@ -60,7 +60,9 @@ define([
             $scope.changePage = function (id, title){
                 EditorData.paperId = id;
                 $scope.paperTitle = title;
-                EditorData.focusId = "";
+
+                // 속성창 갱신 First Task
+                EditorData.focusId = EditorData.paperId;
             }
 
             $scope.popCreatePaperModal = function () {

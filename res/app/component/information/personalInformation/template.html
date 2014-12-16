@@ -32,7 +32,7 @@
                     <button class="k-button" ng-click="win_birthday.center(); win_birthday.open();">{{personalInfo.D_birthday | date:"yyyy년 MM월 dd일"}}</button>
                 </div>
                 <div kendo-window="win_birthday" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">
-                    <kendo-calendar ng-model="birthDay" k-on-change="win_birthday.close()"></kendo-calendar>
+                    <kendo-calendar ng-model="personalInfo.D_birthday" k-on-change="win_birthday.close()"></kendo-calendar>
                 </div>
             </div>
 

@@ -22,10 +22,9 @@ define([
     'component/information/localActivityInformation/component',
     'component/information/globalActivityInformation/component',
     'component/information/projectInformation/component',
-    'component/information/columnInformation/component',
-    'services/info/savePersonal'
+    'component/information/columnInformation/component'
 ], function ($, ng, app, InformationData) {
-    app.controller('informationManager', ['$scope', '$http', 'InformationData', 'savePersonal', function ($scope, $http, InformationData, savePersonal) {
+    app.controller('informationManager', ['$scope', '$http', '$q', 'InformationData', function ($scope, $http, $q, InformationData) {
         $scope.initialize = function () {
             $('#informationTab a').click(function (e) {
                 e.preventDefault();
@@ -33,22 +32,87 @@ define([
             });
 
             $('#personalInformationLink').click();
+            loadPersonalInfo();
         }
 
-        $scope.save = function (info){
-            showNotification();
-//            if(info === 'personalInfo'){
-//                savePersonal($http, InformationData.personalInfo, function (result) {
-//                    console.log(result);
-//                });
-//            }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $scope.load = function (info) {
+            if (info === 'personalInfo') {
+                loadPersonalInfo();
+            }else if(info === 'schoolInfo'){
+                loadSchoolInfo();
+            }
         }
 
-        function showNotification(){
+        function loadPersonalInfo() {
+            var savePersonalPromiss = $http.get('http://210.118.74.166:8123/info/personal', {withCredentials: true});
+            var saveAdditionalPromiss = $http.get('http://210.118.74.166:8123/info/additional', {withCredentials: true});
+
+            $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
+                InformationData.personalInfo = resultArray[0].data.result;
+                InformationData.additionalInfo = resultArray[1].data.result;
+            });
+        }
+
+        function loadSchoolInfo() {
+            var saveHighSchoolPromiss = $http.get('http://210.118.74.166:8123/info/highSchool', {withCredentials: true});
+            var saveUnivSchoolPromiss = $http.get('http://210.118.74.166:8123/info/univSchool', {withCredentials: true});
+
+            $q.all([saveHighSchoolPromiss, saveUnivSchoolPromiss]).then(function (resultArray) {
+                InformationData.highSchoolInfos = resultArray[0].data.result;
+                InformationData.univSchoolInfos = resultArray[1].data.result;
+            });
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $scope.save = function (info) {
+            if (info === 'personalInfo') {
+//                console.log(InformationData.personalInfo);
+//                console.log(InformationData.additionalInfo);
+                savePersonalInfo();
+            }else if(info === 'schoolInfo'){
+//                console.log(InformationData.highSchoolInfos['0']);
+//                console.log(InformationData.univSchoolInfos['0']);
+                saveSchoolInfo();
+            }
+
+        }
+
+        function savePersonalInfo() {
+            var savePersonalPromiss = $http.post('http://210.118.74.166:8123/info/personal', {personalInfo: InformationData.personalInfo}, {withCredentials: true});
+            var saveAdditionalPromiss = $http.post('http://210.118.74.166:8123/info/additional', {additionalInfo: InformationData.additionalInfo}, {withCredentials: true});
+
+            $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
+                angular.forEach(resultArray, function (value, key) {
+                    if (value.data.returnCode !== '000') {
+                        return;
+                    }
+                });
+
+                showNotification();
+            });
+        }
+
+        function saveSchoolInfo() {
+            var saveHighSchoolPromiss = $http.post('http://210.118.74.166:8123/info/highSchool', {highSchoolInfo: InformationData.highSchoolInfos['0']}, {withCredentials: true});
+            var saveUnivSchoolPromiss = $http.post('http://210.118.74.166:8123/info/univSchool', {univSchoolInfo: InformationData.univSchoolInfos['0']}, {withCredentials: true});
+
+            $q.all([saveHighSchoolPromiss, saveUnivSchoolPromiss]).then(function (resultArray) {
+                angular.forEach(resultArray, function (value, key) {
+                    if (value.data.returnCode !== '000') {
+                        return;
+                    }
+                });
+
+                showNotification();
+            });
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        function showNotification() {
             var notification = kendo.toString('성공하였습니다.');
             $scope.noti.show(notification, "info");
         }
-
 
 
     }]);
