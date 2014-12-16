@@ -11,7 +11,8 @@ define([
     var InformationData = {
         personalInfo : new PersonalInfo(),
         additionalInfo : new AdditionalInfo(),
-        highSchoolInfo : new HighSchoolInfo()
+        highSchoolInfo : new HighSchoolInfo(),
+        highSchoolInfos : []
     };
 
     app.factory('InformationData', function () {

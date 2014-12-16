@@ -4,16 +4,27 @@
 
 define([
     'app',
-    'services/InformationData'
-], function (app, InformationData) {
-    app.controller('highSchoolInformationContorller', function ($scope) {
+    'services/InformationData',
+    'classes/Info/HighSchoolInfo'
+], function (app, InformationData, HighSchoolInfo) {
+    app.controller('highSchoolInformationContorller', ['$scope', '$compile', function ($scope, $compile) {
+        $scope.highSchoolInfo = new HighSchoolInfo();
+
         $scope.InformationData = InformationData;
 
-        $scope.$watch("InformationData.highSchoolInfo", function () {
-            $scope.highSchoolInfo = InformationData.highSchoolInfo;
+        $scope.$watch("InformationData.highSchoolInfos", function () {
+            $scope.highSchoolInfos = InformationData.highSchoolInfos;
         }, true);
-//        $scope.highSchoolInfos = new Array();
-    });
+
+        $scope.add = function () {
+            $scope.highSchoolInfos.push($scope.highSchoolInfo);
+        }
+
+        $scope.del = function (index) {
+            $scope.highSchoolInfos.splice(index, 1);
+        }
+
+    }]);
 
     app.directive('highSchoolInformation', function () {
         return {
