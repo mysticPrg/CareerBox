@@ -12,8 +12,8 @@ module.exports.set = function (server) {
     server.get('/info/highSchool', readListService);
 };
 
-function checkArgForHighSchoolInfo(req, res) {
-    if (!req.body.highSchoolInfo) {
+function checkArgForHighSchoolInfos(req, res) {
+    if (!req.body.highSchoolInfos) {
 
         var result = new Result(null);
         result.setCode('001');
@@ -31,15 +31,17 @@ function saveService(req, res) {
     if (!ServiceUtil.checkSession(req, res)) {
         return;
     }
-    if (!checkArgForHighSchoolInfo(req, res)) {
+    if (!checkArgForHighSchoolInfos(req, res)) {
         return;
     }
 
-    var data = req.body.highSchoolInfo;
-    data._member_id = req.session._id;
+    var arrData = req.body.highSchoolInfos;
+    for ( var i=0 ; i<arrData.length ; i++ ) {
+        arrData[i]._member_id = req.session._id;
+    }
 
-    HighSchoolInfoDB.save(data, function (err, saved) {
-        ServiceUtil.sendResult(err, res, saved._id);
+    HighSchoolInfoDB.saveList(arrData, function (err) {
+        ServiceUtil.sendResult(err, res, null);
     });
 
 }

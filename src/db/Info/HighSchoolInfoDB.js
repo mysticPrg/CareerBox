@@ -8,13 +8,16 @@ var HighSchoolInfo = requirejs('classes/Info/HighSchoolInfo');
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
-function save(data, callback) {
+function saveList(arrData, callback) {
     var highSchoolInfoCollection = require('../../util/DBCollections').getInstance().collections.highSchoolInfo;
-    var highSchoolInfo = new HighSchoolInfo(data);
-    highSchoolInfo._id = new ObjectID(highSchoolInfo._id);
 
-    highSchoolInfoCollection.save(highSchoolInfo, function(err, savedCount, result) {
-        callback(err, result.upserted[0]);
+    async.each(arrData, function (data, cb) {
+        var highSchoolInfo = new HighSchoolInfo(data);
+        highSchoolInfo._id = new ObjectID(highSchoolInfo._id);
+
+        highSchoolInfoCollection.save(highSchoolInfo, cb);
+    }, function (err) {
+        callback(err);
     });
 }
 
@@ -28,7 +31,7 @@ function readList(_member_id, callback) {
 
 
 var exports = {
-    save: save,
+    saveList: saveList,
     readList: readList
 };
 
