@@ -77,7 +77,8 @@ define([
             var loadWorkingPromiss = $http.get('http://210.118.74.166:8123/info/working', {withCredentials: true});
 
             $q.all([loadWorkingPromiss]).then(function (resultArray) {
-                InformationData.workingInfos = resultArray[0].data.result;
+                if(resultArray[0].data.result !== null)
+                    InformationData.workingInfo = resultArray[0].data.result;
             });
         }
 
@@ -138,9 +139,9 @@ define([
         }
 
         function saveWorkingInfo() {
-            var saveHighSchoolPromiss = $http.post('http://210.118.74.166:8123/info/working', {workingInfo: InformationData.workingInfo}, {withCredentials: true});
+            var saveWorkingPromiss = $http.post('http://210.118.74.166:8123/info/working', {workingInfo: InformationData.workingInfo}, {withCredentials: true});
 
-            $q.all([saveHighSchoolPromiss]).then(function (resultArray) {
+            $q.all([saveWorkingPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
                     if (value.data.returnCode !== '000') {
                         return;
