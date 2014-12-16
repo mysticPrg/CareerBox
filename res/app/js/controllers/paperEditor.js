@@ -63,8 +63,9 @@ define([
 
                     loadPaper(EditorData.paper);
 
-//                    $compile($('#canvas-content'))($scope);
-                    // 이후에 child가 로드되어야함.
+                    // 속성창 갱신 Second Task
+                    EditorData.focusId = "canvas-content";
+
                 });
             });
 
@@ -160,7 +161,7 @@ define([
             }
 
             function loadItem(item) {
-                var option = {draggable: true, resizable: true};
+                var option = {draggable: true, resizable: true, rotatable: true};
 
                 var domObj = HTMLGenerator('loadItem', item, item._id, option);
 
