@@ -5,14 +5,16 @@ define([
     'app',
     'classes/Info/PersonalInfo',
     'classes/Info/AdditionalInfo',
+    'classes/Info/HighSchoolInfo',
+    'classes/Info/UnivSchoolInfo',
     'classes/Info/WorkingInfo'
-], function (app, PersonalInfo, AdditionalInfo, WorkingInfo) {
+], function (app, PersonalInfo, AdditionalInfo, HighSchoolInfo, UnivSchoolInfo, WorkingInfo) {
 
     var InformationData = {
         personalInfo : new PersonalInfo(),
         additionalInfo : new AdditionalInfo(),
-        highSchoolInfos : [],
-        univSchoolInfos : [],
+        highSchoolInfo : new HighSchoolInfo(),
+        univSchoolInfo : new UnivSchoolInfo(),
         workingInfos : [],
         certificateAbilityInfos : []
     };
