@@ -20,6 +20,7 @@ var CertificationAbilityInfoService = require('./src/services/Info/Certification
 var ProficiencyInfoService = require('./src/services/Info/ProficiencyInfoService');
 var ComputerAbilityInfoService = require('./src/services/Info/ComputerAbilityInfoService');
 var PaperAbilityInfoService = require('./src/services/Info/PaperAbilityInfoService');
+var ScholarshipInfoService = require('./src/services/Info/ScholarshipInfoService');
 
 MemberService.set(server);
 PortfolioService.set(server);
@@ -36,6 +37,7 @@ CertificationAbilityInfoService.set(server);
 ProficiencyInfoService.set(server);
 ComputerAbilityInfoService.set(server);
 PaperAbilityInfoService.set(server);
+ScholarshipInfoService.set(server);
 
 server.start(8123);
 

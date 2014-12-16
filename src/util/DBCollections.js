@@ -39,7 +39,9 @@ function _DBCollections() {
         certificationAbilityInfo: null,
         proficiencyInfo: null,
         computerAbilityInfo: null,
-        paperAbilityInfo: null
+        paperAbilityInfo: null,
+
+        scholarshipInfo: null
     };
 }
 
@@ -65,6 +67,8 @@ _DBCollections.prototype.open = function open(callback) {
             self.collections.proficiencyInfo = db.collection('proficiencyInfo');
             self.collections.computerAbilityInfo = db.collection('computerAbilityInfo');
             self.collections.paperAbilityInfo = db.collection('paperAbilityInfo');
+
+            self.collections.scholarshipInfo = db.collection('scholarshipInfo');
 
             self.isOpen = true;
 
@@ -93,7 +97,9 @@ _DBCollections.prototype.close = function close() {
             certificationAbilityInfo: null,
             proficiencyInfo: null,
             computerAbilityInfo: null,
-            paperAbilityInfo: null
+            paperAbilityInfo: null,
+
+            scholarshipInfo: null
         };
     }
 };
