@@ -12,7 +12,8 @@ define([
         additionalInfo : new AdditionalInfo(),
         highSchoolInfos : [],
         univSchoolInfos : [],
-        workingInfos : []
+        workingInfos : [],
+        certificateAbilityInfos : []
     };
 
     app.factory('InformationData', function () {
