@@ -7,16 +7,20 @@ if (typeof define !== 'function') {
     var define = require('amdefine')(module);
 }
 
-define([
-    'classes/Structs/Term'
-], function (Term) {
+define([], function () {
 
     function WorkingInfoItem(props) {
 
-        this.S_name = ''; //
+        this.S_name = ''; // 장학금명
+        this.S_school = ''; // 학교명
+        this.N_year = ''; // 수여 년도
+        this.N_term = ''; // 수여 학기
 
         if ( props ) {
             this.S_name = props.S_name ? props.S_name : this.S_name;
+            this.S_school = props.S_school ? props.S_school : this.S_school;
+            this.N_year = props.N_year ? props.N_year : this.N_year;
+            this.N_term = props.N_term ? props.N_term : this.N_term;
         }
     }
 
