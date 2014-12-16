@@ -8,25 +8,27 @@ var HighSchoolInfo = requirejs('classes/Info/HighSchoolInfo');
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
-function saveList(arrData, callback) {
+function saveList(data, callback) {
     var highSchoolInfoCollection = require('../../util/DBCollections').getInstance().collections.highSchoolInfo;
 
-    async.each(arrData, function (data, cb) {
-        var highSchoolInfo = new HighSchoolInfo(data);
-        highSchoolInfo._id = new ObjectID(highSchoolInfo._id);
+    var highSchoolInfo = new HighSchoolInfo(data);
+    highSchoolInfo._id = new ObjectID(highSchoolInfo._id);
 
-        highSchoolInfoCollection.save(highSchoolInfo, cb);
-    }, function (err) {
-        callback(err);
+    highSchoolInfoCollection.save(highSchoolInfo, function(err, savedCount, result) {
+        var returnID = null;
+        if ( result.updatedExisting ) {
+            returnID = highSchoolInfo;
+        } else {
+            returnID = result.upserted[0];
+        }
+        callback(err, returnID);
     });
 }
 
 function readList(_member_id, callback) {
     var highSchoolInfoCollection = require('../../util/DBCollections').getInstance().collections.highSchoolInfo;
 
-    highSchoolInfoCollection.find({'_member_id': _member_id}).toArray(function(err, arr) {
-        callback(err, arr);
-    });
+    highSchoolInfoCollection.findOne({'_member_id': _member_id}, callback);
 }
 
 
