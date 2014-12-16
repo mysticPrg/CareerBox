@@ -15,7 +15,8 @@ define([], function () {
         univSchoolInfo: 'univSchoolInfo',
         workingInfo: 'workingInfo',
 
-        certificationAbilityInfo: 'certificationAbilityInfo'
+        certificationAbilityInfo: 'certificationAbilityInfo',
+        proficiencyInfo: 'proficiencyInfo'
     };
 
     return InfoType;
