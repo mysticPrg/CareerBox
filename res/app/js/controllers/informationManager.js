@@ -41,6 +41,8 @@ define([
                 loadPersonalInfo();
             }else if(info === 'schoolInfo'){
                 loadSchoolInfo();
+            }else if(info === 'workingInfo'){
+                loadSchoolInfo();
             }else if(info === 'abilityInfo'){
 
             }
@@ -63,10 +65,16 @@ define([
             var saveUnivSchoolPromiss = $http.get('http://210.118.74.166:8123/info/univSchool', {withCredentials: true});
 
             $q.all([saveHighSchoolPromiss, saveUnivSchoolPromiss]).then(function (resultArray) {
-                if(resultArray[0].data.result.length !== 0)
-                    InformationData.highSchoolInfos = resultArray[0].data.result;
-                if(resultArray[1].data.result.length !== 0)
-                    InformationData.univSchoolInfos = resultArray[1].data.result;
+                InformationData.highSchoolInfos = resultArray[0].data.result;
+                InformationData.univSchoolInfos = resultArray[1].data.result;
+            });
+        }
+
+        function loadWorkingInfo() {
+            var saveHighSchoolPromiss = $http.get('http://210.118.74.166:8123/info/working', {withCredentials: true});
+
+            $q.all([saveHighSchoolPromiss]).then(function (resultArray) {
+                InformationData.workingInfos = resultArray[0].data.result;
             });
         }
 
@@ -85,6 +93,9 @@ define([
                 savePersonalInfo();
             }else if(info === 'schoolInfo'){
                 saveSchoolInfo();
+            }else if(info === 'workingInfo'){
+//                console.log(InformationData.highSchoolInfo);
+                saveWorkingInfo();
             }else if(info === 'abilityInfo'){
                 saveAbilityInfo();
             }
@@ -121,6 +132,20 @@ define([
             });
         }
 
+        function saveWorkingInfo() {
+            var saveHighSchoolPromiss = $http.post('http://210.118.74.166:8123/info/working', {workingInfo: InformationData.workingInfo}, {withCredentials: true});
+
+            $q.all([saveHighSchoolPromiss]).then(function (resultArray) {
+                angular.forEach(resultArray, function (value, key) {
+                    if (value.data.returnCode !== '000') {
+                        return;
+                    }
+                });
+
+                showNotification();
+            });
+        };
+
         function saveAbilityInfo() {
             var saveCertificationAbilityPromiss = $http.post('http://210.118.74.166:8123/info/certificationAbility', {certificationAbilityInfos: InformationData.certificateAbilityInfos}, {withCredentials: true});
 
@@ -133,7 +158,7 @@ define([
 
                 showNotification();
             });
-        }
+        };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         function showNotification() {

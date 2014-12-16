@@ -1,9 +1,12 @@
 
 define([
-    'app'
+    'app',
+    'services/SetIndex',
+    'services/EditorData'
 ], function (app, Color) {
 
-    app.directive('isIndexAttribute', function () {
+    app.directive('isIndexAttribute', function (SetIndex, EditorData) {
+
         return {
             restrict: 'A',
             scope: {
@@ -11,12 +14,21 @@ define([
             },
             templateUrl: require.toUrl('component/attribute/isIndexAttribute/template.html'),
             link: function ($scope, element, att) {
+                console.log('EditorData',EditorData);
+
                 $scope.isIndex = $scope.data.isIndex;
 
-                $scope.$watch("isIndex",function() {
-//                    // 칼라를 바꾼다.
-//                    $scope.data.font.color = new Color($scope.color.substring(1,$scope.color.length));
-                },true);
+                $scope.check = function(){
+                    if($scope.isIndex == true){
+                        var data = {
+                            _portfolio_id : EditorData.portfolio._id,
+                            _paper_id : EditorData.paperId
+                        }
+                        SetIndex(data, function() {
+                            alert("현재 페이지가 Index 페이지로 되었습니다.")
+                        });
+                    }
+                };
             }
         };
     });
