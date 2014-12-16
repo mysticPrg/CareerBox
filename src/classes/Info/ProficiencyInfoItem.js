@@ -11,6 +11,7 @@ define([], function () {
     function UnivSchoolInfoItem(props) {
 
         this.S_name = '';              // 언어명
+        this.B_exam = false;          // 공인 시험
         this.S_reg_number = '';        // 등록번호
         this.D_date = new Date();     // 취득일자
         this.S_grade = '';             // 등급
@@ -19,6 +20,7 @@ define([], function () {
 
         if ( props ) {
             this.S_name = props.S_name ? props.S_name : this.S_name;
+            this.B_exam = props.B_exam ? props.B_exam : this.B_exam;
             this.S_reg_number = props.S_reg_number ? props.S_reg_number : this.S_reg_number;
             this.D_date = props.D_date ? props.D_date : this.D_date;
             this.S_grade = props.S_grade ? props.S_grade : this.S_grade;
