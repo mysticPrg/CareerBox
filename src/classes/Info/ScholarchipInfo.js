@@ -9,28 +9,28 @@ if (typeof define !== 'function') {
 define([
     'classes/Util',
     'classes/Info/InfoClass',
-    'classes/Info/WorkingInfoItem',
+    'classes/Info/ScholarshipInfoItem',
     'classes/Enums/InfoType'
-], function (Util, InfoClass, WorkingInfoItem, InfoType) {
+], function (Util, InfoClass, ScholarshipInfoItem, InfoType) {
 
-    function WorkingInfo(props) {
+    function ScholarshipInfo(props) {
 
         InfoClass.call(this, props);
 
-        this.infoType = InfoType.workingInfo;
+        this.infoType = InfoType.scholarshipInfo;
         this.items = [];
 
         if ( props && props.items ) {
             var newItems = [];
             for ( var i=0 ; i<props.items.length ; i++ ) {
-                newItems.push(new WorkingInfoItem(props.items[i]));
+                newItems.push(new ScholarshipInfoItem(props.items[i]));
             }
 
             this.items = newItems;
         }
     }
 
-    Util.inherit(WorkingInfo, InfoClass);
+    Util.inherit(ScholarshipInfo, InfoClass);
 
-    return WorkingInfo;
+    return ScholarshipInfo;
 });

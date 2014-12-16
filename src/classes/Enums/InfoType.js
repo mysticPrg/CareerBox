@@ -18,7 +18,9 @@ define([], function () {
         certificationAbilityInfo: 'certificationAbilityInfo',
         proficiencyInfo: 'proficiencyInfo',
         computerAbilityInfo: 'computerAbilityInfo',
-        paperAbilityInfo: 'paperAbilityInfo'
+        paperAbilityInfo: 'paperAbilityInfo',
+
+        scholarshipInfo: 'scholarshipInfo'
     };
 
     return InfoType;
