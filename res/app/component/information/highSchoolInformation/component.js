@@ -17,6 +17,7 @@ define([
         }, true);
 
         $scope.add = function () {
+            $scope.highSchoolInfo = new HighSchoolInfo();
             var newHighSchoolInfo = new HighSchoolInfo($scope.highSchoolInfo);
             $scope.highSchoolInfos.push(newHighSchoolInfo);
         }
