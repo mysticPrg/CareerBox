@@ -140,7 +140,7 @@ function setIndex(_portfolio_id, _paper_id, callback) {
             if (p._id.toHexString() === _paper_id) {
                 paperCollection.update(
                     {
-                        _id: _paper_id
+                        _id: new ObjectID(_paper_id)
                     },
                     {
                         $set: {isIndex: true}
