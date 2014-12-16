@@ -9,27 +9,32 @@ var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
 function save(data, callback) {
-    var CertificationAbilityInfoCollection = require('../../util/DBCollections').getInstance().collections.certificationAbilityInfo;
+    var certificationAbilityInfoCollection = require('../../util/DBCollections').getInstance().collections.certificationAbilityInfo;
+
     var certificationAbilityInfo = new CertificationAbilityInfo(data);
     certificationAbilityInfo._id = new ObjectID(certificationAbilityInfo._id);
 
-    CertificationAbilityInfoCollection.save(certificationAbilityInfo, function(err, savedCount, result) {
-        callback(err, result.upserted[0]);
+    certificationAbilityInfoCollection.save(certificationAbilityInfo, function(err, savedCount, result) {
+        var returnObject = null;
+        if ( result.updatedExisting ) {
+            returnObject = certificationAbilityInfo;
+        } else {
+            returnObject = result.upserted[0];
+        }
+        callback(err, returnObject);
     });
 }
 
-function readList(_member_id, callback) {
-    var CertificationAbilityInfoCollection = require('../../util/DBCollections').getInstance().collections.certificationAbilityInfo;
+function read(_member_id, callback) {
+    var certificationAbilityInfoCollection = require('../../util/DBCollections').getInstance().collections.certificationAbilityInfo;
 
-    CertificationAbilityInfoCollection.find({'_member_id': _member_id}).toArray(function(err, arr) {
-        callback(err, arr);
-    });
+    certificationAbilityInfoCollection.findOne({'_member_id': _member_id}, callback);
 }
 
 
 var exports = {
     save: save,
-    readList: readList
+    read: read
 };
 
 module.exports = exports;

@@ -9,27 +9,24 @@ if (typeof define !== 'function') {
 define([
     'classes/Util',
     'classes/Info/InfoClass',
+    'classes/Info/CertificationAbilityInfoItem',
     'classes/Enums/InfoType'
-], function (Util, InfoClass, InfoType) {
+], function (Util, InfoClass, CertificationAbilityInfoItem, InfoType) {
 
     function CertificateAbilityInfo(props) {
 
         InfoClass.call(this, props);
 
         this.infoType = InfoType.certificateAbilityInfo;
+        this.items = [];
 
-        this.S_name = '';
-        this.S_publisher = '';         // 발행처
-        this.D_date = new Date();
-        this.I_image = '';
-        this.F_file = '';
+        if ( props && props.items ) {
+            var newItems = [];
+            for ( var i=0 ; i<props.items.length ; i++ ) {
+                newItems.push(new CertificationAbilityInfoItem(props.items[i]));
+            }
 
-        if ( props ) {
-            this.S_name = props.S_name ? props.S_name : this.S_name;
-            this.S_publisher = props.S_publisher ? props.S_publisher : this.S_publisher;
-            this.D_date = props.D_date ? props.D_date : this.D_date;
-            this.I_image = props.I_image ? props.I_image : this.I_image;
-            this.F_file = props.F_file ? props.F_file : this.F_file;
+            this.items = newItems;
         }
     }
 

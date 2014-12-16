@@ -53,7 +53,7 @@ function readListService(req, res) {
 
     var _member_id = req.session._id;
 
-    CertificationAbilityInfoDB.readList(_member_id, function (err, findedList) {
-        ServiceUtil.sendResult(err, res, findedList);
+    CertificationAbilityInfoDB.read(_member_id, function (err, finded) {
+        ServiceUtil.sendResult(err, res, finded);
     });
 }
