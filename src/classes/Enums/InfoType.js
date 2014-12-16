@@ -20,7 +20,8 @@ define([], function () {
         computerAbilityInfo: 'computerAbilityInfo',
         paperAbilityInfo: 'paperAbilityInfo',
 
-        scholarshipInfo: 'scholarshipInfo'
+        scholarshipInfo: 'scholarshipInfo',
+        awardInfo: 'awardInfo'
     };
 
     return InfoType;
