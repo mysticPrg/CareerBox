@@ -16,13 +16,13 @@ define([
             $scope.highSchoolInfos = InformationData.highSchoolInfos;
         }, true);
 
-        $scope.add = function () {
-            $scope.highSchoolInfo = new HighSchoolInfo();
+        $scope.addHighSchool = function () {
             var newHighSchoolInfo = new HighSchoolInfo($scope.highSchoolInfo);
             $scope.highSchoolInfos.push(newHighSchoolInfo);
+            $scope.highSchoolInfo = new HighSchoolInfo();
         }
 
-        $scope.del = function (index) {
+        $scope.delHighSchool = function (index) {
             $scope.highSchoolInfos.splice(index, 1);
         }
 
