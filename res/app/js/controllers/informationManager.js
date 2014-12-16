@@ -45,20 +45,21 @@ define([
         }
 
         function loadPersonalInfo() {
-            var saveHighSchoolPromiss = $http.get('http://210.118.74.166:8123/info/highSchool', {withCredentials: true});
-
-            $q.all([saveHighSchoolPromiss]).then(function (resultArray) {
-                InformationData.highSchoolInfos = resultArray[0].data.result;
-            });
-        }
-
-        function loadSchoolInfo() {
             var savePersonalPromiss = $http.get('http://210.118.74.166:8123/info/personal', {withCredentials: true});
             var saveAdditionalPromiss = $http.get('http://210.118.74.166:8123/info/additional', {withCredentials: true});
 
             $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
+                console.log(InformationData.personalInfo);
                 InformationData.personalInfo = resultArray[0].data.result;
                 InformationData.additionalInfo = resultArray[1].data.result;
+            });
+        }
+
+        function loadSchoolInfo() {
+            var saveHighSchoolPromiss = $http.get('http://210.118.74.166:8123/info/highSchool', {withCredentials: true});
+
+            $q.all([saveHighSchoolPromiss]).then(function (resultArray) {
+                InformationData.highSchoolInfos = resultArray[0].data.result;
             });
         }
 
