@@ -3,10 +3,13 @@
  */
 
 define([
-    'app'
-], function (app) {
+    'app',
+    'services/InformationData',
+    'classes/Info/AdditionalInfo'
+], function (app, InformationData, AdditionalInfo) {
     app.controller('additionalInformationContorller', function ($scope) {
-
+        $scope.additionalInfo = new AdditionalInfo();
+        InformationData.additionalInfo = $scope.additionalInfo;
     });
 
     app.directive('additionalInformation', function () {

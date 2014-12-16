@@ -4,8 +4,8 @@
     <div class="form-group">
         <label for="lbl_veteran" class="col-md-2 control-label">보훈대상</label>
         <div class="col-md-3" id="lbl_veteran">
-            <label><input type="radio" name="veteran" value="true">보훈대상</input></label>
-            <label><input type="radio" name="veteran" value="false">보훈비대상</input></label>
+            <label><input type="radio" name="veteran" ng-model="additionalInfo.B_veteran" ng-value="true">보훈대상</input></label>
+            <label><input type="radio" name="veteran" ng-model="additionalInfo.B_veteran" ng-value="false">보훈비대상</input></label>
         </div>
     </div>
 
@@ -13,8 +13,8 @@
     <div class="form-group">
         <label for="lbl_disability" class="col-md-2 control-label">장애여부</label>
         <div class="col-md-3" id="lbl_disability">
-            <label><input type="radio" name="disability" value="true">장애인</input></label>
-            <label><input type="radio" name="disability" value="false">비장애인</input></label>
+            <label><input type="radio" name="disability" ng-model="additionalInfo.B_disability" ng-value="true">장애인</input></label>
+            <label><input type="radio" name="disability" ng-model="additionalInfo.B_disability" ng-value="false">비장애인</input></label>
         </div>
     </div>
 
@@ -22,22 +22,22 @@
     <div class="form-group row">
         <label for="lbl_militery_category" class="col-md-2 control-label">병역사항</label>
         <div class="col-md-4" id="lbl_militery_category">
-            <label><input type="radio" name="militery_category" value="false">해당없음</input></label>
-            <label><input type="radio" name="militery_category" value="false">필</input></label>
-            <label><input type="radio" name="militery_category" value="false">면제</input></label>
-            <label><input type="radio" name="militery_category" value="false">미필</input></label>
-            <label><input type="radio" name="militery_category" value="false">복무중</input></label>
+            <label><input type="radio" name="militery_category" ng-model="additionalInfo.S_militaryService_category" ng-value="해당없음">해당없음</input></label>
+            <label><input type="radio" name="militery_category" ng-model="additionalInfo.S_militaryService_category" ng-value="필">필</input></label>
+            <label><input type="radio" name="militery_category" ng-model="additionalInfo.S_militaryService_category" ng-value="면제">면제</input></label>
+            <label><input type="radio" name="militery_category" ng-model="additionalInfo.S_militaryService_category" ng-value="미필">미필</input></label>
+            <label><input type="radio" name="militery_category" ng-model="additionalInfo.S_militaryService_category" ng-value="복무중">복무중</input></label>
         </div>
 
         <label for="lbl_militery_term" class="col-md-2 control-label">복무기간</label>
         <div class="col-md-2" id="lbl_militery_term">
-            <button class="k-button" ng-click="win_militery_term_start.center(); win_militery_term_start.open();">{{startDate | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_militery_term_end.center(); win_militery_term_end.open();">{{endDate | date:"yyyy년 MM월 dd일"}}</button>
+            <button class="k-button" ng-click="win_militery_term_start.center(); win_militery_term_start.open();">{{additionalInfo.T_militaryService_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_militery_term_end.center(); win_militery_term_end.open();">{{additionalInfo.T_militaryService_term.end | date:"yyyy년 MM월 dd일"}}</button>
         </div>
         <div kendo-window="win_militery_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
-            <kendo-calendar ng-model="startDate" k-on-change="win_militery_term_start.close()"></kendo-calendar>
+            <kendo-calendar ng-model="additionalInfo.T_militaryService_term.start" k-on-change="win_militery_term_start.close()"></kendo-calendar>
         </div>
         <div kendo-window="win_militery_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">
-            <kendo-calendar ng-model="endDate" k-on-change="win_militery_term_end.close()"></kendo-calendar>
+            <kendo-calendar ng-model="additionalInfo.T_militaryService_term.end" k-on-change="win_militery_term_end.close()"></kendo-calendar>
         </div>
     </div>
 
@@ -45,11 +45,11 @@
     <div class="form-group">
         <label for="lbl_religion" class="col-md-2 control-label">종교</label>
         <div class="col-md-4" id="lbl_religion">
-            <label><input type="radio" name="religion" value="false">무교</input></label>
-            <label><input type="radio" name="religion" value="false">기독교</input></label>
-            <label><input type="radio" name="religion" value="false">천주교</input></label>
-            <label><input type="radio" name="religion" value="false">불교</input></label>
-            <label><input type="radio" name="religion" value="false">기타</input></label>
+            <label><input type="radio" name="religion" ng-model="additionalInfo.S_religion" ng-value="무교">무교</input></label>
+            <label><input type="radio" name="religion" ng-model="additionalInfo.S_religion" ng-value="기독교">기독교</input></label>
+            <label><input type="radio" name="religion" ng-model="additionalInfo.S_religion" ng-value="천주교">천주교</input></label>
+            <label><input type="radio" name="religion" ng-model="additionalInfo.S_religion" ng-value="불교">불교</input></label>
+            <label><input type="radio" name="religion" ng-model="additionalInfo.S_religion" ng-value="기타">기타</input></label>
         </div>
     </div>
 
@@ -57,13 +57,13 @@
     <div class="form-group row">
         <label for="lbl_physical_tall" class="col-md-2 control-label">신장</label>
         <div class="col-md-2" id="lbl_physical_tall">
-            <input type="text" class="form-control"  placeholder="신장">
+            <input type="text" class="form-control"  placeholder="신장" ng-model="additionalInfo.N_physical_tall">
         </div>
         <div class="col-md-1">cm</div>
 
         <label for="lbl_physical_weight" class="col-md-1 control-label">몸무게</label>
         <div class="col-md-2" id="lbl_physical_weight">
-            <input type="text" class="form-control"  placeholder="몸무게">
+            <input type="text" class="form-control"  placeholder="몸무게" ng-model="additionalInfo.N_physical_weight">
         </div>
         <div class="col-md-1">kg</div>
     </div>
@@ -72,16 +72,16 @@
     <div class="form-group row">
         <label for="lbl_physical_blood" class="col-md-2 control-label">혈액형</label>
         <div class="col-md-2" id="lbl_physical_blood">
-            <input type="text" class="form-control"  placeholder="혈액형">
+            <input type="text" class="form-control"  placeholder="혈액형" ng-model="additionalInfo.N_physical_blood">
         </div>
 
         <label for="lbl_physical_sight" class="col-md-2 control-label">시력</label>
         <div class="col-md-2" id="lbl_physical_sight">
-            <input type="text" class="form-control"  placeholder="좌안">
+            <input type="text" class="form-control"  placeholder="좌안" ng-model="additionalInfo.N_physical_sight_left">
         </div>
         <div class="col-md-1">/</div>
         <div class="col-md-2">
-            <input type="text" class="form-control"  placeholder="우안">
+            <input type="text" class="form-control"  placeholder="우안" ng-model="additionalInfo.N_physical_sight_right">
         </div>
     </div>
 
@@ -89,12 +89,12 @@
     <div class="form-group row">
         <label for="lbl_favorite" class="col-md-2 control-label">취미</label>
         <div class="col-md-3" id="lbl_favorite">
-            <input type="text" class="form-control"  placeholder="취미">
+            <input type="text" class="form-control"  placeholder="취미" ng-model="additionalInfo.S_favorite">
         </div>
 
         <label for="lbl_forte" class="col-md-1 control-label">특기</label>
         <div class="col-md-3" id="lbl_forte">
-            <input type="text" class="form-control"  placeholder="특기">
+            <input type="text" class="form-control"  placeholder="특기" ng-model="additionalInfo.S_respect">
         </div>
     </div>
 
