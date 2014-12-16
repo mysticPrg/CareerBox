@@ -32,18 +32,44 @@ define([
             });
 
             $('#personalInformationLink').click();
+            loadPersonalInfo();
         }
 
-        $scope.save = function (info) {
-            var savePersonalPromiss = $http.post('http://210.118.74.166:8123/info/personal', {personalInfo :InformationData.personalInfo});
-            var saveAdditionalPromiss = $http.post('http://210.118.74.166:8123/info/additional', {additionalInfo :InformationData.additionalInfo});
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $scope.load = function (info) {
+            if (info === 'personalInfo') {
+                loadPersonalInfo();
+            }
+        }
 
-            console.log(InformationData.personalInfo);
-            console.log(InformationData.additionalInfo);
+        function loadPersonalInfo() {
+            var savePersonalPromiss = $http.get('http://210.118.74.166:8123/info/personal', {withCredentials: true});
+            var saveAdditionalPromiss = $http.get('http://210.118.74.166:8123/info/additional', {withCredentials: true});
+
+            $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
+                InformationData.personalInfo = resultArray[0].data.result;
+                InformationData.additionalInfo = resultArray[1].data.result;
+            });
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $scope.save = function (info) {
+            if (info === 'personalInfo') {
+//                console.log(InformationData.personalInfo);
+//                console.log(InformationData.additionalInfo);
+                savePersonalInfo();
+            }
+
+        }
+
+        function savePersonalInfo() {
+            var savePersonalPromiss = $http.post('http://210.118.74.166:8123/info/personal', {personalInfo: InformationData.personalInfo}, {withCredentials: true});
+            var saveAdditionalPromiss = $http.post('http://210.118.74.166:8123/info/additional', {additionalInfo: InformationData.additionalInfo}, {withCredentials: true});
 
             $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
-                    if(value.data.returnCode !== '000'){
+                    console.log(value.data.returnCode);
+                    if (value.data.returnCode !== '000') {
                         return;
                     }
                 });
@@ -52,6 +78,7 @@ define([
             });
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         function showNotification() {
             var notification = kendo.toString('성공하였습니다.');
             $scope.noti.show(notification, "info");

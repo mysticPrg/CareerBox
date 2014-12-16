@@ -19,7 +19,7 @@
 </head>
 
 <body ng-controller="informationManager">
-<span kendo-notification="noti" k-position="{top: 20}" k-stacking="down"></span>
+<span kendo-notification="noti" k-position="{top: 20}"></span>
 <!--좌측 메뉴-->
 <menu id="menu" class="aside"></menu>
 
@@ -32,14 +32,14 @@
 
     <div id="information-content" data-ng-init="initialize()">
         <ul class="nav nav-tabs" id="informationTab">
-            <li role="presentation"><a href="#personalInformationContent" id="personalInformationLink">기본정보</a></li>
-            <li role="presentation"><a href="#schoolInformationContent">학력</a></li>
-            <li role="presentation"><a href="#workingInformationContent">경력</a></li>
-            <li role="presentation"><a href="#abilityInformationContent">보유능력</a></li>
-            <li role="presentation"><a href="#awardInformationContent">수상</a></li>
-            <li role="presentation"><a href="#activityInformationContent">활동</a></li>
-            <li role="presentation"><a href="#projectInformationContent">프로젝트</a></li>
-            <li role="presentation"><a href="#columnInformationContent">칼럼</a></li>
+            <li role="presentation"><a href="#personalInformationContent" id="personalInformationLink" ng-click="load('personalInfo')">기본정보</a></li>
+            <li role="presentation"><a href="#schoolInformationContent" ng-click="load('schoolInform')">학력</a></li>
+            <li role="presentation"><a href="#workingInformationContent" ng-click="load('workingInfo')">경력</a></li>
+            <li role="presentation"><a href="#abilityInformationContent" ng-click="load('abilityInfo')">보유능력</a></li>
+            <li role="presentation"><a href="#awardInformationContent" ng-click="load('awardInfo')">수상</a></li>
+            <li role="presentation"><a href="#activityInformationContent" ng-click="load('activityInfo')">활동</a></li>
+            <li role="presentation"><a href="#projectInformationContent" ng-click="load('projectInfo')">프로젝트</a></li>
+            <li role="presentation"><a href="#columnInformationContent" ng-click="load('columnInfo')">칼럼</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane" id="personalInformationContent">

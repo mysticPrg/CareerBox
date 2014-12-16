@@ -5,10 +5,14 @@ define([
     'app',
     'services/InformationData',
     'classes/Info/PersonalInfo'
-], function (app, InformationData, PersonalInfo) {
-    app.controller('personalInformationController', ['$scope', function ($scope) {
-        $scope.personalInfo = new PersonalInfo();
-        InformationData.personalInfo = $scope.personalInfo;
+], function (app, InformationData) {
+    app.controller('personalInformationController', ['$scope',  function ($scope) {
+        $scope.InformationData = InformationData;
+
+        $scope.$watch("InformationData.personalInfo", function () {
+            $scope.personalInfo = InformationData.personalInfo;
+        }, true);
+
     }]);
 
     app.directive('personalInformation', function () {

@@ -8,8 +8,11 @@ define([
     'classes/Info/AdditionalInfo'
 ], function (app, InformationData, AdditionalInfo) {
     app.controller('additionalInformationContorller', function ($scope) {
-        $scope.additionalInfo = new AdditionalInfo();
-        InformationData.additionalInfo = $scope.additionalInfo;
+        $scope.InformationData = InformationData;
+
+        $scope.$watch("InformationData.additionalInfo", function () {
+            $scope.additionalInfo = InformationData.additionalInfo;
+        }, true);
     });
 
     app.directive('additionalInformation', function () {
