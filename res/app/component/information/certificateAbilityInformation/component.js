@@ -5,25 +5,25 @@
 define([
     'app',
     'services/InformationData',
-    'classes/Info/CertificationAbilityInfo'
-], function (app, InformationData, CertificateAbilityInfo) {
+    'classes/Info/CertificationAbilityInfoItem'
+], function (app, InformationData, CertificationAbilityInfoItem) {
     app.controller('certificateAbilityInformationContorller', ['$scope', function ($scope) {
-        $scope.certificateAbilityInfo = new CertificateAbilityInfo();
+        $scope.certificateAbilityInfoItem = new CertificationAbilityInfoItem();
 
         $scope.InformationData = InformationData;
 
-        $scope.$watch("InformationData.certificateAbilityInfos", function () {
-            $scope.certificateAbilityInfos = InformationData.certificateAbilityInfos;
+        $scope.$watch("InformationData.certificateAbilityInfo", function () {
+            $scope.certificateAbilityInfoItems = InformationData.certificateAbilityInfo.items;
         }, true);
 
-        $scope.addCertificateAbility = function () {
-            var newCertificateAbilityInfo = new CertificateAbilityInfo($scope.certificateAbilityInfo);
-            $scope.certificateAbilityInfos.push(newCertificateAbilityInfo);
-            $scope.certificateAbilityInfo = new CertificateAbilityInfo();
+        $scope.addCertificateAbilityInfo = function () {
+            var newCertificateAbilityInfoItem = new CertificationAbilityInfoItem($scope.certificateAbilityInfoItem);
+            $scope.certificateAbilityInfoItems.push(newCertificateAbilityInfoItem);
+            $scope.certificateAbilityInfoItem = new CertificationAbilityInfoItem();
         }
 
-        $scope.delCertificateAbility = function (index) {
-            $scope.certificateAbilityInfos.splice(index, 1);
+        $scope.delCertificateAbilityInfo = function (index) {
+            $scope.certificateAbilityInfoItems.splice(index, 1);
         }
 
     }]);

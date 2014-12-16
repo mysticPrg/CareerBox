@@ -85,8 +85,8 @@ define([
             var loadCertificationAbilityPromiss = $http.get('http://210.118.74.166:8123/info/certificationAbility', {withCredentials: true});
 
             $q.all([loadCertificationAbilityPromiss]).then(function (resultArray) {
-                if(resultArray[0].data.result.length !== 0)
-                    InformationData.certificateAbilityInfos = resultArray[0].data.result;
+                if(resultArray[0].data.result !== null)
+                    InformationData.certificateAbilityInfo = resultArray[0].data.result;
             });
         }
 
@@ -149,7 +149,7 @@ define([
         };
 
         function saveAbilityInfo() {
-            var saveCertificationAbilityPromiss = $http.post('http://210.118.74.166:8123/info/certificationAbility', {certificationAbilityInfos: InformationData.certificateAbilityInfos}, {withCredentials: true});
+            var saveCertificationAbilityPromiss = $http.post('http://210.118.74.166:8123/info/certificationAbility', {certificationAbilityInfo: InformationData.certificateAbilityInfo}, {withCredentials: true});
 
             $q.all([saveCertificationAbilityPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
