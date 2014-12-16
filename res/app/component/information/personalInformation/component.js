@@ -6,7 +6,7 @@ define([
     'services/InformationData',
     'classes/Info/PersonalInfo'
 ], function (app, InformationData, PersonalInfo) {
-    app.controller('personalInformationController', ['$scope', '$http', function ($scope, $http) {
+    app.controller('personalInformationController', ['$scope', function ($scope) {
         $scope.personalInfo = new PersonalInfo();
         InformationData.personalInfo = $scope.personalInfo;
     }]);
