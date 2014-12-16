@@ -218,8 +218,8 @@ img {
 }
 
 .editzoneWrapper .paper {
-    width: 960px !important;
-    height: 1358px !important;
+    width: 960px ;
+    height: 1358px ;
 }
 
 .drop-target {
