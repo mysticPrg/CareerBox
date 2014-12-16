@@ -8,8 +8,9 @@ define([
     'classes/Info/HighSchoolInfo',
     'classes/Info/UnivSchoolInfo',
     'classes/Info/WorkingInfo',
-    'classes/Info/CertificationAbilityInfo'
-], function (app, PersonalInfo, AdditionalInfo, HighSchoolInfo, UnivSchoolInfo, WorkingInfo, CertificationAbilityInfo) {
+    'classes/Info/CertificationAbilityInfo',
+    'classes/Info/ProficiencyInfo'
+], function (app, PersonalInfo, AdditionalInfo, HighSchoolInfo, UnivSchoolInfo, WorkingInfo, CertificationAbilityInfo, ProficiencyInfo) {
 
     var InformationData = {
         personalInfo : new PersonalInfo(),
@@ -17,7 +18,8 @@ define([
         highSchoolInfo : new HighSchoolInfo(),
         univSchoolInfo : new UnivSchoolInfo(),
         workingInfos : [],
-        certificateAbilityInfo : new CertificationAbilityInfo()
+        certificateAbilityInfo : new CertificationAbilityInfo(),
+        proficiencyInfo : new ProficiencyInfo()
     };
 
     app.factory('InformationData', function () {
