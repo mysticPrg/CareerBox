@@ -17,6 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '국내활동';
         this.infoType = InfoType.localActivityInfo;
         this.items = [];
 

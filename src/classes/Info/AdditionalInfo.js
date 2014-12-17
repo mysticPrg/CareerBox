@@ -17,6 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '추가정보';
         this.infoType = InfoType.additionalInfo;
 
         this.B_veteran = false;

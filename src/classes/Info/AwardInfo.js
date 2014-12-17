@@ -17,6 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '대회수상';
         this.infoType = InfoType.awardInfo;
         this.items = [];
 

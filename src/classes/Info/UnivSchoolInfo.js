@@ -18,6 +18,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '대학교';
         this.infoType = InfoType.univSchoolInfo;
         this.items = [];
 

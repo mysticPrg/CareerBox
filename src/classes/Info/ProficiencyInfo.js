@@ -17,6 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '외국어능력';
         this.infoType = InfoType.proficiencyInfo;
         this.items = [];
 
