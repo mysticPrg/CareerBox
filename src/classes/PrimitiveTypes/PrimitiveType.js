@@ -7,7 +7,7 @@ if (typeof define !== 'function') {
 }
 
 define([
-    'classes/Enums/PrimitiveTypeEnum',
+    'classes/Enums/PrimitiveTypeEnum'
 ], function (PrimitiveTypeEnum) {
 
     function PrimitiveType(props) {
