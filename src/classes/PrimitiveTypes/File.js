@@ -20,14 +20,14 @@ define([
         this.originalName = '';
         this.name = '';
         this.filesize = 0;
-        this.url = '';
+        this.isBinding = false; // article에 바인딩 된 file인지 여부 (독립적으로 리스트 제공해야 하는지)
 
         if (props) {
             this._member_id = props._member_id ? props._member_id : this._member_id;
             this.originalName = props.originalName ? props.originalName : this.originalName;
             this.name = props.name ? props.name : this.name;
             this.filesize = props.filesize ? props.filesize : this.filesize;
-            this.url = props.url ? props.url : this.url;
+            this.isBinding = props.isBinding ? props.isBinding : this.isBinding;
         }
     };
 

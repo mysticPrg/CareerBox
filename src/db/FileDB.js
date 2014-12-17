@@ -25,8 +25,9 @@ function getList(_member_id, callback) {
     var fileCollection = require('../util/DBCollections').getInstance().collections.file;
 
     fileCollection.find({
-        '_member_id': _member_id
-    }.toArray(callback));
+        '_member_id': _member_id,
+        'isBinding': false
+    }).toArray(callback);
 }
 
 function deleteFile(_id, callback) {
