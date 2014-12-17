@@ -4,22 +4,23 @@
 define([
     'app',
     'classes/Enums/InfoType',
-    'classes/Info/PersonalInfo',
-    'classes/Info/AdditionalInfo',
-    'classes/Info/HighSchoolInfoItem',
-    'classes/Info/UnivSchoolInfoItem',
-    'classes/Info/WorkingInfoItem',
-    'classes/Info/CertificationAbilityInfoItem',
-    'classes/Info/ComputerAbilityInfoItem',
-    'classes/Info/ProficiencyInfoItem',
-    'classes/Info/ScholarshipInfoItem',
-    'classes/Info/AwardInfoItem',
-    'classes/Info/LocalActivityInfoItem',
-    'classes/Info/GlobalActivityInfoItem',
-    'classes/Info/ProjectInfoItem',
-    'classes/Info/ColumnInfoItem'
-], function (app, InfoType, PersonalInfo, AdditionalInfo, HighSchoolInfoItem, UnivSchoolInfoItem, WorkingInfoItem, CertificationAbilityInfoItem, ComputerAbilityInfoItem,
-             ProficiencyInfoItem, ScholarshipInfoItem, AwardInfoItem, LocalActivityInfoItem, GlobalActivityInfoItem, ProjectInfoItem, ColumnInfoItem) {
+    'classes/Info/PersonalInfo', // 개인정보
+    'classes/Info/AdditionalInfo', // 추가정보
+    'classes/Info/HighSchoolInfoItem', // 고등학교
+    'classes/Info/UnivSchoolInfoItem', // 대학교
+    'classes/Info/WorkingInfoItem', // 경력
+    'classes/Info/CertificationAbilityInfoItem', // 자격증
+    'classes/Info/ProficiencyInfoItem', // 외국어
+    'classes/Info/ComputerAbilityInfoItem', // 컴퓨터 활용 능력
+    'classes/Info/PaperAbilityInfoItem', // 논문
+    'classes/Info/ScholarshipInfoItem', // 장학금
+    'classes/Info/AwardInfoItem', // 수상내역
+    'classes/Info/LocalActivityInfoItem', // 국내활동
+    'classes/Info/GlobalActivityInfoItem', // 국외활동
+    'classes/Info/ProjectInfoItem', // 프로젝트
+    'classes/Info/ColumnInfoItem'  // 칼럼
+], function (app, InfoType, PersonalInfo, AdditionalInfo, HighSchoolInfoItem, UnivSchoolInfoItem, WorkingInfoItem, CertificationAbilityInfoItem, ProficiencyInfoItem, ComputerAbilityInfoItem,
+             PaperAbilityInfoItem, ScholarshipInfoItem, AwardInfoItem, LocalActivityInfoItem, GlobalActivityInfoItem, ProjectInfoItem, ColumnInfoItem) {
     app.factory('getAvailableAttribute', function () {
         return function (category, infoType) {
             var result = {};
@@ -49,10 +50,12 @@ define([
                     return new WorkingInfoItem();
                 case InfoType.certificationAbilityInfo:
                     return new CertificationAbilityInfoItem();
-                case InfoType.computerAbilityInfo:
-                    return new ComputerAbilityInfoItem();
                 case InfoType.proficiencyInfo:
                     return new ProficiencyInfoItem();
+                case InfoType.computerAbilityInfo:
+                    return new ComputerAbilityInfoItem();
+                case InfoType.paperAbilityInfo:
+                    return new PaperAbilityInfoItem();
                 case InfoType.scholarshipInfo:
                     return new ScholarshipInfoItem();
                 case InfoType.awardInfo:
