@@ -55,7 +55,8 @@ function _DBCollections() {
         projectInfo: null,
         columnInfo: null,
 
-        file: null
+        file: null,
+        image: null
     };
 }
 
@@ -95,6 +96,7 @@ _DBCollections.prototype.open = function open(callback) {
             self.collections.columnInfo = db.collection('columnInfo');
 
             self.collections.file = db.collection('file');
+            self.collections.image = db.collection('image');
 
             self.isOpen = true;
 
@@ -138,7 +140,8 @@ _DBCollections.prototype.close = function close() {
             projectInfo: null,
             columnInfo: null,
 
-            file: null
+            file: null,
+            image: null
         };
     }
 };

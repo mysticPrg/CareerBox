@@ -10,6 +10,7 @@ var PortfolioService = require('./src/services/PortfolioService');
 var TemplateService = require('./src/services/TemplateService');
 var PaperService = require('./src/services/PaperService');
 var FileService = require('./src/services/FileService');
+var ImageService = require('./src/services/ImageService');
 
 var PersonalInfoService = require('./src/services/Info/PersonalInfoService');
 var AdditionalInfoService = require('./src/services/info/AdditionalInfoService');
@@ -32,6 +33,7 @@ PortfolioService.set(server);
 TemplateService.set(server);
 PaperService.set(server);
 FileService.set(server);
+ImageService.set(server);
 
 PersonalInfoService.set(server);
 AdditionalInfoService.set(server);
