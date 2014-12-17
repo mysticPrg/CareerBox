@@ -5,9 +5,16 @@
     <title></title>
 </head>
 <body ng-controller="testController">
-<select class="form-control">
-    <option ng-repeat="info in infoCategory track by $index">{{info.title}}</option>
+<select class="form-control" ng-model="category" ng-options="category as category.title for category in infoCategory">
 </select>
+
+<select class="form-control" ng-model="type" ng-change="test()" ng-options="type as type for type in types">
+</select>
+
+<ul>
+    <li ng-repeat="r in result track by $index">{{r}}</li>
+</ul>
+
 <script src="../libs/require/require.js" data-main="../main.js"></script>
 </body>
 </html>
