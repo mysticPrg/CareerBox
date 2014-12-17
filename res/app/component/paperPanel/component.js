@@ -50,6 +50,35 @@ define([
 
                 $('#articleTabLink').click();
                 $scope.loadArticleTemplate();
+
+
+                $("#content > div").hide(); // Initially hide all content
+                $("#SectionEditorTab li:first").attr("id","current"); // Activate first tab
+                $("#SectionEditorTab li:first a img").attr("src", "../img/editor_img/articleIcon.png");
+                $("#content div:first").fadeIn(); // Show first tab content
+
+                $('#SectionEditorTab a').click(function(e) {
+                    e.preventDefault();
+                    $("#content > div").hide(); //Hide all content
+                    $("#SectionEditorTab li").attr("id",""); //Reset id's
+                    $(this).parent().attr("id","current"); // Activate this
+
+                    if($(this).children().attr('id') === 'articleTabImg')
+                    {
+                        $(this).children().attr("src", "../img/editor_img/articleIcon.png");
+                        $(this).parent().siblings().children().children().attr("src", "../img/editor_img/itemIconActive.png");
+                    }
+                    else if($(this).children().attr('id') === 'itemTabImg')
+                    {
+                        $(this).children().attr("src", "../img/editor_img/itemIcon.png");
+                        $(this).parent().siblings().children().children().attr("src", "../img/editor_img/articleIconActive.png");
+                    }
+
+
+                    $('#' + $(this).attr('title')).show();
+                    $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+                });
+
             }
 
             $scope.loadArticleTemplate = function () {
