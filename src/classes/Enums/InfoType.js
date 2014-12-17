@@ -21,7 +21,9 @@ define([], function () {
         paperAbilityInfo: 'paperAbilityInfo',
 
         scholarshipInfo: 'scholarshipInfo',
-        awardInfo: 'awardInfo'
+        awardInfo: 'awardInfo',
+
+        localActivityInfo: 'localActivityInfo'
     };
 
     return InfoType;

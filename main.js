@@ -22,6 +22,7 @@ var ComputerAbilityInfoService = require('./src/services/Info/ComputerAbilityInf
 var PaperAbilityInfoService = require('./src/services/Info/PaperAbilityInfoService');
 var ScholarshipInfoService = require('./src/services/Info/ScholarshipInfoService');
 var AwardInfoService = require('./src/services/Info/AwardInfoService');
+var LocalActivityInfoService = require('./src/services/Info/LocalActivityInfoService');
 
 MemberService.set(server);
 PortfolioService.set(server);
@@ -40,6 +41,7 @@ ComputerAbilityInfoService.set(server);
 PaperAbilityInfoService.set(server);
 ScholarshipInfoService.set(server);
 AwardInfoService.set(server);
+LocalActivityInfoService.set(server);
 
 server.start(8123);
 
