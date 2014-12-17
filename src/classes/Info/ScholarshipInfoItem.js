@@ -9,7 +9,7 @@ if (typeof define !== 'function') {
 
 define([], function () {
 
-    function WorkingInfoItem(props) {
+    function ScholarshipInfoItem(props) {
 
         this.S_name = ''; // 장학금명
         this.S_school = ''; // 학교명
@@ -24,5 +24,5 @@ define([], function () {
         }
     }
 
-    return WorkingInfoItem;
+    return ScholarshipInfoItem;
 });

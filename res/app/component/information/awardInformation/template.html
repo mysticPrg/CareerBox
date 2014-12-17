@@ -1,107 +1,101 @@
 <div style="margin: 30px 0 10px 0">대회 수상</div>
 <form class="form-horizontal" role="form">
+    <!-- 대회명 -->
     <div class="form-group">
+        <label for="lbl_award_name" class="col-md-2 control-label">대회명</label>
+        <div class="col-md-4" id="lbl_award_name">
+            <input type="text" class="form-control"  placeholder="대회명" ng-model="awardInfoItem.S_name">
+        </div>
+    </div>
 
+    <!-- 작품명 -->
+    <div class="form-group">
+        <label for="lbl_award_title" class="col-md-2 control-label">작품명</label>
+        <div class="col-md-4" id="lbl_award_title">
+            <input type="text" class="form-control"  placeholder="작품명" ng-model="awardInfoItem.S_title">
+        </div>
+    </div>
+
+    <!-- 주최기관 -->
+    <div class="form-group">
+        <label for="lbl_award_host" class="col-md-2 control-label">주최기관</label>
+        <div class="col-md-4" id="lbl_award_host">
+            <input type="text" class="form-control"  placeholder="주최기관" ng-model="awardInfoItem.S_host">
+        </div>
+    </div>
+
+    <!-- 수상년월 -->
+    <div class="form-group">
+        <label for="lbl_award_date" class="col-md-2 control-label">수상년월</label>
+        <div class="col-md-2" id="lbl_award_date">
+            <button class="k-button" ng-click="win_award_date.center(); win_award_date.open();">{{awardInfoItem.D_date | date:"yyyy년 MM월 dd일"}}</button>
+        </div>
+        <div kendo-window="win_award_date" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">
+            <kendo-calendar ng-model="awardInfoItem.D_date" k-on-change="win_award_date.close()"></kendo-calendar>
+        </div>
+    </div>
+
+    <!-- 상세정보 -->
+    <div class="form-group">
+        <label for="lbl_award_detail" class="col-md-2 control-label">상세정보</label>
+        <div class="col-md-4" id="lbl_award_detail">
+            <textarea class="form-control" ng-model="awardInfoItem.L_detail"></textarea>
+        </div>
+    </div>
+
+    <!--추가 버튼-->
+    <div>
+        <button type="button" class="btn btn-default" ng-click="addAwardInfo()">추가</button>
+    </div>
+
+    <hr>
+
+    <div ng-repeat="item in awardInfoItems track by $index">
         <!-- 대회명 -->
         <div class="form-group">
-            <label for="lbl_award_name" class="col-md-2 control-label">대회명</label>
-            <div class="col-md-4" id="lbl_award_name">
-                <input type="text" class="form-control"  placeholder="대회명">
+            <label for="lbl_award_name_load" class="col-md-2 control-label">대회명</label>
+            <div class="col-md-4" id="lbl_award_name_load">
+                <input type="text" class="form-control"  placeholder="대회명" ng-model="item.S_name">
             </div>
         </div>
 
         <!-- 작품명 -->
         <div class="form-group">
-            <label for="lbl_award_title" class="col-md-2 control-label">작품명</label>
-            <div class="col-md-4" id="lbl_award_title">
-                <input type="text" class="form-control"  placeholder="작품명">
+            <label for="lbl_award_title_load" class="col-md-2 control-label">작품명</label>
+            <div class="col-md-4" id="lbl_award_title_load">
+                <input type="text" class="form-control"  placeholder="작품명" ng-model="item.S_title">
             </div>
         </div>
 
         <!-- 주최기관 -->
         <div class="form-group">
-            <label for="lbl_award_host" class="col-md-2 control-label">주최기관</label>
-            <div class="col-md-4" id="lbl_award_host">
-                <input type="text" class="form-control"  placeholder="주최기관">
+            <label for="lbl_award_host_load" class="col-md-2 control-label">주최기관</label>
+            <div class="col-md-4" id="lbl_award_host_load">
+                <input type="text" class="form-control"  placeholder="주최기관" ng-model="item.S_host">
             </div>
         </div>
 
         <!-- 수상년월 -->
         <div class="form-group">
-            <label for="lbl_award_date" class="col-md-2 control-label">수상년월</label>
-            <div class="col-md-2" id="lbl_award_date">
-                <button class="k-button" ng-click="win_award_date.center(); win_award_date.open();">{{awardDate | date:"yyyy년 MM월 dd일"}}</button>
+            <label for="lbl_award_date_load" class="col-md-2 control-label">수상년월</label>
+            <div class="col-md-2" id="lbl_award_date_load">
+                <button class="k-button" ng-click="win_award_date.center(); win_award_date.open();">{{item.D_date | date:"yyyy년 MM월 dd일"}}</button>
             </div>
             <div kendo-window="win_award_date" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">
-                <kendo-calendar ng-model="awardDate" k-on-change="win_award_date.close()"></kendo-calendar>
+                <kendo-calendar ng-model="item.D_date" k-on-change="win_award_date.close()"></kendo-calendar>
             </div>
         </div>
 
         <!-- 상세정보 -->
         <div class="form-group">
-            <label for="lbl_award_detail" class="col-md-2 control-label">상세정보</label>
-            <div class="col-md-4" id="lbl_award_detail">
-                <textarea class="form-control"></textarea>
+            <label for="lbl_award_detail_load" class="col-md-2 control-label">상세정보</label>
+            <div class="col-md-4" id="lbl_award_detail_load">
+                <textarea class="form-control" ng-model="item.L_detail"></textarea>
             </div>
         </div>
-    </div>
-
-    <div>
-        <button type="button" class="btn btn-default">추가</button>
-        <button type="button" class="btn btn-default">삭제</button>
+        <!-- 삭제 버튼-->
+        <div>
+            <button type="button" class="btn btn-default" ng-click="delAwardInfo($index)">삭제</button>
+        </div>
     </div>
 </form>
-
-<!--<div>대회 수상</div>-->
-<!--<form class="form-horizontal" role="form">-->
-    <!--<div class="form-group">-->
-
-
-        <!--<div class="form-group">-->
-            <!--<label for="lbl_award_name" class="col-sm-2 control-label">대회명</label>-->
-            <!--<div class="col-sm-10" id="lbl_award_name">-->
-                <!--<input type="text" class="form-control"  placeholder="대회명">-->
-            <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="form-group">-->
-            <!--<label for="lbl_award_title" class="col-sm-2 control-label">작품명</label>-->
-            <!--<div class="col-sm-10" id="lbl_award_title">-->
-                <!--<input type="text" class="form-control"  placeholder="작품명">-->
-            <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="form-group">-->
-            <!--<label for="lbl_award_host" class="col-sm-2 control-label">주최기관</label>-->
-            <!--<div class="col-sm-10" id="lbl_award_host">-->
-                <!--<input type="text" class="form-control"  placeholder="주최기관">-->
-            <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="form-group">-->
-            <!--<label for="lbl_award_date" class="col-sm-2 control-label">수상년월</label>-->
-            <!--<div class="col-sm-10" id="lbl_award_date">-->
-                <!--<button class="k-button" ng-click="win_award_date.center(); win_award_date.open();">{{awardDate | date:"yyyy년 MM월 dd일"}}</button>-->
-            <!--</div>-->
-            <!--<div kendo-window="win_award_date" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">-->
-                <!--<kendo-calendar ng-model="awardDate" k-on-change="win_award_date.close()"></kendo-calendar>-->
-            <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="form-group">-->
-            <!--<label for="lbl_award_detail" class="col-sm-2 control-label">상세정보</label>-->
-            <!--<div class="col-sm-10" id="lbl_award_detail">-->
-                <!--<textarea class="form-control"></textarea>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<div>-->
-        <!--<button type="button" class="btn btn-default">추가</button>-->
-        <!--<button type="button" class="btn btn-default">삭제</button>-->
-    <!--</div>-->
-<!--</form>-->

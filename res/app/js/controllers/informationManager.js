@@ -45,6 +45,8 @@ define([
                 loadWorkingInfo();
             }else if(info === 'abilityInfo'){
                 loadAbilityInfo();
+            }else if(info === 'awardInfo'){
+                loadAwardInfo();
             }
         }
 
@@ -100,6 +102,18 @@ define([
             });
         }
 
+        function loadAwardInfo() {
+            var loadScholarshipPromiss = $http.get('http://210.118.74.166:8123/info/scholarship', {withCredentials: true});
+            var loadAwardPromiss = $http.get('http://210.118.74.166:8123/info/award', {withCredentials: true});
+
+            $q.all([loadScholarshipPromiss, loadAwardPromiss]).then(function (resultArray) {
+                if(resultArray[0].data.result !== null)
+                    InformationData.scholarshipInfo = resultArray[0].data.result;
+                if(resultArray[1].data.result !== null)
+                    InformationData.awardInfo = resultArray[1].data.result;
+            });
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $scope.save = function (info) {
             if (info === 'personalInfo') {
@@ -110,6 +124,8 @@ define([
                 saveWorkingInfo();
             }else if(info === 'abilityInfo'){
                 saveAbilityInfo();
+            }else if(info === 'awardInfo'){
+                saveAwardInfo();
             }
 
         }
@@ -165,6 +181,21 @@ define([
             var savePaperAbilityPromiss = $http.post('http://210.118.74.166:8123/info/paperAbility', {paperAbilityInfo: InformationData.paperAbilityInfo}, {withCredentials: true});
 
             $q.all([saveCertificationAbilityPromiss, saveProficiencyPromiss, saveComputerAbilityPromiss, savePaperAbilityPromiss]).then(function (resultArray) {
+                angular.forEach(resultArray, function (value, key) {
+                    if (value.data.returnCode !== '000') {
+                        return;
+                    }
+                });
+
+                showNotification();
+            });
+        };
+
+        function saveAwardInfo() {
+            var saveScholarshipPromiss = $http.post('http://210.118.74.166:8123/info/scholarship', {scholarshipInfo: InformationData.scholarshipInfo}, {withCredentials: true});
+            var saveAwardPromiss = $http.post('http://210.118.74.166:8123/info/award', {awardInfo: InformationData.awardInfo}, {withCredentials: true});
+
+            $q.all([saveScholarshipPromiss, saveAwardPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
                     if (value.data.returnCode !== '000') {
                         return;

@@ -1,68 +1,65 @@
 <div style="margin: 30px 0 10px 0">장학금</div>
 <form class="form-horizontal" role="form">
+    <!-- 장학금명 -->
     <div class="form-group">
+        <label for="lbl_scholarship_name" class="col-md-2 control-label">장학금명</label>
+        <div class="col-md-2" id="lbl_scholarship_name">
+            <input type="text" class="form-control"  placeholder="장학금명" ng-model="scholarshipInfoItem.S_name">
+        </div>
+    </div>
 
+    <!-- 학교명, 수여시기 -->
+    <div class="form-group row">
+        <label for="lbl_scholarship_school" class="col-md-2 control-label">학교명</label>
+        <div class="col-md-2" id="lbl_scholarship_school">
+            <input type="text" class="form-control"  placeholder="학교명" ng-model="scholarshipInfoItem.S_school">
+        </div>
+
+        <label for="lbl_scholarship_year" class="col-md-1 control-label">수여 시기</label>
+        <div class="col-md-2" id="lbl_scholarship_year">
+            <input type="text" class="form-control"  placeholder="년도" ng-model="scholarshipInfoItem.N_year">
+        </div>
+        <div class="col-md-1">/</div>
+        <div class="col-md-2" id="lbl_scholarship_term">
+            <input type="text" class="form-control"  placeholder="학기" ng-model="scholarshipInfoItem.N_term">
+        </div>
+    </div>
+
+    <!--추가 버튼-->
+    <div>
+        <button type="button" class="btn btn-default" ng-click="addScholarshipInfo()">추가</button>
+    </div>
+
+    <hr>
+
+    <div ng-repeat="item in scholarshipInfoItems track by $index">
         <!-- 장학금명 -->
         <div class="form-group">
-            <label for="lbl_scholarship_name" class="col-md-2 control-label">장학금명</label>
-            <div class="col-md-2" id="lbl_scholarship_name">
-                <input type="text" class="form-control"  placeholder="장학금명">
+            <label for="lbl_scholarship_name_load" class="col-md-2 control-label">장학금명</label>
+            <div class="col-md-2" id="lbl_scholarship_name_load">
+                <input type="text" class="form-control"  placeholder="장학금명" ng-model="item.S_name">
             </div>
         </div>
 
         <!-- 학교명, 수여시기 -->
         <div class="form-group row">
-            <label for="lbl_scholarship_school" class="col-md-2 control-label">학교명</label>
-            <div class="col-md-2" id="lbl_scholarship_school">
-                <input type="text" class="form-control"  placeholder="학교명">
+            <label for="lbl_scholarship_school_load" class="col-md-2 control-label">학교명</label>
+            <div class="col-md-2" id="lbl_scholarship_school_load">
+                <input type="text" class="form-control"  placeholder="학교명" ng-model="item.S_school">
             </div>
 
-            <label for="lbl_scholarship_year" class="col-md-1 control-label">수여 시기</label>
-            <div class="col-md-2" id="lbl_scholarship_year">
-                <input type="text" class="form-control"  placeholder="년도">
+            <label for="lbl_scholarship_year_load" class="col-md-1 control-label">수여 시기</label>
+            <div class="col-md-2" id="lbl_scholarship_year_load">
+                <input type="text" class="form-control"  placeholder="년도" ng-model="item.N_year">
             </div>
             <div class="col-md-1">/</div>
-            <div class="col-md-2" id="lbl_scholarship_term">
-                <input type="text" class="form-control"  placeholder="학기">
+            <div class="col-md-2" id="lbl_scholarship_term_load">
+                <input type="text" class="form-control"  placeholder="학기" ng-model="item.N_term">
             </div>
         </div>
-
-    </div>
-
-    <div>
-        <button type="button" class="btn btn-default">추가</button>
-        <button type="button" class="btn btn-default">삭제</button>
+        <!-- 삭제 버튼-->
+        <div>
+            <button type="button" class="btn btn-default" ng-click="delScholarshipInfo($index)">삭제</button>
+        </div>
     </div>
 </form>
-
-<!--<div>장학금</div>-->
-<!--<form class="form-horizontal" role="form">-->
-    <!--<div class="form-group">-->
-        <!--<div class="form-group">-->
-            <!--<label for="lbl_scholarship_date" class="col-sm-2 control-label">수여 시기</label>-->
-            <!--<div class="col-sm-10" id="lbl_scholarship_date">-->
-                <!--<input type="text" class="form-control"  placeholder="년도">-->
-                <!--<input type="text" class="form-control"  placeholder="학기">-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="form-group">-->
-            <!--<label for="lbl_scholarship_name" class="col-sm-2 control-label">장학금명</label>-->
-            <!--<div class="col-sm-10" id="lbl_scholarship_name">-->
-                <!--<input type="text" class="form-control"  placeholder="장학금명">-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="form-group">-->
-            <!--<label for="lbl_scholarship_shcool" class="col-sm-2 control-label">학교명</label>-->
-            <!--<div class="col-sm-10" id="lbl_scholarship_shcool">-->
-                <!--<input type="text" class="form-control"  placeholder="학교명">-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<div>-->
-        <!--<button type="button" class="btn btn-default">추가</button>-->
-        <!--<button type="button" class="btn btn-default">삭제</button>-->
-    <!--</div>-->
-<!--</form>-->
