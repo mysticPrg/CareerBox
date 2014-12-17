@@ -4,6 +4,7 @@
 
 var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
+var GridStore = require('mongodb').GridStore;
 
 var url = 'mongodb://localhost:27017/careerbox';
 
@@ -24,6 +25,10 @@ function _DBCollections() {
 
     this.isOpen = false;
     this.db = null;
+    this.store = {
+        read: null,
+        write: null
+    };
     this.collections = {
         member: null,
         paper: null,
@@ -48,7 +53,9 @@ function _DBCollections() {
         globalActivityInfo: null,
 
         projectInfo: null,
-        columnInfo: null
+        columnInfo: null,
+
+        file: null
     };
 }
 
@@ -58,6 +65,9 @@ _DBCollections.prototype.open = function open(callback) {
     if (!self.isOpen) {
         MongoClient.connect(url, function (err, db) {
             self.db = db;
+
+            self.store.read = new GridStore(db, null, null, 'r');
+            self.store.write = new GridStore(db, null, null, 'w');
 
             self.collections.member = db.collection('member');
             self.collections.paper = db.collection('paper');
@@ -84,6 +94,8 @@ _DBCollections.prototype.open = function open(callback) {
             self.collections.projectInfo = db.collection('projectInfo');
             self.collections.columnInfo = db.collection('columnInfo');
 
+            self.collections.file = db.collection('file');
+
             self.isOpen = true;
 
             if (callback) {
@@ -96,6 +108,10 @@ _DBCollections.prototype.open = function open(callback) {
 _DBCollections.prototype.close = function close() {
     if (this.isOpen && this.db) {
         this.db.close();
+        this.store = {
+            read: null,
+            write: null
+        };
         this.collections = {
             member: null,
             paper: null,
@@ -120,7 +136,9 @@ _DBCollections.prototype.close = function close() {
             globalActivityInfo: null,
 
             projectInfo: null,
-            columnInfo: null
+            columnInfo: null,
+
+            file: null
         };
     }
 };
