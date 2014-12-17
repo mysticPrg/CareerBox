@@ -47,6 +47,8 @@ define([
                 loadAbilityInfo();
             }else if(info === 'awardInfo'){
                 loadAwardInfo();
+            }else if(info === 'activityInfo'){
+                loadActivityInfo();
             }
         }
 
@@ -114,6 +116,18 @@ define([
             });
         }
 
+        function loadActivityInfo() {
+            var loadLocalActivityPromiss = $http.get('http://210.118.74.166:8123/info/localActivity', {withCredentials: true});
+            var loadGlobalActivityPromiss = $http.get('http://210.118.74.166:8123/info/globalActivity', {withCredentials: true});
+
+            $q.all([loadLocalActivityPromiss, loadGlobalActivityPromiss]).then(function (resultArray) {
+                if(resultArray[0].data.result !== null)
+                    InformationData.localActivityInfo = resultArray[0].data.result;
+                if(resultArray[1].data.result !== null)
+                    InformationData.globalActivityInfo = resultArray[1].data.result;
+            });
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $scope.save = function (info) {
             if (info === 'personalInfo') {
@@ -126,6 +140,8 @@ define([
                 saveAbilityInfo();
             }else if(info === 'awardInfo'){
                 saveAwardInfo();
+            }else if(info === 'activityInfo'){
+                saveActivityInfo();
             }
 
         }
@@ -196,6 +212,21 @@ define([
             var saveAwardPromiss = $http.post('http://210.118.74.166:8123/info/award', {awardInfo: InformationData.awardInfo}, {withCredentials: true});
 
             $q.all([saveScholarshipPromiss, saveAwardPromiss]).then(function (resultArray) {
+                angular.forEach(resultArray, function (value, key) {
+                    if (value.data.returnCode !== '000') {
+                        return;
+                    }
+                });
+
+                showNotification();
+            });
+        };
+
+        function saveActivityInfo() {
+            var saveLocalActivityPromiss = $http.post('http://210.118.74.166:8123/info/localActivity', {localActivityInfo: InformationData.localActivityInfo}, {withCredentials: true});
+            var saveGlobalActivityPromiss = $http.post('http://210.118.74.166:8123/info/globalActivity', {globalActivityInfo: InformationData.globalActivityInfo}, {withCredentials: true});
+
+            $q.all([saveLocalActivityPromiss, saveGlobalActivityPromiss]).then(function (resultArray) {
                 angular.forEach(resultArray, function (value, key) {
                     if (value.data.returnCode !== '000') {
                         return;
