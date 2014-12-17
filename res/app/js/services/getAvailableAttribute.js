@@ -22,12 +22,13 @@ define([
              ProficiencyInfoItem, ScholarshipInfoItem, AwardInfoItem, LocalActivityInfoItem, GlobalActivityInfoItem, ProjectInfoItem, ColumnInfoItem) {
     app.factory('getAvailableAttribute', function () {
         return function (category, infoType) {
-            var result = [];
+            var result = {};
             var item = getItem(category);
 
             for(var key in item){
                 if(key.split('_')[0] === infoType){
-                    result.push(key);
+                    var name = item.getAttributeName(key)
+                    result[key] = name;
                 }
             }
 

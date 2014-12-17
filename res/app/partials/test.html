@@ -12,7 +12,7 @@
 </select>
 
 <ul>
-    <li ng-repeat="r in result track by $index">{{r}}</li>
+    <li ng-repeat="(key,r) in result track by $index">{{key}} : {{r}}</li>
 </ul>
 
 <script src="../libs/require/require.js" data-main="../main.js"></script>
