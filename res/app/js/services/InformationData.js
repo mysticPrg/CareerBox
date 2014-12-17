@@ -19,7 +19,7 @@ define([
         additionalInfo : new AdditionalInfo(),
         highSchoolInfo : new HighSchoolInfo(),
         univSchoolInfo : new UnivSchoolInfo(),
-        workingInfo : new LocalActivityInfo(),
+        workingInfo : new WorkingInfo(),
         certificateAbilityInfo : new CertificationAbilityInfo(),
         proficiencyInfo : new ProficiencyInfo(),
         computerAbilityInfo : new ComputerAbilityInfo(),
