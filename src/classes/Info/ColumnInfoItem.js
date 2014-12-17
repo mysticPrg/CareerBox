@@ -8,15 +8,22 @@ if (typeof define !== 'function') {
 }
 
 define([], function () {
-
+    var dictionary = {
+        'S_title' : '칼럼명',
+        'S_content' : '내용'
+    }
     function ColumnInfoItem(props) {
 
         this.S_title = ''; // 칼럼명
-        this.L_content = ''; // 내용
+        this.S_content = ''; // 내용
 
         if ( props ) {
             this.S_title = props.S_title ? props.S_title : this.S_title;
-            this.L_content = props.L_content ? props.L_content : this.L_content;
+            this.S_content = props.S_content ? props.S_content : this.S_content;
+        }
+
+        ColumnInfoItem.prototype.getAttributeName = function getAttributeName(key){
+            return dictionary[key];
         }
     }
 

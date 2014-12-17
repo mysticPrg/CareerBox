@@ -10,6 +10,12 @@ define([
     'classes/Structs/Term'
 ], function (Term) {
 
+    var dictionary = {
+        'S_name' : '기능',
+        'S_grade' : '활용수준',
+        'N_term' : '활용기간'
+    }
+
     function ComputerAbilityInfoItem(props) {
 
         this.S_name = '';              // 기능
@@ -20,6 +26,10 @@ define([
             this.S_name = props.S_name ? props.S_name : this.S_name;
             this.S_grade = props.S_grade ? props.S_grade : this.S_grade;
             this.N_term = props.N_term ? props.N_term : this.N_term;
+        }
+
+        ComputerAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key){
+            return dictionary[key];
         }
     }
 

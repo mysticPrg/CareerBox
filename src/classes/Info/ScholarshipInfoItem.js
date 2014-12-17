@@ -9,6 +9,13 @@ if (typeof define !== 'function') {
 
 define([], function () {
 
+    var dictionary = {
+        'S_name' : '장학금명',
+        'S_school' : '학교명',
+        'N_year' : '수여년도',
+        'N_term' : '수여학기'
+    }
+
     function ScholarshipInfoItem(props) {
 
         this.S_name = ''; // 장학금명
@@ -21,6 +28,10 @@ define([], function () {
             this.S_school = props.S_school ? props.S_school : this.S_school;
             this.N_year = props.N_year ? props.N_year : this.N_year;
             this.N_term = props.N_term ? props.N_term : this.N_term;
+        }
+
+        ScholarshipInfoItem.prototype.getAttributeName = function getAttributeName(key){
+            return dictionary[key];
         }
     }
 

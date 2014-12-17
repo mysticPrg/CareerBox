@@ -12,7 +12,7 @@ define([
     'component/item/image/component',
     'directives/CommonAttribute'
 ], function ($, ng, app) {
-    app.controller('portfolioEditor', ['$scope', 'EditorData', function ($scope, EditorData) {
+    app.controller('portfolioEditor', ['$scope', '$window', 'EditorData', function ($scope, $window, EditorData) {
 
         $(document).ready(function () {
             EditorData.portfolio._id = window.location.href.split("id=")[1].split('#/')[0];
@@ -25,12 +25,17 @@ define([
                 {collapsible: true, size: "300px" }
             ];
 
-//            var tools = $('[data-toggle="tooltip"]');
-//            tools.tooltip();
+            $scope.hrefPreview = function (){
+                $window.location.href = 'portfolioPreview.html?id=' + EditorData.portfolio._id;
+            }
 
-//            $('#preview').tooltip('show');
-//            $('#moveManage').tooltip('show');
-//            $('#logout').tooltip('show');
+            $scope.hrefManager = function (){
+                $window.location.href = 'portfolioManager.html';
+            }
+
+            $scope.logout = function (){
+                
+            }
         });
 
 

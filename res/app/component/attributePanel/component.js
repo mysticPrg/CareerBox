@@ -25,7 +25,7 @@ define([
     app.controller('attributePanel', ['$scope', '$rootScope', '$window', 'EditorData', 'SetAttributeInformation', function ($scope, $rootScope, $window, EditorData, SetAttributeInformation) {
 
         $scope.EditorData = EditorData;
-console.log(EditorData)
+
         $scope.$watch('EditorData.focusId', function () {
             if(EditorData.focusId){
                 var infomation = SetAttributeInformation(EditorData.focusId);

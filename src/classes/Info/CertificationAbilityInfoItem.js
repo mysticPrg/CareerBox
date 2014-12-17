@@ -7,6 +7,13 @@ if (typeof define !== 'function') {
 }
 
 define([], function () {
+    var dictionary = {
+        'S_name': '자격증명',
+        'S_publisher': '발행처',
+        'D_date': '취급일자',
+        'I_image': '대표이미지',
+        'F_file': '첨부파일'
+    }
 
     function CertificateAbilityInfoItem(props) {
 
@@ -16,12 +23,16 @@ define([], function () {
         this.I_image = '';
         this.F_file = '';
 
-        if ( props ) {
+        if (props) {
             this.S_name = props.S_name ? props.S_name : this.S_name;
             this.S_publisher = props.S_publisher ? props.S_publisher : this.S_publisher;
             this.D_date = props.D_date ? props.D_date : this.D_date;
             this.I_image = props.I_image ? props.I_image : this.I_image;
             this.F_file = props.F_file ? props.F_file : this.F_file;
+        }
+
+        CertificateAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key) {
+            return dictionary[key];
         }
     }
 
