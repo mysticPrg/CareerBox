@@ -86,7 +86,6 @@ define([
             $scope.$watch("EditorData.childArr", function () {
                 if(EditorData.childArr){
                     $scope.changed = true;
-                    console.log('$scope.EditorData.childArr', $scope.EditorData.childArr);
                 }
             }, true);
 
