@@ -17,6 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '논문';
         this.infoType = InfoType.paperAbilityInfo;
         this.items = [];
 

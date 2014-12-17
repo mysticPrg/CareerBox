@@ -17,6 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '장학금';
         this.infoType = InfoType.scholarshipInfo;
         this.items = [];
 

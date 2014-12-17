@@ -17,6 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '칼럼';
         this.infoType = InfoType.columnInfo;
         this.items = [];
 
