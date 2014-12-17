@@ -55,6 +55,10 @@ img {
     margin-right: 40px;
 }
 
+#top-pane #etcWrapper > ul > li > a {
+    display: block;
+}
+
 #top-pane h1 {
     line-height: 50px;
     color: #fff;
@@ -544,9 +548,6 @@ img {
 }
 
 #articleEditBtn {
-    /*background-image: url('../img/editor_img/articleEditBtn.png');*/
-    /*background-position: center;*/
-    /*background-repeat: no-repeat;*/
     width: 58px;
     height: 32px;
     padding: 0;
@@ -554,9 +555,6 @@ img {
 }
 
 #itemDelBtn {
-    /*background-image: url('../img/editor_img/itemDelBtn.png');*/
-    /*background-position: center;*/
-    /*background-repeat: no-repeat;*/
     width: 54px;
     height: 32px;
     padding: 0;
@@ -565,10 +563,6 @@ img {
 }
 
 /*tooltip*/
-.k-popup .k-group {
-
-}
-
 .k-widget .k-tooltip {
     width: 80px;
     height: 20px;

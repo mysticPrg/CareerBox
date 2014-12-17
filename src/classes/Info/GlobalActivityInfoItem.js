@@ -14,7 +14,7 @@ define([
     var dictionary = {
         'S_country'   : '활동 국가',
         'T_term'    : '활동 기간',
-        'L_description'   : '활동 내용',
+        'S_description'   : '활동 내용',
         'I_image'  : '대표이미지',
         'F_file'  : '첨부파일'
     };
@@ -23,14 +23,14 @@ define([
 
         this.S_country = ''; // 활동 국가
         this.T_term = new Term(); // 활동 기간
-        this.L_description = ''; // 활동 내용
+        this.S_description = ''; // 활동 내용
         this.I_image = ''; // 대표이미지
         this.F_file = ''; // 첨부파일
 
         if ( props ) {
             this.S_country = props.S_country ? props.S_country : this.S_country;
             this.T_term = props.T_term ? props.T_term : this.T_term;
-            this.L_description = props.L_description ? props.L_description : this.L_description;
+            this.S_description = props.S_description ? props.S_description : this.S_description;
             this.I_image = props.I_image ? props.I_image : this.I_image;
             this.F_file = props.F_file ? props.F_file : this.F_file;
         }

@@ -17,10 +17,10 @@
 <menu id="menu" class="aside"></menu>
 
 <!--컨텐츠 부분-->
-<div id="content" >
+<div id="content" data-ng-init="initialize()">
     <!--상단 사용자 정보-->
     <div id="user-info" class="clearfix">
-        <h2>임다혜 님의 포트폴리오</h2>
+        <h2 id="header-title" style="display: none;">{{userInfo.S_name_kr}} 님의 포트폴리오</h2>
 
         <!--사용자 사진-->
         <div id="userImg">
@@ -28,11 +28,10 @@
         </div>
 
         <!--프로필 수정-->
-        <a id="editProfileBtn" ng-click="createPortfolio()"><img src="../img/manage_img/editProfileBtn.png"/></a>
+        <a id="editProfileBtn" ng-click="editPersonalInformation()"><img src="../img/manage_img/editProfileBtn.png"/></a>
 
         <!--포트폴리오 생성-->
         <a id="newPortfolioBtn" ng-click="createPortfolio()"><img src="../img/manage_img/newPortfolioBtn.png"/></a>
-
 
     </div>
 
