@@ -24,6 +24,13 @@ define([
                 {collapsible: false, scrollable: false},
                 {collapsible: true, size: "300px" }
             ];
+
+//            var tools = $('[data-toggle="tooltip"]');
+//            tools.tooltip();
+
+//            $('#preview').tooltip('show');
+//            $('#moveManage').tooltip('show');
+//            $('#logout').tooltip('show');
         });
 
 
