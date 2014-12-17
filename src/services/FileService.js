@@ -15,7 +15,7 @@ var fs = require('fs');
 var fileDir = __dirname + '/../../res/uploads/file';
 
 var uploader = new Uploader({
-    debug: true,
+//    debug: true,
     validate: true,
     safeName: true,
     publicDir: __dirname + '/../../res',
@@ -25,6 +25,19 @@ var uploader = new Uploader({
 
 function checkArgForFiles(req, res) {
     if (!req.files) {
+
+        var result = new Result(null);
+        result.setCode('001');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function checkArgForIsBinding(req, res) {
+    if ( req.body.isBinding === null || req.body.isBinding === undefined ) {
 
         var result = new Result(null);
         result.setCode('001');
@@ -73,13 +86,18 @@ function uploadService(req, res) {
         if (!checkArgForFiles(req, res)) {
             return;
         }
+        if (!checkArgForIsBinding(req, res)) {
+            return;
+        }
+
+        var isBinding = (req.body.isBinding === 'true') ? true : false;
 
         var fileData = {
             originalName: data[0].originalName,
             _member_id: req.session._id,
             name: data[0].name,
             filesize: data[0].size,
-            url: ''
+            isBinding: isBinding
         };
 
         FileDB.write(fileData, function(err, writed) {
@@ -137,6 +155,6 @@ function deleteService(req, res) {
 module.exports.set = function (server) {
     server.post('/file', multipart, uploadService);
     server.get('/file/:_id', downloadService);
-    server.get('/file/list', getListService);
+    server.get('/file', getListService);
     server.delete('/file', deleteService);
 };

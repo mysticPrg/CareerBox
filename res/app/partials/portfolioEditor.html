@@ -5,8 +5,8 @@
 
     <title>Portfolio Editor</title>
 
-    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="../libs/jquery/jquery-ui.css" rel="stylesheet">
+    <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet">
 
     <link href="../libs/kendo/styles/web/kendo.flat.min.css" rel="stylesheet">
     <link href="../libs/kendo/styles/web/kendo.common.core.css" rel="stylesheet">
@@ -19,7 +19,17 @@
 </head>
 <body ng-controller="portfolioEditor">
 <div id="top-pane">
-    <h1>Career Box</h1>
+    <div id="logoWrapper">
+        <img src="../img/manage_img/logo.png"/>
+    </div>
+
+    <div id="etcWrapper">
+        <ul>
+            <li><a id="preview" href="portfolioPreview.html" kendo-tooltip k-content="'프리뷰'" ><img src="../img/editor_img/viewPage.png" style="width: 25px"/></a></li>
+            <li><a id="moveManage" href="portfolioManager.html"kendo-tooltip k-content="'관리 페이지'"><img src="../img/editor_img/managePage.png" style="width: 16.5px"/></a></li>
+            <li><a id="logout" href="portfolioManager.html" kendo-tooltip k-content="'로그아웃'"><img src="../img/editor_img/logout.png" style="width: 18px"/></a></li>
+        </ul>
+    </div>
 </div>
 <div id="bottom-pane" kendo-splitter k-panes="panes" k-orientation="orientation">
     <div id="page">
