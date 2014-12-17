@@ -9,7 +9,7 @@ var MemberService = require('./src/services/MemberService');
 var PortfolioService = require('./src/services/PortfolioService');
 var TemplateService = require('./src/services/TemplateService');
 var PaperService = require('./src/services/PaperService');
-var UploadService = require('./src/services/UploadServicer');
+var FileService = require('./src/services/FileService');
 
 var PersonalInfoService = require('./src/services/Info/PersonalInfoService');
 var AdditionalInfoService = require('./src/services/info/AdditionalInfoService');
@@ -31,7 +31,7 @@ MemberService.set(server);
 PortfolioService.set(server);
 TemplateService.set(server);
 PaperService.set(server);
-UploadService.set(server);
+FileService.set(server);
 
 PersonalInfoService.set(server);
 AdditionalInfoService.set(server);

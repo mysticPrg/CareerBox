@@ -10,7 +10,6 @@ var ServiceUtil = require('../util/ServiceUtil');
 var Result = require('./result');
 var ObjectID = require('mongodb').ObjectID;
 
-var mime = require('mime');
 var fs = require('fs');
 
 var fileDir = __dirname + '/../../res/uploads/file';
@@ -37,8 +36,21 @@ function checkArgForFiles(req, res) {
     return true;
 }
 
-function checkArgForId(req, res) {
+function checkArgForIdOnParams(req, res) {
     if (!req.params._id) {
+
+        var result = new Result(null);
+        result.setCode('001');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function checkArgForIdOnBody(req, res) {
+    if (!req.body._id) {
 
         var result = new Result(null);
         result.setCode('001');
@@ -78,7 +90,7 @@ function uploadService(req, res) {
 }
 
 function downloadService(req, res) {
-    if (!checkArgForId(req, res)) {
+    if (!checkArgForIdOnParams(req, res)) {
         return;
     }
 
@@ -97,13 +109,34 @@ function getListService(req, res) {
     }
 
     FileDB.getList(req.session._id, function(err, findedArr) {
+        ServiceUtil.sendResult(err, res, findedArr);
+    });
+}
 
+function deleteService(req, res) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
+        return;
+    }
+    if (!checkArgForIdOnBody(req, res)) {
+        return;
+    }
+
+    var _id = req.body._id;
+
+    FileDB.read(_id, function(err, finded) {
+        FileDB.deleteFile(req.body._id, function(err2) {
+
+            var filepath = fileDir + '/' + finded.name;
+            fs.unlinkSync(filepath);
+            ServiceUtil.sendResult(err2, res, null);
+        });
     });
 }
 
 module.exports.set = function (server) {
-    server.post('/file/upload', multipart, uploadService);
-    server.get('/file/download/:_id', downloadService);
+    server.post('/file', multipart, uploadService);
+    server.get('/file/:_id', downloadService);
     server.get('/file/list', getListService);
-//    server.delete('/file/delete', deleteService);
+    server.delete('/file', deleteService);
 };

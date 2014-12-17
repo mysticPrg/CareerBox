@@ -29,10 +29,17 @@ function getList(_member_id, callback) {
     }.toArray(callback));
 }
 
+function deleteFile(_id, callback) {
+    var fileCollection = require('../util/DBCollections').getInstance().collections.file;
+
+    fileCollection.remove({'_id': new ObjectID(_id)}, callback);
+}
+
 var exports = {
     write: write,
     read: read,
-    getList: getList
+    getList: getList,
+    deleteFile: deleteFile
 };
 
 module.exports = exports;
