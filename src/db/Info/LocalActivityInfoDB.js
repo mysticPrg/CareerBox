@@ -11,13 +11,13 @@ var ObjectID = require('mongodb').ObjectID;
 function save(data, callback) {
     var localActivityInfoCollection = require('../../util/DBCollections').getInstance().collections.localActivityInfo;
 
-    var LocalActivityInfo = new LocalActivityInfo(data);
-    LocalActivityInfo._id = new ObjectID(LocalActivityInfo._id);
+    var localActivityInfo = new LocalActivityInfo(data);
+    localActivityInfo._id = new ObjectID(localActivityInfo._id);
 
-    localActivityInfoCollection.save(LocalActivityInfo, function(err, savedCount, result) {
+    localActivityInfoCollection.save(localActivityInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {
-            returnObject = LocalActivityInfo;
+            returnObject = localActivityInfo;
         } else {
             returnObject = result.upserted[0];
         }
