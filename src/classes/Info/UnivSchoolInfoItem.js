@@ -10,6 +10,14 @@ define([
     'classes/Structs/Term'
 ], function (Term) {
 
+    var dictionary = {
+        'S_name' : '학교명',            // 학교명
+        'S_address' : '소재지',         // 소재지
+        'B_graduate' : '졸업 여부',     // 졸업 여부
+        'T_term' : '재학기간',
+        'S_major' : '전공'             // 전공
+    };
+
     function UnivSchoolInfoItem(props) {
 
         this.S_name = '';              // 학교명
@@ -24,6 +32,10 @@ define([
             this.B_graduate = props.B_graduate ? props.B_graduate : this.B_graduate;
             this.T_term = props.T_term ? props.T_term : this.T_term;
             this.S_major = props.S_major ? props.S_major : this.S_major;
+        }
+
+        UnivSchoolInfoItem.prototype.getAttributeName = function getAttributeName(key){
+            return dictionary[key];
         }
     }
 

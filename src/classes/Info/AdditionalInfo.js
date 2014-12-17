@@ -27,7 +27,7 @@ define([
         'S_favorite'                   : "취미",
         'S_skill'                      : "특기",
         'S_respect'                    : "존경인물"
-    }
+    };
 
     function AdditionalInfo(props) {
 
