@@ -45,7 +45,6 @@ define([
                 // 포트폴리오 삭제
                 $scope.portfolios.splice(index, 1);
             }, function () { // Cancel
-                console.log('Modal dismissed at: ' + new Date());
             });
         };
 
@@ -64,7 +63,6 @@ define([
                     })
                 });
             }, function () { // Cancel
-                console.log('Modal dismissed at: ' + new Date());
             });
         }
 
@@ -87,7 +85,6 @@ define([
                 });
             }, function () {
                 // Cancel
-                console.log('Modal dismissed at: ' + new Date());
             });
 
         }
