@@ -70,6 +70,8 @@ define([
 
         // 포트폴리오 정보 변경 함수
         $scope.modifyPortfolio = function (index) {
+            EditorData.portfolio = $scope.portfolios[index];
+
             var modalInstance = $modal.open(modifyPortfolioModal);
             modalInstance.result.then(function (portfolio) {
                 // OK
