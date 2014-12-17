@@ -9,6 +9,14 @@ if (typeof define !== 'function') {
 
 define([], function () {
 
+    var dictionary = {
+        'S_name'   : '대회명',
+        'S_title' : '작품명',
+        'S_host'    : '주최기관',
+        'D_date'   : '수상일자',
+        'L_detail'  : '상세정보'
+    };
+
     function AwardInfoItem(props) {
 
         this.S_name = ''; // 대회명
@@ -23,6 +31,10 @@ define([], function () {
             this.S_host = props.S_host ? props.S_host : this.S_host;
             this.D_date = props.D_date ? props.D_date : this.D_date;
             this.L_detail = props.L_detail ? props.L_detail : this.L_detail;
+        }
+
+        AwardInfoItem.prototype.getAttributeName = function getAttributeName(key){
+            return dictionary[key];
         }
     }
 
