@@ -32,14 +32,14 @@
 
     <div id="information-content" data-ng-init="initialize()">
         <ul class="nav nav-tabs" id="informationTab">
-            <li role="presentation"><a href="#personalInformationContent" id="personalInformationLink" ng-click="load('personalInfo')">기본정보</a></li>
-            <li role="presentation"><a href="#schoolInformationContent" ng-click="load('schoolInfo')">학력</a></li>
-            <li role="presentation"><a href="#workingInformationContent" ng-click="load('workingInfo')">경력</a></li>
-            <li role="presentation"><a href="#abilityInformationContent" ng-click="load('abilityInfo')">보유능력</a></li>
-            <li role="presentation"><a href="#awardInformationContent" ng-click="load('awardInfo')">수상</a></li>
-            <li role="presentation"><a href="#activityInformationContent" ng-click="load('activityInfo')">활동</a></li>
-            <li role="presentation"><a href="#projectInformationContent" ng-click="load('projectInfo')">프로젝트</a></li>
-            <li role="presentation"><a href="#columnInformationContent" ng-click="load('columnInfo')">칼럼</a></li>
+            <li role="presentation"><a href="#personalInformationContent" id="personalInfo">기본정보</a></li>
+            <li role="presentation"><a href="#schoolInformationContent" id="schoolInfo">학력</a></li>
+            <li role="presentation"><a href="#workingInformationContent" id="workingInfo">경력</a></li>
+            <li role="presentation"><a href="#abilityInformationContent" id="abilityInfo">보유능력</a></li>
+            <li role="presentation"><a href="#awardInformationContent" id="awardInfo">수상</a></li>
+            <li role="presentation"><a href="#activityInformationContent" id="activityInfo">활동</a></li>
+            <li role="presentation"><a href="#projectInformationContent" id="projectInfo">프로젝트</a></li>
+            <li role="presentation"><a href="#columnInformationContent" id="columnInfo">칼럼</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane" id="personalInformationContent">
@@ -47,24 +47,24 @@
                 <additional-information></additional-information>
 
                 <button class="btn btn-default" ng-click="save('personalInfo')">저장</button>
-                <button class="btn btn-default">다음</button>
+                <button class="btn btn-default" ng-click="transition('schoolInfo')">다음</button>
             </div>
 
             <div class="tab-pane" id="schoolInformationContent">
                 <high-school-information></high-school-information>
                 <university-information></university-information>
 
-                <button class="btn btn-default">이전</button>
+                <button class="btn btn-default" ng-click="transition('personalInfo')">이전</button>
                 <button class="btn btn-default" ng-click="save('schoolInfo')">저장</button>
-                <button class="btn btn-default">다음</button>
+                <button class="btn btn-default" ng-click="transition('workingInfo')">다음</button>
             </div>
 
             <div class="tab-pane" id="workingInformationContent">
                 <working-information></working-information>
 
-                <button class="btn btn-default">이전</button>
+                <button class="btn btn-default" ng-click="transition('schoolInfo')">이전</button>
                 <button class="btn btn-default" ng-click="save('workingInfo')">저장</button>
-                <button class="btn btn-default">다음</button>
+                <button class="btn btn-default" ng-click="transition('abilityInfo')">다음</button>
             </div>
             
             <div class="tab-pane" id="abilityInformationContent">
@@ -73,41 +73,41 @@
                 <computer-ability-information></computer-ability-information>
                 <paper-ability-information></paper-ability-information>
 
-                <button class="btn btn-default">이전</button>
+                <button class="btn btn-default" ng-click="transition('workingInfo')">이전</button>
                 <button class="btn btn-default" ng-click="save('abilityInfo')">저장</button>
-                <button class="btn btn-default">다음</button>
+                <button class="btn btn-default" ng-click="transition('awardInfo')">다음</button>
             </div>
 
             <div class="tab-pane" id="awardInformationContent">
                 <scholarship-information></scholarship-information>
                 <award-information></award-information>
 
-                <button class="btn btn-default">이전</button>
+                <button class="btn btn-default" ng-click="transition('abilityInfo')">이전</button>
                 <button class="btn btn-default" ng-click="save('awardInfo')">저장</button>
-                <button class="btn btn-default">다음</button>
+                <button class="btn btn-default" ng-click="transition('activityInfo')">다음</button>
             </div>
 
             <div class="tab-pane" id="activityInformationContent">
                 <local-activity-information></local-activity-information>
                 <global-activity-information></global-activity-information>
 
-                <button class="btn btn-default">이전</button>
+                <button class="btn btn-default" ng-click="transition('awardInfo')">이전</button>
                 <button class="btn btn-default" ng-click="save('activityInfo')">저장</button>
-                <button class="btn btn-default">다음</button>
+                <button class="btn btn-default" ng-click="transition('projectInfo')">다음</button>
             </div>
 
             <div class="tab-pane" id="projectInformationContent">
                 <project-information></project-information>
 
-                <button class="btn btn-default">이전</button>
+                <button class="btn btn-default" ng-click="transition('activityInfo')">이전</button>
                 <button class="btn btn-default" ng-click="save('projectInfo')">저장</button>
-                <button class="btn btn-default">다음</button>
+                <button class="btn btn-default" ng-click="transition('columnInfo')">다음</button>
             </div>
 
             <div class="tab-pane" id="columnInformationContent">
                 <column-information></column-information>
 
-                <button class="btn btn-default">이전</button>
+                <button class="btn btn-default" ng-click="transition('projectInfo')">이전</button>
                 <button class="btn btn-default" ng-click="save('columnInfo')">저장</button>
             </div>
         </div>

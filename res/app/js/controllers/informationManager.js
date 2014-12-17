@@ -29,10 +29,14 @@ define([
             $('#informationTab a').click(function (e) {
                 e.preventDefault();
                 $(this).tab('show');
+                $scope.load(e.target.getAttribute('id'));
             });
 
-            $('#personalInformationLink').click();
-            loadPersonalInfo();
+            $scope.transition('personalInfo');
+        }
+
+        $scope.transition = function (link){
+            $('#'+link).click();
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -243,7 +247,6 @@ define([
                 resultCheck(resultArray);
             });
         };
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         function resultCheck(resultArray){
             var returnCode;
