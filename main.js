@@ -24,6 +24,7 @@ var ScholarshipInfoService = require('./src/services/Info/ScholarshipInfoService
 var AwardInfoService = require('./src/services/Info/AwardInfoService');
 var LocalActivityInfoService = require('./src/services/Info/LocalActivityInfoService');
 var GlobalActivityInfoService = require('./src/services/Info/GlobalActivityInfoService');
+var ProjectInfoService = require('./src/services/Info/ProjectInfoService');
 
 MemberService.set(server);
 PortfolioService.set(server);
@@ -44,6 +45,7 @@ ScholarshipInfoService.set(server);
 AwardInfoService.set(server);
 LocalActivityInfoService.set(server);
 GlobalActivityInfoService.set(server);
+ProjectInfoService.set(server);
 
 server.start(8123);
 

@@ -24,7 +24,9 @@ define([], function () {
         awardInfo: 'awardInfo',
 
         localActivityInfo: 'localActivityInfo',
-        globalActivityInfo: 'globalActivityInfo'
+        globalActivityInfo: 'globalActivityInfo',
+
+        projectInfo: 'projectInfo'
     };
 
     return InfoType;
