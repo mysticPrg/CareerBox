@@ -12,6 +12,19 @@ define([
     'classes/Enums/InfoType'
 ], function (Util, InfoClass, InfoType) {
 
+    var dictionary = {
+        'I_picture' : '프로필',
+        'S_name_kr' : '한글',
+        'S_name_en' : '영문',
+        'S_name_ch' : '한문',
+        'D_birthday' : '생일',
+        'S_email' : '이메일',
+        'S_phone' : '전화번호',
+        'S_cellphone' : '핸드폰',
+        'S_address_1' : '주소',
+        'S_address_2' : '상세주소'
+    }
+
     function PersonalInfo(props) {
 
         InfoClass.call(this, props);
@@ -41,6 +54,10 @@ define([
             this.S_cellphone = props.S_cellphone ? props.S_cellphone : this.S_cellphone;
             this.S_address_1 = props.S_address_1 ? props.S_address_1 : this.S_address_1;
             this.S_address_2 = props.S_address_2 ? props.S_address_2 : this.S_address_2;
+        }
+
+        PersonalInfo.prototype.getAttributeName = function getAttributeName(key){
+            return dictionary[key];
         }
     }
 

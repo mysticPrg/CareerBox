@@ -25,7 +25,7 @@ define([
     app.controller('attributePanel', ['$scope', '$rootScope', '$window', 'EditorData', 'SetAttributeInformation', function ($scope, $rootScope, $window, EditorData, SetAttributeInformation) {
 
         $scope.EditorData = EditorData;
-
+console.log(EditorData)
         $scope.$watch('EditorData.focusId', function () {
             if(EditorData.focusId){
                 var infomation = SetAttributeInformation(EditorData.focusId);
@@ -42,8 +42,8 @@ define([
                     $scope.parentArray[key].zOrder--;
                 }
             }
-
             EditorData.end_zOrder--;
+            EditorData.start_zOrder++;
 
             EditorData.focusId = 'canvas-content';
 
@@ -79,6 +79,37 @@ define([
                 }
             }
             console.log('더이상 뒤로 갈수가 없습니다.', $scope);
+        }
+
+        $scope.goFirst = function () {
+
+            // z index 처리
+
+            // 뒤에 있는 것들을 앞으로 하나씩 땡김
+            for (var key in $scope.parentArray) {
+                if ($scope.parentArray[key].zOrder < $scope.attributeInformation.zOrder) {
+                    $scope.parentArray[key].zOrder++;
+                }
+            };
+
+            // 자신을 start로
+            $scope.attributeInformation.zOrder = EditorData.start_zOrder;
+
+        };
+
+        $scope.goEnd = function () {
+
+            // z index 처리
+
+            // 앞에 있는 것들을 뒤로 하나씩 땡김
+            for (var key in $scope.parentArray) {
+                if ($scope.parentArray[key].zOrder > $scope.attributeInformation.zOrder) {
+                    $scope.parentArray[key].zOrder--;
+                }
+            };
+
+            // 자신을 end로
+            $scope.attributeInformation.zOrder = EditorData.end_zOrder;
         }
 
         $scope.editTemplate = function (template) {
