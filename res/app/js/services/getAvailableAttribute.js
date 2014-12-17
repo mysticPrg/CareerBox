@@ -25,10 +25,11 @@ define([
         return function (category, infoType) {
             var result = {};
             var item = getItem(category);
+            console.log(category);
 
             for(var key in item){
                 if(key.split('_')[0] === infoType){
-                    var name = item.getAttributeName(key)
+                    var name = item.getAttributeName(key);
                     result[key] = name;
                 }
             }

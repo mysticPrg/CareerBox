@@ -14,14 +14,14 @@ define([
     'classes/Info/CertificationAbilityInfo',
     'classes/Info/ProficiencyInfo',
     'classes/Info/ComputerAbilityInfo',
-    'classes/Info/ScholarshipInfo',
     'classes/Info/PaperAbilityInfo',
+    'classes/Info/ScholarshipInfo',
     'classes/Info/AwardInfo',
     'classes/Info/LocalActivityInfo',
     'classes/Info/GlobalActivityInfo',
     'classes/Info/ProjectInfo',
     'classes/Info/ColumnInfo'
-], function (PersonalInfo, AdditionalInfo, HighSchoolInfo, UnivSchoolInfo, WorkingInfo, CertificationAbilityInfo, ComputerAbilityInfo, ProficiencyInfo,
+], function (PersonalInfo, AdditionalInfo, HighSchoolInfo, UnivSchoolInfo, WorkingInfo, CertificationAbilityInfo, ProficiencyInfo, ComputerAbilityInfo,
              PaperAbilityInfo, ScholarshipInfo, AwardInfo, LocalActivityInfo, GlobalActivityInfo, ProjectInfo, ColumnInfo) {
     var InfoCategory = [
         new PersonalInfo(), new AdditionalInfo(), new HighSchoolInfo(), new UnivSchoolInfo(), new WorkingInfo(), new CertificationAbilityInfo(), new ProficiencyInfo(),
