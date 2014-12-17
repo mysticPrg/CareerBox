@@ -1,7 +1,7 @@
 
 define([
     'app',
-    'classes/Templates/Template'
+    'classes/Portfolio'
 ], function (app, Portfolio) {
     app.controller('createPortfolioModalController', function ($scope, $modalInstance) {
         $scope.portfolio = new Portfolio();
