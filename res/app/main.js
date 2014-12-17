@@ -27,7 +27,7 @@ require.config({
             exports: 'facebook'
         },
 
-        // grunt custom:splitter,calendar,angular,fx,window,progressbar,colorpicker,notification
+        // grunt custom:splitter,calendar,angular,fx,window,progressbar,colorpicker,notification,tooltip
         'kendo': {
             deps: ['angular', 'jquery', '../libs/kendo/js/cultures/kendo.culture.ko-KR.min'],
             exports: 'kendo'
