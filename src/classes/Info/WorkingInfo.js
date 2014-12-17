@@ -17,6 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '경력';
         this.infoType = InfoType.workingInfo;
         this.items = [];
 

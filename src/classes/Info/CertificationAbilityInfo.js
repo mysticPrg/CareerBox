@@ -17,6 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '자격증';
         this.infoType = InfoType.certificateAbilityInfo;
         this.items = [];
 

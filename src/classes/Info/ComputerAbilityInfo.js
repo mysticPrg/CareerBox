@@ -17,6 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '컴퓨터활용능력';
         this.infoType = InfoType.computerAbilityInfo;
         this.items = [];
 

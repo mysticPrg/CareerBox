@@ -14,7 +14,6 @@ define([
             },
             templateUrl: require.toUrl('component/attribute/isIndexAttribute/template.html'),
             link: function ($scope, element, att) {
-                console.log('EditorData',EditorData);
 
                 $scope.isIndex = $scope.data.isIndex;
 

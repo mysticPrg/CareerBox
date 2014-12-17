@@ -1,24 +1,24 @@
-<ANY ng-switch = "attributeInformation.arrow.use">
+<ANY ng-switch = "attributeInformation.arrow.use" style="width: 100%; height: 100%">
     <ANY ng-switch-when="false">
         <svg  ng-model="lineEnd" style="width: 100%; height: 100%">
-            <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
+            <line ng-x1={{attributeInformation.outline.weight*5}} ng-y1={{lineEnd.y/2}} ng-x2={{lineEnd.x-attributeInformation.outline.weight*5}} ng-y2={{lineEnd.y/2}} stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
         </svg>
     </ANY>
     <ANY ng-switch-default>
         <ANY ng-switch = "attributeInformation.arrow.direction">
             <ANY ng-switch-when="start">
                 <svg style="width: 100%; height: 100%" ng-model=lineEnd>
-                    <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} marker-start = "url(#startArrow)" stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
+                    <line ng-x1={{attributeInformation.outline.weight*5}} ng-y1={{lineEnd.y/2}} ng-x2={{lineEnd.x-attributeInformation.outline.weight*5}} ng-y2={{lineEnd.y/2}} marker-start = "url(#startArrow)" stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
                 </svg>
             </ANY>
             <ANY ng-switch-when="end">
                 <svg style="width: 100%; height: 100%" ng-model=lineEnd>
-                    <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} marker-end = "url(#endArrow)" stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
+                    <line ng-x1={{attributeInformation.outline.weight*5}} ng-y1={{lineEnd.y/2}} ng-x2={{lineEnd.x-attributeInformation.outline.weight*5}} ng-y2={{lineEnd.y/2}} marker-end = "url(#endArrow)" stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
                 </svg>
             </ANY>
             <ANY ng-switch-when="both">
                 <svg style="width: 100%; height: 100%" ng-model=lineEnd>
-                    <line x1="0" y1="0" x2={{lineEnd.x}} y2={{lineEnd.y}} marker-start = "url(#startArrow)" marker-end = "url(#endArrow)" stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
+                    <line ng-x1={{attributeInformation.outline.weight*5}} ng-y1={{lineEnd.y/2}} ng-x2={{lineEnd.x-attributeInformation.outline.weight*5}} ng-y2={{lineEnd.y/2}} marker-start = "url(#startArrow)" marker-end = "url(#endArrow)" stroke = {{style.fill}} stroke-width={{attributeInformation.outline.weight}} />
                 </svg>
             </ANY>
         </ANY>
@@ -27,12 +27,12 @@
 
 <svg style="width:0; height: 0">
     <defs>
-        <marker id="endArrow" markerWidth="10" markerHeight="10" refx="2" refy="6" orient="auto">
-            <path d="M1,1 L1,10 L10,6" ng-style="style" />
+        <marker id="endArrow" markerWidth="5" markerHeight="5" refx="1" refy="2.8" orient="auto">
+            <path d="M0,0 L0,5 L5,3" ng-style="style" />
         </marker>
 
-        <marker id="startArrow" markerWidth="10" markerHeight="10" refx="2" refy="6" orient="auto">
-            <path d="M1,6 L10,1 L10,10" ng-style="style" />
+        <marker id="startArrow" markerWidth="5" markerHeight="5" refx="1" refy="2.8" orient="auto">
+            <path d="M0,3 L5,0 L5,5" ng-style="style" />
         </marker>
     </defs>
 </svg>

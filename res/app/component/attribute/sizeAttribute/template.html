@@ -1,10 +1,22 @@
 <ul id="sizeForm" class="clearfix">
-    <li>
-        <label for="sizeInputWidth">width :</label>
-        <input type="text" class="attrInput form-control" id="sizeInputWidth" ng-model="data.size.width">
-    </li>
-    <li>
-        <label for="sizeInputHeight">height :</label>
-        <input type="text" class="attrInput form-control" id="sizeInputHeight" ng-model="data.size.height">
-    </li>
+    <ANY ng-switch="data.itemType">
+
+        <ANY ng-switch-when="line">
+            <li>
+                <label for="sizeInputWidth">length :</label>
+                <input type="text" class="attrInput form-control" id="sizeInputWidth_line" ng-model="data.size.width">
+            </li>
+        </ANY>
+        <ANY ng-switch-default>
+            <li>
+                <label for="sizeInputWidth">width :</label>
+                <input type="text" class="attrInput form-control" id="sizeInputWidth" ng-model="data.size.width">
+            </li>
+            <li>
+                <label for="sizeInputHeight">height :</label>
+                <input type="text" class="attrInput form-control" id="sizeInputHeight" ng-model="data.size.height">
+            </li>
+        </ANY>
+    </ANY>
+
 </ul>

@@ -17,6 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '프로젝트';
         this.infoType = InfoType.projectInfo;
         this.items = [];
 

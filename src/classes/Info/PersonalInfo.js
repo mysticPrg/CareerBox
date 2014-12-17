@@ -16,6 +16,7 @@ define([
 
         InfoClass.call(this, props);
 
+        this.title = '기본정보';
         this.infoType = InfoType.personalInfo;
 
         this.I_picture = null;
