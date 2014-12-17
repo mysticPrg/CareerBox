@@ -7,22 +7,24 @@
     <div class="tab-content">
         <div class="tab-pane active" id="sectionAttr">
 
-            <div style="background-color: #f9f9f9; height: 54px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); padding: 9px 10px 0 10px; box-sizing: border-box;">
+            <div style="background-color: #f9f9f9; height: 54px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); padding: 9px 10px 0 15px; box-sizing: border-box;">
                 <!--속성 이름-->
                 <div id="itemAttrInfo" class="clearfix">
-                    <h3>{{attributeInformation.layoutComponentType}}</h3>
-                    <h3>{{attributeInformation.itemType}}</h3>
-                    <h3>{{attributeInformation.templateType}}</h3>
+                    <h4>{{attributeInformation.layoutComponentType}}</h4>
+                    <h4>{{attributeInformation.itemType}}</h4>
+                    <h4>{{attributeInformation.templateType}}</h4>
                 </div>
 
                 <!--수정, 삭제 버튼-->
                 <div id="editBtnGrp" ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
                     <button  id="articleEditBtn" class="btn btn-default"
                              ng-click="deleteItem(attributeInformation._id)">
+                        <img src="../img/editor_img/articleEditBtn.png" style="margin-right: 3px;"/>수정
                     </button>
 
                     <button id="itemDelBtn" class="btn btn-default"
                             ng-click="deleteItem(attributeInformation._id)">
+                        <img src="../img/editor_img/itemDelBtn.png" style="margin-right: 3px;"/>삭제
                     </button>
                 </div>
             </div>

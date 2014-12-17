@@ -152,6 +152,13 @@ img {
     float: right;
 }
 
+#bottom-pane #page #stateBar #btnGroup #btnSave {
+    padding: 0;
+    box-sizing: border-box;
+    width: 60px;
+    height: 34px;
+    border-color: #c1c1c1;
+}
 
 #articleTemplateArea{
     padding: 20px;
@@ -386,7 +393,7 @@ img {
 }
 
 /*item type 이름 & 삭제 버튼*/
-#attribute #sectionAttr #itemAttrInfo > h3{
+#attribute #sectionAttr #itemAttrInfo > h4{
     float: left;
 }
 
@@ -532,31 +539,42 @@ img {
     float: right;
 }
 
+#editBtnGrp > .btn {
+    font-size: 12px;
+}
+
 #articleEditBtn {
-    background-image: url('../img/editor_img/articleEditBtn.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 60px;
+    /*background-image: url('../img/editor_img/articleEditBtn.png');*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    width: 58px;
     height: 32px;
     padding: 0;
-    border-color: #3199cd;
+    border-color: #c1c1c1;
 }
 
 #itemDelBtn {
-    background-image: url('../img/editor_img/itemDelBtn.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 60px;
+    /*background-image: url('../img/editor_img/itemDelBtn.png');*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    width: 54px;
     height: 32px;
     padding: 0;
-    border-color: #eb5373;
+    border-color: #c1c1c1;
+    margin-left: 5px;
 }
 
 /*tooltip*/
+.k-popup .k-group {
+
+}
+
 .k-widget .k-tooltip {
     width: 80px;
     height: 20px;
     line-height: 20px;
-    border-style: none;
-    background-color: #47bdf8;
+    font-size: 12px;
+    border-style: none !important;
+    background-color: #47bdf8 !important;
 }
+
