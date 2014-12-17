@@ -17,7 +17,7 @@ define([
 
         InfoClass.call(this, props);
 
-        this.infoType = InfoType.workingInfo;
+        this.infoType = InfoType.projectInfo;
         this.items = [];
 
         if ( props && props.items ) {
