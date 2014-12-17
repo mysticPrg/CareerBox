@@ -25,6 +25,7 @@ var AwardInfoService = require('./src/services/Info/AwardInfoService');
 var LocalActivityInfoService = require('./src/services/Info/LocalActivityInfoService');
 var GlobalActivityInfoService = require('./src/services/Info/GlobalActivityInfoService');
 var ProjectInfoService = require('./src/services/Info/ProjectInfoService');
+var ColumnInfoService = require('./src/services/Info/ColumnInfoService');
 
 MemberService.set(server);
 PortfolioService.set(server);
@@ -46,6 +47,7 @@ AwardInfoService.set(server);
 LocalActivityInfoService.set(server);
 GlobalActivityInfoService.set(server);
 ProjectInfoService.set(server);
+ColumnInfoService.set(server);
 
 server.start(8123);
 
@@ -100,3 +102,4 @@ server.start(8123);
 //capture(p, function() {
 //    console.log('Capure Complete!');
 //});
+

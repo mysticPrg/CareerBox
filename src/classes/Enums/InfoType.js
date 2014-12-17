@@ -26,7 +26,8 @@ define([], function () {
         localActivityInfo: 'localActivityInfo',
         globalActivityInfo: 'globalActivityInfo',
 
-        projectInfo: 'projectInfo'
+        projectInfo: 'projectInfo',
+        columnInfo: 'columnInfo'
     };
 
     return InfoType;
