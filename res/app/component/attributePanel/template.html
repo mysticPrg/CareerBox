@@ -7,13 +7,29 @@
     <div class="tab-content">
         <div class="tab-pane active" id="sectionAttr">
 
-            <ul id="itemAttrList">
+            <div style="background-color: #f9f9f9; height: 54px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); padding: 9px 10px 0 10px; box-sizing: border-box;">
+                <!--속성 이름-->
                 <div id="itemAttrInfo" class="clearfix">
                     <h3>{{attributeInformation.layoutComponentType}}</h3>
                     <h3>{{attributeInformation.itemType}}</h3>
                     <h3>{{attributeInformation.templateType}}</h3>
                 </div>
 
+                <!--수정, 삭제 버튼-->
+                <div id="editBtnGrp" ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
+                    <button  id="articleEditBtn" class="btn btn-default"
+                             ng-click="deleteItem(attributeInformation._id)">
+                    </button>
+
+                    <button id="itemDelBtn" class="btn btn-default"
+                            ng-click="deleteItem(attributeInformation._id)">
+                    </button>
+                </div>
+            </div>
+
+            <ul id="itemAttrList">
+
+                <!--속성 리스트-->
                 <li ng-repeat="(key, att) in attributeInformation track by $index"
                     ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType'
                     || key == 'state' || key == 'pos_end' || key == 'pos_start'
@@ -101,11 +117,8 @@
                     </ANY>
                 </li>
 
+                <!--z-index 설정버튼-->
                 <div ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
-                    <button class="btn btn-default"
-                            ng-click="deleteItem(attributeInformation._id)">삭제
-                    </button>
-
                     <button class="btn btn-default"
                             ng-click="goFront()">앞으로
                     </button>
@@ -114,6 +127,7 @@
                             ng-click="goBack()">뒤로
                     </button>
                 </div>
+
             </ul>
         </div>
 

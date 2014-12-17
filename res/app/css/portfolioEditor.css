@@ -1,8 +1,11 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 html, body {
     height:100%;
     margin:0;
     padding:0;
     overflow:hidden;
+    font-family: 'nanum gothic';
 }
 
 div, h1, h3 , ul, li, pre {
@@ -36,6 +39,20 @@ img {
 
 #top-pane #logoWrapper {
     padding-top: 8px;
+    display: inline-block;
+}
+
+#top-pane #etcWrapper {
+    display: inline-block;
+    position: absolute;
+    right: 40px;
+}
+
+#top-pane #etcWrapper > ul > li {
+    display: inline-block;
+    line-height: 50px;
+    float: left;
+    margin-right: 40px;
 }
 
 #top-pane h1 {
@@ -422,8 +439,7 @@ img {
 }
 
 
-/*editor tab*/
-
+/*editor article, item tab*/
 #SectionEditorTab {
     overflow: auto;
     width: 100%;
@@ -458,6 +474,10 @@ img {
     text-decoration: none;
 }
 
+#SectionEditorTab img {
+    margin-right: 10px;
+}
+
 
 #SectionEditorTab a:hover {
     background: #c93434;
@@ -472,6 +492,7 @@ img {
 
 .k-splitbar {
     background-color: #05091c;
+    border-style: none;
 }
 
 #SectionEditorTab #current a {
@@ -489,8 +510,44 @@ img {
     /*padding: 30px;*/
 }
 
-
-/* 에디터 탭 */
 .k-color-value{
     color: #000000;
+}
+
+
+
+/*속성창 수정, 삭제 버튼*/
+#itemAttrInfo {
+    font-family: 'nanum gothic';
+    font-weight: 800;
+    display: inline-block;
+}
+
+#itemAttrInfo h3 {
+    line-height: 37px;
+}
+
+
+#editBtnGrp {
+    float: right;
+}
+
+#articleEditBtn {
+    background-image: url('../img/editor_img/articleEditBtn.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 32px;
+    padding: 0;
+    border-color: #3199cd;
+}
+
+#itemDelBtn {
+    background-image: url('../img/editor_img/itemDelBtn.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 32px;
+    padding: 0;
+    border-color: #eb5373;
 }
