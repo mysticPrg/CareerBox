@@ -10,8 +10,7 @@ define([
     'component/item/text/component',
     'component/item/link/component',
     'component/item/image/component',
-    'directives/CommonAttribute',
-    'twitter-bootstrap'
+    'directives/CommonAttribute'
 ], function ($, ng, app) {
     app.controller('portfolioEditor', ['$scope', 'EditorData', function ($scope, EditorData) {
 
@@ -26,8 +25,8 @@ define([
                 {collapsible: true, size: "300px" }
             ];
 
-            var tools = $('[data-toggle="tooltip"]');
-            tools.tooltip();
+//            var tools = $('[data-toggle="tooltip"]');
+//            tools.tooltip();
 
 //            $('#preview').tooltip('show');
 //            $('#moveManage').tooltip('show');
