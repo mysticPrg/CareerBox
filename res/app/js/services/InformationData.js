@@ -15,8 +15,10 @@ define([
     'classes/Info/ScholarshipInfo',
     'classes/Info/AwardInfo',
     'classes/Info/LocalActivityInfo',
-    'classes/Info/GlobalActivityInfo'
-], function (app, PersonalInfo, AdditionalInfo, HighSchoolInfo, UnivSchoolInfo, WorkingInfo, CertificationAbilityInfo, ProficiencyInfo, ComputerAbilityInfo, PaperAbilityInfo, ScholarshipInfo, AwardInfo, LocalActivityInfo, GlobalActivityInfo) {
+    'classes/Info/GlobalActivityInfo',
+    'classes/Info/ProjectInfo',
+    'classes/Info/ColumnInfo'
+], function (app, PersonalInfo, AdditionalInfo, HighSchoolInfo, UnivSchoolInfo, WorkingInfo, CertificationAbilityInfo, ProficiencyInfo, ComputerAbilityInfo, PaperAbilityInfo, ScholarshipInfo, AwardInfo, LocalActivityInfo, GlobalActivityInfo, ProjectInfo, ColumnInfo) {
 
     var InformationData = {
         personalInfo : new PersonalInfo(),
@@ -31,7 +33,9 @@ define([
         scholarshipInfo : new ScholarshipInfo(),
         awardInfo : new AwardInfo(),
         localActivityInfo : new LocalActivityInfo(),
-        globalActivityInfo : new GlobalActivityInfo()
+        globalActivityInfo : new GlobalActivityInfo(),
+        projectInfo : new ProjectInfo(),
+        columnInfo : new ColumnInfo()
     };
 
     app.factory('InformationData', function () {
