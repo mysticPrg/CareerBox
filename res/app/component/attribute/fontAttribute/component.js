@@ -13,7 +13,10 @@ define([
             templateUrl: require.toUrl('component/attribute/fontAttribute/template.html'),
             link: function ($scope, element, att) {
 
-                $scope.color = "#" + $scope.data.font.color.R + $scope.data.font.color.G + $scope.data.font.color.B;
+                $scope.$watch("data.font.color",function() {
+                    $scope.color = "#" + $scope.data.font.color.R + $scope.data.font.color.G + $scope.data.font.color.B;
+
+                },true);
 
                 $scope.$watch("color",function() {
                     // 칼라를 바꾼다.
