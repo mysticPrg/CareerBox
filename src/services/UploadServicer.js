@@ -10,7 +10,6 @@ var ServiceUtil = require('../util/ServiceUtil');
 var Result = require('./result');
 var ObjectID = require('mongodb').ObjectID;
 
-var path = require('path');
 var mime = require('mime');
 var fs = require('fs');
 
@@ -79,9 +78,6 @@ function uploadService(req, res) {
 }
 
 function downloadService(req, res) {
-    if (!ServiceUtil.checkSession(req, res)) {
-        return;
-    }
     if (!checkArgForId(req, res)) {
         return;
     }
@@ -89,20 +85,25 @@ function downloadService(req, res) {
     FileDB.read(req.params._id, function(err, finded) {
 
         var filepath = fileDir + '/' + finded.name;
-//        var filepath = path.basename(filename);
-        var mimetype = mime.lookup(finded.name); //(filepath);
 
-        res.setHeader('Content-disposition', 'attachment; filename=' + finded.originalName);
-        res.setHeader('Content-type', mimetype);
+        res.download(filepath, finded.originalName);
+    });
+}
 
-        var filestream = fs.createReadStream(filepath);
-        filestream.pipe(res);
+function getListService(req, res) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
+        return;
+    }
+
+    FileDB.getList(req.session._id, function(err, findedArr) {
+
     });
 }
 
 module.exports.set = function (server) {
     server.post('/file/upload', multipart, uploadService);
     server.get('/file/download/:_id', downloadService);
-//    server.get('/file/list', getList);
+    server.get('/file/list', getListService);
 //    server.delete('/file/delete', deleteService);
 };

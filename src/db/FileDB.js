@@ -21,9 +21,18 @@ function read(_id, callback) {
     fileCollection.findOne({'_id': new ObjectID(_id)}, callback);
 }
 
+function getList(_member_id, callback) {
+    var fileCollection = require('../util/DBCollections').getInstance().collections.file;
+
+    fileCollection.find({
+        '_member_id': _member_id
+    }.toArray(callback));
+}
+
 var exports = {
     write: write,
-    read: read
+    read: read,
+    getList: getList
 };
 
 module.exports = exports;
