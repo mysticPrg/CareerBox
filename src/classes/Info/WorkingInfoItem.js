@@ -11,6 +11,21 @@ define([
     'classes/Structs/Term'
 ], function (Term) {
 
+    var dictionary = {
+        'I_logo': '대표이미지',
+        'S_name': '회사명',
+        'S_address': '소재지',
+        'S_hireType': '고용형태',
+        'B_resignation': '퇴직여부',
+        'T_term': '기간',
+        'S_department': '부서',
+        'S_position': '직위',
+        'S_jobTitle': '직책',
+        'S_jobType': '직종',
+        'S_business': '주요업무',
+        'S_achive': '주요성과'
+    }
+
     function WorkingInfoItem(props) {
 
         this.I_logo = '';           // 대표이미지
@@ -23,8 +38,8 @@ define([
         this.S_position = '';       // 직위
         this.S_jobTitle = '';       // 직책
         this.S_jobType = '';        // 직종
-        this.L_business = '';       // 주요 업무
-        this.L_achive = '';         // 주요 성과
+        this.S_business = '';       // 주요 업무
+        this.S_achive = '';         // 주요 성과
 
         if ( props ) {
             this.I_logo = props.I_logo ? props.I_logo : this.I_logo;
@@ -37,8 +52,12 @@ define([
             this.S_position = props.S_position ? props.S_position : this.S_position;
             this.S_jobTitle = props.S_jobTitle ? props.S_jobTitle : this.S_jobTitle;
             this.S_jobType = props.S_jobType ? props.S_jobType : this.S_jobType;
-            this.L_business = props.L_business ? props.L_business : this.L_business;
-            this.L_achive = props.L_achive ? props.L_achive : this.L_achive;
+            this.S_business = props.S_business ? props.S_business : this.S_business;
+            this.S_achive = props.S_achive ? props.S_achive : this.S_achive;
+        }
+
+        WorkingInfoItem.prototype.getAttributeName = function getAttributeName(key){
+            return dictionary[key];
         }
     }
 

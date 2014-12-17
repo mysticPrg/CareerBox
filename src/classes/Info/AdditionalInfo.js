@@ -13,6 +13,22 @@ define([
     'classes/Structs/Term'
 ], function (Util, InfoClass, InfoType, Term) {
 
+    var dictionary = {
+        'B_veteran'                    : "보훈대상",
+        'B_disability'                 : "장애여부",
+        'T_militaryService_term'       : "복무기간",
+        'S_militaryService_category'   : "병역사항",
+        'S_religion'                   : "종교",
+        'N_physical_tall'              : "신장",
+        'N_physical_weight'            : "몸무게",
+        'N_physical_blood'             : "혈액형",
+        'N_physical_sight_left'        : "우시",
+        'N_physical_sight_right'       : "좌시",
+        'S_favorite'                   : "취미",
+        'S_skill'                      : "특기",
+        'S_respect'                    : "존경인물"
+    };
+
     function AdditionalInfo(props) {
 
         InfoClass.call(this, props);
@@ -49,6 +65,10 @@ define([
             this.S_favorite = props.S_favorite ? props.S_favorite : this.S_favorite;
             this.S_skill = props.S_skill ? props.S_skill : this.S_skill;
             this.S_respect = props.S_respect ? props.S_respect : this.S_respect;
+        }
+
+        AdditionalInfo.prototype.getAttributeName = function getAttributeName(key){
+            return dictionary[key];
         }
     }
 

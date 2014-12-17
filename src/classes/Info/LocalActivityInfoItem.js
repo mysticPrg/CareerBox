@@ -11,6 +11,15 @@ define([
     'classes/Structs/Term'
 ], function (Term) {
 
+    var dictionary = {
+        'S_category'   : '분류',
+        'S_name' : '활동명',
+        'T_term'    : '활동 기간',
+        'L_description'   : '활동 내용',
+        'I_image'  : '대표이미지',
+        'F_file'  : '첨부파일'
+    };
+
     function LocalActivityInfoItem(props) {
 
         this.S_category = ''; // 분류
@@ -27,6 +36,10 @@ define([
             this.L_description = props.L_description ? props.L_description : this.L_description;
             this.I_image = props.I_image ? props.I_image : this.I_image;
             this.F_file = props.F_file ? props.F_file : this.F_file;
+        }
+
+        LocalActivityInfoItem.prototype.getAttributeName = function getAttributeName(key){
+            return dictionary[key];
         }
     }
 

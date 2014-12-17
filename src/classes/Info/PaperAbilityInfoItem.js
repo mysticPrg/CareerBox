@@ -10,6 +10,14 @@ define([
     'classes/Structs/Term'
 ], function (Term) {
 
+    var dictionary = {
+        'S_title'   : '논문 제목',
+        'S_academy' : '논문게재 학회',
+        'D_date'    : '논문게재 날짜',
+        'S_ratio'   : '참여 정도',
+        'L_detail'  : '논문 내용'
+    };
+
     function PaperAbilityInfoItem(props) {
 
         this.S_title = ''; // 논문 제목
@@ -24,6 +32,10 @@ define([
             this.D_date = props.D_date ? props.D_date : this.D_date;
             this.S_ratio = props.S_ratio ? props.S_ratio : this.S_ratio;
             this.L_detail = props.L_detail ? props.L_detail : this.L_detail;
+        }
+
+        PaperAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key){
+            return dictionary[key];
         }
     }
 
