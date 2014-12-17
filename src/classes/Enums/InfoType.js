@@ -23,7 +23,8 @@ define([], function () {
         scholarshipInfo: 'scholarshipInfo',
         awardInfo: 'awardInfo',
 
-        localActivityInfo: 'localActivityInfo'
+        localActivityInfo: 'localActivityInfo',
+        globalActivityInfo: 'globalActivityInfo'
     };
 
     return InfoType;

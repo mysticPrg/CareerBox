@@ -44,7 +44,8 @@ function _DBCollections() {
         scholarshipInfo: null,
         awardInfo: null,
 
-        localActivityInfo: null
+        localActivityInfo: null,
+        globalActivityInfo: null
     };
 }
 
@@ -75,6 +76,7 @@ _DBCollections.prototype.open = function open(callback) {
             self.collections.awardInfo = db.collection('awardInfo');
 
             self.collections.localActivityInfo = db.collection('localActivityInfo');
+            self.collections.globalActivityInfo = db.collection('globalActivityInfo');
 
             self.isOpen = true;
 
@@ -108,7 +110,8 @@ _DBCollections.prototype.close = function close() {
             scholarshipInfo: null,
             awardInfo: null,
 
-            localActivityInfo: null
+            localActivityInfo: null,
+            globalActivityInfo: null
         };
     }
 };

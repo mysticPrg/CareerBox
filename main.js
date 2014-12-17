@@ -23,6 +23,7 @@ var PaperAbilityInfoService = require('./src/services/Info/PaperAbilityInfoServi
 var ScholarshipInfoService = require('./src/services/Info/ScholarshipInfoService');
 var AwardInfoService = require('./src/services/Info/AwardInfoService');
 var LocalActivityInfoService = require('./src/services/Info/LocalActivityInfoService');
+var GlobalActivityInfoService = require('./src/services/Info/GlobalActivityInfoService');
 
 MemberService.set(server);
 PortfolioService.set(server);
@@ -42,6 +43,7 @@ PaperAbilityInfoService.set(server);
 ScholarshipInfoService.set(server);
 AwardInfoService.set(server);
 LocalActivityInfoService.set(server);
+GlobalActivityInfoService.set(server);
 
 server.start(8123);
 
