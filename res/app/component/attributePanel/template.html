@@ -1,7 +1,8 @@
 <div id="attribute" >
     <!--<h3>Attribute</h3>-->
     <!--id : {{EditorData.focusId}}<br/>-->
-    <!--z_index : {{EditorData.end_zOrder}}-->
+    <!--end_zOrder : {{EditorData.end_zOrder}}<br/>-->
+    <!--start_zOrder : {{EditorData.start_zOrder}}-->
     <!--templateState : {{EditorData.templateState}}-->
 
     <div class="tab-content">
@@ -13,6 +14,7 @@
                     <h4>{{attributeInformation.layoutComponentType}}</h4>
                     <h4>{{attributeInformation.itemType}}</h4>
                     <h4>{{attributeInformation.templateType}}</h4>
+                    <h4 ng-if="attributeInformation.isIndex==true || attributeInformation.isIndex==false">Paper</h4>
                 </div>
 
                 <!--수정, 삭제 버튼-->
@@ -36,7 +38,7 @@
                     ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType'
                     || key == 'state' || key == 'pos_end' || key == 'pos_start'
                     || key == 'target' || key == '_template_id' || key == 'templateType' || key == 'timestamp'
-                    || key == 'childArr' || key == '_member_id'" >
+                    || key == 'childArr' || key == '_member_id' || key == '_portfolio_id'"  >
                     <!--<h3>{{key}}</h3>-->
                     <ANY ng-switch="key">
 
@@ -127,6 +129,14 @@
 
                     <button class="btn btn-default"
                             ng-click="goBack()">뒤로
+                    </button>
+
+                    <button class="btn btn-default"
+                            ng-click="goEnd()">맨앞으로
+                    </button>
+
+                    <button class="btn btn-default"
+                            ng-click="goFirst()">맨뒤로
                     </button>
                 </div>
 

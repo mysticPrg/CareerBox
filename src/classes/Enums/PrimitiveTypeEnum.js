@@ -14,7 +14,9 @@ define([], function () {
         number: 'number',
         boolean: 'boolean',
         file: 'file',
-        image: 'image'
+        image: 'image',
+        term: 'term',
+        date: 'date'
     };
 
     return PrimitiveTypeEnum;
