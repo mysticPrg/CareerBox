@@ -45,7 +45,6 @@ define([
                 // 포트폴리오 삭제
                 $scope.portfolios.splice(index, 1);
             }, function () { // Cancel
-                console.log('Modal dismissed at: ' + new Date());
             });
         };
 
@@ -64,12 +63,13 @@ define([
                     })
                 });
             }, function () { // Cancel
-                console.log('Modal dismissed at: ' + new Date());
             });
         }
 
         // 포트폴리오 정보 변경 함수
         $scope.modifyPortfolio = function (index) {
+            EditorData.portfolio = $scope.portfolios[index];
+
             var modalInstance = $modal.open(modifyPortfolioModal);
             modalInstance.result.then(function (portfolio) {
                 // OK
@@ -85,7 +85,6 @@ define([
                 });
             }, function () {
                 // Cancel
-                console.log('Modal dismissed at: ' + new Date());
             });
 
         }

@@ -29,10 +29,14 @@ define([
             $('#informationTab a').click(function (e) {
                 e.preventDefault();
                 $(this).tab('show');
+                $scope.load(e.target.getAttribute('id'));
             });
 
-            $('#personalInformationLink').click();
-            loadPersonalInfo();
+            $scope.transition('personalInfo');
+        }
+
+        $scope.transition = function (link){
+            $('#'+link).click();
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +51,14 @@ define([
                 loadAbilityInfo();
             }else if(info === 'awardInfo'){
                 loadAwardInfo();
+            }else if(info === 'activityInfo'){
+                loadActivityInfo();
+            }else if(info === 'projectInfo'){
+                loadProjectInfo();
+            }else if(info === 'columnInfo'){
+                loadColumnInfo();
             }
+
         }
 
         function loadPersonalInfo() {
@@ -114,6 +125,36 @@ define([
             });
         }
 
+        function loadActivityInfo() {
+            var loadLocalActivityPromiss = $http.get('http://210.118.74.166:8123/info/localActivity', {withCredentials: true});
+            var loadGlobalActivityPromiss = $http.get('http://210.118.74.166:8123/info/globalActivity', {withCredentials: true});
+
+            $q.all([loadLocalActivityPromiss, loadGlobalActivityPromiss]).then(function (resultArray) {
+                if(resultArray[0].data.result !== null)
+                    InformationData.localActivityInfo = resultArray[0].data.result;
+                if(resultArray[1].data.result !== null)
+                    InformationData.globalActivityInfo = resultArray[1].data.result;
+            });
+        }
+
+        function loadProjectInfo() {
+            var loadProjectPromiss = $http.get('http://210.118.74.166:8123/info/project', {withCredentials: true});
+
+            $q.all([loadProjectPromiss]).then(function (resultArray) {
+                if(resultArray[0].data.result !== null)
+                    InformationData.projectInfo = resultArray[0].data.result;
+            });
+        }
+
+        function loadColumnInfo() {
+            var loadColumnPromiss = $http.get('http://210.118.74.166:8123/info/column', {withCredentials: true});
+
+            $q.all([loadColumnPromiss]).then(function (resultArray) {
+                if(resultArray[0].data.result !== null)
+                    InformationData.columnInfo = resultArray[0].data.result;
+            });
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $scope.save = function (info) {
             if (info === 'personalInfo') {
@@ -126,6 +167,12 @@ define([
                 saveAbilityInfo();
             }else if(info === 'awardInfo'){
                 saveAwardInfo();
+            }else if(info === 'activityInfo'){
+                saveActivityInfo();
+            }else if(info === 'projectInfo'){
+                saveProjectInfo();
+            }else if(info === 'columnInfo'){
+                saveColumnInfo();
             }
 
         }
@@ -135,13 +182,7 @@ define([
             var saveAdditionalPromiss = $http.post('http://210.118.74.166:8123/info/additional', {additionalInfo: InformationData.additionalInfo}, {withCredentials: true});
 
             $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
-                angular.forEach(resultArray, function (value, key) {
-                    if (value.data.returnCode !== '000') {
-                        return;
-                    }
-                });
-
-                showNotification();
+                resultCheck(resultArray);
             });
         }
 
@@ -150,13 +191,7 @@ define([
             var saveUnivSchoolPromiss = $http.post('http://210.118.74.166:8123/info/univSchool', {univSchoolInfo: InformationData.univSchoolInfo}, {withCredentials: true});
 
             $q.all([saveHighSchoolPromiss, saveUnivSchoolPromiss]).then(function (resultArray) {
-                angular.forEach(resultArray, function (value, key) {
-                    if (value.data.returnCode !== '000') {
-                        return;
-                    }
-                });
-
-                showNotification();
+                resultCheck(resultArray);
             });
         }
 
@@ -164,13 +199,7 @@ define([
             var saveWorkingPromiss = $http.post('http://210.118.74.166:8123/info/working', {workingInfo: InformationData.workingInfo}, {withCredentials: true});
 
             $q.all([saveWorkingPromiss]).then(function (resultArray) {
-                angular.forEach(resultArray, function (value, key) {
-                    if (value.data.returnCode !== '000') {
-                        return;
-                    }
-                });
-
-                showNotification();
+                resultCheck(resultArray);
             });
         };
 
@@ -181,13 +210,7 @@ define([
             var savePaperAbilityPromiss = $http.post('http://210.118.74.166:8123/info/paperAbility', {paperAbilityInfo: InformationData.paperAbilityInfo}, {withCredentials: true});
 
             $q.all([saveCertificationAbilityPromiss, saveProficiencyPromiss, saveComputerAbilityPromiss, savePaperAbilityPromiss]).then(function (resultArray) {
-                angular.forEach(resultArray, function (value, key) {
-                    if (value.data.returnCode !== '000') {
-                        return;
-                    }
-                });
-
-                showNotification();
+                resultCheck(resultArray);
             });
         };
 
@@ -196,20 +219,55 @@ define([
             var saveAwardPromiss = $http.post('http://210.118.74.166:8123/info/award', {awardInfo: InformationData.awardInfo}, {withCredentials: true});
 
             $q.all([saveScholarshipPromiss, saveAwardPromiss]).then(function (resultArray) {
-                angular.forEach(resultArray, function (value, key) {
-                    if (value.data.returnCode !== '000') {
-                        return;
-                    }
-                });
-
-                showNotification();
+                resultCheck(resultArray);
             });
         };
 
+        function saveActivityInfo() {
+            var saveLocalActivityPromiss = $http.post('http://210.118.74.166:8123/info/localActivity', {localActivityInfo: InformationData.localActivityInfo}, {withCredentials: true});
+            var saveGlobalActivityPromiss = $http.post('http://210.118.74.166:8123/info/globalActivity', {globalActivityInfo: InformationData.globalActivityInfo}, {withCredentials: true});
+
+            $q.all([saveLocalActivityPromiss, saveGlobalActivityPromiss]).then(function (resultArray) {
+                resultCheck(resultArray);
+            });
+        };
+
+        function saveProjectInfo() {
+            var saveProjectPromiss = $http.post('http://210.118.74.166:8123/info/project', {projectInfo: InformationData.projectInfo}, {withCredentials: true});
+
+            $q.all([saveProjectPromiss]).then(function (resultArray) {
+                resultCheck(resultArray);
+            });
+        };
+
+        function saveColumnInfo() {
+            var saveColumnPromiss = $http.post('http://210.118.74.166:8123/info/column', {columnInfo: InformationData.columnInfo}, {withCredentials: true});
+
+            $q.all([saveColumnPromiss]).then(function (resultArray) {
+                resultCheck(resultArray);
+            });
+        };
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        function showNotification() {
+        function resultCheck(resultArray){
+            var returnCode;
+            angular.forEach(resultArray, function (value, key) {
+                returnCode = value.data.returnCode;
+            });
+
+            if(returnCode === '000'){
+                showSuccessNotification();
+            }else{
+                showFailNotification();
+            }
+        }
+        function showSuccessNotification() {
             var notification = kendo.toString('성공하였습니다.');
             $scope.noti.show(notification, "info");
+        }
+
+        function showFailNotification() {
+            var notification = kendo.toString('실패하였습니다.');
+            $scope.noti.show(notification, "error");
         }
     }]);
 });

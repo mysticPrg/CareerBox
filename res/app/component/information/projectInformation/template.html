@@ -1,11 +1,10 @@
 <div style="margin: 30px 0 10px 0">프로젝트</div>
 <form class="form-horizontal" role="form">
-
     <!--프로젝트명-->
     <div class="form-group">
         <label for="lbl_project_title" class="col-md-2 control-label">프로젝트명</label>
         <div class="col-md-2" id="lbl_project_title">
-            <input type="text" class="form-control"  placeholder="프로젝트명">
+            <input type="text" class="form-control"  placeholder="프로젝트명" ng-model="projectInfoItem.S_title">
         </div>
     </div>
 
@@ -13,18 +12,18 @@
     <div class="form-group row">
         <label for="lbl_project_part" class="col-md-2 control-label">담당부분</label>
         <div class="col-md-2" id="lbl_project_part">
-            <input type="text" class="form-control"  placeholder="담당부분">
+            <input type="text" class="form-control"  placeholder="담당부분" ng-model="projectInfoItem.S_part">
         </div>
 
         <label for="lbl_project_term" class="col-md-1 control-label">기간</label>
         <div class="col-md-4" id="lbl_project_term">
-            <button class="k-button" ng-click="win_project_term_start.open()">{{startDate | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_project_term_end.open()">{{endDate | date:"yyyy년 MM월 dd일"}}</button>
+            <button class="k-button" ng-click="win_project_term_start.open()">{{projectInfoItem.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_project_term_end.open()">{{projectInfoItem.T_term.end | date:"yyyy년 MM월 dd일"}}</button>
         </div>
         <div kendo-window="win_project_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
-            <kendo-calendar ng-model="startDate" k-on-change="win_project_term_start.close()"></kendo-calendar>
+            <kendo-calendar ng-model="projectInfoItem.T_term.start" k-on-change="win_project_term_start.close()"></kendo-calendar>
         </div>
         <div kendo-window="win_project_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">
-            <kendo-calendar ng-model="endDate" k-on-change="win_project_term_end.close()"></kendo-calendar>
+            <kendo-calendar ng-model="projectInfoItem.T_term.end" k-on-change="win_project_term_end.close()"></kendo-calendar>
         </div>
     </div>
 
@@ -32,7 +31,7 @@
     <div class="form-group">
         <label for="lbl_project_description" class="col-md-2 control-label">프로젝트 설명</label>
         <div class="col-md-5" id="lbl_project_description">
-            <textarea class="form-control" rows="3"></textarea>
+            <textarea class="form-control" rows="3" ng-model="projectInfoItem.L_description"></textarea>
         </div>
     </div>
 
@@ -41,7 +40,7 @@
         <label for="lbl_project_image" class="col-md-2 control-label">대표이미지</label>
 
         <div class="col-md-3" id="lbl_project_image">
-            <img src="../img/noImage.png" id="picture"><br>
+            <img src="../img/noImage.png" ng-model="projectInfoItem.I_image"><br>
             <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
         </div>
     </div>
@@ -51,64 +50,74 @@
         <label for="lbl_project_file" class="col-md-2 control-label">첨부파일</label>
 
         <div class="col-md-3" id="lbl_project_file">
-            <input type="file">
+            <input type="file" ng-model="projectInfoItem.F_file">
         </div>
     </div>
+
+    <!--추가 버튼-->
     <div>
-        <button type="button" class="btn btn-default">추가</button>
-        <button type="button" class="btn btn-default">삭제</button>
+        <button type="button" class="btn btn-default" ng-click="addProjectInfo()">추가</button>
+    </div>
+
+    <hr>
+
+    <div ng-repeat="item in projectInfoItems track by $index">
+        <!--프로젝트명-->
+        <div class="form-group">
+            <label for="lbl_project_title_load" class="col-md-2 control-label">프로젝트명</label>
+            <div class="col-md-2" id="lbl_project_title_load">
+                <input type="text" class="form-control"  placeholder="프로젝트명" ng-model="item.S_title">
+            </div>
+        </div>
+
+        <!--담당부분, 기간-->
+        <div class="form-group row">
+            <label for="lbl_project_part_load" class="col-md-2 control-label">담당부분</label>
+            <div class="col-md-2" id="lbl_project_part_load">
+                <input type="text" class="form-control"  placeholder="담당부분" ng-model="item.S_part">
+            </div>
+
+            <label for="lbl_project_term_load" class="col-md-1 control-label">기간</label>
+            <div class="col-md-4" id="lbl_project_term_load">
+                <button class="k-button" ng-click="win_project_term_start.open()">{{item.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_project_term_end.open()">{{item.T_term.end | date:"yyyy년 MM월 dd일"}}</button>
+            </div>
+            <div kendo-window="win_project_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
+                <kendo-calendar ng-model="item.T_term.start" k-on-change="win_project_term_start.close()"></kendo-calendar>
+            </div>
+            <div kendo-window="win_project_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">
+                <kendo-calendar ng-model="item.T_term.end" k-on-change="win_project_term_end.close()"></kendo-calendar>
+            </div>
+        </div>
+
+        <!--프로젝트 설명-->
+        <div class="form-group">
+            <label for="lbl_project_description_load" class="col-md-2 control-label">프로젝트 설명</label>
+            <div class="col-md-5" id="lbl_project_description_load">
+                <textarea class="form-control" rows="3" ng-model="item.L_description"></textarea>
+            </div>
+        </div>
+
+        <!--대표이미지-->
+        <div class="form-group">
+            <label for="lbl_project_image_load" class="col-md-2 control-label">대표이미지</label>
+
+            <div class="col-md-3" id="lbl_project_image_load">
+                <img src="../img/noImage.png" ng-model="item.I_image"><br>
+                <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
+            </div>
+        </div>
+
+        <!--첨부파일-->
+        <div class="form-group">
+            <label for="lbl_project_file_load" class="col-md-2 control-label">첨부파일</label>
+
+            <div class="col-md-3" id="lbl_project_file_load">
+                <input type="file" ng-model="item.F_file">
+            </div>
+        </div>
+        <!-- 삭제 버튼-->
+        <div>
+            <button type="button" class="btn btn-default" ng-click="delProjectInfo($index)">삭제</button>
+        </div>
     </div>
 </form>
-
-<!--<div>프로젝트</div>-->
-<!--<form class="form-horizontal" role="form">-->
-    <!--<div class="form-group">-->
-        <!--<label for="lbl_project_title" class="col-sm-2 control-label">프로젝트명</label>-->
-        <!--<div class="col-sm-10" id="lbl_project_title">-->
-            <!--<input type="text" class="form-control"  placeholder="프로젝트명">-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-        <!--<label for="lbl_project_description" class="col-sm-2 control-label">프로젝트 설명</label>-->
-        <!--<div class="col-sm-10" id="lbl_project_description">-->
-            <!--<textarea class="form-control" rows="3"></textarea>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-        <!--<label for="lbl_project_term" class="col-sm-2 control-label">기간</label>-->
-        <!--<div class="col-sm-10" id="lbl_project_term">-->
-            <!--<button class="k-button" ng-click="win_project_term_start.open()">{{startDate | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_project_term_end.open()">{{endDate | date:"yyyy년 MM월 dd일"}}</button>-->
-        <!--</div>-->
-        <!--<div kendo-window="win_project_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">-->
-            <!--<kendo-calendar ng-model="startDate" k-on-change="win_project_term_start.close()"></kendo-calendar>-->
-        <!--</div>-->
-        <!--<div kendo-window="win_project_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">-->
-            <!--<kendo-calendar ng-model="endDate" k-on-change="win_project_term_end.close()"></kendo-calendar>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-        <!--<label for="lbl_project_part" class="col-sm-2 control-label">담당부분</label>-->
-        <!--<div class="col-sm-10" id="lbl_project_part">-->
-            <!--<input type="text" class="form-control"  placeholder="담당부분">-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-        <!--<label for="lbl_project_image" class="col-sm-2 control-label">대표이미지</label>-->
-
-        <!--<div class="col-sm-10" id="lbl_project_image">-->
-            <!--<img src="../img/noImage.png" id="picture"><br>-->
-            <!--<button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-        <!--<label for="lbl_project_file" class="col-sm-2 control-label">첨부파일</label>-->
-
-        <!--<div class="col-sm-10" id="lbl_project_file">-->
-            <!--<input type="file">-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div>-->
-        <!--<button type="button" class="btn btn-default">추가</button>-->
-        <!--<button type="button" class="btn btn-default">삭제</button>-->
-    <!--</div>-->
-<!--</form>-->
