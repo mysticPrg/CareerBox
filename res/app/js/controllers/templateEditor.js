@@ -39,21 +39,15 @@ define([
                 {collapsible: false}
             ];
 
-            $scope.template = EditorData.template;
-
             $('#canvas-content').find('div').remove();
             EditorData.templateItemArray = [];
 
-
-            // [병진] EditorData.templateState 가 edit가 되었지 않아서 실행이 안되기 때문에 주석처리를 해줌.
-            if (EditorData.templateState == 'edit')
-
-//            if($scope.template.target != null)
-            {
-                loadTemplate();
-            }
-            else{
+            if(EditorData.templateState === 'new'){
+                EditorData.template = new Template();
                 getTemplateInstance();
+            }else if (EditorData.templateState == 'edit'){
+                $scope.template = EditorData.template;
+                loadTemplate();
             }
 
             // changed 초기화
@@ -66,7 +60,7 @@ define([
         $scope.$watch("EditorData.templateItemArray", function () {
             if(!isFirst && EditorData.paper){
                 $scope.changed = true;
-                console.log('EditorData.templateItemArray', EditorData.templateItemArray);
+//                console.log('EditorData.templateItemArray', EditorData.templateItemArray);
             } else {isFirst = false;}
         }, true);
 
@@ -77,7 +71,7 @@ define([
         // Get Template Instance
         function getTemplateInstance() {
             var article = new Article();
-            article.template = $scope.template._template_id;
+//            article.template = $scope.template._template_id;
 
             article.size.width = $('#canvas-content').width();
             article.size.height = $('#canvas-content').height();
@@ -169,7 +163,7 @@ define([
             $scope.thumbnail = '';
             $scope.description = '';
 
-            console.log('$scope.template.target', $scope.template.target);
+//            console.log('$scope.template.target', $scope.template.target);
 
             SaveTemplate($http, $scope.template, function (resultCode) {
                 if (resultCode == 000) {
