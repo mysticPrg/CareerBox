@@ -20,9 +20,9 @@ define([
         }, true);
 
         function initializeFileForm(){
-            $('#file').val('');
-            $('#btn-upload').css('display', 'none');
-            $('#progress-bar').css('display', 'none');
+            $('#certificate_file').val('');
+            $('#certificate_upload').css('display', 'none');
+            $('#certificate_progressbar').css('display', 'none');
         }
 
         $scope.addCertificateAbilityInfo = function () {
@@ -39,11 +39,11 @@ define([
 
         $scope.onFileSelectCertificateAbilityInfo = function ($files) {
             $scope.files = $files;
-            $('#btn-upload').fadeIn('slow');
+            $('#certificate_upload').fadeIn('slow');
         }
 
         $scope.uploadCertificateAbilityInfo = function (){
-            $('#progress-bar').fadeIn('slow');
+            $('#certificate_progressbar').fadeIn('slow');
 
             for (var i = 0; i < $scope.files.length; i++) {
                 var file = $scope.files[i];

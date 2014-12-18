@@ -31,15 +31,15 @@
         <label for="lbl_certificate_file" class="col-md-2 control-label">첨부파일</label>
 
         <div class="col-md-3" id="lbl_certificate_file">
-            <input type="file" id="file" ng-file-select="onFileSelectCertificateAbilityInfo($files)">
+            <input type="file" id="certificate_file" ng-file-select="onFileSelectCertificateAbilityInfo($files)">
         </div>
 
-        <button type="btn btn-default col-md-2" id="btn-upload" ng-click="uploadCertificateAbilityInfo()" style="display: none;">업로드</button>
+        <button type="btn btn-default col-md-2" id="certificate_upload" ng-click="uploadCertificateAbilityInfo()" style="display: none;">업로드</button>
     </div>
 
     <!--첨부파일 정보-->
     <div class="form-group">
-        <div id="progress-bar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div>
+        <div id="certificate_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div>
     </div>
 
     <!--추가 버튼-->
