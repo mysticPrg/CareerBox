@@ -23,6 +23,8 @@ define([
         this.fill = new Fill();
         this.outline = new Outline();
         this.radius = 0;
+        this.bindingType = '';
+        this.isBinding = false;
 
         if (props) {
             this._id = props._id ? props._id : this._id;
@@ -33,6 +35,8 @@ define([
             this.fill = props.fill ? props.fill : this.fill;
             this.outline = props.outline ? props.outline : this.outline;
             this.radius = props.radius ? props.radius : this.radius;
+            this.bindingType = props.bindingType ? props.bindingType : this.bindingType;
+            this.isBinding = props.isBinding ? props.isBinding : this.isBinding;
         }
     };
 

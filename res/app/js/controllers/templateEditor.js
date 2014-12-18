@@ -69,16 +69,8 @@ define([
 
         // Get Template Instance
         function getTemplateInstance() {
-            var temp =  new Template(EditorData.template);
-            $scope.template.title = temp.title;
-            $scope.template.description = temp.description;
-            $scope.template.target.size.width = 600;
-            $scope.template.target.size.height = 400;
-
-            EditorData.template = new Template($scope.template);
-
-//            article.size.width = $('#canvas-content').width();
-//            article.size.height = $('#canvas-content').height();
+            EditorData.template.target.size = {width : 600, height : 400};
+            $scope.template = EditorData.template;
 
             // 템플릿 생성하고 나면 캔버스 속성이 나오도록함.
             EditorData.focusId = 'canvas-content';
@@ -161,6 +153,7 @@ define([
             $scope.thumbnail = '';
             $scope.description = '';
 
+            console.log('save data', $scope.template);
             SaveTemplate($http, $scope.template, function (result) {
                 if (result.returnCode === '000') {
                     $scope.changed = false;

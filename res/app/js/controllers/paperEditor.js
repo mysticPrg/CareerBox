@@ -110,9 +110,6 @@ define([
                 }else if(EditorData.templateState === 'edit'){
                     $window.location.href = "#/TemplateEditor";
                 }
-
-                // TemplateEditor 에서도 templateState를 사용하기 때문에 일단 주석처리했음.
-//                EditorData.templateState = '';
             }
 
             function createTemplate(){

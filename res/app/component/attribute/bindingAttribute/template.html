@@ -1,0 +1,25 @@
+<ul id="sizeForm" class="clearfix">
+    <li>
+        <label for="useBtnForm">Binding :</label>
+        <div id="useBtnForm" class="btn-group">
+            <label class="btn btn-primary" ng-model="data.isBinding" btn-radio=false ng-click="clear()">없음</label>
+            <label class="btn btn-primary" ng-model="data.isBinding" btn-radio=true>사용</label>
+        </div>
+    </li>
+
+    <li ng-show="data.isBinding == true">
+
+        <label >Binding Type :</label>
+        <!--페이퍼 에디터 : 아티클 -->
+        <select ng-show="layoutType === 'template'" class="form-control" ng-model="category" ng-change="setCategory()" ng-options="category as category.title for category in infoCategory"></select>
+
+        <!--템플릿 에디터 : 아티클 -->
+
+        <!--템플릿 에디터 : 아이템 -->
+
+
+    </li>
+
+
+
+</ul>

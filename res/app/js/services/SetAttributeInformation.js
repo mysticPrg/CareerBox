@@ -8,6 +8,7 @@ define([
     app.factory('SetAttributeInformation', function (EditorData) {
 
         return function(id) {
+
             // 템플릿
             if(window.location.href.split("#/")[1] == 'TemplateEditor'){
                 // 템플릿일 경우
