@@ -20,6 +20,7 @@ define([
         }, true);
 
         function initializeFileForm(){
+            $scope.progress = 0;
             $('#certificate_file').val('');
             $('#certificate_upload').css('display', 'none');
             $('#certificate_progressbar').css('display', 'none');
