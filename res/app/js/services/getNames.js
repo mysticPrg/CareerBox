@@ -21,21 +21,21 @@ define([
     'classes/Info/ColumnInfoItem'  // 칼럼
 ], function (app, InfoType, PersonalInfo, AdditionalInfo, HighSchoolInfoItem, UnivSchoolInfoItem, WorkingInfoItem, CertificationAbilityInfoItem, ProficiencyInfoItem, ComputerAbilityInfoItem,
              PaperAbilityInfoItem, ScholarshipInfoItem, AwardInfoItem, LocalActivityInfoItem, GlobalActivityInfoItem, ProjectInfoItem, ColumnInfoItem) {
-    app.factory('getAvailableAttribute', function () {
-        return function (category, infoType) {
+    app.factory('getNames', function () {
+        return function (category) {
             var result = {};
             var item = getItem(category);
-            console.log(item);
 
             for(var key in item){
-                if(key.split('_')[0] === infoType){
-                    var name = item.getAttributeName(key);
-                    result[key] = name;
-                }
+                var AttributeName = item.getAttributeName(key);
+                result[key] = {
+                    'AttributeName' : AttributeName,
+                    '' : ''
+                };
             }
 
             return result;
-        }
+        };
 
         function getItem(category){
             switch (category){
@@ -70,6 +70,6 @@ define([
                 case InfoType.columnInfo:
                     return new ColumnInfoItem();
             }
-        }
+        };
     });
 });

@@ -37,6 +37,9 @@ define([
                 infoType = 'D';
             }
 
+//            console.log('category', category);
+//            console.log('infoType', infoType);
+
             $scope.result = getAvailableAttribute(category, infoType);
         }
     }]);

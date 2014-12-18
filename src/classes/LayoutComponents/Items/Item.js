@@ -10,7 +10,8 @@ define([
     'classes/Util',
     'classes/Enums/ItemType',
     'classes/Enums/LayoutComponentType',
-    'classes/LayoutComponents/LayoutComponent'
+    'classes/LayoutComponents/LayoutComponent',
+    'classes/Info/InfoClass'
 ], function (Util, ItemType, LayoutComponentType, LayoutComponent) {
 
     function Item(props) {

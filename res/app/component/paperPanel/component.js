@@ -87,6 +87,7 @@ define([
                 getTemplateList($http, 'article', function (data) {
                     if (data.returnCode == 000) {
                         $scope.templates = data.result;
+                        console.log('load data',$scope.templates);
                     }
                 });
             };
