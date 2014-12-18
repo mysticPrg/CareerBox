@@ -53,8 +53,15 @@
         <label for="lbl_local_activity_file" class="col-md-2 control-label">첨부파일</label>
 
         <div class="col-md-3" id="lbl_local_activity_file">
-            <input type="file" ng-model="localActivityInfoItem.F_file">
+            <input type="file" id="localActivity_file" ng-file-select="onFileSelectLocalActivityInfo($files)">
         </div>
+
+        <button type="btn btn-default col-md-2" id="localActivity_upload" ng-click="uploadLocalActivityInfo()" style="display: none;">업로드</button>
+    </div>
+
+    <!--첨부파일 정보-->
+    <div class="form-group">
+        <div id="localActivity_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div>
     </div>
 
     <!--추가 버튼-->
@@ -117,8 +124,9 @@
         <div class="form-group">
             <label for="lbl_local_activity_file_load" class="col-md-2 control-label">첨부파일</label>
 
-            <div class="col-md-3" id="lbl_local_activity_file_load">
-                <input type="file" ng-model="item.F_file">
+            <div class="col-md-5" id="lbl_local_activity_file_load">
+                <div ng-show = "!item.F_file">없음</div>
+                <div ng-show = "item.F_file"><a href="http://210.118.74.166:8123/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
             </div>
         </div>
 
