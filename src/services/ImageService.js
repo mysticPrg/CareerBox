@@ -14,13 +14,17 @@ var fs = require('fs');
 
 var fileDir = __dirname + '/../../res/uploads/image';
 
-var uploader = new Uploader({
+var isolateUploader = new Uploader({
 //    debug: true,
     validate: true,
     safeName: true,
     publicDir: __dirname + '/../../res',
     uploadDir: fileDir,
-    uploadUrl: '/upload/image'
+    uploadUrl: 'http://210.118.74.166:8123/image/',
+    thumbnails: true,
+    thumbToSubDir: true,
+    thumbSizes: [[200, 200]],
+    acceptFileTypes: /\.(gif|jpe?g|png)$/i
 });
 
 function checkArgForFiles(req, res) {
@@ -75,9 +79,26 @@ function checkArgForIdOnBody(req, res) {
     return true;
 }
 
+function checkArgForFileType(data, res) {
+    if (data[0].error === 'Filetype not allowed') {
+
+        var result = new Result(null);
+        result.setCode('201');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function uploadIsolateImgService(req, res) {
+
+}
+
 function uploadService(req, res) {
 
-    uploader.uploadFile(req, function (data) {
+    isolateUploader.uploadFile(req, function (data) {
 
         ServiceUtil.setResHeader(res);
         if (!ServiceUtil.checkSession(req, res)) {
@@ -87,6 +108,9 @@ function uploadService(req, res) {
             return;
         }
         if (!checkArgForIsBinding(req, res)) {
+            return;
+        }
+        if (!checkArgForFileType(data, res)) {
             return;
         }
 

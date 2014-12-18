@@ -101,7 +101,7 @@ function uploadService(req, res) {
         };
 
         FileDB.write(fileData, function(err, writed) {
-            ServiceUtil.sendResult(err, res, null);
+            ServiceUtil.sendResult(err, res, writed[0]);
             delete req.files;
         });
     });
