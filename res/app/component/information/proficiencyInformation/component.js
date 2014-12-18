@@ -30,6 +30,8 @@ define([
             var newProficiencyInfoItem = new ProficiencyInfoItem($scope.proficiencyInfoItem);
             $scope.proficiencyInfoItems.push(newProficiencyInfoItem);
             $scope.proficiencyInfoItem = new ProficiencyInfoItem();
+
+            initializeFileForm();
         }
 
         $scope.delProficiencyInfo = function (index) {
