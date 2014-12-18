@@ -13,7 +13,7 @@ define([
     function Template(props) {
         this._id = null;
         this.title = 'New Template';
-        this.target = null;
+        this.target = new Article();
         this.description = '';
         this.timestamp = new Date();
         this.thumbnail = null;
