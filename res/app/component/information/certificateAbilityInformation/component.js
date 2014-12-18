@@ -19,6 +19,12 @@ define([
             $scope.certificateAbilityInfoItems = InformationData.certificateAbilityInfo.items;
         }, true);
 
+        function initializeFileForm(){
+            $('#file').val('');
+            $('#btn-upload').css('display', 'none');
+            $('#progress-bar').css('display', 'none');
+        }
+
         $scope.addCertificateAbilityInfo = function () {
             var newCertificateAbilityInfoItem = new CertificationAbilityInfoItem($scope.certificateAbilityInfoItem);
             $scope.certificateAbilityInfoItems.push(newCertificateAbilityInfoItem);
@@ -27,21 +33,16 @@ define([
             initializeFileForm();
         }
 
-        function initializeFileForm(){
-            $('#progress-bar').css('display', 'none');
-            $('#file').val('');
-        }
-
         $scope.delCertificateAbilityInfo = function (index) {
             $scope.certificateAbilityInfoItems.splice(index, 1);
         }
 
-        $scope.onFileSelect = function ($files) {
+        $scope.onFileSelectCertificateAbilityInfo = function ($files) {
             $scope.files = $files;
             $('#btn-upload').fadeIn('slow');
         }
 
-        $scope.upload = function (){
+        $scope.uploadCertificateAbilityInfo = function (){
             $('#progress-bar').fadeIn('slow');
 
             for (var i = 0; i < $scope.files.length; i++) {
@@ -59,11 +60,6 @@ define([
                 });
             }
         }
-
-        function uploadDone(){
-            $('#file-name').fadeIn('slow');
-        }
-
     }]);
 
     app.directive('certificateAbilityInformation', function () {
