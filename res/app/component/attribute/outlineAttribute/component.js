@@ -13,7 +13,10 @@ define([
             templateUrl: require.toUrl('component/attribute/outlineAttribute/template.html'),
             link: function ($scope, element, att) {
 
-                $scope.color = "#" + $scope.data.outline.color.R + $scope.data.outline.color.G + $scope.data.outline.color.B;
+                $scope.$watch("data.outline.color",function() {
+                    $scope.color = "#" + $scope.data.outline.color.R + $scope.data.outline.color.G + $scope.data.outline.color.B;
+
+                },true);
 
                 $scope.$watch("color",function() {
                     // 칼라를 바꾼다.

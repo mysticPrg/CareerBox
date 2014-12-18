@@ -3,6 +3,7 @@ define([
     'angular',
     'app',
     'services/EditorData',
+    'services/httpLogout',
     '../route',
     '../../component/attributePanel/component',
     'component/item/line/component',
@@ -12,7 +13,7 @@ define([
     'component/item/image/component',
     'directives/CommonAttribute'
 ], function ($, ng, app) {
-    app.controller('portfolioEditor', ['$scope', '$window', 'EditorData', function ($scope, $window, EditorData) {
+    app.controller('portfolioEditor', ['$scope', '$window', 'EditorData',  'httpLogout', function ($scope, $window, EditorData, httpLogout) {
 
         $(document).ready(function () {
             EditorData.portfolio._id = window.location.href.split("id=")[1].split('#/')[0];
@@ -34,7 +35,12 @@ define([
             }
 
             $scope.logout = function (){
-                
+                httpLogout(function(data){
+                    if (data.returnCode == '000') {
+                        alert("성공하였습니다.");
+                        $window.location.href = 'login.html';
+                    }
+                });
             }
         });
 
