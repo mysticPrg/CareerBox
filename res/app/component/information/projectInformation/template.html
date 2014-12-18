@@ -31,7 +31,7 @@
     <div class="form-group">
         <label for="lbl_project_description" class="col-md-2 control-label">프로젝트 설명</label>
         <div class="col-md-5" id="lbl_project_description">
-            <textarea class="form-control" rows="3" ng-model="projectInfoItem.L_description"></textarea>
+            <textarea class="form-control" rows="3" ng-model="projectInfoItem.S_description"></textarea>
         </div>
     </div>
 
@@ -50,8 +50,15 @@
         <label for="lbl_project_file" class="col-md-2 control-label">첨부파일</label>
 
         <div class="col-md-3" id="lbl_project_file">
-            <input type="file" ng-model="projectInfoItem.F_file">
+            <input type="file" id="project_file" ng-file-select="onFileSelectProjectInfo($files)">
         </div>
+
+        <button type="btn btn-default col-md-2" id="project_upload" ng-click="uploadProjectInfo()" style="display: none;">업로드</button>
+    </div>
+
+    <!--첨부파일 정보-->
+    <div class="form-group">
+        <div id="project_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div>
     </div>
 
     <!--추가 버튼-->
@@ -93,7 +100,7 @@
         <div class="form-group">
             <label for="lbl_project_description_load" class="col-md-2 control-label">프로젝트 설명</label>
             <div class="col-md-5" id="lbl_project_description_load">
-                <textarea class="form-control" rows="3" ng-model="item.L_description"></textarea>
+                <textarea class="form-control" rows="3" ng-model="item.S_description"></textarea>
             </div>
         </div>
 
@@ -111,8 +118,9 @@
         <div class="form-group">
             <label for="lbl_project_file_load" class="col-md-2 control-label">첨부파일</label>
 
-            <div class="col-md-3" id="lbl_project_file_load">
-                <input type="file" ng-model="item.F_file">
+            <div class="col-md-5" id="lbl_project_file_load">
+                <div ng-show = "!item.F_file">없음</div>
+                <div ng-show = "item.F_file"><a href="http://210.118.74.166:8123/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
             </div>
         </div>
         <!-- 삭제 버튼-->

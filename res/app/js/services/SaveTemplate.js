@@ -11,7 +11,7 @@ define(['app'], function (app) {
                 responseType: 'json',
                 withCredentials: true
             }).success(function (data) {
-                callback(data.returnCode);
+                callback(data);
             });
         }
     });
