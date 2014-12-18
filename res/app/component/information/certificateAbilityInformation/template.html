@@ -4,7 +4,7 @@
     <div class="form-group">
         <label for="lbl_certificate_name" class="col-md-2 control-label">자격증명</label>
 
-        <div class="col-sm-3" id="lbl_certificate_name">
+        <div class="col-md-3" id="lbl_certificate_name">
             <input type="text" class="form-control" placeholder="자격증명" ng-model="certificateAbilityInfoItem.S_name">
         </div>
     </div>
@@ -30,9 +30,16 @@
     <div class="form-group">
         <label for="lbl_certificate_file" class="col-md-2 control-label">첨부파일</label>
 
-        <div class="col-md-5" id="lbl_certificate_file">
-            <input type="file" ng-model="certificateAbilityInfoItem.F_file">
+        <div class="col-md-3" id="lbl_certificate_file">
+            <input type="file" id="file" ng-file-select="onFileSelect($files)">
         </div>
+
+        <button type="btn btn-default col-md-2" id="btn-upload" ng-click="upload()" style="display: none;">업로드</button>
+    </div>
+
+    <!--첨부파일 정보-->
+    <div class="form-group">
+        <div id="progress-bar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div>
     </div>
 
     <!--추가 버튼-->
@@ -47,7 +54,7 @@
         <div class="form-group">
             <label for="lbl_certificate_name_load" class="col-md-2 control-label">자격증명</label>
 
-            <div class="col-sm-3" id="lbl_certificate_name_load">
+            <div class="col-md-3" id="lbl_certificate_name_load">
                 <input type="text" class="form-control" placeholder="자격증명" ng-model="item.S_name">
             </div>
         </div>
@@ -74,7 +81,8 @@
             <label for="lbl_certificate_file_load" class="col-md-2 control-label">첨부파일</label>
 
             <div class="col-md-5" id="lbl_certificate_file_load">
-                <input type="file" ng-model="item.F_file">
+                <div ng-show = "!item.F_file">없음</div>
+                <div ng-show = "item.F_file"><a href="http://210.118.74.166:8123/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
             </div>
         </div>
 
