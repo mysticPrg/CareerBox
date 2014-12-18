@@ -2,7 +2,8 @@
     <!--<h3>Attribute</h3>-->
     <!--id : {{EditorData.focusId}}<br/>-->
     <!--end_zOrder : {{EditorData.end_zOrder}}<br/>-->
-    <!--start_zOrder : {{EditorData.start_zOrder}}-->
+    <!--start_zOrder : {{EditorData.start_zOrder}}<br/><br/>-->
+    <!--Z_order : {{attributeInformation.zOrder}}-->
     <!--templateState : {{EditorData.templateState}}-->
 
     <div class="tab-content">
@@ -106,6 +107,7 @@
                 <li ng-if="attributeInformation.isIndex">
                     <div is-index-attribute to="attributeInformation"></div>
                 </li>
+
                 <!------------------------------------------->
 
                 <!--이전 속성 리스트 없애도 됨.-->
@@ -115,7 +117,7 @@
                     <!--|| key == 'state' || key == 'pos_end' || key == 'pos_start'-->
                     <!--|| key == 'target' || key == '_template_id' || key == 'templateType' || key == 'timestamp'-->
                     <!--|| key == 'childArr' || key == '_member_id' || key == '_portfolio_id'"  >-->
-                    <!--&lt;!&ndash;<h3>{{key}}</h3>&ndash;&gt;-->
+                    <!--<!--<h3>{{key}}</h3>-->-->
                     <!--<ANY ng-switch="key">-->
 
                         <!--<ANY ng-switch-when="title">-->
