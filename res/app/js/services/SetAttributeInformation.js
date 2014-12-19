@@ -12,12 +12,35 @@ define([
             // 템플릿
             if(window.location.href.split("#/")[1] == 'TemplateEditor'){
                 // 템플릿일 경우
-                if(EditorData.template._id == id || id == "canvas-content")
+                if(EditorData.template._id == id || id == "canvas-content"){
                     return {
                         parentArray : EditorData,
                         attributeInformation : EditorData.template.target,
                         type : 'template'
                     }
+                }
+
+                // 템플릿 안의 요소들일 경우
+                else
+                    return {
+                        parentArray : EditorData.templateItemArray,
+                        attributeInformation : EditorData.templateItemArray[id],
+                        type : 'template_item'
+                    }
+            };
+
+            // 템플릿
+            if(window.location.href.split("partials/")[1].split('?')[0] == 'templatePreview.html'){
+                // 템플릿일 경우
+                if(EditorData.template._id == id || id == "canvas-content"){
+                    console.log('음...', EditorData.template.target);
+                    return {
+                        parentArray : EditorData,
+                        attributeInformation : EditorData.template.target,
+                        type : 'template'
+                    }
+                }
+
                 // 템플릿 안의 요소들일 경우
                 else
                     return {
