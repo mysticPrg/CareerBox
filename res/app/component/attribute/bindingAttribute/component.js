@@ -17,9 +17,9 @@ define([
             },
             templateUrl: require.toUrl('component/attribute/bindingAttribute/template.html'),
             link: function ($scope, element, att) {
-                console.log('binding Attribute $scope', $scope);
+//                console.log('binding Attribute $scope', $scope);
 
-                console.log('InformationData', InformationData);
+//                console.log('InformationData', InformationData);
                 $scope.infoCategory = InformationData;
                 $scope.category = '';
                 $scope.setCategory = function(){
