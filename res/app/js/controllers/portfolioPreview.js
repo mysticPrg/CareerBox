@@ -23,7 +23,12 @@ define([
         $scope.paperItemArray = [];
 
         $(document).ready(function () {
-            EditorData.portfolio._id = window.location.href.split("id=")[1].split('#/')[0];
+            EditorData.portfolio._id = window.location.href.split("id=")[1].split("&")[0];
+
+            EditorData.paper_id = window.location.href.split("paper_id=")[1];
+            console.log('EditorData.paper_id', EditorData.paper_id)
+
+            // 만약에 paper_id 가 없으면 index페이지로 이동.
 
             initPaper();
 
@@ -34,7 +39,9 @@ define([
                 var paper;
                 for(var idx = 0; idx < $scope.papers.length; idx++){
                     paper = $scope.papers[idx];
-                    if(paper.isIndex === true){
+
+
+                    if(!EditorData.paper_id && paper.isIndex === true){
                         EditorData.paperId = paper._id;
 
                         LoadPaper($http, EditorData.paperId, function (result) {
@@ -42,6 +49,21 @@ define([
 
                             loadPaper(EditorData.paper);
                         });
+                        return;
+                    }
+
+                    console.log('paper._id', paper._id)
+
+                    if(paper._id === EditorData.paper_id){
+
+                        EditorData.paperId = paper._id;
+
+                        LoadPaper($http, EditorData.paperId, function (result) {
+                            EditorData.paper = result.result;
+
+                            loadPaper(EditorData.paper);
+                        });
+                        return;
                     }
                 }
             });
