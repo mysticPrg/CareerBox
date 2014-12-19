@@ -24,9 +24,21 @@ define([
 ], function (PersonalInfo, AdditionalInfo, HighSchoolInfo, UnivSchoolInfo, WorkingInfo, CertificationAbilityInfo, ProficiencyInfo, ComputerAbilityInfo,
              PaperAbilityInfo, ScholarshipInfo, AwardInfo, LocalActivityInfo, GlobalActivityInfo, ProjectInfo, ColumnInfo) {
     var InfoCategory = [
-        new PersonalInfo(), new AdditionalInfo(), new HighSchoolInfo(), new UnivSchoolInfo(), new WorkingInfo(), new CertificationAbilityInfo(), new ProficiencyInfo(),
-        new ComputerAbilityInfo(),  new PaperAbilityInfo(), new ScholarshipInfo(), new AwardInfo(), new LocalActivityInfo(), new GlobalActivityInfo(),
-        new ProjectInfo(), new ColumnInfo()
+        new PersonalInfo(),
+        new AdditionalInfo(),
+        new HighSchoolInfo(),
+        new UnivSchoolInfo(),
+        new WorkingInfo(),
+        new CertificationAbilityInfo(),
+        new ProficiencyInfo(),
+        new ComputerAbilityInfo(),
+        new PaperAbilityInfo(),
+        new ScholarshipInfo(),
+        new AwardInfo(),
+        new LocalActivityInfo(),
+        new GlobalActivityInfo(),
+        new ProjectInfo(),
+        new ColumnInfo()
     ];
 
     return InfoCategory;
