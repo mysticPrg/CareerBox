@@ -43,9 +43,13 @@
         <label for="lbl_local_activity_image" class="col-md-2 control-label">대표이미지</label>
 
         <div class="col-md-3" id="lbl_local_activity_image">
-            <img src="../img/noImage.png" ng-model="localActivityInfoItem.I_image"><br>
-            <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
+            <img src="../img/noImage200x200.png" id="localActivity_picture">
+
+            <input type="file" id="localActivity_picture_upload" class="btn btn-default" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectLocalActivityImage($files)"><br>
+            <div id="localActivity_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="imageProgress" style="display: none;"></div><br>
         </div>
+
+
     </div>
 
     <!--첨부파일-->
@@ -115,8 +119,12 @@
             <label for="lbl_local_activity_image_load" class="col-md-2 control-label">대표이미지</label>
 
             <div class="col-md-3" id="lbl_local_activity_image_load">
-                <img src="../img/noImage.png" ng-model="item.I_image"><br>
-                <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
+                <div ng-show = "!item.I_image">
+                    <img ng-src="../img/noImage200x200.png">
+                </div>
+                <div ng-show = "item.I_image">
+                    <img ng-src="http://210.118.74.166:8123/image/symbol/thumb/{{item.I_image._id}}">
+                </div>
             </div>
         </div>
 
