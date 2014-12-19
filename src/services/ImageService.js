@@ -25,7 +25,7 @@ var isolateUploader = new Uploader({
     thumbSizes: [
         [200, 200]
     ],
-    acceptFileTypes: /\.(jpe?g|png)$/i,
+    acceptFileTypes: /\.(jpe?g|png|bmp)$/i,
     uploadType: 'isolate'
 });
 
@@ -38,9 +38,10 @@ var profileImgUploader = new Uploader({
     thumbnails: true,
     thumbToSubDir: true,
     thumbSizes: [
-        [120, 160]
+        [120, 160],
+        [160, 213]
     ],
-    acceptFileTypes: /\.(jpe?g|png)$/i,
+    acceptFileTypes: /\.(jpe?g|png|bmp)$/i,
     uploadType: 'profile'
 });
 
@@ -55,7 +56,7 @@ var symbolImgUploader = new Uploader({
     thumbSizes: [
         [500]
     ],
-    acceptFileTypes: /\.(jpe?g|png)$/i,
+    acceptFileTypes: /\.(jpe?g|png|bmp)$/i,
     uploadType: 'symbol'
 });
 
@@ -223,6 +224,11 @@ function downloadIsolateThumbnailImageService(req, res) {
     }
 
     ImageDB.read(req.params._id, function (err, finded) {
+        if (!finded) {
+            ServiceUtil.setResHeader(res);
+            ServiceUtil.sendResult(err, res, null, '202');
+            return;
+        }
 
         var filepath = fileDir + '/200x200/' + finded.name;
 
@@ -236,6 +242,11 @@ function downloadProfileThumbnailImageService(req, res) {
     }
 
     ImageDB.read(req.params._id, function (err, finded) {
+        if (!finded) {
+            ServiceUtil.setResHeader(res);
+            ServiceUtil.sendResult(err, res, null, '202');
+            return;
+        }
 
         var filepath = fileDir + '/120x160/' + finded.name;
 
@@ -249,8 +260,31 @@ function downloadSymbolThumbnailImageService(req, res) {
     }
 
     ImageDB.read(req.params._id, function (err, finded) {
+        if (!finded) {
+            ServiceUtil.setResHeader(res);
+            ServiceUtil.sendResult(err, res, null, '202');
+            return;
+        }
 
         var filepath = fileDir + '/500x500/' + finded.name;
+
+        res.download(filepath, finded.originalName);
+    });
+}
+
+function downloadProfileMainImageService(req, res) {
+    if (!checkArgForIdOnParams(req, res)) {
+        return;
+    }
+
+    ImageDB.read(req.params._id, function (err, finded) {
+        if (!finded) {
+            ServiceUtil.setResHeader(res);
+            ServiceUtil.sendResult(err, res, null, '202');
+            return;
+        }
+
+        var filepath = fileDir + '/160x213/' + finded.name;
 
         res.download(filepath, finded.originalName);
     });
@@ -300,6 +334,7 @@ module.exports.set = function (server) {
 
     server.post('/image/profile', multipart, uploadProfileImageService);
     server.get('/image/profile/thumb/:_id', downloadProfileThumbnailImageService);
+    server.get('/image/profile/main/:_id', downloadProfileMainImageService);
 
     server.post('/image/symbol', multipart, uploadSymbolImageService);
     server.get('/image/symbol/thumb/:_id', downloadSymbolThumbnailImageService);
