@@ -79,15 +79,15 @@
                     <div outline-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.radius || attributeInformation.radius===''">
+                <li ng-if="attributeInformation.radius || attributeInformation.radius==='' || attributeInformation.radius===0">
                     <div radius-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.alpha || attributeInformation.alpha==='' ">
+                <li ng-if="attributeInformation.alpha || attributeInformation.alpha==='' || attributeInformation.alpha===0 ">
                     <div alpha-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.rotate || attributeInformation.rotate===''">
+                <li ng-if="attributeInformation.rotate || attributeInformation.rotate==='' || attributeInformation.rotate===0">
                     <div rotate-attribute to="attributeInformation"></div>
                 </li>
 
