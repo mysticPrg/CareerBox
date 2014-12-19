@@ -14,10 +14,14 @@ define([
             var loadAdditionalPromiss = $http.get('http://210.118.74.166:8123/info/additional', {withCredentials: true});
 
             $q.all([loadPersonalPromiss, loadAdditionalPromiss]).then(function (resultArray) {
-                if(resultArray[0].data.result !== null)
+                if(resultArray[0].data.result !== null){
                     InformationData.personalInfo = resultArray[0].data.result;
+                    InformationData.personalInfo.title = '기본정보';
+                }
                 if(resultArray[1].data.result !== null)
+
                     InformationData.additionalInfo = resultArray[1].data.result;
+                InformationData.additionalInfo.title = '상세정보';
             });
         }
 
@@ -102,6 +106,16 @@ define([
                     InformationData.columnInfo = resultArray[0].data.result;
             });
         }
+        function loadAllInfo(){
+            loadPersonalInfo();
+            loadSchoolInfo();
+            loadWorkingInfo();
+            loadAwardInfo();
+            loadAbilityInfo();
+            loadActivityInfo();
+            loadProjectInfo();
+            loadColumnInfo();
+        }
 
         return {
             'loadPersonalInfo'    : loadPersonalInfo,
@@ -111,7 +125,8 @@ define([
             'loadAbilityInfo'     : loadAbilityInfo,
             'loadActivityInfo'    : loadActivityInfo,
             'loadProjectInfo'     : loadProjectInfo,
-            'loadColumnInfo'      : loadColumnInfo
+            'loadColumnInfo'      : loadColumnInfo,
+            'loadAllInfo'         : loadAllInfo
         };
 
     }]);
