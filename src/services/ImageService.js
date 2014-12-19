@@ -92,10 +92,6 @@ function checkArgForFileType(data, res) {
     return true;
 }
 
-function uploadIsolateImgService(req, res) {
-
-}
-
 function uploadService(req, res) {
 
     isolateUploader.uploadFile(req, function (data) {
@@ -121,7 +117,8 @@ function uploadService(req, res) {
             _member_id: req.session._id,
             name: data[0].name,
             filesize: data[0].size,
-            isBinding: isBinding
+            isBinding: isBinding,
+            size: data[0].imageSize
         };
 
         ImageDB.write(fileData, function(err, writed) {
