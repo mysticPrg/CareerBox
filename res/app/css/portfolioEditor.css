@@ -333,6 +333,10 @@ img {
     cursor: pointer;
 }
 
+#itemTemplateArea {
+    padding-top: 16px;
+}
+
  #itemTemplateArea > #itemTemplateList {
     width: 85%;
     min-width: 250px;
