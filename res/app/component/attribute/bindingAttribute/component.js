@@ -4,10 +4,11 @@ define([
     'classes/Enums/InfoCategory',
     'services/getAttributeNames',
     'services/EditorData',
+    'services/InformationData',
     'services/getAvailableAttribute'
 ], function (app, InfoCategory) {
 
-    app.directive('bindingAttribute', function (getAttributeNames, EditorData, getAvailableAttribute) {
+    app.directive('bindingAttribute', function (getAttributeNames, EditorData, getAvailableAttribute, InformationData) {
         return {
             restrict: 'A',
             scope: {
@@ -19,7 +20,8 @@ define([
             link: function ($scope, element, att) {
                 console.log('binding Attribute $scope', $scope);
 
-                $scope.infoCategory = InfoCategory;
+                console.log('InformationData', InformationData);
+                $scope.infoCategory = InformationData;
                 $scope.category = '';
                 $scope.setCategory = function(){
                     // 템플릿에 카테고리를 매칭
@@ -34,6 +36,11 @@ define([
                 // 속성 이름들 모두 가져오기
                 $scope.EditorData = EditorData;
                 $scope.$watch('EditorData.focusId',function(){
+                     var data = $scope.data;
+                    if(data.hasOwnProperty('itemType')){
+
+                    }
+
                     try {
                         if($scope.data.itemType === "image"){
                             // key의 첫글자가 I 인 것만 가져오기

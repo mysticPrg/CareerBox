@@ -46,6 +46,22 @@ function getList(_member_id, callback) {
     });
 }
 
+function getListByInfoType(_member_id, infoType, callback) {
+    var templateCollection = require('../util/DBCollections').getInstance().collections.template;
+
+    templateCollection.find({
+        _member_id: _member_id,
+        'target.bindingType': infoType
+    }).toArray(function (err, list) {
+        async.each(list, function (t, cb) {
+            delete t._member_id;
+            cb();
+        }, function () {
+            callback(err, list);
+        });
+    });
+}
+
 function remove(_id, callback) {
     var templateCollection = require('../util/DBCollections').getInstance().collections.template;
 
@@ -90,6 +106,7 @@ var exports = {
     create: create,
     get: get,
     getList: getList,
+    getListByInfoType: getListByInfoType,
     remove: remove,
     update: update,
     checkUsingTemplate: checkUsingTemplate
