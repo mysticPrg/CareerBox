@@ -172,13 +172,13 @@ define([
                 var modalInstance = $modal.open(saveConfirmModal);
                 modalInstance.result.then(function () {
                     $.when($scope.save()).then(function(){
-                        history.back();
+                        $window.location.href = '#portfolioEditor';
                     });
                 }, function () {
-                    history.back();
+                    $window.location.href = '#portfolioEditor';
                 });
             }else{
-                history.back();
+                $window.location.href = '#portfolioEditor';
             }
         }
 

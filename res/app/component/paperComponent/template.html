@@ -6,7 +6,7 @@
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu" role="menu" data-ng-init="loadPaperList()">
+        <ul class="dropdown-menu" role="menu">
             <li ng-repeat="paper in papers track by $index">
                 <a ng-click="changePage(paper._id, paper.title)">
                     <span>{{paper.title}}</span>

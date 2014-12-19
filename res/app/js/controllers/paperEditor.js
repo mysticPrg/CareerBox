@@ -40,6 +40,10 @@ define([
                     {collapsible: true, size: "300px"},
                     {collapsible: false}
                 ];
+
+                if(EditorData.paperId !== ''){
+                    loadPaper();
+                }
             });
 
             // 페이퍼 속성
@@ -56,12 +60,16 @@ define([
                 if (EditorData.paperId === '')
                     return;
 
+                loadPaper();
+            });
+
+            function loadPaper(){
                 initPaper();
 
                 LoadPaper($http, EditorData.paperId, function (result) {
                     EditorData.paper = result.result;
 
-                    loadPaper(EditorData.paper);
+                    loadPaperDom(EditorData.paper);
 
                     // 속성창 갱신 Second Task
                     EditorData.focusId = "canvas-content";
@@ -70,7 +78,7 @@ define([
                     $scope.changed = false;
                     isFirst = true;
                 });
-            });
+            }
 
             // 로딩된 처음은 무조건 EditorData.paper watch가 발생하기 때문에 첫번째는 무시
             var isFirst = true;
@@ -134,7 +142,7 @@ define([
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            function loadPaper(paper) {
+            function loadPaperDom(paper) {
                 var paperChildArr = paper.childArr;
 
                 $compile($('#canvas-content'))($scope); // 페이퍼 속성을 적용시켜줌.
