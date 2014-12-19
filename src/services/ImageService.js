@@ -24,7 +24,7 @@ var isolateUploader = new Uploader({
     thumbToSubDir: true,
     thumbSizes: [[100, 100]],
     acceptFileTypes: /\.(gif|jpe?g|png)$/i,
-    uploadType: 'profile'
+    uploadType: 'profile'//
 });
 
 var profileImgUploader = new Uploader({
