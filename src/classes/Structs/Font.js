@@ -9,7 +9,7 @@ if (typeof define !== 'function') {
 define(['classes/Structs/Color'], function (Color) {
 
     function Font(props) {
-        this.color = Color.BLACK;
+        this.color = new Color('000000');
         this.size = 11;
         this.family = 'dotum';
 

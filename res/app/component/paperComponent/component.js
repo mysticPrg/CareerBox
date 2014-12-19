@@ -23,8 +23,28 @@ define([
             $scope.paperTitle = 'Select Paper';
             $scope.papers = [];
 
-            $(document).ready(function () {
+            function loadPaperList(){
+                LoadPaperList($http, EditorData.portfolio._id, function (result) {
+                    EditorData.paperList = result.result;
+                    $scope.papers = result.result;
 
+                    if(EditorData.paperId === '') {
+                        var paper;
+                        for (var idx = 0; idx < $scope.papers.length; idx++) {
+                            paper = $scope.papers[idx];
+                            if (paper.isIndex === true) {
+                                EditorData.paperId = paper._id;
+                                EditorData.paperTitle = paper.title;
+                            }
+                        }
+                    }
+
+                    $scope.paperTitle = EditorData.paperTitle;
+                });
+            }
+
+            $(document).ready(function () {
+                loadPaperList();
             });
 
             $scope.createPaper = function (paper){
@@ -32,27 +52,9 @@ define([
 
                 SavePaper($http, data, function (result) {
                     if(result.returnCode === '000'){
-                        $scope.loadPaperList();
+                        loadPaperList();
                         EditorData.paperId = result.result;
                         $scope.paperTitle = paper.title;
-                    }
-                });
-            }
-
-            $scope.loadPaperList = function (){
-                LoadPaperList($http, EditorData.portfolio._id, function (result) {
-                    EditorData.paperList = result.result;
-                    $scope.papers = result.result;
-
-                    if(EditorData.paperId === ''){
-                        var paper;
-                        for(var idx = 0; idx < $scope.papers.length; idx++){
-                            paper = $scope.papers[idx];
-                            if(paper.isIndex === true){
-                                EditorData.paperId = paper._id;
-                                $scope.paperTitle = paper.title;
-                            }
-                        }
                     }
                 });
             }
