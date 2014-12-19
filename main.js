@@ -2,7 +2,7 @@
  * Created by mysticPrg on 2014-09-22.
  */
 
-///*
+/*
 var server = require('./src/services/server');
 
 var MemberService = require('./src/services/MemberService');
@@ -59,7 +59,10 @@ server.start(8123);
 
 /**/
 
-
+var CaptureFromSite = require('./src/util/CaptureFromSite');
+CaptureFromSite('test', 'portfolio', function(err) {
+   console.log('done');
+});
 
 /*
 var genID = require('./src/util/genID');
