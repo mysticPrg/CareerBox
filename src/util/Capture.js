@@ -13,6 +13,11 @@ var HTMLGen = require('./HTMLGen');
 var screenShotPath = 'res/screenshot/';
 var thumbWidth = 200;
 
+var requirejs = require('../require.config');
+
+var Paper = requirejs('classes/Paper');
+var Article = requirejs('classes/LayoutComponents/Article');
+
 module.exports = function capture(target, closerCallback) {
     async.waterfall([
         function (callback) { // open page
@@ -42,11 +47,14 @@ module.exports = function capture(target, closerCallback) {
         },
         function (callback) {
             // 어떤걸 HTML로 만들어야 하는지 캐치!
-            if (target.templateType) {
-                HTMLGen.templateToHTML($, $('body'), target, callback);
-            } else {
-                HTMLGen.paperToHTML($, $('body'), target, callback);
+            if ( target instanceof Article ) {
+                HTMLGen.articleToHTML($, $('body'), target, callback);
             }
+//            if (target.templateType) {
+//                HTMLGen.templateToHTML($, $('body'), target, callback);
+//            } else {
+//                HTMLGen.paperToHTML($, $('body'), target, callback);
+//            }
 
         },
         function (callback) { // save screenshot
