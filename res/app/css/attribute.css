@@ -18,7 +18,7 @@
 
 .horizonAlignBtnForm #horizonAlignBtn .left, .center, .right {
     width: 50px;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 
 /*세로정렬*/
@@ -28,7 +28,7 @@
 
 .verticalAlignBtnForm #verticalAlignBtn .top, .middle, .bottom {
     width: 50px;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 
 /*폰트*/
@@ -176,6 +176,23 @@
     margin-left: 10px;
 }
 
+/*radius*/
+#radiusForm #radiusLabel {
+    width: 57px;
+}
+
+#radiusForm #radiusInput {
+    margin-left: 10px;
+}
+
+/*회전*/
+#rotateForm > label {
+    width: 57px;
+}
+
+#rotateForm #rotateInput {
+    margin-left: 10px;
+}
 
 /*페이퍼 타이틀*/
 #titleForm #titleInputForm {

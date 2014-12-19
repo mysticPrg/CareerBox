@@ -43,55 +43,6 @@
                     <div description-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.fill || attributeInformation.fill==='' " class="att_list">
-                    <div fill-attribute to="attributeInformation"></div>
-                </li>
-
-
-                <li ng-if="attributeInformation.outline || attributeInformation.outline==='' " class="att_list">
-                    <div outline-attribute to="attributeInformation"></div>
-                </li>
-
-                <li ng-if="attributeInformation.shapeType || attributeInformation.shapeType==='' ">
-                    <div shape-type-attribute to="attributeInformation"></div>
-                </li>
-
-                <li ng-if="attributeInformation.arrow || attributeInformation.arrow==='' ">
-                    <div arrow-attribute to="attributeInformation"></div>
-                </li>
-
-                <li ng-if="attributeInformation.radius || attributeInformation.radius===0">
-                    <div radius-attribute to="attributeInformation"></div>
-                </li>
-
-                <li ng-if="attributeInformation.rotate || attributeInformation.rotate===0">
-                    <div rotate-attribute to="attributeInformation"></div>
-                </li>
-
-                <li ng-if="attributeInformation.pos || attributeInformation.pos==='' ">
-                    <div pos-attribute to="attributeInformation"></div>
-                </li>
-
-                <li ng-if="attributeInformation.size || attributeInformation.size==='' ">
-                    <div size-attribute to="attributeInformation"></div>
-                </li>
-
-                <li ng-if="attributeInformation.alpha || attributeInformation.alpha===0 ">
-                    <div alpha-attribute to="attributeInformation"></div>
-                </li>
-
-                <li ng-if="attributeInformation.align || attributeInformation.align==='' ">
-                    <div align-attribute to="attributeInformation"></div>
-                </li>
-
-                <li ng-if="attributeInformation.font || attributeInformation.font==='' " class="att_list">
-                    <div font-attribute to="attributeInformation"></div>
-                </li>
-
-                <li ng-if="attributeInformation.vAlign || attributeInformation.vAlign==='' ">
-                    <div vertical-align-attribute to="attributeInformation"></div>
-                </li>
-
                 <li ng-if="attributeInformation.value || attributeInformation.value==='' ">
                     <div value-attribute to="attributeInformation"></div>
                 </li>
@@ -104,13 +55,61 @@
                     <div url-attribute to="attributeInformation"></div>
                 </li>
 
+                <li ng-if="attributeInformation.arrow || attributeInformation.arrow==='' ">
+                    <div arrow-attribute to="attributeInformation"></div>
+                </li>
+
+                <li ng-if="attributeInformation.shapeType || attributeInformation.shapeType==='' ">
+                    <div shape-type-attribute to="attributeInformation"></div>
+                </li>
+
+                <li ng-if="attributeInformation.size || attributeInformation.size==='' ">
+                    <div size-attribute to="attributeInformation"></div>
+                </li>
+
+                <li ng-if="attributeInformation.pos || attributeInformation.pos==='' ">
+                    <div pos-attribute to="attributeInformation"></div>
+                </li>
+
+                <li ng-if="attributeInformation.fill || attributeInformation.fill==='' " class="att_list">
+                    <div fill-attribute to="attributeInformation"></div>
+                </li>
+
+                <li ng-if="attributeInformation.outline || attributeInformation.outline==='' " class="att_list">
+                    <div outline-attribute to="attributeInformation"></div>
+                </li>
+
+                <li ng-if="attributeInformation.radius || attributeInformation.radius===0">
+                    <div radius-attribute to="attributeInformation"></div>
+                </li>
+
+                <li ng-if="attributeInformation.alpha || attributeInformation.alpha===0 ">
+                    <div alpha-attribute to="attributeInformation"></div>
+                </li>
+
+                <li ng-if="attributeInformation.rotate || attributeInformation.rotate===0">
+                    <div rotate-attribute to="attributeInformation"></div>
+                </li>
+
+                <li ng-if="attributeInformation.font || attributeInformation.font==='' " class="att_list">
+                    <div font-attribute to="attributeInformation"></div>
+                </li>
+
+                <li ng-if="attributeInformation.align || attributeInformation.align==='' ">
+                    <div align-attribute to="attributeInformation"></div>
+                </li>
+
+                <li ng-if="attributeInformation.vAlign || attributeInformation.vAlign==='' ">
+                    <div vertical-align-attribute to="attributeInformation"></div>
+                </li>
+
                 <li ng-if="attributeInformation.isIndex || attributeInformation.isIndex==='' ">
                     <div is-index-attribute to="attributeInformation"></div>
                 </li>
 
                 <!--z-index 설정버튼-->
                 <div id="zIndexForm">
-                    <label for="zIndex">정렬</label>
+                    <label for="zIndex">z축</label>
                     <div id="zIndex" ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
                         <button class="btn btn-default"
                                 ng-click="goFront()">앞으로
@@ -135,99 +134,6 @@
                 <!--</li>-->
 
                 attributeInformation.bindingType : {{attributeInformation.bindingType}}
-
-                <!------------------------------------------->
-
-                <!--이전 속성 리스트 없애도 됨.-->
-
-                <!--<li ng-repeat="(key, att) in attributeInformation track by $index"-->
-                    <!--ng-hide="key == '_id' || key == 'itemType' || key == 'layoutComponentType'-->
-                    <!--|| key == 'state' || key == 'pos_end' || key == 'pos_start'-->
-                    <!--|| key == 'target' || key == '_template_id' || key == 'templateType' || key == 'timestamp'-->
-                    <!--|| key == 'childArr' || key == '_member_id' || key == '_portfolio_id'"  >-->
-                    <!--<h3>{{key}}</h3>-->
-                    <!--<ANY ng-switch="key">-->
-
-                        <!--<ANY ng-switch-when="title">-->
-                            <!--<div title-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="description">-->
-                            <!--<div description-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="fill">-->
-                            <!--<div fill-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-
-                        <!--<ANY ng-switch-when="outline">-->
-                            <!--<div outline-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="shapeType">-->
-                            <!--<div shape-type-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="arrow">-->
-                            <!--<div arrow-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="radius">-->
-                            <!--<div radius-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="rotate">-->
-                            <!--<div rotate-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="pos">-->
-                            <!--<div pos-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="size">-->
-                            <!--<div size-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="alpha">-->
-                            <!--<div alpha-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="align">-->
-                            <!--<div align-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="font">-->
-                            <!--<div font-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="vAlign">-->
-                            <!--<div vertical-align-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="value">-->
-                            <!--<div value-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="name">-->
-                            <!--<div name-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="url">-->
-                            <!--<div url-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-when="isIndex">-->
-                            <!--<div is-index-attribute to="attributeInformation"></div>-->
-                        <!--</ANY>-->
-
-                        <!--<ANY ng-switch-default>-->
-                            <!--<p>{{key}} : {{att}}</p>-->
-                        <!--</ANY>-->
-                    <!--</ANY>-->
-                <!--</li>-->
-
-            
 
             </ul>
         </div>
