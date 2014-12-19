@@ -35,76 +35,76 @@
             <ul id="itemAttrList">
 
                 <!----------------------< 순서를 바꿀수 있도록 바뀐 속성 리스트 >--------------------->
-                <li ng-if="attributeInformation.title">
+                <li ng-if="attributeInformation.title || attributeInformation.title===''">
                     <div title-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.description">
+                <li ng-if="attributeInformation.description || attributeInformation.description==='' ">
                     <div description-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.fill" class="att_list">
+                <li ng-if="attributeInformation.fill || attributeInformation.fill==='' " class="att_list">
                     <div fill-attribute to="attributeInformation"></div>
                 </li>
 
 
-                <li ng-if="attributeInformation.outline" class="att_list">
+                <li ng-if="attributeInformation.outline || attributeInformation.outline==='' " class="att_list">
                     <div outline-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.shapeType">
+                <li ng-if="attributeInformation.shapeType || attributeInformation.shapeType==='' ">
                     <div shape-type-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.arrow">
+                <li ng-if="attributeInformation.arrow || attributeInformation.arrow==='' ">
                     <div arrow-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.radius">
+                <li ng-if="attributeInformation.radius || attributeInformation.radius===0">
                     <div radius-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.rotate">
+                <li ng-if="attributeInformation.rotate || attributeInformation.rotate===0">
                     <div rotate-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.pos">
+                <li ng-if="attributeInformation.pos || attributeInformation.pos==='' ">
                     <div pos-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.size">
+                <li ng-if="attributeInformation.size || attributeInformation.size==='' ">
                     <div size-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.alpha">
+                <li ng-if="attributeInformation.alpha || attributeInformation.alpha===0 ">
                     <div alpha-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.align">
+                <li ng-if="attributeInformation.align || attributeInformation.align==='' ">
                     <div align-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.font" class="att_list">
+                <li ng-if="attributeInformation.font || attributeInformation.font==='' " class="att_list">
                     <div font-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.vAlign">
+                <li ng-if="attributeInformation.vAlign || attributeInformation.vAlign==='' ">
                     <div vertical-align-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.value">
+                <li ng-if="attributeInformation.value || attributeInformation.value==='' ">
                     <div value-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.name">
+                <li ng-if="attributeInformation.name || attributeInformation.name==='' ">
                     <div name-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.url">
+                <li ng-if="attributeInformation.url || attributeInformation.url==='' ">
                     <div url-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.isIndex">
+                <li ng-if="attributeInformation.isIndex || attributeInformation.isIndex==='' ">
                     <div is-index-attribute to="attributeInformation"></div>
                 </li>
 
