@@ -43,7 +43,6 @@ define([
             EditorData.templateItemArray = [];
 
             if(EditorData.templateState === 'new'){
-                EditorData.template = new Template();
                 getTemplateInstance();
             }else if (EditorData.templateState == 'edit'){
                 $scope.template = EditorData.template;
@@ -70,17 +69,8 @@ define([
 
         // Get Template Instance
         function getTemplateInstance() {
-            var article = new Article();
-//            article.template = $scope.template._template_id;
-
-            article.size.width = $('#canvas-content').width();
-            article.size.height = $('#canvas-content').height();
-
-            article.childArr = getTemplateChildArr(EditorData.templateItemArray);
-            article.rowCount = 0;
-            article.colCount = 0;
-
-            $scope.template.target = article;
+            EditorData.template.target.size = {width : 600, height : 400};
+            $scope.template = EditorData.template;
 
             // 템플릿 생성하고 나면 캔버스 속성이 나오도록함.
             EditorData.focusId = 'canvas-content';
@@ -163,16 +153,16 @@ define([
             $scope.thumbnail = '';
             $scope.description = '';
 
-//            console.log('$scope.template.target', $scope.template.target);
-
-            SaveTemplate($http, $scope.template, function (resultCode) {
-                if (resultCode == 000) {
+            console.log('save data', $scope.template);
+            SaveTemplate($http, $scope.template, function (result) {
+                if (result.returnCode === '000') {
                     $scope.changed = false;
-                    alert('Success');
-                } else if (resultCode === 001) {
-                    alert('Invalid Arguments');
-                } else if (resultCode === 002) {
-                    alert('Not Login');
+                    $scope.template._id = result.result;
+                    showSuccessNotification();
+                } else if (result.returnCode === '001') {
+                    showFailNotification();
+                } else if (result.returnCode === '002') {
+                    showFailNotification();
                 }
             });
         }
@@ -195,6 +185,16 @@ define([
         function deleteItem(id) {
             $('#' + id).remove();
             EditorData.templateItemArray[id].state = 'del';
+        }
+
+        function showSuccessNotification() {
+            var notification = kendo.toString('성공하였습니다.');
+            $scope.noti.show(notification, "info");
+        }
+
+        function showFailNotification() {
+            var notification = kendo.toString('실패하였습니다.');
+            $scope.noti.show(notification, "error");
         }
     }]);
 });

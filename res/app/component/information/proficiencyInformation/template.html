@@ -43,10 +43,19 @@
     <!--첨부파일-->
     <div class="form-group">
         <label for="lbl_proficiency_file" class="col-md-2 control-label">첨부파일</label>
-        <div class="col-md-2" id="lbl_proficiency_file">
-            <input type="file" ng-model="proficiencyInfoItem.F_file">
+
+        <div class="col-md-3" id="lbl_proficiency_file">
+            <input type="file" id="proficiency_file" ng-file-select="onFileSelectProficiencyInfo($files)">
         </div>
+
+        <button type="btn btn-default col-md-2" id="proficiency_upload" ng-click="uploadProficiencyInfo()" style="display: none;">업로드</button>
     </div>
+
+    <!--첨부파일 정보-->
+    <div class="form-group">
+        <div id="proficiency_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div>
+    </div>
+
 
     <!--추가 버튼-->
     <div>
@@ -99,10 +108,12 @@
         <!--첨부파일-->
         <div class="form-group">
             <label for="lbl_proficiency_file_load" class="col-md-2 control-label">첨부파일</label>
-            <div class="col-md-2" id="lbl_proficiency_file_load">
-                <input type="file" ng-model="item.F_file">
+            <div class="col-md-5" id="lbl_proficiency_file_load">
+                <div ng-show = "!item.F_file">없음</div>
+                <div ng-show = "item.F_file"><a href="http://210.118.74.166:8123/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
             </div>
         </div>
+
         <!-- 삭제 버튼-->
         <div>
             <button type="button" class="btn btn-default" ng-click="delProficiencyInfo($index)">삭제</button>

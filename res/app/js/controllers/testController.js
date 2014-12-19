@@ -12,7 +12,17 @@ define([
         $scope.infoCategory = InfoCategory;
         $scope.category = '';
 
-        $scope.types = ['string', 'number', 'boolean', 'file', 'image', 'term', 'date'];
+//        $scope.types = ['string', 'number', 'boolean', 'file', 'image', 'term', 'date'];
+        $scope.types = {
+            'string' : 'S',
+            'number' : 'N',
+            'boolean' : 'B',
+            'file' : 'F',
+            'image' : 'I',
+            'term' : 'T',
+            'date' : 'D'
+        };
+
         $scope.type;
 
         $scope.result;
@@ -20,22 +30,7 @@ define([
         $scope.test = function (){
             var category = $scope.category.infoType;
 
-            var infoType = '';
-            if($scope.type === $scope.types[0]){
-                infoType = 'S';
-            }else if($scope.type === $scope.types[1]){
-                infoType = 'N';
-            }else if($scope.type === $scope.types[2]){
-                infoType = 'B';
-            }else if($scope.type === $scope.types[3]){
-                infoType = 'F';
-            }else if($scope.type === $scope.types[4]){
-                infoType = 'I';
-            }else if($scope.type === $scope.types[5]){
-                infoType = 'T';
-            }else if($scope.type === $scope.types[6]){
-                infoType = 'D';
-            }
+            var infoType = $scope.type;
 
             $scope.result = getAvailableAttribute(category, infoType);
         }
