@@ -76,8 +76,15 @@
 
         <!--사진 첨부-->
         <div class="col-md-2">
-            <img src="../img/noImage.png" id="personal_picture"><br>
-            <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
+            <div ng-show = "!personalInfo.I_picture">
+                <img ng-src="../img/noImage.png">
+            </div>
+            <div ng-show = "personalInfo.I_picture">
+                <img ng-src="http://210.118.74.166:8123/image/profile/thumb/{{personalInfo.I_picture._id}}" id="personal_picture">
+            </div>
+
+            <input type="file" id="personal_picture_file" class="btn btn-default" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectProfileImage($files)"><br>
+            <div id="personal_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div><br>
         </div>
     </div>
 </form>
