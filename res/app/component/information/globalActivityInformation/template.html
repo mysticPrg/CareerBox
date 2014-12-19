@@ -9,7 +9,7 @@
 
         <label for="lbl_global_activity_term" class="col-md-2 control-label">기간</label>
         <div class="col-md-2" id="lbl_global_activity_term">
-            <button class="k-button" ng-click="lbl_global_activity_term_start.open()">{{globalActivityInfoItem.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="lbl_global_activity_term_end.open()">{{globalActivityInfoItem.T_term.end | date:"yyyy년 MM월 dd일"}}</button>
+            <button class="k-button" ng-click="lbl_global_activity_term_start.center(); lbl_global_activity_term_start.open()">{{globalActivityInfoItem.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="lbl_global_activity_term_end.center(); lbl_global_activity_term_end.open()">{{globalActivityInfoItem.T_term.end | date:"yyyy년 MM월 dd일"}}</button>
         </div>
         <div kendo-window="lbl_global_activity_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
             <kendo-calendar ng-model="globalActivityInfoItem.T_term.start" k-on-change="lbl_global_activity_term_start.close()"></kendo-calendar>
@@ -72,7 +72,7 @@
 
             <label for="lbl_global_activity_term_load" class="col-md-2 control-label">기간</label>
             <div class="col-md-2" id="lbl_global_activity_term_load">
-                <button class="k-button" ng-click="lbl_global_activity_term_start.open()">{{item.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="lbl_global_activity_term_end.open()">{{item.T_term.end | date:"yyyy년 MM월 dd일"}}</button>
+                <button class="k-button" ng-click="lbl_global_activity_term_start.center(); lbl_global_activity_term_start.open()">{{item.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="lbl_global_activity_term_end.center(); lbl_global_activity_term_end.open()">{{item.T_term.end | date:"yyyy년 MM월 dd일"}}</button>
             </div>
             <div kendo-window="lbl_global_activity_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
                 <kendo-calendar ng-model="item.T_term.start" k-on-change="lbl_global_activity_term_start.close()"></kendo-calendar>
