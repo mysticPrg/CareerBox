@@ -26,7 +26,6 @@ define([
 
             var result = {};
             var item = getItem(category);
-            console.log(item);
 
             // I F 빼고 가져오기
             if(infoType == '-I -F'){
