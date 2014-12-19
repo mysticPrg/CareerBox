@@ -41,10 +41,16 @@ define([
                 httpLogout(function(data){
                     if (data.returnCode == '000') {
                         alert("성공하였습니다.");
-                        $window.location.href = 'login.html';
+                        $window.location.href = 'index.html';
                     }
                 });
             }
+
+            $scope.goToPortfolio = function () {
+                var href = 'portfolioPreview.html?id=' + EditorData.portfolio._id;
+                $window.location.href = href;
+            }
+
         });
 
 

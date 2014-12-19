@@ -20,10 +20,31 @@
 
             <div class="tab-content" id="content">
                 <div id="articleTemplateArea">
-                    <!--New 템플릿 생성 버튼-->
-                    <button id="btnAddArticleTemplate" class="btn btn-default form-control"
-                            ng-click="popCreateTemplateModal()">add article template
-                    </button>
+                    <div style="margin-bottom: 30px">
+                        <!--템플릿 분류 드롭다운-->
+                        <div id="templateSelect" class="btn-group">
+                            <button type="button" class="templateCategory btn btn-default">전체보기</button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">기본정보</a></li>
+                                <li><a href="#">학력</a></li>
+                                <li><a href="#">경력</a></li>
+                                <li><a href="#">보유능력</a></li>
+                                <li><a href="#">수상</a></li>
+                                <li><a href="#">활동</a></li>
+                                <li><a href="#">프로젝트</a></li>
+                                <li><a href="#">칼럼</a></li>
+                            </ul>
+                        </div>
+
+                        <!--New 템플릿 생성 버튼-->
+                        <button id="btnAddArticleTemplate" class="btn btn-default form-control"
+                                ng-click="popCreateTemplateModal()">+New
+                        </button>
+                    </div>
+
                     <!--생성한 템플릿 리스트 -->
                     <ul id="articleTemplateList">
                         <li ng-repeat="template in templates track by $index">

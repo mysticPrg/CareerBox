@@ -1,12 +1,5 @@
 <form class="form-horizontal" role="form">
-    <!-- 회사 로고 -->
-    <div  class="col-md-2">
-        <div class="form-group">
-            <img src="../img/noImage.png" ng-model="workingInfoItem.I_logo"><br>
-            <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
-        </div>
-    </div>
-    <div  class="col-md-10">
+    <div  class="col-md-12">
         <!-- 회사명, 구분 -->
         <div class="form-group row">
             <label for="lbl_working_name" class="col-md-2 control-label">회사명</label>
@@ -109,14 +102,7 @@
     <hr>
 
     <div ng-repeat="item in workingInfoItems track by $index">
-        <!-- 회사 로고 -->
-        <div  class="col-md-2">
-            <div class="form-group">
-                <img src="../img/noImage.png" ng-model="item.I_logo"><br>
-                <button class="btn btn-default">수정</button> <button class="btn btn-default">삭제</button>
-            </div>
-        </div>
-        <div  class="col-md-10">
+        <div  class="col-md-12">
             <!-- 회사명, 구분 -->
             <div class="form-group row">
                 <label for="lbl_working_name_load" class="col-md-2 control-label">회사명</label>

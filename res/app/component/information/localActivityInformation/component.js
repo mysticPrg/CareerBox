@@ -6,54 +6,75 @@ define([
     'services/InformationData',
     'classes/Info/LocalActivityInfoItem',
     'angular-upload',
-    'services/fileUpload'
+    'services/fileUpload',
+    'services/ImageUpload'
 ], function (app, InformationData, LocalActivityInfoItem) {
-    app.controller('localActivityInformationController', ['$scope', '$upload', 'fileUpload', function ($scope, $upload, fileUpload) {
-        $scope.localActivityInfoItem = new LocalActivityInfoItem();
-        $scope.files;
-        $scope.progress = 0;
-
-        $scope.InformationData = InformationData;
-
-        $scope.$watch("InformationData.localActivityInfo", function () {
-            $scope.localActivityInfoItems = InformationData.localActivityInfo.items;
-        }, true);
-
-        function initializeFileForm(){
-            $scope.progress = 0;
-            $('#localActivity_file').val('');
-            $('#localActivity_upload').css('display', 'none');
-            $('#localActivity_progressbar').css('display', 'none');
-        }
-
-        $scope.addLocalActivityInfo = function () {
-            var newLocalActivityInfoItem = new LocalActivityInfoItem($scope.localActivityInfoItem);
-            $scope.localActivityInfoItems.push(newLocalActivityInfoItem);
+    app.controller('localActivityInformationController', ['$scope', '$upload', 'fileUpload', 'ImageUpload',
+        function ($scope, $upload, fileUpload, ImageUpload) {
             $scope.localActivityInfoItem = new LocalActivityInfoItem();
+            $scope.files;
+            $scope.progress = 0;
+            $scope.imageProgress = 0;
 
-            initializeFileForm();
-        }
+            $scope.InformationData = InformationData;
 
-        $scope.delLocalActivityInfo = function (index) {
-            $scope.localActivityInfoItems.splice(index, 1);
-        }
+            $scope.$watch("InformationData.localActivityInfo", function () {
+                $scope.localActivityInfoItems = InformationData.localActivityInfo.items;
+            }, true);
 
-        $scope.onFileSelectLocalActivityInfo = function ($files) {
-            $scope.files = $files;
-            $('#localActivity_upload').fadeIn('slow');
-        }
+            function initializeFileForm() {
+                $scope.progress = 0;
+                $scope.imageProgress = 0;
 
-        $scope.uploadLocalActivityInfo = function () {
-            $('#localActivity_progressbar').fadeIn('slow');
+                $('#localActivity_file').val('');
+                $('#localActivity_upload').css('display', 'none');
+                $('#localActivity_progressbar').css('display', 'none');
 
-            fileUpload($upload, $scope.files, true, function(evt){
-                $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-            },function(data){
-                $scope.localActivityInfoItem.F_file = data.result;
-            });
-        }
+                $('#localActivity_picture_upload').val('');
+                $('#localActivity_picture').attr('src', '../img/noImage200x200.png');
+                $('#localActivity_picture_progressbar').css('display', 'none');
+            }
 
-    }]);
+            $scope.addLocalActivityInfo = function () {
+                var newLocalActivityInfoItem = new LocalActivityInfoItem($scope.localActivityInfoItem);
+                $scope.localActivityInfoItems.push(newLocalActivityInfoItem);
+                $scope.localActivityInfoItem = new LocalActivityInfoItem();
+
+                initializeFileForm();
+            }
+
+            $scope.delLocalActivityInfo = function (index) {
+                $scope.localActivityInfoItems.splice(index, 1);
+            }
+
+            $scope.onFileSelectLocalActivityInfo = function ($files) {
+                $scope.files = $files;
+                $('#localActivity_upload').fadeIn('slow');
+            }
+
+            $scope.uploadLocalActivityInfo = function () {
+                $('#localActivity_progressbar').fadeIn('slow');
+
+                fileUpload($upload, $scope.files, true, function (evt) {
+                    $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+                }, function (data) {
+                    $scope.localActivityInfoItem.F_file = data.result;
+                });
+            }
+
+            $scope.onFileSelectLocalActivityImage = function ($files) {
+                $scope.imageProgress = 0;
+                $('#localActivity_picture_progressbar').fadeIn('slow');
+
+                ImageUpload($upload, $files, 'symbol', function (evt) {
+                    $scope.imageProgress = parseInt(100.0 * evt.loaded / evt.total);
+                }, function (data) {
+                    $scope.localActivityInfoItem.I_image = data.result;
+                    $('#localActivity_picture').attr('src', 'http://210.118.74.166:8123/image/symbol/thumb/' + data.result._id);
+                });
+            }
+
+        }]);
 
     app.directive('localActivityInformation', function () {
         return {
