@@ -78,6 +78,10 @@ define([
                     }
                 });
 
+                // binding
+                scope.$watch("info.bindingType",function() {
+                    scope.info['value'] = scope.info.bindingType
+                });
 
             },
             templateUrl: require.toUrl('component/item/text/template.html')
