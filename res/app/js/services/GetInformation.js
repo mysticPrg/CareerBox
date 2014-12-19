@@ -7,20 +7,7 @@ define([
     'app',
     'services/InformationData'
 ], function($, ng, app) {
-    app.factory('GetInformation', ['$scope', '$http', '$q', 'InformationData', function ($scope, $http, $q, InformationData) {
-        return function() {
-            var functionBundle = {
-                'loadPersonalInfo'    : loadPersonalInfo,
-                'loadSchoolInfo'      : loadSchoolInfo,
-                'loadWorkingInfo'     : loadWorkingInfo,
-                'loadAwardInfo'     : loadAwardInfo,
-                'loadAbilityInfo'     : loadAbilityInfo,
-                'loadActivityInfo'    : loadActivityInfo,
-                'loadProjectInfo'     : loadProjectInfo,
-                'loadColumnInfo'      : loadColumnInfo
-            }
-            return functionBundle;
-        }
+    app.factory('GetInformation', ['$http', '$q', 'InformationData', function ($http, $q, InformationData) {
 
         function loadPersonalInfo() {
             var loadPersonalPromiss = $http.get('http://210.118.74.166:8123/info/personal', {withCredentials: true});
@@ -116,6 +103,16 @@ define([
             });
         }
 
+        return {
+            'loadPersonalInfo'    : loadPersonalInfo,
+            'loadSchoolInfo'      : loadSchoolInfo,
+            'loadWorkingInfo'     : loadWorkingInfo,
+            'loadAwardInfo'       : loadAwardInfo,
+            'loadAbilityInfo'     : loadAbilityInfo,
+            'loadActivityInfo'    : loadActivityInfo,
+            'loadProjectInfo'     : loadProjectInfo,
+            'loadColumnInfo'      : loadColumnInfo
+        };
 
     }]);
 });

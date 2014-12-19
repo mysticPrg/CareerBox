@@ -36,6 +36,11 @@ define([
                 // 속성 이름들 모두 가져오기
                 $scope.EditorData = EditorData;
                 $scope.$watch('EditorData.focusId',function(){
+                     var data = $scope.data;
+                    if(data.hasOwnProperty('itemType')){
+
+                    }
+
                     try {
                         if($scope.data.itemType === "image"){
                             // key의 첫글자가 I 인 것만 가져오기
