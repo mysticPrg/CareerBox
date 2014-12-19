@@ -12,7 +12,10 @@ define([
             templateUrl: require.toUrl('component/attribute/fillAttribute/template.html'),
             link: function ($scope, element, att) {
 
-                $scope.color = "#" + $scope.data.fill.color.R + $scope.data.fill.color.G + $scope.data.fill.color.B;
+                $scope.$watch("data.fill.color",function() {
+                    $scope.color = "#" + $scope.data.fill.color.R + $scope.data.fill.color.G + $scope.data.fill.color.B;
+
+                },true);
 
                 $scope.$watch("color",function() {
                     // 칼라를 바꾼다.

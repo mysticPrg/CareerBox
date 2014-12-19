@@ -43,15 +43,12 @@ define([
                 }
             }
             EditorData.end_zOrder--;
-            EditorData.start_zOrder++;
 
             EditorData.focusId = 'canvas-content';
 
             if (window.location.href.split("#/")[1] == 'TemplateEditor') {
-//                EditorData.focusId = EditorData.template._id;
                 $scope.$emit('deleteItem', id);
             } else {
-//                EditorData.focusId = EditorData.paperId;
                 $scope.$emit('deleteArticle', id);
             }
 
@@ -93,7 +90,7 @@ define([
             };
 
             // 자신을 start로
-            $scope.attributeInformation.zOrder = EditorData.start_zOrder;
+            $scope.attributeInformation.zOrder = EditorData.start_zOrder+1;
 
         };
 

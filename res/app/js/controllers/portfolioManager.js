@@ -11,12 +11,11 @@ define([
     'classes/Info/PersonalInfo'
 ], function ($, ng, app, EditorData, PersonalInfo) {
     app.controller('portfolioManager', ['$scope', '$http', '$window', function ($scope, $http, $window) {
-        $scope.userInfo = '';
-
         $scope.initialize = function (){
             $http.get('http://210.118.74.166:8123/info/personal', {withCredentials: true}).
                 success(function(data, status, headers, config) {
                     $scope.userInfo = data.result;
+                    $('#header-title').fadeIn('slow');
                 });
         }
 
