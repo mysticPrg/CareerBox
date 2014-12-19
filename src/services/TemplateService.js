@@ -24,6 +24,7 @@ module.exports.set = function (server) {
     server.delete('/template', deleteService);
     server.get('/template', getTemplateListService);
     server.get('/template/:infoType', getTemplateListByInfoTypeService);
+    server.get('/template/preview/:_id', getTemplateByIdService);
     server.get('/template/check/:_id', getTemplateUsingCheckService);
 };
 
@@ -160,6 +161,25 @@ function getTemplateListByInfoTypeService(req, res) {
     });
 }
 
+function getTemplateByIdService(req, res) {
+    ServiceUtil.setResHeader(res);
+    if (!checkArgForIdOnParams(req, res)) {
+        return;
+    }
+
+    var _id = req.params._id;
+
+    TemplateDB.getById(_id, function (err, finded) {
+
+        if (!finded) {
+            ServiceUtil.setResHeader(res);
+            ServiceUtil.sendResult(err, res, null, '003');
+            return;
+        }
+
+        ServiceUtil.sendResult(err, res, finded);
+    });
+}
 
 function getTemplateUsingCheckService(req, res) {
     var _template_id = req.params._id;

@@ -226,7 +226,7 @@ function downloadIsolateThumbnailImageService(req, res) {
     ImageDB.read(req.params._id, function (err, finded) {
         if (!finded) {
             ServiceUtil.setResHeader(res);
-            ServiceUtil.sendResult(err, res, null, '202');
+            ServiceUtil.sendResult(err, res, null, '003');
             return;
         }
 
@@ -244,7 +244,7 @@ function downloadProfileThumbnailImageService(req, res) {
     ImageDB.read(req.params._id, function (err, finded) {
         if (!finded) {
             ServiceUtil.setResHeader(res);
-            ServiceUtil.sendResult(err, res, null, '202');
+            ServiceUtil.sendResult(err, res, null, '003');
             return;
         }
 
@@ -262,7 +262,7 @@ function downloadSymbolThumbnailImageService(req, res) {
     ImageDB.read(req.params._id, function (err, finded) {
         if (!finded) {
             ServiceUtil.setResHeader(res);
-            ServiceUtil.sendResult(err, res, null, '202');
+            ServiceUtil.sendResult(err, res, null, '003');
             return;
         }
 
@@ -280,7 +280,7 @@ function downloadProfileMainImageService(req, res) {
     ImageDB.read(req.params._id, function (err, finded) {
         if (!finded) {
             ServiceUtil.setResHeader(res);
-            ServiceUtil.sendResult(err, res, null, '202');
+            ServiceUtil.sendResult(err, res, null, '003');
             return;
         }
 

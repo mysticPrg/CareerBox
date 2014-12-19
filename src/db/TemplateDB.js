@@ -31,6 +31,20 @@ function get(data, callback) {
     });
 }
 
+function getById(_id, callback) {
+    var template = new Template(data);
+
+    var templateCollection = require('../util/DBCollections').getInstance().collections.template;
+    templateCollection.findOne({
+        _id: new ObjectID(_id)
+    }, function (err, findTemplate) {
+        if (findTemplate) {
+            delete findTemplate._member_id;
+        }
+        callback(err, findTemplate);
+    });
+}
+
 function getList(_member_id, callback) {
     var templateCollection = require('../util/DBCollections').getInstance().collections.template;
 
@@ -112,6 +126,7 @@ function reset() {
 var exports = {
     create: create,
     get: get,
+    getById: getById,
     getList: getList,
     getListByInfoType: getListByInfoType,
     remove: remove,
