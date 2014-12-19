@@ -14,7 +14,6 @@ define([
 
                 $scope.$watch("data.fill.color",function() {
                     $scope.color = "#" + $scope.data.fill.color.R + $scope.data.fill.color.G + $scope.data.fill.color.B;
-
                 },true);
 
                 $scope.$watch("color",function() {

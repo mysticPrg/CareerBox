@@ -10,7 +10,7 @@ define(['classes/Structs/Color'], function (Color) {
 
     function Outline(props) {
         this.use = true;
-        this.color = Color.BLACK;
+        this.color = new Color('000000');
         this.weight = 1;
 
         if (props) {

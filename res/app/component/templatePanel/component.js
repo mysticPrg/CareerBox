@@ -28,14 +28,44 @@ define([
                 var item;
                 if (type === 'text') {
                     item = new Text();
+                    item.radius = 3;
+                    item.font.size = 15;
+                    item.size.width = 250;
+                    item.size.height = 100;
+                    item.outline.color.R = "d9";
+                    item.outline.color.G = "d9";
+                    item.outline.color.B = "d9";
+
                 } else if (type === 'image') {
                     item = new Image();
+                    item.size.width = 140;
+                    item.size.height = 180;
+                    item.outline.weight = 0;
+
                 } else if (type === 'line') {
                     item = new Line();
+                    item.outline.weight = 2;
+                    item.size.width = 250;
+
                 } else if (type === 'link') {
                     item = new Link();
+                    item.size.width = 100;
+                    item.size.height = 50;
+                    item.url = 'http://';
+                    item.name = '여기로 이동';
+                    item.outline.weight = 0;
+                    item.font.size = 15;
+
                 } else if (type === 'shape') {
                     item = new Shape();
+                    item.outline.weight = 3;
+                    item.fill.color.R = "f2";
+                    item.fill.color.G = "57";
+                    item.fill.color.B = "5a";
+
+                    item.outline.color.R = "e1";
+                    item.outline.color.G = "3b";
+                    item.outline.color.B = "3d";
                 }
 
                 item._id = $scope.childIndex++;
