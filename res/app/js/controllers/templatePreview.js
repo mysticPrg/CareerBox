@@ -29,12 +29,11 @@ define([
                 responseType: 'json',
                 withCredentials: true
             }).success(function (data) {
-                console.log(data.result);
-
                 EditorData.template = data.result;
-                console.log('>>' , EditorData.template);
                 $scope.template = EditorData.template;
                 loadTemplate();
+                $compile($('#canvas-content'))($scope);
+
             });
         });
 

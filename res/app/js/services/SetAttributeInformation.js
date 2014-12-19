@@ -33,7 +33,6 @@ define([
             if(window.location.href.split("partials/")[1].split('?')[0] == 'templatePreview.html'){
                 // 템플릿일 경우
                 if(EditorData.template._id == id || id == "canvas-content"){
-                    console.log('음...', EditorData.template.target);
                     return {
                         parentArray : EditorData,
                         attributeInformation : EditorData.template.target,

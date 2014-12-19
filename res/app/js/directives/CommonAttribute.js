@@ -79,8 +79,6 @@ define([
                 var info = SetAttributeInformation(att.id);
                 scope.attributeInformation = info.attributeInformation;
 
-                console.log('음???' , scope.attributeInformation);
-
                 scope.type = info.type;
 
                 if(scope.attributeInformation){
