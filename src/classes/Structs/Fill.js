@@ -10,7 +10,7 @@ define(['classes/Structs/Color'], function (Color) {
 
     function Fill(props) {
         this.use = true;
-        this.color = Color.WHITE;
+        this.color = new Color('FFFFFF');
 
         if (props) {
             this.use = props.use ? props.use : this.use;
