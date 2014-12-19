@@ -144,7 +144,7 @@ function getTemplateListService(req, res) {
     });
 }
 
-function getTemplateListService(req, res) {
+function getTemplateListByInfoTypeService(req, res) {
     ServiceUtil.setResHeader(res);
     if (!ServiceUtil.checkSession(req, res)) {
         return;

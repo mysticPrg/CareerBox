@@ -18,7 +18,6 @@ define([
         this.primitiveTypeEnum = PrimitiveTypeEnum.image;
 
         this.size = new Size();
-        this.thumbPath = '';
         this.thumbSize = new Size();
         this.fitSize = false;
 

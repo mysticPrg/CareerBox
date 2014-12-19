@@ -15,7 +15,6 @@ var fs = require('fs');
 var fileDir = __dirname + '/../../res/uploads/image';
 
 var isolateUploader = new Uploader({
-//    debug: true,
     validate: true,
     safeName: true,
     publicDir: __dirname + '/../../res',
