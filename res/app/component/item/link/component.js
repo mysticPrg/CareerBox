@@ -1,14 +1,15 @@
 define([
     'app',
     'jquery-ui',
-    'services/SetAttributeInformation'
+    'services/SetAttributeInformation',
+    'services/EditorData'
 ], function (app) {
     var vAlign = {
         top : '10%',
         middle : '50%',
         bottom : '90%'
     };
-    app.directive('link', ['SetAttributeInformation', function (SetAttributeInformation) {
+    app.directive('link', ['SetAttributeInformation', 'EditorData', '$window', function (SetAttributeInformation, EditorData, $window) {
         return {
             // A = attribute, E = Element, C = Class and M = HTML Comment
             restrict: 'A',
@@ -57,6 +58,16 @@ define([
                     }
                 });
 
+                scope.goToPreview = function () {
+                    // isOutURL 에 따라 분류
+                    if(scope.info.isOutURL){
+                        $window.open(scope.info.url);
+                    }
+                    else{
+                        var href = 'portfolioPreview.html?id=' + EditorData.portfolio._id +'&paper_id=' + scope.info.url;
+                        $window.open(href);
+                    }
+                };
 
             },
             templateUrl: require.toUrl('component/item/link/template.html')
