@@ -85,6 +85,8 @@ define([
                     // 로딩시 CSS 적용
                     if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
                         ApplyCommonItemAttribute.all(element, scope.attributeInformation);
+                    }else if(!(window.location.href.split("partials/")[1].split('?')[0] != 'templatePreview.html' && att.id == 'canvas-content')){
+                        ApplyCommonItemAttribute.all(element, scope.attributeInformation);
                     }
                     else {
                         ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
