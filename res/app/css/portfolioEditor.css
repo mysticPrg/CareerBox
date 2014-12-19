@@ -417,37 +417,37 @@ img {
 }
 
 /*속성창 input css*/
-.attrInput {
-    width: 35px;
-    height: 15px;
-    display: inline-block;
-}
+/*.attrInput {*/
+    /*width: 35px;*/
+    /*height: 15px;*/
+    /*display: inline-block;*/
+/*}*/
 
 /*pos, size 속성*/
-#posForm > li, #sizeForm > li {
-    width: 125px;
-    float: left;
-}
+/*#posForm > li, #sizeForm > li {*/
+    /*width: 125px;*/
+    /*float: left;*/
+/*}*/
 
 /*outline 속성*/
-#outlineForm ,#weightForm {
-    width: 125px;
-    float: left;
-    display: inline-block;
-}
+/*#outlineForm ,#weightForm {*/
+    /*width: 125px;*/
+    /*float: left;*/
+    /*display: inline-block;*/
+/*}*/
 
-#arrowForm > li {
-    margin-bottom: 25px;
-}
+/*#arrowForm > li {*/
+    /*margin-bottom: 25px;*/
+/*}*/
 
-#fontForm .fontElement {
+/*#fontForm .fontElement {*/
 
-    margin-bottom: 25px;
-}
+    /*margin-bottom: 25px;*/
+/*}*/
 
-#fontForm #fontOptionForm #fontFamilyInput {
-    width: 65px;
-}
+/*#fontForm #fontOptionForm #fontFamilyInput {*/
+    /*width: 65px;*/
+/*}*/
 
 
 /*editor article, item tab*/

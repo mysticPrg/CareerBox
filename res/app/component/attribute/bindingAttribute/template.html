@@ -2,8 +2,8 @@
     <li>
         <label for="useBtnForm">Binding :</label>
         <div id="useBtnForm" class="btn-group">
-            <label class="btn btn-primary" ng-model="data.isBinding" btn-radio=false ng-click="clear()">안함</label>
-            <label class="btn btn-primary" ng-model="data.isBinding" btn-radio=true>사용</label>
+            <label class="btn btn-default" ng-model="data.isBinding" btn-radio=false ng-click="clear()">안함</label>
+            <label class="btn btn-default" ng-model="data.isBinding" btn-radio=true>사용</label>
         </div>
     </li>
 
@@ -13,12 +13,9 @@
         <!--페이퍼 에디터 : 아티클 -->
 
         <!--템플릿 에디터 : 아티클 -->
-        <select ng-show="layoutType === 'template'" class="form-control" ng-model="category" ng-change="setCategory()" ng-options="category as category.title for category in infoCategory"></select>
+        <select ng-show="layoutType === 'template'" class="form-control" ng-model="category" ng-change="setCategory()" ng-options="category.title for (key, category) in infoCategory"></select>
 
         <!--템플릿 에디터 : 아이템 -->
         <select ng-show="layoutType === 'template_item'" class="form-control" ng-model="attributeName" ng-change="setAttributeName()" ng-options="value for (key, value) in attributeNames | filter:'핸드폰'"></select>
-
-
     </li>
-
 </ul>
