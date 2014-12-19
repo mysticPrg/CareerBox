@@ -35,6 +35,7 @@ define([
                     item.outline.color.R = "d9";
                     item.outline.color.G = "d9";
                     item.outline.color.B = "d9";
+                    item.value = 'Text';
 
                 } else if (type === 'image') {
                     item = new Image();
