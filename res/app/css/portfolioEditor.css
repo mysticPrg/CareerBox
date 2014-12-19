@@ -576,3 +576,14 @@ img {
     background-color: #47bdf8 !important;
 }
 
+
+/*rotate 핸들 아이콘*/
+.ui-rotatable-handle {
+    position: absolute;
+    top: 1px !important;
+    left: auto !important;
+    right: -23px !important;
+    background-image: url('../img/editor_img/rotate.png') !important;
+    height: 19px !important;
+}
+

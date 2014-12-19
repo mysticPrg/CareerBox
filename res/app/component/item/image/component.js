@@ -17,8 +17,6 @@ define([
 //                   'content': 'url(\"../img/noImage.png\")'
                 });
 
-
-
             },
 
         templateUrl: require.toUrl('component/item/image/template.html')

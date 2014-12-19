@@ -19,10 +19,12 @@ define([
         this.itemType = ItemType.link;
         this.name = '';
         this.url = 'about:blank';
+        this.isOutURL = true;
 
         if (props) {
             this.name = props.name ? props.name : this.name;
             this.url = props.url ? props.url : this.url;
+            this.isOutURL = props.isOutURL ? props.isOutURL : this.isOutURL;
         }
     };
 
