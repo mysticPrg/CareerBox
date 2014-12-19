@@ -22,8 +22,22 @@ var isolateUploader = new Uploader({
     uploadUrl: 'http://210.118.74.166:8123/image/',
     thumbnails: true,
     thumbToSubDir: true,
+    thumbSizes: [[100, 100]],
+    acceptFileTypes: /\.(gif|jpe?g|png)$/i,
+    uploadType: 'profile'
+});
+
+var profileImgUploader = new Uploader({
+    validate: true,
+    safeName: true,
+    publicDir: __dirname + '/../../res',
+    uploadDir: fileDir,
+    uploadUrl: 'http://210.118.74.166:8123/image/',
+    thumbnails: true,
+    thumbToSubDir: true,
     thumbSizes: [[200, 200]],
-    acceptFileTypes: /\.(gif|jpe?g|png)$/i
+    acceptFileTypes: /\.(gif|jpe?g|png)$/i,
+    uploadType: 'profile'
 });
 
 function checkArgForFiles(req, res) {
