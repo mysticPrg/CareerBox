@@ -36,11 +36,19 @@ function deleteFile(_id, callback) {
     imageCollection.remove({'_id': new ObjectID(_id)}, callback);
 }
 
+function reset() {
+    var imageCollection = require('../util/DBCollections').getInstance().collections.image;
+    imageCollection.remove({}, function() {
+        return;
+    });
+}
+
 var exports = {
     write: write,
     read: read,
     getList: getList,
-    deleteFile: deleteFile
+    deleteFile: deleteFile,
+    reset: reset
 };
 
 module.exports = exports;

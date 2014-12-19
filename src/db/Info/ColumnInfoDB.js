@@ -31,9 +31,17 @@ function read(_member_id, callback) {
     columnInfoCollection.findOne({'_member_id': _member_id}, callback);
 }
 
+function reset() {
+    var columnInfoCollection = require('../../util/DBCollections').getInstance().collections.columnInfo;
+    columnInfoCollection.remove({}, function() {
+        return;
+    });
+}
+
 var exports = {
     save: save,
-    read: read
+    read: read,
+    reset: reset
 };
 
 module.exports = exports;

@@ -161,6 +161,13 @@ function setIndex(_portfolio_id, _paper_id, callback) {
     });
 }
 
+function reset() {
+    var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
+    paperCollection.remove({}, function() {
+        return;
+    });
+}
+
 var exports = {
     create: create,
     get: get,
@@ -170,7 +177,8 @@ var exports = {
     update: update,
     refreshTempalteData: refreshTemplateData,
     removeTemplateData: removeTemplateData,
-    setIndex: setIndex
+    setIndex: setIndex,
+    reset: reset
 }
 
 module.exports = exports;

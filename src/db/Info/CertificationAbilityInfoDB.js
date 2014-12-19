@@ -31,10 +31,17 @@ function read(_member_id, callback) {
     certificationAbilityInfoCollection.findOne({'_member_id': _member_id}, callback);
 }
 
+function reset() {
+    var certificationAbilityInfoCollection = require('../../util/DBCollections').getInstance().collections.certificationAbilityInfo;
+    certificationAbilityInfoCollection.remove({}, function() {
+        return;
+    });
+}
 
 var exports = {
     save: save,
-    read: read
+    read: read,
+    reset: reset
 };
 
 module.exports = exports;

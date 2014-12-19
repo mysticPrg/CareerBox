@@ -49,12 +49,20 @@ function update(data, callback) {
     );
 }
 
+function reset() {
+    var memberCollection = require('../util/DBCollections').getInstance().collections.member;
+    memberCollection.remove({}, function() {
+        return;
+    });
+}
+
 var exports = {
     create: create,
     get: get,
     isExistEmail: isExistEmail,
     remove: remove,
-    update: update
+    update: update,
+    reset: reset
 };
 
 module.exports = exports;

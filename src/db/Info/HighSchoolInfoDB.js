@@ -31,10 +31,17 @@ function readList(_member_id, callback) {
     highSchoolInfoCollection.findOne({'_member_id': _member_id}, callback);
 }
 
+function reset() {
+    var highSchoolInfoCollection = require('../../util/DBCollections').getInstance().collections.highSchoolInfo;
+    highSchoolInfoCollection.remove({}, function() {
+        return;
+    });
+}
 
 var exports = {
     saveList: saveList,
-    readList: readList
+    readList: readList,
+    reset: reset
 };
 
 module.exports = exports;

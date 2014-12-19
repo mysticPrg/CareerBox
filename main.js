@@ -28,6 +28,8 @@ var GlobalActivityInfoService = require('./src/services/Info/GlobalActivityInfoS
 var ProjectInfoService = require('./src/services/Info/ProjectInfoService');
 var ColumnInfoService = require('./src/services/Info/ColumnInfoService');
 
+var ResetService = require('./src/services/ResetService');
+
 MemberService.set(server);
 PortfolioService.set(server);
 TemplateService.set(server);
@@ -50,6 +52,8 @@ LocalActivityInfoService.set(server);
 GlobalActivityInfoService.set(server);
 ProjectInfoService.set(server);
 ColumnInfoService.set(server);
+
+ResetService.set(server);
 
 server.start(8123);
 

@@ -73,12 +73,20 @@ function update(data, callback) {
     );
 }
 
+function reset() {
+    var portfolioCollection = require('../util/DBCollections').getInstance().collections.portfolio;
+    portfolioCollection.remove({}, function() {
+        return;
+    });
+}
+
 var exports = {
     create: create,
     get: get,
     getList: getList,
     remove: remove,
-    update: update
+    update: update,
+    reset: reset
 }
 
 module.exports = exports;

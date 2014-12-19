@@ -31,9 +31,17 @@ function read(_member_id, callback) {
     projectInfoCollection.findOne({'_member_id': _member_id}, callback);
 }
 
+function reset() {
+    var projectInfoCollection = require('../../util/DBCollections').getInstance().collections.projectInfo;
+    projectInfoCollection.remove({}, function() {
+        return;
+    });
+}
+
 var exports = {
     save: save,
-    read: read
+    read: read,
+    reset: reset
 };
 
 module.exports = exports;

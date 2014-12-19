@@ -102,6 +102,13 @@ function checkUsingTemplate(_id, callback) {
     });
 }
 
+function reset() {
+    var templateCollection = require('../util/DBCollections').getInstance().collections.template;
+    templateCollection.remove({}, function() {
+        return;
+    });
+}
+
 var exports = {
     create: create,
     get: get,
@@ -109,7 +116,8 @@ var exports = {
     getListByInfoType: getListByInfoType,
     remove: remove,
     update: update,
-    checkUsingTemplate: checkUsingTemplate
+    checkUsingTemplate: checkUsingTemplate,
+    reset: reset
 }
 
 module.exports = exports;

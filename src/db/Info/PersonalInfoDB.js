@@ -30,10 +30,17 @@ function read(_member_id, callback) {
     personalInfoCollection.findOne({'_member_id': _member_id}, callback);
 }
 
+function reset() {
+    var personalInfoCollection = require('../../util/DBCollections').getInstance().collections.personalInfo;
+    personalInfoCollection.remove({}, function() {
+        return;
+    });
+}
 
 var exports = {
     save: save,
-    read: read
+    read: read,
+    reset: reset
 };
 
 module.exports = exports;
