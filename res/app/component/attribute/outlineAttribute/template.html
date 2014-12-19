@@ -1,10 +1,10 @@
-<div class="clearfix">
-    <div id="outlineForm">
-        <label for="outlineInput">outline :</label>
-        <input id="outlineInput" kendo-color-picker ng-model="color" k-buttons="true" k-preview="true" k-input="true"/>
+<div id="outlineForm" class="clearfix">
+    <label for="outlineForm" class="outlineElement">테두리</label>
+    <div id="outlineInput" class="outlineElement">
+         <input kendo-color-picker ng-model="color" k-buttons="true" k-preview="true" k-input="true"/>
     </div>
-    <div id="weightForm">
-        <label for="weightInput">weight :</label>
+    <div id="weightForm" class="outlineElement">
         <input id="weightInput" class="attrInput form-control" ng-model="data.outline.weight"/>
+        <span>px</span>
     </div>
 </div>

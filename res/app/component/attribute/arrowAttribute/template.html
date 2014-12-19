@@ -1,18 +1,18 @@
 <ul id="arrowForm">
     <li>
-        <label for="useBtnForm">use :</label>
+        <label id="useBtnLabel" for="useBtnForm">화살표</label>
         <div id="useBtnForm" class="btn-group">
-            <label class="btn btn-primary" ng-model="data.arrow.use" btn-radio=false>없음</label>
-            <label class="btn btn-primary" ng-model="data.arrow.use" btn-radio=true>사용</label>
+            <label class="btn btn-default" ng-model="data.arrow.use" btn-radio=false>없음</label>
+            <label class="btn btn-default" ng-model="data.arrow.use" btn-radio=true>사용</label>
         </div>
     </li>
 
     <li ng-show="data.arrow.use == true">
-        <label for="dirBtnForm">direction :</label>
+        <label id="dirBtnLabel" for="dirBtnForm">방향</label>
         <div id="dirBtnForm" class="btn-group">
-            <label class="btn btn-primary" ng-model="data.arrow.direction" btn-radio="'start'">Start</label>
-            <label class="btn btn-primary" ng-model="data.arrow.direction" btn-radio="'end'">End</label>
-            <label class="btn btn-primary" ng-model="data.arrow.direction" btn-radio="'both'">Both</label>
+            <label class="btn btn-default" ng-model="data.arrow.direction" btn-radio="'start'">시작</label>
+            <label class="btn btn-default" ng-model="data.arrow.direction" btn-radio="'end'">끝</label>
+            <label class="btn btn-default" ng-model="data.arrow.direction" btn-radio="'both'">둘다</label>
         </div>
     </li>
 </ul>

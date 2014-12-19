@@ -108,8 +108,30 @@
                     <div is-index-attribute to="attributeInformation"></div>
                 </li>
 
+                <!--z-index 설정버튼-->
+                <div id="zIndexForm">
+                    <label for="zIndex">정렬</label>
+                    <div id="zIndex" ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
+                        <button class="btn btn-default"
+                                ng-click="goFront()">앞으로
+                        </button>
+
+                        <button class="btn btn-default"
+                                ng-click="goBack()">뒤로
+                        </button>
+
+                        <button class="btn btn-default"
+                                ng-click="goEnd()">맨앞으로
+                        </button>
+
+                        <button class="btn btn-default"
+                                ng-click="goFirst()">맨뒤로
+                        </button>
+                    </div>
+                </div>
+
                 <!--<li ng-if="attributeInformation.bindingType">-->
-                    <div binding-attribute to="attributeInformation" type="type"></div>
+                <div binding-attribute to="attributeInformation" type="type"></div>
                 <!--</li>-->
 
                 attributeInformation.bindingType : {{attributeInformation.bindingType}}
@@ -205,26 +227,7 @@
                     <!--</ANY>-->
                 <!--</li>-->
 
-                <!--z-index 설정버튼-->
-                <div ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
-                
-
-                    <button class="btn btn-default"
-                            ng-click="goFront()">앞으로
-                    </button>
-
-                    <button class="btn btn-default"
-                            ng-click="goBack()">뒤로
-                    </button>
-
-                    <button class="btn btn-default"
-                            ng-click="goEnd()">맨앞으로
-                    </button>
-
-                    <button class="btn btn-default"
-                            ng-click="goFirst()">맨뒤로
-                    </button>
-                </div>
+            
 
             </ul>
         </div>

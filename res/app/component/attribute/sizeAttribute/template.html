@@ -1,22 +1,27 @@
-<ul id="sizeForm" class="clearfix">
+<div id="sizeForm" class="clearfix">
     <ANY ng-switch="data.itemType">
 
         <ANY ng-switch-when="line">
-            <li>
-                <label for="sizeInputWidth">length :</label>
+            <div id="lineForm">
+                <label for="sizeInputWidth_line">길이</label>
                 <input type="text" class="attrInput form-control" id="sizeInputWidth_line" ng-model="data.size.width">
-            </li>
+                <span>px</span>
+            </div>
         </ANY>
-        <ANY ng-switch-default>
-            <li>
-                <label for="sizeInputWidth">width :</label>
-                <input type="text" class="attrInput form-control" id="sizeInputWidth" ng-model="data.size.width">
-            </li>
-            <li>
-                <label for="sizeInputHeight">height :</label>
-                <input type="text" class="attrInput form-control" id="sizeInputHeight" ng-model="data.size.height">
-            </li>
-        </ANY>
-    </ANY>
 
-</ul>
+        <ANY ng-switch-default>
+            <div id="sizeFillForm">
+                <label for="sizeFillForm" class="sizeElement">사이즈</label>
+                <div class="width sizeElement">
+                    <label for="sizeInputWidth">w</label>
+                    <input type="text" class="attrInput form-control" id="sizeInputWidth" ng-model="data.size.width">
+                </div>
+                <div class="height sizeElement">
+                    <label for="sizeInputHeight">h</label>
+                    <input type="text" class="attrInput form-control" id="sizeInputHeight" ng-model="data.size.height">
+                </div>
+            </div>
+        </ANY>
+
+    </ANY>
+</div>

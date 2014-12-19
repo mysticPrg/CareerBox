@@ -1,0 +1,195 @@
+/*속성창 input css*/
+.attrInput {
+    width: 35px;
+    height: 15px;
+    display: inline-block;
+}
+
+/*text_value*/
+#textInputWidth, #urlInput{
+    width: 250px;
+    box-sizing: border-box;
+}
+
+/*가로정렬*/
+.horizonAlignBtnForm #horizonAlignBtn {
+    margin-left: 10px;
+}
+
+.horizonAlignBtnForm #horizonAlignBtn .left, .center, .right {
+    width: 50px;
+    box-sizing: border-box;
+}
+
+/*세로정렬*/
+.verticalAlignBtnForm #verticalAlignBtn {
+    margin-left: 10px;
+}
+
+.verticalAlignBtnForm #verticalAlignBtn .top, .middle, .bottom {
+    width: 50px;
+    box-sizing: border-box;
+}
+
+/*폰트*/
+#fontForm #fontStyleForm > .fontElement {
+    float: left;
+}
+
+#fontForm #fontStyleForm #fontColorForm, #fontSizeForm {
+    margin-left: 14px;
+}
+
+#fontForm #fontStyleForm #fontSizeForm #fontSizeInput{
+    width: 25px;
+}
+
+#fontForm #fontOptionForm #fontFamilyInputLabel {
+    width: 57px;
+}
+
+#fontForm #fontOptionForm > .btn {
+    width: 34px;
+    box-sizing: border-box;
+}
+
+#fontForm #fontOptionForm > .btn-group {
+    margin-left: 5px;
+}
+
+#fontForm .fontElement {
+
+    margin-bottom: 25px;
+}
+
+#fontForm #fontOptionForm #fontFamilyInput {
+    width: 65px;
+    margin-left: 10px;
+}
+
+/*사이즈*/
+#sizeForm #sizeFillForm > label {
+    width: 57px;
+}
+
+#sizeForm #sizeFillForm .width, .height {
+    margin-left: 10px;
+}
+
+#sizeForm #sizeFillForm > .sizeElement {
+    float: left;
+}
+
+/*길이*/
+#lineForm > label {
+    width: 57px;
+}
+
+#lineForm #sizeInputWidth_line {
+    margin-left: 10px;
+}
+
+/*위치*/
+#posForm > label {
+    width: 57px;
+}
+
+#posForm > .posElement {
+    float: left;
+}
+
+#posForm .posX, .posY {
+    margin-left: 10px;
+}
+
+/*배경색*/
+#fillForm .fillElement {
+    float: left;
+}
+#fillForm > label {
+    width: 57px;
+}
+#fillForm #fillInputForm {
+    margin-left: 10px;
+}
+
+/*테두리*/
+#outlineForm .outlineElement {
+    float: left;
+
+}
+
+#outlineForm > label {
+    width: 57px;
+}
+
+#outlineForm #outlineInput{
+    margin-left: 10px;
+}
+
+#outlineForm #weightInput {
+    margin-left: 14px;
+    width: 25px;
+
+}
+
+/*투명도*/
+#alphaForm > label {
+    width: 57px;
+}
+
+#alphaForm #alphaInput {
+    margin-left: 10px;
+}
+
+/*z-Index*/
+#zIndexForm {
+    margin-bottom: 30px;
+}
+
+#zIndexForm #zIndex > .btn {
+    font-size: 12px;
+    width: 120px;
+    box-sizing: border-box;
+    margin: 0 2px 5px 0;
+}
+
+/*화살표*/
+#useBtnLabel #useBtnForm > .btn, #dirBtnForm > .btn {
+    width: 25px;
+}
+
+ #useBtnLabel, #dirBtnLabel{
+    width: 57px;
+}
+
+#arrowForm #useBtnForm, #dirBtnForm {
+    margin-left: 10px;
+}
+
+/*도형타입*/
+#shapeTypeForm > label {
+    width: 57px;
+}
+
+#shapeTypeForm #shapeTypeBtn {
+    margin-left: 10px;
+}
+
+
+/*페이퍼 타이틀*/
+#titleForm #titleInputForm {
+    width: 250px;
+    box-sizing: border-box;
+}
+/*outline 속성*/
+/*#outlineForm ,#weightForm {*/
+    /*width: 125px;*/
+    /*float: left;*/
+    /*display: inline-block;*/
+/*}*/
+
+#arrowForm > li {
+    margin-bottom: 25px;
+}
+
