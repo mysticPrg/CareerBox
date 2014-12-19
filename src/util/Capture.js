@@ -62,7 +62,7 @@ module.exports = function capture(target, closerCallback) {
         },
         function (callback) {
             var thumbnail = new Thumbnail(screenShotPath, screenShotPath + 'thumb/');
-            thumbnail.ensureThumbnail(target._id + '.png', thumbWidth, function () {
+            thumbnail.ensureThumbnail(target._id + '.png', thumbWidth, null, function () {
                 callback();
             });
         },

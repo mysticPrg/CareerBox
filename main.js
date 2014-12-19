@@ -59,8 +59,9 @@ server.start(8123);
 
 /**/
 
-/*
 
+
+/*
 var genID = require('./src/util/genID');
 
 var requirejs = require('./src/require.config');
@@ -81,33 +82,30 @@ var Outline = requirejs('classes/Structs/Outline');
 
 var capture = require('./src/util/Capture');
 
-var p = new Paper({
-    _id: genID()
-});
-
 var a = new Article({
    _id: genID(),
-    size: new Size({width: 600, height: 600}),
+    size: new Size({width: 500, height: 300}),
     rotate: 30
 });
+a.fill.color = new Color('FF0000');
+a.radius = 30;
 
 a.childArr.push(new Text({
     _id: genID(),
-    size: new Size({width: 100, height: 200}),
+    size: new Size({width: 100, height: 50}),
     pos: new Position({x: 10, y: 20}),
-    value: 'text1'
+    value: 'text1',
+    rotate: 30
 }));
 
 a.childArr.push(new Text({
     _id: genID(),
-    size: new Size({width: 100, height: 200}),
-    pos: new Position({x: 300, y: 300}),
+    size: new Size({width: 100, height: 60}),
+    pos: new Position({x: 100, y: 100}),
     value: 'text2'
 }));
 
-p.childArr.push(a);
-
-capture(p, function() {
+capture(a, function() {
     console.log('Capure Complete!');
 });
 
