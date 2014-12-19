@@ -79,15 +79,15 @@
                     <div outline-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.radius || attributeInformation.radius===0">
+                <li ng-if="attributeInformation.radius || attributeInformation.radius==='' || attributeInformation.radius===0">
                     <div radius-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.alpha || attributeInformation.alpha===0 ">
+                <li ng-if="attributeInformation.alpha || attributeInformation.alpha==='' || attributeInformation.alpha===0 ">
                     <div alpha-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.rotate || attributeInformation.rotate===0">
+                <li ng-if="attributeInformation.rotate || attributeInformation.rotate==='' || attributeInformation.rotate===0">
                     <div rotate-attribute to="attributeInformation"></div>
                 </li>
 
@@ -132,8 +132,6 @@
                 <!--<li ng-if="attributeInformation.bindingType">-->
                 <div binding-attribute to="attributeInformation" type="type"></div>
                 <!--</li>-->
-
-                attributeInformation.bindingType : {{attributeInformation.bindingType}}
 
             </ul>
         </div>
