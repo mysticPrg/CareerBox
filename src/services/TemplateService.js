@@ -23,6 +23,7 @@ module.exports.set = function (server) {
     server.post('/template', createOrUpdateService);
     server.delete('/template', deleteService);
     server.get('/template', getTemplateListService);
+    server.get('/template/:infoType', getTemplateListByInfoTypeService);
     server.get('/template/check/:_id', getTemplateUsingCheckService);
 };
 
@@ -54,6 +55,20 @@ function checkArgForId(req, res) {
 
 function checkArgForIdOnParams(req, res) {
     var _paper_id = req.params._id;
+    if (!_paper_id || !ObjectID.isValid(_paper_id)) {
+
+        var result = new Result(null);
+        result.setCode('001');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function checkArgForInfoTypeOnParams(req, res) {
+    var _paper_id = req.params.infoType;
     if (!_paper_id || !ObjectID.isValid(_paper_id)) {
 
         var result = new Result(null);
@@ -128,6 +143,23 @@ function getTemplateListService(req, res) {
         ServiceUtil.sendResult(err, res, list);
     });
 }
+
+function getTemplateListService(req, res) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
+        return;
+    }
+    if (!checkArgForInfoTypeOnParams(req, res)) {
+        return;
+    }
+
+    var infoType = req.params.infoType;
+
+    TemplateDB.getListByInfoType(req.session._id, infoType, function (err, list) {
+        ServiceUtil.sendResult(err, res, list);
+    });
+}
+
 
 function getTemplateUsingCheckService(req, res) {
     var _template_id = req.params._id;
