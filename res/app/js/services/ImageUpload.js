@@ -2,12 +2,12 @@
  * Created by JEONGBORAM-PC-W1 on 2014-12-20.
  */
 define(['app', 'services/serverURL'], function (app) {
-    app.factory('profileImageUpload', ['serverURL', function (serverURL) {
-        return function ($upload, files, progressCallBack, successCallBack) {
+    app.factory('ImageUpload', ['serverURL', function (serverURL) {
+        return function ($upload, files, type, progressCallBack, successCallBack) {
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 $upload.upload({
-                    url: serverURL + '/image/profile',
+                    url: serverURL + '/image/'+type,
                     method: 'POST',
                     withCredentials: true,
                     file: file

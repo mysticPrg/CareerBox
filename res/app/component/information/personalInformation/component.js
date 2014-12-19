@@ -6,9 +6,9 @@ define([
     'services/InformationData',
     'classes/Info/PersonalInfo',
     'angular-upload',
-    'services/profileImageUpload'
+    'services/ImageUpload'
 ], function (app, InformationData) {
-    app.controller('personalInformationController', ['$scope', '$upload', 'profileImageUpload', function ($scope, $upload, profileImageUpload) {
+    app.controller('personalInformationController', ['$scope', '$upload', 'ImageUpload', function ($scope, $upload, ImageUpload) {
         $scope.InformationData = InformationData;
         $scope.progress = 0;
 
@@ -19,11 +19,11 @@ define([
         $scope.onFileSelectProfileImage = function ($files) {
             $('#personal_picture_progressbar').fadeIn('slow');
 
-            profileImageUpload($upload, $files, function(evt){
+            ImageUpload($upload, $files, 'profile', function (evt) {
                 $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-            },function(data){
+            }, function (data) {
                 $scope.personalInfo.I_picture = data.result;
-                $('#personal_picture').attr('src', 'http://210.118.74.166:8123/image/profile/thumb/'+data.result._id);
+                $('#personal_picture').attr('src', 'http://210.118.74.166:8123/image/profile/thumb/' + data.result._id);
             });
         }
 
