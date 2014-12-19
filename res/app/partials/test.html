@@ -5,10 +5,11 @@
     <title></title>
 </head>
 <body ng-controller="testController">
+TYPE : {{type}}
 <select class="form-control" ng-model="category" ng-options="category as category.title for category in infoCategory">
 </select>
 
-<select class="form-control" ng-model="type" ng-change="test()" ng-options="type as type for type in types">
+<select class="form-control" ng-model="type" ng-change="test()" ng-options="key for (key, value) in types">
 </select>
 
 <ul>

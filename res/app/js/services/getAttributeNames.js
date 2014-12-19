@@ -21,17 +21,16 @@ define([
     'classes/Info/ColumnInfoItem'  // 칼럼
 ], function (app, InfoType, PersonalInfo, AdditionalInfo, HighSchoolInfoItem, UnivSchoolInfoItem, WorkingInfoItem, CertificationAbilityInfoItem, ProficiencyInfoItem, ComputerAbilityInfoItem,
              PaperAbilityInfoItem, ScholarshipInfoItem, AwardInfoItem, LocalActivityInfoItem, GlobalActivityInfoItem, ProjectInfoItem, ColumnInfoItem) {
-    app.factory('getNames', function () {
+    app.factory('getAttributeNames', function () {
         return function (category) {
             var result = {};
             var item = getItem(category);
 
             for(var key in item){
                 var AttributeName = item.getAttributeName(key);
-                result[key] = {
-                    'AttributeName' : AttributeName,
-                    '' : ''
-                };
+                if(AttributeName && AttributeName !== '0' && AttributeName !== 0) {
+                    result[key] = AttributeName;
+                }
             }
 
             return result;
