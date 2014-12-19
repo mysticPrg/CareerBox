@@ -3,10 +3,11 @@ define([
     'app',
     'classes/Enums/InfoCategory',
     'services/getAttributeNames',
-    'services/EditorData'
+    'services/EditorData',
+    'services/getAvailableAttribute'
 ], function (app, InfoCategory) {
 
-    app.directive('bindingAttribute', function (getAttributeNames, EditorData) {
+    app.directive('bindingAttribute', function (getAttributeNames, EditorData, getAvailableAttribute) {
         return {
             restrict: 'A',
             scope: {
@@ -25,6 +26,7 @@ define([
                     $scope.data.bindingType = $scope.category;
                 };
 
+                // bindingType 비우기
                 $scope.clear = function() {
                     $scope.data.bindingType = '';
                 };
@@ -32,16 +34,26 @@ define([
                 // 속성 이름들 모두 가져오기
                 $scope.EditorData = EditorData;
                 $scope.$watch('EditorData.focusId',function(){
-                    $scope.attributeNames = getAttributeNames(EditorData.template.target.bindingType.infoType);    // 상위 아티클의 바인딩타입이 들어가야함.
+                    try {
+                        if($scope.data.itemType === "image"){
+                            // key의 첫글자가 I 인 것만 가져오기
+                            $scope.attributeNames = getAvailableAttribute(EditorData.template.target.bindingType.infoType, 'I');
+
+                        } else if($scope.data.itemType === "link"){
+                            // key의 첫글자가 F 인 것만 가져오기
+                            $scope.attributeNames = getAvailableAttribute(EditorData.template.target.bindingType.infoType, 'F');
+
+                        } else if($scope.data.itemType === "text"){
+                            // key의 첫글자가 I,F 인 것빼고 가져오기
+                            $scope.attributeNames = getAvailableAttribute(EditorData.template.target.bindingType.infoType, '-I -F');
+                        }
+                    } catch(exception){} // 아이템이 아닌 경우
                 },true);
 
+                // 아이템에 속성이름을 매칭
                 $scope.setAttributeName = function() {
-                    // 아이템에 속성이름을 매칭
                     for(var key in $scope.attributeNames){
                         if($scope.attributeNames[key] == $scope.attributeName){
-//                            console.log('key', key)
-//                            console.log('EditorData.template.target.bindingType', EditorData.template.target.bindingType)
-
                             $scope.data.bindingType = EditorData.template.target.bindingType[key];
                         }
                     }

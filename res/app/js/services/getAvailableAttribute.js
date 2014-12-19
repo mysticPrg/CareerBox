@@ -23,14 +23,28 @@ define([
              PaperAbilityInfoItem, ScholarshipInfoItem, AwardInfoItem, LocalActivityInfoItem, GlobalActivityInfoItem, ProjectInfoItem, ColumnInfoItem) {
     app.factory('getAvailableAttribute', function () {
         return function (category, infoType) {
+
             var result = {};
             var item = getItem(category);
             console.log(item);
 
+            // I F 빼고 가져오기
+            if(infoType == '-I -F'){
+                for(var key in item){
+                    if(key.split('_')[0] !== 'I' && key.split('_')[0] !== 'F'){
+                        var AttributeName = item.getAttributeName(key);
+                        if(AttributeName && AttributeName !== '0' && AttributeName !== 0)
+                            result[key] = AttributeName;
+                    }
+                }
+                return result;
+            }
+
             for(var key in item){
                 if(key.split('_')[0] === infoType){
-                    var name = item.getAttributeName(key);
-                    result[key] = name;
+                    var AttributeName = item.getAttributeName(key);
+                    if(AttributeName && AttributeName !== '0' && AttributeName !== 0)
+                        result[key] = AttributeName;
                 }
             }
 
