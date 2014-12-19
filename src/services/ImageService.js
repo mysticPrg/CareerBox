@@ -22,9 +22,11 @@ var isolateUploader = new Uploader({
     uploadUrl: 'http://210.118.74.166:8123/image/',
     thumbnails: true,
     thumbToSubDir: true,
-    thumbSizes: [[100, 100]],
-    acceptFileTypes: /\.(gif|jpe?g|png)$/i,
-    uploadType: 'profile'//
+    thumbSizes: [
+        [200, 200]
+    ],
+    acceptFileTypes: /\.(jpe?g|png)$/i,
+    uploadType: 'isolate'
 });
 
 var profileImgUploader = new Uploader({
@@ -35,26 +37,30 @@ var profileImgUploader = new Uploader({
     uploadUrl: 'http://210.118.74.166:8123/image/',
     thumbnails: true,
     thumbToSubDir: true,
-    thumbSizes: [[200, 200]],
-    acceptFileTypes: /\.(gif|jpe?g|png)$/i,
+    thumbSizes: [
+        [120, 160]
+    ],
+    acceptFileTypes: /\.(jpe?g|png)$/i,
     uploadType: 'profile'
+});
+
+var symbolImgUploader = new Uploader({
+    validate: true,
+    safeName: true,
+    publicDir: __dirname + '/../../res',
+    uploadDir: fileDir,
+    uploadUrl: 'http://210.118.74.166:8123/image/',
+    thumbnails: true,
+    thumbToSubDir: true,
+    thumbSizes: [
+        [500]
+    ],
+    acceptFileTypes: /\.(jpe?g|png)$/i,
+    uploadType: 'symbol'
 });
 
 function checkArgForFiles(req, res) {
     if (!req.files) {
-
-        var result = new Result(null);
-        result.setCode('001');
-        res.end(result.toString());
-
-        return false;
-    }
-
-    return true;
-}
-
-function checkArgForIsBinding(req, res) {
-    if ( req.body.isBinding === null || req.body.isBinding === undefined ) {
 
         var result = new Result(null);
         result.setCode('001');
@@ -107,15 +113,15 @@ function checkArgForFileType(data, res) {
 
 function uploadIsolateImageService(req, res) {
 
-    isolateUploader.uploadFile(req, function (data) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
+        return;
+    }
+    if (!checkArgForFiles(req, res)) {
+        return;
+    }
 
-        ServiceUtil.setResHeader(res);
-        if (!ServiceUtil.checkSession(req, res)) {
-            return;
-        }
-        if (!checkArgForFiles(req, res)) {
-            return;
-        }
+    isolateUploader.uploadFile(req, function (data) {
         if (!checkArgForFileType(data, res)) {
             return;
         }
@@ -129,19 +135,81 @@ function uploadIsolateImageService(req, res) {
             size: data[0].imageSize
         };
 
-        ImageDB.write(fileData, function(err, writed) {
+        ImageDB.write(fileData, function (err, writed) {
             ServiceUtil.sendResult(err, res, writed[0]);
             delete req.files;
         });
     });
 }
 
-function downloadIsolateImageService(req, res) {
+function uploadProfileImageService(req, res) {
+
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
+        return;
+    }
+    if (!checkArgForFiles(req, res)) {
+        return;
+    }
+
+    profileImgUploader.uploadFile(req, function (data) {
+        if (!checkArgForFileType(data, res)) {
+            return;
+        }
+
+        var fileData = {
+            originalName: data[0].originalName,
+            _member_id: req.session._id,
+            name: data[0].name,
+            filesize: data[0].size,
+            isBinding: true,
+            size: data[0].imageSize
+        };
+
+        ImageDB.write(fileData, function (err, writed) {
+            ServiceUtil.sendResult(err, res, writed[0]);
+            delete req.files;
+        });
+    });
+}
+
+function uploadSymbolImageService(req, res) {
+
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
+        return;
+    }
+    if (!checkArgForFiles(req, res)) {
+        return;
+    }
+
+    symbolImgUploader.uploadFile(req, function (data) {
+        if (!checkArgForFileType(data, res)) {
+            return;
+        }
+
+        var fileData = {
+            originalName: data[0].originalName,
+            _member_id: req.session._id,
+            name: data[0].name,
+            filesize: data[0].size,
+            isBinding: true,
+            size: data[0].imageSize
+        };
+
+        ImageDB.write(fileData, function (err, writed) {
+            ServiceUtil.sendResult(err, res, writed[0]);
+            delete req.files;
+        });
+    });
+}
+
+function downloadImageService(req, res) {
     if (!checkArgForIdOnParams(req, res)) {
         return;
     }
 
-    ImageDB.read(req.params._id, function(err, finded) {
+    ImageDB.read(req.params._id, function (err, finded) {
 
         var filepath = fileDir + '/' + finded.name;
 
@@ -154,9 +222,35 @@ function downloadIsolateThumbnailImageService(req, res) {
         return;
     }
 
-    ImageDB.read(req.params._id, function(err, finded) {
+    ImageDB.read(req.params._id, function (err, finded) {
 
         var filepath = fileDir + '/200x200/' + finded.name;
+
+        res.download(filepath, finded.originalName);
+    });
+}
+
+function downloadProfileThumbnailImageService(req, res) {
+    if (!checkArgForIdOnParams(req, res)) {
+        return;
+    }
+
+    ImageDB.read(req.params._id, function (err, finded) {
+
+        var filepath = fileDir + '/120x160/' + finded.name;
+
+        res.download(filepath, finded.originalName);
+    });
+}
+
+function downloadSymbolThumbnailImageService(req, res) {
+    if (!checkArgForIdOnParams(req, res)) {
+        return;
+    }
+
+    ImageDB.read(req.params._id, function (err, finded) {
+
+        var filepath = fileDir + '/500x500/' + finded.name;
 
         res.download(filepath, finded.originalName);
     });
@@ -168,7 +262,7 @@ function getListService(req, res) {
         return;
     }
 
-    ImageDB.getList(req.session._id, function(err, findedArr) {
+    ImageDB.getList(req.session._id, function (err, findedArr) {
         ServiceUtil.sendResult(err, res, findedArr);
     });
 }
@@ -184,8 +278,8 @@ function deleteService(req, res) {
 
     var _id = req.body._id;
 
-    ImageDB.read(_id, function(err, finded) {
-        ImageDB.deleteFile(req.body._id, function(err2) {
+    ImageDB.read(_id, function (err, finded) {
+        ImageDB.deleteFile(req.body._id, function (err2) {
 
             var filepath = fileDir + '/' + finded.name;
             fs.unlinkSync(filepath);
@@ -199,8 +293,14 @@ function deleteService(req, res) {
 
 module.exports.set = function (server) {
     server.post('/image', multipart, uploadIsolateImageService);
-    server.get('/image/:_id', downloadIsolateImageService);
+    server.get('/image/:_id', downloadImageService);
     server.get('/image/thumb/:_id', downloadIsolateThumbnailImageService);
     server.get('/image', getListService);
     server.delete('/image', deleteService);
+
+    server.post('/image/profile', multipart, uploadProfileImageService);
+    server.get('/image/profile/thumb/:_id', downloadProfileThumbnailImageService);
+
+    server.post('/image/symbol', multipart, uploadSymbolImageService);
+    server.get('/image/symbol/thumb/:_id', downloadSymbolThumbnailImageService);
 };
