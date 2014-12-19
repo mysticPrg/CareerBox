@@ -17,7 +17,6 @@ define([
                 if(resultArray[0].data.result !== null){
                     InformationData.personalInfo = resultArray[0].data.result;
                     InformationData.personalInfo.title = '기본정보';
-                    console.log(resultArray[0].data.result);
                 }
                 if(resultArray[1].data.result !== null)
 
