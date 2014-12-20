@@ -7,12 +7,13 @@ define([
     'angular-upload',
     'twitter-bootstrap',
     'kendo',
+    'ngGrid',
     'angular-bootstrap',
-    'facebook',
+    'facebook'
 ], function (ng) {
     'use strict';
 
-    var app = ng.module('myApp', ['kendo.directives', 'ui.bootstrap', 'facebook', 'ngRoute', 'angularFileUpload']);
+    var app = ng.module('myApp', ['kendo.directives', 'ngGrid', 'ui.bootstrap', 'facebook', 'ngRoute', 'angularFileUpload']);
 
     app.config(function (FacebookProvider) {
         // Set your appId through the setAppId method or

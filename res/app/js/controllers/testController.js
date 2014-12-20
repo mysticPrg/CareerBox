@@ -13,11 +13,11 @@ define([
         $scope.category = '';
 
         $scope.myData = [{name: "Moroni", age: 50},
-            {name: "Tiancum", age: 43},
+            {name: "Teancum", age: 43},
             {name: "Jacob", age: 27},
             {name: "Nephi", age: 29},
             {name: "Enos", age: 34}];
-        $scope.gridOptions = { data: 'myData' };
+        $scope.myOptions = { data: 'myData' };
 
 //        $scope.types = ['string', 'number', 'boolean', 'file', 'image', 'term', 'date'];
         $scope.types = {

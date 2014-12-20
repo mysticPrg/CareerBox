@@ -15,7 +15,7 @@ require.config({
         'domReady': '../libs/require/domReady',
         'twitter-bootstrap': '../libs/bootstrap/bootstrap.min',
         'kendo': '../libs/kendo/js/kendo.custom',
-        'ngGrid' : '../libs/ngGrid/ng-grid.min',
+        'ngGrid' : '../libs/ngGrid/ng-grid',
         'facebook': '../libs/facebook/angular-facebook',
         'rotatable': '../libs/jquery/rotatable/jquery.ui.rotatable.min',
         'component': '../component',
