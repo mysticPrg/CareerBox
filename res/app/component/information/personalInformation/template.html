@@ -83,8 +83,14 @@
                 <img ng-src="http://210.118.74.166:8123/image/profile/thumb/{{personalInfo.I_picture._id}}" id="personal_picture">
             </div>
 
-            <input type="file" id="personal_picture_file" class="btn btn-default" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectProfileImage($files)"><br>
-            <div id="personal_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div><br>
+            <!--<input type="file" id="personal_picture_file" class="btn btn-default" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectProfileImage($files)">-->
+            <input type="text" id="personal_picture_file" class="fileInputText" readonly="readonly" ng-model = "fileName"/>
+            <div class="fileInputDiv">
+                <input type="button" class="btn btn-default" value="파일첨부" class="fileInputButton" />
+                <input type="file" class="fileInputHidden" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectProfileImage($files)"/>
+            </div>
+
+            <div id="personal_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="width: 180px; height: 8px; display: none;"></div><br>
         </div>
     </div>
 </form>

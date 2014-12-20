@@ -132,13 +132,62 @@ img {
 }
 
 
-/***개인정보***/
-/*이름*/
-#name .nameLabel {
-    padding-right: 3px;
-    width: 60px;
-    text-align: left;
+/*파일첨부*/
+.fileInputText {
+    /*float: left;*/
+    border-style: none;
+    display: inline-block;
+    text-align: center;
 }
 
+.fileInputDiv {
+    position: relative;
+    width: 100px;
+    height: 34px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.fileInputHidden {
+    font-size: 23px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    opacity: 0;
+}
+
+.fileInputButton {
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: #33bb00;
+    color: #fff;
+    border-style: solid;
+    cursor: pointer;
+}
+
+.fileInputHidden {
+    font-size: 45px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    opacity: 0;
+    cursor: pointer;
+
+    filter: alpha(opacity=0);
+    -ms-filter: "alpha(opacity=0)";
+    -khtml-opacity: 0;
+    -moz-opacity: 0;
+}
+
+.k-progress-status-wrap span {
+    visibility: hidden;
+}
+
+.k-progressbar .k-state-selected {
+    background-color: #e74f70 !important;
+    border-color: #e74f70 !important;
+}
 
 
