@@ -2,5 +2,5 @@
     <img ng-src="../img/noImage.png">
 </div>
 <div ng-if = "info.thumbnail">
-    <img ng-src="http://210.118.74.166:8123/image/thumb/{{info.thumbnail}}" id="image_picture">
+    <img ng-src="http://210.118.74.166:8123/image/{{info.thumbnail}}" id="image_picture" ng-style="info.size">
 </div>
