@@ -1,14 +1,15 @@
 
 define([
     'app',
-    'classes/Enums/InfoCategory',
+    'component/bindingArticleModal/component',
     'services/getAttributeNames',
     'services/EditorData',
     'services/InformationData',
     'services/getAvailableAttribute'
-], function (app, InfoCategory) {
+], function (app, bindingArticleModal) {
 
     app.directive('bindingAttribute', function (getAttributeNames, EditorData, getAvailableAttribute, InformationData) {
+
         return {
             restrict: 'A',
             scope: {
@@ -16,7 +17,7 @@ define([
                 layoutType : "=type"
             },
             templateUrl: require.toUrl('component/attribute/bindingAttribute/template.html'),
-            link: function ($scope, element, att) {
+            controller : function ($scope, $modal) {
 
                 $scope.infoCategory = InformationData;
                 $scope.category = '';
@@ -80,7 +81,12 @@ define([
                 };
 
                 $scope.articleBinging = function(infoType) {
-
+                    EditorData.infoType = infoType;
+                    var modalInstance = $modal.open(bindingArticleModal);
+                    modalInstance.result.then(function () {
+                        console.log('test');
+                    }, function () {
+                    });
                 }
 
             }
