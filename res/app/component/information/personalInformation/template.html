@@ -1,24 +1,24 @@
 <form class="form-horizontal" role="form">
     <div class="personalInfoForm form-group">
         <!--개인정보 입력-->
-        <div class="col-md-10">
+        <div class="col-md-9">
             <!--성명-->
-            <div class="form-group">
+            <div id="name" class="form-group">
                 <label class="col-md-2 control-label">이름</label>
                 <div class="col-md-10 clearfix">
                     <div class="form-group row">
-                        <span for="lbl_personal_name_kr" class="col-md-2 control-label">한글</span>
+                        <span for="lbl_personal_name_kr" class="col-md-2 control-label" style="padding-right: 3px; width: 60px; text-align: left">한글</span>
                         <div class="col-md-3" id="lbl_personal_name_kr" style="padding: 0 ; width: 100px;">
                             <input type="text" class="form-control"  placeholder="이름 (한글)" ng-model="personalInfo.S_name_kr">
                         </div>
 
-                        <span for="lbl_personal_name_en" class="col-md-2 control-label">한문</span>
+                        <span for="lbl_personal_name_en" class="col-md-2 control-label" style="padding-right: 3px; width: 60px; text-align: left">한문</span>
                         <div class="col-md-3" id="lbl_personal_name_en" style="padding: 0 ; width: 100px;">
                             <input type="text" class="form-control"  placeholder="이름 (한문)" ng-model="personalInfo.S_name_en">
                         </div>
 
-                        <span for="lbl_personal_name_ch" class="col-md-2 control-label">영문</span>
-                        <div class="col-md-3" id="lbl_personal_name_ch" style="padding: 0 ; width: 100px;">
+                        <span for="lbl_personal_name_ch" class="col-md-2 control-label" style="padding-right: 3px; width: 60px; text-align: left">영문</span>
+                        <div class="col-md-3" id="lbl_personal_name_ch" style="padding: 0 ; width: 150px;">
                             <input type="text" class="form-control"  placeholder="이름 (영문)" ng-model="personalInfo.S_name_ch">
                         </div>
                     </div>
@@ -75,7 +75,7 @@
         </div>
 
         <!--사진 첨부-->
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div ng-show = "!personalInfo.I_picture">
                 <img ng-src="../img/noImage.png">
             </div>

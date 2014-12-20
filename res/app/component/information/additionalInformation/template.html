@@ -1,9 +1,8 @@
 <form class="form-horizontal" role="form">
-
     <!--보훈대상-->
     <div class="form-group">
-        <label for="lbl_veteran" class="col-md-2 control-label">보훈대상</label>
-        <div class="col-md-3" id="lbl_veteran">
+        <label for="lbl_veteran" class="col-md-2 control-label" style="width: 109px">보훈대상</label>
+        <div class="col-md-4" id="lbl_veteran">
             <label><input type="radio" name="veteran" ng-model="additionalInfo.B_veteran" value="true">보훈대상</input></label>
             <label><input type="radio" name="veteran" ng-model="additionalInfo.B_veteran" value="false">보훈비대상</input></label>
         </div>
@@ -11,8 +10,8 @@
 
     <!--장애여부-->
     <div class="form-group">
-        <label for="lbl_disability" class="col-md-2 control-label">장애여부</label>
-        <div class="col-md-3" id="lbl_disability">
+        <label for="lbl_disability" class="col-md-2 control-label" style="width: 109px">장애여부</label>
+        <div class="col-md-4" id="lbl_disability">
             <label><input type="radio" name="disability" ng-model="additionalInfo.B_disability" value="true">장애인</input></label>
             <label><input type="radio" name="disability" ng-model="additionalInfo.B_disability" value="false">비장애인</input></label>
         </div>
@@ -20,7 +19,7 @@
 
     <!--병역-->
     <div class="form-group row">
-        <label for="lbl_militery_category" class="col-md-2 control-label">병역사항</label>
+        <label for="lbl_militery_category" class="col-md-2 control-label" style="width: 109px">병역사항</label>
         <div class="col-md-4" id="lbl_militery_category">
             <label><input type="radio" name="militery_category" ng-model="additionalInfo.S_militaryService_category" value="해당없음">해당없음</input></label>
             <label><input type="radio" name="militery_category" ng-model="additionalInfo.S_militaryService_category" value="필">필</input></label>
@@ -29,7 +28,7 @@
             <label><input type="radio" name="militery_category" ng-model="additionalInfo.S_militaryService_category" value="복무중">복무중</input></label>
         </div>
 
-        <label for="lbl_militery_term" class="col-md-2 control-label">복무기간</label>
+        <label for="lbl_militery_term" class="col-md-2 control-label" style="width: 109px">복무기간</label>
         <div class="col-md-2" id="lbl_militery_term">
             <button class="k-button" ng-click="win_militery_term_start.center(); win_militery_term_start.open();">{{additionalInfo.T_militaryService_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_militery_term_end.center(); win_militery_term_end.open();">{{additionalInfo.T_militaryService_term.end | date:"yyyy년 MM월 dd일"}}</button>
         </div>
@@ -43,7 +42,7 @@
 
     <!--종교-->
     <div class="form-group">
-        <label for="lbl_religion" class="col-md-2 control-label">종교</label>
+        <label for="lbl_religion" class="col-md-2 control-label" style="width: 109px">종교</label>
         <div class="col-md-4" id="lbl_religion">
             <label><input type="radio" name="religion" ng-model="additionalInfo.S_religion" value="무교">무교</input></label>
             <label><input type="radio" name="religion" ng-model="additionalInfo.S_religion" value="기독교">기독교</input></label>
@@ -55,13 +54,13 @@
 
     <!--신체 : 신장, 몸무게-->
     <div class="form-group row">
-        <label for="lbl_physical_tall" class="col-md-2 control-label">신장</label>
+        <label for="lbl_physical_tall" class="col-md-2 control-label" style="width: 109px">신장</label>
         <div class="col-md-2" id="lbl_physical_tall">
             <input type="text" class="form-control"  placeholder="신장" ng-model="additionalInfo.N_physical_tall">
         </div>
         <div class="col-md-1">cm</div>
 
-        <label for="lbl_physical_weight" class="col-md-1 control-label">몸무게</label>
+        <label for="lbl_physical_weight" class="col-md-1 control-label" style="width: 109px">몸무게</label>
         <div class="col-md-2" id="lbl_physical_weight">
             <input type="text" class="form-control"  placeholder="몸무게" ng-model="additionalInfo.N_physical_weight">
         </div>
@@ -70,12 +69,12 @@
 
     <!--혈액형, 시력-->
     <div class="form-group row">
-        <label for="lbl_physical_blood" class="col-md-2 control-label">혈액형</label>
+        <label for="lbl_physical_blood" class="col-md-2 control-label" style="width: 109px">혈액형</label>
         <div class="col-md-2" id="lbl_physical_blood">
             <input type="text" class="form-control"  placeholder="혈액형" ng-model="additionalInfo.N_physical_blood">
         </div>
 
-        <label for="lbl_physical_sight" class="col-md-2 control-label">시력</label>
+        <label for="lbl_physical_sight" class="col-md-2 control-label" style="width: 109px">시력</label>
         <div class="col-md-2" id="lbl_physical_sight">
             <input type="text" class="form-control"  placeholder="좌안" ng-model="additionalInfo.N_physical_sight_left">
         </div>
@@ -87,12 +86,12 @@
 
     <!--취미, 특기-->
     <div class="form-group row">
-        <label for="lbl_favorite" class="col-md-2 control-label">취미</label>
+        <label for="lbl_favorite" class="col-md-2 control-label" style="width: 109px">취미</label>
         <div class="col-md-3" id="lbl_favorite">
             <input type="text" class="form-control"  placeholder="취미" ng-model="additionalInfo.S_favorite">
         </div>
 
-        <label for="lbl_forte" class="col-md-1 control-label">특기</label>
+        <label for="lbl_forte" class="col-md-1 control-label" style="width: 109px">특기</label>
         <div class="col-md-3" id="lbl_forte">
             <input type="text" class="form-control"  placeholder="특기" ng-model="additionalInfo.S_skill">
         </div>
@@ -100,10 +99,9 @@
 
     <!--존경인물-->
     <div class="form-group">
-        <label for="lbl_respect" class="col-md-2 control-label">존경인물</label>
+        <label for="lbl_respect" class="col-md-2 control-label" style="width: 109px">존경인물</label>
         <div class="col-md-3" id="lbl_respect">
             <input type="text" class="form-control"  placeholder="존경인물" ng-model="additionalInfo.S_respect">
         </div>
     </div>
-
 </form>
