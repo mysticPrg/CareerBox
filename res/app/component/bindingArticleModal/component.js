@@ -7,8 +7,15 @@ define([
 ], function (app) {
     app.controller('bindingArticleModalController', ['$scope', '$http', '$modalInstance', 'EditorData', 'getInformationByType', 'getInformationItem',
         function ($scope, $http, $modalInstance, EditorData, getInformationByType, getInformationItem) {
-            $scope.myData;
-            $scope.myOptions = { data: 'myData' };
+            $scope.informationData;
+            $scope.selectedItems = [];
+            $scope.informationDataOptions = {
+                data: 'informationData',
+                selectedItems: $scope.selectedItems,
+                multiSelect: true
+            };
+
+
             var InformationItem = getInformationItem(EditorData.infoType);
 
             getInformationByType($http, EditorData.infoType, function (data) {
@@ -25,8 +32,10 @@ define([
                     for (var key in item) {
                         var keyKr = InformationItem.getAttributeName(key);
 
-                        if(key === '_id')
+                        if(key === '_id'){
+                            dataitem[key] = item[key];
                             continue;
+                        }
 
                         if(key === 'F_file'){
                             dataitem[keyKr] = item[key].originalName;
@@ -49,12 +58,15 @@ define([
                     dataItems.push(dataitem);
                 }
 
-                $scope.myData = dataItems;
-                $scope.myOptions = { data: 'myData' };
+                $scope.informationData = dataItems;
             });
 
-            $scope.save = function () {
-//                $modalInstance.close($scope.paper);
+            $scope.ok = function () {
+                var bindingArticleIds = [];
+                for(var i = 0; i < $scope.selectedItems.length; i++){
+                    bindingArticleIds.push($scope.selectedItems[i]._id);
+                }
+                $modalInstance.close(bindingArticleIds);
             };
 
             $scope.cancel = function () {
