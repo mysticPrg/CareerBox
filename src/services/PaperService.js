@@ -10,6 +10,8 @@ var ServiceUtil = require('../util/ServiceUtil');
 var Result = require('./result');
 var ObjectID = require('mongodb').ObjectID;
 
+var CaptureFromSite = require('../util/CaptureFromSite');
+
 var genID = require('../util/genID');
 
 module.exports.set = function (server) {
@@ -102,7 +104,15 @@ function createOrUpdateService(req, res) {
     if (newPaper._id) {
         newPaper._id = new ObjectID(newPaper._id);
         PaperDB.update(newPaper, function(err) {
-            ServiceUtil.sendResult(err, res, null);
+            if ( newPaper.isIndex ) {
+                CaptureFromSite(newPaper._portfolio_id, 'portfolio', function(err2) {
+                    ServiceUtil.sendResult(err2, res, null);
+                    return;
+                });
+            } else {
+                ServiceUtil.sendResult(err, res, null);
+                return;
+            }
         });
     } else {
         PaperDB.create(newPaper, function (err, created) {

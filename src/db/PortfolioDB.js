@@ -37,6 +37,15 @@ function get(data, callback) {
     });
 }
 
+function getById(_id, callback) {
+    var portfolioCollection = require('../util/DBCollections').getInstance().collections.portfolio;
+    portfolioCollection.findOne({
+        _id: new ObjectID(_id)
+    }, function (err, finded) {
+        callback(err, finded);
+    });
+}
+
 function getList(_member_id, callback) {
     var portfolioCollection = require('../util/DBCollections').getInstance().collections.portfolio;
 
@@ -83,6 +92,7 @@ function reset() {
 var exports = {
     create: create,
     get: get,
+    getById: getById,
     getList: getList,
     remove: remove,
     update: update,

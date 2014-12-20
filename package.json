@@ -54,7 +54,6 @@
     "gm": "^1.17.0",
     "grunt-jscpd": "0.0.11",
     "jquery": "^2.1.1",
-    "jquerygo": "0.0.16",
     "kendo-ui-core": "^1.0.2",
     "mime": "^1.2.11",
     "mongodb": "~1.4.18",
