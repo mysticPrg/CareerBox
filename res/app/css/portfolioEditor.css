@@ -114,13 +114,15 @@ img {
 
 .delete {
     padding: 0px;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
+    border-style: none;
+    border-radius: 100%;
 }
 
 #bottom-pane #pageEditor #pageSelect ul li a .delBtn {
     float: right;
-    margin-top: 8px;
+    margin-top: 5px;
 }
 
 #bottom-pane #page #canvasWrapper {
