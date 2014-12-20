@@ -70,6 +70,7 @@ define([
 
                 LoadPaper($http, EditorData.paperId, function (result) {
                     EditorData.paper = result.result;
+                    EditorData.paperTitle = result.result.title;
 
                     loadPaperDom(EditorData.paper);
 
