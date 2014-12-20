@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">닫기</span></button>
+    <h4 class="modal-title">사진 업로드</h4>
+</div>
+<div class="modal-body">
+
+    <h6 class="modal-title">기존파일에서 선택</h6>
+    <li ng-repeat="imageFile in imageFiles" >
+        <img ng-click="save(imageFile)" ng-src="http://210.118.74.166:8123/image/thumb/{{imageFile._id}}">
+        <h6> {{imageFile.originalName}} </h6>
+        <button ng-click="deleteImage(imageFile._id)">삭제</button>
+    </li>
+
+    <h6 class="modal-title">새로 첨부</h6>
+
+    <input type="file" id="image_picture_file" class="btn btn-default" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectProfileImage($files)"><br>
+    <div id="image_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div><br>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancel()">확인</button>
+    <!--<button type="button" class="btn btn-primary" ng-click="save()">저장</button>-->
+</div>

@@ -16,7 +16,9 @@ define(['app', 'classes/Paper', 'classes/Portfolio', 'classes/Templates/Template
         templateItemArray : [],
         childArr: [],
         start_zOrder : null,
-        end_zOrder : null
+        end_zOrder : null,
+        infoType : '',
+        bindingData : []
     };
 
     app.factory('EditorData', function() {

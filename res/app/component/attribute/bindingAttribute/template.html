@@ -18,7 +18,7 @@
             {{data.bindingType.title}}
 
             <br/>
-            <button ng-click="articleBinging(data.bindingType.infoType)">Binding</button>
+            <button class="btn btn-default" ng-click="articleBinging(data)">Binding</button>
         </div>
 
         <!--템플릿 에디터 : 아티클 -->
@@ -28,6 +28,6 @@
         <select ng-show="layoutType === 'template_item'" class="form-control" ng-model="attributeName" ng-change="setAttributeName()" ng-options="value for (key, value) in attributeNames "></select>
     </li>
 
-    <!--data.bindingType : {{data.bindingType}} <br/><br/>-->
+    data.bindingData : {{data.bindingData}} <br/><br/>
     <!--EditorData.template.target : {{EditorData.template.target}}-->
 </ul>
