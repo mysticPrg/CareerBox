@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <link href="../libs/ngGrid/ng-grid.css" rel="stylesheet"  type="text/css" >
+    <link rel="stylesheet" type="text/css" href="../libs/ngGrid/ng-grid.css">
 </head>
 <body ng-controller="testController">
 TYPE : {{type}}
@@ -17,8 +17,7 @@ TYPE : {{type}}
     <li ng-repeat="(key,r) in result track by $index">{{key}} : {{r}}</li>
 </ul>
 
-<div class="gridStyle" ng-grid="gridOptions" style="height: 400px;">
-</div>
+<div ng-grid="myOptions" style="height: 500px;"></div>
 
 <script src="../libs/require/require.js" data-main="../main.js"></script>
 </body>
