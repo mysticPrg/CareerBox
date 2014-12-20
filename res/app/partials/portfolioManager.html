@@ -24,7 +24,12 @@
 
         <!--사용자 사진-->
         <div id="userImg">
-            <img src="../img/manage_img/profileImg.png"/>
+            <div ng-show = "!userInfo.I_picture">
+                <img ng-src="../img/noImage.png">
+            </div>
+            <div ng-show = "userInfo.I_picture">
+                <img ng-src="http://210.118.74.166:8123/image/profile/thumb/{{userInfo.I_picture._id}}">
+            </div>
         </div>
 
         <!--프로필 수정-->
