@@ -79,13 +79,10 @@ define([
                     }
                 };
 
+                $scope.articleBinging = function(infoType) {
 
-                $scope.attributeName = a;
+                }
 
-//                // 페이지 에디터에서 인덱스를 선택
-//                $scope.itemIndex = function() {
-//
-//                };
             }
         };
     });
