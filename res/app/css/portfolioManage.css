@@ -4,6 +4,8 @@ html, body {
     margin:0;
     padding:0;
     height: 100%;
+    /*background-color: #ececec;*/
+    background-image: url('../img/manage_img/bg.png');
     font-family: 'Nanum Gothic', sans-serif;
 }
 
@@ -49,6 +51,12 @@ img {
     box-shadow: 0px 3px 12px rgba(0,0,0,0.2);
 }
 
+#content #user-info #userInfoWrapper {
+    position: relative;
+    width: 900px;
+    margin: 0 auto;
+}
+
 #content #user-info h2{
     line-height: 110px;
     font-weight: 700;
@@ -57,13 +65,13 @@ img {
 
 #content #user-info #userImg {
     position: absolute;
-    left: 325px;
+    left: 0px;
     bottom: -81px;
     width: 172px;
     height: 172px;
     padding: 6px;
     border-radius: 100%;
-    background-color: rgba();
+    background-color: rgba(255,255,255,0.5);
     text-align: center;
     box-shadow: 0px 4px 4px rgba(0,0,0,0.4);
 }
@@ -92,7 +100,7 @@ img {
     /*width: 95px;*/
     /*height: 110px;*/
     bottom: -63px;
-    right: 325px;
+    right: 10px;
     cursor: pointer;
 }
 
@@ -100,8 +108,8 @@ img {
     position: absolute;
     /*width: 95px;*/
     /*height: 110px;*/
-    bottom: -63px;
-    right: 445px;
+    bottom: -61px;
+    right: 125px;
     cursor: pointer;
 }
 
@@ -115,7 +123,7 @@ img {
     width: 100%;
     height: 100%;
     text-align: center;
-    background-color: #ececec;
+    /*background-color: #ececec;*/
     padding-top: 35px;
 }
 
