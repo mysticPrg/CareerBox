@@ -23,6 +23,10 @@ define([
                 $scope.setCategory = function(){
                     // 템플릿에 카테고리를 매칭
                     $scope.data.bindingType = $scope.category;
+                    $scope.data.bindingType = {
+                        infoType : $scope.category.infoType,
+                        title : $scope.category.title
+                    }
                 };
 
                 // bindingType 비우기
@@ -75,10 +79,13 @@ define([
                     }
                 };
 
-                // 페이지 에디터에서 인덱스를 선택
-                $scope.itemIndex = function() {
 
-                };
+                $scope.attributeName = a;
+
+//                // 페이지 에디터에서 인덱스를 선택
+//                $scope.itemIndex = function() {
+//
+//                };
             }
         };
     });
