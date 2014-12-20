@@ -9,9 +9,17 @@
 
     <li ng-show="data.isBinding == true">
 
-        <label >Binding Type :</label>
+
         <!--페이퍼 에디터 : 아티클 -->
-        <select ng-show="layoutType === 'acticle'" class="form-control" ng-model="index" ng-change="itemIndex()" ng-options="value for value in indexs "></select>
+        <div ng-show="layoutType === 'acticle'">
+            <label >Binding Type :</label>
+
+            <!--<select ng-show="layoutType === 'acticle'" class="form-control" ng-model="index" ng-change="itemIndex()" ng-options="value for value in indexs "></select>-->
+            {{data.bindingType.title}}
+
+            <br/>
+            <button ng-click="articleBinging(data.bindingType.infoType)">Binding</button>
+        </div>
 
         <!--템플릿 에디터 : 아티클 -->
         <select ng-show="layoutType === 'template'" class="form-control" ng-model="category" ng-change="setCategory()" ng-options="category.title for (key, category) in infoCategory"></select>
