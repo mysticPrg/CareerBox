@@ -68,6 +68,7 @@ define([
                     bindingArticleIds.push($scope.selectedItems[i]._id);
                 }
                 $modalInstance.close(bindingArticleIds);
+//                console.log(bindingArticleIds);
             };
 
             $scope.cancel = function () {
