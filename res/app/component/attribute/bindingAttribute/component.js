@@ -77,20 +77,7 @@ define([
 
                 // 페이지 에디터에서 인덱스를 선택
                 $scope.itemIndex = function() {
-                    // 하위에 있는 아이템을 돌아가면서 매칭
-                    for(var i in $scope.data.childArr){
-//                        $scope.data                 // 아티클
-//                        $scope.data.childArr[i];  // 하위 아이템
 
-//                        console.log('bindingType', $scope.data.childArr[i].bindingType);
-//                        $scope.data.childArr[i].bindingType = $scope.data.bindingType.items[$scope.index-1][ $scope.data.childArr[i].bindingType['key'] ];
-
-//                        console.log('$scope.data.childArr[i]' , $scope.data.childArr[i]);
-//
-//                        console.log('바인딩 적용될 것' , element);
-//                        console.log('바인딩 적용된 모델' , $scope.data.bindingType.items[$scope.index-1][ $scope.data.childArr[i].bindingType['key'] ])
-
-                    }
                 };
             }
         };
