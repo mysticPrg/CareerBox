@@ -41,7 +41,8 @@
 
                         <!--New 템플릿 생성 버튼-->
                         <button id="btnAddArticleTemplate" class="btn btn-default form-control"
-                                ng-click="popCreateTemplateModal()">+New
+                                ng-click="popCreateTemplateModal()">+ New
+                            <!--<img src="../img/editor_img/newArticleIcon.png" style="margin-right: 5px; width: 13px"/>new</button>-->
                         </button>
                     </div>
 
@@ -55,10 +56,22 @@
                                     {{template.title}}
                                 </div>
                             </div>
+
+
+                            <!--<div id="editGroup" class="dropdown">-->
+                                <!--  -->
+                                <!--<button data-toggle="dropdown" class="btn btn-default" href="#">edit</button>-->
+                                <!--  -->
+                                <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">-->
+                                    <!--    -->
+                                    <!--<li><a ng-click="editTemplate(template)">수정</a></li>-->
+                                    <!--<li><a ng-click="popDeleteTemplateModal(template._id)">삭제</a></li>-->
+                                    <!--  -->
+                                <!--</ul>-->
+                            <!--</div>-->
+
                             <div id="editGroup" class="dropdown">
-                                  
-                                <button data-toggle="dropdown" class="btn btn-default" href="#">edit</button>
-                                  
+                                <button id="editBtn" data-toggle="dropdown" class="btn btn-default" href="#"></button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                         
                                     <li><a ng-click="editTemplate(template)">수정</a></li>
@@ -66,6 +79,8 @@
                                       
                                 </ul>
                             </div>
+
+
                         </li>
                     </ul>
                 </div>
@@ -101,15 +116,15 @@
                 </div>
             </div>
 
-            <!--&lt;!&ndash;탭 내부 정보&ndash;&gt;-->
+            <!--<!--탭 내부 정보-->
             <!--<div class="tab-content">-->
-                <!--&lt;!&ndash;Article 템플릿 리스트&ndash;&gt;-->
+                <!--<!--Article 템플릿 리스트-->
                 <!--<div class="tab-pane" id="articleTemplateArea">-->
-                    <!--&lt;!&ndash;New 템플릿 생성 버튼&ndash;&gt;-->
+                    <!--<!--New 템플릿 생성 버튼-->
                     <!--<button id="btnAddArticleTemplate" class="btn btn-default form-control"-->
                             <!--ng-click="popCreateTemplateModal()">add article template-->
                     <!--</button>-->
-                    <!--&lt;!&ndash;생성한 템플릿 리스트 &ndash;&gt;-->
+                    <!--<!--생성한 템플릿 리스트 -->
                     <!--<ul id="articleTemplateList">-->
                         <!--<li ng-repeat="template in templates track by $index">-->
                             <!--<div id="templateThumb" ng-click="templateClone(template)">-->
@@ -133,7 +148,7 @@
                         <!--</li>-->
                     <!--</ul>-->
                 <!--</div>-->
-                <!--&lt;!&ndash;Item 템플릿 리스트&ndash;&gt;-->
+                <!--<!--Item 템플릿 리스트-->
                 <!--<div class="tab-pane" id="itemTemplateArea">-->
                     <!--<ul id="itemTemplateList" class="clearfix">-->
                         <!--<li>-->

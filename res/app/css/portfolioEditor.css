@@ -90,8 +90,13 @@ img {
 }
 
 #bottom-pane #pageEditor .newBtn {
-    background-color: #10152c;
+    width: 58px;
+    height: 32px;
+    padding: 0;
+    font-size: 13px;
+    background-color: #05091c;
     border-style: none;
+    color: #fff;
     margin: 0 10px;
 }
 
@@ -176,8 +181,14 @@ img {
 
 
 #btnAddArticleTemplate{
-    width: 40px;
-    height: 20px;
+    width: 58px;
+    height: 32px;
+    padding: 0;
+    margin: 0 8px;
+    background-color: #10152c;
+    border-style: none;
+    font-size: 13px;
+    color: #fff;
 }
 
 #templateSelect .dropdown-menu {
@@ -325,12 +336,32 @@ img {
 
 #articleTemplateArea #articleTemplateList #editGroup {
     position: absolute;
-    top: 10px;
-    right: 5px;
+    top: 8px;
+    right: 10px;
+}
+
+/*템플릿 수정버튼*/
+#articleTemplateArea #articleTemplateList #editGroup  #editBtn {
+    width: 40px;
+    height: 40px;
+    background-image: url('../img/editor_img/editBtn.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border-style: none;
+    box-sizing: border-box;
+}
+
+/*템플릿 버튼 dropdown hover*/
+.dropdown:hover .dropdown-menu {
+    display: block;
 }
 
 #articleTemplateArea #articleTemplateList #editGroup .dropdown-menu {
     min-width: 75px;
+    position: absolute;
+    top: 36px;
+    left: -18px;
 }
 
 #articleTemplateArea #articleTemplateList #editGroup .dropdown-menu li {
