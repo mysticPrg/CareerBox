@@ -28,6 +28,7 @@ define([
             }, function (data) {
                 // 파일 다시 받기
                 getImageFiles();
+                alert('업로드가 완료 되었습니다.');
             });
         };
 
