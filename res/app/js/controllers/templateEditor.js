@@ -162,9 +162,9 @@ define([
                     $scope.template._id = result.result;
                     showSuccessNotification();
                 } else if (result.returnCode === '001') {
-                    showFailNotification();
+                    showFailNotification('실패하였습니다.');
                 } else if (result.returnCode === '002') {
-                    showFailNotification();
+                    showFailNotification('로그인 필요');
                 }
             });
         }
@@ -194,8 +194,8 @@ define([
             $scope.noti.show(notification, "info");
         }
 
-        function showFailNotification() {
-            var notification = kendo.toString('실패하였습니다.');
+        function showFailNotification(text) {
+            var notification = kendo.toString(text);
             $scope.noti.show(notification, "error");
         }
     }]);

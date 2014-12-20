@@ -41,7 +41,7 @@ define([
                     {collapsible: false}
                 ];
 
-                if(EditorData.paperId !== ''){
+                if (EditorData.paperId !== '') {
                     loadPaper();
                 }
 
@@ -65,7 +65,7 @@ define([
                 loadPaper();
             });
 
-            function loadPaper(){
+            function loadPaper() {
                 initPaper();
 
                 LoadPaper($http, EditorData.paperId, function (result) {
@@ -87,22 +87,24 @@ define([
             var isFirst = true;
             $scope.EditorData.paper = EditorData.paper;
             $scope.$watch("EditorData.paper", function () {
-                if(!isFirst && EditorData.paper){
+                if (!isFirst && EditorData.paper) {
                     $scope.changed = true;
-                } else {isFirst = false;}
+                } else {
+                    isFirst = false;
+                }
             }, true);
 
             // childArr watch 하지만 acticle은 object로 인식 >> watch가 안됨..
             $scope.EditorData.childArr = EditorData.childArr;
             $scope.$watch("EditorData.childArr", function () {
-                if(EditorData.childArr){
+                if (EditorData.childArr) {
                     $scope.changed = true;
                 }
             }, true);
 
             $scope.$watch("EditorData.templateState", function () {
-                if(EditorData.templateState !== ''){
-                    if($scope.changed){
+                if (EditorData.templateState !== '') {
+                    if ($scope.changed) {
                         var modalInstance = $modal.open(saveConfirmModal);
                         modalInstance.result.then(function () {
                             $scope.save();
@@ -115,15 +117,15 @@ define([
                 }
             });
 
-            function templateStateProcess(){
-                if(EditorData.templateState === 'new'){
+            function templateStateProcess() {
+                if (EditorData.templateState === 'new') {
                     createTemplate();
-                }else if(EditorData.templateState === 'edit'){
+                } else if (EditorData.templateState === 'edit') {
                     $window.location.href = "#/TemplateEditor";
                 }
             }
 
-            function createTemplate(){
+            function createTemplate() {
                 var modalInstance = $modal.open(createTemplateModal);
                 modalInstance.result.then(function (template) {
                     EditorData.template.title = template.title;
@@ -133,7 +135,7 @@ define([
                 });
             }
 
-            function initPaper(){
+            function initPaper() {
                 $('#canvas-content').find('div').remove();
 
                 $scope.paper = new Paper();
@@ -156,7 +158,7 @@ define([
                     EditorData.childArr[child._id] = child;
                     if (child.childArr) {
                         loadArticle(child);
-                    }else{
+                    } else {
                         loadItem(child);
                     }
                 }
@@ -225,9 +227,13 @@ define([
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: $scope.paper};
 
                 SavePaper($http, data, function (result) {
-                    if(result.returnCode === '000'){
+                    if (result.returnCode === '000') {
                         $scope.changed = false;
-                        alert('저장되었습니다.');
+                        showSuccessNotification();
+                    } else if (result.returnCode === '001') {
+                        showFailNotification('실패하였습니다.');
+                    } else if (result.returnCode === '002') {
+                        showFailNotification('로그인 필요');
                     }
                 });
 
@@ -259,6 +265,16 @@ define([
             function deleteArticle(id) {
                 $('#' + id).remove();
                 EditorData.childArr[id].state = 'del';
+            }
+
+            function showSuccessNotification() {
+                var notification = kendo.toString('성공하였습니다.');
+                $scope.noti.show(notification, "info");
+            }
+
+            function showFailNotification(text) {
+                var notification = kendo.toString(text);
+                $scope.noti.show(notification, "error");
             }
         }]);
 });
