@@ -212,6 +212,12 @@ function downloadImageService(req, res) {
 
     ImageDB.read(req.params._id, function (err, finded) {
 
+        if (!finded) {
+            ServiceUtil.setResHeader(res);
+            ServiceUtil.sendResult(err, res, null, '003');
+            return;
+        }
+
         var filepath = fileDir + '/' + finded.name;
 
         res.download(filepath, finded.originalName);

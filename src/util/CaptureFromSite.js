@@ -18,6 +18,84 @@ module.exports = function CaptureFromSite(_id, type, closerCallback) {
 
     var filename = __dirname + '/../../' + screenShotPath + _id + '.png';
 
+    function initPage(page) {
+
+        page.resources = 0;
+
+        // Whether page has loaded.
+        page.ready = false;
+
+        // Pass along console messages.
+        page.set('onConsoleMessage', function (msg) {
+            console.log('Console:' + msg);
+        });
+
+        // Log any errors.
+        page.set('onResourceError', function (err) {
+            console.log('ERROR: ' + err.errorString);
+        });
+
+        // Increment our outstanding resources counter.
+        page.set('onResourceRequested', function () {
+            if (page.ready) {
+                page.loading = true;
+                page.resources++;
+            }
+        });
+
+        // Fire an event when we have received a resource.
+        page.set('onResourceReceived', function (res) {
+            if (page.ready && (res.stage == 'end') && (--page.resources == 0)) {
+                page.loading = false;
+            }
+        });
+
+        // Trigger when the loading has started.
+        page.set('onLoadStarted', function () {
+            page.loading = true;
+        });
+
+        // Trigger when the loading has finished.
+        page.set('onLoadFinished', function () {
+            page.loading = (page.resources > 0);
+            page.ready = true;
+        });
+
+        page.set('viewportSize', {
+            width: 10,
+            height: 10
+        });
+
+        page.wait = function (callback, nowait) {
+            var loadWait = function () {
+                setTimeout(function () {
+                    page.wait(callback, true);
+                }, 100);
+            };
+
+            if (nowait) {
+                if (page.loading) {
+                    loadWait();
+                }
+                else {
+                    page.evaluate(function () {
+                        return jQuery.isReady;
+                    }, function (ready) {
+                        if (ready) {
+                            callback.call();
+                        } else {
+                            loadWait();
+                        }
+                    });
+                }
+            }
+            else {
+                loadWait();
+            }
+        };
+    }
+
+
     async.waterfall([
         function (callback) {
             phantom.create(function (ph) {
@@ -30,30 +108,34 @@ module.exports = function CaptureFromSite(_id, type, closerCallback) {
             });
         },
         function (ph, page, callback) { // open page
-
-            page.set('onLoadFinished', function () {
-                console.log('???');
-                callback(null, ph, page)
+            initPage(page);
+            page.open(url[type] + _id, function () {
+                callback(null, ph, page);
             });
-
-            page.open(url[type] + _id);
+        },
+        function (ph, page, callback) {
+            page.wait(function () {
+                callback(null, ph, page);
+            });
         },
         function (ph, page, callback) { // save screenshot
             page.render(filename, {
                 format: 'jpeg'
-            }, function() {
+            }, function () {
                 callback(null, ph);
             });
         },
-//        function (ph, callback) {
-//            gm(filename)
-//                .resize(200, 200)
-//                .write(filename, function(err) {
-//                    callback(err, ph);
-//                });
-//        },
+        function (ph, callback) {
+            gm(filename)
+                .scale(200)
+                .noProfile()
+                .write(filename, function(err) {
+                    callback(err, ph);
+                });
+        },
         function (ph) {
-            ph.exit(closerCallback);
+            ph.exit();
+            closerCallback();
         }
     ]);
 

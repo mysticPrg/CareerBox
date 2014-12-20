@@ -65,11 +65,10 @@ try {
     var CaptureFromSite = require('./src/util/CaptureFromSite');
     CaptureFromSite('54943111ad000fb818d166b5', 'portfolio', function(err) {
         console.log('portfolio done');
-        CaptureFromSite('54954ab687dacf3c0c9fe15b', 'template', function(err) {
-            console.log('template done');
-        });
     });
-
+    CaptureFromSite('54954ab687dacf3c0c9fe15b', 'template', function(err) {
+        console.log('template done');
+    });
 
 } catch (e) {
     console.log(e);
