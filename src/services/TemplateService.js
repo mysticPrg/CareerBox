@@ -15,6 +15,8 @@ var Result = require('./result');
 var ObjectID = require('mongodb').ObjectID;
 var genID = require('../util/genID');
 
+var CaptureFromSite = require('../util/CaptureFromSite');
+
 var _server = null;
 
 module.exports.set = function (server) {
@@ -172,7 +174,6 @@ function getTemplateByIdService(req, res) {
     TemplateDB.getById(_id, function (err, finded) {
 
         if (!finded) {
-            ServiceUtil.setResHeader(res);
             ServiceUtil.sendResult(err, res, null, '003');
             return;
         }

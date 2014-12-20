@@ -14,6 +14,12 @@ function save(data, callback) {
     var certificationAbilityInfo = new CertificationAbilityInfo(data);
     certificationAbilityInfo._id = new ObjectID(certificationAbilityInfo._id);
 
+    for ( var i=0 ; i<certificationAbilityInfo.items.length ; i++ ) {
+        if (!certificationAbilityInfo.items[i]._id) {
+            certificationAbilityInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     certificationAbilityInfoCollection.save(certificationAbilityInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

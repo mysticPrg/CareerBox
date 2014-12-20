@@ -59,54 +59,9 @@ server.start(8123);
 
 /**/
 
-
-
 /*
-var genID = require('./src/util/genID');
-
-var requirejs = require('./src/require.config');
-
-var Paper = requirejs('classes/Paper');
-var Article = requirejs('classes/LayoutComponents/Article');
-
-var Text = requirejs('classes/LayoutComponents/Items/Text');
-var Shape = requirejs('classes/LayoutComponents/Items/Shape');
-var Link = requirejs('classes/LayoutComponents/Items/Link');
-var Color = requirejs('classes/Structs/Color');
-var Icon = requirejs('classes/LayoutComponents/Items/Icon');
-var IconType = requirejs('classes/Enums/IconType');
-
-var Size = requirejs('classes/Structs/Size');
-var Position = requirejs('classes/Structs/Position');
-var Outline = requirejs('classes/Structs/Outline');
-
-var capture = require('./src/util/Capture');
-
-var a = new Article({
-   _id: genID(),
-    size: new Size({width: 500, height: 300}),
-    rotate: 30
+var CaptureFromSite = require('./src/util/CaptureFromSite');
+CaptureFromSite('54943111ad000fb818d166b5', 'portfolio', function(err) {
+   console.log('done');
 });
-a.fill.color = new Color('FF0000');
-a.radius = 30;
-
-a.childArr.push(new Text({
-    _id: genID(),
-    size: new Size({width: 100, height: 50}),
-    pos: new Position({x: 10, y: 20}),
-    value: 'text1',
-    rotate: 30
-}));
-
-a.childArr.push(new Text({
-    _id: genID(),
-    size: new Size({width: 100, height: 60}),
-    pos: new Position({x: 100, y: 100}),
-    value: 'text2'
-}));
-
-capture(a, function() {
-    console.log('Capure Complete!');
-});
-
 /**/

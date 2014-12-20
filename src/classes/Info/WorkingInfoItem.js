@@ -28,6 +28,7 @@ define([
 
     function WorkingInfoItem(props) {
 
+        this._id = null;
         this.I_logo = '';           // 대표이미지
         this.S_name = '';           // 회사명
         this.S_address = '';        // 소재지
@@ -42,6 +43,7 @@ define([
         this.S_achive = '';         // 주요 성과
 
         if ( props ) {
+            this._id = props._id ? props._id : this._id;
             this.I_logo = props.I_logo ? props.I_logo : this.I_logo;
             this.S_name = props.S_name ? props.S_name : this.S_name;
             this.S_address = props.S_address ? props.S_address : this.S_address;

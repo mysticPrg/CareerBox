@@ -32,8 +32,6 @@ function get(data, callback) {
 }
 
 function getById(_id, callback) {
-    var template = new Template(data);
-
     var templateCollection = require('../util/DBCollections').getInstance().collections.template;
     templateCollection.findOne({
         _id: new ObjectID(_id)

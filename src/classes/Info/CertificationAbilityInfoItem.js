@@ -17,6 +17,7 @@ define([], function () {
 
     function CertificateAbilityInfoItem(props) {
 
+        this._id = null;
         this.S_name = '';
         this.S_publisher = '';         // 발행처
         this.D_date = new Date();
@@ -24,6 +25,7 @@ define([], function () {
         this.F_file = '';
 
         if (props) {
+            this._id = props._id ? props._id : this._id;
             this.S_name = props.S_name ? props.S_name : this.S_name;
             this.S_publisher = props.S_publisher ? props.S_publisher : this.S_publisher;
             this.D_date = props.D_date ? props.D_date : this.D_date;

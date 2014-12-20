@@ -14,6 +14,12 @@ function save(data, callback) {
     var paperAbilityInfo = new PaperAbilityInfo(data);
     paperAbilityInfo._id = new ObjectID(paperAbilityInfo._id);
 
+    for ( var i=0 ; i<paperAbilityInfo.items.length ; i++ ) {
+        if (!paperAbilityInfo.items[i]._id) {
+            paperAbilityInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     paperAbilityInfoCollection.save(paperAbilityInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

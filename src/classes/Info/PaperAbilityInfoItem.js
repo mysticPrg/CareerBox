@@ -20,6 +20,7 @@ define([
 
     function PaperAbilityInfoItem(props) {
 
+        this._id = null;
         this.S_title = ''; // 논문 제목
         this.S_academy = ''; // 논문게재 학회
         this.D_date = new Date(); // 논문게재 날짜
@@ -27,6 +28,7 @@ define([
         this.S_detail = ''; // 논문 내용
 
         if ( props ) {
+            this._id = props._id ? props._id : this._id;
             this.S_title = props.S_title ? props.S_title : this.S_title;
             this.S_academy = props.S_academy ? props.S_academy : this.S_academy;
             this.D_date = props.D_date ? props.D_date : this.D_date;

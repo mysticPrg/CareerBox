@@ -14,6 +14,12 @@ function save(data, callback) {
     var columnInfo = new ColumnInfo(data);
     columnInfo._id = new ObjectID(columnInfo._id);
 
+    for ( var i=0 ; i<columnInfo.items.length ; i++ ) {
+        if (!columnInfo.items[i]._id) {
+            columnInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     columnInfoCollection.save(columnInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

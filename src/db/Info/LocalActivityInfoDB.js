@@ -14,6 +14,12 @@ function save(data, callback) {
     var localActivityInfo = new LocalActivityInfo(data);
     localActivityInfo._id = new ObjectID(localActivityInfo._id);
 
+    for ( var i=0 ; i<localActivityInfo.items.length ; i++ ) {
+        if (!localActivityInfo.items[i]._id) {
+            localActivityInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     localActivityInfoCollection.save(localActivityInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

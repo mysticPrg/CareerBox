@@ -14,6 +14,12 @@ function save(data, callback) {
     var globalActivityInfo = new GlobalActivityInfo(data);
     globalActivityInfo._id = new ObjectID(globalActivityInfo._id);
 
+    for ( var i=0 ; i<globalActivityInfo.items.length ; i++ ) {
+        if (!globalActivityInfo.items[i]._id) {
+            globalActivityInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     globalActivityInfoCollection.save(globalActivityInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

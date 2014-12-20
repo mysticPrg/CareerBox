@@ -21,6 +21,7 @@ define([
 
     function HighSchoolInfoItem(props) {
 
+        this._id = null;
         this.S_name = '';              // 학교명
         this.B_qualification = false; // 검정고시 여부
         this.B_graduate = false;      // 졸업 여부
@@ -28,6 +29,7 @@ define([
         this.S_major = '';             // 전공
 
         if ( props ) {
+            this._id = props._id ? props._id : this._id;
             this.S_name = props.S_name ? props.S_name : this.S_name;
             this.B_qualification = props.B_qualification ? props.B_qualification : this.B_qualification;
             this.B_graduate = props.B_graduate ? props.B_graduate : this.B_graduate;

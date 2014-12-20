@@ -14,6 +14,12 @@ function saveList(data, callback) {
     var highSchoolInfo = new HighSchoolInfo(data);
     highSchoolInfo._id = new ObjectID(highSchoolInfo._id);
 
+    for ( var i=0 ; i<highSchoolInfo.items.length ; i++ ) {
+        if (!highSchoolInfo.items[i]._id) {
+            highSchoolInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     highSchoolInfoCollection.save(highSchoolInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

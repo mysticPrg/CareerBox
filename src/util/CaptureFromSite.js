@@ -8,17 +8,23 @@ var async = require('async');
 var gm = require('gm');
 
 var screenShotPath = 'res/screenshot/';
-var thumbWidth = 200;
 
 var url = {
-    portfolio: 'http://210.118.74.166:8123/res/paper',
-    template: 'http://210.118.74.166:8123/res/template'
+    portfolio: 'http://210.118.74.166:8123/res/app/partials/portfolioPreview.html?id=',
+    template: 'http://210.118.74.166:8123/res/app/partials/templatePreview.html?id='
 };
 
 module.exports = function CaptureFromSite(_id, type, closerCallback) {
+
+    var filename = __dirname + '/../../' + screenShotPath + _id + '.png';
+
     async.waterfall([
         function (callback) { // open page
-            $.visit(url[type], function () {
+
+            $.config.width = 10;
+            $.config.height = 10;
+
+            $.visit(url[type] + _id, function () {
                 callback();
             });
         },
@@ -26,13 +32,12 @@ module.exports = function CaptureFromSite(_id, type, closerCallback) {
             $.waitForPage(callback);
         },
         function (callback) { // save screenshot
-            $.capture(__dirname + '/../../' + screenShotPath + target._id + '.png', callback);
+            $.capture(filename, callback);
         },
         function (callback) {
-            var thumbnail = new Thumbnail(screenShotPath, screenShotPath + 'thumb/');
-            thumbnail.ensureThumbnail(target._id + '.png', thumbWidth, null, function () {
-                callback();
-            });
+            gm(filename)
+                .resize(200, 200)
+                .write(filename, callback);
         },
         function () {
             $.close();
