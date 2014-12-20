@@ -131,9 +131,9 @@ function loadService(req, res) {
     var _paper_id = req.params._id;
 
     ServiceUtil.setResHeader(res);
-    if (!ServiceUtil.checkSession(req, res)) {
-        return;
-    }
+//    if (!ServiceUtil.checkSession(req, res)) {
+//        return;
+//    }
     if (!checkArgForIdOnParams(req, res)) {
         return;
     }
@@ -147,9 +147,9 @@ function loadListService(req, res) {
     var _portfolio_id = req.body._portfolio_id;
 
     ServiceUtil.setResHeader(res);
-    if (!ServiceUtil.checkSession(req, res)) {
-        return;
-    }
+//    if (!ServiceUtil.checkSession(req, res)) {
+//        return;
+//    }
     if (!checkArgForPortfolioId(req, res)) {
         return;
     }
