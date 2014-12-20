@@ -19,6 +19,7 @@ define([], function () {
 
     function AwardInfoItem(props) {
 
+        this._id = null;
         this.S_name = ''; // 대회명
         this.S_title = ''; // 작품명
         this.S_host = ''; // 주최기관
@@ -26,6 +27,7 @@ define([], function () {
         this.S_detail = ''; // 상세정보
 
         if ( props ) {
+            this._id = props._id ? props._id : this._id;
             this.S_name = props.S_name ? props.S_name : this.S_name;
             this.S_title = props.S_title ? props.S_title : this.S_title;
             this.S_host = props.S_host ? props.S_host : this.S_host;

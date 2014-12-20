@@ -22,6 +22,7 @@ define([
 
     function ProjectInfoItem(props) {
 
+        this._id = null;
         this.S_title = ''; // 프로젝트명
         this.S_part = ''; // 담당 부분
         this.T_term = new Term(); // 기간
@@ -30,6 +31,7 @@ define([
         this.F_file = ''; // 첨부파일
 
         if (props) {
+            this._id = props._id ? props._id : this._id;
             this.S_title = props.S_title ? props.S_title : this.S_title;
             this.S_part = props.S_part ? props.S_part : this.S_part;
             this.T_term = props.T_term ? props.T_term : this.T_term;

@@ -14,6 +14,12 @@ function save(data, callback) {
     var proficiencyInfo = new ProficiencyInfo(data);
     proficiencyInfo._id = new ObjectID(proficiencyInfo._id);
 
+    for ( var i=0 ; i<proficiencyInfo.items.length ; i++ ) {
+        if (!proficiencyInfo.items[i]._id) {
+            proficiencyInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     proficiencyInfoCollection.save(proficiencyInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

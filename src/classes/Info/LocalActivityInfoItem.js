@@ -22,6 +22,7 @@ define([
 
     function LocalActivityInfoItem(props) {
 
+        this._id = null;
         this.S_category = ''; // 분류
         this.S_name = ''; // 활동명
         this.T_term = new Term(); // 활동 기간
@@ -30,6 +31,7 @@ define([
         this.F_file = ''; // 첨부파일
 
         if ( props ) {
+            this._id = props._id ? props._id : this._id;
             this.S_category = props.S_category ? props.S_category : this.S_category;
             this.S_name = props.S_name ? props.S_name : this.S_name;
             this.T_term = props.T_term ? props.T_term : this.T_term;

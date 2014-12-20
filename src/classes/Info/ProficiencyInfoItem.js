@@ -20,6 +20,7 @@ define([], function () {
 
     function ProficiencyInfoItem(props) {
 
+        this._id = null;
         this.S_name = '';              // 언어명
         this.B_exam = false;          // 공인 시험
         this.S_reg_number = '';        // 등록번호
@@ -29,6 +30,7 @@ define([], function () {
         this.F_file = '';              // 첨부파일
 
         if (props) {
+            this._id = props._id ? props._id : this._id;
             this.S_name = props.S_name ? props.S_name : this.S_name;
             this.B_exam = props.B_exam ? props.B_exam : this.B_exam;
             this.S_reg_number = props.S_reg_number ? props.S_reg_number : this.S_reg_number;

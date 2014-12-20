@@ -14,6 +14,12 @@ function save(data, callback) {
     var projectInfo = new ProjectInfo(data);
     projectInfo._id = new ObjectID(projectInfo._id);
 
+    for ( var i=0 ; i<projectInfo.items.length ; i++ ) {
+        if (!projectInfo.items[i]._id) {
+            projectInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     projectInfoCollection.save(projectInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

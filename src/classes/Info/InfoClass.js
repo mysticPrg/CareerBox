@@ -14,6 +14,7 @@ define([
         this._id = null;
         this._member_id = null;
         this.infoType = InfoType.personalInfo;
+        this.title = '';
 
         if ( props ) {
             this._id = props._id ? props._id : this._id;

@@ -14,6 +14,12 @@ function save(data, callback) {
     var computerAbilityInfo = new ComputerAbilityInfo(data);
     computerAbilityInfo._id = new ObjectID(computerAbilityInfo._id);
 
+    for ( var i=0 ; i<computerAbilityInfo.items.length ; i++ ) {
+        if (!computerAbilityInfo.items[i]._id) {
+            computerAbilityInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     computerAbilityInfoCollection.save(computerAbilityInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

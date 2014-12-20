@@ -21,6 +21,7 @@ define([
 
     function GlobalActivityInfoItem(props) {
 
+        this._id = null;
         this.S_country = ''; // 활동 국가
         this.T_term = new Term(); // 활동 기간
         this.S_description = ''; // 활동 내용
@@ -28,6 +29,7 @@ define([
         this.F_file = ''; // 첨부파일
 
         if ( props ) {
+            this._id = props._id ? props._id : this._id;
             this.S_country = props.S_country ? props.S_country : this.S_country;
             this.T_term = props.T_term ? props.T_term : this.T_term;
             this.S_description = props.S_description ? props.S_description : this.S_description;

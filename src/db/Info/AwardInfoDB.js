@@ -14,6 +14,12 @@ function save(data, callback) {
     var awardInfo = new AwardInfo(data);
     awardInfo._id = new ObjectID(awardInfo._id);
 
+    for ( var i=0 ; i<awardInfo.items.length ; i++ ) {
+        if (!awardInfo.items[i]._id) {
+            awardInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     awardInfoCollection.save(awardInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

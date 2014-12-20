@@ -14,6 +14,12 @@ function save(data, callback) {
     var workingInfo = new WorkingInfo(data);
     workingInfo._id = new ObjectID(workingInfo._id);
 
+    for ( var i=0 ; i<workingInfo.items.length ; i++ ) {
+        if (!workingInfo.items[i]._id) {
+            workingInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     workingInfoCollection.save(workingInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

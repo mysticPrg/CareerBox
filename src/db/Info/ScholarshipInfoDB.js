@@ -14,6 +14,12 @@ function save(data, callback) {
     var scholarshipInfoInfo = new ScholarshipInfo(data);
     scholarshipInfoInfo._id = new ObjectID(scholarshipInfoInfo._id);
 
+    for ( var i=0 ; i<scholarshipInfoInfo.items.length ; i++ ) {
+        if (!scholarshipInfoInfo.items[i]._id) {
+            scholarshipInfoInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     scholarshipInfoCollection.save(scholarshipInfoInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {

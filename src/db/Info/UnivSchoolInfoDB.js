@@ -14,6 +14,12 @@ function saveList(data, callback) {
     var univSchoolInfo = new UnivSchoolInfo(data);
     univSchoolInfo._id = new ObjectID(univSchoolInfo._id);
 
+    for ( var i=0 ; i<univSchoolInfo.items.length ; i++ ) {
+        if (!univSchoolInfo.items[i]._id) {
+            univSchoolInfo.items[i]._id = new ObjectID();
+        }
+    }
+
     univSchoolInfoCollection.save(univSchoolInfo, function(err, savedCount, result) {
         var returnObject = null;
         if ( result.updatedExisting ) {
