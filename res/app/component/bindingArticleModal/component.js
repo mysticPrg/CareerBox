@@ -12,9 +12,10 @@ define([
             $scope.informationDataOptions = {
                 data: 'informationData',
                 selectedItems: $scope.selectedItems,
-                multiSelect: true
-            };
+                multiSelect: true,
+                excludeProperties: ['_id']
 
+            };
 
             var InformationItem = getInformationItem(EditorData.infoType);
 
