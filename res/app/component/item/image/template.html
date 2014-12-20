@@ -1,1 +1,6 @@
-<img src="../img/noImage.png" style="width: 100%; height: 100%"/>
+<div ng-if = "!info.thumbnail">
+    <img ng-src="../img/noImage.png">
+</div>
+<div ng-if = "info.thumbnail">
+    <img ng-src="http://210.118.74.166:8123/image/thumb/{{info.thumbnail}}" id="image_picture">
+</div>

@@ -107,6 +107,10 @@
                     <div is-index-attribute to="attributeInformation"></div>
                 </li>
 
+                <li ng-if="attributeInformation.thumbnail || attributeInformation.thumbnail==='' ">
+                    <div thumbnail-attribute to="attributeInformation"></div>
+                </li>
+
                 <!--z-index 설정버튼-->
                 <div id="zIndexForm">
                     <label for="zIndex">z축</label>

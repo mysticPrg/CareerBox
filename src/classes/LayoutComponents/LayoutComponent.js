@@ -25,6 +25,7 @@ define([
         this.radius = 0;
         this.bindingType = '';
         this.isBinding = false;
+        this.bindingData = [];
 
         if (props) {
             this._id = props._id ? props._id : this._id;
@@ -37,6 +38,7 @@ define([
             this.radius = props.radius ? props.radius : this.radius;
             this.bindingType = props.bindingType ? props.bindingType : this.bindingType;
             this.isBinding = props.isBinding ? props.isBinding : this.isBinding;
+            this.bindingData = props.bindingData ? props.bindingData : this.bindingData;
         }
     };
 
