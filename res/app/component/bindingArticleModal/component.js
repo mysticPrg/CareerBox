@@ -60,6 +60,17 @@ define([
                 }
 
                 $scope.informationData = dataItems;
+
+            });
+
+            $scope.$on('ngGridEventData', function(){
+                angular.forEach($scope.informationData, function (data, index) {
+                    for (var i = 0; i < EditorData.bindingData.length; i++) {
+                        if (data._id == EditorData.bindingData[i]) {
+                            $scope.informationDataOptions.selectRow(index, true);
+                        }
+                    }
+                });
             });
 
             $scope.ok = function () {

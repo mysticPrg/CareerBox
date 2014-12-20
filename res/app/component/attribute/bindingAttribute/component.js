@@ -80,8 +80,10 @@ define([
                     }
                 };
 
-                $scope.articleBinging = function(infoType) {
-                    EditorData.infoType = infoType;
+                $scope.articleBinging = function(data) {
+                    EditorData.infoType = data.bindingType.infoType;
+                    EditorData.bindingData = data.bindingData;
+
                     var modalInstance = $modal.open(bindingArticleModal);
                     modalInstance.result.then(function (result) {
                         $scope.data.bindingData = result;
