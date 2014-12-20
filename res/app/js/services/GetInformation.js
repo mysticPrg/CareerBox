@@ -18,10 +18,10 @@ define([
                     InformationData.personalInfo = resultArray[0].data.result;
                     InformationData.personalInfo.title = '기본정보';
                 }
-                if(resultArray[1].data.result !== null)
-
+                if(resultArray[1].data.result !== null){
                     InformationData.additionalInfo = resultArray[1].data.result;
-                InformationData.additionalInfo.title = '상세정보';
+                    InformationData.additionalInfo.title = '상세정보';
+                }
             });
         }
 
