@@ -1,23 +1,32 @@
+<style>
+    .focus {box-shadow: 0 0 0 2px rgb( 155, 201, 199 ); }
+</style>
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">닫기</span></button>
     <h4 class="modal-title">사진 업로드</h4>
 </div>
 <div class="modal-body">
+    <div style="height: 500px; overflow-x:hidden; overflow-y:auto;">
+        <ul style="list-style-type: none;">
+            <li ng-repeat="imageFile in imageFiles" style="float: left; margin: 20px;">
+                <div ng-click="selectImage(imageFile, $event)">
+                    <img ng-src="http://210.118.74.166:8123/image/thumb/{{imageFile._id}}">
+                    <h6> {{imageFile.originalName}} </h6>
+                    <button ng-click="deleteImage(imageFile._id)">삭제</button>
+                </div>
+            </li>
+        </ul>
+    </div>
 
-    <h6 class="modal-title">기존파일에서 선택</h6>
-    <li ng-repeat="imageFile in imageFiles" >
-        <img ng-click="save(imageFile)" ng-src="http://210.118.74.166:8123/image/thumb/{{imageFile._id}}">
-        <h6> {{imageFile.originalName}} </h6>
-        <button ng-click="deleteImage(imageFile._id)">삭제</button>
-    </li>
+    <hr>
+    <h6 class="modal-title">새 이미지</h6>
 
-    <h6 class="modal-title">새로 첨부</h6>
+    <input type="file" id="image_picture_file" class="col-md-10" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectUnbindImage($files)">
+    <button type="btn btn-default col-md-2"  ng-click="uploadUnbindImage()">업로드</button>
 
-    <input type="file" id="image_picture_file" class="btn btn-default" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectProfileImage($files)"><br>
     <div id="image_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div><br>
 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="cancel()">확인</button>
-    <!--<button type="button" class="btn btn-primary" ng-click="save()">저장</button>-->
+    <button class="btn btn-primary" ng-click="save()">확인</button>
+    <button class="btn btn-warning" ng-click="cancel()">취소</button>
 </div>
