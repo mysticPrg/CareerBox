@@ -97,6 +97,12 @@ define([
                     // 아티클, 아이템 공통
                     setCommonWatch(scope, element, att);
                 }
+
+                // 포커싱 되었을 때 박스 쉐도우가 보이도록 함
+//                scope.id = att.id;
+//                var handle = element.find('.ui-rotatable-handle');
+//                handle.attr('ng-show',"id == EditorData.focusId");
+//                $compile(handle)(scope);
             }
         };
     }]);

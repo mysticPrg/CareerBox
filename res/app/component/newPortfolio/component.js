@@ -35,7 +35,6 @@ define([
             var modalInstance = $modal.open(deletePortfolioModal);
             modalInstance.result.then(function () { // OK
                 // 포트폴리오 삭제 통신
-                console.log("$scope.portfolios[index]._id : " + $scope.portfolios[index]._id);
                 deletePortfolio($http, {_id: $scope.portfolios[index]._id}, function (data) {
                     CommonCallback(data, function () { // 성공시
                         console.log("정상적으로 삭제 되었습니다.");
@@ -64,7 +63,7 @@ define([
                 });
             }, function () { // Cancel
             });
-        }
+        };
 
         // 포트폴리오 정보 변경 함수
         $scope.modifyPortfolio = function (index) {
@@ -87,7 +86,7 @@ define([
                 // Cancel
             });
 
-        }
+        };
 
         // 포트폴리오 에디터 이동 함수
         $scope.goToPortfolioEditor = function (portfolioId) {
@@ -95,7 +94,7 @@ define([
             $window.location.href = href;
 
 //            $scope.$emit("createPortfolio", portfolio);
-        }
+        };
 
         $scope.goToPortfolio = function (portfolioId) {
             var href = 'portfolioPreview.html?id=' + portfolioId;

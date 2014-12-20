@@ -28,14 +28,19 @@ define([
 
         $scope.EditorData = EditorData;
 
-        $scope.$watch('EditorData.focusId', function () {
-            if(EditorData.focusId){
-                var infomation = SetAttributeInformation(EditorData.focusId);
-                $scope.attributeInformation = infomation.attributeInformation;
-                $scope.parentArray = infomation.parentArray;
-                $scope.type = infomation.type;
-            }
-        }, true);
+        $scope.$watch('EditorData.focusId', function () { if(EditorData.focusId){
+            // 모델 적용
+            var infomation = SetAttributeInformation(EditorData.focusId);
+            $scope.attributeInformation = infomation.attributeInformation;
+            $scope.parentArray = infomation.parentArray;
+            $scope.type = infomation.type;
+
+            // Box shadow
+            $('#' + EditorData.old_focusId).removeClass('focus')
+            $('#' + EditorData.focusId).addClass('focus')
+            EditorData.old_focusId = EditorData.focusId
+
+        }}, true);
 
         $scope.deleteItem = function (id) {
             // z index 처리

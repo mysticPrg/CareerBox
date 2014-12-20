@@ -98,6 +98,8 @@ define(['app'
                 top: item.pos.y + "px",
                 left: item.pos.x + "px"
             });
+        } else{
+            // rotate 가 걸려있을 경우
         }
     }
 

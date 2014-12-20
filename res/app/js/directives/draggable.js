@@ -18,6 +18,7 @@ define([
             scope : true,   // 새로운 스코프
             //The link function is responsible for registering DOM listeners as well as updating the DOM.
             link: function (scope, element, att) {
+                var item = SetAttributeInformation(att.id).attributeInformation;
                 element.draggable({
                     helper: 'original',    // 객체를 복사
                     cursor: 'move',     //
@@ -28,16 +29,20 @@ define([
                 element.bind('mousedown', function (event){
                     // 포커싱 처리
                     EditorData.focusId = att.id;
+
                 });
 
                 element.bind('mouseup', function (event){
                     // 위치 업데이트
-                    var item = SetAttributeInformation(att.id).attributeInformation;
                     item.pos = {x: element.position().left, y: element.position().top};
                     if (item.state != 'new') {
                         item.state = 'edit';
                     }
                     element.trigger('click');
+                });
+
+                element.bind('mousemove', function (event){
+//                    console.log('mousemove', element.position());
                 });
 
                 element.bind('mouseout', function (event){
