@@ -12,6 +12,7 @@ define([
             restrict: 'A',
             scope : true,   // 새로운 스코프
             link: function(scope, element, att) {
+                scope.info = SetAttributeInformation(att.id).attributeInformation;
 
                 element.css ({
 //                   'content': 'url(\"../img/noImage.png\")'

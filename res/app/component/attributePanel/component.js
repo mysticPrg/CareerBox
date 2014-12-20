@@ -19,6 +19,7 @@ define([
     'component/attribute/urlAttribute/component',
     'component/attribute/isIndexAttribute/component',
     'component/attribute/bindingAttribute/component',
+    'component/attribute/thumbnailAttribute/component',
     'services/EditorData',
     'services/SetAttributeInformation'
 ], function (app) {
