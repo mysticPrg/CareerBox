@@ -126,43 +126,26 @@ module.exports = function CaptureFromSite(_id, type, closerCallback) {
             });
         },
         function (ph, callback) {
-            gm(filename)
-                .scale(200)
-                .noProfile()
-                .write(filename, function(err) {
-                    callback(err, ph);
-                });
+            if ( type === 'portfolio' ) {
+                gm(filename)
+                    .scale(250)
+                    .crop(250, 350)
+                    .noProfile()
+                    .write(filename, function(err) {
+                        callback(err, ph);
+                    });
+            } else if ( type === 'template') {
+                gm(filename)
+                    .scale(200)
+                    .noProfile()
+                    .write(filename, function(err) {
+                        callback(err, ph);
+                    });
+            }
         },
         function (ph) {
             ph.exit();
             closerCallback();
         }
     ]);
-
-//    async.waterfall([
-//        function (callback) { // open page
-//
-//            $.config.width = 10;
-//            $.config.height = 10;
-//
-//            $.visit(url[type] + _id, function () {
-//                callback();
-//            });
-//        },
-//        function (callback) { // wait
-//            $.waitForPage(callback);
-//        },
-//        function (callback) { // save screenshot
-//            $.capture(filename, callback);
-//        },
-//        function (callback) {
-//            gm(filename)
-//                .resize(200, 200)
-//                .write(filename, callback);
-//        },
-//        function () {
-//            $.close();
-//            closerCallback();
-//        }
-//    ]);
 };

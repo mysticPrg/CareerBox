@@ -23,6 +23,7 @@ module.exports.set = function (server) {
     server.get('/portfolio', getPortfolioListService);
     server.get('/portfolio/:_id', getPortfolioService);
     server.put('/portfolio', updateService);
+    server.get('/portfolio/thumb/:_id', downloadThumbService);
 };
 
 function checkArgForPortfolio(req, res) {
@@ -41,6 +42,19 @@ function checkArgForPortfolio(req, res) {
 function checkArgForIdOnBody(req, res) {
     var _portfolio_id = req.body._id;
     if (!_portfolio_id || !ObjectID.isValid(_portfolio_id)) {
+
+        var result = new Result(null);
+        result.setCode('001');
+        res.end(result.toString());
+
+        return false;
+    }
+
+    return true;
+}
+
+function checkArgForIdOnParams(req, res) {
+    if (!req.params._id) {
 
         var result = new Result(null);
         result.setCode('001');
@@ -136,5 +150,25 @@ function updateService(req, res) {
 
     PortfolioDB.update(changedPortfolio, function(err) {
         ServiceUtil.sendResult(err, res, null);
+    });
+}
+
+function downloadThumbService(req, res) {
+    if (!checkArgForIdOnParams(req, res)) {
+        return;
+    }
+
+    PortfolioDB.getById(req.params._id, function (err, finded) {
+        if (!finded) {
+            ServiceUtil.setResHeader(res);
+            ServiceUtil.sendResult(err, res, null, '003');
+            return;
+        }
+
+        var _id = finded._id.toHexString();
+        var fileDir = __dirname + '/../../res/screenshot/';
+        var filepath = fileDir + _id + '.png';
+
+        res.download(filepath, _id + '.png');
     });
 }
