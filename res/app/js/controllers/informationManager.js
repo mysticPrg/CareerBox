@@ -41,6 +41,24 @@ define([
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $("#tabContent > div").hide(); // Initially hide all content
+        $("#informationTab li:first").attr("id","current"); // Activate first tab
+        $("#tabContent > div:first").fadeIn(); // Show first tab content
+
+        $('#informationTab a').click(function(e) {
+            e.preventDefault();
+            $("#tabContent > div").hide(); //Hide all content
+            $("#informationTab li").attr("id",""); //Reset id's
+            $(this).parent().attr("id","current"); // Activate this
+            $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+        });
+
+
+
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $scope.load = function (info) {
             if (info === 'personalInfo') {
                 GetInformation.loadPersonalInfo();

@@ -44,6 +44,8 @@ define([
                 if(EditorData.paperId !== ''){
                     loadPaper();
                 }
+
+                EditorData.focusId = EditorData.paper._id;
             });
 
             // 페이퍼 속성
@@ -68,6 +70,7 @@ define([
 
                 LoadPaper($http, EditorData.paperId, function (result) {
                     EditorData.paper = result.result;
+                    EditorData.paperTitle = result.result.title;
 
                     loadPaperDom(EditorData.paper);
 

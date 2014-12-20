@@ -5,7 +5,8 @@ html, body {
     padding:0;
     height: 100%;
     /*background-color: #ececec;*/
-    background-image: url('../img/manage_img/bg.png');
+    background-image: url('../img/manage_img/bgPattern3.png');
+    background-repeat: repeat;
     font-family: 'Nanum Gothic', sans-serif;
 }
 

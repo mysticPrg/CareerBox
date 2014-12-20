@@ -49,6 +49,8 @@ define([
                 loadTemplate();
             }
 
+            EditorData.focusId = EditorData.template._id;
+
             // changed 초기화
             $scope.changed = false;
             isFirst = true;
