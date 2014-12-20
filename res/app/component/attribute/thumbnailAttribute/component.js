@@ -17,7 +17,6 @@ define([
                 $scope.openBindingImageModal = function() {
                     var modalInstance = $modal.open(bindingImageModal);
                     modalInstance.result.then(function (imageFile) {
-                        console.log('imageFile', imageFile);
                         // 성공
                         // 모델에 저장
                         $scope.data.thumbnail = imageFile._id;

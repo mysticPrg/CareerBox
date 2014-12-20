@@ -14,7 +14,6 @@ define([
             var loadImagePromiss = $http.get('http://210.118.74.166:8123/image', {withCredentials: true});
             $q.all([loadImagePromiss]).then(function (resultArray) {
                 $scope.imageFiles = resultArray[0].data.result;
-                console.log('이미지의 배열', resultArray);
             });
         }
         getImageFiles();
