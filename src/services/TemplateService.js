@@ -111,11 +111,19 @@ function createOrUpdateService(req, res) {
         newTemplate._id = new ObjectID(newTemplate._id);
 
         TemplateDB.update(newTemplate, function (err) {
-            ServiceUtil.sendResult(err, res, null);
+//            CaptureFromSite(newTemplate._id.toHexString(), 'template', function(err2) {
+                ServiceUtil.sendResult(err2, res, null);
+//            });
         });
     } else {
         TemplateDB.create(newTemplate, function (err, created) {
-            ServiceUtil.sendResult(err, res, created[0]._id.toHexString());
+
+            var _id = created[0]._id.toHexString();
+
+//            CaptureFromSite(_id, 'template', function(err2) {
+                ServiceUtil.sendResult(err2, res, _id);
+//            });
+
         });
     }
 }
