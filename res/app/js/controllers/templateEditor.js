@@ -83,7 +83,7 @@ define([
             var size = $scope.template.target.size;
             loadEditorCanvas(size);
 
-            var itemArray = $scope.template.target.childArr;
+            var itemArray = $scope.template.target.childArr[0];
             for (var index = 0; index < itemArray.length; index++) {
                 delete itemArray[index].state;
                 EditorData.templateItemArray[itemArray[index]._id] = itemArray[index];
@@ -150,11 +150,12 @@ define([
         $scope.save = function () {
             EditorData.focusId = '';
 
-            $scope.template.target.childArr = getTemplateChildArr(EditorData.templateItemArray);
+            $scope.template.target.childArr[0] = getTemplateChildArr(EditorData.templateItemArray);
 
             $scope.thumbnail = '';
             $scope.description = '';
 
+            console.log($scope.template);
             SaveTemplate($http, $scope.template, function (result) {
                 if (result.returnCode === '000') {
                     $scope.changed = false;
