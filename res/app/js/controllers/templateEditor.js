@@ -83,7 +83,7 @@ define([
             var size = $scope.template.target.size;
             loadEditorCanvas(size);
 
-            var itemArray = $scope.template.target.childArr;
+            var itemArray = $scope.template.target.childArr[0];
             for (var index = 0; index < itemArray.length; index++) {
                 delete itemArray[index].state;
                 EditorData.templateItemArray[itemArray[index]._id] = itemArray[index];
