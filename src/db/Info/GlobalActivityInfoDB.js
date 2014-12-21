@@ -37,6 +37,21 @@ function read(_member_id, callback) {
     globalActivityInfoCollection.findOne({'_member_id': _member_id}, callback);
 }
 
+function useCheck(_member_id, _item_id, callback) {
+    var awardInfoCollection = require('../../util/DBCollections').getInstance().collections.awardInfo;
+
+    awardInfoCollection.findOne({
+        '_member_id': _member_id,
+        'items': {$elemMatch: {_id: _item_id}}
+    }, function(err, finded) {
+        if ( finded ) {
+            callback(err, true);
+        } else {
+            callback(err, false);
+        }
+    });
+}
+
 function reset() {
     var globalActivityInfoCollection = require('../../util/DBCollections').getInstance().collections.globalActivityInfo;
     globalActivityInfoCollection.remove({}, function() {
@@ -47,6 +62,7 @@ function reset() {
 var exports = {
     save: save,
     read: read,
+    useCheck: useCheck,
     reset: reset
 };
 
