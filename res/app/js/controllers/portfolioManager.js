@@ -15,7 +15,14 @@ define([
             $http.get('http://210.118.74.166:8123/info/personal', {withCredentials: true}).
                 success(function(data, status, headers, config) {
                     $scope.userInfo = data.result;
+
+                    if (data.result.S_name_kr === '') {
+                        $scope.userInfo.S_name_kr = data.result._member_email.split('@')[0];
+                    }
+
                     $('#header-title').fadeIn('slow');
+
+
                 });
         }
 
