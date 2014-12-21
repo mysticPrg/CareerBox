@@ -16,7 +16,8 @@ define([
 
                 // row, col이 있는 경우(pos-x속성이 존재한다)
 
-                if(att.row){
+//                console.log('att.row', "row" in att);
+                if("row" in att){
                     element.css({
                         top:  (element.position().top + att.row * element.height()) + "px",
                         left: (element.position().left + att.col * element.width()) + "px"
