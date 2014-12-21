@@ -105,6 +105,7 @@ function articleBinding(article, _member_id, callback) {
                 }
                 bindedChildArr.push(bindItems(article.childArr[0], childs[i]));
             }
+            article.childArr = [bindedChildArr];
             callback();
         });
     }
@@ -149,14 +150,17 @@ function getInfoValue(infoType, infoData) {
 
 function setImage(layoutItem, infoData) {
     layoutItem.thumbnail = getInfoValue(layoutItem.bindingType, infoData);
+    return layoutItem;
 }
 
 function setText(layoutItem, infoData) {
     layoutItem.value = getInfoValue(layoutItem.bindingType, infoData);
+    return layoutItem;
 }
 
 function setLink(layoutItem, infoData) {
     layoutItem.url = getInfoValue(layoutItem.bindingType, infoData);
+    return layoutItem;
 }
 
 function setDefault(layoutItem) {
