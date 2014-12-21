@@ -17,7 +17,7 @@ define([], function () {
             this.R = colorCode.substr(0, 2);
             this.G = colorCode.substr(2, 2);
             this.B = colorCode.substr(4, 2);
-        } else {
+        } else if ( colorCode instanceof Color) {
             this.R = colorCode.R;
             this.G = colorCode.G;
             this.B = colorCode.B;
