@@ -62,6 +62,7 @@ var exports = {
     read: read,
     getList: getList,
     deleteFile: deleteFile,
+    checkUsingImage: checkUsingImage,
     reset: reset
 };
 

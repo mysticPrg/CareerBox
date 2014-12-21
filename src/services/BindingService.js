@@ -11,6 +11,11 @@ var ItemType = requirejs('classes/Enums/itemType');
 var LayoutComponentType = requirejs('classes/Enums/LayoutComponentType');
 var Term = requirejs('classes/Structs/Term');
 
+var Image = requirejs('classes/LayoutComponents/Items/Image');
+var Text = requirejs('classes/LayoutComponents/Items/Text');
+var Link = requirejs('classes/LayoutComponents/Items/Link');
+
+
 var PersonalInfoDB = require('../db/Info/PersonalInfoDB');
 var AdditionalInfoDB = require('../db/Info/AdditionalInfoDB');
 var HighSchoolInfoDB = require('../db/Info/HighSchoolInfoDB');
@@ -157,18 +162,21 @@ function getInfoValue(infoType, infoData) {
 }
 
 function setImage(layoutItem, infoData) {
-    layoutItem.thumbnail = getInfoValue(layoutItem.bindingType, infoData);
-    return layoutItem;
+    var newItem = new Image(layoutItem);
+    newItem.thumbnail = getInfoValue(layoutItem.bindingType, infoData);
+    return newItem;
 }
 
 function setText(layoutItem, infoData) {
-    layoutItem.value = getInfoValue(layoutItem.bindingType, infoData);
-    return layoutItem;
+    var newItem = new Text(layoutItem);
+    newItem.value = getInfoValue(layoutItem.bindingType, infoData);
+    return newItem;
 }
 
 function setLink(layoutItem, infoData) {
-    layoutItem.url = getInfoValue(layoutItem.bindingType, infoData);
-    return layoutItem;
+    var newItem = new Link(layoutItem);
+    newItem.url = getInfoValue(layoutItem.bindingType, infoData);
+    return newItem;
 }
 
 function setDefault(layoutItem) {
