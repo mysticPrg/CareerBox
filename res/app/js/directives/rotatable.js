@@ -17,9 +17,14 @@ define([
                 var a = values[0];
                 var b = values[1];
                 var rad = Math.atan2(b, a);
+
             } else { var rad = 0; }
             return rad;
         };
+
+        function getRotationDeg(rad) {
+            return rad * 180 / Math.PI;
+        }
 
         return {
             // A = attribute, E = Element, C = Class and M = HTML Comment
@@ -35,7 +40,7 @@ define([
                     },
                     // Callback fired on rotation end.
                     stop: function(event, ui) {
-                        scope.attributeInformation.rotate = getRotationRadian(element);
+                        scope.attributeInformation.rotate = getRotationDeg(getRotationRadian(element));
                     }
                 };
                 element.rotatable(params);

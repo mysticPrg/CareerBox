@@ -14,9 +14,19 @@ define([
             if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
                 // pos
                 scope.$watch("attributeInformation.pos",function() {
-                    if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
-
+                    if(EditorData.focusId == att.id){
+                        // row, col이 있는 경우(pos-x속성이 존재한다)
+//                        console.log('att.posY', att.posY);
+//                        console.log('att.posX', att.posX);
+                        if(att.posX){
+                            element.css({
+                                top:  (element.pos.y + att.posY) + "px",
+                                left: (element.pos.x + att.posX) + "px"
+                            });
+                        }else{
+                            ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
+                        }
+                    }
                 },true);
 
                 // outline 색

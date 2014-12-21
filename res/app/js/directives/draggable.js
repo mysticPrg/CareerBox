@@ -26,8 +26,8 @@ define([
                     containment: '#canvas-content'    // 드롭되지 않으면 다시 돌아옴.
 
                     ,start: function() {
-                        console.log('start', element.position());
-                        console.log('start top, left', element[0].offsetTop, element[0].offsetLeft);
+//                        console.log('start', element.position());
+//                        console.log('start top, left', element[0].offsetTop, element[0].offsetLeft);
                     }
                 });
 
