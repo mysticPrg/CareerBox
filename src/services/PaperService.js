@@ -11,6 +11,7 @@ var Result = require('./result');
 var ObjectID = require('mongodb').ObjectID;
 
 var CaptureFromSite = require('../util/CaptureFromSite');
+var BindingService = require('./BindingService');
 
 var genID = require('../util/genID');
 
@@ -149,7 +150,9 @@ function loadService(req, res) {
     }
 
     PaperDB.get(_paper_id, function(err, paper) {
-        ServiceUtil.sendResult(err, res, paper);
+        BindingService(paper, req.session._id, function() {
+            ServiceUtil.sendResult(err, res, paper);
+        });
     });
 }
 

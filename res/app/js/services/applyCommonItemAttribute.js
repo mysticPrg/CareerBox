@@ -62,6 +62,7 @@ define(['app'
     };
 
     function radius(element, item) {
+        console.log('test radius');
         element.css({
             'border-radius': item.radius + "px"
         });
@@ -93,13 +94,12 @@ define(['app'
     }
 
     function pos(element, item){
-        if( !(item.pos.x == element.position().left && item.pos.y == element.position().top) ){
+//        if( !(item.pos.x == element[0].offsetLeft && item.pos.y == element[0].offsetTop) )
+        {
             element.css({
                 top: item.pos.y + "px",
                 left: item.pos.x + "px"
             });
-        } else{
-            // rotate 가 걸려있을 경우
         }
     }
 

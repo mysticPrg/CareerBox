@@ -16,7 +16,7 @@ function save(data, callback) {
 
     for ( var i=0 ; i<globalActivityInfo.items.length ; i++ ) {
         if (!globalActivityInfo.items[i]._id) {
-            globalActivityInfo.items[i]._id = new ObjectID();
+            globalActivityInfo.items[i]._id = new ObjectID().toHexString();
         }
     }
 

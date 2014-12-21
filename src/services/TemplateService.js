@@ -101,7 +101,7 @@ function createOrUpdateService(req, res) {
 
     for (var k in newTemplate.target.childArr) {
 
-        for (var i=0 ; i<newTemplate.target.childArr[k] ; i++ ) {
+        for (var i=0 ; i<newTemplate.target.childArr[k].length ; i++ ) {
             if (!newTemplate.target.childArr[k][i]._id) {
                 newTemplate.target.childArr[k][i]._id = genID();
             }

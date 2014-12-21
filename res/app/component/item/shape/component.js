@@ -12,7 +12,7 @@ define([
         function modifyShapeType(scope, element){
             if(scope.info.shapeType == "box")
                 element.css({
-                    'border-radius': '0%'
+                    'border-radius': '0px'
                 });
             else
                 element.css({

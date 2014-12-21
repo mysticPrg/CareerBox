@@ -16,7 +16,7 @@ function saveList(data, callback) {
 
     for ( var i=0 ; i<highSchoolInfo.items.length ; i++ ) {
         if (!highSchoolInfo.items[i]._id) {
-            highSchoolInfo.items[i]._id = new ObjectID();
+            highSchoolInfo.items[i]._id = new ObjectID().toHexString();
         }
     }
 
