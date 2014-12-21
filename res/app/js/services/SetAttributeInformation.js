@@ -77,8 +77,8 @@ define([
                 }
                 else{
                     articleId = id.split("_")[0] + "_" + id.split("_")[1];
-                    childID = id.split("_")[2];
-                    arrayId = id.split("_")[3];
+                    childID = id.split("_")[3];
+                    arrayId = id.split("_")[2];
                 }
 
                 // 모델 경로 설정 ** EditorData.childArr -> article
@@ -121,6 +121,7 @@ define([
 //                    }
 //                };
 //            }
+
             // 페이퍼에디터에서 아티클 자체이거나 아이템인 경우
             else if(id.split("_").length == 3){
                 // 아이디 파싱
@@ -132,9 +133,9 @@ define([
                     attributeInformation : EditorData.childArr[articleId],
                     type : 'acticle'
                 }
-
             }
 
+            // 아티클 그 자체
             else {
                 return {
                     parentArray : EditorData.childArr,
