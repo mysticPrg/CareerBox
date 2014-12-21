@@ -11,10 +11,9 @@ define([
     'component/item/text/component',
     'component/item/link/component',
     'component/item/image/component',
-    'directives/CommonAttribute',
-    'services/GetInformation'
+    'directives/CommonAttribute'
 ], function ($, ng, app) {
-    app.controller('portfolioEditor', ['$scope', '$window', 'EditorData',  'httpLogout', 'GetInformation', function ($scope, $window, EditorData, httpLogout, GetInformation) {
+    app.controller('portfolioEditor', ['$scope', '$window', 'EditorData',  'httpLogout', function ($scope, $window, EditorData, httpLogout) {
 
         $(document).ready(function () {
             EditorData.portfolio._id = window.location.href.split("id=")[1].split('#/')[0];
@@ -26,8 +25,6 @@ define([
                 {collapsible: false, scrollable: false},
                 {collapsible: true, size: "300px" }
             ];
-
-            GetInformation.loadAllInfo();
 
             $scope.hrefPreview = function (){
                 $window.location.href = 'portfolioPreview.html?id=' + EditorData.portfolio._id;
