@@ -43,6 +43,20 @@ function reset() {
     });
 }
 
+function checkUsingImage(_id, callback) {
+    var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
+
+    paperCollection.findOne({
+        childArr: {$elemMatch: {_template_id: _id}}
+    }, function (err, finded) {
+        if ( finded ) {
+            callback(err, true);
+        } else {
+            callback(err, false);
+        }
+    });
+}
+
 var exports = {
     write: write,
     read: read,

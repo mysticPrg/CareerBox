@@ -31,10 +31,10 @@ define([
             this._id = props._id ? props._id : this._id;
             this.layoutComponentType = props.layoutComponentType ? props.layoutComponentType : this.layoutComponentType;
             this.zOrder = props.zOrder ? props.zOrder : this.zOrder;
-            this.size = props.size ? props.size : this.size;
-            this.pos = props.pos ? props.pos : this.pos;
-            this.fill = props.fill ? props.fill : this.fill;
-            this.outline = props.outline ? props.outline : this.outline;
+            this.size = new Size(props.size ? props.size : this.size);
+            this.pos = new Pos(props.pos ? props.pos : this.pos);
+            this.fill = new Fill(props.fill ? props.fill : this.fill);
+            this.outline = new Outline(props.outline ? props.outline : this.outline);
             this.radius = props.radius ? props.radius : this.radius;
             this.bindingType = props.bindingType ? props.bindingType : this.bindingType;
             this.isBinding = props.isBinding ? props.isBinding : this.isBinding;
