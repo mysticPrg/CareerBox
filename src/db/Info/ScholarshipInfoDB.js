@@ -16,7 +16,7 @@ function save(data, callback) {
 
     for ( var i=0 ; i<scholarshipInfoInfo.items.length ; i++ ) {
         if (!scholarshipInfoInfo.items[i]._id) {
-            scholarshipInfoInfo.items[i]._id = new ObjectID();
+            scholarshipInfoInfo.items[i]._id = new ObjectID().toHexString();
         }
     }
 

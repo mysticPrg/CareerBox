@@ -16,7 +16,7 @@ function save(data, callback) {
 
     for ( var i=0 ; i<paperAbilityInfo.items.length ; i++ ) {
         if (!paperAbilityInfo.items[i]._id) {
-            paperAbilityInfo.items[i]._id = new ObjectID();
+            paperAbilityInfo.items[i]._id = new ObjectID().toHexString();
         }
     }
 

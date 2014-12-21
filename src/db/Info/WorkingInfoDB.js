@@ -16,7 +16,7 @@ function save(data, callback) {
 
     for ( var i=0 ; i<workingInfo.items.length ; i++ ) {
         if (!workingInfo.items[i]._id) {
-            workingInfo.items[i]._id = new ObjectID();
+            workingInfo.items[i]._id = new ObjectID().toHexString();
         }
     }
 

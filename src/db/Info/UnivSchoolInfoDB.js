@@ -16,7 +16,7 @@ function saveList(data, callback) {
 
     for ( var i=0 ; i<univSchoolInfo.items.length ; i++ ) {
         if (!univSchoolInfo.items[i]._id) {
-            univSchoolInfo.items[i]._id = new ObjectID();
+            univSchoolInfo.items[i]._id = new ObjectID().toHexString();
         }
     }
 

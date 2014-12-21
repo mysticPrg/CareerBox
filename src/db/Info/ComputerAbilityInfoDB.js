@@ -16,7 +16,7 @@ function save(data, callback) {
 
     for ( var i=0 ; i<computerAbilityInfo.items.length ; i++ ) {
         if (!computerAbilityInfo.items[i]._id) {
-            computerAbilityInfo.items[i]._id = new ObjectID();
+            computerAbilityInfo.items[i]._id = new ObjectID().toHexString();
         }
     }
 

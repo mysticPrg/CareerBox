@@ -16,7 +16,7 @@ function save(data, callback) {
 
     for ( var i=0 ; i<columnInfo.items.length ; i++ ) {
         if (!columnInfo.items[i]._id) {
-            columnInfo.items[i]._id = new ObjectID();
+            columnInfo.items[i]._id = new ObjectID().toHexString();
         }
     }
 

@@ -6,8 +6,10 @@ var async = require('async');
 
 var requirejs = require('../require.config');
 
-var infoType = requirejs('classes/Enums/InfoType');
-var LayoutCompnentType = requirejs('classes/Enums/LayoutCompnentType');
+var InfoType = requirejs('classes/Enums/InfoType');
+var ItemType = requirejs('classes/Enums/itemType');
+var LayoutComponentType = requirejs('classes/Enums/LayoutComponentType');
+var Term = requirejs('classes/Structs/Term');
 
 var PersonalInfoDB = require('../db/Info/PersonalInfoDB');
 var AdditionalInfoDB = require('../db/Info/AdditionalInfoDB');
@@ -26,38 +28,31 @@ var ProjectInfoDB = require('../db/Info/ProjectInfoDB');
 var ColumnInfoDB = require('../db/Info/ColumnInfoDB');
 
 var infoDBs = {};
-infoDBs[infoType.personalInfo] = PersonalInfoDB;
-infoDBs[infoType.additionalInfo] = AdditionalInfoDB;
-infoDBs[infoType.highSchoolInfo] = HighSchoolInfoDB;
-infoDBs[infoType.univSchoolInfo] = UnivSchoolInfoDB;
-infoDBs[infoType.workingInfo] = WorkingInfoDB;
-infoDBs[infoType.certificationAbilityInfo] = CertificationAbilityInfoDB;
-infoDBs[infoType.proficiencyInfo] = ProficiencyInfoDB;
-infoDBs[infoType.computerAbilityInfo] = ComputerAbilityInfoDB;
-infoDBs[infoType.paperAbilityInfo] = PaperAbilityInfoDB;
-infoDBs[infoType.scholarshipInfo] = ScholarshipInfoDB;
-infoDBs[infoType.awardInfo] = AwardInfoDB;
-infoDBs[infoType.localActivityInfo] = LocalActivityInfoDB;
-infoDBs[infoType.globalActivityInfo] = GlobalActivityInfoDB;
-infoDBs[infoType.projectInfo] = ProjectInfoDB;
-infoDBs[infoType.columnInfo] = ColumnInfoDB;
+infoDBs[InfoType.personalInfo] = PersonalInfoDB;
+infoDBs[InfoType.additionalInfo] = AdditionalInfoDB;
+infoDBs[InfoType.highSchoolInfo] = HighSchoolInfoDB;
+infoDBs[InfoType.univSchoolInfo] = UnivSchoolInfoDB;
+infoDBs[InfoType.workingInfo] = WorkingInfoDB;
+infoDBs[InfoType.certificationAbilityInfo] = CertificationAbilityInfoDB;
+infoDBs[InfoType.proficiencyInfo] = ProficiencyInfoDB;
+infoDBs[InfoType.computerAbilityInfo] = ComputerAbilityInfoDB;
+infoDBs[InfoType.paperAbilityInfo] = PaperAbilityInfoDB;
+infoDBs[InfoType.scholarshipInfo] = ScholarshipInfoDB;
+infoDBs[InfoType.awardInfo] = AwardInfoDB;
+infoDBs[InfoType.localActivityInfo] = LocalActivityInfoDB;
+infoDBs[InfoType.globalActivityInfo] = GlobalActivityInfoDB;
+infoDBs[InfoType.projectInfo] = ProjectInfoDB;
+infoDBs[InfoType.columnInfo] = ColumnInfoDB;
 
-var bindFuncs = {};
-bindFuncs[infoType.personalInfo] = bindForPersonalInfo;
-bindFuncs[infoType.additionalInfo] = bindForAdditionalInfo;
-bindFuncs[infoType.highSchoolInfo] = bindForHighSchoolInfo;
-bindFuncs[infoType.univSchoolInfo] = bindForUnivSchoolInfo;
-bindFuncs[infoType.workingInfo] = bindForWorkingInfo;
-bindFuncs[infoType.certificationAbilityInfo] = bindForCertificationAbilityInfo;
-bindFuncs[infoType.proficiencyInfo] = bindForProficiencyInfo;
-bindFuncs[infoType.computerAbilityInfo] = bindForComputerAbilityInfo;
-bindFuncs[infoType.paperAbilityInfo] = bindForPaperAbilityInfo;
-bindFuncs[infoType.scholarshipInfo] = bindForScholarshipInfo;
-bindFuncs[infoType.awardInfo] = bindForAwardInfo;
-bindFuncs[infoType.localActivityInfo] = bindForLocalActivityInfo;
-bindFuncs[infoType.globalActivityInfo] = bindForGlobalActivityInfo;
-bindFuncs[infoType.projectInfo] = bindForProjectInfo;
-bindFuncs[infoType.columnInfo] = bindForColumnInfo;
+var setFuncs = {};
+setFuncs[ItemType.image] = setImage;
+setFuncs[ItemType.text] = setText;
+setFuncs[ItemType.link] = setLink;
+
+setFuncs[ItemType.line] = setDefault
+setFuncs[ItemType.shape] = setDefault;
+setFuncs[ItemType.icon] = setDefault;
+
 
 function paperBinding(paper, _member_id, callback) {
     var child = paper.childArr;
@@ -77,91 +72,107 @@ function articleBinding(article, _member_id, callback) {
     }
 
     var infoDB = infoDBs[article.bindingType.infoType];
-    var bindFunc = bindFuncs[article.bindingType.infoType];
 
     // info 자체에 데이터가 있는 경우
-    if (article.bindingType === 'personalInfo' || article.bindingType === 'additionalInfo') {
+    if (article.bindingType.infoType === 'personalInfo' || article.bindingType.infoType === 'additionalInfo') {
         infoDB.read(_member_id, function (err, finded) {
-            var bindedChildArr = bindFunc(finded);
+
+            if (!finded) {
+                callback();
+                return;
+            }
+
+            finded._id = finded._id.toHexString();
+            var bindedChildArr = bindItems(article.childArr[0], finded);
             article.childArr = [bindedChildArr];
             callback();
         });
     }
     else { // info.item 구조인 경우
         infoDB.read(_member_id, function (err, finded) {
+
+            if (!finded) {
+                callback();
+                return;
+            }
+
             var bindedChildArr = [];
 
-            var childs = finded.childArr;
+            var childs = finded.items;
             for ( var i=0 ; i<childs.length ; i++ ) {
-                if ( article.bindingData.indexOf(childs._id) === -1 ) {
+                if ( article.bindingData.indexOf(childs[i]._id) === -1 ) {
                     continue;
                 }
-                bindedChildArr.push(bindFunc(childs[i]));
+                bindedChildArr.push(bindItems(article.childArr[0], childs[i]));
             }
             callback();
         });
     }
 }
 
-function bindForPersonalInfo () {
+function getInfoValue(infoType, infoData) {
+    var type = infoType[0];
 
+    switch (type) {
+        case 'S':
+            return infoData;
+
+        case 'N':
+            return '' + infoData;
+
+        case 'B':
+            if ( infoData ) {
+                return true;
+            } else {
+                return false;
+            }
+
+        case 'F':
+            return infoData._id;
+
+        case 'I':
+            return infoData._id;
+
+        case 'D':
+            var tempDate = new Date(infoData);
+            return '' + tempDate.getYear() + '-' + tempDate.getMonth() + '-' + tempDate.getDate();
+
+        case 'T':
+            var tempTerm = new Term(infoData);
+            return '' + tempTerm.start.getYear() + '-' + tempTerm.start.getMonth() + '-' + tempTerm.start.getDate() + ' ~ ' +
+                tempTerm.end.getYear() + '-' + tempTerm.end.getMonth() + '-' + tempTerm.end.getDate();
+
+        default:
+            return '';
+    }
 }
 
-function bindForAdditionalInfo () {
-
+function setImage(layoutItem, infoData) {
+    layoutItem.thumbnail = getInfoValue(layoutItem.bindingType, infoData);
 }
 
-function bindForHighSchoolInfo () {
-
+function setText(layoutItem, infoData) {
+    layoutItem.value = getInfoValue(layoutItem.bindingType, infoData);
 }
 
-function bindForUnivSchoolInfo () {
-
+function setLink(layoutItem, infoData) {
+    layoutItem.url = getInfoValue(layoutItem.bindingType, infoData);
 }
 
-function bindForWorkingInfo () {
-
+function setDefault(layoutItem) {
+    return layoutItem;
 }
 
-function bindForCertificationAbilityInfo () {
+function bindItems (layoutItems, infoData) {
 
+    var resultArr = [];
+
+    for (var k in layoutItems) {
+        var bindedLayoutItem = setFuncs[layoutItems[k].itemType](layoutItems[k], infoData[layoutItems[k].bindingType]);
+        resultArr.push(bindedLayoutItem);
+    }
+
+    return resultArr;
 }
-
-function bindForProficiencyInfo () {
-
-}
-
-function bindForComputerAbilityInfo () {
-
-}
-
-function bindForPaperAbilityInfo () {
-
-}
-
-function bindForScholarshipInfo () {
-
-}
-
-function bindForAwardInfo () {
-
-}
-
-function bindForLocalActivityInfo () {
-
-}
-
-function bindForGlobalActivityInfo () {
-
-}
-
-function bindForProjectInfo () {
-
-}
-
-function bindForColumnInfo () {
-
-}
-
 
 module.exports = paperBinding;

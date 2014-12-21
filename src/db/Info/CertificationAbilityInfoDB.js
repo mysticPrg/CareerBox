@@ -16,7 +16,7 @@ function save(data, callback) {
 
     for ( var i=0 ; i<certificationAbilityInfo.items.length ; i++ ) {
         if (!certificationAbilityInfo.items[i]._id) {
-            certificationAbilityInfo.items[i]._id = new ObjectID();
+            certificationAbilityInfo.items[i]._id = new ObjectID().toHexString();
         }
     }
 
