@@ -68,6 +68,10 @@ function paperBinding(paper, _member_id, callback) {
 
 function articleBinding(article, _member_id, callback) {
     if (!article.isBinding) {
+        callback();
+        return;
+    } else if (article.bindingData && article.bindingData.length === 0 ) {
+        callback();
         return;
     }
 
@@ -105,7 +109,7 @@ function articleBinding(article, _member_id, callback) {
                 }
                 bindedChildArr.push(bindItems(article.childArr[0], childs[i]));
             }
-            article.childArr = [bindedChildArr];
+            article.childArr = bindedChildArr;
             callback();
         });
     }
