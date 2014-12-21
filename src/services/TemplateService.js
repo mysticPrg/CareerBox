@@ -100,8 +100,11 @@ function createOrUpdateService(req, res) {
     newTemplate._member_id = req.session._id;
 
     for (var k in newTemplate.target.childArr) {
-        if (!newTemplate.target.childArr[k]._id) {
-            newTemplate.target.childArr[k]._id = genID();
+
+        for (var i=0 ; i<newTemplate.target.childArr[k] ; i++ ) {
+            if (!newTemplate.target.childArr[k][i]._id) {
+                newTemplate.target.childArr[k][i]._id = genID();
+            }
         }
     }
 
