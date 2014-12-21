@@ -31,6 +31,7 @@ define([
             $scope.paperItemArray = [];
 
             $(document).ready(function () {
+
                 // templateState값이 변경됨에 따라 저장 여부 판단
                 EditorData.templateState = '';
 
@@ -44,6 +45,7 @@ define([
                 if (EditorData.paperId !== '') {
                     loadPaper();
                 }
+
                 EditorData.focusId = EditorData.paper._id;
             });
 
@@ -57,6 +59,7 @@ define([
                 deleteArticle(id);
             });
 
+            // 페이지 바꿧을때  loadPaper()를 다시;
             $scope.$watch("EditorData.paperId", function () {
                 if (EditorData.paperId === '')
                     return;

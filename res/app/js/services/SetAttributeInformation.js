@@ -78,13 +78,15 @@ define([
                 }
 
                 // 모델 경로 설정 ** EditorData.childArr -> article
-                for(var key in EditorData.childArr[articleId].childArr){
-                    if(EditorData.childArr[articleId].childArr[key]._id == childID)
+                var articleModel = EditorData.childArr[articleId].childArr[0];
+                for(var key in articleModel){
+                    if(articleModel[key]._id == childID){
                         return {
-                            parentArray : EditorData.childArr[articleId].childArr,
-                            attributeInformation : EditorData.childArr[articleId].childArr[key],
+                            parentArray : articleModel,
+                            attributeInformation : articleModel[key],
                             type : 'acticle_item'
                         }
+                    }
                 };
             };
 

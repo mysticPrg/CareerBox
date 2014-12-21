@@ -26,7 +26,6 @@ define([
                 });
 
                 // 포커싱 되었을 때 handle이 보이도록 함
-//                scope.EditorData = EditorData;
                 scope.id = att.id;
                 var handle = element.find('.ui-resizable-handle');
                 handle.attr('ng-show',"id == EditorData.focusId");

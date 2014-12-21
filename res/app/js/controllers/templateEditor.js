@@ -155,7 +155,6 @@ define([
             $scope.thumbnail = '';
             $scope.description = '';
 
-            console.log($scope.template);
             SaveTemplate($http, $scope.template, function (result) {
                 if (result.returnCode === '000') {
                     $scope.changed = false;
