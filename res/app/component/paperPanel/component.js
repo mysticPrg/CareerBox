@@ -181,7 +181,7 @@ define([
                     }
                 }
 
-                var templateDomId = template._id + '_' + $scope.childIndex;
+                var templateDomId = template._id + '_' + $scope.childIndex + '_0';
                 var templateItemDom = '';
 
                 template._template_id = template._id;
@@ -192,6 +192,8 @@ define([
                 template.target._template_id = template._id;
 
                 EditorData.childArr[templateDomId] = template.target;
+                console.log(EditorData.childArr[templateDomId]);
+
                 SetZOrder(template.target, templateDomId);
 
                 var templateItemArray = template.target.childArr[0];
