@@ -53,7 +53,6 @@ function checkUsingImage(_id, callback) {
         if ( finded ) {
             callback(err, true);
         } else {
-
             templateCollection.findOne({
                 'childArr.0': {$elemMatch: {itemType: 'image', thumbnail: _id}}
             }, function(err2, findedTemplate) {
