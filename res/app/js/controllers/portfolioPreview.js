@@ -26,7 +26,6 @@ define([
             EditorData.portfolio._id = window.location.href.split("id=")[1].split("&")[0];
 
             EditorData.paper_id = window.location.href.split("paper_id=")[1];
-            console.log('EditorData.paper_id', EditorData.paper_id)
 
             // 만약에 paper_id 가 없으면 index페이지로 이동.
 
@@ -40,7 +39,6 @@ define([
                 for(var idx = 0; idx < $scope.papers.length; idx++){
                     paper = $scope.papers[idx];
 
-
                     if(!EditorData.paper_id && paper.isIndex === true){
                         EditorData.paperId = paper._id;
 
@@ -51,8 +49,6 @@ define([
                         });
                         return;
                     }
-
-                    console.log('paper._id', paper._id)
 
                     if(paper._id === EditorData.paper_id){
 
@@ -83,10 +79,6 @@ define([
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         function loadPaper(paper) {
             var paperChildArr = paper.childArr;
-
-            console.log('///////');
-            console.log(paper);
-            console.log('///////');
 
             $compile($('#canvas-content'))($scope); // 페이퍼 속성을 적용시켜줌.
 

@@ -34,7 +34,6 @@ define([
             scope : true,   // 새로운 스코프
             link: function(scope, element, att) {
 
-
                 scope.info = SetAttributeInformation(att.id).attributeInformation;
                 scope.style = {};
 
@@ -79,9 +78,9 @@ define([
                 });
 
                 // binding
-                scope.$watch("info.bindingType",function() {
-                    scope.info['value'] = scope.info.bindingType
-                });
+//                scope.$watch("info.bindingType",function() {
+//                    scope.info['value'] = scope.info.bindingType
+//                });
 
             },
             templateUrl: require.toUrl('component/item/text/template.html')

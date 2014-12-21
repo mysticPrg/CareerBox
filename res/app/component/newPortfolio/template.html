@@ -6,7 +6,7 @@
     <ul>
         <li ng-repeat="portfolio in portfolios track by $index">
             <div ng-click="goToPortfolio(portfolio._id)">
-                <img ng-src="http://210.118.74.166:8123/portfolio/thumb/{{portfolio._id}}">
+                <img ng-src="http://210.118.74.166:8123/portfolio/thumb/{{portfolio._id}}" onerror="this.src='../img/testImage.png'">
 
                 <div class="portfolioInfo">
 

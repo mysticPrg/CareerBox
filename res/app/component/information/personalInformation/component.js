@@ -12,11 +12,13 @@ define([
         $scope.InformationData = InformationData;
         $scope.progress = 0;
 
+
         $scope.$watch("InformationData.personalInfo", function () {
             $scope.personalInfo = InformationData.personalInfo;
         }, true);
 
         $scope.onFileSelectProfileImage = function ($files) {
+            $scope.fileName = $files[0].name;
             $('#personal_picture_progressbar').fadeIn('slow');
 
             ImageUpload($upload, $files, 'profile', function (evt) {

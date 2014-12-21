@@ -28,8 +28,8 @@
                 <div ng-show = "!userInfo.I_picture">
                     <img ng-src="../img/noImage.png">
                 </div>
-                <div ng-show = "userInfo.I_picture">
-                    <img ng-src="http://210.118.74.166:8123/image/profile/thumb/{{userInfo.I_picture._id}}">
+                <div class="crop" ng-show = "userInfo.I_picture">
+                    <img class="profileImg" ng-src="http://210.118.74.166:8123/image/profile/thumb/{{userInfo.I_picture._id}}">
                 </div>
             </div>
 

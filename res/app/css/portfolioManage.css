@@ -84,6 +84,22 @@ img {
     border-radius: 100%;
 }
 
+/*#content #user-info #userImg .crop {*/
+    /*width: 160px;*/
+    /*height: 160px;*/
+    /*overflow: hidden;*/
+/*}*/
+
+/*#content #user-info #userImg .crop .profileImg {*/
+    /*width: 160px;*/
+    /*height: 214px;*/
+    /*margin: -27px 0 -27px 0;*/
+/*}*/
+
+/*#content #user-info #userImg img {*/
+    /*border-radius: 100%;*/
+/*}*/
+
 #content #user-info #horizonLine {
     position: absolute;
     margin: 0;
@@ -199,6 +215,7 @@ img {
     width: 46px;
     height: 48px;
     background-image: url('../img/manage_img/editBtn.png');
+    background-color: transparent;
     border-style: none;
 
 }

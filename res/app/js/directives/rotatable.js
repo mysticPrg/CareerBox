@@ -2,9 +2,10 @@ define([
     'app',
     'jquery-ui',
     'rotatable',
-    'services/ApplyCommonItemAttribute'
+    'services/ApplyCommonItemAttribute',
+    'services/EditorData'
 ], function (app) {
-    app.directive('rotatable', function (ApplyCommonItemAttribute) {
+    app.directive('rotatable', function (ApplyCommonItemAttribute, $compile, EditorData) {
         function getRotationRadian(obj) {
             var matrix = obj.css("-webkit-transform") ||
                 obj.css("-moz-transform")    ||
@@ -37,8 +38,13 @@ define([
                         scope.attributeInformation.rotate = getRotationRadian(element);
                     }
                 };
-
                 element.rotatable(params);
+
+                // 포커싱 되었을 때 handle이 보이도록 함
+                scope.id = att.id;
+                var handle = element.find('.ui-rotatable-handle');
+                handle.attr('ng-show',"id == EditorData.focusId");
+                $compile(handle)(scope);
             }
         };
     });
