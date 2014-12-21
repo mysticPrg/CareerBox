@@ -77,18 +77,26 @@ img {
     box-shadow: 0px 4px 4px rgba(0,0,0,0.4);
 }
 
-#content #user-info #userImg img {
-    display: inline-block;
-    width: 160px;
-    height: 160px;
-    border-radius: 100%;
-}
-
-/*#content #user-info #userImg .crop {*/
+/*#content #user-info #userImg img {*/
+    /*display: inline-block;*/
     /*width: 160px;*/
     /*height: 160px;*/
-    /*overflow: hidden;*/
+    /*border-radius: 100%;*/
 /*}*/
+
+/*이미지 크롭*/
+#content #user-info #userImg .crop img {
+    width: 160px;
+    overflow: hidden;
+}
+
+#content #user-info #userImg .crop {
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+    color: #fff;
+    -webkit-mask-image: url('../img/manage_img/maskCircle.png');
+}
 
 /*#content #user-info #userImg .crop .profileImg {*/
     /*width: 160px;*/

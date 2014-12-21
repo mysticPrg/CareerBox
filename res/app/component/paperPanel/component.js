@@ -86,8 +86,13 @@ define([
 
                 getTemplateList($http, 'article', function (data) {
                     if (data.returnCode == 000) {
-                        $scope.templates = data.result;
-//                        console.log('load data',$scope.templates);
+                        var templates = data.result;
+                        $scope.templates = []
+                        for(var i = 0; i < templates.length; i++){
+                            var template = new Template(templates[i]);
+                            template.thumbURL = 'http://210.118.74.166:8123/template/thumb/'+template._id+'?'+new Date();
+                            $scope.templates.push(template);
+                        }
                     }
                 });
             };

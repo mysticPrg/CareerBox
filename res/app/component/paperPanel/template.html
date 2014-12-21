@@ -50,7 +50,7 @@
                     <ul id="articleTemplateList">
                         <li ng-repeat="template in templates track by $index">
                             <div id="templateThumb" ng-click="templateClone(template)">
-                                <img ng-src="http://210.118.74.166:8123/template/thumb/{{template._id}}">
+                                <img ng-src="{{template.thumbURL}}">
 
                                 <div class="description">
                                     {{template.title}}
