@@ -38,7 +38,7 @@ function saveService(req, res) {
     var data = req.body.univSchoolInfo;
     data._member_id = req.session._id;
 
-    UnivSchoolInfoDB.saveList(data, function (err, saved) {
+    UnivSchoolInfoDB.save(data, function (err, saved) {
         ServiceUtil.sendResult(err, res, saved._id);
     });
 }
@@ -52,7 +52,7 @@ function readListService(req, res) {
 
     var _member_id = req.session._id;
 
-    UnivSchoolInfoDB.readList(_member_id, function (err, finded) {
+    UnivSchoolInfoDB.read(_member_id, function (err, finded) {
         ServiceUtil.sendResult(err, res, finded);
     });
 }

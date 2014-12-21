@@ -45,8 +45,8 @@ function reset() {
 }
 
 var exports = {
-    saveList: saveList,
-    readList: readList,
+    save: saveList,
+    read: readList,
     reset: reset
 };
 

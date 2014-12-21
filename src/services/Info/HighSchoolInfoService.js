@@ -38,7 +38,7 @@ function saveService(req, res) {
     var data = req.body.highSchoolInfo;
     data._member_id = req.session._id;
 
-    HighSchoolInfoDB.saveList(data, function (err, saved) {
+    HighSchoolInfoDB.save(data, function (err, saved) {
         ServiceUtil.sendResult(err, res, saved._id);
     });
 
@@ -53,7 +53,7 @@ function readListService(req, res) {
 
     var _member_id = req.session._id;
 
-    HighSchoolInfoDB.readList(_member_id, function (err, finded) {
+    HighSchoolInfoDB.read(_member_id, function (err, finded) {
         ServiceUtil.sendResult(err, res, finded);
     });
 }

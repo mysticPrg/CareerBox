@@ -114,6 +114,8 @@ function createOrUpdateService(req, res) {
         console.log(newTemplate._id);
         newTemplate._id = new ObjectID(newTemplate._id);
 
+        newTemplate.target.bindingData = req.body.template.target.bindingData;
+
         TemplateDB.update(newTemplate, function (err) {
             CaptureFromSite(newTemplate._id.toHexString(), 'template', function(err2) {
                 ServiceUtil.sendResult(err2, res, null);

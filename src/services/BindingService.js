@@ -76,6 +76,10 @@ function articleBinding(article, _member_id, callback) {
     }
 
     var infoDB = infoDBs[article.bindingType.infoType];
+    if (!infoDB) {
+        callback();
+        return;
+    }
 
     // info 자체에 데이터가 있는 경우
     if (article.bindingType.infoType === 'personalInfo' || article.bindingType.infoType === 'additionalInfo') {
