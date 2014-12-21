@@ -194,7 +194,7 @@ define([
                 EditorData.childArr[templateDomId] = template.target;
                 SetZOrder(template.target, templateDomId);
 
-                var templateItemArray = template.target.childArr;
+                var templateItemArray = template.target.childArr[0];
 
                 createTemplateDiv(template, templateDomId);
 
