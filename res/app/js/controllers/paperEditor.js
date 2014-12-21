@@ -267,26 +267,26 @@ define([
 
             }
 
-            function updateModel(id, draggable) {
-
-                var child;
-
-                child = EditorData.childArr[id];
-
-//            ** do not override item id
-//            child._id = id;
-                child.pos = {x: draggable.position().left, y: draggable.position().top};
-                child.size = {width: draggable.width(), height: draggable.height()};
-
-                EditorData.childArr[id] = child;
-            }
+//            function updateModel(id, draggable) {
+//
+//                var child;
+//
+//                child = EditorData.childArr[id];
+//
+////            ** do not override item id
+////            child._id = id;
+//                child.pos = {x: draggable.position().left, y: draggable.position().top};
+//                child.size = {width: draggable.width(), height: draggable.height()};
+//
+//                EditorData.childArr[id] = child;
+//            }
 
             $('#canvas-content').droppable({
                 activeClass: "drop-area",
                 drop: function (e, ui) {            // 드롭될 경우
                     var id = ui.draggable[0].getAttribute("id");
 
-                    updateModel(id, ui.draggable);
+//                    updateModel(id, ui.draggable);
                 }
             });
 
