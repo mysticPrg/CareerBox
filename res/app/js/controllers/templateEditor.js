@@ -19,6 +19,7 @@ define([
     app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation) {
         EditorData.editorType = 'template';
         $scope.changed = false;
+        $scope.saveRock;
 
         // z index 초기화
         EditorData.end_zOrder = 0;
@@ -148,6 +149,11 @@ define([
 
 
         $scope.save = function () {
+            if($scope.saveRock === true){
+                return;
+            }
+
+            $scope.saveRock = true;
             EditorData.focusId = '';
 
             $scope.template.target.childArr[0] = getTemplateChildArr(EditorData.templateItemArray);
@@ -191,6 +197,7 @@ define([
         function showSuccessNotification() {
             var notification = kendo.toString('성공하였습니다.');
             $scope.template_noti.show(notification, "info");
+            $scope.saveRock = false;
         }
 
         function showFailNotification(text) {
