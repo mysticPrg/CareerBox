@@ -72,8 +72,8 @@ define([
 
         if (props) {
             this._template_id = props._template_id ? props._template_id : this._template_id;
-            this.rowCount = props.rowCount ? props.rowCount : this.rowCount;
-            this.colCount = props.colCount ? props.colCount : this.colCount;
+            this.rowCount = Number.parseInt(props.rowCount ? props.rowCount : this.rowCount);
+            this.colCount = Number.parseInt(props.colCount ? props.colCount : this.colCount);
 
             if (props.childArr) {
                 createChildObj(this, props.childArr);

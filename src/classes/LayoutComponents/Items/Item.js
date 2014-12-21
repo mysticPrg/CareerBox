@@ -24,8 +24,8 @@ define([
 
         if (props) {
             this.itemType = props.itemType ? props.itemType : this.itemType;
-            this.rotate = props.rotate ? props.rotate : this.rotate;
-            this.alpha = props.alpha ? props.alpha : this.alpha;
+            this.rotate = Number.parseFloat(props.rotate ? props.rotate : this.rotate);
+            this.alpha = Number.parseInt(props.alpha ? props.alpha : this.alpha);
         }
     };
 

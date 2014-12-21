@@ -13,8 +13,8 @@ define([], function () {
         this.height = 100;
 
         if (props) {
-            this.width = props.width ? props.width : this.width;
-            this.height = props.height ? props.height : this.height;
+            this.width = Number.parseInt(props.width ? props.width : this.width);
+            this.height = Number.parseInt(props.height ? props.height : this.height);
         }
     };
 

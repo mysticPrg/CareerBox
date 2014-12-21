@@ -13,8 +13,8 @@ define([], function () {
         this.y = 0;
 
         if (props) {
-            this.x = props.x ? props.x : this.x;
-            this.y = props.y ? props.y : this.y;
+            this.x = Number.parseInt(props.x ? props.x : this.x);
+            this.y = Number.parseInt(props.y ? props.y : this.y);
         }
     };
 
