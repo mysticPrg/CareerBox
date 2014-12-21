@@ -24,6 +24,11 @@ define([
                     cursor: 'move',     //
                     tolerance: 'fit',   //
                     containment: '#canvas-content'    // 드롭되지 않으면 다시 돌아옴.
+
+                    ,start: function() {
+                        console.log('start', element.position());
+                        console.log('start top, left', element[0].offsetTop, element[0].offsetLeft);
+                    }
                 });
 
                 element.bind('mousedown', function (event){
@@ -34,7 +39,8 @@ define([
 
                 element.bind('mouseup', function (event){
                     // 위치 업데이트
-                    item.pos = {x: element.position().left, y: element.position().top};
+//                    item.pos = {x: element.position().left, y: element.position().top};
+                    item.pos = {x: element[0].offsetLeft, y: element[0].offsetTop};
                     if (item.state != 'new') {
                         item.state = 'edit';
                     }

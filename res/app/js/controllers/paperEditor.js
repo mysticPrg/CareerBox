@@ -169,8 +169,6 @@ define([
 
             function loadArticle(_article) {
                 var originalArticle = _article;
-                console.log('loadArticle', originalArticle.rowCount, originalArticle.colCount);
-
                 var articleGroupDom = HTMLGenerator('loadDivDom', originalArticle, '', {draggable: true, resizable: false}) + '<table>';
 
                 // TODO 테이블 형식으로 뿌려보자
@@ -179,10 +177,11 @@ define([
                     articleGroupDom += '<tr>';
                     for (var col = 0; col < originalArticle.colCount; col++) {
                         article = new Article(originalArticle);
+
                         article.pos.x += (originalArticle.size.width * col);
                         article.pos.y += (originalArticle.size.height * row);
-                        console.log(article.size.width, article.size.height, article.pos.x, article.pos.y);
-                        article.childArr = originalArticle.childArr[0];
+
+                        article.childArr = originalArticle.childArr[(row * originalArticle.rowCount) + col];
 
                         articleGroupDom += '<td>';
                         articleGroupDom += loadArticleDom(article);
@@ -193,14 +192,12 @@ define([
 
                 articleGroupDom += '</table></div>';
 
-                console.log(articleGroupDom);
-
                 $('#canvas-content').append(articleGroupDom);
                 $compile($('#' + originalArticle._id))($scope);
             }
 
             function loadArticleDom(article) {
-                var ArticleDom = '<div>';
+                var ArticleDom = '<div id="' + article._id + '"pos-x="' + article.pos.x + '" pos-y="' + article.pos.y + '">';
 
                 var width = 0, height = 0;
 
