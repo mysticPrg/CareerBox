@@ -150,11 +150,12 @@ define([
         $scope.save = function () {
             EditorData.focusId = '';
 
-            $scope.template.target.childArr = getTemplateChildArr(EditorData.templateItemArray);
+            $scope.template.target.childArr[0] = getTemplateChildArr(EditorData.templateItemArray);
 
             $scope.thumbnail = '';
             $scope.description = '';
 
+            console.log($scope.template);
             SaveTemplate($http, $scope.template, function (result) {
                 if (result.returnCode === '000') {
                     $scope.changed = false;
