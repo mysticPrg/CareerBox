@@ -111,6 +111,11 @@
                     <div thumbnail-attribute to="attributeInformation"></div>
                 </li>
 
+                <li ng-if="attributeInformation.rowCount || attributeInformation.rowCount==='' || attributeInformation.rowCount===0">
+                    <div rowcol-attribute to="attributeInformation"></div>
+                </li>
+
+
                 <!--z-index 설정버튼-->
                 <div id="zIndexForm">
                     <label for="zIndex">z축</label>
