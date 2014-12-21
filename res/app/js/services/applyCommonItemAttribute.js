@@ -62,14 +62,13 @@ define(['app'
     };
 
     function radius(element, item) {
-        console.log('test radius');
         element.css({
             'border-radius': item.radius + "px"
         });
     };
 
     function rotate(element, item) {
-        var r = 'rotate(' + item.rotate + 'rad)';
+        var r = 'rotate(' + item.rotate + 'deg)';
         element.css({
 //            '-moz-transform': r,
             '-webkit-transform': r,
