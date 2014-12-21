@@ -155,7 +155,6 @@ define([
             $scope.thumbnail = '';
             $scope.description = '';
 
-            console.log('save data', $scope.template);
             SaveTemplate($http, $scope.template, function (result) {
                 if (result.returnCode === '000') {
                     $scope.changed = false;
@@ -191,12 +190,12 @@ define([
 
         function showSuccessNotification() {
             var notification = kendo.toString('성공하였습니다.');
-            $scope.noti.show(notification, "info");
+            $scope.template_noti.show(notification, "info");
         }
 
         function showFailNotification(text) {
             var notification = kendo.toString(text);
-            $scope.noti.show(notification, "error");
+            $scope.template_noti.show(notification, "error");
         }
     }]);
 });
