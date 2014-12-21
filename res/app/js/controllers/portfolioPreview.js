@@ -101,7 +101,7 @@ define([
 
             var width = 0, height = 0;
 
-            var templateItemArray = article.childArr;
+            var templateItemArray = article.childArr[0];
             EditorData.end_zOrder++;
             var itemOption = {draggable: false, resizable: false};
 
