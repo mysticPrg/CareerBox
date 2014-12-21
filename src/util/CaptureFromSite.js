@@ -120,7 +120,8 @@ module.exports = function CaptureFromSite(_id, type, closerCallback) {
         },
         function (ph, page, callback) { // save screenshot
             page.render(filename, {
-                format: 'jpeg'
+                format: 'png',
+                quality: '50'
             }, function () {
                 callback(null, ph);
             });
@@ -128,6 +129,7 @@ module.exports = function CaptureFromSite(_id, type, closerCallback) {
         function (ph, callback) {
             if ( type === 'portfolio' ) {
                 gm(filename)
+                    .quality(50)
                     .scale(250)
                     .crop(250, 350)
                     .noProfile()
