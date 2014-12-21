@@ -27,7 +27,6 @@ define(['app'
     }
 
     function fill(element, item) {
-
         if(typeof item.alpha != 'undefined') {
             element.css({
                 'background-color': 'rgba(' + HexTo10(item.fill.color.R) + ', ' + HexTo10(item.fill.color.G) + ', ' + HexTo10(item.fill.color.B) + ', ' + item.alpha / 100 + ')'

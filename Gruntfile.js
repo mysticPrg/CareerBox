@@ -78,7 +78,9 @@ module.exports = function (grunt) {
                         'domReady',
                         'twitter-bootstrap',
                         'kendo',
-                        'facebook'
+                        'facebook',
+                        'ngGrid',
+                        'rotatable'
                     ]
                 }
             }

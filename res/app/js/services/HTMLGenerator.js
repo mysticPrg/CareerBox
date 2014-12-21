@@ -43,6 +43,12 @@ define(['app'], function (app) {
         if(option.resizable === true){
             domObj += 'resizable ';
         }
+        if(option.row!==null){
+            domObj += 'row='+ option.row +' ' ;
+        }
+        if(option.col!==null){
+            domObj += 'col='+ option.col +' ' ;
+        }
 
         domObj += 'style="position: absolute; top: ' + item.pos.y + 'px; left: ' + item.pos.x + 'px; width: ' + item.size.width + 'px; height: ' + item.size.height + 'px;">';
 

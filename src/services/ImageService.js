@@ -332,12 +332,29 @@ function deleteService(req, res) {
     });
 }
 
+function checkService(req, res) {
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
+        return;
+    }
+    if (!checkArgForIdOnParams(req, res)) {
+        return;
+    }
+
+    var _image_id = req.params._id;
+
+    ImageDB.checkUsingImage(_image_id, function(err, check) {
+        ServiceUtil.sendResult(err, res, check);
+    });
+}
+
 module.exports.set = function (server) {
     server.post('/image', multipart, uploadIsolateImageService);
     server.get('/image/:_id', downloadImageService);
     server.get('/image/thumb/:_id', downloadIsolateThumbnailImageService);
     server.get('/image', getListService);
     server.delete('/image', deleteService);
+    server.get('/image/check/:_id', checkService);
 
     server.post('/image/profile', multipart, uploadProfileImageService);
     server.get('/image/profile/thumb/:_id', downloadProfileThumbnailImageService);

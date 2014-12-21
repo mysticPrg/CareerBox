@@ -45,14 +45,24 @@ function reset() {
 
 function checkUsingImage(_id, callback) {
     var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
+    var templateCollection = require('../util/DBCollections').getInstance().collections.template;
 
     paperCollection.findOne({
-        childArr: {$elemMatch: {_template_id: _id}}
+        childArr: {$elemMatch: {itemType: 'image', thumbnail: _id}}
     }, function (err, finded) {
         if ( finded ) {
             callback(err, true);
         } else {
-            callback(err, false);
+
+            templateCollection.findOne({
+                'childArr.0': {$elemMatch: {itemType: 'image', thumbnail: _id}}
+            }, function(err2, findedTemplate) {
+                if ( findedTemplate ) {
+                    callback(err2, true);
+                } else {
+                    callback(err2, false);
+                }
+            });
         }
     });
 }
@@ -62,6 +72,7 @@ var exports = {
     read: read,
     getList: getList,
     deleteFile: deleteFile,
+    checkUsingImage: checkUsingImage,
     reset: reset
 };
 

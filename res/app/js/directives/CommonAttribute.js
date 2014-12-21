@@ -13,20 +13,29 @@ define([
         function setCommonWatch(scope, element, att) {
             if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
                 // pos
+
+                // row, col이 있는 경우(pos-x속성이 존재한다)
+
+                if(att.row){
+                    element.css({
+                        top:  (element.position().top + att.row * element.height()) + "px",
+                        left: (element.position().left + att.col * element.width()) + "px"
+                    });
+                }
+                else
                 scope.$watch("attributeInformation.pos",function() {
                     if(EditorData.focusId == att.id){
-                        // row, col이 있는 경우(pos-x속성이 존재한다)
-//                        console.log('att.posY', att.posY);
-//                        console.log('att.posX', att.posX);
-                        if(att.posX){
-                            element.css({
-                                top:  (element.pos.y + att.posY) + "px",
-                                left: (element.pos.x + att.posX) + "px"
-                            });
-                        }else{
-                            ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
-                        }
+                      ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
                     }
+//                    else {
+//                        // row, col이 있는 경우(pos-x속성이 존재한다)
+//                        if(att.row){
+//                            element.css({
+//                                top:  (element.position().top + att.row * element.height()) + "px",
+//                                left: (element.position().left + att.col * element.width()) + "px"
+//                            });
+//                        }
+//                    }
                 },true);
 
                 // outline 색
@@ -89,6 +98,7 @@ define([
                 // 모델 GET
                 var info = SetAttributeInformation(att.id);
                 scope.attributeInformation = info.attributeInformation;
+                scope.parentArray  = info.parentArray;
 
                 scope.type = info.type;
 
