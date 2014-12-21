@@ -186,7 +186,7 @@ define([
                         article.childArr = _article.childArr[(row * _article.rowCount) + col];
                         article.tempIndex = (row * _article.rowCount) + col;
 
-                        articleGroupDom += loadArticleDom(article);
+                        articleGroupDom += loadArticleDom(article, row, col);
                     }
                 }
 
@@ -196,9 +196,9 @@ define([
                 $compile($('#' + _article._id))($scope);
             }
 
-            function loadArticleDom(article) {
+            function loadArticleDom(article, row, col) {
                 article._id += '_' + article.tempIndex;
-                var ArticleDom = HTMLGenerator('loadDivDom', article, '', {draggable: false, resizable: false});
+                var ArticleDom = HTMLGenerator('loadDivDom', article, '', {draggable: false, resizable: false, row: row, col: col});
 
                 var templateItemArray = article.childArr;
                 EditorData.end_zOrder++;
