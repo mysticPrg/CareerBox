@@ -16,7 +16,7 @@ define([
                 success(function(data, status, headers, config) {
                     $scope.userInfo = data.result;
 
-                    if (data.result.S_name_kr === '') {
+                    if(data.result.S_name_kr === '' || data.result.S_name_kr === undefined){
                         $scope.userInfo.S_name_kr = data.result._member_email.split('@')[0];
                     }
 
