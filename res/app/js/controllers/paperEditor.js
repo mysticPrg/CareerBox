@@ -197,7 +197,7 @@ define([
             }
 
             function loadArticleDom(article) {
-                var ArticleDom = '<div id="' + article._id + '"pos-x="' + article.pos.x + '" pos-y="' + article.pos.y + '">';
+                var ArticleDom = '<div common-attribute id="' + article._id + '"pos-x="' + article.pos.x + '" pos-y="' + article.pos.y + '">';
 
                 var width = 0, height = 0;
 

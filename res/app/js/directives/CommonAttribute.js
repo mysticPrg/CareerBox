@@ -16,10 +16,12 @@ define([
                 scope.$watch("attributeInformation.pos",function() {
                     if(EditorData.focusId == att.id){
                         // row, col이 있는 경우(pos-x속성이 존재한다)
-                        if(att.pos-x){
+//                        console.log('att.posY', att.posY);
+//                        console.log('att.posX', att.posX);
+                        if(att.posX){
                             element.css({
-                                top: att.pos-y + "px",
-                                left: att.pos-x + "px"
+                                top:  (element.pos.y + att.posY) + "px",
+                                left: (element.pos.x + att.posX) + "px"
                             });
                         }else{
                             ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
