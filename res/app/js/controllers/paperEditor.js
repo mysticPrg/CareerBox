@@ -168,38 +168,37 @@ define([
             }
 
             function loadArticle(_article) {
-                var originalArticle = _article;
-                var articleGroupDom = HTMLGenerator('loadDivDom', originalArticle, '', {draggable: true, resizable: false}) + '<table>';
+                var article = new Article(_article);
+                var articleGroup = new Article(_article);
+                articleGroup.size.width = (_article.size.width * _article.colCount);
+                articleGroup.size.height = (_article.size.height * _article.rowCount);
 
-                // TODO 테이블 형식으로 뿌려보자
+                var articleGroupDom = HTMLGenerator('loadDivDom', articleGroup, '', {draggable: true, resizable: false});
+
                 var article;
-                for (var row = 0; row < originalArticle.rowCount; row++) {
-                    articleGroupDom += '<tr>';
-                    for (var col = 0; col < originalArticle.colCount; col++) {
-                        article = new Article(originalArticle);
+                for (var row = 0; row < _article.rowCount; row++) {
+                    for (var col = 0; col < _article.colCount; col++) {
+                        article = new Article(_article);
 
-                        article.pos.x += (originalArticle.size.width * col);
-                        article.pos.y += (originalArticle.size.height * row);
+                        article.pos.x += (article * col);
+                        article.pos.y += (article * row);
 
-                        article.childArr = originalArticle.childArr[(row * originalArticle.rowCount) + col];
+                        article.childArr = _article.childArr[(row * _article.rowCount) + col];
+                        article.tempIndex = (row * _article.rowCount) + col;
 
-                        articleGroupDom += '<td>';
                         articleGroupDom += loadArticleDom(article);
-                        articleGroupDom += '</td>';
                     }
-                    articleGroupDom += '</tr>';
                 }
 
-                articleGroupDom += '</table></div>';
+                articleGroupDom += '</div>';
 
                 $('#canvas-content').append(articleGroupDom);
-                $compile($('#' + originalArticle._id))($scope);
+                $compile($('#' + _article._id))($scope);
             }
 
             function loadArticleDom(article) {
-                var ArticleDom = '<div common-attribute id="' + article._id + '"pos-x="' + article.pos.x + '" pos-y="' + article.pos.y + '">';
-
-                var width = 0, height = 0;
+                article._id += '_' + article.tempIndex;
+                var ArticleDom = HTMLGenerator('loadDivDom', article, '', {draggable: false, resizable: false});
 
                 var templateItemArray = article.childArr;
                 EditorData.end_zOrder++;
@@ -207,7 +206,7 @@ define([
                 var articleItemId;
                 for (var index = 0; index < templateItemArray.length; index++) {
                     // Item of article 's id = template id_item id
-                    articleItemId = article._id + '_load_' + templateItemArray[index]._id;
+                    articleItemId = article._id + '_load_' + templateItemArray[index]._id + '_' + article.tempIndex;
                     ArticleDom += HTMLGenerator('loadItem', templateItemArray[index], articleItemId, {draggable: false, resizable: false});
                 }
 
@@ -254,6 +253,7 @@ define([
                 $scope.paper.childArr = getPaperChildArr(EditorData.childArr);
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: $scope.paper};
 
+                console.log($scope.paper.childArr[0]);
                 SavePaper($http, data, function (result) {
                     if (result.returnCode === '000') {
                         $scope.changed = false;
