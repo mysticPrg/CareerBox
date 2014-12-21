@@ -24,31 +24,36 @@ define([
         var childArr = [];
 
         for ( var i=0 ; i<data.length ; i++ ) {
+
+            var tempArr = [];
+
             switch (data[i].itemType) {
                 case ItemType.icon:
-                    childArr.push(new Icon(data[i]));
+                    tempArr.push(new Icon(data[i]));
                     break;
 
                 case ItemType.image:
-                    childArr.push(new Image(data[i]));
+                    tempArr.push(new Image(data[i]));
                     break;
 
                 case ItemType.line:
-                    childArr.push(new Line(data[i]));
+                    tempArr.push(new Line(data[i]));
                     break;
 
                 case ItemType.link:
-                    childArr.push(new Link(data[i]));
+                    tempArr.push(new Link(data[i]));
                     break;
 
                 case ItemType.shape:
-                    childArr.push(new Shape(data[i]));
+                    tempArr.push(new Shape(data[i]));
                     break;
 
                 case ItemType.text:
-                    childArr.push(new Text(data[i]));
+                    tempArr.push(new Text(data[i]));
                     break;
             }
+
+            childArr.push(tempArr);
         }
 
         article.childArr = childArr;
@@ -58,7 +63,7 @@ define([
         LayoutComponent.call(this, props);
 
         this._template_id = null;
-        this.childArr = [];
+        this.childArr = [[]];
         this.rowCount = 1;
         this.colCount = 1;
         this.layoutComponentType = LayoutComponentType.article;
