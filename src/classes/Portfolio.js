@@ -23,7 +23,7 @@ define([], function () {
         if (props) {
             this._id = props._id ? props._id : null;
             this.title = props.title ? props.title : this.title;
-            this.timestamp = props.timestamp ? props.timestamp : this.timestamp;
+            this.timestamp = new Date(props.timestamp ? props.timestamp : this.timestamp);
             this.description = props.description ? props.description : this.description;
             this.thumbnail = props.thumbnail ? props.thumbnail : this.thumbnail;
             this.papers = props.papers ? props.papers : this.papers;

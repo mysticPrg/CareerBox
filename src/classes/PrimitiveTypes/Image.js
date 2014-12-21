@@ -21,7 +21,7 @@ define([
         this.fitSize = false;
 
         if (props) {
-            this.size = props.size ? props.size : this.size;
+            this.size = new Size(props.size ? props.size : this.size);
             this.fitSize = props.fitSize ? props.fitSize : this.fitSize;
         }
     };

@@ -26,7 +26,7 @@ define([
 
         if (props) {
             this.value = props.value ? props.value : this.value;
-            this.font = props.font ? props.font : this.font;
+            this.font = new Font(props.font ? props.font : this.font);
             this.align = props.align ? props.align : this.align;
             this.vAlign = props.vAlign ? props.vAlign : this.vAlign;
         }

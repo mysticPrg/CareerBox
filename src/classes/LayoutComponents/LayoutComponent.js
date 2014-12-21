@@ -32,7 +32,7 @@ define([
             this.layoutComponentType = props.layoutComponentType ? props.layoutComponentType : this.layoutComponentType;
             this.zOrder = props.zOrder ? props.zOrder : this.zOrder;
             this.size = new Size(props.size ? props.size : this.size);
-            this.pos = new Pos(props.pos ? props.pos : this.pos);
+            this.pos = new Position(props.pos ? props.pos : this.pos);
             this.fill = new Fill(props.fill ? props.fill : this.fill);
             this.outline = new Outline(props.outline ? props.outline : this.outline);
             this.radius = props.radius ? props.radius : this.radius;

@@ -33,8 +33,8 @@ define([
             this.title = props.title ? props.title : this.title;
             this.description = props.description ? props.description : this.description;
             this.childArr = props.childArr ? props.childArr : this.childArr;
-            this.fill = props.fill ? props.fill : this.fill;
-            this.size = props.size ? props.size : this.size;
+            this.fill = new Fill(props.fill ? props.fill : this.fill);
+            this.size = new Size(props.size ? props.size : this.size);
             this.isIndex = props.isIndex ? props.isIndex : this.isIndex;
 
             this._member_id = props._member_id ? props._member_id : this._member_id;

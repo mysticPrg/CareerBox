@@ -24,7 +24,6 @@ define([
         if (props) {
             this._id = props._id ? props._id : null;
             this.title = props.title ? props.title : this.title;
-            this.target = props.target ? props.target : this.target;
             this.description = props.description ? props.description : this.description;
             this.timestamp = props.timestamp ? props.timestamp : this.timestamp;
             this.thumbnail = props.thumbnail ? props.thumbnail : this.thumbnail;

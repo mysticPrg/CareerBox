@@ -23,9 +23,9 @@ define([
         this.pos_end = new Position();
 
         if (props) {
-            this.arrow = props.arrow ? props.arrow : this.arrow;
-            this.pos_start = props.pos_start ? props.pos_start : this.pos_start;
-            this.pos_end = props.pos_end ? props.pos_end : this.pos_end;
+            this.arrow = new Arrow(props.arrow ? props.arrow : this.arrow);
+            this.pos_start = new Position(props.pos_start ? props.pos_start : this.pos_start);
+            this.pos_end = new Position(props.pos_end ? props.pos_end : this.pos_end);
         }
     };
 
