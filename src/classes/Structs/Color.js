@@ -13,7 +13,7 @@ define([], function () {
         this.G = 'FF';
         this.B = 'FF';
 
-        if ( colorCode && colorCode instanceof String ) {
+        if ( colorCode && (typeof colorCode) === 'string' ) {
             this.R = colorCode.substr(0, 2);
             this.G = colorCode.substr(2, 2);
             this.B = colorCode.substr(4, 2);
