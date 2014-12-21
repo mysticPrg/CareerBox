@@ -629,3 +629,14 @@ img {
 }
 
 .focus {box-shadow: 0 0 0 2px rgb( 155, 201, 199 ); }
+
+.whiteSpace {
+    white-space:pre-wrap; !important;
+    white-space:pre-wrap;
+    white-space:-o-pre-wrap;
+    word-wrap:break-word;
+    word-break:break-all;
+    white-space:pre;
+    white-space:pre-wrap;
+    white-space:pre-line;
+}
