@@ -181,6 +181,7 @@ define([
                     }
                 }
 
+                var templateId = template._id + '_' + $scope.childIndex;
                 var templateDomId = template._id + '_' + $scope.childIndex + '_0';
                 var templateItemDom = '';
 
@@ -188,13 +189,13 @@ define([
                 template.state = 'new';
 
                 // template의 article을 저장.
-                template.target._id = templateDomId;
+                template.target._id = templateId;
                 template.target._template_id = template._id;
 
-                EditorData.childArr[templateDomId] = template.target;
-                console.log(EditorData.childArr[templateDomId]);
+                EditorData.childArr[templateId] = template.target;
+                console.log(EditorData.childArr[templateId]);
 
-                SetZOrder(template.target, templateDomId);
+                SetZOrder(template.target, templateId);
 
                 var templateItemArray = template.target.childArr[0];
 
@@ -211,7 +212,7 @@ define([
 //                    item._id = templateItemArray[index]._id;
 //                    EditorData.childArr[templateDomId].target.childArr[index] = item;
 
-                    // Item of template 's id = template id_item id
+                    // 아티클아이디_차일드인덱스_0_아이템아이디
                     templateItemId = templateDomId + '_' +templateItemArray[index]._id;
                     templateItemDom += HTMLGenerator('loadItem', templateItemArray[index], templateItemId, option);
                 }
