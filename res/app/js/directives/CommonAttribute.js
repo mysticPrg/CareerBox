@@ -14,9 +14,17 @@ define([
             if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
                 // pos
                 scope.$watch("attributeInformation.pos",function() {
-                    if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
-
+                    if(EditorData.focusId == att.id){
+                        // row, col이 있는 경우(pos-x속성이 존재한다)
+                        if(att.pos-x){
+                            element.css({
+                                top: att.pos-y + "px",
+                                left: att.pos-x + "px"
+                            });
+                        }else{
+                            ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
+                        }
+                    }
                 },true);
 
                 // outline 색
