@@ -1,5 +1,5 @@
 <div id="radiusForm">
-    <ANY ng-if="data.itemType!='shape'">
+    <ANY ng-show="data.shapeType!=='circle'">
         <label id="radiusLabel" for="radiusInput">radius</label>
         <input type="text" class="attrInput form-control" id="radiusInput" ng-model="data.radius"/>
     </ANY>
