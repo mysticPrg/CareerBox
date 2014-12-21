@@ -44,7 +44,6 @@ define([
                 if (EditorData.paperId !== '') {
                     loadPaper();
                 }
-
                 EditorData.focusId = EditorData.paper._id;
             });
 

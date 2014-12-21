@@ -20,6 +20,8 @@ define([
     'component/attribute/isIndexAttribute/component',
     'component/attribute/bindingAttribute/component',
     'component/attribute/thumbnailAttribute/component',
+    'component/attribute/rowcolAttribute/component',
+//    'component/attribute/rowCountAttribute/component',
     'services/EditorData',
     'services/SetAttributeInformation'
 ], function (app) {
