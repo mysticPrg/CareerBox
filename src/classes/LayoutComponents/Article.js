@@ -25,38 +25,37 @@ define([
 
         for ( var i=0 ; i<data.length ; i++ ) {
 
+            var tempArr = [];
             for ( var k=0 ; k<data[i].length ; k++ ) {
-                var tempArr = [];
 
                 switch (data[i][k].itemType) {
                     case ItemType.icon:
-                        tempArr.push(new Icon(data[i]));
+                        tempArr.push(new Icon(data[i][k]));
                         break;
 
                     case ItemType.image:
-                        tempArr.push(new Image(data[i]));
+                        tempArr.push(new Image(data[i][k]));
                         break;
 
                     case ItemType.line:
-                        tempArr.push(new Line(data[i]));
+                        tempArr.push(new Line(data[i][k]));
                         break;
 
                     case ItemType.link:
-                        tempArr.push(new Link(data[i]));
+                        tempArr.push(new Link(data[i][k]));
                         break;
 
                     case ItemType.shape:
-                        tempArr.push(new Shape(data[i]));
+                        tempArr.push(new Shape(data[i][k]));
                         break;
 
                     case ItemType.text:
-                        tempArr.push(new Text(data[i]));
+                        tempArr.push(new Text(data[i][k]));
                         break;
                 }
 
-                childArr.push(tempArr);
             }
-
+            childArr.push(tempArr);
         }
 
         article.childArr = childArr;
