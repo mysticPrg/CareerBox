@@ -168,7 +168,7 @@ define([
             };
 
             $scope.templateClone = function (template_ori) {
-                var template = jQuery.extend(true, {}, template_ori);   // 객체 복사해주어야함!.
+                var template = new Template(template_ori);   // 객체 복사해주어야함!.
 
                 // 로드된 템플릿과 아이디가 겹치지 않도록함.
                 for(var key in EditorData.childArr){
@@ -194,7 +194,7 @@ define([
                 EditorData.childArr[templateDomId] = template.target;
                 SetZOrder(template.target, templateDomId);
 
-                var templateItemArray = template.target.childArr;
+                var templateItemArray = template.target.childArr[0];
 
                 createTemplateDiv(template, templateDomId);
 

@@ -9,6 +9,7 @@ define([
     'angular',
     'app',
     'classes/Paper',
+    'classes/LayoutComponents/Article',
     'component/createTemplateModal/component',
     'component/saveConfirmModal/component',
     'directives/draggable',
@@ -20,7 +21,7 @@ define([
     'services/SavePaper',
     'services/LoadPaper',
     'component/paperPanel/component'
-], function ($, ng, app, Paper, createTemplateModal, saveConfirmModal) {
+], function ($, ng, app, Paper, Article, createTemplateModal, saveConfirmModal) {
     app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper',
         function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper) {
             EditorData.editorType = 'paper';
@@ -31,6 +32,7 @@ define([
             $scope.paperItemArray = [];
 
             $(document).ready(function () {
+
                 // templateState값이 변경됨에 따라 저장 여부 판단
                 EditorData.templateState = '';
 
@@ -44,6 +46,7 @@ define([
                 if (EditorData.paperId !== '') {
                     loadPaper();
                 }
+
                 EditorData.focusId = EditorData.paper._id;
             });
 
@@ -57,6 +60,7 @@ define([
                 deleteArticle(id);
             });
 
+            // 페이지 바꿧을때  loadPaper()를 다시;
             $scope.$watch("EditorData.paperId", function () {
                 if (EditorData.paperId === '')
                     return;
@@ -163,28 +167,56 @@ define([
                 }
             }
 
-            function loadArticle(article) {
-                var option = {draggable: true, resizable: false};
+            function loadArticle(_article) {
+                var originalArticle = _article;
+                console.log('loadArticle', originalArticle.rowCount, originalArticle.colCount);
 
-                var ArticleDom = HTMLGenerator('loadDivDom', article, '', option);
+                var articleGroupDom = HTMLGenerator('loadDivDom', originalArticle, '', {draggable: true, resizable: false}) + '<table>';
+
+                // TODO 테이블 형식으로 뿌려보자
+                var article;
+                for (var row = 0; row < originalArticle.rowCount; row++) {
+                    articleGroupDom += '<tr>';
+                    for (var col = 0; col < originalArticle.colCount; col++) {
+                        article = new Article(originalArticle);
+                        article.pos.x += (originalArticle.size.width * col);
+                        article.pos.y += (originalArticle.size.height * row);
+                        console.log(article.size.width, article.size.height, article.pos.x, article.pos.y);
+                        article.childArr = originalArticle.childArr[0];
+
+                        articleGroupDom += '<td>';
+                        articleGroupDom += loadArticleDom(article);
+                        articleGroupDom += '</td>';
+                    }
+                    articleGroupDom += '</tr>';
+                }
+
+                articleGroupDom += '</table></div>';
+
+                console.log(articleGroupDom);
+
+                $('#canvas-content').append(articleGroupDom);
+                $compile($('#' + originalArticle._id))($scope);
+            }
+
+            function loadArticleDom(article) {
+                var ArticleDom = '<div>';
 
                 var width = 0, height = 0;
 
                 var templateItemArray = article.childArr;
                 EditorData.end_zOrder++;
-                var itemOption = {draggable: false, resizable: false};
 
                 var articleItemId;
                 for (var index = 0; index < templateItemArray.length; index++) {
                     // Item of article 's id = template id_item id
                     articleItemId = article._id + '_load_' + templateItemArray[index]._id;
-                    ArticleDom += HTMLGenerator('loadItem', templateItemArray[index], articleItemId, itemOption);
+                    ArticleDom += HTMLGenerator('loadItem', templateItemArray[index], articleItemId, {draggable: false, resizable: false});
                 }
 
                 ArticleDom += '</div>';
 
-                $('#canvas-content').append(ArticleDom);
-                $compile($('#' + article._id))($scope);
+                return ArticleDom;
             }
 
             function loadItem(item) {

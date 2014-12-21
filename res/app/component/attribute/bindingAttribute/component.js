@@ -73,7 +73,7 @@ define([
                                 $scope.data.bindingType = EditorData.template.target.bindingType[key];
                             } else{
                                 // key를 등록!
-                                $scope.data.bindingType = EditorData.template.target.bindingType.infoType + "." + key;
+                                $scope.data.bindingType = key;
 
                             }
                         }
