@@ -144,12 +144,12 @@ function getInfoValue(infoType, infoData) {
 
         case 'D':
             var tempDate = new Date(infoData);
-            return '' + tempDate.getYear() + '-' + tempDate.getMonth() + '-' + tempDate.getDate();
+            return '' + (1900+tempDate.getYear()) + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate();
 
         case 'T':
             var tempTerm = new Term(infoData);
-            return '' + tempTerm.start.getYear() + '-' + tempTerm.start.getMonth() + '-' + tempTerm.start.getDate() + ' ~ ' +
-                tempTerm.end.getYear() + '-' + tempTerm.end.getMonth() + '-' + tempTerm.end.getDate();
+            return '' + (1900+tempTerm.start.getYear()) + '-' + (tempTerm.start.getMonth()+1) + '-' + tempTerm.start.getDate() + ' ~ ' +
+                (1900+tempTerm.end.getYear()) + '-' + (tempTerm.end.getMonth()+1) + '-' + tempTerm.end.getDate();
 
         default:
             return '';

@@ -13,8 +13,8 @@ define([], function () {
         this.end = new Date();
 
         if (props) {
-            this.start = props.start ? props.start : this.start;
-            this.end = props.end ? props.end : this.end;
+            this.start = new Date(props.start ? props.start : this.start);
+            this.end = new Date(props.end ? props.end : this.end);
         }
     };
 
