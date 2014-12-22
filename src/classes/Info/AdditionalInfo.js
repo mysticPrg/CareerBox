@@ -19,7 +19,7 @@ define([
 
         this.title = '추가정보';
         this.infoType = InfoType.additionalInfo;
-        this.items = [];
+        this.items = [new AdditionalInfoItem()];
 
         if ( props && props.items ) {
             var newItems = [];

@@ -8,7 +8,7 @@ if (typeof define !== 'function') {
 
 define([
     'classes/Structs/Term'
-], function (Term) {
+], function () {
 
     var dictionary = {
         'S_title'   : '논문 제목',

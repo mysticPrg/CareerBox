@@ -19,7 +19,7 @@ define([
 
         this.title = '기본정보';
         this.infoType = InfoType.personalInfo;
-        this.items = [];
+        this.items = [new PersonalInfoItem()];
 
         if ( props && props.items ) {
             var newItems = [];
