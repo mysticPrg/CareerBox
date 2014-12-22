@@ -37,6 +37,14 @@ define([
                                 EditorData.paperTitle = paper.title;
                             }
                         }
+                    }else{
+                        for (var idx = 0; idx < $scope.papers.length; idx++) {
+                            paper = $scope.papers[idx];
+                            if (paper._id === EditorData.paperId) {
+                                EditorData.paperId = paper._id;
+                                EditorData.paperTitle = paper.title;
+                            }
+                        }
                     }
 
                     $scope.paperTitle = EditorData.paperTitle;
@@ -52,9 +60,8 @@ define([
 
                 SavePaper($http, data, function (result) {
                     if(result.returnCode === '000'){
-                        loadPaperList();
                         EditorData.paperId = result.result;
-                        $scope.paperTitle = paper.title;
+                        loadPaperList();
                     }
                 });
             }
@@ -82,7 +89,7 @@ define([
 
                     deletePaper($http, data, function(result){
                         $scope.paperTitle = 'Select Paper';
-                        $scope.loadPaperList();
+                        loadPaperList();
                         window.location.reload();
                     });
                 }, function () {
