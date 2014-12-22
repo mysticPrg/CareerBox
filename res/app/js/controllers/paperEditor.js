@@ -173,20 +173,20 @@ define([
                 articleGroup.size.width = (_article.size.width * _article.colCount);
                 articleGroup.size.height = (_article.size.height * _article.rowCount);
 
-                var articleGroupDom = HTMLGenerator('loadDivDom', articleGroup, '', {draggable: true, resizable: false});
+                var articleGroupDom = HTMLGenerator('loadDivDom', articleGroup, '', {draggable: true, resizable: false, grid: true});
 
                 var article;
                 for (var row = 0; row < _article.rowCount; row++) {
                     for (var col = 0; col < _article.colCount; col++) {
                         article = new Article(_article);
 
-                        article.pos.x += (article * col);
-                        article.pos.y += (article * row);
+                        article.col = col;
+                        article.row = row;
 
-                        article.childArr = _article.childArr[(row * _article.rowCount) + col];
-                        article.tempIndex = (row * _article.rowCount) + col;
+                        article.childArr = _article.childArr[(row * _article.colCount) + col];
+                        article.tempIndex = (row * _article.colCount) + col;
 
-                        articleGroupDom += loadArticleDom(article, row, col);
+                        articleGroupDom += loadArticleDom(article);
                     }
                 }
 
@@ -196,14 +196,15 @@ define([
                 $compile($('#' + _article._id))($scope);
             }
 
-            function loadArticleDom(article, row, col) {
+            function loadArticleDom(article) {
                 article._id += '_' + article.tempIndex;
-                var ArticleDom = HTMLGenerator('loadDivDom', article, '', {draggable: false, resizable: false, row: row, col: col});
+                var ArticleDom = HTMLGenerator('loadDivDom', article, '', {draggable: false, resizable: false, row: article.row, col: article.col});
 
                 var templateItemArray = article.childArr;
                 EditorData.end_zOrder++;
 
                 var articleItemId;
+
                 for (var index = 0; index < templateItemArray.length; index++) {
                     // Item of article 's id = template id_item id
                     articleItemId = article._id + '_load_' + templateItemArray[index]._id + '_' + article.tempIndex;
@@ -253,7 +254,6 @@ define([
                 $scope.paper.childArr = getPaperChildArr(EditorData.childArr);
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: $scope.paper};
 
-                console.log($scope.paper.childArr[0]);
                 SavePaper($http, data, function (result) {
                     if (result.returnCode === '000') {
                         $scope.changed = false;
@@ -267,26 +267,10 @@ define([
 
             }
 
-//            function updateModel(id, draggable) {
-//
-//                var child;
-//
-//                child = EditorData.childArr[id];
-//
-////            ** do not override item id
-////            child._id = id;
-//                child.pos = {x: draggable.position().left, y: draggable.position().top};
-//                child.size = {width: draggable.width(), height: draggable.height()};
-//
-//                EditorData.childArr[id] = child;
-//            }
-
             $('#canvas-content').droppable({
                 activeClass: "drop-area",
                 drop: function (e, ui) {            // 드롭될 경우
                     var id = ui.draggable[0].getAttribute("id");
-
-//                    updateModel(id, ui.draggable);
                 }
             });
 

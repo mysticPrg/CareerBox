@@ -43,12 +43,19 @@ define(['app'], function (app) {
         if(option.resizable === true){
             domObj += 'resizable ';
         }
+        //
+        if(option.grid === true){
+            domObj += 'grid ';
+        }
+        // 배열일 경우 row 추가
         if(option.row!==null){
             domObj += 'row='+ option.row +' ' ;
         }
+        // 배열일 경우 col 추가
         if(option.col!==null){
             domObj += 'col='+ option.col +' ' ;
         }
+
 
         domObj += 'style="position: absolute; top: ' + item.pos.y + 'px; left: ' + item.pos.x + 'px; width: ' + item.size.width + 'px; height: ' + item.size.height + 'px;">';
 
