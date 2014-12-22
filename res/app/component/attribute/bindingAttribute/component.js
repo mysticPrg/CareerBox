@@ -5,10 +5,14 @@ define([
     'service/getAttributeNames',
     'service/EditorData',
     'service/InformationData',
-    'service/getAvailableAttribute'
+    'service/getAvailableAttribute',
+    'service/loadArticle',
+    'service/LoadPaper',
+    'service/SavePaper',
+    'service/SetAttributeInformation'
 ], function (app, bindingArticleModal) {
 
-    app.directive('bindingAttribute', function (getAttributeNames, EditorData, getAvailableAttribute, InformationData) {
+    app.directive('bindingAttribute', function (getAttributeNames, EditorData, getAvailableAttribute, InformationData, loadArticle, LoadPaper, SavePaper, SetAttributeInformation, $http) {
 
         return {
             restrict: 'A',
@@ -97,8 +101,37 @@ define([
 
                     var modalInstance = $modal.open(bindingArticleModal);
                     modalInstance.result.then(function (result) {
+                        // 성공했을 때
                         $scope.data.bindingData = result;
-                    }, function () {
+
+                        // reload
+                        $scope.reload(function(){
+                            alert('성공했습니다.');
+                        });
+                    }, function () {});
+                }
+
+                $scope.reload = function(callback) {
+                    //페이퍼 저장
+                    var data = {_portfolio_id: EditorData.portfolio._id, paper: EditorData.paper};
+                    SavePaper($http, data, function (result) {
+                        if (result.returnCode === '000') {
+                            // 페이퍼 로드
+                            LoadPaper($http, EditorData.paperId, function (result) {
+                                EditorData.paper = result.result;
+                                EditorData.paperTitle = result.result.title;
+
+                                // reload
+                                $('#' + EditorData.focusId).remove();
+                                var articleModel = SetAttributeInformation(EditorData.focusId).attributeInformation;
+                                loadArticle(articleModel ,$scope);
+
+                                callback();
+                            });
+
+                        } else if (result.returnCode === '001') {
+                        } else if (result.returnCode === '002') {
+                        }
                     });
                 }
 

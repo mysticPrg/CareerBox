@@ -7,10 +7,12 @@ define([
     'jquery-ui',
     'service/EditorData',
     'service/ApplyCommonItemAttribute',
-    'service/SetAttributeInformation'
+    'service/SetAttributeInformation',
+    'service/loadArticle'
 ], function (app) {
-    app.directive('commonAttribute', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation) {
+    app.directive('commonAttribute', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', 'loadArticle', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation, loadArticle) {
         function setCommonWatch(scope, element, att) {
+            // 페이퍼 캔버스에는 제외되는 속성
             if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
                 // pos
                 {
@@ -64,10 +66,10 @@ define([
                 },true);
 
                 // rotate
-//                scope.$watch("attributeInformation.rotate",function() {
-////                if(EditorData.focusId == att.id)
-//                    ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
-//                },true);
+                scope.$watch("attributeInformation.rotate",function() {
+//                if(EditorData.focusId == att.id)
+                    ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
+                },true);
 
                 // z - index
                 scope.$watch("attributeInformation.zOrder", function () {
@@ -86,8 +88,6 @@ define([
             {
                 // grid일 경우 예외처리
                 if(att.grid != null){
-//                    console.log('att.grid', att.grid)
-//                    console.log('scope.attributeInformation.colCount', scope.attributeInformation.colCount)
                     element.css({
                         width: (scope.attributeInformation.size.width * scope.attributeInformation.colCount) + "px",
                         height: (scope.attributeInformation.size.height * scope.attributeInformation.rowCount) + "px"
@@ -101,8 +101,6 @@ define([
 
                     },true);
             }
-
-
         };
 
         return {

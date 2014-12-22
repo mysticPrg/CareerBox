@@ -33,10 +33,10 @@ define([
                     article.row = row;
 
                     article.childArr = _article.childArr[index];
-                    article.tempIndex = index;
-
-
-                    articleGroupDom += loadArticleDom(article);
+                    if(article.childArr){
+                        article.tempIndex = index;
+                        articleGroupDom += loadArticleDom(article);
+                    }
                 }
             }
 

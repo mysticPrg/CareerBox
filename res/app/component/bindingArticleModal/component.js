@@ -25,6 +25,7 @@ define([
                     return;
 
                 var items = data.result.items
+                console.log('items', items);
                 $scope.hasItems = items.length > 0? true: false;
                 console.log( $scope.hasItems);
 

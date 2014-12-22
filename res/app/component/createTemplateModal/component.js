@@ -3,12 +3,18 @@
  */
 define([
     'app',
-    'classes/Templates/Template'
+    'classes/Templates/Template',
+    'service/InformationData'
 ], function (app, Template) {
-    app.controller('createTemplateModalController', function ($scope, $modalInstance) {
+    app.controller('createTemplateModalController', function ($scope, $modalInstance, InformationData) {
         $scope.template = new Template();
+        $scope.infoCategory = InformationData;
+        $scope.category='';
+
         $scope.save = function () {
-            $modalInstance.close($scope.template);
+//            $scope.template.target.infoType = $scope.category.infoType;
+//            $modalInstance.close($scope.template);
+            console.log($scope.category);
         };
         $scope.cancel = function () {
             $modalInstance.dismiss();
