@@ -7,9 +7,9 @@
     <input type="text" class="form-control" placeholder="템플릿 이름" ng-model="template.title">
     <select class="form-control"
             ng-model="category"
-            ng-options="category.title for (key, category) in infoCategory"></select>
+            ng-options="value.title for (key, value) in infoCategory"></select>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="cancel()">닫기</button>
-    <button type="button" class="btn btn-primary" ng-click="save()">저장</button>
+    <button type="button" class="btn btn-primary" ng-click="save(category)">저장</button>
 </div>
