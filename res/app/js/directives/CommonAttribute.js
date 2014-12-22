@@ -73,12 +73,12 @@ define([
 
             // size
 
-            console.log('att.grid', att.grid != null)
+//            console.log('att.grid', att.grid != null)
 
             // grid
             if(att.grid != null){
-                console.log('att.grid', att.grid)
-                console.log('scope.attributeInformation.colCount', scope.attributeInformation.colCount)
+//                console.log('att.grid', att.grid)
+//                console.log('scope.attributeInformation.colCount', scope.attributeInformation.colCount)
                 element.css({
                     width: (scope.attributeInformation.size.width * scope.attributeInformation.colCount) + "px",
                     height: (scope.attributeInformation.size.height * scope.attributeInformation.rowCount) + "px"
