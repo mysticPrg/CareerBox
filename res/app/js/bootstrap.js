@@ -5,7 +5,7 @@
 define([
     'angular',
     'app'
-], function (ng, app) {
+], function (ng) {
     'use strict';
 
     require(['domReady'], function (document) {

@@ -71,10 +71,13 @@ module.exports = function (grunt) {
                     findNestedDependencies: true,
                     baseUrl: 'res/app/js',
                     mainConfigFile: 'res/app/compressMain.js',
+                    optimize: 'none',
                     exclude: [
+                        'app',
                         'angular',
                         'angular-route',
                         'angular-bootstrap',
+                        'angular-upload',
                         'jquery',
                         'jquery-ui',
                         'domReady',

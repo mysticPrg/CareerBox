@@ -3,7 +3,7 @@
  */
 
 require([
-    'service/applyCommonItemAttribute',
+    'service/ApplyCommonItemAttribute',
     'service/CommonCallback',
     'service/createPortfolio',
     'service/deleteImage',
@@ -38,5 +38,4 @@ require([
     'service/SetIndex',
     'service/SetZOrder'
 ], function () {
-
 });

@@ -19,9 +19,8 @@ require.config({
         'facebook': '../libs/facebook/angular-facebook',
         'rotatable': '../libs/jquery/rotatable/jquery.ui.rotatable.min',
         'component': '../component',
-//        'classes': './classes.min',
         'classes': '../../../src/classes',
-        'service': 'services'
+        'service': './services'
     },
 
     shim: {
@@ -76,9 +75,8 @@ require.config({
 
 require([
     'jquery'
-//    'classes',
+//    'classes.min',
 //    'services.min'
-
 ], function ($) {
 
     var cntl = $('body').attr('ng-controller');

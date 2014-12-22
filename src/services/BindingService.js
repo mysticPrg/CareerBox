@@ -188,8 +188,13 @@ function bindItems (layoutItems, infoData) {
     var resultArr = [];
 
     for (var k in layoutItems) {
-        var bindedLayoutItem = setFuncs[layoutItems[k].itemType](layoutItems[k], infoData[layoutItems[k].bindingType]);
-        resultArr.push(bindedLayoutItem);
+
+        if (layoutItems[k].isBinding) {
+            var bindedLayoutItem = setFuncs[layoutItems[k].itemType](layoutItems[k], infoData[layoutItems[k].bindingType]);
+            resultArr.push(bindedLayoutItem);
+        } else {
+            resultArr.push(layoutItems[k]);
+        }
     }
 
     return resultArr;
