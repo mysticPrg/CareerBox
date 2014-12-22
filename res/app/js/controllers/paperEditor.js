@@ -43,10 +43,6 @@ define([
                     {collapsible: false}
                 ];
 
-                if (EditorData.paperId !== '') {
-                    loadPaper();
-                }
-
                 EditorData.focusId = EditorData.paper._id;
             });
 
@@ -72,6 +68,7 @@ define([
                 initPaper();
 
                 LoadPaper($http, EditorData.paperId, function (result) {
+                    console.log('LoadPaper', result.result);
                     EditorData.paper = result.result;
                     EditorData.paperTitle = result.result.title;
 
