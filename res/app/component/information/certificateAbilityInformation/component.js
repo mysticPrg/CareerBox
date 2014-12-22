@@ -40,6 +40,7 @@ define([
         }
 
         $scope.onFileSelectCertificateAbilityInfo = function ($files) {
+            $scope.fileName = $files[0].name;
             $scope.files = $files;
             $('#certificate_upload').fadeIn('slow');
         }

@@ -1,12 +1,14 @@
-<div style="margin: 30px 0 10px 0">외국어능력</div>
 <form class="form-horizontal" role="form">
+    <div class="col-md-12" style="margin: 20px 0 20px 0; font-size: 20px; font-weight: 700; color: #d53d3d; text-align: left">외국어능력</div>
+
     <!--외국어명-->
     <div class="form-group">
         <label for="lbl_proficiency_name" class="col-md-2 control-label">외국어명</label>
-        <div class="col-md-2" id="lbl_proficiency_name">
+        <div class="col-md-4" id="lbl_proficiency_name">
             <input type="text" class="form-control" placeholder="외국어명" ng-model="proficiencyInfoItem.S_name">
         </div>
-        <div class="col-md-2">
+
+        <div class="col-md-2" style="height: 34px; line-height: 34px; text-align: right">
             <label><input type="checkbox" name="exam" ng-model="proficiencyInfoItem.B_exam">공인시험</label>
         </div>
     </div>
@@ -14,13 +16,18 @@
     <!--등록번호, 취득일자-->
     <div class="form-group row">
         <label for="lbl_proficiency_reg_number" class="col-md-2 control-label">등록번호</label>
-        <div class="col-md-2" id="lbl_proficiency_reg_number">
+        <div class="col-md-4" id="lbl_proficiency_reg_number">
             <input type="text" class="form-control" placeholder="등록번호" ng-model="proficiencyInfoItem.S_reg_number">
         </div>
 
         <label for="lbl_proficiency_date" class="col-md-2 control-label">취득일자</label>
-        <div class="col-md-2" id="lbl_proficiency_date">
-            <button class="k-button" ng-click="lbl_proficiency_date.center(); lbl_proficiency_date.open();">{{proficiencyInfoItem.D_date | date:"yyyy년 MM월 dd일"}}</button>
+        <div class="col-md-3" id="lbl_proficiency_date">
+            <div class="input-group">
+                <input type="text" class="form-control" value="{{proficiencyInfoItem.D_date | date:'yyyy.MM.dd'}}" />
+                <span class="input-group-btn">
+                   <button class="btn btn-default" type="button" ng-click="lbl_proficiency_date.center(); lbl_proficiency_date.open();">달력</button>
+                </span>
+            </div>
         </div>
         <div kendo-window="lbl_proficiency_date" k-title="'Date'" k-modal="true" k-resizable="false" k-visible="false">
             <kendo-calendar ng-model="proficiencyInfoItem.D_date" k-on-change="lbl_proficiency_date.close()"></kendo-calendar>
@@ -30,12 +37,12 @@
     <!--등급, 활용수준-->
     <div class="form-group row">
         <label for="lbl_proficiency_grade" class="col-md-2 control-label">등급</label>
-        <div class="col-md-2" id="lbl_proficiency_grade">
+        <div class="col-md-4" id="lbl_proficiency_grade">
             <input type="text" class="form-control" placeholder="등급" ng-model="proficiencyInfoItem.S_grade">
         </div>
 
         <label for="lbl_proficiency_proficiency" class="col-md-2 control-label">활용수준</label>
-        <div class="col-md-2" id="lbl_proficiency_proficiency">
+        <div class="col-md-3" id="lbl_proficiency_proficiency">
             <input type="text" class="form-control" placeholder="활용수준" ng-model="proficiencyInfoItem.S_proficiency">
         </div>
     </div>
@@ -43,17 +50,25 @@
     <!--첨부파일-->
     <div class="form-group">
         <label for="lbl_proficiency_file" class="col-md-2 control-label">첨부파일</label>
-
-        <div class="col-md-3" id="lbl_proficiency_file">
-            <input type="file" id="proficiency_file" ng-file-select="onFileSelectProficiencyInfo($files)">
+        <div class="row">
+            <div class="col-md-4" style="width: 290px" id="lbl_proficiency_file">
+                <input type="text" class="fileInputTextBorder form-control" readonly="readonly" ng-model = "fileName"/>
+            </div>
+            <div class="col-md-1" style="padding-left: 0; text-align: left; width: 115px">
+                <div class="fileInputDiv" >
+                    <input type="button" class="fileInputButton btn btn-default" value="파일첨부" />
+                    <input type="file" class="fileInputHidden" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectProficiencyInfo($files)"/>
+                </div>
+            </div>
+            <div class="col-md-1" style="padding-left: 0; text-align: left">
+                <button class="btn btn-default" id="proficiency_upload" ng-click="uploadProficiencyInfo()" style="display: none;">업로드</button>
+            </div>
         </div>
-
-        <button type="btn btn-default col-md-2" id="proficiency_upload" ng-click="uploadProficiencyInfo()" style="display: none;">업로드</button>
     </div>
 
     <!--첨부파일 정보-->
     <div class="form-group">
-        <div id="proficiency_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div>
+        <div id="proficiency_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="width: 180px; height: 8px; display: none;"></div>
     </div>
 
 
@@ -62,53 +77,45 @@
         <button type="button" class="btn btn-default" ng-click="addProficiencyInfo()">추가</button>
     </div>
 
-    <hr>
+    <hr style="border-color: #d6d6d6">
 
     <div ng-repeat="item in proficiencyInfoItems track by $index">
         <!--외국어명-->
         <div class="form-group">
             <label for="lbl_proficiency_name_load" class="col-md-2 control-label">외국어명</label>
-            <div class="col-md-2" id="lbl_proficiency_name_load">
-                <input type="text" class="form-control" placeholder="외국어명" ng-model="item.S_name">
-            </div>
-            <div class="col-md-2">
-                <label><input type="checkbox" name="exam" ng-model="item.B_exam">공인시험</label>
+            <div class="col-md-4" id="lbl_proficiency_name_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_name}}</div>
+
+            <label class="col-md-2 control-label">공인시험</label>
+            <div class="col-md-2" style="text-align: left; height: 34px; line-height: 34px">
+                <div ng-if="item.B_exam">해당</div>
+                <div ng-if="!item.B_exam">해당없음</div>
             </div>
         </div>
 
         <!--등록번호, 취득일자-->
         <div class="form-group row">
             <label for="lbl_proficiency_reg_number_load" class="col-md-2 control-label">등록번호</label>
-            <div class="col-md-2" id="lbl_proficiency_reg_number_load">
-                <input type="text" class="form-control" placeholder="등록번호" ng-model="item.S_reg_number">
-            </div>
+            <div class="col-md-4" id="lbl_proficiency_reg_number_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_reg_number}}</div>
 
             <label for="lbl_proficiency_date_load" class="col-md-2 control-label">취득일자</label>
-            <div class="col-md-2" id="lbl_proficiency_date_load">
-                <button class="k-button" ng-click="lbl_proficiency_date.center(); lbl_proficiency_date.open();">{{item.D_date | date:"yyyy년 MM월 dd일"}}</button>
-            </div>
-            <div kendo-window="lbl_proficiency_date" k-title="'Date'" k-modal="true" k-resizable="false" k-visible="false">
-                <kendo-calendar ng-model="item.D_date" k-on-change="lbl_proficiency_date.close()"></kendo-calendar>
-            </div>
+
+            <div class="col-md-2" id="lbl_proficiency_date_load" style="text-align: left; height: 34px; line-height: 34px">{{item.D_date | date:"yyyy.MM.dd"}}</div>
         </div>
 
         <!--등급, 활용수준-->
         <div class="form-group row">
             <label for="lbl_proficiency_grade" class="col-md-2 control-label">등급</label>
-            <div class="col-md-2" id="lbl_proficiency_grade_load">
-                <input type="text" class="form-control" placeholder="등급" ng-model="item.S_grade">
-            </div>
+            <div class="col-md-4" id="lbl_proficiency_grade_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_grade}}</div>
 
             <label for="lbl_proficiency_proficiency_load" class="col-md-2 control-label">활용수준</label>
-            <div class="col-md-2" id="lbl_proficiency_proficiency_load">
-                <input type="text" class="form-control" placeholder="활용수준" ng-model="item.S_proficiency">
-            </div>
+            <div class="col-md-2" id="lbl_proficiency_proficiency_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_proficiency}}</div>
+
         </div>
 
         <!--첨부파일-->
         <div class="form-group">
             <label for="lbl_proficiency_file_load" class="col-md-2 control-label">첨부파일</label>
-            <div class="col-md-5" id="lbl_proficiency_file_load">
+            <div class="col-md-4" id="lbl_proficiency_file_load" style="height: 34px; line-height: 34px; text-align: left">
                 <div ng-show = "!item.F_file">없음</div>
                 <div ng-show = "item.F_file"><a href="http://210.118.74.166:8123/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
             </div>

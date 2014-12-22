@@ -140,6 +140,10 @@ img {
     text-align: center;
 }
 
+.fileInputTextBorder {
+
+}
+
 .fileInputDiv {
     position: relative;
     width: 100px;
@@ -161,9 +165,9 @@ img {
     position: absolute;
     top: 0px;
     right: 0px;
-    background-color: #33bb00;
-    color: #fff;
-    border-style: solid;
+    /*background-color: #33bb00;*/
+    /*color: #fff;*/
+    /*border-style: solid;*/
     cursor: pointer;
 }
 
