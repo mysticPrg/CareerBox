@@ -75,7 +75,7 @@ require.config({
 });
 
 require([
-    'jquery',
+    'jquery'
 //    'classes',
 //    'services.min'
 
