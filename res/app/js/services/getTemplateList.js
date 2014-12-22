@@ -6,7 +6,6 @@ define(['app'], function (app) {
         return function ($http, infoType, callback) {
             var url = 'http://210.118.74.166:8123/template';
             if(infoType !== ''){
-                console.log('getTemplateList', infoType);
                 url = url + '/' + infoType;
                 console.log(url);
             }
