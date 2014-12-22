@@ -173,7 +173,7 @@ define([
                 articleGroup.size.width = (_article.size.width * _article.colCount);
                 articleGroup.size.height = (_article.size.height * _article.rowCount);
 
-                var articleGroupDom = HTMLGenerator('loadDivDom', articleGroup, '', {draggable: true, resizable: false});
+                var articleGroupDom = HTMLGenerator('loadDivDom', articleGroup, '', {draggable: true, resizable: false, grid: true});
 
                 var article;
                 for (var row = 0; row < _article.rowCount; row++) {
