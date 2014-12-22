@@ -86,22 +86,6 @@ function articleBinding(article, _member_id, callback) {
         return;
     }
 
-//    // info 자체에 데이터가 있는 경우
-//    if (article.bindingType.infoType === 'personalInfo' || article.bindingType.infoType === 'additionalInfo') {
-//        infoDB.read(_member_id, function (err, finded) {
-//
-//            if (!finded) {
-//                callback();
-//                return;
-//            }
-//
-//            finded._id = finded._id.toHexString();
-//            var bindedChildArr = bindItems(article.childArr[0], finded);
-//            article.childArr = [bindedChildArr];
-//            callback();
-//        });
-//    }
-//    else { // info.item 구조인 경우
     infoDB.read(_member_id, function (err, finded) {
 
         if (!finded) {
