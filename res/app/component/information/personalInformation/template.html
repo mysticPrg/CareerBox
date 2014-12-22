@@ -1,4 +1,6 @@
 <form class="form-horizontal" role="form">
+    <div class="col-md-12" style="margin: 20px 0 20px 0; font-size: 20px; font-weight: 700; color: #d53d3d; text-align: left">기본정보</div>
+
     <div class="personalInfoForm form-group">
         <!--개인정보 입력-->
         <div class="col-md-9">
@@ -32,7 +34,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" value="{{personalInfo.D_birthday | date:'yyyy.MM.dd'}}" />
                         <span class="input-group-btn">
-                           <button class="btn btn-default" type="button" ng-click="win_birthday.center(); win_birthday.open();">달력</button>
+                           <button class="btn btn-default" type="button" ng-click="win_birthday.center(); win_birthday.open();" style="height: 34px; box-sizing: border-box"><img src="../img/information_img/calendarIcon.png" style="width: 16px; padding-bottom: 3px"/></button>
                         </span>
                     </div>
                 </div>
@@ -94,14 +96,15 @@
                 <img ng-src="http://210.118.74.166:8123/image/profile/thumb/{{personalInfo.I_picture._id}}" id="personal_picture">
             </div>
 
-            <!--<input type="file" id="personal_picture_file" class="btn btn-default" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectProfileImage($files)">-->
-            <input type="text" id="personal_picture_file" class="fileInputText" readonly="readonly" ng-model = "fileName"/>
-            <div class="fileInputDiv">
+            <!--<input type="text" id="personal_picture_file" class="fileInputText" readonly="readonly" ng-model = "fileName"/>-->
+            <div class="fileInputDiv" style="margin-top: 10px">
                 <input type="button" class="btn btn-default" value="파일첨부" class="fileInputButton" />
                 <input type="file" class="fileInputHidden" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectProfileImage($files)"/>
             </div>
 
-            <div id="personal_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="width: 180px; height: 8px; display: none;"></div><br>
+            <!--프로그래스바-->
+            <div id="personal_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="width: 125px; height: 8px; display: none;"></div>
+
         </div>
     </div>
 </form>

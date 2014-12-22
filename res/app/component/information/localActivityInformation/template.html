@@ -27,21 +27,21 @@
 
         <div id="lbl_local_activity_term" class="row">
             <!--시작 날짜-->
-            <div class="col-md-2" style="padding-right: 0; width: 172px">
+            <div class="col-md-2" style="padding-right: 0; width: 161px">
                 <div class="input-group">
                     <input type="text" class="form-control" value="{{localActivityInfoItem.T_term.start | date:'yyyy.MM.dd'}}" style="width: 105px"/>
                     <span class="input-group-btn">
-                       <button class="btn btn-default" type="button" ng-click="win_local_activity_term_start.center(); win_local_activity_term_start.open()">달력</button>
+                       <button class="btn btn-default" type="button" ng-click="win_local_activity_term_start.center(); win_local_activity_term_start.open()" style="height: 34px; box-sizing: border-box"><img src="../img/information_img/calendarIcon.png" style="width: 16px; padding-bottom: 3px"/></button>
                     </span>
                 </div>
             </div>
             <div class="col-md-1" style="width: 24px; height: 34px; line-height: 34px; padding: 0">~</div>
             <!--종료 날짜-->
-            <div class="col-md-2" style="padding-left: 0; width: 172px">
+            <div class="col-md-2" style="padding-left: 0; width: 161px">
                 <div class="input-group">
                     <input type="text" class="form-control" value="{{localActivityInfoItem.T_term.end | date:'yyyy.MM.dd'}}" style="width: 105px"/>
                     <span class="input-group-btn">
-                       <button class="btn btn-default" type="button" ng-click="win_local_activity_term_end.center(); win_local_activity_term_end.open()">달력</button>
+                       <button class="btn btn-default" type="button" ng-click="win_local_activity_term_end.center(); win_local_activity_term_end.open()" style="height: 34px; box-sizing: border-box"><img src="../img/information_img/calendarIcon.png" style="width: 16px; padding-bottom: 3px"/></button>
                     </span>
                 </div>
             </div>

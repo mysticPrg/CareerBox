@@ -4,7 +4,7 @@ html, body {
     margin:0;
     padding:0;
     height: 100%;
-
+    overflow-y: scroll;
     background-image: url('../img/manage_img/bgPattern3.png');
     background-repeat: repeat;
 
