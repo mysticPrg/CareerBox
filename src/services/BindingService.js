@@ -170,6 +170,7 @@ function setImage(layoutItem, infoData) {
 function setText(layoutItem, infoData) {
     var newItem = new Text(layoutItem);
     newItem.value = getInfoValue(layoutItem.bindingType, infoData);
+    console.log(newItem.value);
     return newItem;
 }
 
@@ -184,6 +185,8 @@ function setDefault(layoutItem) {
 }
 
 function bindItems(layoutItems, infoData) {
+
+    console.log(infoData._id);
 
     var resultArr = [];
 

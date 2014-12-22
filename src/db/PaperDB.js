@@ -81,17 +81,24 @@ function refreshTemplateData(template, callback) {
                     newArr.push(p.childArr[i]);
                 } else {
                     var cloneArticle = new Article(template.target);
-                    cloneArticle.pos = p.childArr[i].pos;
-                    cloneArticle.zOrder = p.childArr[i].zOrder;
-                    cloneArticle._id = p.childArr[i]._id;
-                    cloneArticle._template_id = p.childArr[i]._template_id;
-                    cloneArticle.isBinding = p.childArr[i].isBinding;
-                    cloneArticle.bindingData = p.childArr[i].bindingData;
-                    cloneArticle.bindingType = p.childArr[i].bindingType;
+                    var paperArticle = p.childArr[i];
+
+                    cloneArticle.pos = paperArticle.pos;
+                    cloneArticle.zOrder = paperArticle.zOrder;
+                    cloneArticle._id = paperArticle._id;
+                    cloneArticle._template_id = paperArticle._template_id;
+
+                    if (paperArticle.bindingChanged === false) {
+                        cloneArticle.isBinding = paperArticle.isBinding;
+                        cloneArticle.bindingData = paperArticle.bindingData;
+                        cloneArticle.bindingType = paperArticle.bindingType;
+                    }
 
                     newArr.push(cloneArticle);
                 }
             }
+
+            console.log(newArr);
 
             paperCollection.update(
                 {

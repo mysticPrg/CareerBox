@@ -69,11 +69,13 @@ define([
         this.rowCount = 1;
         this.colCount = 1;
         this.layoutComponentType = LayoutComponentType.article;
+        this.bindingChanged = false;
 
         if (props) {
             this._template_id = props._template_id ? props._template_id : this._template_id;
             this.rowCount = Number(props.rowCount ? props.rowCount : this.rowCount);
             this.colCount = Number(props.colCount ? props.colCount : this.colCount);
+            this.bindingChanged = (props.bindingChanged!==undefined) ? props.bindingChanged : this.bindingChanged;
 
             if (props.childArr) {
                 createChildObj(this, props.childArr);

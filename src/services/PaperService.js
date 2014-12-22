@@ -104,9 +104,9 @@ function createOrUpdateService(req, res) {
 
     if (newPaper._id) {
         newPaper._id = new ObjectID(newPaper._id);
-        PaperDB.update(newPaper, function(err) {
-            if ( newPaper.isIndex ) {
-                CaptureFromSite(newPaper._portfolio_id, 'portfolio', function(err2) {
+        PaperDB.update(newPaper, function (err) {
+            if (newPaper.isIndex) {
+                CaptureFromSite(newPaper._portfolio_id, 'portfolio', function (err2) {
                     ServiceUtil.sendResult(err2, res, null);
                     return;
                 });
@@ -149,8 +149,8 @@ function loadService(req, res) {
         return;
     }
 
-    PaperDB.get(_paper_id, function(err, paper) {
-        BindingService(paper, req.session._id, function() {
+    PaperDB.get(_paper_id, function (err, paper) {
+        BindingService(paper, req.session._id, function () {
             ServiceUtil.sendResult(err, res, paper);
         });
     });
@@ -167,7 +167,7 @@ function loadListService(req, res) {
         return;
     }
 
-    PaperDB.getList(_portfolio_id, function(err, list) {
+    PaperDB.getList(_portfolio_id, function (err, list) {
         ServiceUtil.sendResult(err, res, list);
     });
 }
@@ -185,7 +185,10 @@ function setIndexService(req, res) {
         return;
     }
 
-    PaperDB.setIndex(_portfolio_id, _paper_id,function (err){
-        ServiceUtil.sendResult(err,res,null);
+    PaperDB.setIndex(_portfolio_id, _paper_id, function (err) {
+        CaptureFromSite(_portfolio_id, 'portfolio', function (err2) {
+            ServiceUtil.sendResult(err2, res, null);
+            return;
+        });
     });
 }
