@@ -168,8 +168,8 @@ define([
             }
 
             function loadArticle(_article) {
-                var article = new Article(_article);
                 var articleGroup = new Article(_article);
+                var bindingCount = _article.bindingData.length;
                 articleGroup.size.width = (_article.size.width * _article.colCount);
                 articleGroup.size.height = (_article.size.height * _article.rowCount);
 
@@ -178,13 +178,19 @@ define([
                 var article;
                 for (var row = 0; row < _article.rowCount; row++) {
                     for (var col = 0; col < _article.colCount; col++) {
+                        var index = (row * _article.colCount) + col;
+                        // Prevent to load Binding Item of null binding data
+                        if(index >= bindingCount)
+                            break;
+
                         article = new Article(_article);
 
                         article.col = col;
                         article.row = row;
 
-                        article.childArr = _article.childArr[(row * _article.colCount) + col];
-                        article.tempIndex = (row * _article.colCount) + col;
+                        article.childArr = _article.childArr[index];
+                        article.tempIndex = index;
+
 
                         articleGroupDom += loadArticleDom(article);
                     }
