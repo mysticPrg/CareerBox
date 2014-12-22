@@ -15,13 +15,14 @@ define([
     '../deleteTemplateModal/component',
     '../paperComponent/component',
     'service/EditorData',
+    'service/InformationData',
     'service/HTMLGenerator',
     'service/SaveTemplate',
     'service/getTemplateList',
     'service/deleteTemplate',
     'service/ApplyCommonItemAttribute',
     'service/SetZOrder'
-], function (app, Template, Icon, Image, Item, Line, Link, Shape, Text, createTemplateModal, deleteTemplateModal, paperComponent) {
+], function (app, Template, Icon, Image, Item, Line, Link, Shape, Text, createTemplateModal, deleteTemplateModal) {
     app.controller('paperPanel', [
         '$scope',
         '$rootScope',
@@ -30,15 +31,19 @@ define([
         '$window',
         '$compile',
         'EditorData',
+        'InformationData',
         'HTMLGenerator',
         'SaveTemplate',
         'getTemplateList',
         'DeleteTemplate',
         'ApplyCommonItemAttribute',
         'SetZOrder',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, getTemplateList, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder) {
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, InformationData, HTMLGenerator, SaveTemplate, getTemplateList, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder) {
             $scope.templates = [];
             $scope.childIndex = 0;
+
+            $scope.infoTypes = InformationData;
+//            console.log( $scope.infoTypes);
 
 //            console.log('EditorData', EditorData);
 
@@ -81,10 +86,10 @@ define([
 
             }
 
-            $scope.loadArticleTemplate = function () {
-                var articleTemplateArray = new Array();
+            function getTemplateListByType(infotype){
+                console.log('getTemplateListByType', infotype);
 
-                getTemplateList($http, 'article', function (data) {
+                getTemplateList($http, infotype, function (data) {
                     if (data.returnCode == 000) {
                         var templates = data.result;
                         $scope.templates = []
@@ -95,7 +100,19 @@ define([
                         }
                     }
                 });
+            }
+
+            $scope.setInfoType = function (){
+                // model = infoType
+                console.log('setInfoType', $scope.selected.infoType);
+                getTemplateListByType($scope.selected.infoType);
+            }
+
+            $scope.loadArticleTemplate = function () {
+                getTemplateListByType('');
             };
+
+
 
             function newItem(type) {
                 var item;
