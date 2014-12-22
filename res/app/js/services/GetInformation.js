@@ -16,11 +16,9 @@ define([
             $q.all([loadPersonalPromiss, loadAdditionalPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null){
                     InformationData.personalInfo = resultArray[0].data.result;
-                    InformationData.personalInfo.title = '기본정보';
                 }
                 if(resultArray[1].data.result !== null){
                     InformationData.additionalInfo = resultArray[1].data.result;
-                    InformationData.additionalInfo.title = '상세정보';
                 }
             });
         }
@@ -32,7 +30,6 @@ define([
             $q.all([loadHighSchoolPromiss, loadUnivSchoolPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null)
                     InformationData.highSchoolInfo = resultArray[0].data.result;
-
                 if(resultArray[1].data.result !== null)
                     InformationData.univSchoolInfo = resultArray[1].data.result;
             });
