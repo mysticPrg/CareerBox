@@ -16,9 +16,10 @@ define([
     'component/item/text/component',
     'component/item/link/component',
     'component/item/image/component',
-    'directives/CommonAttribute'
+    'directives/CommonAttribute',
+    'service/loadArticle'
 ], function ($, ng, app, Paper, Article, EditorData) {
-    app.controller('portfolioPreview', ['$scope', '$http', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'LoadPaper', function ($scope, $http, $compile, EditorData, HTMLGenerator, LoadPaperList, LoadPaper) {
+    app.controller('portfolioPreview', ['$scope', '$http', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'LoadPaper', 'loadArticle', function ($scope, $http, $compile, EditorData, HTMLGenerator, LoadPaperList, LoadPaper, loadArticle) {
         $scope.paper;
 
         $scope.paperItemArray = [];
@@ -88,66 +89,11 @@ define([
                 child = paperChildArr[index];
                 EditorData.childArr[child._id] = child;
                 if (child.childArr) {
-                    loadArticle(child);
+                    loadArticle(child, $scope);
                 }else{
                     loadItem(child);
                 }
             }
-        }
-
-        function loadArticle(_article) {
-            var articleGroup = new Article(_article);
-            var bindingCount = _article.bindingData.length === 0? 1: _article.bindingData.length;
-            articleGroup.size.width = (_article.size.width * _article.colCount);
-            articleGroup.size.height = (_article.size.height * _article.rowCount);
-
-            var articleGroupDom = HTMLGenerator('loadDivDom', articleGroup, '', {draggable: true, resizable: false, grid: true});
-
-            var article;
-            for (var row = 0; row < _article.rowCount; row++) {
-                for (var col = 0; col < _article.colCount; col++) {
-                    var index = (row * _article.colCount) + col;
-                    // Prevent to load Binding Item of null binding data
-                    if(index >= bindingCount)
-                        break;
-
-                    article = new Article(_article);
-
-                    article.col = col;
-                    article.row = row;
-
-                    article.childArr = _article.childArr[index];
-                    article.tempIndex = index;
-
-
-                    articleGroupDom += loadArticleDom(article);
-                }
-            }
-
-            articleGroupDom += '</div>';
-
-            $('#canvas-content').append(articleGroupDom);
-            $compile($('#' + _article._id))($scope);
-        }
-
-        function loadArticleDom(article) {
-            article._id += '_' + article.tempIndex;
-            var ArticleDom = HTMLGenerator('loadDivDom', article, '', {draggable: false, resizable: false, row: article.row, col: article.col});
-
-            var templateItemArray = article.childArr;
-            EditorData.end_zOrder++;
-
-            var articleItemId;
-
-            for (var index = 0; index < templateItemArray.length; index++) {
-                // Item of article 's id = template id_item id
-                articleItemId = article._id + '_load_' + templateItemArray[index]._id + '_' + article.tempIndex;
-                ArticleDom += HTMLGenerator('loadItem', templateItemArray[index], articleItemId, {draggable: false, resizable: false});
-            }
-
-            ArticleDom += '</div>';
-
-            return ArticleDom;
         }
 
         function loadItem(item) {
