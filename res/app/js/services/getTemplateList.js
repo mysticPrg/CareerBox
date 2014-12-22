@@ -7,7 +7,6 @@ define(['app'], function (app) {
             var url = 'http://210.118.74.166:8123/template';
             if(infoType !== ''){
                 url = url + '/' + infoType;
-                console.log(url);
             }
 
             $http({
@@ -16,7 +15,6 @@ define(['app'], function (app) {
                 responseType: 'json',
                 withCredentials: true
             }).success(function (data) {
-                console.log(data);
                 callback(data);
             });
         }
