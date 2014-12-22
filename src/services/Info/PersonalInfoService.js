@@ -9,6 +9,7 @@ var ServiceUtil = require('../../util/ServiceUtil');
 module.exports.set = function (server) {
     server.post('/info/personal', saveService);
     server.get('/info/personal', readService);
+    server.get('/info/mainInfo', getMainInfoService);
 };
 
 function checkArgForPersonalInfo(req, res) {
@@ -40,7 +41,6 @@ function saveService(req, res) {
     PersonalInfoDB.save(data, function (err, saved) {
         ServiceUtil.sendResult(err, res, saved._id);
     });
-
 }
 
 function readService(req, res) {
@@ -53,13 +53,30 @@ function readService(req, res) {
     var _member_id = req.session._id;
 
     PersonalInfoDB.read(_member_id, function (err, finded) {
-        if ( finded ) {
-            finded._member_email = req.session.email;
-        } else {
-            finded = {
-                _member_email: req.session.email
-            }
-        }
         ServiceUtil.sendResult(err, res, finded);
+    });
+}
+
+function getMainInfoService(req, res) {
+
+    ServiceUtil.setResHeader(res);
+    if (!ServiceUtil.checkSession(req, res)) {
+        return;
+    }
+
+    var _member_id = req.session._id;
+
+    PersonalInfoDB.read(_member_id, function (err, finded) {
+
+        var result = {};
+
+        if ( finded ) {
+            result._member_name = finded.items[0].S_name_kr;
+            result._member_image = finded.items[0].I_picture;
+        } else {
+            result._member_name = req.session.email;
+            result._member_image = null;
+        }
+        ServiceUtil.sendResult(err, res, result);
     });
 }

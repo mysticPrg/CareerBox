@@ -4,14 +4,13 @@
 
 define([
     'app',
-    'service/InformationData',
-    'classes/Info/AdditionalInfo'
-], function (app, InformationData, AdditionalInfo) {
+    'service/InformationData'
+], function (app, InformationData) {
     app.controller('additionalInformationContorller', function ($scope) {
         $scope.InformationData = InformationData;
 
         $scope.$watch("InformationData.additionalInfo", function () {
-            $scope.additionalInfo = InformationData.additionalInfo;
+            $scope.additionalInfo = InformationData.additionalInfo.items[0];
         }, true);
     });
 

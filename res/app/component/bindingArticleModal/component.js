@@ -48,6 +48,11 @@ define([
                             continue;
                         }
 
+                        if(key === 'I_picture'){
+                            dataitem[keyKr] = item[key].originalName;
+                            continue;
+                        }
+
                         if(key === 'T_term'){
                             dataitem[keyKr] = item[key].start.split('T')[0] + '-' + item[key].end.split('T')[0];
                             continue;

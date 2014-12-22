@@ -4,7 +4,6 @@
 define([
     'app',
     'service/InformationData',
-    'classes/Info/PersonalInfo',
     'angular-upload',
     'service/ImageUpload'
 ], function (app, InformationData) {
@@ -14,7 +13,7 @@ define([
 
 
         $scope.$watch("InformationData.personalInfo", function () {
-            $scope.personalInfo = InformationData.personalInfo;
+            $scope.personalInfo = InformationData.personalInfo.items[0];
         }, true);
 
         $scope.onFileSelectProfileImage = function ($files) {
