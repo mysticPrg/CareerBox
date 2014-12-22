@@ -64,13 +64,13 @@ module.exports = function (grunt) {
             compile: {
                 options: {
 //                    name: '../../../src/classes/classes',
-//                    out: 'res/app/classes.min.js',
-                    name: './services/services',
-                    out: 'res/app/services.min.js',
+//                    out: 'res/app/js/classes.min.js',
+                    name: 'service/services',
+                    out: 'res/app/js/services.min.js',
                     removeCombined: true,
                     findNestedDependencies: true,
                     baseUrl: 'res/app/js',
-                    mainConfigFile: 'res/app/main.js',
+                    mainConfigFile: 'res/app/compressMain.js',
                     exclude: [
                         'angular',
                         'angular-route',

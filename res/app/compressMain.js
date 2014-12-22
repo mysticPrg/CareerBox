@@ -19,7 +19,6 @@ require.config({
         'facebook': '../libs/facebook/angular-facebook',
         'rotatable': '../libs/jquery/rotatable/jquery.ui.rotatable.min',
         'component': '../component',
-//        'classes': './classes.min',
         'classes': '../../../src/classes',
         'service': 'services'
     },
@@ -76,8 +75,8 @@ require.config({
 
 require([
     'jquery',
-//    'classes',
-//    'services.min'
+    'classes',
+    'service/services'
 
 ], function ($) {
 
