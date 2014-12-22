@@ -14,8 +14,9 @@ define([
                 selectedItems: $scope.selectedItems,
                 multiSelect: true,
                 excludeProperties: ['_id']
-
             };
+
+            $scope.hasItems = false;
 
             var InformationItem = getInformationItem(EditorData.infoType);
 
@@ -25,6 +26,7 @@ define([
 
                 var items = data.result.items
                 $scope.hasItems = items.length > 0? true: false;
+                console.log( $scope.hasItems);
 
                 if($scope.hasItems === true){
                     var dataItems = [];

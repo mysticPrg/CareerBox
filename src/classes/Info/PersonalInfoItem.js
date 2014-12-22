@@ -10,9 +10,9 @@ define([], function () {
 
     var dictionary = {
         'I_picture' : '프로필',
-        'S_name_kr' : '한글',
-        'S_name_en' : '영문',
-        'S_name_ch' : '한문',
+        'S_name_kr' : '이름(한글)',
+        'S_name_en' : '이름(영문)',
+        'S_name_ch' : '이름(한문)',
         'D_birthday' : '생일',
         'S_email' : '이메일',
         'S_phone' : '전화번호',
