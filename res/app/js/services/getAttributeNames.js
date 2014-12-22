@@ -4,8 +4,8 @@
 define([
     'app',
     'classes/Enums/InfoType',
-    'classes/Info/PersonalInfo', // 개인정보
-    'classes/Info/AdditionalInfo', // 추가정보
+    'classes/Info/PersonalInfoItem', // 개인정보
+    'classes/Info/AdditionalInfoItem', // 추가정보
     'classes/Info/HighSchoolInfoItem', // 고등학교
     'classes/Info/UnivSchoolInfoItem', // 대학교
     'classes/Info/WorkingInfoItem', // 경력
@@ -19,7 +19,7 @@ define([
     'classes/Info/GlobalActivityInfoItem', // 국외활동
     'classes/Info/ProjectInfoItem', // 프로젝트
     'classes/Info/ColumnInfoItem'  // 칼럼
-], function (app, InfoType, PersonalInfo, AdditionalInfo, HighSchoolInfoItem, UnivSchoolInfoItem, WorkingInfoItem, CertificationAbilityInfoItem, ProficiencyInfoItem, ComputerAbilityInfoItem,
+], function (app, InfoType, PersonalInfoItem, AdditionalInfoItem, HighSchoolInfoItem, UnivSchoolInfoItem, WorkingInfoItem, CertificationAbilityInfoItem, ProficiencyInfoItem, ComputerAbilityInfoItem,
              PaperAbilityInfoItem, ScholarshipInfoItem, AwardInfoItem, LocalActivityInfoItem, GlobalActivityInfoItem, ProjectInfoItem, ColumnInfoItem) {
     app.factory('getAttributeNames', function () {
         return function (category) {
@@ -39,9 +39,9 @@ define([
         function getItem(category){
             switch (category){
                 case InfoType.personalInfo:
-                    return new PersonalInfo();
+                    return new PersonalInfoItem();
                 case InfoType.additionalInfo:
-                    return new AdditionalInfo();
+                    return new AdditionalInfoItem();
                 case InfoType.highSchoolInfo:
                     return new HighSchoolInfoItem();
                 case InfoType.univSchoolInfo:
