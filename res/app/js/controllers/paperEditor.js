@@ -43,10 +43,6 @@ define([
                     {collapsible: false}
                 ];
 
-                if (EditorData.paperId !== '') {
-                    loadPaper();
-                }
-
                 EditorData.focusId = EditorData.paper._id;
             });
 
@@ -72,6 +68,7 @@ define([
                 initPaper();
 
                 LoadPaper($http, EditorData.paperId, function (result) {
+                    console.log('LoadPaper', result.result);
                     EditorData.paper = result.result;
                     EditorData.paperTitle = result.result.title;
 
@@ -169,7 +166,7 @@ define([
 
             function loadArticle(_article) {
                 var articleGroup = new Article(_article);
-                var bindingCount = _article.bindingData.length;
+                var bindingCount = _article.bindingData.length === 0? 1: _article.bindingData.length;
                 articleGroup.size.width = (_article.size.width * _article.colCount);
                 articleGroup.size.height = (_article.size.height * _article.rowCount);
 

@@ -193,7 +193,7 @@ define([
                 template.target._template_id = template._id;
 
                 EditorData.childArr[templateId] = template.target;
-                console.log(EditorData.childArr[templateId]);
+//                console.log(EditorData.childArr[templateId]);
 
                 SetZOrder(template.target, templateId);
 
