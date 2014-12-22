@@ -72,9 +72,8 @@ function checkArgForIdOnParams(req, res) {
 }
 
 function checkArgForInfoTypeOnParams(req, res) {
-    var _paper_id = req.params.infoType;
-    if (!_paper_id || !ObjectID.isValid(_paper_id)) {
-
+    var infoType = req.params.infoType;
+    if (!infoType) {
         var result = new Result(null);
         result.setCode('001');
         res.end(result.toString());

@@ -14,9 +14,10 @@ define([
     'service/HTMLGenerator',
     'service/SaveTemplate',
     'service/SetAttributeInformation',
+    'service/WaitServer',
     'component/templatePanel/component'
 ], function ($, ng, app, Template, Article, saveConfirmModal) {
-    app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation) {
+    app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', 'WaitServer', function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation, WaitServer) {
         EditorData.editorType = 'template';
         $scope.changed = false;
         $scope.saveRock;
@@ -153,6 +154,8 @@ define([
                 return;
             }
 
+            WaitServer.show();
+
             $scope.saveRock = true;
             EditorData.focusId = '';
 
@@ -162,6 +165,8 @@ define([
             $scope.description = '';
 
             SaveTemplate($http, $scope.template, function (result) {
+                WaitServer.hide();
+
                 if (result.returnCode === '000') {
                     $scope.changed = false;
                     $scope.template._id = result.result;

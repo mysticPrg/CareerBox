@@ -10,6 +10,7 @@ define([
     'service/memberCallback'
 ], function ($, ng, app) {
     app.controller('loginController', ['$scope', '$timeout', '$window', 'httpLogin', 'memberCallback', 'Facebook', function ($scope, $timeout, $window, httpLogin, memberCallback, Facebook) {
+
         $scope.errors = [];
         $scope.msgs = [];
 

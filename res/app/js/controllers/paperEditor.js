@@ -21,10 +21,11 @@ define([
     'service/LoadPaperList',
     'service/SavePaper',
     'service/LoadPaper',
+    'service/WaitServer',
     'component/paperPanel/component'
 ], function ($, ng, app, Paper, Article, createTemplateModal, saveConfirmModal) {
-    app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper', 'loadArticle',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper, loadArticle) {
+    app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper', 'loadArticle', 'WaitServer',
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper, loadArticle, WaitServer) {
             EditorData.editorType = 'paper';
             $scope.paperChanged = false;
 
@@ -207,7 +208,10 @@ define([
                 $scope.paper.childArr = getPaperChildArr(EditorData.childArr);
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: $scope.paper};
 
+                WaitServer.show();
+
                 SavePaper($http, data, function (result) {
+                    WaitServer.hide();
                     console.log('save data', data);
                     if (result.returnCode === '000') {
                         $scope.changed = false;

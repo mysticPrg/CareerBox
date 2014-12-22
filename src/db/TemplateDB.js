@@ -63,7 +63,7 @@ function getListByInfoType(_member_id, infoType, callback) {
 
     templateCollection.find({
         _member_id: _member_id,
-        'target.bindingType': infoType
+        'target.bindingType.infoType': infoType
     }).toArray(function (err, list) {
         async.each(list, function (t, cb) {
             delete t._member_id;
