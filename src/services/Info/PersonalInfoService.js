@@ -53,14 +53,6 @@ function readService(req, res) {
     var _member_id = req.session._id;
 
     PersonalInfoDB.read(_member_id, function (err, finded) {
-        if ( finded ) {
-            finded._member_email = req.session.email;
-        }
-//        } else {
-//            finded = {
-//                _member_email: req.session.email
-//            }
-//        }
         ServiceUtil.sendResult(err, res, finded);
     });
 }

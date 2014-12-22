@@ -75,7 +75,7 @@ function articleBinding(article, _member_id, callback) {
     if (!article.isBinding) {
         callback();
         return;
-    } else if (article.bindingData && article.bindingData.length === 0 ) {
+    } else if (article.bindingData && article.bindingData.length === 0) {
         callback();
         return;
     }
@@ -86,42 +86,42 @@ function articleBinding(article, _member_id, callback) {
         return;
     }
 
-    // info 자체에 데이터가 있는 경우
-    if (article.bindingType.infoType === 'personalInfo' || article.bindingType.infoType === 'additionalInfo') {
-        infoDB.read(_member_id, function (err, finded) {
+//    // info 자체에 데이터가 있는 경우
+//    if (article.bindingType.infoType === 'personalInfo' || article.bindingType.infoType === 'additionalInfo') {
+//        infoDB.read(_member_id, function (err, finded) {
+//
+//            if (!finded) {
+//                callback();
+//                return;
+//            }
+//
+//            finded._id = finded._id.toHexString();
+//            var bindedChildArr = bindItems(article.childArr[0], finded);
+//            article.childArr = [bindedChildArr];
+//            callback();
+//        });
+//    }
+//    else { // info.item 구조인 경우
+    infoDB.read(_member_id, function (err, finded) {
 
-            if (!finded) {
-                callback();
-                return;
-            }
-
-            finded._id = finded._id.toHexString();
-            var bindedChildArr = bindItems(article.childArr[0], finded);
-            article.childArr = [bindedChildArr];
+        if (!finded) {
             callback();
-        });
-    }
-    else { // info.item 구조인 경우
-        infoDB.read(_member_id, function (err, finded) {
+            return;
+        }
 
-            if (!finded) {
-                callback();
-                return;
+        var bindedChildArr = [];
+
+        var childs = finded.items;
+        for (var i = 0; i < childs.length; i++) {
+            if (article.bindingData.indexOf(childs[i]._id) === -1) {
+                continue;
             }
-
-            var bindedChildArr = [];
-
-            var childs = finded.items;
-            for ( var i=0 ; i<childs.length ; i++ ) {
-                if ( article.bindingData.indexOf(childs[i]._id) === -1 ) {
-                    continue;
-                }
-                bindedChildArr.push(bindItems(article.childArr[0], childs[i]));
-            }
-            article.childArr = bindedChildArr;
-            callback();
-        });
-    }
+            bindedChildArr.push(bindItems(article.childArr[0], childs[i]));
+        }
+        article.childArr = bindedChildArr;
+        callback();
+    });
+//    }
 }
 
 function getInfoValue(infoType, infoData) {
@@ -135,7 +135,7 @@ function getInfoValue(infoType, infoData) {
             return '' + infoData;
 
         case 'B':
-            if ( infoData ) {
+            if (infoData) {
                 return true;
             } else {
                 return false;
@@ -149,12 +149,12 @@ function getInfoValue(infoType, infoData) {
 
         case 'D':
             var tempDate = new Date(infoData);
-            return '' + (1900+tempDate.getYear()) + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate();
+            return '' + (1900 + tempDate.getYear()) + '-' + (tempDate.getMonth() + 1) + '-' + tempDate.getDate();
 
         case 'T':
             var tempTerm = new Term(infoData);
-            return '' + (1900+tempTerm.start.getYear()) + '-' + (tempTerm.start.getMonth()+1) + '-' + tempTerm.start.getDate() + ' ~ ' +
-                (1900+tempTerm.end.getYear()) + '-' + (tempTerm.end.getMonth()+1) + '-' + tempTerm.end.getDate();
+            return '' + (1900 + tempTerm.start.getYear()) + '-' + (tempTerm.start.getMonth() + 1) + '-' + tempTerm.start.getDate() + ' ~ ' +
+                (1900 + tempTerm.end.getYear()) + '-' + (tempTerm.end.getMonth() + 1) + '-' + tempTerm.end.getDate();
 
         default:
             return '';
@@ -183,7 +183,7 @@ function setDefault(layoutItem) {
     return layoutItem;
 }
 
-function bindItems (layoutItems, infoData) {
+function bindItems(layoutItems, infoData) {
 
     var resultArr = [];
 

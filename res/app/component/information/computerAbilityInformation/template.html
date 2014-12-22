@@ -1,17 +1,25 @@
-<div style="margin: 30px 0 10px 0">컴퓨터 활용 능력</div>
 <form class="form-horizontal" role="form">
+    <div class="col-md-12" style="margin: 20px 0 20px 0; font-size: 20px; font-weight: 700; color: #d53d3d; text-align: left">컴퓨터 활용 능력</div>
+
     <div class="form-group">
         <!-- 기능 -->
         <div class="form-group">
             <label for="lbl_computer_name" class="col-md-2 control-label">기능</label>
-            <div class="col-md-3" id="lbl_computer_name">
+            <div class="col-md-4" id="lbl_computer_name">
                 <input type="text" class="form-control" placeholder="기능" ng-model="computerAbilityInfoItem.S_name">
             </div>
         </div>
 
+        <!-- 활용 기간 -->
+        <div class="form-group row">
+            <label for="lbl_computer_term" class="col-md-2 control-label">활용기간</label>
+            <div class="col-md-2" id="lbl_computer_term" style="padding-right: 0">
+                <input type="text" class="form-control"  placeholder="활용기간" ng-model="computerAbilityInfoItem.N_term">
+            </div>
+            <div class="col-md-1" style="width: 65px; padding-left: 0 ;height: 34px; line-height: 34px">년</div>
+
         <!-- 활용 수준 -->
-        <div class="form-group">
-            <label for="lbl_computer_grade" class="col-md-2 control-label">활용 수준</label>
+            <label for="lbl_computer_grade" class="col-md-3 control-label" style="width: 240px">활용 수준</label>
             <div class="col-md-2" id="lbl_computer_grade">
                 <select class="form-control" ng-model="computerAbilityInfoItem.S_grade">
                     <option>상</option>
@@ -21,14 +29,6 @@
             </div>
         </div>
 
-        <!-- 활용 기간 -->
-        <div class="form-group">
-            <label for="lbl_computer_term" class="col-md-2 control-label">활용기간</label>
-            <div class="col-md-1" id="lbl_computer_term">
-                <input type="text" class="form-control"  placeholder="활용기간" ng-model="computerAbilityInfoItem.N_term">
-            </div>
-            <div class="col-md-1">년</div>
-        </div>
     </div>
 
     <!--추가 버튼-->
@@ -36,37 +36,26 @@
         <button type="button" class="btn btn-default" ng-click="addComputerAbilityInfo()">추가</button>
     </div>
 
-    <hr>
+    <hr style="border-color: #d6d6d6">
 
     <div ng-repeat="item in computerAbilityInfoItems track by $index">
         <div class="form-group">
             <!-- 기능 -->
             <div class="form-group">
                 <label for="lbl_computer_name_load" class="col-md-2 control-label">기능</label>
-                <div class="col-md-3" id="lbl_computer_name_load">
-                    <input type="text" class="form-control" placeholder="기능" ng-model="item.S_name">
-                </div>
+                <div class="col-md-4" id="lbl_computer_name_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_name}}</div>
             </div>
 
             <!-- 활용 수준 -->
-            <div class="form-group">
+            <div class="form-group row">
                 <label for="lbl_computer_grade_load" class="col-md-2 control-label">활용 수준</label>
-                <div class="col-md-2" id="lbl_computer_grade_load">
-                    <select class="form-control" ng-model="item.S_grade">
-                        <option>상</option>
-                        <option>중</option>
-                        <option>하</option>
-                    </select>
-                </div>
-            </div>
+                <div class="col-md-4" id="lbl_computer_grade_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_grade}}</div>
 
             <!-- 활용 기간 -->
-            <div class="form-group">
                 <label for="lbl_computer_term_load" class="col-md-2 control-label">활용기간</label>
-                <div class="col-md-1" id="lbl_computer_term_load">
-                    <input type="text" class="form-control"  placeholder="활용기간" ng-model="item.N_term">
-                </div>
-                <div class="col-md-1">년</div>
+
+                <div class="col-md-1" id="lbl_computer_term_load" style="text-align: left; height: 34px; line-height: 34px">{{item.N_term}}</div>
+                <div class="col-md-1" style="width: 45px; padding-left: 0; height: 34px; line-height: 34px">년</div>
             </div>
         </div>
 

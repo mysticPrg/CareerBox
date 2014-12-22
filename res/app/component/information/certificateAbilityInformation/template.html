@@ -1,10 +1,11 @@
-<div style="margin: 30px 0 10px 0">자격증</div>
 <form class="form-horizontal" role="form">
+    <div class="col-md-12" style="margin: 20px 0 20px 0; font-size: 20px; font-weight: 700; color: #d53d3d; text-align: left">자격증</div>
+
     <!--자격증명-->
     <div class="form-group">
         <label for="lbl_certificate_name" class="col-md-2 control-label">자격증명</label>
 
-        <div class="col-md-3" id="lbl_certificate_name">
+        <div class="col-md-4" id="lbl_certificate_name">
             <input type="text" class="form-control" placeholder="자격증명" ng-model="certificateAbilityInfoItem.S_name">
         </div>
     </div>
@@ -13,13 +14,18 @@
     <div class="form-group row">
         <label for="lbl_certificate_publisher" class="col-sm-2 control-label">발행처</label>
 
-        <div class="col-md-3" id="lbl_certificate_publisher">
+        <div class="col-md-4" id="lbl_certificate_publisher">
             <input type="text" class="form-control" placeholder="발행처" ng-model="certificateAbilityInfoItem.S_publisher">
         </div>
 
         <label for="lbl_certificate_date" class="col-md-2 control-label">취득일자</label>
-        <div class="col-md-2" id="lbl_certificate_date">
-            <button class="k-button" ng-click="lbl_certificate_date.center(); lbl_certificate_date.open();">{{certificateAbilityInfoItem.D_date | date:"yyyy년 MM월 dd일"}}</button>
+        <div class="col-md-3" id="lbl_certificate_date">
+            <div class="input-group">
+                <input type="text" class="form-control" value="{{certificateAbilityInfoItem.D_date | date:'yyyy.MM.dd'}}" />
+                <span class="input-group-btn">
+                   <button class="btn btn-default" type="button" ng-click="lbl_certificate_date.center(); lbl_certificate_date.open();">달력</button>
+                </span>
+            </div>
         </div>
         <div kendo-window="lbl_certificate_date" k-title="'Date'" k-modal="true" k-resizable="false" k-visible="false">
             <kendo-calendar ng-model="certificateAbilityInfoItem.D_date" k-on-change="lbl_certificate_date.close()"></kendo-calendar>
@@ -27,19 +33,28 @@
     </div>
 
     <!--첨부파일-->
-    <div class="form-group">
+    <div class="form-group row">
         <label for="lbl_certificate_file" class="col-md-2 control-label">첨부파일</label>
 
-        <div class="col-md-3" id="lbl_certificate_file">
-            <input type="file" id="certificate_file" ng-file-select="onFileSelectCertificateAbilityInfo($files)">
+        <div class="row">
+            <div class="col-md-4" style="width: 290px">
+                <input type="text" id="lbl_certificate_file" class="fileInputTextBorder form-control" readonly="readonly" ng-model = "fileName"/>
+            </div>
+            <div class="col-md-1" style="padding-left: 0; text-align: left; width: 115px">
+                <div class="fileInputDiv" >
+                    <input type="button" class="fileInputButton btn btn-default" value="파일첨부" />
+                    <input type="file" class="fileInputHidden" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectCertificateAbilityInfo($files)"/>
+                </div>
+            </div>
+            <div class="col-md-1" style="padding-left: 0; text-align: left">
+                <button class="btn btn-default" id="certificate_upload" ng-click="uploadCertificateAbilityInfo()" style="display: none;">업로드</button>
+            </div>
         </div>
-
-        <button type="btn btn-default col-md-2" id="certificate_upload" ng-click="uploadCertificateAbilityInfo()" style="display: none;">업로드</button>
     </div>
 
     <!--첨부파일 정보-->
     <div class="form-group">
-        <div id="certificate_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div>
+        <div id="certificate_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="width: 180px; height: 8px; display: none;"></div>
     </div>
 
     <!--추가 버튼-->
@@ -47,40 +62,29 @@
         <button type="button" class="btn btn-default" ng-click="addCertificateAbilityInfo()">추가</button>
     </div>
 
-    <hr>
+    <hr style="border-color: #d6d6d6">
 
     <div ng-repeat="item in certificateAbilityInfoItems track by $index">
         <!--자격증명-->
         <div class="form-group">
             <label for="lbl_certificate_name_load" class="col-md-2 control-label">자격증명</label>
-
-            <div class="col-md-3" id="lbl_certificate_name_load">
-                <input type="text" class="form-control" placeholder="자격증명" ng-model="item.S_name">
-            </div>
+            <div class="col-md-3" id="lbl_certificate_name_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_name}}</div>
         </div>
 
         <!--발행처, 취득일자-->
         <div class="form-group row">
             <label for="lbl_certificate_publisher_load" class="col-sm-2 control-label">발행처</label>
-
-            <div class="col-md-3" id="lbl_certificate_publisher_load">
-                <input type="text" class="form-control" placeholder="발행처" ng-model="item.S_publisher">
-            </div>
+            <div class="col-md-3" id="lbl_certificate_publisher_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_publisher}}</div>
 
             <label for="lbl_certificate_date_load" class="col-md-2 control-label">취득일자</label>
-            <div class="col-md-2" id="lbl_certificate_date_load">
-                <button class="k-button" ng-click="lbl_certificate_date.center(); lbl_certificate_date.open();">{{item.D_date | date:"yyyy년 MM월 dd일"}}</button>
-            </div>
-            <div kendo-window="lbl_certificate_date" k-title="'Date'" k-modal="true" k-resizable="false" k-visible="false">
-                <kendo-calendar ng-model="item.D_date" k-on-change="lbl_certificate_date.close()"></kendo-calendar>
-            </div>
+            <div class="col-md-2" id="lbl_certificate_date_load" style="text-align: left; height: 34px; line-height: 34px">{{item.D_date | date:"yyyy.MM.dd"}}</div>
         </div>
 
         <!--첨부파일-->
         <div class="form-group">
             <label for="lbl_certificate_file_load" class="col-md-2 control-label">첨부파일</label>
 
-            <div class="col-md-5" id="lbl_certificate_file_load">
+            <div class="col-md-4" id="lbl_certificate_file_load" style="height: 34px; line-height: 34px; text-align: left">
                 <div ng-show = "!item.F_file">없음</div>
                 <div ng-show = "item.F_file"><a href="http://210.118.74.166:8123/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
             </div>

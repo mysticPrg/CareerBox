@@ -40,6 +40,7 @@ define([
         }
 
         $scope.onFileSelectProficiencyInfo = function ($files) {
+            $scope.fileName = $files[0].name;
             $scope.files = $files;
             $('#proficiency_upload').fadeIn('slow');
         }
