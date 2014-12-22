@@ -3,13 +3,13 @@ define([
     'app',
     'classes/Paper',
     'component/bindingArticleModal/component',
-    'service/getAttributeNames',
+    'service/getAvailableAttribute',
     'service/EditorData',
     'service/InformationData',
     'service/reloadPaper'
 ], function (app, Paper, bindingArticleModal) {
 
-    app.directive('bindingAttribute', function (getAttributeNames, EditorData, InformationData, reloadPaper) {
+    app.directive('bindingAttribute', function (getAvailableAttribute, EditorData, InformationData, reloadPaper) {
 
         return {
             restrict: 'A',

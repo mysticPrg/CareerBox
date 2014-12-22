@@ -1,18 +1,15 @@
 <div id="editor" style="background-color: #d8d8d8">
-    <div id="paperEditor" paper-component style="background-color: #f9f9f9; height: 54px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.2);"></div>
+    <div id="paperEditor" paper-component
+         style="background-color: #f9f9f9; height: 54px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.2);"></div>
 
     <!--Section, Article, Item 에디터-->
     <div id="otherEditor">
         <!--Section 수정 가능한 에디터-->
         <div id="SectionEditor" data-ng-init="initializeSectionEditor()">
             <!--탭-->
-            <!--<ul class="nav nav-tabs nav-justified" id="SectionEditorTab">-->
-                <!--<li ng-click="loadArticleTemplate()"><a id="articleTabLink" href="#articleTemplateArea">article</a></li>-->
-                <!--<li><a id="itemTabLink" href="#itemTemplateArea">item</a></li>-->
-            <!--</ul>-->
-
             <ul id="SectionEditorTab">
-                <li><a id="articleTabLink" href="#articleTemplateArea" title="articleTemplateArea" ng-click="loadArticleTemplate()">
+                <li><a id="articleTabLink" href="#articleTemplateArea" title="articleTemplateArea"
+                       ng-click="loadArticleTemplate()">
                     <img src="../img/editor_img/articleIconActive.png" id="articleTabImg"/>article</a></li>
                 <li><a id="itemTabLink" href="#itemTemplateArea" title="itemTemplateArea">
                     <img src="../img/editor_img/itemIconActive.png" id="itemTabImg"/>item</a></li>
@@ -21,28 +18,12 @@
             <div class="tab-content" id="content">
                 <div id="articleTemplateArea">
                     <div style="margin-bottom: 30px">
-                        <!--템플릿 분류 드롭다운-->
-                        <div id="templateSelect" class="btn-group">
-                            <button type="button" class="templateCategory btn btn-default">전체보기</button>
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">기본정보</a></li>
-                                <li><a href="#">학력</a></li>
-                                <li><a href="#">경력</a></li>
-                                <li><a href="#">보유능력</a></li>
-                                <li><a href="#">수상</a></li>
-                                <li><a href="#">활동</a></li>
-                                <li><a href="#">프로젝트</a></li>
-                                <li><a href="#">칼럼</a></li>
-                            </ul>
-                        </div>
+                        <select ng-model="selected" ng-change="setInfoType()"
+                                ng-options="value.title for (key, value) in infoTypes"></select>
 
                         <!--New 템플릿 생성 버튼-->
                         <button id="btnAddArticleTemplate" class="btn btn-default form-control"
                                 ng-click="popCreateTemplateModal()">+ New
-                            <!--<img src="../img/editor_img/newArticleIcon.png" style="margin-right: 5px; width: 13px"/>new</button>-->
                         </button>
                     </div>
 
@@ -57,19 +38,6 @@
                                 </div>
                             </div>
 
-
-                            <!--<div id="editGroup" class="dropdown">-->
-                                <!--  -->
-                                <!--<button data-toggle="dropdown" class="btn btn-default" href="#">edit</button>-->
-                                <!--  -->
-                                <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">-->
-                                    <!--    -->
-                                    <!--<li><a ng-click="editTemplate(template)">수정</a></li>-->
-                                    <!--<li><a ng-click="popDeleteTemplateModal(template._id)">삭제</a></li>-->
-                                    <!--  -->
-                                <!--</ul>-->
-                            <!--</div>-->
-
                             <div id="editGroup" class="dropdown">
                                 <button id="editBtn" data-toggle="dropdown" class="btn btn-default" href="#"></button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -79,8 +47,6 @@
                                       
                                 </ul>
                             </div>
-
-
                         </li>
                     </ul>
                 </div>
@@ -115,71 +81,6 @@
                     </ul>
                 </div>
             </div>
-
-            <!--<!--탭 내부 정보-->
-            <!--<div class="tab-content">-->
-                <!--<!--Article 템플릿 리스트-->
-                <!--<div class="tab-pane" id="articleTemplateArea">-->
-                    <!--<!--New 템플릿 생성 버튼-->
-                    <!--<button id="btnAddArticleTemplate" class="btn btn-default form-control"-->
-                            <!--ng-click="popCreateTemplateModal()">add article template-->
-                    <!--</button>-->
-                    <!--<!--생성한 템플릿 리스트 -->
-                    <!--<ul id="articleTemplateList">-->
-                        <!--<li ng-repeat="template in templates track by $index">-->
-                            <!--<div id="templateThumb" ng-click="templateClone(template)">-->
-                                <!--<img src="../img/thumb_template.png"/>-->
-
-                                <!--<div class="description">-->
-                                    <!--{{template.title}}-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<div id="editGroup" class="dropdown">-->
-                                <!--  -->
-                                <!--<button data-toggle="dropdown" class="btn btn-default" href="#">edit</button>-->
-                                <!--  -->
-                                <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">-->
-                                    <!--    -->
-                                    <!--<li><a ng-click="editTemplate(template)">수정</a></li>-->
-                                    <!--<li><a ng-click="popDeleteTemplateModal(template._id)">삭제</a></li>-->
-                                    <!--  -->
-                                <!--</ul>-->
-                            <!--</div>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-                <!--<!--Item 템플릿 리스트-->
-                <!--<div class="tab-pane" id="itemTemplateArea">-->
-                    <!--<ul id="itemTemplateList" class="clearfix">-->
-                        <!--<li>-->
-                            <!--<div id="text" class="" ng-click="itemClone('text')">-->
-                                <!--<img src="../img/item_icon/item_text.png"/>-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<div id="image" class="" ng-click="itemClone('image')">-->
-                                <!--<img src="../img/item_icon/item_image.png"/>-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<div id="line" class="" ng-click="itemClone('line')">-->
-                                <!--<img src="../img/item_icon/item_line.png"/>-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<div id="link" class="" ng-click="itemClone('link')">-->
-                                <!--<img src="../img/item_icon/item_link.png"/>-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<div id="shape" class="" ng-click="itemClone('shape')">-->
-                                <!--<img src="../img/item_icon/item_shape.png"/>-->
-                            <!--</div>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
         </div>
-        <!-- end of SectionEditor -->
     </div>
 </div>
