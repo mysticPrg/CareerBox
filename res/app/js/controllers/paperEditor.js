@@ -169,7 +169,7 @@ define([
 
             function loadArticle(_article) {
                 var articleGroup = new Article(_article);
-                var bindingCount = _article.bindingData.length;
+                var bindingCount = _article.bindingData.length === 0? 1: _article.bindingData.length;
                 articleGroup.size.width = (_article.size.width * _article.colCount);
                 articleGroup.size.height = (_article.size.height * _article.rowCount);
 
