@@ -21,15 +21,12 @@
     <!--상단 사용자 정보-->
     <div id="user-info" class="clearfix">
         <div id="userInfoWrapper">
-            <h2 id="header-title" style="display: none;">{{userInfo.S_name_kr}} 님의 포트폴리오</h2>
+            <h2 id="header-title" style="display: none;">{{userInfo._member_name}} 님의 포트폴리오</h2>
 
             <!--사용자 사진-->
             <div id="userImg">
-                <div ng-show = "!userInfo.I_picture">
-                    <img ng-src="../img/noImage.png">
-                </div>
-                <div class="crop" ng-show = "userInfo.I_picture">
-                    <img class="profileImg" ng-src="http://210.118.74.166:8123/image/profile/thumb/{{userInfo.I_picture._id}}">
+                <div class="crop">
+                    <img class="profileImg" ng-src="http://210.118.74.166:8123/image/profile/thumb/{{userInfo._member_image._id}}" onerror="this.src='../img/noImage.png'">
                 </div>
             </div>
 
