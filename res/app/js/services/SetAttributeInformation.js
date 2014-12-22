@@ -126,7 +126,6 @@ define([
             else if(id.split("_").length == 3){
                 // 아이디 파싱
                 var articleId = id.split("_")[0] + "_" + id.split("_")[1];
-                var arrayId = id.split("_")[2];
 
                 return {
                     parentArray : EditorData.childArr[articleId],
