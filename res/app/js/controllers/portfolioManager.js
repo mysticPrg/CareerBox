@@ -14,8 +14,9 @@ define([
         $scope.initialize = function (){
             $http.get('http://210.118.74.166:8123/info/mainInfo', {withCredentials: true}).
                 success(function(data, status, headers, config) {
+                    var name = data.result._member_name.split('@')[0];
+                    data.result._member_name = name;
                     $scope.userInfo = data.result;
-                    console.log(data.result);
 
                     $('#header-title').fadeIn('slow');
 
