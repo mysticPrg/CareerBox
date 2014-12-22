@@ -85,6 +85,9 @@ function refreshTemplateData(template, callback) {
                     cloneArticle.zOrder = p.childArr[i].zOrder;
                     cloneArticle._id = p.childArr[i]._id;
                     cloneArticle._template_id = p.childArr[i]._template_id;
+                    cloneArticle.isBinding = p.childArr[i].isBinding;
+                    cloneArticle.bindingData = p.childArr[i].bindingData;
+                    cloneArticle.bindingType = p.childArr[i].bindingType;
 
                     newArr.push(cloneArticle);
                 }
