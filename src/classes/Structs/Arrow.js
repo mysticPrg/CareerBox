@@ -13,7 +13,7 @@ define(['classes/Enums/Direction'], function (Direction) {
         this.direction = Direction.end;
 
         if (props) {
-            this.use = props.use ? props.use : this.use;
+            this.use = (props.use!==undefined) ? props.use : this.use;
             this.direction = props.direction ? props.direction : this.direction;
         }
     };

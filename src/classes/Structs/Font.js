@@ -20,8 +20,8 @@ define(['classes/Structs/Color'], function (Color) {
             this.color = new Color(props.color ? props.color : this.color);
             this.size = Number(props.size ? props.size : this.size);
             this.family = props.family ? props.family : this.family;
-            this.italic = props.italic ? props.italic : this.italic;
-            this.bold = props.bold ? props.bold : this.bold;
+            this.italic = (props.italic!==undefined) ? props.italic : this.italic;
+            this.bold = (props.bold!==undefined) ? props.bold : this.bold;
         }
     };
 

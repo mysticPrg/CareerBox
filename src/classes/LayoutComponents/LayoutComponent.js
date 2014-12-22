@@ -37,7 +37,7 @@ define([
             this.outline = new Outline(props.outline ? props.outline : this.outline);
             this.radius = Number(props.radius ? props.radius : this.radius);
             this.bindingType = props.bindingType ? props.bindingType : this.bindingType;
-            this.isBinding = props.isBinding ? props.isBinding : this.isBinding;
+            this.isBinding = (props.isBinding!==undefined) ? props.isBinding : this.isBinding;
             this.bindingData = props.bindingData ? props.bindingData : this.bindingData;
         }
     };

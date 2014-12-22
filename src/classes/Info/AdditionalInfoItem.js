@@ -43,8 +43,8 @@ define(['classes/Structs/Term'], function (Term) {
         this.S_respect = '';
 
         if ( props ) {
-            this.B_veteran = props.B_veteran ? props.B_veteran : this.B_veteran;
-            this.B_disability = props.B_disability ? props.B_disability : this.B_disability;
+            this.B_veteran = (props.B_veteran!==undefined) ? props.B_veteran : this.B_veteran;
+            this.B_disability = (props.B_disability!==undefined) ? props.B_disability : this.B_disability;
             this.T_militaryService_term = props.T_militaryService_term ? props.T_militaryService_term : this.T_militaryService_term;
             this.S_militaryService_category = props.S_militaryService_category ? props.S_militaryService_category : this.S_militaryService_category;
             this.S_religion = props.S_religion ? props.S_religion : this.S_religion;
