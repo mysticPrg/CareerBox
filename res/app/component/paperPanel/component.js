@@ -42,10 +42,14 @@ define([
             $scope.templates = [];
             $scope.childIndex = 0;
 
-            $scope.infoTypes = InformationData;
-//            console.log( $scope.infoTypes);
-
-//            console.log('EditorData', EditorData);
+            // Initialize Template InfoType
+            var infoTypes = [];
+            infoTypes.push({title: '전체보기', infoType: ''});
+            for(var key in InformationData){
+                infoTypes.push(InformationData[key]);
+            }
+            $scope.selected = infoTypes[0];
+            $scope.infoTypes = infoTypes;
 
             $scope.initializeSectionEditor = function () {
                 $('#SectionEditorTab a').click(function (e) {
@@ -87,8 +91,6 @@ define([
             }
 
             function getTemplateListByType(infotype){
-                console.log('getTemplateListByType', infotype);
-
                 getTemplateList($http, infotype, function (data) {
                     if (data.returnCode == 000) {
                         var templates = data.result;
@@ -103,8 +105,6 @@ define([
             }
 
             $scope.setInfoType = function (){
-                // model = infoType
-                console.log('setInfoType', $scope.selected.infoType);
                 getTemplateListByType($scope.selected.infoType);
             }
 
