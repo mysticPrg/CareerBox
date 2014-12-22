@@ -3,7 +3,7 @@
  */
 define([
     'app',
-    'services/InformationData',
+    'service/InformationData',
     'classes/Info/ComputerAbilityInfoItem'
 ], function (app, InformationData, ComputerAbilityInfoItem) {
     app.controller('computerAbilityInformationController', ['$scope', function ($scope) {

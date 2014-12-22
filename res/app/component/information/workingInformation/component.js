@@ -3,7 +3,7 @@
  */
 define([
     'app',
-    'services/InformationData',
+    'service/InformationData',
     'classes/Info/WorkingInfoItem'
 ], function (app, InformationData, WorkingInfoItem) {
 

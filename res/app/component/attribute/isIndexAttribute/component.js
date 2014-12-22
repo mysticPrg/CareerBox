@@ -1,9 +1,9 @@
 
 define([
     'app',
-    'services/SetIndex',
-    'services/EditorData'
-], function (app, Color) {
+    'service/SetIndex',
+    'service/EditorData'
+], function (app) {
 
     app.directive('isIndexAttribute', function (SetIndex, EditorData) {
 

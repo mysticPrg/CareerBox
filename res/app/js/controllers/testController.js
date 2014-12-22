@@ -6,7 +6,7 @@ define([
     'angular',
     'app',
     'classes/Enums/InfoCategory',
-    'services/getAvailableAttribute'
+    'service/getAvailableAttribute'
 ], function ($, ng, app, InfoCategory) {
     app.controller('testController', ['$scope', 'getAvailableAttribute', function ($scope, getAvailableAttribute) {
         $scope.infoCategory = InfoCategory;

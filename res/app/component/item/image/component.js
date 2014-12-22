@@ -1,7 +1,7 @@
 define([
     'app',
     'jquery-ui',
-    'services/SetAttributeInformation'
+    'service/SetAttributeInformation'
 ], function (app) {
 
 

@@ -4,8 +4,8 @@
 define([
     'app',
     'classes/Paper',
-    'services/ImageUpload',
-    'services/deleteImage'
+    'service/ImageUpload',
+    'service/deleteImage'
 ], function (app, Paper) {
     app.controller('bindingImageModal', function ($scope, $modalInstance, $compile, $upload, ImageUpload, $http, $q, deleteImage, $http) {
         $scope.files;

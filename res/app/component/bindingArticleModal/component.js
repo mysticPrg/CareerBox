@@ -1,9 +1,9 @@
 
 define([
     'app',
-    'services/EditorData',
-    'services/getInformationByType',
-    'services/getInformationItem'
+    'service/EditorData',
+    'service/getInformationByType',
+    'service/getInformationItem'
 ], function (app) {
     app.controller('bindingArticleModalController', ['$scope', '$http', '$modalInstance', 'EditorData', 'getInformationByType', 'getInformationItem',
         function ($scope, $http, $modalInstance, EditorData, getInformationByType, getInformationItem) {

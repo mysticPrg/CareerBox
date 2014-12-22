@@ -14,13 +14,13 @@ define([
     '../createTemplateModal/component',
     '../deleteTemplateModal/component',
     '../paperComponent/component',
-    'services/EditorData',
-    'services/HTMLGenerator',
-    'services/SaveTemplate',
-    'services/getTemplateList',
-    'services/deleteTemplate',
-    'services/ApplyCommonItemAttribute',
-    'services/SetZOrder'
+    'service/EditorData',
+    'service/HTMLGenerator',
+    'service/SaveTemplate',
+    'service/getTemplateList',
+    'service/deleteTemplate',
+    'service/ApplyCommonItemAttribute',
+    'service/SetZOrder'
 ], function (app, Template, Icon, Image, Item, Line, Link, Shape, Text, createTemplateModal, deleteTemplateModal, paperComponent) {
     app.controller('paperPanel', [
         '$scope',

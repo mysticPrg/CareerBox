@@ -3,11 +3,11 @@
  */
 define([
     'app',
-    'services/InformationData',
+    'service/InformationData',
     'classes/Info/LocalActivityInfoItem',
     'angular-upload',
-    'services/fileUpload',
-    'services/ImageUpload'
+    'service/fileUpload',
+    'service/ImageUpload'
 ], function (app, InformationData, LocalActivityInfoItem) {
     app.controller('localActivityInformationController', ['$scope', '$upload', 'fileUpload', 'ImageUpload',
         function ($scope, $upload, fileUpload, ImageUpload) {

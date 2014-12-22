@@ -3,7 +3,7 @@
  */
 define([
     'app',
-    'services/EditorData'
+    'service/EditorData'
 ], function(app) {
     app.factory('SetZOrder', function (EditorData) {
         function SetZOrder(model, id) {

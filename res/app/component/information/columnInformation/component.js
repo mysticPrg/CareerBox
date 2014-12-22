@@ -3,7 +3,7 @@
  */
 define([
     'app',
-    'services/InformationData',
+    'service/InformationData',
     'classes/Info/ColumnInfoItem'
 ], function (app, InformationData, ColumnInfoItem) {
     app.controller('columnInformationController', ['$scope', function ($scope) {

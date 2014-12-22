@@ -6,7 +6,7 @@
  */
 
 define([
-    'app', 'jquery-ui', 'services/SetAttributeInformation'
+    'app', 'jquery-ui', 'service/SetAttributeInformation'
 ], function (app) {
     app.directive('shape', ['SetAttributeInformation', function (SetAttributeInformation) {
         function modifyShapeType(scope, element){

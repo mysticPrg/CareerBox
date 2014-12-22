@@ -6,8 +6,8 @@ define([
     'jquery',
     'angular',
     'app',
-    'services/httpLogin',
-    'services/memberCallback'
+    'service/httpLogin',
+    'service/memberCallback'
 ], function ($, ng, app) {
     app.controller('loginController', ['$scope', '$timeout', '$window', 'httpLogin', 'memberCallback', 'Facebook', function ($scope, $timeout, $window, httpLogin, memberCallback, Facebook) {
         $scope.errors = [];

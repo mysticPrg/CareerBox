@@ -6,9 +6,9 @@ define([
     'app',
     'jquery',
     'jquery-ui',
-    'services/EditorData',
-    'services/ApplyCommonItemAttribute',
-    'services/SetAttributeInformation'
+    'service/EditorData',
+    'service/ApplyCommonItemAttribute',
+    'service/SetAttributeInformation'
 ], function (app, $) {
     app.directive('draggable', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', '$document', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation, $document) {
         return {

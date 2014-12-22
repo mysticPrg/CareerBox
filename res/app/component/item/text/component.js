@@ -20,7 +20,7 @@
 define([
     'app',
     'jquery-ui',
-    'services/SetAttributeInformation'
+    'service/SetAttributeInformation'
 ], function (app) {
     var vAlign = {
         top : '10%',

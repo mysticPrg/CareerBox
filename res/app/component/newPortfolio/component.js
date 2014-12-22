@@ -1,14 +1,14 @@
 define([
     'app',
-    'services/EditorData',
+    'service/EditorData',
     '../createPortfolioModal/component',
     '../modifyPortfolioModal/component',
     '../deletePortfolioModal/component',
-    '../../js/services/getPortfolioList',
-    '../../js/services/createPortfolio',
-    '../../js/services/CommonCallback',
-    '../../js/services/deletePortfolio',
-    '../../js/services/modifyPortfolio'
+    'service/getPortfolioList',
+    'service/createPortfolio',
+    'service/CommonCallback',
+    'service/deletePortfolio',
+    'service/modifyPortfolio'
 ], function (app, EditorData, createPortfolioModal, modifyPortfolioModal, deletePortfolioModal) {
 
     app.controller('newPortfolioController', ['$scope', '$http', '$window', '$modal', 'getPortfolioList', 'createPortfolio', 'deletePortfolio', 'CommonCallback', 'modifyPortfolio', function ($scope, $http, $window, $modal, getPortfolioList, createPortfolio, deletePortfolio, CommonCallback, modifyPortfolio) {

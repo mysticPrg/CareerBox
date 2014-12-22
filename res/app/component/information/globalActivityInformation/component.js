@@ -3,11 +3,11 @@
  */
 define([
     'app',
-    'services/InformationData',
+    'service/InformationData',
     'classes/Info/GlobalActivityInfoItem',
     'angular-upload',
-    'services/fileUpload',
-    'services/ImageUpload'
+    'service/fileUpload',
+    'service/ImageUpload'
 ], function (app, InformationData, GlobalActivityInfoItem) {
     app.controller('globalActivityInformationController', ['$scope', '$upload', 'fileUpload', 'ImageUpload',
         function ($scope, $upload, fileUpload, ImageUpload) {

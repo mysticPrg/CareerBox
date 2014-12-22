@@ -1,7 +1,7 @@
 /**
  * Created by JEONGBORAM-PC-W1 on 2014-12-20.
  */
-define(['app', 'services/serverURL'], function (app) {
+define(['app', 'service/serverURL'], function (app) {
     app.factory('ImageUpload', ['serverURL', function (serverURL) {
         return function ($upload, files, type, progressCallBack, successCallBack) {
             for (var i = 0; i < files.length; i++) {

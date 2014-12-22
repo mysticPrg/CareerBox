@@ -5,7 +5,7 @@ define([
     'jquery',
     'angular',
     'app',
-    'services/InformationData'
+    'service/InformationData'
 ], function($, ng, app) {
     app.factory('GetInformation', ['$http', '$q', 'InformationData', function ($http, $q, InformationData) {
 

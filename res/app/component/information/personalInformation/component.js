@@ -3,10 +3,10 @@
  */
 define([
     'app',
-    'services/InformationData',
+    'service/InformationData',
     'classes/Info/PersonalInfo',
     'angular-upload',
-    'services/ImageUpload'
+    'service/ImageUpload'
 ], function (app, InformationData) {
     app.controller('personalInformationController', ['$scope', '$upload', 'ImageUpload', function ($scope, $upload, ImageUpload) {
         $scope.InformationData = InformationData;

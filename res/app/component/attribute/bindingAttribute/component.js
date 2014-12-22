@@ -2,10 +2,10 @@
 define([
     'app',
     'component/bindingArticleModal/component',
-    'services/getAttributeNames',
-    'services/EditorData',
-    'services/InformationData',
-    'services/getAvailableAttribute'
+    'service/getAttributeNames',
+    'service/EditorData',
+    'service/InformationData',
+    'service/getAvailableAttribute'
 ], function (app, bindingArticleModal) {
 
     app.directive('bindingAttribute', function (getAttributeNames, EditorData, getAvailableAttribute, InformationData) {

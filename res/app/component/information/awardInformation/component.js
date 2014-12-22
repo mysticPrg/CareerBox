@@ -3,7 +3,7 @@
  */
 define([
     'app',
-    'services/InformationData',
+    'service/InformationData',
     'classes/Info/AwardInfoItem'
 ], function (app, InformationData, AwardInfoItem) {
     app.controller('awardInformationController', ['$scope', function ($scope) {

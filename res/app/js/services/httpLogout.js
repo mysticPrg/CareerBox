@@ -2,7 +2,7 @@
  * Created by gimbyeongjin on 14. 10. 24..
  */
 define(['app',
-    'services/serverURL'
+    'service/serverURL'
 ], function(app) {
     app.factory('httpLogout', ['serverURL','$http', function (serverURL,$http) {
         return function (callback) {

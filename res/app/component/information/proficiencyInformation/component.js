@@ -4,10 +4,10 @@
 
 define([
     'app',
-    'services/InformationData',
+    'service/InformationData',
     'classes/Info/ProficiencyInfoItem',
     'angular-upload',
-    'services/fileUpload'
+    'service/fileUpload'
 ], function (app, InformationData, ProficiencyInfoItem) {
     app.controller('proficiencyInformationContorller', ['$scope', '$upload', 'fileUpload', function ($scope, $upload, fileUpload) {
         $scope.proficiencyInfoItem = new ProficiencyInfoItem();

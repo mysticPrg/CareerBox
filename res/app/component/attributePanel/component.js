@@ -22,8 +22,8 @@ define([
     'component/attribute/thumbnailAttribute/component',
     'component/attribute/rowcolAttribute/component',
 //    'component/attribute/rowCountAttribute/component',
-    'services/EditorData',
-    'services/SetAttributeInformation'
+    'service/EditorData',
+    'service/SetAttributeInformation'
 ], function (app) {
 
     app.controller('attributePanel', ['$scope', '$rootScope', '$window', 'EditorData', 'SetAttributeInformation', function ($scope, $rootScope, $window, EditorData, SetAttributeInformation) {

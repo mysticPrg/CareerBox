@@ -3,11 +3,11 @@
  */
 define([
     'app',
-    'services/InformationData',
+    'service/InformationData',
     'classes/Info/ProjectInfoItem',
     'angular-upload',
-    'services/fileUpload',
-    'services/ImageUpload'
+    'service/fileUpload',
+    'service/ImageUpload'
 ], function (app, InformationData, ProjectInfoItem) {
     app.controller('projectInformationController', ['$scope', '$upload', 'fileUpload', 'ImageUpload',
         function ($scope, $upload, fileUpload, ImageUpload) {
