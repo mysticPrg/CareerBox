@@ -22,15 +22,10 @@ define([
             },
             templateUrl: require.toUrl('component/attribute/bindingAttribute/template.html'),
             controller : function ($scope, $modal) {
-                if($scope.layoutType === 'template')
-                    console.log('템플릿 생성 직후 bindingType', $scope.data.bindingType);
-
 
                 $scope.infoCategory = InformationData;
 
                 $scope.category = '';
-
-
 
                 $scope.setCategory = function(){
                     // 템플릿에 카테고리를 매칭
@@ -38,7 +33,6 @@ define([
                         infoType : $scope.category.infoType,
                         title : $scope.category.title
                     }
-//                    console.log('setCategory 이후 bindingType', $scope.data.bindingType);
                 };
 
                 // bindingType 비우기
@@ -69,14 +63,6 @@ define([
                     }
                     // 템플릿의 아티클일 경우
                     else if($scope.layoutType === 'template'){
-
-//                        // 속성 이름 배열 가져오기
-//                        try {
-//                            $scope.indexs = [];
-//                            for(var i=0; i < $scope.data.bindingType.items.length; i++){
-//                                $scope.indexs.push(i+1);
-//                            };
-//                        } catch(exception){}
 
                         // 처음 배열 인덱스 가져오기
                         $scope.categoryInitIndex =$scope.infoCategory[$scope.data.bindingType.infoType];
