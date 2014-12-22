@@ -25,9 +25,8 @@ define([
                     return;
 
                 var items = data.result.items
-                console.log('items', items);
+
                 $scope.hasItems = items.length > 0? true: false;
-                console.log( $scope.hasItems);
 
                 if($scope.hasItems === true){
                     var dataItems = [];
@@ -91,8 +90,8 @@ define([
                 for(var i = 0; i < $scope.selectedItems.length; i++){
                     bindingArticleIds.push($scope.selectedItems[i]._id);
                 }
+                console.log('before close modal', bindingArticleIds);
                 $modalInstance.close(bindingArticleIds);
-//                console.log(bindingArticleIds);
             };
 
             $scope.cancel = function () {
