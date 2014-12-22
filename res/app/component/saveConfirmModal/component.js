@@ -1,7 +1,7 @@
 
 define([
     'app',
-    'services/EditorData'
+    'service/EditorData'
 ], function (app, EditorData) {
     app.controller('saveConfirmModalController', function ($scope, $modalInstance) {
         $scope.title;

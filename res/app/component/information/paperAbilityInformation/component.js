@@ -3,7 +3,7 @@
  */
 define([
     'app',
-    'services/InformationData',
+    'service/InformationData',
     'classes/Info/PaperAbilityInfoItem'
 ], function (app, InformationData, PaperAbilityInfoItem) {
     app.controller('paperAbilityInformationController', ['$scope', function ($scope) {

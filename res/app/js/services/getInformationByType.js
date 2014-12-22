@@ -1,7 +1,7 @@
 /**
  * Created by JEONGBORAM-PC-W1 on 2014-12-20.
  */
-define(['app', 'services/serverURL'], function (app) {
+define(['app', 'service/serverURL'], function (app) {
     app.factory('getInformationByType', ['serverURL', function (serverURL) {
         return function ($http, infoType, callback) {
             var type = infoType.split('Info')[0];

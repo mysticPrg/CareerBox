@@ -5,10 +5,10 @@ define([
     'app',
     '../createPaperModal/component',
     '../deletePaperModal/component',
-    'services/EditorData',
-    'services/SavePaper',
-    'services/deletePaper',
-    'services/LoadPaperList'
+    'service/EditorData',
+    'service/SavePaper',
+    'service/deletePaper',
+    'service/LoadPaperList'
 ], function (app, createPaperModal, deletePaperModal) {
     app.controller('paperComponent', [
         '$scope',

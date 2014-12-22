@@ -10,9 +10,9 @@ define([
     'classes/LayoutComponents/Items/Link',
     'classes/LayoutComponents/Items/Shape',
     'classes/LayoutComponents/Items/Text',
-    'services/EditorData',
-    'services/HTMLGenerator',
-    'services/SetZOrder'
+    'service/EditorData',
+    'service/HTMLGenerator',
+    'service/SetZOrder'
 ], function (app, Icon, Image, Item, Line, Link, Shape, Text) {
     app.controller('templatePanel', [
         '$scope',

@@ -5,9 +5,9 @@
 define([
     'app',
     'jquery-ui',
-    'services/SetAttributeInformation',
-    'services/ApplyCommonItemAttribute',
-    'services/EditorData'
+    'service/SetAttributeInformation',
+    'service/ApplyCommonItemAttribute',
+    'service/EditorData'
 
 ], function (app) {
     app.directive('ngX1', function() {

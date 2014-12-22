@@ -3,7 +3,7 @@
  */
 define(['app',
     'classes/Member',
-    'services/serverURL'
+    'service/serverURL'
 ], function (app, Member) {
     app.factory('httpLogin', ['serverURL', '$http', function (serverURL, $http) {
         return function (email, password, isFacebook, callback) {

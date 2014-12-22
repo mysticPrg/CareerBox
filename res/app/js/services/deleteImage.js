@@ -1,7 +1,7 @@
 /**
  * Created by JEONGBORAM-PC-W1 on 2014-12-04.
  */
-define(['app','services/serverURL'], function(app) {
+define(['app','service/serverURL'], function(app) {
     app.factory('deleteImage', function ($http, serverURL) {
         return function (data, callback) {
             $http({

@@ -2,7 +2,7 @@
 define([
     'app',
     'classes/Portfolio',
-    'services/EditorData'
+    'service/EditorData'
 ], function (app, Portfolio, EditorData) {
     app.controller('modifyPortfolioModalController', function ($scope, $modalInstance) {
         $scope.portfolio = new Portfolio(EditorData.portfolio);

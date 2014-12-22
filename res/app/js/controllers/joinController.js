@@ -5,8 +5,8 @@ define([
     'jquery',
     'angular',
     'app',
-    'services/httpJoin',
-    'services/memberCallback'
+    'service/httpJoin',
+    'service/memberCallback'
 ], function ($, ng, app) {
     app.controller('joinController', ['$scope', '$window', 'httpJoin', 'memberCallback', function ($scope, $window, httpJoin, memberCallback) {
         $scope.errors = [];

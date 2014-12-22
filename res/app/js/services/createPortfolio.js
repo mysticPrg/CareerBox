@@ -2,7 +2,7 @@
  * Created by gimbyeongjin on 14. 11. 11..
  */
 
-define(['app','services/serverURL'], function(app) {
+define(['app','service/serverURL'], function(app) {
     app.factory('createPortfolio', ['serverURL', function (serverURL) {
         return function ($http, data, callback) {
             $http({

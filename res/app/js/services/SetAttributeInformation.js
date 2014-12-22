@@ -3,7 +3,7 @@
  */
 define([
     'app',
-    'services/EditorData'
+    'service/EditorData'
 ], function (app) {
     app.factory('SetAttributeInformation', function (EditorData) {
 

@@ -1,4 +1,4 @@
-define(['app', 'services/memberlist'], function (app) {
+define(['app', 'service/memberlist'], function (app) {
 
     app.directive('memberlist', function (memberlist) {
         return {

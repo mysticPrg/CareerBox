@@ -5,9 +5,9 @@
 define([
     'app',
     'jquery-ui',
-    'services/EditorData',
-    'services/ApplyCommonItemAttribute',
-    'services/SetAttributeInformation'
+    'service/EditorData',
+    'service/ApplyCommonItemAttribute',
+    'service/SetAttributeInformation'
 ], function (app) {
     app.directive('commonAttribute', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation) {
         function setCommonWatch(scope, element, att) {

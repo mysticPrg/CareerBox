@@ -63,8 +63,10 @@ module.exports = function (grunt) {
         requirejs: {
             compile: {
                 options: {
-                    name: '../main',
-                    out: 'res/app/main.min.js',
+//                    name: '../../../src/classes/classes',
+//                    out: 'res/app/classes.min.js',
+                    name: './services/services',
+                    out: 'res/app/services.min.js',
                     removeCombined: true,
                     findNestedDependencies: true,
                     baseUrl: 'res/app/js',

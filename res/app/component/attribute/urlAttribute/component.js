@@ -1,7 +1,7 @@
 
 define([
     'app',
-    'services/EditorData'
+    'service/EditorData'
 ], function (app) {
 
     app.directive('urlAttribute', function (EditorData) {

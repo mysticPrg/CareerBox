@@ -4,7 +4,7 @@
 
 define([
     'app',
-    'services/InformationData',
+    'service/InformationData',
     'classes/Info/AdditionalInfo'
 ], function (app, InformationData, AdditionalInfo) {
     app.controller('additionalInformationContorller', function ($scope) {

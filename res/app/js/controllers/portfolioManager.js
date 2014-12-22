@@ -7,7 +7,7 @@ define([
     'app',
     '../../component/menu/component',
     '../../component/newPortfolio/component',
-    'services/EditorData',
+    'service/EditorData',
     'classes/Info/PersonalInfo'
 ], function ($, ng, app, EditorData, PersonalInfo) {
     app.controller('portfolioManager', ['$scope', '$http', '$window', function ($scope, $http, $window) {

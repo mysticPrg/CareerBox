@@ -2,8 +2,8 @@ define([
     'app',
     'jquery-ui',
     'rotatable',
-    'services/ApplyCommonItemAttribute',
-    'services/EditorData'
+    'service/ApplyCommonItemAttribute',
+    'service/EditorData'
 ], function (app) {
     app.directive('rotatable', function (ApplyCommonItemAttribute, $compile, EditorData) {
         function getRotationRadian(obj) {

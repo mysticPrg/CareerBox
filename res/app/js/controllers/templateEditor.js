@@ -10,10 +10,10 @@ define([
     'component/saveConfirmModal/component',
     'directives/draggable',
     'directives/resizable',
-    'services/EditorData',
-    'services/HTMLGenerator',
-    'services/SaveTemplate',
-    'services/SetAttributeInformation',
+    'service/EditorData',
+    'service/HTMLGenerator',
+    'service/SaveTemplate',
+    'service/SetAttributeInformation',
     'component/templatePanel/component'
 ], function ($, ng, app, Template, Article, saveConfirmModal) {
     app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation) {
