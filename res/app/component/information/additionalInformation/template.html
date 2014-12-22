@@ -29,8 +29,26 @@
         </div>
 
         <label for="lbl_militery_term" class="col-md-2 control-label" style="width: 109px">복무기간</label>
-        <div class="col-md-2" id="lbl_militery_term">
-            <button class="k-button" ng-click="win_militery_term_start.center(); win_militery_term_start.open();">{{additionalInfo.T_militaryService_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_militery_term_end.center(); win_militery_term_end.open();">{{additionalInfo.T_militaryService_term.end | date:"yyyy년 MM월 dd일"}}</button>
+        <div id="lbl_militery_term" class="row">
+        <!--시작 날짜-->
+            <div class="col-md-2" style="padding-right: 0; width: 172px">
+                <div class="input-group">
+                    <input type="text" class="form-control" value="{{additionalInfo.T_militaryService_term.start | date:'yyyy.MM.dd'}}" style="width: 105px"/>
+                    <span class="input-group-btn">
+                       <button class="btn btn-default" type="button" ng-click="win_militery_term_start.center(); win_militery_term_start.open();">달력</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-1" style="width: 24px; height: 34px; line-height: 34px; padding: 0">~</div>
+            <!--종료 날짜-->
+            <div class="col-md-2" style="padding-left: 0; width: 172px">
+                <div class="input-group">
+                    <input type="text" class="form-control" value="{{additionalInfo.T_militaryService_term.end | date:'yyyy.MM.dd'}}" style="width: 105px"/>
+                    <span class="input-group-btn">
+                       <button class="btn btn-default" type="button" ng-click="win_militery_term_end.center(); win_militery_term_end.open();">달력</button>
+                    </span>
+                </div>
+            </div>
         </div>
         <div kendo-window="win_militery_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
             <kendo-calendar ng-model="additionalInfo.T_militaryService_term.start" k-on-change="win_militery_term_start.close()"></kendo-calendar>
@@ -38,6 +56,20 @@
         <div kendo-window="win_militery_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">
             <kendo-calendar ng-model="additionalInfo.T_militaryService_term.end" k-on-change="win_militery_term_end.close()"></kendo-calendar>
         </div>
+
+
+
+
+
+        <!--<div class="col-md-2" id="lbl_militery_term">-->
+            <!--<button class="k-button" ng-click="win_militery_term_start.center(); win_militery_term_start.open();">{{additionalInfo.T_militaryService_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_militery_term_end.center(); win_militery_term_end.open();">{{additionalInfo.T_militaryService_term.end | date:"yyyy년 MM월 dd일"}}</button>-->
+        <!--</div>-->
+        <!--<div kendo-window="win_militery_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">-->
+            <!--<kendo-calendar ng-model="additionalInfo.T_militaryService_term.start" k-on-change="win_militery_term_start.close()"></kendo-calendar>-->
+        <!--</div>-->
+        <!--<div kendo-window="win_militery_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">-->
+            <!--<kendo-calendar ng-model="additionalInfo.T_militaryService_term.end" k-on-change="win_militery_term_end.close()"></kendo-calendar>-->
+        <!--</div>-->
     </div>
 
     <!--종교-->
