@@ -3,7 +3,6 @@
  */
 
 var async = require('async');
-//var $ = require('jquerygo');
 var gm = require('gm');
 var phantom = require('phantom');
 
@@ -14,8 +13,12 @@ var url = {
     template: 'http://210.118.74.166:8123/res/app/partials/templatePreview.html?id='
 };
 
-module.exports = function CaptureFromSite(_id, type, closerCallback) {
+module.exports = function CaptureFromSite(_id, type, _member_id, closerCallback) {
 
+    var _member_id_param = '';
+    if (_member_id) {
+        _member_id_param += '&_member_id=' + _member_id;
+    }
     var filename = __dirname + '/../../' + screenShotPath + _id + '.png';
 
     function initPage(page) {
@@ -109,7 +112,7 @@ module.exports = function CaptureFromSite(_id, type, closerCallback) {
         },
         function (ph, page, callback) { // open page
             initPage(page);
-            page.open(url[type] + _id, function () {
+            page.open(url[type] + _id + _member_id_param, function () {
                 callback(null, ph, page);
             });
         },
@@ -127,20 +130,20 @@ module.exports = function CaptureFromSite(_id, type, closerCallback) {
             });
         },
         function (ph, callback) {
-            if ( type === 'portfolio' ) {
+            if (type === 'portfolio') {
                 gm(filename)
                     .quality(50)
                     .scale(250)
                     .crop(250, 350)
                     .noProfile()
-                    .write(filename, function(err) {
+                    .write(filename, function (err) {
                         callback(err, ph);
                     });
-            } else if ( type === 'template') {
+            } else if (type === 'template') {
                 gm(filename)
                     .scale(200)
                     .noProfile()
-                    .write(filename, function(err) {
+                    .write(filename, function (err) {
                         callback(err, ph);
                     });
             }

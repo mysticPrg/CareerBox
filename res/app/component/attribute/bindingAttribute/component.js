@@ -22,6 +22,9 @@ define([
             },
             templateUrl: require.toUrl('component/attribute/bindingAttribute/template.html'),
             controller : function ($scope, $modal) {
+                if($scope.layoutType === 'template')
+                    console.log('템플릿 생성 직후 bindingType', $scope.data.bindingType);
+
 
                 $scope.infoCategory = InformationData;
 
@@ -34,6 +37,7 @@ define([
                         title : $scope.category.title
                     }
                     $scope.data.bindingChanged = true;
+//                    console.log('setCategory 이후 bindingType', $scope.data.bindingType);
                 };
 
                 // bindingType 비우기
