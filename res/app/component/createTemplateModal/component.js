@@ -9,12 +9,23 @@ define([
     app.controller('createTemplateModalController', function ($scope, $modalInstance, InformationData) {
         $scope.template = new Template();
         $scope.infoCategory = InformationData;
-        $scope.category='';
+//        $scope.category='';
 
-        $scope.save = function () {
-//            $scope.template.target.infoType = $scope.category.infoType;
-//            $modalInstance.close($scope.template);
-            console.log($scope.category);
+        $scope.save = function (category) {
+            if(category){
+                $scope.template.target.bindingType = {
+                    infoType : category.infoType,
+                    title : category.title
+                }
+
+                $scope.template.target.isBinding = true;
+
+//                console.log('$scope.template', $scope.template);
+
+//            $scope.template.target.bindingType = category;
+            }
+
+            $modalInstance.close($scope.template);
         };
         $scope.cancel = function () {
             $modalInstance.dismiss();
