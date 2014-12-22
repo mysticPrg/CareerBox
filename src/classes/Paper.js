@@ -35,7 +35,7 @@ define([
             this.childArr = props.childArr ? props.childArr : this.childArr;
             this.fill = new Fill(props.fill ? props.fill : this.fill);
             this.size = new Size(props.size ? props.size : this.size);
-            this.isIndex = props.isIndex ? props.isIndex : this.isIndex;
+            this.isIndex = (props.isIndex!==undefined) ? props.isIndex : this.isIndex;
 
             this._member_id = props._member_id ? props._member_id : this._member_id;
         }

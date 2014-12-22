@@ -24,7 +24,7 @@ define([
         if (props) {
             this.name = props.name ? props.name : this.name;
             this.url = props.url ? props.url : this.url;
-            this.isOutURL = props.isOutURL ? props.isOutURL : this.isOutURL;
+            this.isOutURL = (props.isOutURL!==undefined) ? props.isOutURL : this.isOutURL;
         }
     };
 

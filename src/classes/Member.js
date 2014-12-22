@@ -20,7 +20,7 @@ define([], function () {
         if (props) {
             this._id = props._id ? props._id : null;
             this.email = props.email ? props.email : this.email;
-            this.isFacebook = props.isFacebook ? props.isFacebook : this.isFacebook;
+            this.isFacebook = (props.isFacebook!==undefined) ? props.isFacebook : this.isFacebook;
             this.password = props.password ? props.password : this.password;
 
             this.timestamp = props.timestamp ? props.timestamp : this.timestamp;

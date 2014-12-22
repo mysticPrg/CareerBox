@@ -13,7 +13,7 @@ define(['classes/Structs/Color'], function (Color) {
         this.color = new Color('FFFFFF');
 
         if (props) {
-            this.use = props.use ? props.use : this.use;
+            this.use = (props.use!==undefined) ? props.use : this.use;
             this.color = new Color(props.color ? props.color : this.color);
         }
     };
