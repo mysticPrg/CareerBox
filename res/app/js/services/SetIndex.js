@@ -1,10 +1,10 @@
 /**
  * Created by JEONGBORAM-PC-W1 on 2014-10-24.
  */
-define(['app'], function (app) {
-    app.factory('SetIndex', function ($http) {
+define(['app', 'service/WaitServer'], function (app) {
+    app.factory('SetIndex', function ($http, WaitServer) {
         return function (data, callback) {
-            console.log('data', data)
+            WaitServer.show();
             $http({
                 method: 'POST',
                 url: 'http://210.118.74.166:8123/portfolio/paper/setIndex',
@@ -12,6 +12,7 @@ define(['app'], function (app) {
                 responseType: 'json',
                 withCredentials: true
             }).success(function (result) {
+                WaitServer.hide();
                 callback(result);
             });
         }

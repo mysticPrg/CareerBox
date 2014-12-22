@@ -23,7 +23,7 @@ define([
                 'margin-left': '-100px',
                 'z-index': 65536,
                'border-radius': '50%'
-            }).appendTo($('body'));
+            }).prependTo($('body'));
 
         $('<div id="WaitServerDiv"></div>')
             .css('position', 'fixed')
@@ -37,7 +37,8 @@ define([
             .css('display', 'block')
             .css('margin', 0)
             .css('padding', 0)
-            .appendTo($('body'));
+            .prependTo($('body'))
+            .fadeIn('slow');
 
         if (msec) {
             setTimeout(hide, msec);
