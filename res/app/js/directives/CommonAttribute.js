@@ -72,25 +72,26 @@ define([
             },true);
 
             // size
-
-//            console.log('att.grid', att.grid != null)
-
-            // grid
-            if(att.grid != null){
-//                console.log('att.grid', att.grid)
-//                console.log('scope.attributeInformation.colCount', scope.attributeInformation.colCount)
-                element.css({
-                    width: (scope.attributeInformation.size.width * scope.attributeInformation.colCount) + "px",
-                    height: (scope.attributeInformation.size.height * scope.attributeInformation.rowCount) + "px"
-                });
-            }
-            else
-            // 그외
-            scope.$watch("attributeInformation.size",function() {
+            {
+                // grid일 경우 예외처리
+                if(att.grid != null){
+                    console.log('att.grid', att.grid)
+                    console.log('scope.attributeInformation.colCount', scope.attributeInformation.colCount)
+                    element.css({
+                        width: (scope.attributeInformation.size.width * scope.attributeInformation.colCount) + "px",
+                        height: (scope.attributeInformation.size.height * scope.attributeInformation.rowCount) + "px"
+                    });
+                }
+                else
+                // 그외
+                    scope.$watch("attributeInformation.size",function() {
 //                if(EditorData.focusId == att.id)
-                ApplyCommonItemAttribute.size(element, scope.attributeInformation);
+                        ApplyCommonItemAttribute.size(element, scope.attributeInformation);
 
-            },true);
+                    },true);
+            }
+
+
         };
 
         return {

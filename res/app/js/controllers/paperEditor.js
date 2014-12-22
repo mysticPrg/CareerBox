@@ -191,6 +191,7 @@ define([
                         article.childArr = _article.childArr[index];
                         article.tempIndex = index;
 
+
                         articleGroupDom += loadArticleDom(article);
                     }
                 }
