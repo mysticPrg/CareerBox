@@ -15,9 +15,7 @@ define([
             },
             templateUrl: require.toUrl('component/attribute/rowcolAttribute/template.html'),
             link : function($scope, element, att) {
-
                 $scope.reload = function() {
-
                     //페이퍼 저장
                     var data = {_portfolio_id: EditorData.portfolio._id, paper: EditorData.paper};
                     SavePaper($http, data, function (result) {
