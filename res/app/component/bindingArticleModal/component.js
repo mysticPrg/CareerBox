@@ -20,52 +20,57 @@ define([
             var InformationItem = getInformationItem(EditorData.infoType);
 
             getInformationByType($http, EditorData.infoType, function (data) {
+                if(data.result === null)
+                    return;
+
                 var items = data.result.items
+                $scope.hasItems = items.length > 0? true: false;
 
-                var dataItems = [];
-                var dataitem;
+                if($scope.hasItems === true){
+                    var dataItems = [];
+                    var dataitem;
 
-                var item;
-                for(var i = 0 ; i < items.length; i++){
-                    dataitem = new Object();
-                    item = items[i];
+                    var item;
+                    for(var i = 0 ; i < items.length; i++){
+                        dataitem = new Object();
+                        item = items[i];
 
-                    for (var key in item) {
-                        var keyKr = InformationItem.getAttributeName(key);
+                        for (var key in item) {
+                            var keyKr = InformationItem.getAttributeName(key);
 
-                        if(key === '_id'){
-                            dataitem[key] = item[key];
-                            continue;
+                            if(key === '_id'){
+                                dataitem[key] = item[key];
+                                continue;
+                            }
+
+                            if(key === 'F_file'){
+                                dataitem[keyKr] = item[key].originalName;
+                                continue;
+                            }
+
+                            if(key === 'I_image'){
+                                dataitem[keyKr] = item[key].originalName;
+                                continue;
+                            }
+
+                            if(key === 'I_picture'){
+                                dataitem[keyKr] = item[key].originalName;
+                                continue;
+                            }
+
+                            if(key === 'T_term'){
+                                dataitem[keyKr] = item[key].start.split('T')[0] + '-' + item[key].end.split('T')[0];
+                                continue;
+                            }
+
+                            dataitem[keyKr] = item[key];
                         }
 
-                        if(key === 'F_file'){
-                            dataitem[keyKr] = item[key].originalName;
-                            continue;
-                        }
-
-                        if(key === 'I_image'){
-                            dataitem[keyKr] = item[key].originalName;
-                            continue;
-                        }
-
-                        if(key === 'I_picture'){
-                            dataitem[keyKr] = item[key].originalName;
-                            continue;
-                        }
-
-                        if(key === 'T_term'){
-                            dataitem[keyKr] = item[key].start.split('T')[0] + '-' + item[key].end.split('T')[0];
-                            continue;
-                        }
-
-                        dataitem[keyKr] = item[key];
+                        dataItems.push(dataitem);
                     }
 
-                    dataItems.push(dataitem);
+                    $scope.informationData = dataItems;
                 }
-
-                $scope.informationData = dataItems;
-
             });
 
             $scope.$on('ngGridEventData', function(){
