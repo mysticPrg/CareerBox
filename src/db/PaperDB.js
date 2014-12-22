@@ -98,8 +98,6 @@ function refreshTemplateData(template, callback) {
                 }
             }
 
-            console.log(newArr);
-
             paperCollection.update(
                 {
                     _id: p._id

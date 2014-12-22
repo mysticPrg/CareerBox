@@ -25,11 +25,14 @@ define([
         $scope.paperItemArray = [];
 
         $(document).ready(function () {
-            EditorData.portfolio._id = window.location.href.split("id=")[1].split("&")[0];
+            var params = {};
+            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+                params[key] = value;
+            });
 
-            EditorData.paper_id = window.location.href.split("paper_id=")[1];
-
-            // 만약에 paper_id 가 없으면 index페이지로 이동.
+            EditorData.portfolio._id = params.id;
+            EditorData.paper_id = params.paper_id; // 만약에 paper_id 가 없으면 index페이지로 이동.
+            var params_member_id = params._member_id;
 
             initPaper();
 
@@ -48,7 +51,7 @@ define([
                             EditorData.paper = result.result;
 
                             loadPaper(EditorData.paper);
-                        });
+                        }, params_member_id);
                         return;
                     }
 
@@ -60,7 +63,7 @@ define([
                             EditorData.paper = result.result;
 
                             loadPaper(EditorData.paper);
-                        });
+                        }, params_member_id);
                         return;
                     }
                 }
