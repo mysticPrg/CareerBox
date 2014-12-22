@@ -31,10 +31,10 @@ define([], function () {
             this.N_year = props.N_year ? props.N_year : this.N_year;
             this.N_term = props.N_term ? props.N_term : this.N_term;
         }
+    }
 
-        ScholarshipInfoItem.prototype.getAttributeName = function getAttributeName(key){
-            return dictionary[key];
-        }
+    ScholarshipInfoItem.prototype.getAttributeName = function getAttributeName(key){
+        return dictionary[key];
     }
 
     return ScholarshipInfoItem;

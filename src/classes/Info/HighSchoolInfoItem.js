@@ -36,10 +36,10 @@ define([
             this.T_term = props.T_term ? props.T_term : this.T_term;
             this.S_major = props.S_major ? props.S_major : this.S_major;
         }
+    }
 
-        HighSchoolInfoItem.prototype.getAttributeName = function getAttributeName(key){
-            return dictionary[key];
-        }
+    HighSchoolInfoItem.prototype.getAttributeName = function getAttributeName(key){
+        return dictionary[key];
     }
 
     return HighSchoolInfoItem;

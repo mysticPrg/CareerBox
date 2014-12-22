@@ -39,10 +39,10 @@ define([], function () {
             this.S_proficiency = props.S_proficiency ? props.S_proficiency : this.S_proficiency;
             this.F_file = props.F_file ? props.F_file : this.F_file;
         }
+    }
 
-        ProficiencyInfoItem.prototype.getAttributeName = function getAttributeName(key) {
-            return dictionary[key];
-        }
+    ProficiencyInfoItem.prototype.getAttributeName = function getAttributeName(key) {
+        return dictionary[key];
     }
 
     return ProficiencyInfoItem;

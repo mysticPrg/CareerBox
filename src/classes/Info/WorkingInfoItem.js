@@ -57,10 +57,10 @@ define([
             this.S_business = props.S_business ? props.S_business : this.S_business;
             this.S_achive = props.S_achive ? props.S_achive : this.S_achive;
         }
+    }
 
-        WorkingInfoItem.prototype.getAttributeName = function getAttributeName(key){
-            return dictionary[key];
-        }
+    WorkingInfoItem.prototype.getAttributeName = function getAttributeName(key){
+        return dictionary[key];
     }
 
     return WorkingInfoItem;

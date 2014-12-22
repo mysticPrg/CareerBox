@@ -10,17 +10,24 @@ var ObjectID = require('mongodb').ObjectID;
 
 function save(data, callback) {
     var personalInfoCollection = require('../../util/DBCollections').getInstance().collections.personalInfo;
+
     var personalInfo = new PersonalInfo(data);
     personalInfo._id = new ObjectID(personalInfo._id);
 
-    personalInfoCollection.save(personalInfo, function(err, savedCount, result) {
-        var returnVal = null;
-        if ( result.updatedExisting ) {
-            returnVal = personalInfo;
-        } else {
-            returnVal = result.upserted[0];
+    for ( var i=0 ; i<personalInfo.items.length ; i++ ) {
+        if (!personalInfo.items[i]._id) {
+            personalInfo.items[i]._id = new ObjectID().toHexString();
         }
-        callback(err, returnVal);
+    }
+
+    personalInfoCollection.save(personalInfo, function(err, savedCount, result) {
+        var returnObject = null;
+        if ( result.updatedExisting ) {
+            returnObject = personalInfo;
+        } else {
+            returnObject = result.upserted[0];
+        }
+        callback(err, returnObject);
     });
 }
 

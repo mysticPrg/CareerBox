@@ -35,10 +35,10 @@ define([
             this.S_ratio = props.S_ratio ? props.S_ratio : this.S_ratio;
             this.S_detail = props.S_detail ? props.S_detail : this.S_detail;
         }
+    }
 
-        PaperAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key){
-            return dictionary[key];
-        }
+    PaperAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key){
+        return dictionary[key];
     }
 
     return PaperAbilityInfoItem;

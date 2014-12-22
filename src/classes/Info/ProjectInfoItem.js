@@ -39,10 +39,10 @@ define([
             this.I_image = props.I_image ? props.I_image : this.I_image;
             this.F_file = props.F_file ? props.F_file : this.F_file;
         }
+    }
 
-        ProjectInfoItem.prototype.getAttributeName = function getAttributeName(key) {
-            return dictionary[key];
-        }
+    ProjectInfoItem.prototype.getAttributeName = function getAttributeName(key) {
+        return dictionary[key];
     }
 
     return ProjectInfoItem;

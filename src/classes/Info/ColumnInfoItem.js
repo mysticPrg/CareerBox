@@ -23,10 +23,10 @@ define([], function () {
             this.S_title = props.S_title ? props.S_title : this.S_title;
             this.S_content = props.S_content ? props.S_content : this.S_content;
         }
+    }
 
-        ColumnInfoItem.prototype.getAttributeName = function getAttributeName(key){
-            return dictionary[key];
-        }
+    ColumnInfoItem.prototype.getAttributeName = function getAttributeName(key){
+        return dictionary[key];
     }
 
     return ColumnInfoItem;

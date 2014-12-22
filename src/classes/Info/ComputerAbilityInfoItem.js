@@ -27,10 +27,10 @@ define([], function () {
             this.S_grade = props.S_grade ? props.S_grade : this.S_grade;
             this.N_term = props.N_term ? props.N_term : this.N_term;
         }
+    }
 
-        ComputerAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key){
-            return dictionary[key];
-        }
+    ComputerAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key){
+        return dictionary[key];
     }
 
     return ComputerAbilityInfoItem;

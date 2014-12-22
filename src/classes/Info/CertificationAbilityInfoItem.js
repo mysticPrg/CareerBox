@@ -32,10 +32,10 @@ define([], function () {
             this.I_image = props.I_image ? props.I_image : this.I_image;
             this.F_file = props.F_file ? props.F_file : this.F_file;
         }
+    }
 
-        CertificateAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key) {
-            return dictionary[key];
-        }
+    CertificateAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key) {
+        return dictionary[key];
     }
 
     return CertificateAbilityInfoItem;

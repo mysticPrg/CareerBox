@@ -34,10 +34,10 @@ define([], function () {
             this.D_date = props.D_date ? props.D_date : this.D_date;
             this.S_detail = props.S_detail ? props.S_detail : this.S_detail;
         }
+    }
 
-        AwardInfoItem.prototype.getAttributeName = function getAttributeName(key){
-            return dictionary[key];
-        }
+    AwardInfoItem.prototype.getAttributeName = function getAttributeName(key){
+        return dictionary[key];
     }
 
     return AwardInfoItem;
