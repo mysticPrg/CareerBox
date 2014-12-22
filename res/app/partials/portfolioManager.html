@@ -25,8 +25,11 @@
 
             <!--사용자 사진-->
             <div id="userImg">
-                <div class="crop">
-                    <img class="profileImg" ng-src="http://210.118.74.166:8123/image/profile/thumb/{{userInfo._member_image._id}}" onerror="this.src='../img/noImage.png'">
+                <div class="crop" ng-show = "!userInfo._member_image">
+                    <img ng-src="../img/noImage.png">
+                </div>
+                <div class="crop" ng-show = "userInfo._member_image">
+                    <img class="profileImg" ng-src="http://210.118.74.166:8123/image/profile/thumb/{{userInfo._member_image._id}}">
                 </div>
             </div>
 
