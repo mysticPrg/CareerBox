@@ -32,7 +32,6 @@ define([
 
             EditorData.portfolio._id = params.id;
             EditorData.paper_id = params.paper_id; // 만약에 paper_id 가 없으면 index페이지로 이동.
-            var params_member_id = params._member_id;
 
             initPaper();
 
@@ -51,7 +50,7 @@ define([
                             EditorData.paper = result.result;
 
                             loadPaper(EditorData.paper);
-                        }, params_member_id);
+                        });
                         return;
                     }
 
@@ -63,7 +62,7 @@ define([
                             EditorData.paper = result.result;
 
                             loadPaper(EditorData.paper);
-                        }, params_member_id);
+                        });
                         return;
                     }
                 }
