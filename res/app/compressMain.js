@@ -75,7 +75,7 @@ require.config({
 
 require([
     'jquery',
-    'classes',
+//    'classes',
     'service/services'
 
 ], function ($) {
