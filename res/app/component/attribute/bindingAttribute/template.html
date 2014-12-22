@@ -21,7 +21,7 @@
         </div>
 
         <!--템플릿 에디터 : 아티클 -->
-        <select ng-show="layoutType === 'template'" ng-init="category[data.bindingType.infoType]" class="form-control" ng-model="category" ng-change="setCategory()" ng-options="category.title for (key, category) in infoCategory"></select>
+        <select ng-show="layoutType === 'template'" ng-init="category = infoCategory[data.bindingType.infoType]" class="form-control" ng-model="category" ng-change="setCategory()" ng-options="category.title for (key, category) in infoCategory"></select>
 
         <!--템플릿 에디터 : 아이템 -->
         <select ng-show="layoutType === 'template_item'" class="form-control" ng-model="attributeName" ng-change="setAttributeName()" ng-options="value for (key, value) in attributeNames "></select>
