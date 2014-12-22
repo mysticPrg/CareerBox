@@ -27,14 +27,13 @@ define([
 
                 $scope.category = '';
 
-
-
                 $scope.setCategory = function(){
                     // 템플릿에 카테고리를 매칭
                     $scope.data.bindingType = {
                         infoType : $scope.category.infoType,
                         title : $scope.category.title
                     }
+                    $scope.data.bindingChanged = true;
                 };
 
                 // bindingType 비우기
