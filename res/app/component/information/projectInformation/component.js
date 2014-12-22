@@ -48,6 +48,7 @@ define([
             }
 
             $scope.onFileSelectProjectInfo = function ($files) {
+                $scope.fileName2 = $files[0].name;
                 $scope.files = $files;
                 $('#project_upload').fadeIn('slow');
             }
@@ -63,6 +64,7 @@ define([
             }
 
             $scope.onFileSelectProjectImage = function ($files) {
+                $scope.fileName1 = $files[0].name;
                 $scope.imageProgress = 0;
                 $('#project_picture_progressbar').fadeIn('slow');
 

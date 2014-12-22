@@ -133,6 +133,8 @@ define([
                 modalInstance.result.then(function (template) {
                     EditorData.template.title = template.title;
                     EditorData.template.description = template.description;
+                    EditorData.template.target.bindingType = template.target.bindingType;
+
                     $window.location.href = "#/TemplateEditor";
                 }, function () {
                 });

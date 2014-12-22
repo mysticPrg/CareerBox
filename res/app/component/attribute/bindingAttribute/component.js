@@ -1,18 +1,15 @@
 
 define([
     'app',
+    'classes/Paper',
     'component/bindingArticleModal/component',
     'service/getAttributeNames',
     'service/EditorData',
     'service/InformationData',
-    'service/getAvailableAttribute',
-    'service/loadArticle',
-    'service/LoadPaper',
-    'service/SavePaper',
-    'service/SetAttributeInformation'
-], function (app, bindingArticleModal) {
+    'service/reloadPaper'
+], function (app, Paper, bindingArticleModal) {
 
-    app.directive('bindingAttribute', function (getAttributeNames, EditorData, getAvailableAttribute, InformationData, loadArticle, LoadPaper, SavePaper, SetAttributeInformation, $http) {
+    app.directive('bindingAttribute', function (getAttributeNames, EditorData, InformationData, reloadPaper) {
 
         return {
             restrict: 'A',
@@ -22,15 +19,10 @@ define([
             },
             templateUrl: require.toUrl('component/attribute/bindingAttribute/template.html'),
             controller : function ($scope, $modal) {
-                if($scope.layoutType === 'template')
-                    console.log('템플릿 생성 직후 bindingType', $scope.data.bindingType);
-
 
                 $scope.infoCategory = InformationData;
 
                 $scope.category = '';
-
-
 
                 $scope.setCategory = function(){
                     // 템플릿에 카테고리를 매칭
@@ -38,6 +30,7 @@ define([
                         infoType : $scope.category.infoType,
                         title : $scope.category.title
                     }
+                    $scope.data.bindingChanged = true;
 //                    console.log('setCategory 이후 bindingType', $scope.data.bindingType);
                 };
 
@@ -70,14 +63,6 @@ define([
                     // 템플릿의 아티클일 경우
                     else if($scope.layoutType === 'template'){
 
-//                        // 속성 이름 배열 가져오기
-//                        try {
-//                            $scope.indexs = [];
-//                            for(var i=0; i < $scope.data.bindingType.items.length; i++){
-//                                $scope.indexs.push(i+1);
-//                            };
-//                        } catch(exception){}
-
                         // 처음 배열 인덱스 가져오기
                         $scope.categoryInitIndex =$scope.infoCategory[$scope.data.bindingType.infoType];
                     }
@@ -107,38 +92,64 @@ define([
                     modalInstance.result.then(function (result) {
                         // 성공했을 때
                         $scope.data.bindingData = result;
+                        console.log('modalClose',result);
 
                         // reload
-                        $scope.reload(function(){
+                        reloadPaper($scope, function(){
                             alert('성공했습니다.');
                         });
                     }, function () {});
                 }
 
-                $scope.reload = function(callback) {
-                    //페이퍼 저장
-                    var data = {_portfolio_id: EditorData.portfolio._id, paper: EditorData.paper};
-                    SavePaper($http, data, function (result) {
-                        if (result.returnCode === '000') {
-                            // 페이퍼 로드
-                            LoadPaper($http, EditorData.paperId, function (result) {
-                                EditorData.paper = result.result;
-                                EditorData.paperTitle = result.result.title;
-
-                                // reload
-                                $('#' + EditorData.focusId).remove();
-                                var articleModel = SetAttributeInformation(EditorData.focusId).attributeInformation;
-                                loadArticle(articleModel ,$scope);
-
-                                callback();
-                            });
-
-                        } else if (result.returnCode === '001') {
-                        } else if (result.returnCode === '002') {
-                        }
-                    });
-                }
-
+//                function getPaperChildArr(childArr) {
+//                    var paperChildArr = new Array();
+//
+//                    for (var key in childArr) {
+//                        var child = childArr[key];
+//
+//                        if (child.state == 'new') {
+//                            delete child._id;
+//                        }
+//
+//                        if (child.state == 'del') {
+//                            continue;
+//                        }
+//
+//                        delete  child.state;
+//
+//                        paperChildArr.push(child);
+//                    }
+//
+//                    return paperChildArr;
+//                }
+//
+//                $scope.reload = function(callback) {
+//                    var paper = EditorData.paper;
+//                    paper.childArr = getPaperChildArr(EditorData.childArr);
+//
+//                    //페이퍼 저장
+//                    var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};
+//                    console.log('paperSave', data.paper.childArr[0].bindingData);
+//                    SavePaper($http, data, function (result) {
+//                        if (result.returnCode === '000') {
+//                            // 페이퍼 로드
+//                            LoadPaper($http, EditorData.paperId, function (result) {
+//                                EditorData.paper = result.result;
+//                                EditorData.paperTitle = result.result.title;
+//
+//                                // reload
+//                                $('#' + EditorData.focusId).remove();
+//                                var articleModel = SetAttributeInformation(EditorData.focusId).attributeInformation;
+//                                loadArticle(articleModel ,$scope);
+//
+//                                callback();
+//                            });
+//
+//                        } else if (result.returnCode === '001') {
+//                        } else if (result.returnCode === '002') {
+//                        }
+//                    });
+//                }
             }
         };
     });

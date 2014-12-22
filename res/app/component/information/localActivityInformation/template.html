@@ -1,7 +1,17 @@
-<div style="margin: 30px 0 10px 0">국내활동</div>
 <form class="form-horizontal" role="form">
-    <!--분류-->
+    <div class="col-md-12" style="margin: 20px 0 20px 0; font-size: 20px; font-weight: 700; color: #d53d3d; text-align: left">국내활동</div>
+
+    <!--이름-->
     <div class="form-group">
+        <label for="lbl_local_activity_name" class="col-md-2 control-label">이름</label>
+        <div class="col-md-9" id="lbl_local_activity_name">
+            <input type="text" class="form-control"  placeholder="이름" ng-model="localActivityInfoItem.S_name">
+        </div>
+    </div>
+
+    <!--분류, 활동기간-->
+    <div class="form-group row">
+
         <label for="lbl_local_activity_category" class="col-md-2 control-label">분류</label>
         <div class="col-md-2" id="lbl_local_activity_category">
             <select class="form-control" ng-model="localActivityInfoItem.S_category">
@@ -9,18 +19,32 @@
                 <option>교외</option>
             </select>
         </div>
-    </div>
-
-    <!--이름, 활동기간-->
-    <div class="form-group">
-        <label for="lbl_local_activity_name" class="col-md-2 control-label">이름</label>
-        <div class="col-md-2" id="lbl_local_activity_name">
-            <input type="text" class="form-control"  placeholder="이름" ng-model="localActivityInfoItem.S_name">
-        </div>
 
         <label for="lbl_local_activity_term" class="col-md-2 control-label">활동기간</label>
-        <div class="col-md-2" id="lbl_local_activity_term">
-            <button class="k-button" ng-click="win_local_activity_term_start.center(); win_local_activity_term_start.open()">{{localActivityInfoItem.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_local_activity_term_end.center(); win_local_activity_term_end.open()">{{localActivityInfoItem.T_term.end | date:"yyyy년 MM월 dd일"}}</button>
+        <!--<div class="col-md-2" id="lbl_local_activity_term">-->
+            <!--<button class="k-button" ng-click="win_local_activity_term_start.center(); win_local_activity_term_start.open()">{{localActivityInfoItem.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_local_activity_term_end.center(); win_local_activity_term_end.open()">{{localActivityInfoItem.T_term.end | date:"yyyy년 MM월 dd일"}}</button>-->
+        <!--</div>-->
+
+        <div id="lbl_local_activity_term" class="row">
+            <!--시작 날짜-->
+            <div class="col-md-2" style="padding-right: 0; width: 172px">
+                <div class="input-group">
+                    <input type="text" class="form-control" value="{{localActivityInfoItem.T_term.start | date:'yyyy.MM.dd'}}" style="width: 105px"/>
+                    <span class="input-group-btn">
+                       <button class="btn btn-default" type="button" ng-click="win_local_activity_term_start.center(); win_local_activity_term_start.open()">달력</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-1" style="width: 24px; height: 34px; line-height: 34px; padding: 0">~</div>
+            <!--종료 날짜-->
+            <div class="col-md-2" style="padding-left: 0; width: 172px">
+                <div class="input-group">
+                    <input type="text" class="form-control" value="{{localActivityInfoItem.T_term.end | date:'yyyy.MM.dd'}}" style="width: 105px"/>
+                    <span class="input-group-btn">
+                       <button class="btn btn-default" type="button" ng-click="win_local_activity_term_end.center(); win_local_activity_term_end.open()">달력</button>
+                    </span>
+                </div>
+            </div>
         </div>
         <div kendo-window="win_local_activity_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
             <kendo-calendar ng-model="localActivityInfoItem.T_term.start" k-on-change="win_local_activity_term_start.close()"></kendo-calendar>
@@ -33,7 +57,7 @@
     <!--활동설명-->
     <div class="form-group">
         <label for="lbl_local_activity_description" class="col-md-2 control-label">활동설명</label>
-        <div class="col-md-7" id="lbl_local_activity_description">
+        <div class="col-md-9" id="lbl_local_activity_description">
             <textarea class="form-control" rows="3" ng-model="localActivityInfoItem.S_description"></textarea>
         </div>
     </div>
@@ -45,25 +69,47 @@
         <div class="col-md-3" id="lbl_local_activity_image">
             <img src="../img/noImage200x200.png" id="localActivity_picture">
 
-            <input type="file" id="localActivity_picture_upload" class="btn btn-default" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectLocalActivityImage($files)"><br>
-            <div id="localActivity_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="imageProgress" style="display: none;"></div><br>
+            <!--<input type="file" id="localActivity_picture_upload" class="btn btn-default" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectLocalActivityImage($files)"><br>-->
         </div>
+    </div>
+
+    <!--대표이미지 첨부-->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-4" style="width: 290px">
+                <input type="text" id="localActivity_picture_upload" class="fileInputTextBorder form-control" readonly="readonly" accept=".jpg, .jpeg, .bmp, .png" ng-model = "fileName1"/>
+            </div>
+            <div class="col-md-1" style="padding-left: 0; text-align: left; width: 115px">
+                <div class="fileInputDiv">
+                    <input type="button" class="btn btn-default" value="파일첨부" class="fileInputButton" style="width: 100px"/>
+                    <input type="file" class="fileInputHidden" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectLocalActivityImage($files)"/>
+                </div>
+            </div>
+        </div>
+        <div id="localActivity_picture_progressbar" class="col-md-offset-2 col-md-3" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="imageProgress" style="width: 230px; height: 8px; display: none;"></div>
     </div>
 
     <!--첨부파일-->
     <div class="form-group">
-        <label for="lbl_local_activity_file" class="col-md-2 control-label">첨부파일</label>
-
-        <div class="col-md-3" id="lbl_local_activity_file">
-            <input type="file" id="localActivity_file" ng-file-select="onFileSelectLocalActivityInfo($files)">
+        <div class="row">
+            <label for="lbl_local_activity_file" class="col-md-2 control-label">첨부파일</label>
+            <!--<div class="row">-->
+                <div class="col-md-4" style="width: 290px">
+                    <input type="text" id="lbl_local_activity_file" class="fileInputTextBorder form-control" readonly="readonly" ng-model = "fileName2"/>
+                </div>
+                <div class="col-md-1" style="padding-left: 0; text-align: left; width: 115px">
+                    <div class="fileInputDiv" >
+                        <input type="button" class="fileInputButton btn btn-default" value="파일첨부" />
+                        <input type="file" class="fileInputHidden" ng-file-select="onFileSelectLocalActivityInfo($files)"/>
+                    </div>
+                </div>
+                <div class="col-md-1" style="padding-left: 0; text-align: left">
+                    <button class="btn btn-default" id="localActivity_upload" ng-click="uploadLocalActivityInfo()" style="display: none;">업로드</button>
+                </div>
+            <!--</div>-->
         </div>
-
-        <button type="btn btn-default col-md-2" id="localActivity_upload" ng-click="uploadLocalActivityInfo()" style="display: none;">업로드</button>
-    </div>
-
-    <!--첨부파일 정보-->
-    <div class="form-group">
-        <div id="localActivity_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div>
+        <!--첨부파일 프로그래스바-->
+        <div id="localActivity_progressbar" class="col-md-offset-2 col-md-4" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="width: 230px; height: 8px; display: none;"></div>
     </div>
 
     <!--추가 버튼-->
@@ -71,45 +117,30 @@
         <button type="button" class="btn btn-default" ng-click="addLocalActivityInfo()">추가</button>
     </div>
 
-    <hr>
+    <hr style="border-color: #d6d6d6">
 
     <div ng-repeat="item in localActivityInfoItems track by $index">
-        <!--분류-->
+        <!--이름-->
         <div class="form-group">
-            <label for="lbl_local_activity_category_load" class="col-md-2 control-label">분류</label>
-            <div class="col-md-2" id="lbl_local_activity_category_load">
-                <select class="form-control" ng-model="item.S_category">
-                    <option>교내</option>
-                    <option>교외</option>
-                </select>
-            </div>
+            <label for="lbl_local_activity_name_load" class="col-md-2 control-label">이름</label>
+            <div class="col-md-9" id="lbl_local_activity_name_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_name}}</div>
         </div>
 
         <!--이름, 활동기간-->
         <div class="form-group">
-            <label for="lbl_local_activity_name_load" class="col-md-2 control-label">이름</label>
-            <div class="col-md-2" id="lbl_local_activity_name_load">
-                <input type="text" class="form-control"  placeholder="이름" ng-model="item.S_name">
-            </div>
+            <label for="lbl_local_activity_category_load" class="col-md-2 control-label">구분</label>
+            <div class="col-md-2" id="lbl_local_activity_category_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_category}}</div>
 
             <label for="lbl_local_activity_term_load" class="col-md-2 control-label">활동기간</label>
-            <div class="col-md-2" id="lbl_local_activity_term_load">
-                <button class="k-button" ng-click="win_local_activity_term_start.center(); win_local_activity_term_start.open()">{{item.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~ <button class="k-button" ng-click="win_local_activity_term_end.center(); win_local_activity_term_end.open()">{{item.T_term.end | date:"yyyy년 MM월 dd일"}}</button>
-            </div>
-            <div kendo-window="win_local_activity_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
-                <kendo-calendar ng-model="item.T_term.start" k-on-change="win_local_activity_term_start.close()"></kendo-calendar>
-            </div>
-            <div kendo-window="win_local_activity_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">
-                <kendo-calendar ng-model="item.T_term.end" k-on-change="win_local_activity_term_end.close()"></kendo-calendar>
+            <div class="col-md-4" id="lbl_local_activity_term_load"  style="height: 34px; line-height: 34px; text-align: left">
+                {{item.T_term.start | date:"yyyy.MM.dd"}} ~ {{item.T_term.end | date:"yyyy.MM.dd"}}
             </div>
         </div>
 
         <!--활동설명-->
         <div class="form-group">
             <label for="lbl_local_activity_description_load" class="col-md-2 control-label">활동설명</label>
-            <div class="col-md-7" id="lbl_local_activity_description_load">
-                <textarea class="form-control" rows="3" ng-model="item.S_description"></textarea>
-            </div>
+            <div class="col-md-9" id="lbl_local_activity_description_load" style="text-align: left; line-height: 34px">{{item.S_description}}</div>
         </div>
 
         <!--대표이미지-->
@@ -131,8 +162,8 @@
             <label for="lbl_local_activity_file_load" class="col-md-2 control-label">첨부파일</label>
 
             <div class="col-md-5" id="lbl_local_activity_file_load">
-                <div ng-show = "!item.F_file">없음</div>
-                <div ng-show = "item.F_file"><a href="http://210.118.74.166:8123/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
+                <div ng-show = "!item.F_file" style="text-align: left; line-height: 34px">없음</div>
+                <div ng-show = "item.F_file" style="text-align: left; line-height: 34px"><a href="http://210.118.74.166:8123/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
             </div>
         </div>
 
