@@ -15,12 +15,14 @@ require.config({
         'domReady': '../libs/require/domReady',
         'twitter-bootstrap': '../libs/bootstrap/bootstrap.min',
         'kendo': '../libs/kendo/js/kendo.custom',
-        'ngGrid' : '../libs/ngGrid/ng-grid',
+        'ngGrid': '../libs/ngGrid/ng-grid',
         'facebook': '../libs/facebook/angular-facebook',
         'rotatable': '../libs/jquery/rotatable/jquery.ui.rotatable.min',
         'component': '../component',
-//        'classes': '../../../src/classes'
+//        'classes': '../../../src/classes',
+        'service': 'services',
         'classes': '../classes.min'
+//        'service': '../services.min'
     },
 
     shim: {
@@ -75,14 +77,17 @@ require.config({
 
 require([
     'jquery',
-//    'classes/classes'
+//    'classes/classes',
+//    'service',
     'classes'
+//    'services'
+
 ], function ($) {
 
     var cntl = $('body').attr('ng-controller');
 
     require([
-        'controllers/' + cntl
+            'controllers/' + cntl
     ], function () {
         require(['bootstrap'])
     });
