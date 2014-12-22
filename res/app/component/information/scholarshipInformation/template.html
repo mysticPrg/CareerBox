@@ -1,9 +1,9 @@
-<div style="margin: 30px 0 10px 0">장학금</div>
 <form class="form-horizontal" role="form">
+    <div class="col-md-12" style="margin: 20px 0 20px 0; font-size: 20px; font-weight: 700; color: #d53d3d; text-align: left">장학금</div>
     <!-- 장학금명 -->
     <div class="form-group">
         <label for="lbl_scholarship_name" class="col-md-2 control-label">장학금명</label>
-        <div class="col-md-2" id="lbl_scholarship_name">
+        <div class="col-md-4" id="lbl_scholarship_name">
             <input type="text" class="form-control"  placeholder="장학금명" ng-model="scholarshipInfoItem.S_name">
         </div>
     </div>
@@ -11,18 +11,20 @@
     <!-- 학교명, 수여시기 -->
     <div class="form-group row">
         <label for="lbl_scholarship_school" class="col-md-2 control-label">학교명</label>
-        <div class="col-md-2" id="lbl_scholarship_school">
+        <div class="col-md-4" id="lbl_scholarship_school">
             <input type="text" class="form-control"  placeholder="학교명" ng-model="scholarshipInfoItem.S_school">
         </div>
 
-        <label for="lbl_scholarship_year" class="col-md-1 control-label">수여 시기</label>
-        <div class="col-md-2" id="lbl_scholarship_year">
-            <input type="text" class="form-control"  placeholder="년도" ng-model="scholarshipInfoItem.N_year">
+        <label for="lbl_scholarship_year" class="col-md-2 control-label">수여시기</label>
+        <div class="col-md-2" id="lbl_scholarship_year" style="padding-right: 0; width: 90px">
+            <input type="text" class="form-control"  placeholder="년도" ng-model="scholarshipInfoItem.N_year"  style="width: 75px">
         </div>
-        <div class="col-md-1">/</div>
-        <div class="col-md-2" id="lbl_scholarship_term">
-            <input type="text" class="form-control"  placeholder="학기" ng-model="scholarshipInfoItem.N_term">
+        <div class="col-md-1" style="padding-left: 0; padding-right: 0; width: 35px; height: 34px; line-height: 34px">년도</div>
+        <div class="col-md-1" style="padding-left: 0; padding-right: 0; width: 35px; height: 34px; line-height: 34px">/</div>
+        <div class="col-md-2" id="lbl_scholarship_term" style="padding-left: 0; padding-right: 0; width: 75px">
+            <input type="text" class="form-control"  placeholder="학기" ng-model="scholarshipInfoItem.N_term" style="width: 75px">
         </div>
+        <div class="col-md-1" style="padding-left: 0; padding-right: 0; width: 35px; height: 34px; line-height: 34px">학기</div>
     </div>
 
     <!--추가 버튼-->
@@ -30,32 +32,27 @@
         <button type="button" class="btn btn-default" ng-click="addScholarshipInfo()">추가</button>
     </div>
 
-    <hr>
+    <hr style="border-style: #d6d6d6">
 
     <div ng-repeat="item in scholarshipInfoItems track by $index">
         <!-- 장학금명 -->
         <div class="form-group">
             <label for="lbl_scholarship_name_load" class="col-md-2 control-label">장학금명</label>
-            <div class="col-md-2" id="lbl_scholarship_name_load">
-                <input type="text" class="form-control"  placeholder="장학금명" ng-model="item.S_name">
-            </div>
+            <div class="col-md-4" id="lbl_scholarship_name_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_name}}</div>
         </div>
 
         <!-- 학교명, 수여시기 -->
         <div class="form-group row">
             <label for="lbl_scholarship_school_load" class="col-md-2 control-label">학교명</label>
-            <div class="col-md-2" id="lbl_scholarship_school_load">
-                <input type="text" class="form-control"  placeholder="학교명" ng-model="item.S_school">
-            </div>
+            <div class="col-md-4" id="lbl_scholarship_school_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_school}}</div>
 
-            <label for="lbl_scholarship_year_load" class="col-md-1 control-label">수여 시기</label>
-            <div class="col-md-2" id="lbl_scholarship_year_load">
-                <input type="text" class="form-control"  placeholder="년도" ng-model="item.N_year">
-            </div>
-            <div class="col-md-1">/</div>
-            <div class="col-md-2" id="lbl_scholarship_term_load">
-                <input type="text" class="form-control"  placeholder="학기" ng-model="item.N_term">
-            </div>
+
+            <label for="lbl_scholarship_year_load" class="col-md-2 control-label">수여 시기</label>
+            <div class="col-md-2" id="lbl_scholarship_year_load" style="padding-right: 0; width: 75px; height: 34px; line-height: 34px">{{item.N_year}}</div>
+            <div class="col-md-1" style="padding-left: 0; padding-right: 0; width: 35px; height: 34px; line-height: 34px">년도</div>
+            <div class="col-md-1" style="padding-left: 0; padding-right: 0; width: 35px; height: 34px; line-height: 34px">/</div>
+            <div class="col-md-2" id="lbl_scholarship_term_load" style="padding-left: 0; padding-right: 0; width: 75px; height: 34px; line-height: 34px">{{item.N_term}}</div>
+            <div class="col-md-1" style="padding-left: 0; padding-right: 0; width: 35px; height: 34px; line-height: 34px">학기</div>
         </div>
         <!-- 삭제 버튼-->
         <div>

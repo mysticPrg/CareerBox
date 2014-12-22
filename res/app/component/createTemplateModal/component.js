@@ -9,7 +9,6 @@ define([
     app.controller('createTemplateModalController', function ($scope, $modalInstance, InformationData) {
         $scope.template = new Template();
         $scope.infoCategory = InformationData;
-//        $scope.category='';
 
         $scope.save = function (category) {
             if(category){
@@ -20,12 +19,11 @@ define([
 
                 $scope.template.target.isBinding = true;
 
-//                console.log('$scope.template', $scope.template);
-
-//            $scope.template.target.bindingType = category;
+                $modalInstance.close($scope.template);
+            } else {
+                alert('카테고리를 선택해주세요.');
             }
 
-            $modalInstance.close($scope.template);
         };
         $scope.cancel = function () {
             $modalInstance.dismiss();

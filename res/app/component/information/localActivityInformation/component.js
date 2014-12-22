@@ -48,6 +48,7 @@ define([
             }
 
             $scope.onFileSelectLocalActivityInfo = function ($files) {
+                $scope.fileName2 = $files[0].name;
                 $scope.files = $files;
                 $('#localActivity_upload').fadeIn('slow');
             }
@@ -63,6 +64,7 @@ define([
             }
 
             $scope.onFileSelectLocalActivityImage = function ($files) {
+                $scope.fileName1 = $files[0].name;
                 $scope.imageProgress = 0;
                 $('#localActivity_picture_progressbar').fadeIn('slow');
 

@@ -1,9 +1,10 @@
-<div style="margin: 30px 0 10px 0">컬럼</div>
 <form class="form-horizontal" role="form">
+    <div class="col-md-12" style="margin: 20px 0 20px 0; font-size: 20px; font-weight: 700; color: #d53d3d; text-align: left">칼럼</div>
+
     <!--제목-->
     <div class="form-group">
         <label for="lbl_column_title" class="col-md-2 control-label">제목</label>
-        <div class="col-md-8" id="lbl_column_title">
+        <div class="col-md-9" id="lbl_column_title">
             <input type="text" class="form-control"  placeholder="제목" ng-model="columnInfoItem.S_title">
         </div>
     </div>
@@ -11,7 +12,7 @@
     <!--내용-->
     <div class="form-group">
         <label for="lbl_column_content" class="col-md-2 control-label">내용</label>
-        <div class="col-md-8" id="lbl_column_content">
+        <div class="col-md-9" id="lbl_column_content">
             <textarea class="form-control" rows="3" ng-model="columnInfoItem.S_content"></textarea>
         </div>
     </div>
@@ -21,23 +22,19 @@
         <button type="button" class="btn btn-default" ng-click="addColumnInfo()">추가</button>
     </div>
 
-    <hr>
+    <hr style="border-color: #d6d6d6">
 
     <div ng-repeat="item in columnInfoItems track by $index">
         <!--제목-->
         <div class="form-group">
             <label for="lbl_column_title_load" class="col-md-2 control-label">제목</label>
-            <div class="col-md-8" id="lbl_column_title_load">
-                <input type="text" class="form-control"  placeholder="제목" ng-model="item.S_title">
-            </div>
+            <div class="col-md-9" id="lbl_column_title_load" style="text-align: left; line-height: 34px">{{item.S_title}}</div>
         </div>
 
         <!--내용-->
         <div class="form-group">
             <label for="lbl_column_content_load" class="col-md-2 control-label">내용</label>
-            <div class="col-md-8" id="lbl_column_content_load">
-                <textarea class="form-control" rows="3" ng-model="item.S_content"></textarea>
-            </div>
+            <div class="col-md-9" id="lbl_column_content_load" style="text-align: left; line-height: 34px">{{item.S_content}}</div>
         </div>
 
         <!-- 삭제 버튼-->
