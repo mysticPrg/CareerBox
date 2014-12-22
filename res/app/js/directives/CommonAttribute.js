@@ -13,28 +13,38 @@ define([
         function setCommonWatch(scope, element, att) {
             if(!(window.location.href.split("#/")[1] != 'TemplateEditor' && att.id == 'canvas-content')){
                 // pos
-
-                // row, col이 있는 경우(pos-x속성이 존재한다)
-
-//                console.log('att.row', "row" in att);
-                if("row" in att){
-                    element.css({
-                        top:  (att.row * element.height()) + "px",
-                        left: (att.col * element.width()) + "px"
-                    });
-                }
-                else
-                scope.$watch("attributeInformation.pos",function() {
-                    if(EditorData.focusId == att.id){
-                      ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
+                {
+                    // row, col이 있는 경우(pos-x속성이 존재한다)
+                    if("row" in att){
+                        element.css({
+                            top:  (att.row * element.height()) + "px",
+                            left: (att.col * element.width()) + "px"
+                        });
                     }
-                },true);
+                    // 그외
+                    else
+                        scope.$watch("attributeInformation.pos",function() {
+                            if(EditorData.focusId == att.id){
+                                ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
+                            }
+                        },true);
+                }
 
-                // outline 색
-                scope.$watch("attributeInformation.outline",function() {
+                // outline
+                {
+                    // grid일 경우 선 없애기
+                    if(att.grid != null){
+                        element.css({
+                            'border' : "0px"
+                        });
+                    }
+                    else
+                    // 그외
+                    scope.$watch("attributeInformation.outline",function() {
 //                    if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.outline(element, scope.attributeInformation);
-                },true);
+                        ApplyCommonItemAttribute.outline(element, scope.attributeInformation);
+                    },true);
+                }
 
                 // radius
                 scope.$watch("attributeInformation.radius",function() {
@@ -52,6 +62,7 @@ define([
 //                    if(EditorData.focusId == att.id)
                     ApplyCommonItemAttribute.alpha(element, scope.attributeInformation);
                 },true);
+
                 // rotate
 //                scope.$watch("attributeInformation.rotate",function() {
 ////                if(EditorData.focusId == att.id)

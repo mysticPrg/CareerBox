@@ -1,32 +1,14 @@
-<div style="margin: 30px 0 10px 0">고등학교</div>
 <form class="form-horizontal" role="form">
+    <div class="col-md-12" style="margin: 20px 0 20px 0; font-size: 20px; font-weight: 700; color: #d53d3d; text-align: left">고등학교</div>
     <!--학교명, 검정고시 여부-->
     <div class="form-group">
         <label for="lbl_highschool_name" class="col-md-2 control-label">학교명</label>
 
-        <div class="col-md-2" id="lbl_highschool_name">
+        <div class="col-md-5" id="lbl_highschool_name">
             <input type="text" class="form-control" placeholder="학교명" ng-model="highSchoolInfoItem.S_name">
         </div>
-        <div class="col-md-2">
-            <label><input type="checkbox" name="qualification" ng-model="highSchoolInfoItem.B_qualification">검정고시</label>
-        </div>
-    </div>
-
-    <!--재학기간, 졸업여부-->
-    <div class="form-group">
-        <label for="lbl_highschool_term" class="col-md-2 control-label">재학기간</label>
-        <div class="col-md-2" id="lbl_highschool_term">
-            <button class="k-button" ng-click="win_highschool_term_start.center(); win_highschool_term_start.open();">{{highSchoolInfoItem.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~
-            <button class="k-button" ng-click="win_highschool_term_end.center(); win_highschool_term_end.open();">{{highSchoolInfoItem.T_term.end | date:"yyyy년 MM월 dd일"}}</button>
-        </div>
-        <div kendo-window="win_highschool_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
-            <kendo-calendar ng-model="highSchoolInfoItem.T_term.start" k-on-change="win_highschool_term_start.close()"></kendo-calendar>
-        </div>
-        <div kendo-window="win_highschool_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">
-            <kendo-calendar ng-model="highSchoolInfoItem.T_term.end" k-on-change="win_highschool_term_end.close()"></kendo-calendar>
-        </div>
-        <div class="col-md-2">
-            <label><input type="checkbox" name="graduate" ng-model="highSchoolInfoItem.B_graduate">졸업여부</label>
+        <div class="col-md-2" style="height: 34px">
+            <label style="height: 34px"><input type="checkbox" name="qualification" ng-model="highSchoolInfoItem.B_qualification">검정고시</label>
         </div>
     </div>
 
@@ -34,8 +16,49 @@
     <div class="form-group">
         <label for="lbl_highschool_major" class="col-md-2 control-label">전공명</label>
 
-        <div class="col-md-4" id="lbl_highschool_major">
+        <div class="col-md-5" id="lbl_highschool_major">
             <input type="text" class="form-control" placeholder="전공명" ng-model="highSchoolInfoItem.S_major">
+        </div>
+    </div>
+
+    <!--재학기간, 졸업여부-->
+    <div class="form-group">
+        <label for="lbl_highschool_term" class="col-md-2 control-label">재학기간</label>
+        <!--&lt;!&ndash;<div class="col-md-2" id="lbl_highschool_term">&ndash;&gt;-->
+            <!--<button class="k-button" ng-click="win_highschool_term_start.center(); win_highschool_term_start.open();">{{highSchoolInfoItem.T_term.start | date:"yyyy년 MM월 dd일"}}</button> ~-->
+            <!--<button class="k-button" ng-click="win_highschool_term_end.center(); win_highschool_term_end.open();">{{highSchoolInfoItem.T_term.end | date:"yyyy년 MM월 dd일"}}</button>-->
+        <!--</div>-->
+        <div id="lbl_highschool_term" class="col-md-6 row" style="width: 400px">
+            <!--시작 날짜-->
+            <div class="col-md-2" style="padding-right: 0; width: 172px">
+                <div class="input-group">
+                    <input type="text" class="form-control" value="{{highSchoolInfoItem.T_term.start | date:'yyyy.MM.dd'}}" style="width: 105px"/>
+                    <span class="input-group-btn">
+                       <button class="btn btn-default" type="button" ng-click="win_highschool_term_start.center(); win_highschool_term_start.open();">달력</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-1" style="width: 24px; height: 34px; line-height: 34px; padding: 0">~</div>
+            <!--종료 날짜-->
+            <div class="col-md-2" style="padding-left: 0; width: 172px">
+                <div class="input-group">
+                    <input type="text" class="form-control" value="{{highSchoolInfoItem.T_term.end | date:'yyyy.MM.dd'}}" style="width: 105px"/>
+                    <span class="input-group-btn">
+                       <button class="btn btn-default" type="button" ng-click="win_highschool_term_end.center(); win_highschool_term_end.open();">달력</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div kendo-window="win_highschool_term_start" k-title="'Start Date'" k-modal="true" k-resizable="false" k-visible="false">
+            <kendo-calendar ng-model="highSchoolInfoItem.T_term.start" k-on-change="win_highschool_term_start.close()"></kendo-calendar>
+        </div>
+        <div kendo-window="win_highschool_term_end" k-title="'End Date'" k-modal="true" k-resizable="false" k-visible="false">
+            <kendo-calendar ng-model="highSchoolInfoItem.T_term.end" k-on-change="win_highschool_term_end.close()"></kendo-calendar>
+        </div>
+
+        <!--졸업여부-->
+        <div class="col-md-2" style="height: 34px">
+            <label style="height: 34px"><input type="checkbox" name="graduate" ng-model="highSchoolInfoItem.B_graduate">졸업여부</label>
         </div>
     </div>
 
@@ -44,41 +67,21 @@
         <button type="button" class="btn btn-default" ng-click="addHighSchoolInfo()">추가</button>
     </div>
 
-    <hr>
+    <hr style="border-color: #d6d6d6">
 
+    <!--추가된 고등학교 보여주는 리스트-->
     <div ng-repeat="item in highSchoolInfoItems track by $index">
         <!--학교명, 검정고시 여부-->
         <div class="form-group">
             <label for="lbl_highschool_name_load" class="col-md-2 control-label">학교명</label>
 
-            <div class="col-md-2" id="lbl_highschool_name_load">
-                {{item.S_name}}
-            </div>
+            <div class="col-md-4" id="lbl_highschool_name_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_name}}</div>
 
             <!-- TODO 다혜 : 체크박스 타이틀 부분 수정됨 -->
-            <div class="col-md-2">
-                <label>검정고시</label>
-            </div>
-            <div class="col-md-2">
+            <label class="col-md-2 control-label">검정고시</label>
+            <div class="col-md-2" style="text-align: left; height: 34px; line-height: 34px" >
                 <div ng-if="item.B_qualification">해당</div>
                 <div ng-if="!item.B_qualification">해당없음</div>
-            </div>
-        </div>
-
-        <!--재학기간, 졸업여부-->
-        <div class="form-group">
-            <label for="lbl_highschool_term_load" class="col-md-2 control-label">재학기간</label>
-            <div class="col-md-2" id="lbl_highschool_term_load">
-                {{item.T_term.start | date:"yyyy년 MM월 dd일"}} - {{item.T_term.end | date:"yyyy년 MM월 dd일"}}
-            </div>
-
-            <!-- TODO 다혜 : 체크박스 타이틀 부분 수정됨 -->
-            <div class="col-md-2">
-                <label>졸업여부</label>
-            </div>
-            <div class="col-md-2">
-                <div ng-if="item.B_graduate">해당</div>
-                <div ng-if="!item.B_graduate">해당없음</div>
             </div>
         </div>
 
@@ -86,8 +89,21 @@
         <div class="form-group">
             <label for="lbl_highschool_major_load" class="col-md-2 control-label">전공명</label>
 
-            <div class="col-md-4" id="lbl_highschool_major_load">
-                {{item.S_major}}
+            <div class="col-md-2" id="lbl_highschool_major_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_major}}</div>
+        </div>
+
+        <!--재학기간, 졸업여부-->
+        <div class="form-group">
+            <label for="lbl_highschool_term_load" class="col-md-2 control-label">재학기간</label>
+            <div class="col-md-4" id="lbl_highschool_term_load"  style="height: 34px; line-height: 34px">
+                {{item.T_term.start | date:"yyyy년 MM월 dd일"}} ~ {{item.T_term.end | date:"yyyy년 MM월 dd일"}}
+            </div>
+
+            <!-- TODO 다혜 : 체크박스 타이틀 부분 수정됨 -->
+            <label class="col-md-2 control-label">졸업여부</label>
+            <div class="col-md-2" style="text-align: left; height: 34px; line-height: 34px">
+                <div ng-if="item.B_graduate">해당</div>
+                <div ng-if="!item.B_graduate">해당없음</div>
             </div>
         </div>
 

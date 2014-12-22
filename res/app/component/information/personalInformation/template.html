@@ -28,12 +28,23 @@
             <!--생일-->
             <div class="form-group">
                 <label for="lbl_personal_birthday" class="col-md-2 control-label">생일</label>
-                <div class="col-md-3" id="lbl_personal_birthday">
-                    <button class="k-button" ng-click="win_birthday.center(); win_birthday.open();">{{personalInfo.D_birthday | date:"yyyy년 MM월 dd일"}}</button>
+                <div class="col-md-5" id="lbl_personal_birthday">
+                    <div class="input-group">
+                        <input type="text" class="form-control" value="{{personalInfo.D_birthday | date:'yyyy.MM.dd'}}" />
+                        <span class="input-group-btn">
+                           <button class="btn btn-default" type="button" ng-click="win_birthday.center(); win_birthday.open();">달력</button>
+                        </span>
+                    </div>
                 </div>
                 <div kendo-window="win_birthday" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">
                     <kendo-calendar ng-model="personalInfo.D_birthday" k-on-change="win_birthday.close()"></kendo-calendar>
                 </div>
+                <!--<div class="col-md-3" id="lbl_personal_birthday">-->
+                    <!--<button class="k-button" ng-click="win_birthday.center(); win_birthday.open();">{{personalInfo.D_birthday | date:"yyyy년 MM월 dd일"}}</button>-->
+                <!--</div>-->
+                <!--<div kendo-window="win_birthday" k-title="'Choose Your Birthday'" k-modal="true" k-resizable="false" k-visible="false">-->
+                    <!--<kendo-calendar ng-model="personalInfo.D_birthday" k-on-change="win_birthday.close()"></kendo-calendar>-->
+                <!--</div>-->
             </div>
 
             <!--이메일-->
