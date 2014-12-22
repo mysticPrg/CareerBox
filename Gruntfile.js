@@ -63,25 +63,25 @@ module.exports = function (grunt) {
         requirejs: {
             compile: {
                 options: {
-                    name: '../main',
-                    out: 'res/app/main.min.js',
+                    name: '../../../src/classes/classes',
+                    out: 'res/app/classes.min.js',
                     removeCombined: true,
                     findNestedDependencies: true,
                     baseUrl: 'res/app/js',
-                    mainConfigFile: 'res/app/main.js',
-                    exclude: [
-                        'angular',
-                        'angular-route',
-                        'angular-bootstrap',
-                        'jquery',
-                        'jquery-ui',
-                        'domReady',
-                        'twitter-bootstrap',
-                        'kendo',
-                        'facebook',
-                        'ngGrid',
-                        'rotatable'
-                    ]
+                    mainConfigFile: 'res/app/main.js'
+//                    exclude: [
+//                        'angular',
+//                        'angular-route',
+//                        'angular-bootstrap',
+//                        'jquery',
+//                        'jquery-ui',
+//                        'domReady',
+//                        'twitter-bootstrap',
+//                        'kendo',
+//                        'facebook',
+//                        'ngGrid',
+//                        'rotatable'
+//                    ]
                 }
             }
         }
