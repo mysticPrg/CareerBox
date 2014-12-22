@@ -139,8 +139,9 @@ function setIndex(_portfolio_id, _paper_id, callback) {
     paperCollection.find({
         _portfolio_id: _portfolio_id
     }).toArray(function (err, arr) {
-        async.each(arr, function (p, cb) {
-            if (p._id.toHexString() === _paper_id) {
+        async.forEach(arr, function (p, cb) {
+            var cur_paper_id = p._id.toHexString();
+            if (cur_paper_id === _paper_id) {
                 paperCollection.update(
                     {
                         _id: new ObjectID(_paper_id)

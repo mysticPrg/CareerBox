@@ -31,8 +31,8 @@ define([
         if ( props ) {
             this._id = props._id ? props._id : this._id;
             this.S_name = props.S_name ? props.S_name : this.S_name;
-            this.B_qualification = props.B_qualification ? props.B_qualification : this.B_qualification;
-            this.B_graduate = props.B_graduate ? props.B_graduate : this.B_graduate;
+            this.B_qualification = (props.B_qualification!==undefined) ? props.B_qualification : this.B_qualification;
+            this.B_graduate = (props.B_graduate!==undefined) ? props.B_graduate : this.B_graduate;
             this.T_term = props.T_term ? props.T_term : this.T_term;
             this.S_major = props.S_major ? props.S_major : this.S_major;
         }

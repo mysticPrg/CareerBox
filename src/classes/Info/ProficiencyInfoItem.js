@@ -32,7 +32,7 @@ define([], function () {
         if (props) {
             this._id = props._id ? props._id : this._id;
             this.S_name = props.S_name ? props.S_name : this.S_name;
-            this.B_exam = props.B_exam ? props.B_exam : this.B_exam;
+            this.B_exam = (props.B_exam!==undefined) ? props.B_exam : this.B_exam;
             this.S_reg_number = props.S_reg_number ? props.S_reg_number : this.S_reg_number;
             this.D_date = props.D_date ? props.D_date : this.D_date;
             this.S_grade = props.S_grade ? props.S_grade : this.S_grade;

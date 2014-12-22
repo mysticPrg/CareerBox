@@ -48,7 +48,7 @@ define([
             this.S_name = props.S_name ? props.S_name : this.S_name;
             this.S_address = props.S_address ? props.S_address : this.S_address;
             this.S_hireType = props.S_hireType ? props.S_hireType : this.S_hireType;
-            this.B_resignation = props.B_resignation ? props.B_resignation : this.B_resignation;
+            this.B_resignation = (props.B_resignation!==undefined) ? props.B_resignation : this.B_resignation;
             this.T_term = props.T_term ? props.T_term : this.T_term;
             this.S_department = props.S_department ? props.S_department : this.S_department;
             this.S_position = props.S_position ? props.S_position : this.S_position;
