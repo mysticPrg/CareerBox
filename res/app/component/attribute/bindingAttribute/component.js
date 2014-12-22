@@ -20,10 +20,13 @@ define([
             controller : function ($scope, $modal) {
 
                 $scope.infoCategory = InformationData;
+
                 $scope.category = '';
+
+
+
                 $scope.setCategory = function(){
                     // 템플릿에 카테고리를 매칭
-                    $scope.data.bindingType = $scope.category;
                     $scope.data.bindingType = {
                         infoType : $scope.category.infoType,
                         title : $scope.category.title
@@ -38,30 +41,38 @@ define([
                 // 속성 이름들 모두 가져오기
                 $scope.EditorData = EditorData;
                 $scope.$watch('EditorData.focusId',function(){
-                    try {
-                        if($scope.data.itemType === "image"){
-                            // key의 첫글자가 I 인 것만 가져오기
-                            $scope.attributeNames = getAvailableAttribute(EditorData.template.target.bindingType.infoType, 'I');
 
-                        } else if($scope.data.itemType === "link"){
-                            // key의 첫글자가 F 인 것만 가져오기
-                            $scope.attributeNames = getAvailableAttribute(EditorData.template.target.bindingType.infoType, 'F');
+                    // 템플릿의 아이템일 경우
+                    if($scope.layoutType === 'template_item'){
+                        try {
+                            if($scope.data.itemType === "image"){
+                                // key의 첫글자가 I 인 것만 가져오기
+                                $scope.attributeNames = getAvailableAttribute(EditorData.template.target.bindingType.infoType, 'I');
 
-                        } else if($scope.data.itemType === "text"){
-                            // key의 첫글자가 I,F 인 것빼고 가져오기
-                            $scope.attributeNames = getAvailableAttribute(EditorData.template.target.bindingType.infoType, '-I -F');
-                        }
-                    } catch(exception){} // 아이템이 아닌 경우
+                            } else if($scope.data.itemType === "link"){
+                                // key의 첫글자가 F 인 것만 가져오기
+                                $scope.attributeNames = getAvailableAttribute(EditorData.template.target.bindingType.infoType, 'F');
 
-
+                            } else if($scope.data.itemType === "text"){
+                                // key의 첫글자가 I,F 인 것빼고 가져오기
+                                $scope.attributeNames = getAvailableAttribute(EditorData.template.target.bindingType.infoType, '-I -F');
+                            }
+                        } catch(exception){} // 아이템이 아닌 경우
+                    }
                     // 템플릿의 아티클일 경우
-                    try {
-                        $scope.indexs = [];
-                        for(var i=0; i < $scope.data.bindingType.items.length; i++){
-                            $scope.indexs.push(i+1);
-                        };
-                    } catch(exception){}
+                    else if($scope.layoutType === 'template'){
 
+//                        // 속성 이름 배열 가져오기
+//                        try {
+//                            $scope.indexs = [];
+//                            for(var i=0; i < $scope.data.bindingType.items.length; i++){
+//                                $scope.indexs.push(i+1);
+//                            };
+//                        } catch(exception){}
+
+                        // 처음 배열 인덱스 가져오기
+                        $scope.categoryInitIndex =$scope.infoCategory[$scope.data.bindingType.infoType];
+                    }
 
                 },true);
 
