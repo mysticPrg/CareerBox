@@ -80,7 +80,8 @@ define([
 
                 // z - index
                 scope.$watch("attributeInformation.zOrder", function () {
-                    if (scope.attributeInformation._id == att.id)
+                    // 비교하면 아티클 배열에서 z-index가 안매겨잠.
+//                    if(scope.attributeInformation._id == att.id)
                         ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
                 }, true);
             }

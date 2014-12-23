@@ -30,19 +30,32 @@ define([
 
         $scope.EditorData = EditorData;
 
-        $scope.$watch('EditorData.focusId', function () { if(EditorData.focusId){
-            // 모델 적용
-            var infomation = SetAttributeInformation(EditorData.focusId);
-            $scope.attributeInformation = infomation.attributeInformation;
-            $scope.parentArray = infomation.parentArray;
-            $scope.type = infomation.type;
+        // 모델 갱신
+        $scope.changeModel = function() {
+            if(EditorData.focusId){
+                // 모델 적용
+                var infomation = SetAttributeInformation(EditorData.focusId);
+                $scope.attributeInformation = infomation.attributeInformation;
+                $scope.parentArray = infomation.parentArray;
+                $scope.type = infomation.type;
 
-            // Box shadow
-            $('#' + EditorData.old_focusId).removeClass('focus')
-            $('#' + EditorData.focusId).addClass('focus')
-            EditorData.old_focusId = EditorData.focusId
+                // Box shadow
+                $('#' + EditorData.old_focusId).removeClass('focus');
+                $('#' + EditorData.focusId).addClass('focus');
+                EditorData.old_focusId = EditorData.focusId;
 
-        }}, true);
+            }
+        };
+
+        // 모델 갱신 리스너
+        $rootScope.$on('changeAttributePanelModel',function(){
+            $scope.changeModel();
+        });
+
+        // 선택된 것이 바뀔때마다 모델을 갱신
+        $scope.$watch('EditorData.focusId', function () {
+            $scope.changeModel();
+        }, true);
 
         $scope.deleteItem = function (id) {
             // z index 처리

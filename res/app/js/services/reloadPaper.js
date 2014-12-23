@@ -39,10 +39,8 @@ define([
 
                         loadPaperDom(EditorData.paper, $scope);
 
-                        $('#attribute').find('div').remove();
-                        var domObj = '<div attribute-panel ></div>'
-                        $('#attribute').append(domObj);
-                        $compile($('#attribute'))($scope);
+                        // 어트리뷰트 모델 강제 변경
+                        $scope.$emit('changeAttributePanelModel');
 
                         callback();
                     });
