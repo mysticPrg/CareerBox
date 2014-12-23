@@ -15,7 +15,7 @@ define([
                 $scope.template.target.bindingType = {
                     infoType : category.infoType,
                     title : category.title
-                }
+                };
 
                 $scope.template.target.isBinding = true;
 

@@ -41,8 +41,9 @@ define([
             }
 
             articleGroupDom += '</div>';
-
+            $('#' + _article._id).remove();
             $('#canvas-content').append(articleGroupDom);
+
             $compile($('#' + _article._id))($scope);
         }
 

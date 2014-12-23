@@ -11,14 +11,13 @@ define([
     'services/LoadPaper',
     'services/loadArticle'
 ], function (app) {
-    app.factory('reloadPaper', function (HTMLGenerator, EditorData, SetAttributeInformation, SavePaper, LoadPaper, loadArticle, $http) {
+    app.factory('reloadPaper', function (HTMLGenerator, EditorData, SetAttributeInformation, SavePaper, LoadPaper, loadArticle, $http, $compile) {
         function reloadPaper($scope, callback) {
             var paper = EditorData.paper;
             paper.childArr = getPaperChildArr(EditorData.childArr);
 
             //페이퍼 저장
             var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};
-            console.log('save data', data.paper.childArr[0].bindingData);
 
             SavePaper($http, data, function (result) {
                 if (result.returnCode === '000') {
@@ -27,10 +26,20 @@ define([
                         EditorData.paper = result.result;
                         EditorData.paperTitle = result.result.title;
 
-                        // reload
-                        $('#' + EditorData.focusId).remove();
-                        var articleModel = SetAttributeInformation(EditorData.focusId).attributeInformation;
-                        loadArticle(articleModel, $scope);
+                        var paper = EditorData.paper
+
+                        var paperChildArr = paper.childArr;
+
+                        $compile($('#canvas-content'))($scope); // 페이퍼 속성을 적용시켜줌.
+
+                        var child;
+                        for (var index = 0; index < paperChildArr.length; index++) {
+                            child = paperChildArr[index];
+                            EditorData.childArr[child._id] = child;
+                            if (child.childArr) {
+                                loadArticle(child, $scope);
+                            }
+                        }
 
                         callback();
                     });
