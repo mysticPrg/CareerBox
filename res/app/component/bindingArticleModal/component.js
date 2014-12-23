@@ -19,6 +19,7 @@ define([
             $scope.hasItems = false;
 
             var InformationItem = getInformationItem(EditorData.infoType);
+            console.log(InformationItem);
 
             getInformationByType($http, EditorData.infoType, function (data) {
                 if(data.result === null)
