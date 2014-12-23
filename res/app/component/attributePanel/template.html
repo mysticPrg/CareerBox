@@ -45,6 +45,9 @@
                 <li ng-if="attributeInformation.title || attributeInformation.title===''">
                     <div title-attribute to="attributeInformation"></div>
                 </li>
+                <li ng-if="type ==='template'">
+                    <div title-attribute to="parentArray"></div>
+                </li>
 
                 <li ng-if="attributeInformation.description || attributeInformation.description==='' ">
                     <div description-attribute to="attributeInformation"></div>
