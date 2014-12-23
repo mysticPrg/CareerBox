@@ -10,7 +10,7 @@ define([
         return function(id) {
 
             // 템플릿
-            if(isTemplateEditor(window.location.href) || window.location.href.split("partials/")[1].split('?')[0] == 'templatePreview.html'){
+            if(isTemplate(window.location.href)){
                 // 템플릿일 경우
                 if(EditorData.template._id == id || id == "canvas-content"){
                     return {
@@ -101,8 +101,8 @@ define([
                     return false;
             }
 
-            function isTemplateEditor(url){
-                if(url.indexOf('TemplateEditor') >= 0)
+            function isTemplate(url){
+                if((url.indexOf('TemplateEditor') >= 0) || (url.indexOf('TemplatePreview') >= 0))
                     return true;
                 else
                     return false;
