@@ -112,10 +112,11 @@ function createOrUpdateService(req, res) {
     if (newTemplate._id) {
         console.log(newTemplate._id);
         newTemplate._id = new ObjectID(newTemplate._id);
+        var str_id = newTemplate._id.toHexString();
 
         TemplateDB.update(newTemplate, function (err) {
-            CaptureFromSite(newTemplate._id.toHexString(), 'template', function(err2) {
-                ServiceUtil.sendResult(err2, res, null);
+            CaptureFromSite(str_id, 'template', function(err2) {
+                ServiceUtil.sendResult(err2, res, str_id);
             });
         });
     } else {
