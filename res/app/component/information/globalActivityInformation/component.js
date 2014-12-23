@@ -39,6 +39,7 @@ define([
             var newGlobalActivityInfoItem = new GlobalActivityInfoItem($scope.globalActivityInfoItem);
             $scope.globalActivityInfoItems.push(newGlobalActivityInfoItem);
             $scope.globalActivityInfoItem = new GlobalActivityInfoItem();
+            $scope.fileNameForGlobalActivity = '';
 
             initializeFileForm();
         }
@@ -48,7 +49,7 @@ define([
         }
 
         $scope.onFileSelectGlobalActivityInfo = function ($files) {
-            $scope.fileName2 = $files[0].name;
+            $scope.fileNameForGlobalActivity = $files[0].name;
             $scope.files = $files;
             $('#globalActivity_upload').fadeIn('slow');
         }
