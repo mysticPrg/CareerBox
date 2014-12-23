@@ -270,7 +270,6 @@ define([
                         $scope.loadArticleTemplate();
                         window.location.reload();
                     } else {
-                        alert('실패하였습니다.');
                         console.log('error: ' + result);
                     }
                 });

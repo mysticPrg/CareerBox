@@ -94,14 +94,14 @@ define([
 
                         // reload
                         reloadPaper($scope, function(){
-                            alert('성공했습니다.');
+                            //
                         });
                     }, function () {});
                 };
 
                 $rootScope.$on('reload', function() {
                     reloadPaper($scope, function(){
-                        alert('성공했습니다.');
+                        //
                     });
                 });
             }
