@@ -25,7 +25,6 @@ define([
                 $scope.category = '';
 
                 $scope.setCategory = function(){
-                    console.log('test');
                     // 템플릿에 카테고리를 매칭
                     $scope.data.bindingType = {
                         infoType : $scope.category.infoType,
