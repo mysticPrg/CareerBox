@@ -63,14 +63,14 @@
     </div>
 
     <!--추가 버튼-->
-    <div>
-        <button type="button" class="btn btn-default" ng-click="addHighSchoolInfo()">추가</button>
+    <div class="myContentAdd">
+        <button type="button" class="btn btn-default" ng-click="addHighSchoolInfo()">+</button>
     </div>
 
     <hr style="border-color: #d6d6d6">
 
     <!--추가된 고등학교 보여주는 리스트-->
-    <div ng-repeat="item in highSchoolInfoItems track by $index">
+    <div ng-repeat="item in highSchoolInfoItems track by $index" class="myContent">
         <!--학교명, 검정고시 여부-->
         <div class="form-group">
             <label for="lbl_highschool_name_load" class="col-md-2 control-label">학교명</label>
@@ -106,10 +106,9 @@
                 <div ng-if="!item.B_graduate">해당없음</div>
             </div>
         </div>
-
         <!-- 삭제 버튼-->
-        <div>
-            <button type="button" class="btn btn-default" ng-click="delHighSchoolInfo($index)">삭제</button>
+        <div class="myContentCancel">
+            <button type="button" class="btn btn-default" ng-click="delHighSchoolInfo($index)"><img src="../img/information_img/infoDelIcon.png"/></button>
         </div>
     </div>
 </form>

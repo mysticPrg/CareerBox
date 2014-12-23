@@ -53,10 +53,6 @@ define([
                 EditorData.focusId = 'canvas-content';
             });
 
-            $rootScope.$on("deleteArticle", function (e, id) {
-                deleteArticle(id);
-            });
-
             // 페이지 바꿧을때  loadPaper()를 다시;
             $scope.$watch("EditorData.paperId", function () {
                 if (EditorData.paperId === '')
@@ -191,7 +187,7 @@ define([
                     }
                 });
 
-            }
+            };
 
             $('#canvas-content').droppable({
                 activeClass: "drop-area",
@@ -199,11 +195,6 @@ define([
                     var id = ui.draggable[0].getAttribute("id");
                 }
             });
-
-            function deleteArticle(id) {
-                $('#' + id).remove();
-                EditorData.childArr[id].state = 'del';
-            }
 
             function showSuccessNotification() {
                 var notification = kendo.toString('성공하였습니다.');

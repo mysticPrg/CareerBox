@@ -53,15 +53,23 @@ define([
             }
             EditorData.end_zOrder--;
 
-            EditorData.focusId = 'canvas-content';
-
             if (isTemplateEditor(window.location.href)) {
-                $scope.$emit('deleteItem', id);
+                deleteItem(id);
             } else {
-                $scope.$emit('deleteArticle', id);
+                deleteArticle(id);
             }
-
+            EditorData.focusId = 'canvas-content';
         };
+
+        function deleteArticle(id) {
+            $('#' + EditorData.focusId).remove();
+            EditorData.childArr[id].state = 'del';
+        }
+
+        function deleteItem(id) {
+            $('#' + EditorData.focusId).remove();
+            EditorData.templateItemArray[id].state = 'del';
+        }
 
         function isTemplateEditor(url){
             if(url.indexOf('TemplateEditor') >= 0)

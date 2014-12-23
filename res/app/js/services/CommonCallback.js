@@ -10,7 +10,7 @@ define(['app'
             // Error
             if(data == null){
                 stateText = "서버와의 연결이 되지 않았습니다.";
-                alert(stateText);
+//                alert(stateText);
             }
             // Success
             else if (data.returnCode == '000') {
@@ -20,12 +20,12 @@ define(['app'
             // Invalid Arguments
             else if (data.returnCode == '001') {
                 stateText = "오류 발생";
-                alert(stateText);
+//                alert(stateText);
             }
             // Not Login
             else if (data.returnCode == '002') {
                 stateText = "로그인이 안되어있습니다.";
-                alert(stateText);
+//                alert(stateText);
                 window.location.href = "../partials/login.html";
             }
             else{

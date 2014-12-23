@@ -32,13 +32,13 @@
     </div>
 
     <!--추가 버튼-->
-    <div>
-        <button type="button" class="btn btn-default" ng-click="addComputerAbilityInfo()">추가</button>
+    <div class="myContentAdd">
+        <button type="button" class="btn btn-default" ng-click="addComputerAbilityInfo()">+</button>
     </div>
 
     <hr style="border-color: #d6d6d6">
 
-    <div ng-repeat="item in computerAbilityInfoItems track by $index">
+    <div ng-repeat="item in computerAbilityInfoItems track by $index" class="myContent">
         <div class="form-group">
             <!-- 기능 -->
             <div class="form-group">
@@ -60,8 +60,8 @@
         </div>
 
         <!-- 삭제 버튼-->
-        <div>
-            <button type="button" class="btn btn-default" ng-click="delComputerAbilityInfo($index)">삭제</button>
+        <div class="myContentCancel">
+            <button type="button" class="btn btn-default" ng-click="delComputerAbilityInfo($index)"><img src="../img/information_img/infoDelIcon.png"/></button>
         </div>
     </div>
 </form>

@@ -50,6 +50,8 @@ define([
                 var _id = url.split('TemplateEditor')[1].split('?id=')[1];
 
                 getTemplate($http, _id, function(data){
+                    // 로드 시 바인딩 bindingChanged 초기화
+                    data.result.target.bindingChanged = false;
                     EditorData.template = new Template(data.result);
                     $scope.template = EditorData.template;
                     loadTemplate();
@@ -81,10 +83,6 @@ define([
                 $scope.changed = true;
             } else {isFirst = false;}
         }, true);
-
-        $rootScope.$on("deleteItem", function (e, id) {
-            deleteItem(id);
-        });
 
         // Get Template Instance
         function getTemplateInstance() {
@@ -203,11 +201,6 @@ define([
             }else{
                 $window.location.href = '#portfolioEditor';
             }
-        }
-
-        function deleteItem(id) {
-            $('#' + id).remove();
-            EditorData.templateItemArray[id].state = 'del';
         }
 
         function showSuccessNotification() {

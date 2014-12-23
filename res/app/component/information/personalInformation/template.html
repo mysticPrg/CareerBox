@@ -9,17 +9,17 @@
                 <label class="col-md-2 control-label">이름</label>
                 <div class="col-md-10 clearfix">
                     <div class="form-group row">
-                        <span for="lbl_personal_name_kr" class="col-md-2 control-label" style="padding-right: 3px; width: 60px; text-align: left">이름(한글)</span>
+                        <span for="lbl_personal_name_kr" class="col-md-2 control-label" style="padding-right: 3px; width: 60px; text-align: left">한글</span>
                         <div class="col-md-3" id="lbl_personal_name_kr" style="padding: 0 ; width: 100px;">
                             <input type="text" class="form-control"  placeholder="이름(한글)" ng-model="personalInfo.S_name_kr">
                         </div>
 
-                        <span for="lbl_personal_name_ch" class="col-md-2 control-label" style="padding-right: 3px; width: 60px; text-align: left">이름(한문)</span>
+                        <span for="lbl_personal_name_ch" class="col-md-2 control-label" style="padding-right: 3px; width: 60px; text-align: left">한문</span>
                         <div class="col-md-3" id="lbl_personal_name_ch" style="padding: 0 ; width: 100px;">
                             <input type="text" class="form-control"  placeholder="이름(한문)" ng-model="personalInfo.S_name_ch">
                         </div>
 
-                        <span for="lbl_personal_name_en" class="col-md-2 control-label" style="padding-right: 3px; width: 60px; text-align: left">이름(영문)</span>
+                        <span for="lbl_personal_name_en" class="col-md-2 control-label" style="padding-right: 3px; width: 60px; text-align: left">영문</span>
                         <div class="col-md-3" id="lbl_personal_name_en" style="padding: 0 ; width: 150px;">
                             <input type="text" class="form-control"  placeholder="이름(영문)" ng-model="personalInfo.S_name_en">
                         </div>
@@ -93,12 +93,12 @@
                 <img ng-src="../img/noImage.png">
             </div>
             <div ng-show = "personalInfo.I_picture">
-                <img ng-src="http://210.118.74.166:8123/image/profile/thumb/{{personalInfo.I_picture._id}}" id="personal_picture">
+                <img ng-src="http://210.118.74.166:8123/image/profile/thumb/{{personalInfo.I_picture._id}}" id="personal_picture" style="box-shadow: 2px 2px 2px rgba(0,0,0,0.5)">
             </div>
 
             <!--<input type="text" id="personal_picture_file" class="fileInputText" readonly="readonly" ng-model = "fileName"/>-->
             <div class="fileInputDiv" style="margin-top: 10px">
-                <input type="button" class="btn btn-default" value="파일첨부" class="fileInputButton" />
+                <input type="button" class="btn btn-default" value="사진변경" class="fileInputButton" style="background-color: #f8f8f8; font-size: 12px; box-sizing: border-box"/>
                 <input type="file" class="fileInputHidden" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectProfileImage($files)"/>
             </div>
 

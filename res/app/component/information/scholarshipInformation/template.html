@@ -28,13 +28,13 @@
     </div>
 
     <!--추가 버튼-->
-    <div>
-        <button type="button" class="btn btn-default" ng-click="addScholarshipInfo()">추가</button>
+    <div class="myContentAdd">
+        <button type="button" class="btn btn-default" ng-click="addScholarshipInfo()">+</button>
     </div>
 
     <hr style="border-style: #d6d6d6">
 
-    <div ng-repeat="item in scholarshipInfoItems track by $index">
+    <div ng-repeat="item in scholarshipInfoItems track by $index" class="myContent">
         <!-- 장학금명 -->
         <div class="form-group">
             <label for="lbl_scholarship_name_load" class="col-md-2 control-label">장학금명</label>
@@ -55,8 +55,8 @@
             <div class="col-md-1" style="padding-left: 0; padding-right: 0; width: 35px; height: 34px; line-height: 34px">학기</div>
         </div>
         <!-- 삭제 버튼-->
-        <div>
-            <button type="button" class="btn btn-default" ng-click="delScholarshipInfo($index)">삭제</button>
+        <div class="myContentCancel">
+            <button type="button" class="btn btn-default" ng-click="delScholarshipInfo($index)"><img src="../img/information_img/infoDelIcon.png"/></button>
         </div>
     </div>
 </form>

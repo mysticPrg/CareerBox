@@ -1,7 +1,6 @@
 <form class="form-horizontal" role="form">
     <div class="col-md-12" style="margin: 20px 0 20px 0; font-size: 20px; font-weight: 700; color: #d53d3d; text-align: left">경력</div>
 
-    <div  class="col-md-12">
         <!-- 회사명, 구분 -->
         <div class="form-group row">
             <label for="lbl_working_name" class="col-md-2 control-label">회사명</label>
@@ -64,7 +63,7 @@
             </div>
 
             <label for="lbl_working_resignation" class="col-md-1 control-label" style="width: 85px">재직여부</label>
-            <div class="col-md-2" id="lbl_working_resignation" style="height: 34px">
+            <div class="col-md-2 radioBtn" id="lbl_working_resignation" style="height: 34px">
                 <label style="line-height: 34px"><input type="radio" name="disability" value="true" ng-model="workingInfoItem.B_resignation" value="재직">재직</input></label>
                 <label style="line-height: 34px"><input type="radio" name="disability" value="false" ng-model="workingInfoItem.B_resignation" value="퇴직">퇴직</input></label>
             </div>
@@ -116,15 +115,15 @@
     </div>
 
     <!--추가 버튼-->
-    <div>
-        <button type="button" class="btn btn-default" ng-click="addWorkingInfo()">추가</button>
+    <div class="myContentAdd">
+        <button type="button" class="btn btn-default" ng-click="addWorkingInfo()">+</button>
     </div>
 
     <hr style="border-color: #d6d6d6">
 
     <!--추가한 리스트 보여줌-->
-    <div ng-repeat="item in workingInfoItems track by $index">
-        <div  class="col-md-12">
+    <div ng-repeat="item in workingInfoItems track by $index" class="myContent">
+        <div>
             <!-- 회사명, 구분 -->
             <div class="form-group row">
                 <label for="lbl_working_name_load" class="col-md-2 control-label">회사명</label>
@@ -187,8 +186,8 @@
             </div>
         </div>
         <!-- 삭제 버튼-->
-        <div>
-            <button type="button" class="btn btn-default" ng-click="delWorkingInfo($index)">삭제</button>
+        <div class="myContentCancel">
+            <button type="button" class="btn btn-default" ng-click="delWorkingInfo($index)"><img src="../img/information_img/infoDelIcon.png"/></button>
         </div>
     </div>
 </form>

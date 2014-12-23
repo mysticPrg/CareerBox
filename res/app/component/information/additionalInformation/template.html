@@ -2,16 +2,16 @@
     <!--보훈대상-->
     <div class="form-group">
         <label for="lbl_veteran" class="col-md-2 control-label" style="width: 109px">보훈대상</label>
-        <div class="col-md-4" id="lbl_veteran" style="text-align: left">
-            <label><input type="radio" name="veteran" ng-model="additionalInfo.B_veteran" value="true">보훈대상</input></label>
-            <label><input type="radio" name="veteran" ng-model="additionalInfo.B_veteran" value="false">보훈비대상</input></label>
+        <div class="col-md-4 radioBtn" id="lbl_veteran" style="text-align: left;">
+            <label style="line-height: 34px; margin-right: 5px"><input type="radio" name="veteran" ng-model="additionalInfo.B_veteran" value="true">보훈대상</input></label>
+            <label style="line-height: 34px; margin-right: 5px"><input type="radio" name="veteran" ng-model="additionalInfo.B_veteran" value="false">보훈비대상</input></label>
         </div>
     </div>
 
     <!--장애여부-->
     <div class="form-group">
         <label for="lbl_disability" class="col-md-2 control-label" style="width: 109px">장애여부</label>
-        <div class="col-md-4" id="lbl_disability" style="text-align: left">
+        <div class="col-md-4 radioBtn" id="lbl_disability" style="text-align: left">
             <label><input type="radio" name="disability" ng-model="additionalInfo.B_disability" value="true">장애인</input></label>
             <label><input type="radio" name="disability" ng-model="additionalInfo.B_disability" value="false">비장애인</input></label>
         </div>
@@ -20,7 +20,7 @@
     <!--병역-->
     <div class="form-group row">
         <label for="lbl_militery_category" class="col-md-2 control-label" style="width: 109px">병역사항</label>
-        <div class="col-md-4" id="lbl_militery_category" style="text-align: left">
+        <div class="col-md-4 radioBtn" id="lbl_militery_category" style="text-align: left; width: 310px;">
             <label><input type="radio" name="militery_category" ng-model="additionalInfo.S_militaryService_category" value="해당없음">해당없음</input></label>
             <label><input type="radio" name="militery_category" ng-model="additionalInfo.S_militaryService_category" value="필">필</input></label>
             <label><input type="radio" name="militery_category" ng-model="additionalInfo.S_militaryService_category" value="면제">면제</input></label>
@@ -75,7 +75,7 @@
     <!--종교-->
     <div class="form-group">
         <label for="lbl_religion" class="col-md-2 control-label" style="width: 109px">종교</label>
-        <div class="col-md-4" id="lbl_religion">
+        <div class="col-md-4 radioBtn" id="lbl_religion" style="text-align: left; width: 310px;">
             <label><input type="radio" name="religion" ng-model="additionalInfo.S_religion" value="무교">무교</input></label>
             <label><input type="radio" name="religion" ng-model="additionalInfo.S_religion" value="기독교">기독교</input></label>
             <label><input type="radio" name="religion" ng-model="additionalInfo.S_religion" value="천주교">천주교</input></label>

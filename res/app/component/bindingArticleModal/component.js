@@ -90,7 +90,6 @@ define([
                 for(var i = 0; i < $scope.selectedItems.length; i++){
                     bindingArticleIds.push($scope.selectedItems[i]._id);
                 }
-                console.log('before close modal', bindingArticleIds);
                 $modalInstance.close(bindingArticleIds);
             };
 
