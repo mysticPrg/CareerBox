@@ -55,13 +55,20 @@ define([
 
             EditorData.focusId = 'canvas-content';
 
-            if (window.location.href.split("#/")[1] == 'TemplateEditor') {
+            if (isTemplateEditor(window.location.href)) {
                 $scope.$emit('deleteItem', id);
             } else {
                 $scope.$emit('deleteArticle', id);
             }
 
         };
+
+        function isTemplateEditor(url){
+            if(url.indexOf('TemplateEditor') >= 0)
+                return true;
+            else
+                return false;
+        }
 
         $scope.goFront = function () {
 

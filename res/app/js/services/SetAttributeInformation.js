@@ -10,7 +10,7 @@ define([
         return function(id) {
 
             // 템플릿
-            if(window.location.href.split("#/")[1] == 'TemplateEditor' || window.location.href.split("partials/")[1].split('?')[0] == 'templatePreview.html'){
+            if(isTemplate(window.location.href)){
                 // 템플릿일 경우
                 if(EditorData.template._id == id || id == "canvas-content"){
                     return {
@@ -86,8 +86,6 @@ define([
                     type : 'acticle'
                 }
             }
-
-            // 아티클 그 자체
             else {
                 return {
                     parentArray : EditorData.childArr,
@@ -98,6 +96,13 @@ define([
 
             function isLoaded(id){
                 if(id.indexOf('load') >= 0)
+                    return true;
+                else
+                    return false;
+            }
+
+            function isTemplate(url){
+                if((url.indexOf('TemplateEditor') >= 0) || (url.indexOf('TemplatePreview') >= 0))
                     return true;
                 else
                     return false;

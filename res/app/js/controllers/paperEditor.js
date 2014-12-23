@@ -123,7 +123,7 @@ define([
                 if (EditorData.templateState === 'new') {
                     createTemplate();
                 } else if (EditorData.templateState === 'edit') {
-                    $window.location.href = "#/TemplateEditor";
+                    $window.location.href = "#/TemplateEditor?id=" + EditorData.template._id;
                 }
             }
 

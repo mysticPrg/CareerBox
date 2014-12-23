@@ -12,11 +12,12 @@ define([
     'directives/resizable',
     'service/EditorData',
     'service/HTMLGenerator',
+    'service/getTemplate',
     'service/SaveTemplate',
-    'service/SetAttributeInformation',
     'component/templatePanel/component'
 ], function ($, ng, app, Template, Article, saveConfirmModal) {
-    app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'SaveTemplate', 'SetAttributeInformation', function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, SaveTemplate, SetAttributeInformation) {
+    app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'getTemplate', 'SaveTemplate',
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, getTemplate, SaveTemplate) {
         EditorData.editorType = 'template';
         $scope.changed = false;
         $scope.saveRock;
@@ -43,11 +44,18 @@ define([
             $('#canvas-content').find('div').remove();
             EditorData.templateItemArray = [];
 
-            if(EditorData.templateState === 'new'){
+            var url = $window.location.href;
+
+            if(isLoaded(url)){
+                var _id = url.split('TemplateEditor')[1].split('?id=')[1];
+
+                getTemplate($http, _id, function(data){
+                    EditorData.template = new Template(data.result);
+                    $scope.template = EditorData.template;
+                    loadTemplate();
+                });
+            }else{
                 getTemplateInstance();
-            }else if (EditorData.templateState == 'edit'){
-                $scope.template = EditorData.template;
-                loadTemplate();
             }
 
             EditorData.focusId = EditorData.template._id;
@@ -57,12 +65,20 @@ define([
             isFirst = true;
         });
 
+        function isLoaded(url){
+            var urlParse = url.split('TemplateEditor');
+            if(urlParse[1] === ''){
+                return false;
+            }else{
+                return true;
+            }
+        }
+
         // 로딩된 처음은 무조건 EditorData.templateItemArray watch가 발생하기 때문에 첫번째는 무시
         var isFirst = true;
         $scope.$watch("EditorData.templateItemArray", function () {
             if(!isFirst && EditorData.paper){
                 $scope.changed = true;
-//                console.log('EditorData.templateItemArray', EditorData.templateItemArray);
             } else {isFirst = false;}
         }, true);
 
