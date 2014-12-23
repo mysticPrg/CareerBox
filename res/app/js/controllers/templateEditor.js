@@ -50,6 +50,8 @@ define([
                 var _id = url.split('TemplateEditor')[1].split('?id=')[1];
 
                 getTemplate($http, _id, function(data){
+                    // 로드 시 바인딩 bindingChanged 초기화
+                    data.result.target.bindingChanged = false;
                     EditorData.template = new Template(data.result);
                     $scope.template = EditorData.template;
                     loadTemplate();
