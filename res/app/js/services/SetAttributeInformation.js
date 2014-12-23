@@ -102,7 +102,7 @@ define([
             }
 
             function isTemplate(url){
-                if((url.indexOf('TemplateEditor') >= 0) || (url.indexOf('TemplatePreview') >= 0))
+                if((url.indexOf('TemplateEditor') >= 0) || (url.indexOf('templatePreview') >= 0))
                     return true;
                 else
                     return false;
