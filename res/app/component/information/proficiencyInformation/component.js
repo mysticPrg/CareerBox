@@ -31,6 +31,7 @@ define([
             var newProficiencyInfoItem = new ProficiencyInfoItem($scope.proficiencyInfoItem);
             $scope.proficiencyInfoItems.push(newProficiencyInfoItem);
             $scope.proficiencyInfoItem = new ProficiencyInfoItem();
+            $scope.fileNameForProficiency = '';
 
             initializeFileForm();
         }
@@ -40,7 +41,7 @@ define([
         }
 
         $scope.onFileSelectProficiencyInfo = function ($files) {
-            $scope.fileName = $files[0].name;
+            $scope.fileNameForProficiency = $files[0].name;
             $scope.files = $files;
             $('#proficiency_upload').fadeIn('slow');
         }
