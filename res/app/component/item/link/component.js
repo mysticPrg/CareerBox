@@ -60,13 +60,17 @@ define([
 
                 scope.goToPreview = function () {
                     // isOutURL 에 따라 분류
-                    if(scope.info.isOutURL){
-                        $window.open(scope.info.url);
+                    var href;
+                    if(scope.info.bindingType === "F_file"){
+                        href = 'http://210.118.74.166:8123/file/' + scope.info.url;
+                    }
+                    else if(scope.info.isOutURL){
+                        href = scope.info.url
                     }
                     else{
-                        var href = 'portfolioPreview.html?id=' + EditorData.portfolio._id +'&paper_id=' + scope.info.url;
-                        $window.open(href);
+                        href = 'portfolioPreview.html?id=' + EditorData.portfolio._id +'&paper_id=' + scope.info.url;
                     }
+                    $window.open(href);
                 };
 
             },
