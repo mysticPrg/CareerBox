@@ -29,13 +29,14 @@ define([
                 if (type === 'text') {
                     item = new Text();
                     item.radius = 3;
-                    item.font.size = 15;
+                    item.font.size = 20;
                     item.size.width = 250;
                     item.size.height = 100;
                     item.outline.color.R = "d9";
                     item.outline.color.G = "d9";
                     item.outline.color.B = "d9";
                     item.value = 'Text';
+                    item.align = 'center';
 
                 } else if (type === 'image') {
                     item = new Image();
@@ -56,6 +57,7 @@ define([
                     item.name = '여기로 이동';
                     item.outline.weight = 0;
                     item.font.size = 15;
+                    item.align = 'center';
 
                 } else if (type === 'shape') {
                     item = new Shape();

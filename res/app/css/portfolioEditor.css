@@ -536,8 +536,8 @@ img {
 
 
 #SectionEditorTab a:hover {
-    background: #c93434;
-    background: linear-gradient(135deg, transparent 10px, #c93434 10px);
+    background: #46bcf8;
+    background: linear-gradient(135deg, transparent 10px, #46bcf8 10px);
     text-decoration: none;
 
 }
@@ -590,6 +590,8 @@ img {
 
 #editBtnGrp > .btn {
     font-size: 12px;
+    border-style: none;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
 }
 
 #articleEditBtn {
