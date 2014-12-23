@@ -84,10 +84,6 @@ define([
             } else {isFirst = false;}
         }, true);
 
-        $rootScope.$on("deleteItem", function (e, id) {
-            deleteItem(id);
-        });
-
         // Get Template Instance
         function getTemplateInstance() {
             EditorData.template.target.size = {width : 600, height : 400};
@@ -205,11 +201,6 @@ define([
             }else{
                 $window.location.href = '#portfolioEditor';
             }
-        }
-
-        function deleteItem(id) {
-            $('#' + id).remove();
-            EditorData.templateItemArray[id].state = 'del';
         }
 
         function showSuccessNotification() {

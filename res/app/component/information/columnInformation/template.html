@@ -18,13 +18,13 @@
     </div>
 
     <!--추가 버튼-->
-    <div>
-        <button type="button" class="btn btn-default" ng-click="addColumnInfo()">추가</button>
+    <div class="myContentAdd">
+        <button type="button" class="btn btn-default" ng-click="addColumnInfo()">+</button>
     </div>
 
     <hr style="border-color: #d6d6d6">
 
-    <div ng-repeat="item in columnInfoItems track by $index">
+    <div ng-repeat="item in columnInfoItems track by $index" class="myContent">
         <!--제목-->
         <div class="form-group">
             <label for="lbl_column_title_load" class="col-md-2 control-label">제목</label>
@@ -38,8 +38,8 @@
         </div>
 
         <!-- 삭제 버튼-->
-        <div>
-            <button type="button" class="btn btn-default" ng-click="delColumnInfo($index)">삭제</button>
+        <div class="myContentCancel">
+            <button type="button" class="btn btn-default" ng-click="delColumnInfo($index)"><img src="../img/information_img/infoDelIcon.png"/></button>
         </div>
     </div>
 

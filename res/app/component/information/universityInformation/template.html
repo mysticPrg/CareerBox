@@ -64,14 +64,14 @@
     </div>
 
     <!--추가 버튼-->
-    <div>
-        <button type="button" class="btn btn-default" ng-click="addUnivSchoolInfo()">추가</button>
+    <div class="myContentAdd">
+        <button type="button" class="btn btn-default" ng-click="addUnivSchoolInfo()">+</button>
     </div>
 
     <hr style="border-color: #d6d6d6">
 
     <!--추가한 리스트 보여줌-->
-    <div ng-repeat="item in univSchoolInfoItems track by $index">
+    <div ng-repeat="item in univSchoolInfoItems track by $index" class="myContent">
         <!--학교명, 소재지-->
         <div class="form-group row">
             <label for="lbl_university_name_load" class="col-md-2 control-label">학교명</label>
@@ -107,8 +107,8 @@
         </div>
 
         <!-- 삭제 버튼-->
-        <div>
-            <button type="button" class="btn btn-default" ng-click="delUnivSchoolInfo($index)">삭제</button>
+        <div class="myContentCancel">
+            <button type="button" class="btn btn-default" ng-click="delUnivSchoolInfo($index)"><img src="../img/information_img/infoDelIcon.png"/></button>
         </div>
     </div>
 </form>

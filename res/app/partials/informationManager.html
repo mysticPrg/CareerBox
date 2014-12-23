@@ -24,7 +24,7 @@
 <menu id="menu" class="aside"></menu>
 
 <!--컨텐츠 부분-->
-<div id="content" >
+<div id="content" style="margin-bottom: 30px">
 
     <div id="information-content" data-ng-init="initialize()">
 
@@ -44,9 +44,9 @@
                 <personal-information></personal-information>
                 <additional-information></additional-information>
 
-                <div>
-                    <button class="btn btn-default" ng-click="save('personalInfo')">저장</button>
-                    <button class="btn btn-default" ng-click="transition('schoolInfo')">다음</button>
+                <div class="moveBtn">
+                    <button class="saveBtn btn btn-default" ng-click="save('personalInfo')">저장</button>
+                    <button class="nextBtn btn btn-default" ng-click="transition('schoolInfo')"><img src="../img/information_img/nextBtn.png"/></button>
                 </div>
             </div>
 
@@ -54,17 +54,21 @@
                 <high-school-information></high-school-information>
                 <university-information></university-information>
 
-                <button class="btn btn-default" ng-click="transition('personalInfo')">이전</button>
-                <button class="btn btn-default" ng-click="save('schoolInfo')">저장</button>
-                <button class="btn btn-default" ng-click="transition('workingInfo')">다음</button>
+                <div class="moveBtn">
+                    <button class="preBtn btn btn-default" ng-click="transition('personalInfo')"><img src="../img/information_img/preBtn.png"/></button>
+                    <button class="saveBtn btn btn-default" ng-click="save('schoolInfo')">저장</button>
+                    <button class="nextBtn btn btn-default" ng-click="transition('workingInfo')"><img src="../img/information_img/nextBtn.png"/></button>
+                </div>
             </div>
 
             <div id="workingInformationContent">
                 <working-information></working-information>
 
-                <button class="btn btn-default" ng-click="transition('schoolInfo')">이전</button>
-                <button class="btn btn-default" ng-click="save('workingInfo')">저장</button>
-                <button class="btn btn-default" ng-click="transition('abilityInfo')">다음</button>
+                <div class="moveBtn">
+                    <button class="preBtn btn btn-default" ng-click="transition('schoolInfo')"><img src="../img/information_img/preBtn.png"/></button>
+                    <button class="saveBtn btn btn-default" ng-click="save('workingInfo')">저장</button>
+                    <button class="nextBtn btn btn-default" ng-click="transition('abilityInfo')"><img src="../img/information_img/nextBtn.png"/></button>
+                </div>
             </div>
 
             <div id="abilityInformationContent">
@@ -73,42 +77,53 @@
                 <computer-ability-information></computer-ability-information>
                 <paper-ability-information></paper-ability-information>
 
-                <button class="btn btn-default" ng-click="transition('workingInfo')">이전</button>
-                <button class="btn btn-default" ng-click="save('abilityInfo')">저장</button>
-                <button class="btn btn-default" ng-click="transition('awardInfo')">다음</button>
+                <div class="moveBtn">
+                    <button class="preBtn btn btn-default" ng-click="transition('workingInfo')"><img src="../img/information_img/preBtn.png"/></button>
+                    <button class="saveBtn btn btn-default" ng-click="save('abilityInfo')">저장</button>
+                    <button class="nextBtn btn btn-default" ng-click="transition('awardInfo')"><img src="../img/information_img/nextBtn.png"/></button>
+                </div>
             </div>
 
             <div id="awardInformationContent">
                 <scholarship-information></scholarship-information>
                 <award-information></award-information>
 
-                <button class="btn btn-default" ng-click="transition('abilityInfo')">이전</button>
-                <button class="btn btn-default" ng-click="save('awardInfo')">저장</button>
-                <button class="btn btn-default" ng-click="transition('activityInfo')">다음</button>
+
+                <div class="moveBtn">
+                    <button class="preBtn btn btn-default" ng-click="transition('abilityInfo')"><img src="../img/information_img/preBtn.png"/></button>
+                    <button class="saveBtn btn btn-default" ng-click="save('awardInfo')">저장</button>
+                    <button class="nextBtn btn btn-default" ng-click="transition('activityInfo')"><img src="../img/information_img/nextBtn.png"/></button>
+                </div>
             </div>
 
             <div id="activityInformationContent">
                 <local-activity-information></local-activity-information>
                 <global-activity-information></global-activity-information>
 
-                <button class="btn btn-default" ng-click="transition('awardInfo')">이전</button>
-                <button class="btn btn-default" ng-click="save('activityInfo')">저장</button>
-                <button class="btn btn-default" ng-click="transition('projectInfo')">다음</button>
+                <div class="moveBtn">
+                    <button class="preBtn btn btn-default" ng-click="transition('awardInfo')"><img src="../img/information_img/preBtn.png"/></button>
+                    <button class="saveBtn btn btn-default" ng-click="save('activityInfo')">저장</button>
+                    <button class="nextBtn btn btn-default" ng-click="transition('projectInfo')"><img src="../img/information_img/nextBtn.png"/></button>
+                </div>
             </div>
 
             <div id="projectInformationContent">
                 <project-information></project-information>
 
-                <button class="btn btn-default" ng-click="transition('activityInfo')">이전</button>
-                <button class="btn btn-default" ng-click="save('projectInfo')">저장</button>
-                <button class="btn btn-default" ng-click="transition('columnInfo')">다음</button>
+                <div class="moveBtn">
+                    <button class="preBtn btn btn-default" ng-click="transition('activityInfo')"><img src="../img/information_img/preBtn.png"/></button>
+                    <button class="saveBtn btn btn-default" ng-click="save('projectInfo')">저장</button>
+                    <button class="nextBtn btn btn-default" ng-click="transition('columnInfo')"><img src="../img/information_img/nextBtn.png"/></button>
+                </div>
             </div>
 
             <div id="columnInformationContent">
                 <column-information></column-information>
 
-                <button class="btn btn-default" ng-click="transition('projectInfo')">이전</button>
-                <button class="btn btn-default" ng-click="save('columnInfo')">저장</button>
+                <div class="moveBtn">
+                    <button class="preBtn btn btn-default" ng-click="transition('projectInfo')"><img src="../img/information_img/preBtn.png"/></button>
+                    <button class="saveBtn btn btn-default" ng-click="save('columnInfo')">저장</button>
+                </div>
             </div>
         </div>
     </div>
