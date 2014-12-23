@@ -25,8 +25,9 @@ define([
                             _paper_id : EditorData.paperId
                         }
                         SetIndex(data, function() {
-                            alert("현재 페이지가 Index 페이지로 되었습니다.")
                         });
+                    } else {
+                        $scope.isIndex = true;
                     }
                 };
             }
