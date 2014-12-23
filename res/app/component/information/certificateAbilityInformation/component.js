@@ -31,6 +31,7 @@ define([
             var newCertificateAbilityInfoItem = new CertificationAbilityInfoItem($scope.certificateAbilityInfoItem);
             $scope.certificateAbilityInfoItems.push(newCertificateAbilityInfoItem);
             $scope.certificateAbilityInfoItem = new CertificationAbilityInfoItem();
+            $scope.fileNameForCertification = '';
 
             initializeFileForm();
         }
@@ -40,7 +41,7 @@ define([
         }
 
         $scope.onFileSelectCertificateAbilityInfo = function ($files) {
-            $scope.fileName = $files[0].name;
+            $scope.fileNameForCertification = $files[0].name;
             $scope.files = $files;
             $('#certificate_upload').fadeIn('slow');
         }
