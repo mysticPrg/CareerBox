@@ -39,6 +39,7 @@ define([
                 var newLocalActivityInfoItem = new LocalActivityInfoItem($scope.localActivityInfoItem);
                 $scope.localActivityInfoItems.push(newLocalActivityInfoItem);
                 $scope.localActivityInfoItem = new LocalActivityInfoItem();
+                $scope.fileNameForLocalActivity = '';
 
                 initializeFileForm();
             }
@@ -48,7 +49,7 @@ define([
             }
 
             $scope.onFileSelectLocalActivityInfo = function ($files) {
-                $scope.fileName2 = $files[0].name;
+                $scope.fileNameForLocalActivity = $files[0].name;
                 $scope.files = $files;
                 $('#localActivity_upload').fadeIn('slow');
             }

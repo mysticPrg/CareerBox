@@ -39,6 +39,7 @@ define([
                 var newProjectInfoItem = new ProjectInfoItem($scope.projectInfoItem);
                 $scope.projectInfoItems.push(newProjectInfoItem);
                 $scope.projectInfoItem = new ProjectInfoItem();
+                $scope.fileNameForProject = '';
 
                 initializeFileForm();
             }
@@ -48,7 +49,7 @@ define([
             }
 
             $scope.onFileSelectProjectInfo = function ($files) {
-                $scope.fileName2 = $files[0].name;
+                $scope.fileNameForProject = $files[0].name;
                 $scope.files = $files;
                 $('#project_upload').fadeIn('slow');
             }
