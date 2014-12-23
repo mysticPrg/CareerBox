@@ -15,7 +15,7 @@ define(['app'
             // Success
             else if (data.returnCode == '000') {
                 stateText = "성공하였습니다.";
-//                successCallback();    // 성공 시 실행되어야하는 콜백 함수
+                successCallback();    // 성공 시 실행되어야하는 콜백 함수
             }
             // Invalid Arguments
             else if (data.returnCode == '001') {
