@@ -16,15 +16,15 @@ define([
     'directives/resizable',
     'directives/rotatable',
     'service/EditorData',
-    'service/loadArticle',
     'service/HTMLGenerator',
     'service/LoadPaperList',
     'service/SavePaper',
     'service/LoadPaper',
+    'service/loadPaperDom',
     'component/paperPanel/component'
 ], function ($, ng, app, Paper, Article, createTemplateModal, saveConfirmModal) {
-    app.controller('PaperEditorController', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'SavePaper', 'LoadPaper', 'loadArticle',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper, loadArticle) {
+    app.controller('PaperEditorController',
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper, loadPaperDom) {
             EditorData.editorType = 'paper';
             $scope.paperChanged = false;
 
@@ -72,7 +72,7 @@ define([
                     EditorData.paper = result.result;
                     EditorData.paperTitle = result.result.title;
 
-                    loadPaperDom(EditorData.paper);
+                    loadPaperDom(EditorData.paper, $scope);
 
                     // 속성창 갱신 Second Task
                     EditorData.focusId = "canvas-content";
@@ -152,34 +152,6 @@ define([
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            function loadPaperDom(paper) {
-                var paperChildArr = paper.childArr;
-
-                $compile($('#canvas-content'))($scope); // 페이퍼 속성을 적용시켜줌.
-
-                var child;
-                for (var index = 0; index < paperChildArr.length; index++) {
-                    child = paperChildArr[index];
-                    EditorData.childArr[child._id] = child;
-                    if (child.childArr) {
-                        loadArticle(child, $scope);
-
-                    } else {
-                        loadItem(child);
-                    }
-                }
-            }
-
-            function loadItem(item) {
-                var option = {draggable: true, resizable: true, rotatable: true};
-
-                var domObj = HTMLGenerator('loadItem', item, item._id, option);
-
-                $('#canvas-content').append(domObj);
-                $compile($('#' + item._id))($scope);
-            }
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             function getPaperChildArr(childArr) {
                 var paperChildArr = new Array();
@@ -209,7 +181,6 @@ define([
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: $scope.paper};
 
                 SavePaper($http, data, function (result) {
-                    console.log('save data', data);
                     if (result.returnCode === '000') {
                         $scope.changed = false;
                         showSuccessNotification();
@@ -243,5 +214,5 @@ define([
                 var notification = kendo.toString(text);
                 $scope.noti.show(notification, "error");
             }
-        }]);
+        });
 });
