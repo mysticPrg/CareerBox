@@ -93,6 +93,7 @@ function refreshTemplateData(template, callback) {
                         cloneArticle.bindingData = paperArticle.bindingData;
                         cloneArticle.bindingType = paperArticle.bindingType;
                     }
+                    cloneArticle.bindingChanged = false;
 
                     newArr.push(cloneArticle);
                 }
