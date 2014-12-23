@@ -51,7 +51,7 @@ define([
                 // radius
                 scope.$watch("attributeInformation.radius",function() {
                     // 쉐이프일 경우에는 적용되지 않도록함.
-//                    if(typeof att.shape == 'undefined')
+                    if( scope.attributeInformation.shapeType != 'circle')
                     {
 //                    if(EditorData.focusId == att.id)
                         ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
