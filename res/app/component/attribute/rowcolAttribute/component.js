@@ -12,11 +12,9 @@ define([
                 data : "=to"
             },
             templateUrl: require.toUrl('component/attribute/rowcolAttribute/template.html'),
-            link : function($scope, element, att) {
+            controller:function($scope){
                 $scope.reload = function() {
-                    reloadPaper($scope, function(){
-                        alert('성공했습니다.');
-                    });
+                    $scope.$emit('reload');
                 }
             }
         };

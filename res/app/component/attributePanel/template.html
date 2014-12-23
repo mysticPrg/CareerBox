@@ -14,7 +14,6 @@
                 <div id="itemAttrInfo" class="clearfix">
                     <h4>{{attributeInformation.layoutComponentType}}</h4>
                     <h4>{{attributeInformation.itemType}}</h4>
-                    <h4>{{attributeInformation.templateType}}</h4>
                     <h4 ng-if="attributeInformation.isIndex==true || attributeInformation.isIndex==false">Paper</h4>
                 </div>
 
@@ -32,13 +31,21 @@
                 </div>
             </div>
 
-            <div binding-attribute to="attributeInformation" type="type"></div>
-
             <ul id="itemAttrList">
-
                 <!----------------------< 순서를 바꿀수 있도록 바뀐 속성 리스트 >--------------------->
+                <li ng-if="attributeInformation.bindingType || attributeInformation.bindingType==='' ">
+                    <div binding-attribute to="attributeInformation" type="type"></div>
+                </li>
+
+                <li ng-if="attributeInformation.thumbnail || attributeInformation.thumbnail==='' ">
+                    <div thumbnail-attribute to="attributeInformation"></div>
+                </li>
+
                 <li ng-if="attributeInformation.title || attributeInformation.title===''">
                     <div title-attribute to="attributeInformation"></div>
+                </li>
+                <li ng-if="type ==='template'">
+                    <div title-attribute to="parentArray"></div>
                 </li>
 
                 <li ng-if="attributeInformation.description || attributeInformation.description==='' ">
@@ -109,9 +116,7 @@
                     <div is-index-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.thumbnail || attributeInformation.thumbnail==='' ">
-                    <div thumbnail-attribute to="attributeInformation"></div>
-                </li>
+
 
                 <li ng-if="attributeInformation.rowCount || attributeInformation.rowCount==='' || attributeInformation.rowCount===0">
                     <div rowcol-attribute to="attributeInformation"></div>

@@ -18,7 +18,7 @@ define([
                 layoutType : "=type"
             },
             templateUrl: require.toUrl('component/attribute/bindingAttribute/template.html'),
-            controller : function ($scope, $modal) {
+            controller : function ($scope, $modal, $rootScope) {
 
                 $scope.infoCategory = InformationData;
 
@@ -29,9 +29,8 @@ define([
                     $scope.data.bindingType = {
                         infoType : $scope.category.infoType,
                         title : $scope.category.title
-                    }
+                    };
                     $scope.data.bindingChanged = true;
-//                    console.log('setCategory 이후 bindingType', $scope.data.bindingType);
                 };
 
                 // bindingType 비우기
@@ -92,64 +91,19 @@ define([
                     modalInstance.result.then(function (result) {
                         // 성공했을 때
                         $scope.data.bindingData = result;
-                        console.log('modalClose',result);
 
                         // reload
                         reloadPaper($scope, function(){
-                            alert('성공했습니다.');
+                            //
                         });
                     }, function () {});
-                }
+                };
 
-//                function getPaperChildArr(childArr) {
-//                    var paperChildArr = new Array();
-//
-//                    for (var key in childArr) {
-//                        var child = childArr[key];
-//
-//                        if (child.state == 'new') {
-//                            delete child._id;
-//                        }
-//
-//                        if (child.state == 'del') {
-//                            continue;
-//                        }
-//
-//                        delete  child.state;
-//
-//                        paperChildArr.push(child);
-//                    }
-//
-//                    return paperChildArr;
-//                }
-//
-//                $scope.reload = function(callback) {
-//                    var paper = EditorData.paper;
-//                    paper.childArr = getPaperChildArr(EditorData.childArr);
-//
-//                    //페이퍼 저장
-//                    var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};
-//                    console.log('paperSave', data.paper.childArr[0].bindingData);
-//                    SavePaper($http, data, function (result) {
-//                        if (result.returnCode === '000') {
-//                            // 페이퍼 로드
-//                            LoadPaper($http, EditorData.paperId, function (result) {
-//                                EditorData.paper = result.result;
-//                                EditorData.paperTitle = result.result.title;
-//
-//                                // reload
-//                                $('#' + EditorData.focusId).remove();
-//                                var articleModel = SetAttributeInformation(EditorData.focusId).attributeInformation;
-//                                loadArticle(articleModel ,$scope);
-//
-//                                callback();
-//                            });
-//
-//                        } else if (result.returnCode === '001') {
-//                        } else if (result.returnCode === '002') {
-//                        }
-//                    });
-//                }
+                $rootScope.$on('reload', function() {
+                    reloadPaper($scope, function(){
+                        //
+                    });
+                });
             }
         };
     });

@@ -130,7 +130,6 @@ define([
                         ApplyCommonItemAttribute.size(element, scope.attributeInformation);
                     }
 
-
                     // 아티클, 아이템 공통
                     setCommonWatch(scope, element, att);
                 }

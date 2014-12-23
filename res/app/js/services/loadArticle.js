@@ -52,7 +52,7 @@ define([
             var ArticleDom = HTMLGenerator('loadDivDom', article, '', {draggable: false, resizable: false, row: article.row, col: article.col});
 
             var templateItemArray = article.childArr;
-            EditorData.end_zOrder++;
+//            EditorData.end_zOrder++;
 
             var articleItemId;
 

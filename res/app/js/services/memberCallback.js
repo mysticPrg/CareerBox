@@ -45,10 +45,10 @@ define(['app'
                 stateText = "이미 존재하는 이메일입니다.";
             }
             else{
-                alert("data : " + data);
+//                alert("data : " + data);
             };
             $scope.msgs.push(stateText);
-            alert(stateText);
+//            alert(stateText);
         }
 
     }]);

@@ -270,7 +270,6 @@ define([
                         $scope.loadArticleTemplate();
                         window.location.reload();
                     } else {
-                        alert('실패하였습니다.');
                         console.log('error: ' + result);
                     }
                 });
@@ -289,19 +288,6 @@ define([
                 }, function () {
                 });
             };
-
-            // modify template modal
-//            $scope.popModifyTemplateModal = function (template) {
-//                createTemplateModal.resolve = {
-//                    template: template
-//                };
-//
-//                var modalInstance = $modal.open(createTemplateModal);
-//                modalInstance.result.then(function (template) { // OK
-//                    $scope.templateClone(template);
-//                }, function () {
-//                });
-//            };
         }
     ]);
 
