@@ -14,9 +14,15 @@ define([
             link: function(scope, element, att) {
                 scope.info = SetAttributeInformation(att.id).attributeInformation;
 
+                scope.$watch('info.radius',function(){
+                    scope.radius = {
+                        'border-radius': scope.info.radius + "px"
+                    }
+                });
+
             },
 
-        templateUrl: require.toUrl('component/item/image/template.html')
+            templateUrl: require.toUrl('component/item/image/template.html')
         };
     }]);
 });
