@@ -86,8 +86,6 @@ define([
                     type : 'acticle'
                 }
             }
-
-            // 아티클 그 자체
             else {
                 return {
                     parentArray : EditorData.childArr,

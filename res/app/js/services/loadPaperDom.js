@@ -27,6 +27,7 @@ define([
                 } else {
                     loadItem(child, $scope);
                 }
+                EditorData.end_zOrder++;
             }
         }
 
