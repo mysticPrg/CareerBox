@@ -106,10 +106,11 @@ function createOrUpdateService(req, res) {
         newPaper._id = new ObjectID(newPaper._id);
         PaperDB.update(newPaper, function (err) {
             if (newPaper.isIndex) {
-                CaptureFromSite(newPaper._portfolio_id, 'portfolio', function (err2) {
-                    ServiceUtil.sendResult(err2, res, null);
-                    return;
+                ServiceUtil.sendResult(err, res, null);
+                // async로 섬네일 생성하도록 수정
+                CaptureFromSite(newPaper._portfolio_id, 'portfolio', function () {
                 });
+                return;
             } else {
                 ServiceUtil.sendResult(err, res, null);
                 return;
@@ -183,9 +184,8 @@ function setIndexService(req, res) {
     }
 
     PaperDB.setIndex(_portfolio_id, _paper_id, function (err) {
-        CaptureFromSite(_portfolio_id, 'portfolio', function (err2) {
-            ServiceUtil.sendResult(err2, res, null);
-            return;
+        ServiceUtil.sendResult(err, res, null);
+        CaptureFromSite(_portfolio_id, 'portfolio', function () {
         });
     });
 }
