@@ -25,6 +25,7 @@ define([
 
             var paper = EditorData.paper;
             paper.childArr = getPaperChildArr(EditorData.childArr);
+//            console.log('EditorData.childArr', EditorData.childArr)
 
             //페이퍼 저장
             var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};
@@ -37,6 +38,11 @@ define([
                         EditorData.paperTitle = result.result.title;
 
                         loadPaperDom(EditorData.paper, $scope);
+
+                        $('#attribute').find('div').remove();
+                        var domObj = '<div attribute-panel ></div>'
+                        $('#attribute').append(domObj);
+                        $compile($('#attribute'))($scope);
 
                         callback();
                     });

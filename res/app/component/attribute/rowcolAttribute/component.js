@@ -16,6 +16,7 @@ define([
                 $scope.reload = function() {
                     $scope.$emit('reload');
                 }
+
             }
         };
     });
