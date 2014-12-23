@@ -35,8 +35,11 @@
             <div binding-attribute to="attributeInformation" type="type"></div>
 
             <ul id="itemAttrList">
-
                 <!----------------------< 순서를 바꿀수 있도록 바뀐 속성 리스트 >--------------------->
+                <li ng-if="attributeInformation.thumbnail || attributeInformation.thumbnail==='' ">
+                    <div thumbnail-attribute to="attributeInformation"></div>
+                </li>
+
                 <li ng-if="attributeInformation.title || attributeInformation.title===''">
                     <div title-attribute to="attributeInformation"></div>
                 </li>
@@ -109,9 +112,7 @@
                     <div is-index-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.thumbnail || attributeInformation.thumbnail==='' ">
-                    <div thumbnail-attribute to="attributeInformation"></div>
-                </li>
+
 
                 <li ng-if="attributeInformation.rowCount || attributeInformation.rowCount==='' || attributeInformation.rowCount===0">
                     <div rowcol-attribute to="attributeInformation"></div>
