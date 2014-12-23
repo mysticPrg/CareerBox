@@ -139,6 +139,7 @@ function removeTemplateData(_template_id, callback) {
 }
 
 function setIndex(_portfolio_id, _paper_id, callback) {
+
     var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
 
     paperCollection.find({
@@ -165,7 +166,6 @@ function setIndex(_portfolio_id, _paper_id, callback) {
                     }
                     , cb);
             }
-
         }, callback);
     });
 }
