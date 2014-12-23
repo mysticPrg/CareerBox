@@ -12,20 +12,10 @@ define([
     'service/loadPaperDom'
 ], function (app) {
     app.factory('reloadPaper', function (HTMLGenerator, EditorData, SetAttributeInformation, SavePaper, LoadPaper, $http, $compile, loadPaperDom) {
-        function initPaper() {
-            EditorData.paper = new Paper();
-            EditorData.childArr = [];
-
-            // z index 초기화
-            EditorData.end_zOrder = 0;
-            EditorData.start_zOrder = 0;
-        }
-
         function reloadPaper($scope, callback) {
 
             var paper = EditorData.paper;
             paper.childArr = getPaperChildArr(EditorData.childArr);
-//            console.log('EditorData.childArr', EditorData.childArr)
 
             //페이퍼 저장
             var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};

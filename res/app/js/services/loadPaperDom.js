@@ -15,6 +15,10 @@ define([
         function loadPaperDom(paper, $scope) {
             var paperChildArr = paper.childArr;
             $('#canvas-content').find('div').remove();
+            // z index 초기화
+            EditorData.end_zOrder = 0;
+            EditorData.start_zOrder = 0;
+
             $compile($('#canvas-content'))($scope); // 페이퍼 속성을 적용시켜줌.
 
             var child;
