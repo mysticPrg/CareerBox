@@ -57,6 +57,7 @@ define([
                     loadTemplate();
                 });
             }else{
+                console.log('test');
                 getTemplateInstance();
             }
 
@@ -86,6 +87,7 @@ define([
 
         // Get Template Instance
         function getTemplateInstance() {
+            EditorData.template = new Template();
             EditorData.template.target.size = {width : 600, height : 400};
             $scope.template = EditorData.template;
 
@@ -175,6 +177,7 @@ define([
             $scope.thumbnail = '';
             $scope.description = '';
 
+            console.log('save Data', $scope.template);
             SaveTemplate($http, $scope.template, function (result) {
                 if (result.returnCode === '000') {
                     $scope.changed = false;
