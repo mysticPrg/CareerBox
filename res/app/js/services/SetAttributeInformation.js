@@ -6,9 +6,7 @@ define([
     'service/EditorData'
 ], function (app) {
     app.factory('SetAttributeInformation', function (EditorData) {
-
         return function(id) {
-
             // 템플릿
             if(isTemplate(window.location.href)){
                 // 템플릿일 경우
@@ -76,7 +74,7 @@ define([
             }
 
             // 페이퍼에디터에서 아티클 자체이거나 아이템인 경우
-            else if(id.split("_").length == 3){
+            else if(typeof id == 'string' && id.split("_").length == 3){
                 // 아이디 파싱
                 var articleId = id.split("_")[0] + "_" + id.split("_")[1];
 
