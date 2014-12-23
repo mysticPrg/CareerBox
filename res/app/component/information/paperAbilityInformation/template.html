@@ -52,13 +52,13 @@
     </div>
 
     <!--추가 버튼-->
-    <div>
-        <button type="button" class="btn btn-default" ng-click="addPaperAbilityInfo()">추가</button>
+    <div class="myContentAdd">
+        <button type="button" class="btn btn-default" ng-click="addPaperAbilityInfo()">+</button>
     </div>
 
     <hr style="border-color: #d6d6d6">
 
-    <div ng-repeat="item in paperAbilityInfoItems track by $index">
+    <div ng-repeat="item in paperAbilityInfoItems track by $index" class="myContent">
         <!-- 논문 제목 -->
         <div class="form-group">
             <label for="lbl_paper_title_load" class="col-md-2 control-label">논문 제목</label>
@@ -89,8 +89,8 @@
         </div>
 
         <!-- 삭제 버튼-->
-        <div>
-            <button type="button" class="btn btn-default" ng-click="delPaperAbilityInfo($index)">삭제</button>
+        <div class="myContentCancel">
+            <button type="button" class="btn btn-default" ng-click="delPaperAbilityInfo($index)"><img src="../img/information_img/infoDelIcon.png"/></button>
         </div>
     </div>
 </form>

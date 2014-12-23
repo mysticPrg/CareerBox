@@ -58,13 +58,13 @@
     </div>
 
     <!--추가 버튼-->
-    <div>
-        <button type="button" class="btn btn-default" ng-click="addCertificateAbilityInfo()">추가</button>
+    <div class="myContentAdd">
+        <button type="button" class="btn btn-default" ng-click="addCertificateAbilityInfo()">+</button>
     </div>
 
     <hr style="border-color: #d6d6d6">
 
-    <div ng-repeat="item in certificateAbilityInfoItems track by $index">
+    <div ng-repeat="item in certificateAbilityInfoItems track by $index" class="myContent">
         <!--자격증명-->
         <div class="form-group">
             <label for="lbl_certificate_name_load" class="col-md-2 control-label">자격증명</label>
@@ -91,8 +91,8 @@
         </div>
 
         <!-- 삭제 버튼-->
-        <div>
-            <button type="button" class="btn btn-default" ng-click="delCertificateAbilityInfo($index)">삭제</button>
+        <div class="myContentCancel">
+            <button type="button" class="btn btn-default" ng-click="delCertificateAbilityInfo($index)"><img src="../img/information_img/infoDelIcon.png"/></button>
         </div>
     </div>
 </form>

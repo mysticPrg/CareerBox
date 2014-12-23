@@ -49,13 +49,13 @@
     </div>
 
     <!--추가 버튼-->
-    <div>
-        <button type="button" class="btn btn-default" ng-click="addAwardInfo()">추가</button>
+    <div class="myContentAdd">
+        <button type="button" class="btn btn-default" ng-click="addAwardInfo()">+</button>
     </div>
 
     <hr style="border-color: #d6d6d6">
 
-    <div ng-repeat="item in awardInfoItems track by $index">
+    <div ng-repeat="item in awardInfoItems track by $index" class="myContent">
         <!-- 대회명 -->
         <div class="form-group">
             <label for="lbl_award_name_load" class="col-md-2 control-label">대회명</label>
@@ -84,8 +84,8 @@
             <div class="col-md-4" id="lbl_award_detail_load" style="text-align: left; height: 34px; line-height: 34px">{{item.S_detail}}</div>
         </div>
         <!-- 삭제 버튼-->
-        <div>
-            <button type="button" class="btn btn-default" ng-click="delAwardInfo($index)">삭제</button>
+        <div class="myContentCancel">
+            <button type="button" class="btn btn-default" ng-click="delAwardInfo($index)"><img src="../img/information_img/infoDelIcon.png"/></button>
         </div>
     </div>
 </form>

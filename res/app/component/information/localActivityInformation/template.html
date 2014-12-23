@@ -113,13 +113,13 @@
     </div>
 
     <!--추가 버튼-->
-    <div>
-        <button type="button" class="btn btn-default" ng-click="addLocalActivityInfo()">추가</button>
+    <div class="myContentAdd">
+        <button type="button" class="btn btn-default" ng-click="addLocalActivityInfo()">+</button>
     </div>
 
     <hr style="border-color: #d6d6d6">
 
-    <div ng-repeat="item in localActivityInfoItems track by $index">
+    <div ng-repeat="item in localActivityInfoItems track by $index" class="myContent">
         <!--이름-->
         <div class="form-group">
             <label for="lbl_local_activity_name_load" class="col-md-2 control-label">이름</label>
@@ -168,8 +168,8 @@
         </div>
 
         <!-- 삭제 버튼-->
-        <div>
-            <button type="button" class="btn btn-default" ng-click="delLocalActivityInfo($index)">삭제</button>
+        <div class="myContentCancel">
+            <button type="button" class="btn btn-default" ng-click="delLocalActivityInfo($index)"><img src="../img/information_img/infoDelIcon.png"/></button>
         </div>
     </div>
 </form>
