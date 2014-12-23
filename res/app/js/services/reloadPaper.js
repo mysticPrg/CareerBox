@@ -9,10 +9,20 @@ define([
     'services/SetAttributeInformation',
     'services/SavePaper',
     'services/LoadPaper',
-    'services/loadArticle'
+    'service/loadPaperDom'
 ], function (app) {
-    app.factory('reloadPaper', function (HTMLGenerator, EditorData, SetAttributeInformation, SavePaper, LoadPaper, loadArticle, $http, $compile) {
+    app.factory('reloadPaper', function (HTMLGenerator, EditorData, SetAttributeInformation, SavePaper, LoadPaper, $http, $compile, loadPaperDom) {
+        function initPaper() {
+            EditorData.paper = new Paper();
+            EditorData.childArr = [];
+
+            // z index 초기화
+            EditorData.end_zOrder = 0;
+            EditorData.start_zOrder = 0;
+        }
+
         function reloadPaper($scope, callback) {
+
             var paper = EditorData.paper;
             paper.childArr = getPaperChildArr(EditorData.childArr);
 
@@ -26,20 +36,7 @@ define([
                         EditorData.paper = result.result;
                         EditorData.paperTitle = result.result.title;
 
-                        var paper = EditorData.paper
-
-                        var paperChildArr = paper.childArr;
-
-                        $compile($('#canvas-content'))($scope); // 페이퍼 속성을 적용시켜줌.
-
-                        var child;
-                        for (var index = 0; index < paperChildArr.length; index++) {
-                            child = paperChildArr[index];
-                            EditorData.childArr[child._id] = child;
-                            if (child.childArr) {
-                                loadArticle(child, $scope);
-                            }
-                        }
+                        loadPaperDom(EditorData.paper, $scope);
 
                         callback();
                     });
