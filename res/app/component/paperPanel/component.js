@@ -289,19 +289,6 @@ define([
                 }, function () {
                 });
             };
-
-            // modify template modal
-//            $scope.popModifyTemplateModal = function (template) {
-//                createTemplateModal.resolve = {
-//                    template: template
-//                };
-//
-//                var modalInstance = $modal.open(createTemplateModal);
-//                modalInstance.result.then(function (template) { // OK
-//                    $scope.templateClone(template);
-//                }, function () {
-//                });
-//            };
         }
     ]);
 

@@ -136,6 +136,7 @@ define([
 
                     $window.location.href = "#/TemplateEditor";
                 }, function () {
+                    EditorData.templateState = 'cancel';
                 });
             }
 
