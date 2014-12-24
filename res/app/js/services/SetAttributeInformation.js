@@ -66,7 +66,7 @@ define([
                         return {
                             parentArray : articleModel,
                             attributeInformation : articleModel[key],
-                            type : 'acticle_item'
+                            type : 'article_item'
                         }
                     }
                 };
@@ -81,7 +81,7 @@ define([
                 return {
                     parentArray : EditorData.childArr,
                     attributeInformation : EditorData.childArr[articleId],
-                    type : 'acticle'
+                    type : 'article'
                 }
             }
             // 페이퍼에서 아이템일경우

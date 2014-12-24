@@ -90,7 +90,7 @@ define([
                 }
             }, true);
 
-            // childArr watch 하지만 acticle은 object로 인식 >> watch가 안됨..
+            // childArr watch 하지만 article은 object로 인식 >> watch가 안됨..
             $scope.EditorData.childArr = EditorData.childArr;
             $scope.$watch("EditorData.childArr", function () {
                 if (EditorData.childArr) {

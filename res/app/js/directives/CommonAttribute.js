@@ -14,12 +14,12 @@ define([
 ], function (app) {
     app.directive('commonAttribute', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation, loadArticle, getInformationByType, reloadPaper, $http, $rootScope) {
         function singleInfoInit(scope) {
-            if(scope.type === 'acticle' && scope.attributeInformation.bindingData.length==0){
+            if(scope.type === 'article' && scope.attributeInformation.bindingData.length==0){
                 // 바인딩 상태
                 scope.attributeInformation.isBinding = true;
 
                 // 기본정보, 상세정보는 선택창 없고 바로 바인딩.
-                if(scope.attributeInformation.bindingType.title === '기본정보' || scope.attributeInformation.bindingType.title === '상세정보'){
+                if(scope.attributeInformation.bindingType.title === '기본정보' || scope.attributeInformation.bindingType.title === '추가정보'){
                     // 기본정보와 바로 바인딩
                     getInformationByType($http, scope.attributeInformation.bindingType.infoType, function (data) {
                         // 성공했을 때
