@@ -40,9 +40,7 @@ define([
 
             var domObj = HTMLGenerator('loadItem', item, item._id, option);
 
-            $('#' + item._id).remove();
-            $('#canvas-content').append(domObj);
-            $compile($('#' + item._id))($scope);
+            $('#canvas-content').append($compile(domObj)($scope));
         }
 
         return loadPaperDom;

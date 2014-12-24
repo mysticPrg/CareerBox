@@ -73,27 +73,27 @@
                     <div shape-type-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.size || attributeInformation.size==='' ">
+                <li ng-if="attributeInformation.size || attributeInformation.size==='' " ng-hide="attributeInformation.layoutComponentType === 'article' && type !== 'template'">
                     <div size-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.pos || attributeInformation.pos==='' ">
+                <li ng-if="attributeInformation.pos || attributeInformation.pos==='' " ng-hide="attributeInformation.layoutComponentType === 'article' && type === 'template'">
                     <div pos-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.fill || attributeInformation.fill==='' " class="att_list">
+                <li ng-if="attributeInformation.fill || attributeInformation.fill==='' " class="att_list" ng-hide="attributeInformation.layoutComponentType === 'article' && type !== 'template'">
                     <div fill-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.outline || attributeInformation.outline==='' " class="att_list">
+                <li ng-if="attributeInformation.outline || attributeInformation.outline==='' " class="att_list" ng-hide="attributeInformation.layoutComponentType === 'article' && type !== 'template'">
                     <div outline-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.alpha || attributeInformation.alpha==='' || attributeInformation.alpha===0 ">
+                <li ng-if="attributeInformation.alpha || attributeInformation.alpha==='' || attributeInformation.alpha===0 " ng-hide="attributeInformation.layoutComponentType === 'article' && type !== 'template'">
                     <div alpha-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.radius || attributeInformation.radius==='' || attributeInformation.radius===0">
+                <li ng-if="attributeInformation.radius || attributeInformation.radius==='' || attributeInformation.radius===0" ng-hide="attributeInformation.layoutComponentType === 'article' && type !== 'template'">
                     <div radius-attribute to="attributeInformation"></div>
                 </li>
 

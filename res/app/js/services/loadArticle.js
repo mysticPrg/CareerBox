@@ -41,10 +41,8 @@ define([
             }
 
             articleGroupDom += '</div>';
-            $('#' + _article._id).remove();
-            $('#canvas-content').append(articleGroupDom);
 
-            $compile($('#' + _article._id))($scope);
+            $('#canvas-content').append($compile(articleGroupDom)($scope));
         }
 
         function loadArticleDom(article) {
