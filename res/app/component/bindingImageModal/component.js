@@ -35,19 +35,24 @@ define([
         };
 
         $scope.uploadUnbindImage = function () {
-            $('#image_picture_progressbar').fadeIn('slow');
+            if($scope.files){
+                $('#image_picture_progressbar').fadeIn('slow');
 
-            ImageUpload($upload, $scope.files, '', function (evt) {   // 독립이미지
-                $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-            }, function (data) {
-                // 파일 다시 받기
-                getImageFiles();
+                ImageUpload($upload, $scope.files, '', function (evt) {   // 독립이미지
+                    $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+                }, function (data) {
+                    // 파일 다시 받기
+                    getImageFiles();
 
-                $scope.progress = 0;
-                $('#image_picture_file').val('');
-                $('#image_picture_progressbar').css('display', 'none');
-            });
-        }
+                    $scope.progress = 0;
+                    $('#image_picture_file').val('');
+                    $('#image_picture_progressbar').css('display', 'none');
+                    $scope.files = null;
+                });
+            } else {
+                alert('업로드 파일을 지정해 주십시오.');
+            }
+        };
 
         ///////////////////////////////
 

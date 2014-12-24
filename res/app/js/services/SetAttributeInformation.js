@@ -84,11 +84,12 @@ define([
                     type : 'acticle'
                 }
             }
+            // 페이퍼에서 아이템일경우
             else {
                 return {
                     parentArray : EditorData.childArr,
                     attributeInformation : EditorData.childArr[id],
-                    type : 'acticle'
+                    type : 'paper_item'
                 }
             }
 
