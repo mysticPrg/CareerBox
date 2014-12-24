@@ -13,7 +13,7 @@
 
     <li ng-hide="data.isOutURL">
         <label for="sizeInputWidth">내부 링크</label>
-        <select ng-model="url_title" class="form-control" ng-change="setURL()" ng-options="value for (key, value) in papers "></select>
+        <select ng-selected="url_title = papers[data.url]" ng-model="url_title" class="form-control" ng-change="setURL()" ng-options="value for (key, value) in papers "></select>
     </li>
 
 </ul>

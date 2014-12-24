@@ -12,7 +12,7 @@
             <div style="background-color: #f9f9f9; height: 54px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); padding: 9px 10px 0 15px; box-sizing: border-box;">
                 <!--속성 이름-->
                 <div id="itemAttrInfo" class="clearfix">
-                    <h4>{{attributeInformation.layoutComponentType}}</h4>
+                    <h4 ng-hide="attributeInformation.itemType">{{attributeInformation.layoutComponentType}}</h4>
                     <h4>{{attributeInformation.itemType}}</h4>
                     <h4 ng-if="attributeInformation.isIndex==true || attributeInformation.isIndex==false">Paper</h4>
                 </div>
@@ -57,9 +57,9 @@
                     <div value-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.name || attributeInformation.name==='' ">
-                    <div name-attribute to="attributeInformation"></div>
-                </li>
+                <!--<li ng-if="(attributeInformation.name || attributeInformation.name==='' ) && attributeInformation.itemType !== 'image'">-->
+                    <!--<div name-attribute to="attributeInformation"></div>-->
+                <!--</li>-->
 
                 <li ng-if="attributeInformation.url || attributeInformation.url==='' ">
                     <div url-attribute to="attributeInformation"></div>
