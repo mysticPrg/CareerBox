@@ -119,7 +119,7 @@
 
 
 
-                <li ng-if="attributeInformation.rowCount || attributeInformation.rowCount==='' || attributeInformation.rowCount===0">
+                <li ng-if="(attributeInformation.rowCount || attributeInformation.rowCount==='' || attributeInformation.rowCount===0) && !(attributeInformation.bindingType.title === '기본정보' || attributeInformation.bindingType.title === '추가정보')">
                     <div rowcol-attribute to="attributeInformation"></div>
                 </li>
 
