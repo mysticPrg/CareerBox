@@ -11,11 +11,15 @@
                 <a ng-click="changePage(paper._id, paper.title)">
                     <span>{{paper.title}}</span>
 
-                    <div class="delBtn">
+                    <div class="delBtn" ng-hide="paper.isIndex">
                         <button type="button" class="delete btn btn-default" data-toggle="button" ng-click="popDeletePaperModal(paper._id)" style="padding: 0 border-style: none">
                             <img src="../img/editor_img/itemDelBtn.png" style="margin-bottom: 2px"/>
                         </button>
                     </div>
+                    <div class="delBtn" ng-show="paper.isIndex">
+                        <h6 style="padding: 0 border-style: none"><b> Index </b></h6>
+                    </div>
+
                 </a>
             </li>
         </ul>

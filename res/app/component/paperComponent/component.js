@@ -48,6 +48,9 @@ define([
                     }
 
                     $scope.paperTitle = EditorData.paperTitle;
+
+                    // 포커스 처리
+                    $scope.$emit('changeAttributePanelModel');
                 });
             }
 
@@ -57,7 +60,7 @@ define([
 
             $scope.createPaper = function (paper){
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};
-
+                EditorData.focusId = paper._id;
                 SavePaper($http, data, function (result) {
                     if(result.returnCode === '000'){
                         EditorData.paperId = result.result;
