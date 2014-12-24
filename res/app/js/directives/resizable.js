@@ -64,12 +64,12 @@ define([
                         for(var key in EditorData.templateItemArray){
                             var child = EditorData.templateItemArray[key];
 
-                            var compareY = child.pos.y + child.size.height + Number(child.outline.weight)*2;
+                            var compareY = Number(child.pos.y) + Number(child.size.height) + Number(child.outline.weight)*2;
                             if(minHeight<compareY){
                                 minHeight = compareY
                             }
 
-                            var compareX = child.pos.x + child.size.width + Number(child.outline.weight)*2;
+                            var compareX = Number(child.pos.x) + Number(child.size.width) + Number(child.outline.weight)*2;
                             if(minWidth<compareX){
                                 minWidth = compareX
                             }

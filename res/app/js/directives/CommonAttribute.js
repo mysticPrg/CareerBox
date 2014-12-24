@@ -118,8 +118,8 @@ define([
                 // grid일 경우 예외처리
                 if (att.grid != null) {
                     element.css({
-                        width: (scope.attributeInformation.size.width * scope.attributeInformation.colCount) + "px",
-                        height: (scope.attributeInformation.size.height * scope.attributeInformation.rowCount) + "px"
+                        width: (Number(scope.attributeInformation.size.width) * scope.attributeInformation.colCount + Number(scope.attributeInformation.outline.weight)*(Number(scope.attributeInformation.colCount)+1)) + "px",
+                        height: (Number(scope.attributeInformation.size.height) * scope.attributeInformation.rowCount + Number(scope.attributeInformation.outline.weight)*(Number(scope.attributeInformation.rowCount)+1)) + "px"
                     });
                 }
                 else
