@@ -57,6 +57,10 @@ define([
             $scope.changeModel();
         }, true);
 
+        $scope.editArticle = function(){
+            $scope.$emit('editTemplate', $scope.attributeInformation._template_id);
+        };
+
         $scope.deleteItem = function (id) {
             // z index 처리
             for (var key in $scope.parentArray) {

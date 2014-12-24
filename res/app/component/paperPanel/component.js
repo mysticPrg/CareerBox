@@ -212,7 +212,6 @@ define([
                 template.target._template_id = template._id;
 
                 EditorData.childArr[templateId] = template.target;
-//                console.log(EditorData.childArr[templateId]);
 
                 SetZOrder(template.target, templateId);
 
@@ -261,6 +260,17 @@ define([
 //                $compile($('#canvas-content'))($scope);
 
             }
+
+            // 에디터 수정 리스너
+            $rootScope.$on('editTemplate',function(e, templateId) {
+                for(var key in $scope.templates){
+                    var template = $scope.templates[key];
+                    if(template._id === templateId){
+                        $scope.editTemplate(template)
+                        break;
+                    }
+                }
+            });
 
             $scope.editTemplate = function (template) {
                 EditorData.template = template;

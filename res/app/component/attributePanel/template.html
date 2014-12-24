@@ -14,13 +14,13 @@
                 <div id="itemAttrInfo" class="clearfix">
                     <h4 ng-hide="attributeInformation.itemType">{{attributeInformation.layoutComponentType}}</h4>
                     <h4>{{attributeInformation.itemType}}</h4>
-                    <h4 ng-if="attributeInformation.isIndex==true || attributeInformation.isIndex==false">Paper</h4>
+                    <h4 ng-show="attributeInformation.isIndex==true || attributeInformation.isIndex==false">Paper</h4>
                 </div>
 
                 <!--수정, 삭제 버튼-->
                 <div id="editBtnGrp" ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
-                    <button  id="articleEditBtn" class="btn btn-default"
-                             ng-click="deleteItem(attributeInformation._id)">
+                    <button ng-show="attributeInformation.layoutComponentType === 'article'"  id="articleEditBtn" class="btn btn-default"
+                             ng-click="editArticle()">
                         <img src="../img/editor_img/articleEditBtn.png" style="margin-right: 3px;"/>수정
                     </button>
 
