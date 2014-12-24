@@ -55,6 +55,8 @@ define([
                     EditorData.template = new Template(data.result);
                     $scope.template = EditorData.template;
                     loadTemplate();
+
+                    $scope.$emit('getModel');
                 });
 
             }else{
@@ -182,7 +184,6 @@ define([
             $scope.thumbnail = '';
             $scope.description = '';
 
-            console.log('save Data', $scope.template);
             SaveTemplate($http, $scope.template, function (result) {
                 if (result.returnCode === '000') {
                     $scope.changed = false;

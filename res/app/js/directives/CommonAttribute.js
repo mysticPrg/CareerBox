@@ -12,7 +12,7 @@ define([
     'service/getInformationByType',
     'service/reloadPaper'
 ], function (app) {
-    app.directive('commonAttribute', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation, loadArticle, getInformationByType, reloadPaper, $http) {
+    app.directive('commonAttribute', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation, loadArticle, getInformationByType, reloadPaper, $http, $rootScope) {
         function singleInfoInit(scope) {
             if(scope.type === 'acticle' && scope.attributeInformation.bindingData.length==0){
                 // 바인딩 상태
@@ -132,6 +132,13 @@ define([
             }
         };
 
+        function getModel(att, scope) {
+            var info = SetAttributeInformation(att.id);
+            scope.attributeInformation = info.attributeInformation;
+            scope.parentArray = info.parentArray;
+            scope.type = info.type;
+        }
+
         return {
 
             // A = attribute, E = Element, C = Class and M = HTML Comment
@@ -141,11 +148,16 @@ define([
             link: function (scope, element, att) {
 
                 // 모델 GET
-                var info = SetAttributeInformation(att.id);
-                scope.attributeInformation = info.attributeInformation;
-                scope.parentArray = info.parentArray;
+                getModel(att, scope);
 
-                scope.type = info.type;
+                if(att.id === 'canvas-content' && isTemplateEditor(window.location.href)){
+
+                    $rootScope.$on('getModel',function(){
+                        getModel(att, scope);
+                        // 아티클, 아이템 공통
+                        setCommonWatch(scope, element, att);
+                    });
+                }
 
                 // 페이지 에디터 : 아티클 Init
                 singleInfoInit(scope);
