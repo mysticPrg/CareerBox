@@ -8,9 +8,30 @@ define([
     'service/EditorData',
     'service/ApplyCommonItemAttribute',
     'service/SetAttributeInformation',
-    'service/loadArticle'
+    'service/loadArticle',
+    'service/getInformationByType',
+    'service/reloadPaper'
 ], function (app) {
-    app.directive('commonAttribute', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', 'loadArticle', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation, loadArticle) {
+    app.directive('commonAttribute', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation, loadArticle, getInformationByType, reloadPaper, $http) {
+        function singleInfoInit(scope) {
+            if(scope.type === 'acticle' && scope.attributeInformation.bindingData.length==0){
+                // 바인딩 상태
+                scope.attributeInformation.isBinding = true;
+
+                // 기본정보, 상세정보는 선택창 없고 바로 바인딩.
+                if(scope.attributeInformation.bindingType.title === '기본정보' || scope.attributeInformation.bindingType.title === '상세정보'){
+                    // 기본정보와 바로 바인딩
+                    getInformationByType($http, scope.attributeInformation.bindingType.infoType, function (data) {
+                        // 성공했을 때
+                        scope.attributeInformation.bindingData = [data.result.items[0]._id];
+                        // reload
+                        reloadPaper(scope, function(){});
+
+                    });
+                }
+            }
+        }
+
         function isTemplateEditor(url) {
             if (url.indexOf('TemplateEditor') >= 0) {
                 return true;
@@ -82,7 +103,7 @@ define([
                 scope.$watch("attributeInformation.zOrder", function () {
                     // 비교하면 아티클 배열에서 z-index가 안매겨잠.
 //                    if(scope.attributeInformation._id == att.id)
-                        ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
+                    ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
                 }, true);
             }
 
@@ -126,6 +147,9 @@ define([
 
                 scope.type = info.type;
 
+                // 페이지 에디터 : 아티클 Init
+                singleInfoInit(scope);
+
                 if (scope.attributeInformation) {
                     // 로딩시 CSS 적용
                     if (!((!isTemplateEditor(window.location.href)) && att.id == 'canvas-content')) {
@@ -143,8 +167,5 @@ define([
                 }
             }
         };
-    }
-    ])
-    ;
-})
-;
+    });
+});

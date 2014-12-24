@@ -241,6 +241,7 @@ define([
 
                 $scope.childIndex++;
 
+                EditorData.focusId = templateDomId;    // 클론될 때 클론된 아이템의 속성창을 바로 띄워줌.
             }
 
             function createTemplateDiv(template, id) {
