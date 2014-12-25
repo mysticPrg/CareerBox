@@ -7,13 +7,13 @@ html, body {
     /*background-color: #ececec;*/
     background-image: url('../img/manage_img/bgPattern3.png');
     background-repeat: repeat;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'nanum gothic', sans-serif;
 }
 
 div, h1, h2, h3 , h4, ul, li, p{
     margin: 0;
     padding: 0;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'nanum gothic', sans-serif;
 }
 
 ul {
@@ -58,10 +58,17 @@ img {
     margin: 0 auto;
 }
 
+#content #user-info h1 {
+    display: inline;
+    font-weight: 700;
+    color: #040404;
+}
+
 #content #user-info h2{
     line-height: 110px;
     font-weight: 700;
     color: #040404;
+    display: inline
 }
 
 #content #user-info #userImg {
