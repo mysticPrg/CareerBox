@@ -283,6 +283,7 @@ img {
     width: 600px;
     height: 400px;
     background-color: #ffffff;
+    box-shadow: -1px -1px 5px rgba(0,0,0,0.2);
     transition: background-color 0.3s;
 }
 
@@ -391,7 +392,7 @@ img {
     margin: 20px;
     width: 85px;
     float: left;
-
+    cursor: pointer;
     display: inline-block;
 }
 
@@ -408,7 +409,7 @@ img {
     margin: 20px;
     width: 85px;
     float: left;
-
+    cursor: pointer;
     display: inline-block;
 }
 
@@ -548,8 +549,13 @@ img {
 
 .k-splitbar {
     background-color: #05091c;
+}
+
+.k-widget {
     border-style: none;
 }
+
+
 
 #SectionEditorTab #current a {
     background: #fff;

@@ -210,3 +210,42 @@
     margin-bottom: 25px;
 }
 
+
+/*바인딩*/
+#bindingForm .bindingAttr label {
+    width: 70px;
+}
+
+#bindingForm .bindingAttr label.btn {
+    width: 25px;
+}
+
+#bindingForm .bindingAttr select {
+    box-sizing: border-box;
+    width: 250px;
+    height: 34px;
+    cursor: pointer;
+}
+
+#bindingForm li > div {
+    margin-bottom: 25px;
+}
+
+#bindingForm .bindingAttrForm {
+    /*margin-left: 10px;*/
+}
+
+
+/*이미지 업로드*/
+#imageForm .imageElement{
+    float: left;
+}
+
+#imageForm .imageElement > label {
+    width: 57px;
+    line-height: 34px;
+}
+
+#imageForm #thumbnailImg {
+    margin-left: 67px;
+}

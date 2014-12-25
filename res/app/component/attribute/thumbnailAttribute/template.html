@@ -1,24 +1,20 @@
-<div ng-show="!data.isBinding" id="sizeForm" class="clearfix">
-    <div id="sizeFillForm">
-        <label for="sizeFillForm" class="sizeElement">썸네일</label>
-
-        <div class="width sizeElement">
-            <label >이미지</label>
-
-            <div class="col-md-2">
-                <div ng-if = "!data.thumbnail">
-                    <img ng-src="../img/noImage.png">
-                </div>
-                <div ng-if = "data.thumbnail">
-                    <img ng-src="http://210.118.74.166:8123/image/thumb/{{data.thumbnail}}" id="image_picture">
-                </div>
-
-            </div>
-
+<div ng-show="!data.isBinding" id="imageForm" class="clearfix">
+    <div class="clearfix">
+        <div class="imageElement">
+            <label for="imageForm">이미지</label>
         </div>
+        <div class="imageElement height">
+            <button for="sizeInputHeight" class="btn btn-default" ng-click="openBindingImageModal()">업로드</button>
+        </div>
+    </div>
 
-        <div class="height sizeElement">
-            <button for="sizeInputHeight" ng-click="openBindingImageModal()">업로드</button>
+    <div id="thumbnailImg" class="width">
+        <!--<label >이미지</label>-->
+        <div ng-if = "!data.thumbnail">
+            <img ng-src="../img/noImage.png">
+        </div>
+        <div ng-if = "data.thumbnail">
+            <img ng-src="http://210.118.74.166:8123/image/thumb/{{data.thumbnail}}" id="image_picture">
         </div>
     </div>
 </div>
