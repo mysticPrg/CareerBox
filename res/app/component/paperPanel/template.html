@@ -31,7 +31,7 @@
                     <ul id="articleTemplateList">
                         <li ng-repeat="template in templates track by $index">
                             <div id="templateThumb" ng-click="templateClone(template)">
-                                <img ng-src="{{template.thumbURL}}">
+                                <img id="templateThumbImg" ng-src="{{template.thumbURL}}">
 
                                 <div class="description">
                                     {{template.title}}
