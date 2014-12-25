@@ -5,9 +5,9 @@
             <label>바인딩 타입</label>
             {{data.bindingType.title}}
         </div>
-        <div class="bindingAttrForm" ng-show="data.isBinding == true">
+        <div ng-show="data.isBinding == true">
             <label>바인딩 데이터</label>
-            <button class="btn btn-default" ng-click="articleBinging(data)">선택</button>
+            <button class="btn btn-default bindingAttrForm" ng-click="articleBinging(data)">선택</button>
         </div>
     </li>
 
@@ -16,7 +16,7 @@
         <div>
             <label>바인딩 타입</label>
 
-            <select ng-selected="category = infoCategory[data.bindingType.infoType]" class="form-control"
+            <select ng-selected="category = infoCategory[data.bindingType.infoType]" class="form-control bindingAttrForm"
                     ng-model="category" ng-change="setCategory()"
                     ng-options="category.title for (key, category) in infoCategory"></select>
         </div>
@@ -37,7 +37,7 @@
         <div ng-show="data.isBinding == true">
             <label>바인딩 타입</label>
 
-            <select ng-selected="attributeName = attributeNames[data.bindingType]" ng-show="layoutType === 'template_item'" class="form-control" ng-model="attributeName"
+            <select ng-selected="attributeName = attributeNames[data.bindingType]" ng-show="layoutType === 'template_item'" class="form-control bindingAttrForm" ng-model="attributeName"
                     ng-change="setAttributeName()" ng-options="value for (key, value) in attributeNames "></select>
         </div>
     </li>

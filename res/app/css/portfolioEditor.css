@@ -53,6 +53,7 @@ img {
     line-height: 50px;
     float: left;
     margin-right: 40px;
+    cursor: pointer;
 }
 
 #top-pane #etcWrapper > ul > li > a {
@@ -90,18 +91,35 @@ img {
 }
 
 #bottom-pane #pageEditor .newBtn {
-    width: 58px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     padding: 0;
-    font-size: 13px;
+    line-height: 29px;
+    font-size: 20px;
+    font-weight: 600;
     background-color: #05091c;
     border-style: none;
     color: #fff;
     margin: 0 10px;
+    border-radius: 100%;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 #bottom-pane #pageEditor .pageNum {
+    padding-left: 16px;
     width: 135px;
+    height: 34px;
+    box-sizing: border-box;
+    border-style: none;
+    border-top: 1px solid #e3e3e3;
+    border-left: 5px solid #10152c;
+    border-radius: 1px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.25);
+}
+
+#bottom-pane #pageEditor #pageSelect {
+    /*border-left: 5px solid #10152c;*/
+    /*border-radius: 1px;*/
 }
 
 #bottom-pane #pageEditor #pageSelect ul li a {
@@ -131,7 +149,7 @@ img {
 
 
 #bottom-pane #page #stateBar {
-    background: #f9f9f9;
+    background: #f6f6f6;
     padding: 10px;
     /*box-shadow: 0px 2px 4px rgba(0,0,0,0.9);*/
 }
@@ -181,16 +199,32 @@ img {
     text-align: center;
 }
 
+#tamplateCategory {
+    height: 34px;
+    border-style: none;
+    padding-left: 10px;
+    border-top: 1px solid #e3e3e3;
+    border-left: 5px solid #3eb3e2;
+    box-sizing: border-box;
+    border-radius: 1px;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.25);
+}
+
 
 #btnAddArticleTemplate{
-    width: 58px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     padding: 0;
-    margin: 0 8px;
-    background-color: #10152c;
+    line-height: 29px;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 10px;
+    border-radius: 100%;
+    background-color: #3EB3E2;
     border-style: none;
-    font-size: 13px;
     color: #fff;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 #templateSelect .dropdown-menu {
@@ -198,7 +232,7 @@ img {
     min-width: 104px;
 }
 
-.templateCategory {
+#templateCategory {
     width: 80px;
 }
 

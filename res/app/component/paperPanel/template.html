@@ -1,6 +1,6 @@
 <div id="editor" style="background-color: #d8d8d8">
     <div id="paperEditor" paper-component
-         style="background-color: #f9f9f9; height: 54px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.2);"></div>
+         style="background-color: #f6f6f6; height: 54px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.2);"></div>
 
     <!--Section, Article, Item 에디터-->
     <div id="otherEditor">
@@ -10,20 +10,20 @@
             <ul id="SectionEditorTab">
                 <li><a id="articleTabLink" href="#articleTemplateArea" title="articleTemplateArea"
                        ng-click="loadArticleTemplate()">
-                    <img src="../img/editor_img/articleIconActive.png" id="articleTabImg"/>template</a></li>
+                    Template</a></li>
                 <li><a id="itemTabLink" href="#itemTemplateArea" title="itemTemplateArea">
-                    <img src="../img/editor_img/itemIconActive.png" id="itemTabImg"/>item</a></li>
+                    Item</a></li>
             </ul>
 
             <div class="tab-content" id="content">
                 <div id="articleTemplateArea">
-                    <div style="margin-bottom: 30px">
-                        <select ng-model="selected" ng-change="setInfoType()"
+                    <div style="margin-bottom: 30px;">
+                        <select id="tamplateCategory" ng-model="selected" ng-change="setInfoType()"
                                 ng-options="value.title for (key, value) in infoTypes"></select>
 
                         <!--New 템플릿 생성 버튼-->
                         <button id="btnAddArticleTemplate" class="btn btn-default form-control"
-                                ng-click="popCreateTemplateModal()">+ New
+                                ng-click="popCreateTemplateModal()">+
                         </button>
                     </div>
 

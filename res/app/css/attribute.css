@@ -213,7 +213,8 @@
 
 /*바인딩*/
 #bindingForm .bindingAttr label {
-    width: 70px;
+    width: 40px;
+    text-align: right;
 }
 
 #bindingForm .bindingAttr label.btn {
@@ -222,9 +223,10 @@
 
 #bindingForm .bindingAttr select {
     box-sizing: border-box;
-    width: 250px;
+    width: 150px;
     height: 34px;
     cursor: pointer;
+    display: inline-block;
 }
 
 #bindingForm li > div {
@@ -232,7 +234,7 @@
 }
 
 #bindingForm .bindingAttrForm {
-    /*margin-left: 10px;*/
+    margin-left: 25px;
 }
 
 
