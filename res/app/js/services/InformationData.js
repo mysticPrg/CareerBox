@@ -21,21 +21,21 @@ define([
 ], function (app, PersonalInfo, AdditionalInfo, HighSchoolInfo, UnivSchoolInfo, WorkingInfo, CertificationAbilityInfo, ProficiencyInfo, ComputerAbilityInfo, PaperAbilityInfo, ScholarshipInfo, AwardInfo, LocalActivityInfo, GlobalActivityInfo, ProjectInfo, ColumnInfo) {
 
     var InformationData = {
-        workingInfo : new WorkingInfo(),
-        highSchoolInfo : new HighSchoolInfo(),
-        localActivityInfo : new LocalActivityInfo(),
         personalInfo : new PersonalInfo(),
-        paperAbilityInfo : new PaperAbilityInfo(),
-        univSchoolInfo : new UnivSchoolInfo(),
-        awardInfo : new AwardInfo(),
-        proficiencyInfo : new ProficiencyInfo(),
-        certificateAbilityInfo : new CertificationAbilityInfo(),
-        scholarshipInfo : new ScholarshipInfo(),
         additionalInfo : new AdditionalInfo(),
-        columnInfo : new ColumnInfo(),
+        highSchoolInfo : new HighSchoolInfo(),
+        univSchoolInfo : new UnivSchoolInfo(),
+        workingInfo : new WorkingInfo(),
+        certificateAbilityInfo : new CertificationAbilityInfo(),
+        proficiencyInfo : new ProficiencyInfo(),
         computerAbilityInfo : new ComputerAbilityInfo(),
+        paperAbilityInfo : new PaperAbilityInfo(),
+        scholarshipInfo : new ScholarshipInfo(),
+        awardInfo : new AwardInfo(),
+        localActivityInfo : new LocalActivityInfo(),
+        globalActivityInfo : new GlobalActivityInfo(),
         projectInfo : new ProjectInfo(),
-        globalActivityInfo : new GlobalActivityInfo()
+        columnInfo : new ColumnInfo()
     };
 
     app.factory('InformationData', function () {
