@@ -21,10 +21,10 @@ define([
 ], function (app, PersonalInfo, AdditionalInfo, HighSchoolInfo, UnivSchoolInfo, WorkingInfo, CertificationAbilityInfo, ProficiencyInfo, ComputerAbilityInfo, PaperAbilityInfo, ScholarshipInfo, AwardInfo, LocalActivityInfo, GlobalActivityInfo, ProjectInfo, ColumnInfo) {
 
     var InformationData = {
-        personalInfo : new PersonalInfo(),
         workingInfo : new WorkingInfo(),
         highSchoolInfo : new HighSchoolInfo(),
         localActivityInfo : new LocalActivityInfo(),
+        personalInfo : new PersonalInfo(),
         paperAbilityInfo : new PaperAbilityInfo(),
         univSchoolInfo : new UnivSchoolInfo(),
         awardInfo : new AwardInfo(),
