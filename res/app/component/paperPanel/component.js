@@ -209,11 +209,11 @@ define([
                 for(var key in EditorData.childArr){
 
                     if(EditorData.childArr[key].layoutComponentType != "item")  // 아이템은 무시
-                    if($scope.childIndex <= Number(EditorData.childArr[key]._id.split(template._id + '_')[1])){
+                        if($scope.childIndex <= Number(EditorData.childArr[key]._id.split(template._id + '_')[1])){
 
 
-                        $scope.childIndex = Number(EditorData.childArr[key]._id.split(template._id + '_')[1]) + 1;
-                    }
+                            $scope.childIndex = Number(EditorData.childArr[key]._id.split(template._id + '_')[1]) + 1;
+                        }
                 }
 
                 var templateId = template._id + '_' + $scope.childIndex;
@@ -226,6 +226,8 @@ define([
                 // template의 article을 저장.
                 template.target._id = templateId;
                 template.target._template_id = template._id;
+
+                template.target.isBasic = template.isBasic;
 
                 EditorData.childArr[templateId] = template.target;
 
