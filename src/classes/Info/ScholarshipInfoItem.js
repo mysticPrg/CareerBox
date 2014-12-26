@@ -11,7 +11,7 @@ define([], function () {
 
     var dictionary = {
         'S_name' : '장학금명',
-        'S_school' : '학교명',
+        'S_school' : '기관명',
         'N_year' : '수여년도',
         'N_term' : '수여학기'
     }
