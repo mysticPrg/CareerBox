@@ -38,6 +38,10 @@
                     <div binding-attribute to="attributeInformation" type="type"></div>
                 </li>
 
+                <li ng-if="(attributeInformation.rowCount || attributeInformation.rowCount==='' || attributeInformation.rowCount===0) && !(attributeInformation.bindingType.title === '기본정보' || attributeInformation.bindingType.title === '추가정보')">
+                    <div rowcol-attribute to="attributeInformation"></div>
+                </li>
+
                 <li ng-if="attributeInformation.thumbnail || attributeInformation.thumbnail==='' ">
                     <div thumbnail-attribute to="attributeInformation"></div>
                 </li>
@@ -117,13 +121,6 @@
                 <li ng-if="attributeInformation.isIndex || attributeInformation.isIndex==='' || attributeInformation.isIndex===false">
                     <div is-index-attribute to="attributeInformation"></div>
                 </li>
-
-
-
-                <li ng-if="(attributeInformation.rowCount || attributeInformation.rowCount==='' || attributeInformation.rowCount===0) && !(attributeInformation.bindingType.title === '기본정보' || attributeInformation.bindingType.title === '추가정보')">
-                    <div rowcol-attribute to="attributeInformation"></div>
-                </li>
-
 
                 <!--z-index 설정버튼-->
                 <div id="zIndexForm">

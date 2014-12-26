@@ -713,3 +713,7 @@ img {
     white-space:pre-wrap;
     white-space:pre-line;
 }
+
+.k-notification-wrap {
+    background-color: #ef5777;
+}
