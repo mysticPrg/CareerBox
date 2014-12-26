@@ -11,7 +11,7 @@ define(['classes/Structs/Color'], function (Color) {
     function Font(props) {
         this.color = new Color('000000');
         this.size = 11;
-        this.family = 'dotum';
+        this.family = 'nanum gothic';
 
         this.italic = false;
         this.bold = false;

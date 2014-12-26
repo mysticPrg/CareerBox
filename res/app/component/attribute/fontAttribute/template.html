@@ -15,7 +15,7 @@
         <label id="fontFamilyInputLabel">글꼴</label>
 
         <select ng-model="data.font.family"
-                ng-options="value for value in fontFamily"></select>
+                ng-options="key for (key, value) in fontFamily"></select>
 
         <div class="btn-group">
             <label class="btn btn-default" ng-model="data.font.bold" btn-checkbox><b>B</b></label>
