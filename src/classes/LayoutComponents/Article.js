@@ -16,7 +16,7 @@ define([
     'classes/LayoutComponents/Items/Line',
     'classes/LayoutComponents/Items/Link',
     'classes/LayoutComponents/Items/Shape',
-    'classes/LayoutComponents/Items/Text',
+    'classes/LayoutComponents/Items/Text'
 ], function (Util, LayoutComponent, ItemType, LayoutComponentType, Icon, Image, Line, Link, Shape, Text) {
 
     function createChildObj(article, data) {
@@ -70,12 +70,14 @@ define([
         this.colCount = 1;
         this.layoutComponentType = LayoutComponentType.article;
         this.bindingChanged = false;
+        this.isBasic = null;
 
         if (props) {
             this._template_id = props._template_id ? props._template_id : this._template_id;
             this.rowCount = Number((props.rowCount!==undefined) ? props.rowCount : this.rowCount);
             this.colCount = Number((props.colCount!==undefined) ? props.colCount : this.colCount);
             this.bindingChanged = (props.bindingChanged!==undefined) ? props.bindingChanged : this.bindingChanged;
+            this.isBasic = props.isBasic ? props.isBasic : this.isBasic;
 
             if (props.childArr) {
                 createChildObj(this, props.childArr);
