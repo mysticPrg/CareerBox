@@ -29,6 +29,9 @@ module.exports.set = function (server) {
     server.get('/template/preview/:_id', getTemplateByIdService);
     server.get('/template/check/:_id', getTemplateUsingCheckService);
     server.get('/template/thumb/:_id', downloadThumbService);
+
+    server.get('/template/basic', getBasicListService);
+    server.get('/template/:infoType', getBasicListByInfoTypeService);
 };
 
 function checkArgForTemplate(req, res) {
@@ -227,5 +230,26 @@ function downloadThumbService(req, res) {
         var filepath = fileDir + _id + '.png';
 
         res.download(filepath, _id + '.png');
+    });
+}
+
+function getBasicListService(req, res) {
+    ServiceUtil.setResHeader(res);
+
+    TemplateDB.getBasicList(function (err, list) {
+        ServiceUtil.sendResult(err, res, list);
+    });
+}
+
+function getBasicListByInfoTypeService(req, res) {
+    ServiceUtil.setResHeader(res);
+    if (!checkArgForInfoTypeOnParams(req, res)) {
+        return;
+    }
+
+    var infoType = req.params.infoType;
+
+    TemplateDB.getBasicListByInfoType(infoType, function (err, list) {
+        ServiceUtil.sendResult(err, res, list);
     });
 }
