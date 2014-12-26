@@ -251,3 +251,23 @@
 #imageForm #thumbnailImg {
     margin-left: 67px;
 }
+
+/*row. col*/
+
+#rowcolForm .rowcolElement {
+    float: left;
+}
+
+#rowcolForm #rowcolFillForm > label {
+    width: 40px;
+    text-align: right;
+}
+
+#rowcolForm #rowcolFillForm .rowCount, .colCount {
+    margin-left: 25px;
+}
+
+#rowcolForm .transformElement {
+    text-align: right;
+    margin-left: 65px;
+}
