@@ -45,7 +45,7 @@ define([
 
             $scope.goToPortfolio = function () {
                 var href = 'portfolioPreview.html?id=' + EditorData.portfolio._id;
-                $window.location.href = href;
+                $window.open(href);
             }
 
         });
