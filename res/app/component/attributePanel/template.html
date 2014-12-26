@@ -94,7 +94,7 @@
                     <div alpha-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.radius || attributeInformation.radius==='' || attributeInformation.radius===0" ng-hide="attributeInformation.layoutComponentType === 'article' && type !== 'template'">
+                <li ng-if="attributeInformation.radius || attributeInformation.radius==='' || attributeInformation.radius===0" ng-hide="attributeInformation.layoutComponentType === 'article' && type !== 'template' && attributeInformation.layoutComponentType === 'article'">
                     <div radius-attribute to="attributeInformation"></div>
                 </li>
 
@@ -118,9 +118,7 @@
                     <div is-index-attribute to="attributeInformation"></div>
                 </li>
 
-
-
-                <li ng-if="(attributeInformation.rowCount || attributeInformation.rowCount==='' || attributeInformation.rowCount===0) && !(attributeInformation.bindingType.title === '기본정보' || attributeInformation.bindingType.title === '추가정보')">
+                <li ng-if="(attributeInformation.rowCount || attributeInformation.rowCount==='' || attributeInformation.rowCount===0) && !(attributeInformation.bindingType.title === '기본정보' || attributeInformation.bindingType.title === '추가정보')" ng-hide="attributeInformation.layoutComponentType === 'article'">
                     <div rowcol-attribute to="attributeInformation"></div>
                 </li>
 

@@ -73,8 +73,8 @@ define([
 
         if (props) {
             this._template_id = props._template_id ? props._template_id : this._template_id;
-            this.rowCount = Number(props.rowCount ? props.rowCount : this.rowCount);
-            this.colCount = Number(props.colCount ? props.colCount : this.colCount);
+            this.rowCount = Number((props.rowCount!==undefined) ? props.rowCount : this.rowCount);
+            this.colCount = Number((props.colCount!==undefined) ? props.colCount : this.colCount);
             this.bindingChanged = (props.bindingChanged!==undefined) ? props.bindingChanged : this.bindingChanged;
 
             if (props.childArr) {

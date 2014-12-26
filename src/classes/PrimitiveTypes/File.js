@@ -26,7 +26,7 @@ define([
             this._member_id = props._member_id ? props._member_id : this._member_id;
             this.originalName = props.originalName ? props.originalName : this.originalName;
             this.name = props.name ? props.name : this.name;
-            this.filesize = props.filesize ? props.filesize : this.filesize;
+            this.filesize = (props.filesize!==undefined) ? props.filesize : this.filesize;
             this.isBinding = (props.isBinding!==undefined) ? props.isBinding : this.isBinding;
         }
     };
