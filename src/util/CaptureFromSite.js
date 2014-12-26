@@ -29,7 +29,7 @@ phantom.create(function (ph) {
 function CaptureFromSite(_id, type, closerCallback) {
     queue[type].push({_id: _id, callback: closerCallback, type: type});
 
-    if ( isRunning === false ) {
+    if (isRunning === false) {
         ProccesesCapture();
     }
 };
@@ -123,7 +123,7 @@ function DoCapture(_id, type, closerCallback) {
         function (page, callback) { // open page
             initPage(page);
             page.open(url[type] + _id, function (stat) {
-                if ( stat === 'success' ) {
+                if (stat === 'success') {
                     callback(null, page);
                 } else {
                     page.close();
@@ -144,7 +144,7 @@ function DoCapture(_id, type, closerCallback) {
                 }, function () {
                     callback(null, page);
                 });
-            }, 200);
+            }, 1000);
         },
         function (page, callback) {
             if (type === 'portfolio') {
@@ -175,19 +175,19 @@ function DoCapture(_id, type, closerCallback) {
     ]);
 }
 
-function ProccesesCapture () {
+function ProccesesCapture() {
 
     isRunning = true;
 
     var item = queue.template.shift(); // template
-    if ( !item ) {
+    if (!item) {
         item = queue.portfolio.shift(); // portfolio
     }
 
-    if ( item ) {
-        DoCapture(item._id, item.type, function() {
+    if (item) {
+        DoCapture(item._id, item.type, function () {
             item.callback();
-            setTimeout(function() {
+            setTimeout(function () {
                 ProccesesCapture();
             }, 0);
         });

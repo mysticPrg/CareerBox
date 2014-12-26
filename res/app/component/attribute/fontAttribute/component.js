@@ -15,23 +15,21 @@ define([
 
                 $scope.fontFamily = [
                 // 영어 폰트
-                    'nanumgothic',
                     'alefhebrew',
                     'amiri',
                     'dhurjati',
                     'dhyana',
                 // 한글 폰트
                     'hanna',
-                    'jejugothic',
-                    'jejumyeongjo',
-                    'jejuhallasan',
-                    'kopubbatang',
-                    'nanumgothic',
-                    'nanumgothiccoding',
-                    'nanummyeongjo',
-                    'nanumbrushscript',
-                    'nanumpenscript'
-
+                    'jeju gothic',
+                    'jeju myeongjo',
+                    'jeju hallasan',
+                    'kopub batang',
+                    'nanum gothic',
+                    'nanum gothic coding',
+                    'nanum myeongjo',
+                    'nanum brush script',
+                    'nanum pen script'
                 ];
 
                 $scope.$watch("data.font.color",function() {
