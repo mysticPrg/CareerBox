@@ -20,11 +20,13 @@ define([
         this.name = '';
         this.url = 'about:blank';
         this.isOutURL = true;
+        this.isNewWindow = false;
 
         if (props) {
             this.name = props.name ? props.name : this.name;
             this.url = props.url ? props.url : this.url;
             this.isOutURL = (props.isOutURL!==undefined) ? props.isOutURL : this.isOutURL;
+            this.isNewWindow = (props.isNewWindow!==undefined) ? props.isNewWindow : this.isNewWindow;
         }
     };
 
