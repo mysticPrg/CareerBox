@@ -13,6 +13,13 @@ var url = {
     template: 'http://210.118.74.166:8123/res/app/partials/templatePreview.html?id='
 };
 
+var g_ph = null;
+
+phantom.create(function (ph) {
+    //callback(null, ph);
+    g_ph = ph;
+});
+
 module.exports = function CaptureFromSite(_id, type, closerCallback) {
 
     var filename = __dirname + '/../../' + screenShotPath + _id + '.png';
@@ -97,35 +104,30 @@ module.exports = function CaptureFromSite(_id, type, closerCallback) {
 
     async.waterfall([
         function (callback) {
-            phantom.create(function (ph) {
-                callback(null, ph);
+            g_ph.createPage(function (page) {
+                callback(null, page);
             });
         },
-        function (ph, callback) {
-            ph.createPage(function (page) {
-                callback(null, ph, page);
-            });
-        },
-        function (ph, page, callback) { // open page
+        function (page, callback) { // open page
             initPage(page);
             page.open(url[type] + _id, function () {
-                callback(null, ph, page);
+                callback(null, page);
             });
         },
-        function (ph, page, callback) {
+        function (page, callback) {
             page.wait(function () {
-                callback(null, ph, page);
+                callback(null, page);
             });
         },
-        function (ph, page, callback) { // save screenshot
+        function (page, callback) { // save screenshot
             page.render(filename, {
                 format: 'png',
                 quality: '50'
             }, function () {
-                callback(null, ph);
+                callback(null, page);
             });
         },
-        function (ph, callback) {
+        function (page, callback) {
             if (type === 'portfolio') {
                 gm(filename)
                     .quality(50)
@@ -133,19 +135,20 @@ module.exports = function CaptureFromSite(_id, type, closerCallback) {
                     .crop(250, 350)
                     .noProfile()
                     .write(filename, function (err) {
-                        callback(err, ph);
+                        callback(err, page);
                     });
             } else if (type === 'template') {
                 gm(filename)
                     .scale(200)
                     .noProfile()
                     .write(filename, function (err) {
-                        callback(err, ph);
+                        callback(err, page);
                     });
             }
         },
-        function (ph) {
-            ph.exit();
+        function (page) {
+            //ph.exit();
+            page.close();
             closerCallback();
         }
     ]);
