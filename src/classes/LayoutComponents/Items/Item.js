@@ -20,12 +20,10 @@ define([
         this.layoutComponentType = LayoutComponentType.item;
         this.itemType = ItemType.shape;
         this.rotate = 0;
-        this.alpha = 100;
 
         if (props) {
             this.itemType = props.itemType ? props.itemType : this.itemType;
             this.rotate = Number(props.rotate ? props.rotate : this.rotate);
-            this.alpha = Number(props.alpha ? props.alpha : this.alpha);
         }
     };
 

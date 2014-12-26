@@ -26,6 +26,7 @@ define([
         this.bindingType = '';
         this.isBinding = false;
         this.bindingData = [];
+        this.alpha = 100;
 
         if (props) {
             this._id = props._id ? props._id : this._id;
@@ -39,6 +40,7 @@ define([
             this.bindingType = props.bindingType ? props.bindingType : this.bindingType;
             this.isBinding = (props.isBinding!==undefined) ? props.isBinding : this.isBinding;
             this.bindingData = props.bindingData ? props.bindingData : this.bindingData;
+            this.alpha = Number(props.alpha ? props.alpha : this.alpha);
         }
     };
 
