@@ -18,8 +18,18 @@
             <div class="tab-content" id="content">
                 <div id="articleTemplateArea">
                     <div style="margin-bottom: 30px;">
-                        <select id="tamplateCategory" ng-model="selected" ng-change="setInfoType()"
-                                ng-options="value.title for (key, value) in infoTypes"></select>
+                        <div id="tamplateCategory" class="btn-group">
+                            <button type="button" class="pageNum btn btn-default dropdown-toggle" data-toggle="dropdown">{{selected.title}}
+                                <span class="caret" style="margin-left: 45px"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="infoType in infoTypes track by $index">
+                                    <a ng-click="setInfoType(infoType)">
+                                        <span>{{infoType.title}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
 
                         <!--New 템플릿 생성 버튼-->
                         <button id="btnAddArticleTemplate" class="btn btn-default form-control"

@@ -119,7 +119,8 @@ define([
                 });
             }
 
-            $scope.setInfoType = function (){
+            $scope.setInfoType = function (infoType){
+                $scope.selected = infoType;
                 getTemplateListByType($scope.selected.infoType);
             }
 
