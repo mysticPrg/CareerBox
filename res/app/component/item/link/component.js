@@ -58,6 +58,13 @@ define([
                     }
                 });
 
+                // font-family
+                scope.$watch("info.font.family",function() {
+                    element.css({
+                        'font-family': scope.info.font.family
+                    });
+                });
+
                 scope.goToPreview = function () {
                     // isOutURL 에 따라 분류
                     var href;

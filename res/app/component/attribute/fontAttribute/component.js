@@ -13,6 +13,14 @@ define([
             templateUrl: require.toUrl('component/attribute/fontAttribute/template.html'),
             link: function ($scope, element, att) {
 
+                $scope.fontFamily = [
+                    'nanumgothic',
+                    'alefhebrew',
+                    'amiri',
+                    'dhurjati',
+                    'dhyana'
+                ];
+
                 $scope.$watch("data.font.color",function() {
                     $scope.color = "#" + $scope.data.font.color.R + $scope.data.font.color.G + $scope.data.font.color.B;
 
