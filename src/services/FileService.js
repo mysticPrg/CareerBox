@@ -20,7 +20,8 @@ var uploader = new Uploader({
     safeName: true,
     publicDir: __dirname + '/../../res',
     uploadDir: fileDir,
-    uploadUrl: '/upload/file'
+    uploadUrl: '/upload/file',
+    maxFileSize: 5242880 //0000 5
 });
 
 function checkArgForFiles(req, res) {
