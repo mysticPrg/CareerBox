@@ -74,6 +74,37 @@ function getListByInfoType(_member_id, infoType, callback) {
     });
 }
 
+function getBasicList(callback) {
+    var templateCollection = require('../util/DBCollections').getInstance().collections.template;
+
+    templateCollection.find({
+        isBasic: true
+    }).toArray(function (err, list) {
+        async.each(list, function (t, cb) {
+            delete t._member_id;
+            cb();
+        }, function () {
+            callback(err, list);
+        });
+    });
+}
+
+function getBasicListByInfoType(infoType, callback) {
+    var templateCollection = require('../util/DBCollections').getInstance().collections.template;
+
+    templateCollection.find({
+        isBasic: true,
+        'target.bindingType.infoType': infoType
+    }).toArray(function (err, list) {
+        async.each(list, function (t, cb) {
+            delete t._member_id;
+            cb();
+        }, function () {
+            callback(err, list);
+        });
+    });
+}
+
 function remove(_id, callback) {
     var templateCollection = require('../util/DBCollections').getInstance().collections.template;
 
@@ -106,7 +137,7 @@ function checkUsingTemplate(_id, callback) {
     paperCollection.findOne({
         childArr: {$elemMatch: {_template_id: _id}}
     }, function (err, finded) {
-        if ( finded ) {
+        if (finded) {
             callback(err, true);
         } else {
             callback(err, false);
@@ -116,7 +147,7 @@ function checkUsingTemplate(_id, callback) {
 
 function reset() {
     var templateCollection = require('../util/DBCollections').getInstance().collections.template;
-    templateCollection.remove({}, function() {
+    templateCollection.remove({}, function () {
         return;
     });
 }
@@ -127,6 +158,8 @@ var exports = {
     getById: getById,
     getList: getList,
     getListByInfoType: getListByInfoType,
+    getBasicList: getBasicList,
+    getBasicListByInfoType: getBasicListByInfoType,
     remove: remove,
     update: update,
     checkUsingTemplate: checkUsingTemplate,
