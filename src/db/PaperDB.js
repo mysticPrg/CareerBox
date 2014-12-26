@@ -70,7 +70,7 @@ function refreshTemplateData(template, callback) {
     var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
 
     paperCollection.find({
-        _member_id: template._member_id,
+        //_member_id: template._member_id,
         childArr: {$elemMatch: {_template_id: template._id.toHexString()}}
     }).toArray(function (err, arr) {
         async.each(arr, function (p, cb) {
