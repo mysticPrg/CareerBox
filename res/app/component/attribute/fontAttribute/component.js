@@ -14,11 +14,24 @@ define([
             link: function ($scope, element, att) {
 
                 $scope.fontFamily = [
+                // 영어 폰트
                     'nanumgothic',
                     'alefhebrew',
                     'amiri',
                     'dhurjati',
-                    'dhyana'
+                    'dhyana',
+                // 한글 폰트
+                    'hanna',
+                    'jejugothic',
+                    'jejumyeongjo',
+                    'jejuhallasan',
+                    'kopubbatang',
+                    'nanumgothic',
+                    'nanumgothiccoding',
+                    'nanummyeongjo',
+                    'nanumbrushscript',
+                    'nanumpenscript'
+
                 ];
 
                 $scope.$watch("data.font.color",function() {
