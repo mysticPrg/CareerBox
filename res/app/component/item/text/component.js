@@ -70,7 +70,7 @@ define([
                 // font-family
                 scope.$watch("info.font.family",function() {
                     element.css({
-                        'font-family': scope.info.font.family + ',' + trim(scope.info.font.family)
+                        'font-family': trim(scope.info.font.family) + ',' + scope.info.font.family
                     });
                 });
 
