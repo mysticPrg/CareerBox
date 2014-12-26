@@ -79,14 +79,18 @@ function getBasicList(callback) {
 
     templateCollection.find({
         isBasic: true
-    }).toArray(function (err, list) {
-        async.each(list, function (t, cb) {
-            delete t._member_id;
-            cb();
-        }, function () {
-            callback(err, list);
+    })
+        //.sort({
+        //    title: 1
+        //})
+        .toArray(function (err, list) {
+            async.each(list, function (t, cb) {
+                delete t._member_id;
+                cb();
+            }, function () {
+                callback(err, list);
+            });
         });
-    });
 }
 
 function getBasicListByInfoType(infoType, callback) {
@@ -95,14 +99,18 @@ function getBasicListByInfoType(infoType, callback) {
     templateCollection.find({
         isBasic: true,
         'target.bindingType.infoType': infoType
-    }).toArray(function (err, list) {
-        async.each(list, function (t, cb) {
-            delete t._member_id;
-            cb();
-        }, function () {
-            callback(err, list);
+    })
+        //.sort({
+        //    title: 1
+        //})
+        .toArray(function (err, list) {
+            async.each(list, function (t, cb) {
+                delete t._member_id;
+                cb();
+            }, function () {
+                callback(err, list);
+            });
         });
-    });
 }
 
 function remove(_id, callback) {
