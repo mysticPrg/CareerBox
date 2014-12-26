@@ -57,6 +57,13 @@ define([
                     scope.style['font-size'] = scope.info.font.size + "px";
                 });
 
+                // font-family
+                scope.$watch("info.font.family",function() {
+                    element.css({
+                        'font-family': scope.info.font.family
+                    });
+                });
+
                 // font-bold
                 scope.$watch("info.font.bold",function() {
                     if(scope.info.font.bold){
