@@ -55,7 +55,14 @@ ColumnInfoService.set(server);
 
 ResetService.set(server);
 
-server.start(8123);
+try {
+    server.start(8123);
+} catch (e) {
+    console.log(e.message);
+    //
+    //server.close();
+    //server.start(8123);
+}
 
 /**/
 

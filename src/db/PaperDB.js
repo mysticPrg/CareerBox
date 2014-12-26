@@ -87,6 +87,8 @@ function refreshTemplateData(template, callback) {
                     cloneArticle.zOrder = paperArticle.zOrder;
                     cloneArticle._id = paperArticle._id;
                     cloneArticle._template_id = paperArticle._template_id;
+                    cloneArticle.rowCount = paperArticle.rowCount;
+                    cloneArticle.colCount = paperArticle.colCount;
 
                     if (paperArticle.bindingChanged === false) {
                         cloneArticle.isBinding = paperArticle.isBinding;
