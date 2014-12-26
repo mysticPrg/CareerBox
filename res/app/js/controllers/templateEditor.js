@@ -96,7 +96,7 @@ define([
 
             newTemplate.target.bindingType = template.target.bindingType;
             newTemplate.target.size = {width : 600, height : 400};
-            newTemplate.target.outline = {weight : 0};
+            newTemplate.target.outline.weight = 0;
 
             $scope.template = newTemplate;
 
