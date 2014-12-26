@@ -4,12 +4,13 @@ define([
     '../createPortfolioModal/component',
     '../modifyPortfolioModal/component',
     '../deletePortfolioModal/component',
+    '../sharePortfolioModal/component',
     'service/getPortfolioList',
     'service/createPortfolio',
     'service/CommonCallback',
     'service/deletePortfolio',
     'service/modifyPortfolio'
-], function (app, EditorData, createPortfolioModal, modifyPortfolioModal, deletePortfolioModal) {
+], function (app, EditorData, createPortfolioModal, modifyPortfolioModal, deletePortfolioModal, sharePortfolioModal) {
 
     app.controller('newPortfolioController', ['$scope', '$http', '$window', '$modal', 'getPortfolioList', 'createPortfolio', 'deletePortfolio', 'CommonCallback', 'modifyPortfolio', function ($scope, $http, $window, $modal, getPortfolioList, createPortfolio, deletePortfolio, CommonCallback, modifyPortfolio) {
 
@@ -29,23 +30,6 @@ define([
         };
 
         $scope.getPortfolioList();    // 함수 실행
-
-        // 포트폴리오 삭제 함수
-        $scope.deletePortfolio = function (index) {
-            var modalInstance = $modal.open(deletePortfolioModal);
-            modalInstance.result.then(function () { // OK
-                // 포트폴리오 삭제 통신
-                deletePortfolio($http, {_id: $scope.portfolios[index]._id}, function (data) {
-                    CommonCallback(data, function () { // 성공시
-                        console.log("정상적으로 삭제 되었습니다.");
-                    })
-                });
-
-                // 포트폴리오 삭제
-                $scope.portfolios.splice(index, 1);
-            }, function () { // Cancel
-            });
-        };
 
         // 포트폴리오 생성 함수
         $scope.createPortfolio = function () {
@@ -86,6 +70,30 @@ define([
                 // Cancel
             });
 
+        };
+
+        // 포트폴리오 삭제 함수
+        $scope.deletePortfolio = function (index) {
+            var modalInstance = $modal.open(deletePortfolioModal);
+            modalInstance.result.then(function () { // OK
+                // 포트폴리오 삭제 통신
+                deletePortfolio($http, {_id: $scope.portfolios[index]._id}, function (data) {
+                    CommonCallback(data, function () { // 성공시
+                        console.log("정상적으로 삭제 되었습니다.");
+                    })
+                });
+
+                // 포트폴리오 삭제
+                $scope.portfolios.splice(index, 1);
+            }, function () { // Cancel
+            });
+        };
+
+        // 포트폴리오 정보 변경 함수
+        $scope.sharePortfolio = function (id) {
+            EditorData.shareId = id;
+
+            var modalInstance = $modal.open(sharePortfolioModal);
         };
 
         // 포트폴리오 에디터 이동 함수

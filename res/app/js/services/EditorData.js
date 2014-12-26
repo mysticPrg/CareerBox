@@ -18,7 +18,8 @@ define(['app', 'classes/Paper', 'classes/Portfolio', 'classes/Templates/Template
         start_zOrder : null,
         end_zOrder : null,
         infoType : '',
-        bindingData : []
+        bindingData : [],
+        shareId : ''
     };
 
     app.factory('EditorData', function() {
