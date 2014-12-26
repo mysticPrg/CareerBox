@@ -13,119 +13,140 @@ var url = {
     template: 'http://210.118.74.166:8123/res/app/partials/templatePreview.html?id='
 };
 
-module.exports = function CaptureFromSite(_id, type, closerCallback) {
+var queue = {
+    'template': [],
+    'portfolio': []
+};
 
-    var filename = __dirname + '/../../' + screenShotPath + _id + '.png';
+var isRunning = false;
 
-    function initPage(page) {
+var g_ph = null;
 
-        page.resources = 0;
+phantom.create(function (ph) {
+    g_ph = ph;
+});
 
-        // Whether page has loaded.
-        page.ready = false;
+function CaptureFromSite(_id, type, closerCallback) {
+    queue[type].push({_id: _id, callback: closerCallback, type: type});
 
-        // Pass along console messages.
-        page.set('onConsoleMessage', function (msg) {
-            console.log('Console:' + msg);
-        });
+    if ( isRunning === false ) {
+        ProccesesCapture();
+    }
+};
 
-        // Log any errors.
-        page.set('onResourceError', function (err) {
-            console.log('ERROR: ' + err.errorString);
-        });
+function initPage(page) {
 
-        // Increment our outstanding resources counter.
-        page.set('onResourceRequested', function () {
-            if (page.ready) {
-                page.loading = true;
-                page.resources++;
-            }
-        });
+    page.resources = 0;
 
-        // Fire an event when we have received a resource.
-        page.set('onResourceReceived', function (res) {
-            if (page.ready && (res.stage == 'end') && (--page.resources == 0)) {
-                page.loading = false;
-            }
-        });
+    // Whether page has loaded.
+    page.ready = false;
 
-        // Trigger when the loading has started.
-        page.set('onLoadStarted', function () {
+    // Pass along console messages.
+    page.set('onConsoleMessage', function (msg) {
+        console.log('Console:' + msg);
+    });
+
+    // Log any errors.
+    page.set('onResourceError', function (err) {
+        console.log('ERROR: ' + err.errorString);
+    });
+
+    // Increment our outstanding resources counter.
+    page.set('onResourceRequested', function () {
+        if (page.ready) {
             page.loading = true;
-        });
+            page.resources++;
+        }
+    });
 
-        // Trigger when the loading has finished.
-        page.set('onLoadFinished', function () {
-            page.loading = (page.resources > 0);
-            page.ready = true;
-        });
+    // Fire an event when we have received a resource.
+    page.set('onResourceReceived', function (res) {
+        if (page.ready && (res.stage == 'end') && (--page.resources == 0)) {
+            page.loading = false;
+        }
+    });
 
-        page.set('viewportSize', {
-            width: 10,
-            height: 10
-        });
+    // Trigger when the loading has started.
+    page.set('onLoadStarted', function () {
+        page.loading = true;
+    });
 
-        page.wait = function (callback, nowait) {
-            var loadWait = function () {
-                setTimeout(function () {
-                    page.wait(callback, true);
-                }, 100);
-            };
+    // Trigger when the loading has finished.
+    page.set('onLoadFinished', function () {
+        page.loading = (page.resources > 0);
+        page.ready = true;
+    });
 
-            if (nowait) {
-                if (page.loading) {
-                    loadWait();
-                }
-                else {
-                    page.evaluate(function () {
-                        return jQuery.isReady;
-                    }, function (ready) {
-                        if (ready) {
-                            callback.call();
-                        } else {
-                            loadWait();
-                        }
-                    });
-                }
-            }
-            else {
+    page.set('viewportSize', {
+        width: 10,
+        height: 10
+    });
+
+    page.wait = function (callback, nowait) {
+        var loadWait = function () {
+            setTimeout(function () {
+                page.wait(callback, true);
+            }, 100);
+        };
+
+        if (nowait) {
+            if (page.loading) {
                 loadWait();
             }
-        };
-    }
+            else {
+                page.evaluate(function () {
+                    return jQuery.isReady;
+                }, function (ready) {
+                    if (ready) {
+                        callback.call();
+                    } else {
+                        loadWait();
+                    }
+                });
+            }
+        }
+        else {
+            loadWait();
+        }
+    };
+}
 
+function DoCapture(_id, type, closerCallback) {
+    var filename = __dirname + '/../../' + screenShotPath + _id + '.png';
 
     async.waterfall([
         function (callback) {
-            phantom.create(function (ph) {
-                callback(null, ph);
+            g_ph.createPage(function (page) {
+                callback(null, page);
             });
         },
-        function (ph, callback) {
-            ph.createPage(function (page) {
-                callback(null, ph, page);
-            });
-        },
-        function (ph, page, callback) { // open page
+        function (page, callback) { // open page
             initPage(page);
-            page.open(url[type] + _id, function () {
-                callback(null, ph, page);
+            page.open(url[type] + _id, function (stat) {
+                if ( stat === 'success' ) {
+                    callback(null, page);
+                } else {
+                    page.close();
+                    CaptureFromSite(_id, type, closerCallback);
+                }
             });
         },
-        function (ph, page, callback) {
+        function (page, callback) {
             page.wait(function () {
-                callback(null, ph, page);
+                callback(null, page);
             });
         },
-        function (ph, page, callback) { // save screenshot
-            page.render(filename, {
-                format: 'png',
-                quality: '50'
-            }, function () {
-                callback(null, ph);
-            });
+        function (page, callback) { // save screenshot
+            setTimeout(function () {
+                page.render(filename, {
+                    format: 'png',
+                    quality: '50'
+                }, function () {
+                    callback(null, page);
+                });
+            }, 200);
         },
-        function (ph, callback) {
+        function (page, callback) {
             if (type === 'portfolio') {
                 gm(filename)
                     .quality(50)
@@ -133,20 +154,46 @@ module.exports = function CaptureFromSite(_id, type, closerCallback) {
                     .crop(250, 350)
                     .noProfile()
                     .write(filename, function (err) {
-                        callback(err, ph);
+                        callback(err, page);
                     });
             } else if (type === 'template') {
                 gm(filename)
                     .scale(200)
                     .noProfile()
                     .write(filename, function (err) {
-                        callback(err, ph);
+                        callback(err, page);
                     });
             }
         },
-        function (ph) {
-            ph.exit();
-            closerCallback();
+        function (page) {
+            //ph.exit();
+            setTimeout(function () {
+                page.close();
+                closerCallback();
+            }, 200);
         }
     ]);
-};
+}
+
+function ProccesesCapture () {
+
+    isRunning = true;
+
+    var item = queue.template.shift(); // template
+    if ( !item ) {
+        item = queue.portfolio.shift(); // portfolio
+    }
+
+    if ( item ) {
+        DoCapture(item._id, item.type, function() {
+            item.callback();
+            setTimeout(function() {
+                ProccesesCapture();
+            }, 0);
+        });
+    } else {
+        isRunning = false;
+    }
+}
+
+module.exports = CaptureFromSite;

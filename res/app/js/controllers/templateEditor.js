@@ -186,7 +186,8 @@ define([
             $scope.template.target.childArr[0] = getTemplateChildArr(EditorData.templateItemArray);
 
             $scope.thumbnail = '';
-            $scope.description = '';
+            $scope.description = EditorData.template.description;
+            $scope.title = EditorData.template.title;
 
             SaveTemplate($http, $scope.template, function (result) {
                 if (result.returnCode === '000') {

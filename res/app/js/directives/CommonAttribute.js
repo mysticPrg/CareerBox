@@ -87,11 +87,6 @@ define([
 
                 }, true);
 
-                // alpha 리스너 달기
-                scope.$watch("attributeInformation.alpha", function () {
-//                    if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.alpha(element, scope.attributeInformation);
-                }, true);
 
                 // rotate
                 scope.$watch("attributeInformation.rotate", function () {
@@ -106,6 +101,12 @@ define([
                     ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
                 }, true);
             }
+
+            // alpha 리스너 달기
+            scope.$watch("attributeInformation.alpha", function () {
+//                    if(EditorData.focusId == att.id)
+                ApplyCommonItemAttribute.alpha(element, scope.attributeInformation);
+            }, true);
 
             // fill 리스너 달기
             scope.$watch("attributeInformation.fill", function () {
