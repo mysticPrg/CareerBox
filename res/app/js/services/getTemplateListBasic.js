@@ -9,8 +9,6 @@ define(['app'], function (app) {
                 url = url + '/' + infoType;
             }
 
-            console.log(url);
-
             $http({
                 method: 'GET',
                 url: url,
