@@ -6,6 +6,11 @@
         <label class="btn btn-default" ng-model="data.isOutURL" btn-radio=true>외부링크</label>
     </div>
 
+    <div class="btn-group">
+        <label class="btn btn-default" ng-model="data.isNewWindow" btn-radio=false>현재 창에서 열기</label>
+        <label class="btn btn-default" ng-model="data.isNewWindow" btn-radio=true>새 창에서 열기</label>
+    </div>
+
     <li ng-show="data.isOutURL">
         <label for="sizeInputWidth">외부 링크</label>
         <textarea type="text" class="attrInput form-control" id="sizeInputWidth" ng-model="data.url" style="width: 250px; box-sizing: border-box"/>

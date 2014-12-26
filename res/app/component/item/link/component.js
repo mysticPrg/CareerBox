@@ -77,7 +77,13 @@ define([
                     else{
                         href = 'portfolioPreview.html?id=' + EditorData.portfolio._id +'&paper_id=' + scope.info.url;
                     }
-                    $window.open(href);
+
+                    // 새창에서 열것인가? 현재창에서 열것인가?
+                    if(scope.info.isNewWindow) {
+                        $window.open(href);
+                    } else{
+                        $window.location.href = href
+                    }
                 };
 
             },
