@@ -29,7 +29,7 @@ define([
                     'nanum gothic coding',
                     'nanum myeongjo',
                     'nanum brush script',
-                    'nanum pens cript'
+                    'nanum pen script'
                 ];
 
                 $scope.$watch("data.font.color",function() {
