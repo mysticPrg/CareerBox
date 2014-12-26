@@ -13,24 +13,25 @@ define([
             templateUrl: require.toUrl('component/attribute/fontAttribute/template.html'),
             link: function ($scope, element, att) {
 
-                $scope.fontFamily = [
-                // 영어 폰트
-                    'alefhebrew',
-                    'amiri',
-                    'dhurjati',
-                    'dhyana',
-                // 한글 폰트
-                    'hanna',
-                    'jeju gothic',
-                    'jeju myeongjo',
-                    'jeju hallasan',
-                    'kopub batang',
-                    'nanum gothic',
-                    'nanum gothic coding',
-                    'nanum myeongjo',
-                    'nanum brush script',
-                    'nanum pen script'
-                ];
+                $scope.fontFamily = {
+                    // 영어폰트
+                    'alefhebrew(영어)' : 'alefhebrew',
+                    'amiri(영어)' : 'amiri',
+                    'dhurjati(영어)' : 'dhurjati',
+                    'dhyana(영어)' : 'dhyana',
+
+                    // 한글 폰트
+                    '한나' : 'hanna',
+                    '제주 고딕' : 'jeju gothic',
+                    '제주 명조' : 'jeju myeongjo',
+                    '제주 한라산' : 'jeju hallasan',
+                    '코펍 바탕' : 'kopub batang',
+                    '나눔 고딕' : 'nanum gothic',
+                    '나눔 고딕코딩' : 'nanum gothiccoding',
+                    '나눔 명조' : 'nanum myeongjo',
+                    '나눔 브러쉬스크립트' : 'nanum brushscript',
+                    '나눔 펜스크립트' : 'nanum penscript'
+                };
 
                 $scope.$watch("data.font.color",function() {
                     $scope.color = "#" + $scope.data.font.color.R + $scope.data.font.color.G + $scope.data.font.color.B;
