@@ -21,15 +21,15 @@ define([
                     'dhyana',
                 // 한글 폰트
                     'hanna',
-                    'jejugothic',
-                    'jejumyeongjo',
-                    'jejuhallasan',
-                    'kopubbatang',
+                    'jeju gothic',
+                    'jeju myeongjo',
+                    'jeju hallasan',
+                    'kopub batang',
                     'nanum gothic',
-                    'nanumgothiccoding',
-                    'nanummyeongjo',
-                    'nanumbrushscript',
-                    'nanumpenscript'
+                    'nanum gothiccoding',
+                    'nanumm yeongjo',
+                    'nanum brushscript',
+                    'nanum penscript'
 
                 ];
 
