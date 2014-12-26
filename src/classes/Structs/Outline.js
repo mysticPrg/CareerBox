@@ -16,7 +16,7 @@ define(['classes/Structs/Color'], function (Color) {
         if (props) {
             this.use = (props.use!==undefined) ? props.use : this.use;
             this.color = new Color(props.color ? props.color : this.color);
-            this.weight = Number(props.weight ? props.weight : this.weight);
+            this.weight = Number((props.weight!==undefined) ? props.weight : this.weight);
         }
     };
 

@@ -19,6 +19,7 @@ define([
     'service/HTMLGenerator',
     'service/SaveTemplate',
     'service/getTemplateList',
+    'service/getTemplateListBasic',
     'service/deleteTemplate',
     'service/ApplyCommonItemAttribute',
     'service/SetZOrder'
@@ -35,10 +36,12 @@ define([
         'HTMLGenerator',
         'SaveTemplate',
         'getTemplateList',
+        'getTemplateListBasic',
         'DeleteTemplate',
         'ApplyCommonItemAttribute',
         'SetZOrder',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, InformationData, HTMLGenerator, SaveTemplate, getTemplateList, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder) {
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, InformationData, HTMLGenerator, SaveTemplate, getTemplateList, getTemplateListBasic, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder) {
+            $scope.basicTemplates = [];
             $scope.templates = [];
             $scope.childIndex = 0;
 
@@ -91,6 +94,18 @@ define([
             }
 
             function getTemplateListByType(infotype){
+                getTemplateListBasic($http, infotype, function (data) {
+                    if (data.returnCode == 000) {
+                        var templates = data.result;
+                        $scope.basicTemplates = [];
+                        for(var i = 0; i < templates.length; i++){
+                            var template = new Template(templates[i]);
+                            template.thumbURL = 'http://210.118.74.166:8123/template/thumb/'+template._id+'?'+new Date();
+                            $scope.basicTemplates.push(template);
+                        }
+                    }
+                });
+
                 getTemplateList($http, infotype, function (data) {
                     if (data.returnCode == 000) {
                         var templates = data.result;
@@ -104,7 +119,8 @@ define([
                 });
             }
 
-            $scope.setInfoType = function (){
+            $scope.setInfoType = function (infoType){
+                $scope.selected = infoType;
                 getTemplateListByType($scope.selected.infoType);
             }
 

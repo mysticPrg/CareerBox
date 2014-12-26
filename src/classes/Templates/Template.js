@@ -17,6 +17,7 @@ define([
         this.description = '';
         this.timestamp = new Date();
         this.thumbnail = null;
+        this.isBasic = false;
 
         // server only
         this._member_id = null;
@@ -27,6 +28,7 @@ define([
             this.description = props.description ? props.description : this.description;
             this.timestamp = props.timestamp ? props.timestamp : this.timestamp;
             this.thumbnail = props.thumbnail ? props.thumbnail : this.thumbnail;
+            this.isBasic = (props.isBasic!==undefined) ? props.isBasic : this.isBasic;
 
             this._member_id = props._member_id ? props._member_id : this._member_id;
 

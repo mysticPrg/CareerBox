@@ -13,8 +13,8 @@ define([], function () {
         this.y = 0;
 
         if (props) {
-            this.x = Number(props.x ? props.x : this.x);
-            this.y = Number(props.y ? props.y : this.y);
+            this.x = Number((props.x!==undefined) ? props.x : this.x);
+            this.y = Number((props.y!==undefined) ? props.y : this.y);
         }
     };
 

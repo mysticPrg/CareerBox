@@ -23,7 +23,7 @@ define([
 
         if (props) {
             this.itemType = props.itemType ? props.itemType : this.itemType;
-            this.rotate = Number(props.rotate ? props.rotate : this.rotate);
+            this.rotate = Number((props.rotate!==undefined) ? props.rotate : this.rotate);
         }
     };
 

@@ -1,4 +1,21 @@
+/* 영어 폰트 */
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/alefhebrew.css);
+@import url(http://fonts.googleapis.com/earlyaccess/amiri.css);
+@import url(http://fonts.googleapis.com/earlyaccess/dhurjati.css);
+@import url(http://fonts.googleapis.com/earlyaccess/dhyana.css);
+
+/* 한글 폰트 */
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+@import url(http://fonts.googleapis.com/earlyaccess/kopubbatang.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
 html, body {
     height:100%;
@@ -602,7 +619,7 @@ img {
 }
 
 #SectionEditorTab a:focus {
-    outline: 0;
+    outline: 0 ;
 }
 
 .k-splitbar {
@@ -701,7 +718,7 @@ img {
     height: 19px !important;
 }
 
-.focus {box-shadow: 0 0 0 2px rgb( 155, 201, 199 ); }
+.focus {box-shadow: 0 0 0 2px rgb( 155, 201, 199 ) !important; }
 
 .whiteSpace {
     white-space:pre-wrap; !important;

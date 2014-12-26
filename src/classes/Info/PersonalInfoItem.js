@@ -36,6 +36,7 @@ define([], function () {
         this.S_address_2 = '';
 
         if ( props ) {
+            this._id = props._id ? props._id : this._id;
             this.I_picture = props.I_picture ? props.I_picture : this.I_picture;
             this.S_name_kr = props.S_name_kr ? props.S_name_kr : this.S_name_kr;
             this.S_name_en = props.S_name_en ? props.S_name_en : this.S_name_en;

@@ -46,7 +46,7 @@ define([
                 // pos
                 {
                     // row, col이 있는 경우(pos-x속성이 존재한다)
-                    if ("row" in att) {
+                    if ("row" in att && att.row !== 'undefined') {
                         element.css({
                             top: (att.row * element.height()) + "px",
                             left: (att.col * element.width()) + "px"

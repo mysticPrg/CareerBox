@@ -40,8 +40,11 @@ define([
                 $scope.type = infomation.type;
 
                 // Box shadow
-                $('#' + EditorData.old_focusId).removeClass('focus');
-                $('#' + EditorData.focusId).addClass('focus');
+                var element_old_focusId = $('#' + EditorData.old_focusId);
+                var element_focusId = $('#' + EditorData.focusId);
+
+                element_old_focusId.removeClass('focus');
+                element_focusId.addClass('focus');
                 EditorData.old_focusId = EditorData.focusId;
 
             }
