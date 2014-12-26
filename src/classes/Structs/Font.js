@@ -18,7 +18,7 @@ define(['classes/Structs/Color'], function (Color) {
 
         if (props) {
             this.color = new Color(props.color ? props.color : this.color);
-            this.size = Number(props.size ? props.size : this.size);
+            this.size = Number((props.size!==undefined) ? props.size : this.size);
             this.family = props.family ? props.family : this.family;
             this.italic = (props.italic!==undefined) ? props.italic : this.italic;
             this.bold = (props.bold!==undefined) ? props.bold : this.bold;

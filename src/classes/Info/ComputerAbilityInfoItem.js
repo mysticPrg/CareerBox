@@ -25,7 +25,7 @@ define([], function () {
             this._id = props._id ? props._id : this._id;
             this.S_name = props.S_name ? props.S_name : this.S_name;
             this.S_grade = props.S_grade ? props.S_grade : this.S_grade;
-            this.N_term = props.N_term ? props.N_term : this.N_term;
+            this.N_term = (props.N_term!==undefined) ? props.N_term : this.N_term;
         }
     }
 
