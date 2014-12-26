@@ -619,7 +619,7 @@ img {
 }
 
 #SectionEditorTab a:focus {
-    outline: 0;
+    outline: 0 ;
 }
 
 .k-splitbar {
@@ -718,7 +718,7 @@ img {
     height: 19px !important;
 }
 
-.focus {box-shadow: 0 0 0 2px rgb( 155, 201, 199 ); }
+.focus {box-shadow: 0 0 0 2px rgb( 155, 201, 199 ) !important; }
 
 .whiteSpace {
     white-space:pre-wrap; !important;
