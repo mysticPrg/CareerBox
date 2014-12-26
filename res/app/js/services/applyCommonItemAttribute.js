@@ -69,15 +69,13 @@ define(['app'
     function rotate(element, item) {
         var r = 'rotate(' + item.rotate + 'deg)';
         element.css({
-//            '-moz-transform': r,
             '-webkit-transform': r,
-//            '-o-transform': r,
-//            '-ms-transform': r,
             'transform': r
         });
     };
 
     function alpha(element, item){
+        if(item.alpha)
         element.css({
             'background-color': 'rgba(' + HexTo10(item.fill.color.R) + ', ' + HexTo10(item.fill.color.G) + ', ' + HexTo10(item.fill.color.B) + ', ' + item.alpha / 100 + ')',
             'border-color': 'rgba(' + HexTo10(item.outline.color.R) + ', ' + HexTo10(item.outline.color.G) + ', ' + HexTo10(item.outline.color.B) + ', ' + item.alpha / 100 + ')'
