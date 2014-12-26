@@ -1,15 +1,18 @@
 <div id="rowcolForm" class="clearfix">
-    <div id="rowcolFillForm">
+    <div id="rowcolFillForm" class="clearfix">
         <!--<label for="rowcolFillForm" class="rowcolElement">사이즈</label>-->
+        <label for="rowcolFillForm" class="rowcolElement">리스트 타입</label>
         <div class="rowCount rowcolElement">
-            <label for="rowCount">row</label>
+            <label for="rowCount">행</label>
             <input type="text" class="attrInput form-control" id="rowCount" ng-model="data.rowCount">
         </div>
         <div class="colCount rowcolElement">
-            <label for="colCount">col</label>
+            <label for="colCount">열</label>
             <input type="text" class="attrInput form-control" id="colCount" ng-model="data.colCount">
         </div>
-        <h6>변환 버튼을 누르면 페이지가 저장됩니다.</h6>
+    </div>
+    <div class="transformElement">
+        <h6>변환 버튼을 누르면 페이지가 저장됨</h6>
         <button class="btn btn-default" ng-click="reload()">변환</button>
     </div>
 </div>
