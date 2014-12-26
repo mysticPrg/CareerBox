@@ -22,20 +22,20 @@ define([
 
     var InformationData = {
         personalInfo : new PersonalInfo(),
-        additionalInfo : new AdditionalInfo(),
-        highSchoolInfo : new HighSchoolInfo(),
-        univSchoolInfo : new UnivSchoolInfo(),
         workingInfo : new WorkingInfo(),
-        certificateAbilityInfo : new CertificationAbilityInfo(),
-        proficiencyInfo : new ProficiencyInfo(),
-        computerAbilityInfo : new ComputerAbilityInfo(),
-        paperAbilityInfo : new PaperAbilityInfo(),
-        scholarshipInfo : new ScholarshipInfo(),
-        awardInfo : new AwardInfo(),
+        highSchoolInfo : new HighSchoolInfo(),
         localActivityInfo : new LocalActivityInfo(),
-        globalActivityInfo : new GlobalActivityInfo(),
+        paperAbilityInfo : new PaperAbilityInfo(),
+        univSchoolInfo : new UnivSchoolInfo(),
+        awardInfo : new AwardInfo(),
+        proficiencyInfo : new ProficiencyInfo(),
+        certificateAbilityInfo : new CertificationAbilityInfo(),
+        scholarshipInfo : new ScholarshipInfo(),
+        additionalInfo : new AdditionalInfo(),
+        columnInfo : new ColumnInfo(),
+        computerAbilityInfo : new ComputerAbilityInfo(),
         projectInfo : new ProjectInfo(),
-        columnInfo : new ColumnInfo()
+        globalActivityInfo : new GlobalActivityInfo()
     };
 
     app.factory('InformationData', function () {

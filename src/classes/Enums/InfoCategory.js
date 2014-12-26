@@ -25,20 +25,20 @@ define([
              PaperAbilityInfo, ScholarshipInfo, AwardInfo, LocalActivityInfo, GlobalActivityInfo, ProjectInfo, ColumnInfo) {
     var InfoCategory = [
         new PersonalInfo(),
-        new AdditionalInfo(),
-        new HighSchoolInfo(),
-        new UnivSchoolInfo(),
         new WorkingInfo(),
-        new CertificationAbilityInfo(),
-        new ProficiencyInfo(),
-        new ComputerAbilityInfo(),
-        new PaperAbilityInfo(),
-        new ScholarshipInfo(),
-        new AwardInfo(),
+        new HighSchoolInfo(),
         new LocalActivityInfo(),
-        new GlobalActivityInfo(),
+        new PaperAbilityInfo(),
+        new UnivSchoolInfo(),
+        new AwardInfo(),
+        new ProficiencyInfo(),
+        new CertificationAbilityInfo(),
+        new ScholarshipInfo(),
+        new AdditionalInfo(),
+        new ColumnInfo(),
+        new ComputerAbilityInfo(),
         new ProjectInfo(),
-        new ColumnInfo()
+        new GlobalActivityInfo()
     ];
 
     return InfoCategory;
