@@ -30,8 +30,8 @@ module.exports.set = function (server) {
     server.get('/template/check/:_id', getTemplateUsingCheckService);
     server.get('/template/thumb/:_id', downloadThumbService);
 
-    server.get('/template/basic', getBasicListService);
-    server.get('/template/basic/:infoType', getBasicListByInfoTypeService);
+    server.get('/template/basic/list', getBasicListService);
+    server.get('/template/basic/list/:infoType', getBasicListByInfoTypeService);
 };
 
 function checkArgForTemplate(req, res) {
