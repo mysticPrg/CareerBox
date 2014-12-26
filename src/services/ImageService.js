@@ -27,7 +27,8 @@ var isolateUploader = new Uploader({
         [200, 200]
     ],
     acceptFileTypes: /\.(jpe?g|png|bmp)$/i,
-    uploadType: 'isolate'
+    uploadType: 'isolate',
+    maxFileSize: 5242880 //0000 5
 });
 
 var profileImgUploader = new Uploader({
@@ -43,7 +44,8 @@ var profileImgUploader = new Uploader({
         [160, 213]
     ],
     acceptFileTypes: /\.(jpe?g|png|bmp)$/i,
-    uploadType: 'profile'
+    uploadType: 'profile',
+    maxFileSize: 5242880 //0000 5
 });
 
 var symbolImgUploader = new Uploader({
@@ -58,7 +60,8 @@ var symbolImgUploader = new Uploader({
         [500]
     ],
     acceptFileTypes: /\.(jpe?g|png|bmp)$/i,
-    uploadType: 'symbol'
+    uploadType: 'symbol',
+    maxFileSize: 5242880 //0000 5
 });
 
 function checkArgForFiles(req, res) {
