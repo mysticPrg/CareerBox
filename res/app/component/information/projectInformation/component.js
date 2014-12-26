@@ -53,7 +53,7 @@ define([
                     alert('파일 크기는 5MB를 넘을 수 없습니다.');
                     return;
                 }
-                
+
                 $scope.fileNameForProject = $files[0].name;
                 $scope.files = $files;
                 $('#project_upload').fadeIn('slow');
