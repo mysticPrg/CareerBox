@@ -93,10 +93,13 @@ define([
             var newTemplate = new Template();
             newTemplate.title = template.title;
             newTemplate.description = template.description;
+
             newTemplate.target.bindingType = template.target.bindingType;
             newTemplate.target.size = {width : 600, height : 400};
 
             $scope.template = newTemplate;
+
+            EditorData.template = newTemplate;
 
             // 템플릿 생성하고 나면 캔버스 속성이 나오도록함.
             EditorData.focusId = 'canvas-content';
