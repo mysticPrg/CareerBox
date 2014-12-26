@@ -26,11 +26,10 @@ define([
                     'jeju hallasan',
                     'kopub batang',
                     'nanum gothic',
-                    'nanum gothiccoding',
-                    'nanumm yeongjo',
-                    'nanum brushscript',
-                    'nanum penscript'
-
+                    'nanum gothic coding',
+                    'nanum myeongjo',
+                    'nanum brush script',
+                    'nanum pens cript'
                 ];
 
                 $scope.$watch("data.font.color",function() {
