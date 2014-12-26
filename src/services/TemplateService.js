@@ -31,7 +31,7 @@ module.exports.set = function (server) {
     server.get('/template/thumb/:_id', downloadThumbService);
 
     server.get('/template/basic', getBasicListService);
-    server.get('/template/:infoType', getBasicListByInfoTypeService);
+    server.get('/template/basic/:infoType', getBasicListByInfoTypeService);
 };
 
 function checkArgForTemplate(req, res) {
