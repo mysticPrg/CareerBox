@@ -49,6 +49,11 @@ define([
             }
 
             $scope.onFileSelectProjectInfo = function ($files) {
+                if($files[0].size > 5242880){
+                    alert('파일 크기는 5MB를 넘을 수 없습니다.');
+                    return;
+                }
+                
                 $scope.fileNameForProject = $files[0].name;
                 $scope.files = $files;
                 $('#project_upload').fadeIn('slow');
@@ -65,6 +70,11 @@ define([
             }
 
             $scope.onFileSelectProjectImage = function ($files) {
+                if($files[0].size > 5242880){
+                    alert('파일 크기는 5MB를 넘을 수 없습니다.');
+                    return;
+                }
+
                 $scope.fileName1 = $files[0].name;
                 $scope.imageProgress = 0;
                 $('#project_picture_progressbar').fadeIn('slow');

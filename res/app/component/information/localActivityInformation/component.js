@@ -49,6 +49,11 @@ define([
             }
 
             $scope.onFileSelectLocalActivityInfo = function ($files) {
+                if($files[0].size > 5242880){
+                    alert('파일 크기는 5MB를 넘을 수 없습니다.');
+                    return;
+                }
+
                 $scope.fileNameForLocalActivity = $files[0].name;
                 $scope.files = $files;
                 $('#localActivity_upload').fadeIn('slow');
@@ -65,6 +70,11 @@ define([
             }
 
             $scope.onFileSelectLocalActivityImage = function ($files) {
+                if($files[0].size > 5242880){
+                    alert('파일 크기는 5MB를 넘을 수 없습니다.');
+                    return;
+                }
+
                 $scope.fileName1 = $files[0].name;
                 $scope.imageProgress = 0;
                 $('#localActivity_picture_progressbar').fadeIn('slow');
