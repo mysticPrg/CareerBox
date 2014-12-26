@@ -9,6 +9,16 @@ define([
         middle : '50%',
         bottom : '90%'
     };
+
+    function trim(str) {
+        var result='';
+        var splitArr = str.split(' ');
+        for(var key in splitArr){
+            result += splitArr[key];
+        }
+        return result;
+    }
+
     app.directive('link', ['SetAttributeInformation', 'EditorData', '$window', function (SetAttributeInformation, EditorData, $window) {
         return {
             // A = attribute, E = Element, C = Class and M = HTML Comment
@@ -61,7 +71,7 @@ define([
                 // font-family
                 scope.$watch("info.font.family",function() {
                     element.css({
-                        'font-family': scope.info.font.family
+                        'font-family': scope.info.font.family + ',' + trim(scope.info.font.family)
                     });
                 });
 
