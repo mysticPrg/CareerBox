@@ -1,4 +1,4 @@
-<div id="editor" style="background-color: #d8d8d8">
+<div id="editor" style="background-color: #d8d8d8; height: 100%;">
     <div id="paperEditor" paper-component
          style="background-color: #f6f6f6; height: 54px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.2);"></div>
 
@@ -16,7 +16,7 @@
             </ul>
 
             <div class="tab-content" id="content">
-                <div id="articleTemplateArea">
+                <div id="articleTemplateArea" >
                     <div style="margin-bottom: 30px;">
                         <div class="btn-group">
                             <button type="button" class="tamplateCategory btn btn-default dropdown-toggle" data-toggle="dropdown">{{selected.title}}
@@ -39,10 +39,12 @@
 
                     <!--기본 템플릿 리스트 -->
                     <ul id="basicTemplateList">
+
                         <li ng-repeat="template in basicTemplates track by $index">
                             <div id="basicTemplateThumb" ng-click="templateClone(template)">
-                                <img id="basicTemplateThumbImg" ng-src="{{template.thumbURL}}">
-
+                                <div style="background-color: #fff;">
+                                    <img id="basicTemplateThumbImg" ng-src="{{template.thumbURL}}">
+                                </div>
                                 <div class="description">
                                     {{template.title}}
                                 </div>

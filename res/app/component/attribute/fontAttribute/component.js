@@ -29,7 +29,7 @@ define([
                     '나눔 고딕' : 'nanum gothic',
                     '나눔 고딕코딩' : 'nanum gothiccoding',
                     '나눔 명조' : 'nanum myeongjo',
-                    '나눔 프러쉬스크립트' : 'nanum brushscript',
+                    '나눔 브러쉬스크립트' : 'nanum brushscript',
                     '나눔 펜스크립트' : 'nanum penscript'
                 };
 
