@@ -82,7 +82,7 @@
                     <div pos-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.fill || attributeInformation.fill==='' " class="att_list" ng-hide="attributeInformation.layoutComponentType === 'article' && type !== 'template'">
+                <li ng-if="attributeInformation.fill || attributeInformation.fill==='' " class="att_list" ng-hide="(attributeInformation.layoutComponentType === 'article' && type !== 'template') || attributeInformation.itemType ==='line'">
                     <div fill-attribute to="attributeInformation"></div>
                 </li>
 
@@ -118,7 +118,7 @@
                     <div is-index-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="(attributeInformation.rowCount || attributeInformation.rowCount==='' || attributeInformation.rowCount===0) && !(attributeInformation.bindingType.title === '기본정보' || attributeInformation.bindingType.title === '추가정보')" ng-hide="attributeInformation.layoutComponentType === 'article'">
+                <li ng-if="(attributeInformation.rowCount || attributeInformation.rowCount==='' || attributeInformation.rowCount===0) && !(attributeInformation.bindingType.title === '기본정보' || attributeInformation.bindingType.title === '추가정보') " ng-hide="type === 'template'">
                     <div rowcol-attribute to="attributeInformation"></div>
                 </li>
 
