@@ -15,7 +15,6 @@ define([
 
                 $scope.fontFamily = [
                 // 영어 폰트
-                    'nanumgothic',
                     'alefhebrew',
                     'amiri',
                     'dhurjati',
@@ -26,7 +25,7 @@ define([
                     'jejumyeongjo',
                     'jejuhallasan',
                     'kopubbatang',
-                    'nanumgothic',
+                    'nanum gothic',
                     'nanumgothiccoding',
                     'nanummyeongjo',
                     'nanumbrushscript',
