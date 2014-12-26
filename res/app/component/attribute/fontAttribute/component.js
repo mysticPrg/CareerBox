@@ -27,10 +27,10 @@ define([
                     '제주 한라산' : 'jeju hallasan',
                     '코펍 바탕' : 'kopub batang',
                     '나눔 고딕' : 'nanum gothic',
-                    '나눔 고딕코딩' : 'nanum gothiccoding',
+                    '나눔 고딕코딩' : 'nanum gothic coding',
                     '나눔 명조' : 'nanum myeongjo',
-                    '나눔 브러쉬스크립트' : 'nanum brushscript',
-                    '나눔 펜스크립트' : 'nanum penscript'
+                    '나눔 브러쉬스크립트' : 'nanum brush script',
+                    '나눔 펜스크립트' : 'nanum pen script'
                 };
 
                 $scope.$watch("data.font.color",function() {
