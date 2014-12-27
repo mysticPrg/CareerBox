@@ -17,7 +17,7 @@ define(['classes/Structs/Term'], function (Term) {
         'S_religion'                   : "종교",
         'N_physical_tall'              : "신장",
         'N_physical_weight'            : "몸무게",
-        'N_physical_blood'             : "혈액형",
+        'S_physical_blood'             : "혈액형",
         'N_physical_sight_left'        : "우시",
         'N_physical_sight_right'       : "좌시",
         'S_favorite'                   : "취미",
@@ -35,7 +35,7 @@ define(['classes/Structs/Term'], function (Term) {
         this.S_religion = '';
         this.N_physical_tall = 0;
         this.N_physical_weight = 0;
-        this.N_physical_blood = 0;
+        this.S_physical_blood = 0;
         this.N_physical_sight_left = 0;
         this.N_physical_sight_right = 0;
         this.S_favorite = '';
@@ -51,7 +51,7 @@ define(['classes/Structs/Term'], function (Term) {
             this.S_religion = props.S_religion ? props.S_religion : this.S_religion;
             this.N_physical_tall = (props.N_physical_tall!==undefined) ? props.N_physical_tall : this.N_physical_tall;
             this.N_physical_weight = (props.N_physical_weight!==undefined) ? props.N_physical_weight : this.N_physical_weight;
-            this.N_physical_blood = (props.N_physical_blood!==undefined) ? props.N_physical_blood : this.N_physical_blood;
+            this.S_physical_blood = (props.S_physical_blood!==undefined) ? props.S_physical_blood : this.S_physical_blood;
             this.N_physical_sight_left = (props.N_physical_sight_left!==undefined) ? props.N_physical_sight_left : this.N_physical_sight_left;
             this.N_physical_sight_right = (props.N_physical_sight_right!==undefined) ? props.N_physical_sight_right : this.N_physical_sight_right;
             this.S_favorite = props.S_favorite ? props.S_favorite : this.S_favorite;
