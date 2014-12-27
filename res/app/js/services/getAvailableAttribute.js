@@ -26,32 +26,36 @@ define([
 
             var result = {};
             var item = getItem(category);
+            var key;
+            var AttributeName;
 
             // I F 빼고 가져오기
-            if(infoType == '-I -F'){
-                for(var key in item){
-                    if(key.split('_')[0] !== 'I' && key.split('_')[0] !== 'F'){
-                        var AttributeName = item.getAttributeName(key);
-                        if(AttributeName && AttributeName !== '0' && AttributeName !== 0)
+            if (infoType === '-I -F') {
+                for (key in item) {
+                    if (key.split('_')[0] !== 'I' && key.split('_')[0] !== 'F') {
+                        AttributeName = item.getAttributeName(key);
+                        if (AttributeName && AttributeName !== '0' && AttributeName !== 0) {
                             result[key] = AttributeName;
+                        }
                     }
                 }
                 return result;
             }
 
-            for(var key in item){
-                if(key.split('_')[0] === infoType){
-                    var AttributeName = item.getAttributeName(key);
-                    if(AttributeName && AttributeName !== '0' && AttributeName !== 0)
+            for (key in item) {
+                if (key.split('_')[0] === infoType) {
+                    AttributeName = item.getAttributeName(key);
+                    if (AttributeName && AttributeName !== '0' && AttributeName !== 0) {
                         result[key] = AttributeName;
+                    }
                 }
             }
 
             return result;
-        }
+        };
 
-        function getItem(category){
-            switch (category){
+        function getItem(category) {
+            switch (category) {
                 case InfoType.personalInfo:
                     return new PersonalInfoItem();
                 case InfoType.additionalInfo:

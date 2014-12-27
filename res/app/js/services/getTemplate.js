@@ -12,6 +12,6 @@ define(['app'], function (app) {
             }).success(function (data) {
                 callback(data);
             });
-        }
+        };
     });
 });

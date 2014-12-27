@@ -60,6 +60,6 @@ define([
                 case InfoType.columnInfo:
                     return new ColumnInfoItem();
             }
-        };
+        }
     });
 });
