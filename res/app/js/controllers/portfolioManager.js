@@ -6,14 +6,14 @@ define([
     'angular',
     'app',
     '../../component/menu/component',
-    '../../component/newPortfolio/component',
-    'service/EditorData',
-    'classes/Info/PersonalInfo'
-], function ($, ng, app, EditorData, PersonalInfo) {
+    '../../component/newPortfolio/component'
+    //'service/EditorData',
+    //'classes/Info/PersonalInfo'
+], function ($, ng, app) {
     app.controller('portfolioManager', ['$scope', '$http', '$window', function ($scope, $http, $window) {
         $scope.initialize = function (){
             $http.get('http://210.118.74.166:8123/info/mainInfo', {withCredentials: true}).
-                success(function(data, status, headers, config) {
+                success(function(data) {
                     var name = data.result._member_name.split('@')[0];
                     data.result._member_name = name;
                     $scope.userInfo = data.result;
@@ -22,10 +22,10 @@ define([
 
 
                 });
-        }
+        };
 
         $scope.editPersonalInformation = function(){
             $window.location.href = 'InformationManager.html';
-        }
+        };
     }]);
 });

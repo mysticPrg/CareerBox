@@ -8,7 +8,6 @@ var ImageDB = require('../db/ImageDB');
 var ServiceUtil = require('../util/ServiceUtil');
 
 var Result = require('./result');
-var ObjectID = require('mongodb').ObjectID;
 
 var fs = require('fs');
 

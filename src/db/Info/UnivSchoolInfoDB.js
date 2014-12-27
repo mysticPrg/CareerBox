@@ -5,7 +5,6 @@
 var requirejs = require('../../require.config');
 var UnivSchoolInfo = requirejs('classes/Info/UnivSchoolInfo');
 
-var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
 function saveList(data, callback) {
@@ -55,7 +54,6 @@ function useCheck(_member_id, _item_id, callback) {
 function reset() {
     var univSchoolInfoCollection = require('../../util/DBCollections').getInstance().collections.univSchoolInfo;
     univSchoolInfoCollection.remove({}, function() {
-        return;
     });
 }
 

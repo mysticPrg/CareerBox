@@ -18,7 +18,7 @@ define(['classes/Structs/Color'], function (Color) {
             this.color = new Color(props.color ? props.color : this.color);
             this.weight = Number((props.weight!==undefined) ? props.weight : this.weight);
         }
-    };
+    }
 
     return Outline;
 });

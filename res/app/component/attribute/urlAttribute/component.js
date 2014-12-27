@@ -10,7 +10,7 @@ define([
             scope: {
                 data : "=to"
             },
-            link: function ($scope, element, att) {
+            link: function ($scope) {
 
                 $scope.papers = {};
                 for(var i in EditorData.paperList){
@@ -21,11 +21,11 @@ define([
 
                 $scope.setURL = function() {
                     for(var key in $scope.papers){
-                        if($scope.papers[key] == $scope.url_title){
+                        if($scope.papers[key] === $scope.url_title){
                             $scope.data.url = key;
                         }
                     }
-                }
+                };
             },
             templateUrl: require.toUrl('component/attribute/urlAttribute/template.html')
         };

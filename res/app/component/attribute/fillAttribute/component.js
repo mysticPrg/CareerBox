@@ -10,7 +10,7 @@ define([
                 data : "=to"
             },
             templateUrl: require.toUrl('component/attribute/fillAttribute/template.html'),
-            link: function ($scope, element, att) {
+            link: function ($scope) {
 
                 $scope.$watch("data.fill.color",function() {
                     $scope.color = "#" + $scope.data.fill.color.R + $scope.data.fill.color.G + $scope.data.fill.color.B;

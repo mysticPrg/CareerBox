@@ -10,7 +10,7 @@ define([
     'service/ApplyCommonItemAttribute',
     'service/SetAttributeInformation'
 ], function (app, $) {
-    app.directive('draggable', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', '$document', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation, $document) {
+    app.directive('draggable', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation) {
         return {
 
             // A = attribute, E = Element, C = Class and M = HTML Comment
@@ -23,42 +23,41 @@ define([
                     helper: 'original',    // 객체를 복사
                     cursor: 'move',     //
                     tolerance: 'fit',   //
-                    containment: '#canvas-content'    // 드롭되지 않으면 다시 돌아옴.
-
-                    ,start: function() {
+                    containment: '#canvas-content',    // 드롭되지 않으면 다시 돌아옴.
+                    start: function() {
 //                        console.log('start', element.position());
 //                        console.log('start top, left', element[0].offsetTop, element[0].offsetLeft);
                     }
                 });
 
-                element.bind('mousedown', function (event){
+                element.bind('mousedown', function (){
                     // 포커싱 처리
                     EditorData.focusId = att.id;
 
                 });
 
-                element.bind('mouseup', function (event){
+                element.bind('mouseup', function (){
                     // 위치 업데이트
 //                    item.pos = {x: element.position().left, y: element.position().top};
                     item.pos = {x: element[0].offsetLeft, y: element[0].offsetTop};
-                    if (item.state != 'new') {
+                    if (item.state !== 'new') {
                         item.state = 'edit';
                     }
                     element.trigger('click');
                 });
 
-                element.bind('mousemove', function (event){
-//                    console.log('mousemove', element.position());
-                });
+//                element.bind('mousemove', function (event){
+////                    console.log('mousemove', element.position());
+//                });
 
-                element.bind('mouseout', function (event){
-                    $('#canvas-content').bind('click', function (event){
+                element.bind('mouseout', function (){
+                    $('#canvas-content').bind('click', function (){
                         // 포커싱 처리
                         EditorData.focusId = 'canvas-content';
                     });
                 });
 
-                element.bind('mouseover', function (event){
+                element.bind('mouseover', function (){
                     $('#canvas-content').unbind('click');
                 });
             }

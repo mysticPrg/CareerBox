@@ -39,7 +39,7 @@ define([
 
     PaperAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key){
         return dictionary[key];
-    }
+    };
 
     return PaperAbilityInfoItem;
 });

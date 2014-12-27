@@ -12,7 +12,7 @@ define([], function () {
         'S_name' : '기능',
         'S_grade' : '활용수준',
         'N_term' : '활용기간'
-    }
+    };
 
     function ComputerAbilityInfoItem(props) {
 
@@ -31,7 +31,7 @@ define([], function () {
 
     ComputerAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key){
         return dictionary[key];
-    }
+    };
 
     return ComputerAbilityInfoItem;
 });

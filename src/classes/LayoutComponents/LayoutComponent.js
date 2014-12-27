@@ -42,7 +42,7 @@ define([
             this.bindingData = props.bindingData ? props.bindingData : this.bindingData;
             this.alpha = Number((props.alpha!==undefined) ? props.alpha : this.alpha);
         }
-    };
+    }
 
     return LayoutComponent;
 });

@@ -5,7 +5,6 @@
 var requirejs = require('../require.config');
 var Member = requirejs('classes/Member');
 
-var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
 function create(data, callback) {
@@ -52,7 +51,6 @@ function update(data, callback) {
 function reset() {
     var memberCollection = require('../util/DBCollections').getInstance().collections.member;
     memberCollection.remove({}, function() {
-        return;
     });
 }
 

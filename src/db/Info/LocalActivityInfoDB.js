@@ -5,7 +5,6 @@
 var requirejs = require('../../require.config');
 var LocalActivityInfo = requirejs('classes/Info/LocalActivityInfo');
 
-var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
 function save(data, callback) {
@@ -55,7 +54,6 @@ function useCheck(_member_id, _item_id, callback) {
 function reset() {
     var localActivityInfoCollection = require('../../util/DBCollections').getInstance().collections.localActivityInfo;
     localActivityInfoCollection.remove({}, function() {
-        return;
     });
 }
 

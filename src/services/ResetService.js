@@ -4,7 +4,7 @@
 
 var ServiceUtil = require('../util/ServiceUtil');
 
-var MemberDB = require('../db/MemberDB');
+//var MemberDB = require('../db/MemberDB');
 var FileDB = require('../db/FileDB');
 var ImageDB = require('../db/ImageDB');
 var PaperDB = require('../db/PaperDB');

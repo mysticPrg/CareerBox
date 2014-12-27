@@ -11,7 +11,8 @@ define([], function () {
     var dictionary = {
         'S_title' : '칼럼명',
         'S_content' : '내용'
-    }
+    };
+
     function ColumnInfoItem(props) {
 
         this._id = null;
@@ -27,7 +28,7 @@ define([], function () {
 
     ColumnInfoItem.prototype.getAttributeName = function getAttributeName(key){
         return dictionary[key];
-    }
+    };
 
     return ColumnInfoItem;
 });

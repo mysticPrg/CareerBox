@@ -13,7 +13,7 @@ define([], function () {
         'D_date': '취급일자',
         'I_image': '대표이미지',
         'F_file': '첨부파일'
-    }
+    };
 
     function CertificateAbilityInfoItem(props) {
 
@@ -36,7 +36,7 @@ define([], function () {
 
     CertificateAbilityInfoItem.prototype.getAttributeName = function getAttributeName(key) {
         return dictionary[key];
-    }
+    };
 
     return CertificateAbilityInfoItem;
 });

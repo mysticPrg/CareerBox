@@ -23,7 +23,7 @@ define(['classes/Structs/Color'], function (Color) {
             this.italic = (props.italic!==undefined) ? props.italic : this.italic;
             this.bold = (props.bold!==undefined) ? props.bold : this.bold;
         }
-    };
+    }
 
     return Font;
 });

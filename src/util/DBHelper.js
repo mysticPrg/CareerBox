@@ -9,7 +9,7 @@ function DBHelper() {
     this.client = require('mongodb').MongoClient;
     this.db = null;
     this.url = 'mongodb://localhost:27017/careerbox';
-};
+}
 
 DBHelper.prototype.connect = function connect(callback) {
     if (this.db !== null) {

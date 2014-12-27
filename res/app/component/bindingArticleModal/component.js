@@ -7,7 +7,6 @@ define([
 ], function (app) {
     app.controller('bindingArticleModalController', ['$scope', '$http', '$modalInstance', 'EditorData', 'getInformationByType', 'getInformationItem',
         function ($scope, $http, $modalInstance, EditorData, getInformationByType, getInformationItem) {
-            $scope.informationData;
             $scope.selectedItems = [];
             $scope.informationDataOptions = {
                 data: 'informationData',
@@ -22,10 +21,11 @@ define([
             console.log(InformationItem);
 
             getInformationByType($http, EditorData.infoType, function (data) {
-                if(data.result === null)
+                if(data.result === null) {
                     return;
+                }
 
-                var items = data.result.items
+                var items = data.result.items;
 
                 $scope.hasItems = items.length > 0? true: false;
 
@@ -35,7 +35,7 @@ define([
 
                     var item;
                     for(var i = 0 ; i < items.length; i++){
-                        dataitem = new Object();
+                        dataitem = {};
                         item = items[i];
 
                         for (var key in item) {
@@ -79,7 +79,7 @@ define([
             $scope.$on('ngGridEventData', function(){
                 angular.forEach($scope.informationData, function (data, index) {
                     for (var i = 0; i < EditorData.bindingData.length; i++) {
-                        if (data._id == EditorData.bindingData[i]) {
+                        if (data._id === EditorData.bindingData[i]) {
                             $scope.informationDataOptions.selectRow(index, true);
                         }
                     }
@@ -102,5 +102,5 @@ define([
         templateUrl: require.toUrl('component/bindingArticleModal/template.html'),
         controller: 'bindingArticleModalController',
         size : 'lg'
-    }
+    };
 });

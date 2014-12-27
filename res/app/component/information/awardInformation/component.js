@@ -19,11 +19,11 @@ define([
             var newAwardInfoItem = new AwardInfoItem($scope.awardInfoItem);
             $scope.awardInfoItems.push(newAwardInfoItem);
             $scope.awardInfoItem = new AwardInfoItem();
-        }
+        };
 
         $scope.delAwardInfo = function (index) {
             $scope.awardInfoItems.splice(index, 1);
-        }
+        };
     }]);
 
     app.directive('awardInformation', function () {

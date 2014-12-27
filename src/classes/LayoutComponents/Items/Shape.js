@@ -22,7 +22,7 @@ define([
         if (props) {
             this.shapeType = props.shapeType ? props.shapeType : this.shapeType;
         }
-    };
+    }
 
     Util.inherit(Shape, Item);
 

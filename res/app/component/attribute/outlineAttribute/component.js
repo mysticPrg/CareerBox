@@ -11,7 +11,7 @@ define([
                 data : "=to"
             },
             templateUrl: require.toUrl('component/attribute/outlineAttribute/template.html'),
-            link: function ($scope, element, att) {
+            link: function ($scope) {
 
                 $scope.$watch("data.outline.color",function() {
                     $scope.color = "#" + $scope.data.outline.color.R + $scope.data.outline.color.G + $scope.data.outline.color.B;

@@ -18,7 +18,7 @@ define([
         'S_description': '설명',
         'I_image': '이미지',
         'F_file': '첨부파일'
-    }
+    };
 
     function ProjectInfoItem(props) {
 
@@ -43,7 +43,7 @@ define([
 
     ProjectInfoItem.prototype.getAttributeName = function getAttributeName(key) {
         return dictionary[key];
-    }
+    };
 
     return ProjectInfoItem;
 });

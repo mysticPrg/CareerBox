@@ -8,7 +8,7 @@ if (typeof define !== 'function') {
 
 define([
     'classes/Structs/Size',
-    'classes/Structs/Fill',
+    'classes/Structs/Fill'
 ], function (Size, Fill) {
 
     function Paper(props) {
@@ -39,7 +39,7 @@ define([
 
             this._member_id = props._member_id ? props._member_id : this._member_id;
         }
-    };
+    }
 
     return Paper;
 });

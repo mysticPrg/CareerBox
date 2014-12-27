@@ -4,11 +4,11 @@
     "curly": true,     // 중괄호 규칙
     "undef": true,     // 정의하지 않은 이름 체크
     "eqeqeq": true,    // ===, !== 사용 여부
-    "newcap": true,    // new 뒤에 오는 생성자는 반드시 대문자로 시작
+    "newcap": false,    // new 뒤에 오는 생성자는 반드시 대문자로 시작
     "noarg": true,     // arguments.caller, arguments.callee의 사용 금지
     "noempty": true,   // for 문 등에서 빈 블록 사용 금지
     "trailing": true,  // 라인 끝에 불필요한 공백문자 금지,
-    "maxdepth": 2,     // 제어문의 최대 중첩갯수,
+    "maxdepth": 4,     // 제어문의 최대 중첩갯수,
     "nonew": false,    // 생성자는 반드시 new로 호출
 
     "es5": false,      // es5 표준 사용 여부
@@ -32,6 +32,8 @@
         "__dirname": true,
         "window": true,
         "document": true,
-        "angular": true
+        "angular": true,
+        "alert": true,
+        "$": true
     }
 }

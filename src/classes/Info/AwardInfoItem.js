@@ -38,7 +38,7 @@ define([], function () {
 
     AwardInfoItem.prototype.getAttributeName = function getAttributeName(key){
         return dictionary[key];
-    }
+    };
 
     return AwardInfoItem;
 });

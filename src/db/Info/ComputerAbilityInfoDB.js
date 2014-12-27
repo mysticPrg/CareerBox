@@ -5,7 +5,6 @@
 var requirejs = require('../../require.config');
 var ComputerAbilityInfo = requirejs('classes/Info/ComputerAbilityInfo');
 
-var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
 function save(data, callback) {
@@ -55,7 +54,6 @@ function useCheck(_member_id, _item_id, callback) {
 function reset() {
     var computerAbilityInfoCollection = require('../../util/DBCollections').getInstance().collections.computerAbilityInfo;
     computerAbilityInfoCollection.remove({}, function() {
-        return;
     });
 }
 

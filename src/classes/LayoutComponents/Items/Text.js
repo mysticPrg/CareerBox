@@ -30,7 +30,7 @@ define([
             this.align = props.align ? props.align : this.align;
             this.vAlign = props.vAlign ? props.vAlign : this.vAlign;
         }
-    };
+    }
 
     Util.inherit(Text, Item);
 

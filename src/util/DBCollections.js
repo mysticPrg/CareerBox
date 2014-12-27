@@ -2,7 +2,6 @@
  * Created by careerBox on 2014-11-20.
  */
 
-var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
 var GridStore = require('mongodb').GridStore;
 

@@ -9,8 +9,6 @@ define([
     'jquery',
     'angular',
     'app',
-    'classes/Templates/Template',
-    'service/EditorData',
     'service/HTMLGenerator',
     'component/item/line/component',
     'component/item/shape/component',
@@ -18,7 +16,7 @@ define([
     'component/item/link/component',
     'component/item/image/component',
     'directives/CommonAttribute'
-], function ($, ng, app, Template, EditorData) {
+], function ($, ng, app) {
     app.controller('templatePreview', ['$scope', '$http', '$compile', 'EditorData', 'HTMLGenerator', function ($scope, $http, $compile, EditorData, HTMLGenerator) {
         // z index 초기화
         EditorData.end_zOrder = 0;
@@ -67,8 +65,6 @@ define([
 
         // 템플릿에서 edit 눌러서 저장된 아이템이 로드될 때 발생!
         function loadElement(item) {
-            var id = EditorData.template._id + '_' + item._id;
-
             var option = {draggable: true, resizable: true, rotatable: true};
 
             var domObj = HTMLGenerator('loadItem', item, item._id, option);

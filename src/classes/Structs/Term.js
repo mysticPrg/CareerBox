@@ -16,7 +16,7 @@ define([], function () {
             this.start = new Date(props.start ? props.start : this.start);
             this.end = new Date(props.end ? props.end : this.end);
         }
-    };
+    }
 
     return Term;
 });

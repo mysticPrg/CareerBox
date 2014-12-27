@@ -22,9 +22,7 @@ define([
             scope: {
                 data : "=to"
             },
-            templateUrl: require.toUrl('component/attribute/arrowAttribute/template.html'),
-            controller: function ($scope, $rootScope) {
-            }
+            templateUrl: require.toUrl('component/attribute/arrowAttribute/template.html')
         };
     });
 

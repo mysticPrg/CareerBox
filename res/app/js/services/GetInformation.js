@@ -28,10 +28,12 @@ define([
             var loadUnivSchoolPromiss = $http.get('http://210.118.74.166:8123/info/univSchool', {withCredentials: true});
 
             $q.all([loadHighSchoolPromiss, loadUnivSchoolPromiss]).then(function (resultArray) {
-                if(resultArray[0].data.result !== null)
+                if(resultArray[0].data.result !== null) {
                     InformationData.highSchoolInfo = resultArray[0].data.result;
-                if(resultArray[1].data.result !== null)
+                }
+                if(resultArray[1].data.result !== null) {
                     InformationData.univSchoolInfo = resultArray[1].data.result;
+                }
             });
         }
 
@@ -39,8 +41,9 @@ define([
             var loadWorkingPromiss = $http.get('http://210.118.74.166:8123/info/working', {withCredentials: true});
 
             $q.all([loadWorkingPromiss]).then(function (resultArray) {
-                if(resultArray[0].data.result !== null)
+                if(resultArray[0].data.result !== null) {
                     InformationData.workingInfo = resultArray[0].data.result;
+                }
             });
         }
 
@@ -51,14 +54,18 @@ define([
             var loadPaperAbilityPromiss = $http.get('http://210.118.74.166:8123/info/paperAbility', {withCredentials: true});
 
             $q.all([loadCertificationAbilityPromiss, loadProficiencyPromiss, loadComputerAbilityPromiss, loadPaperAbilityPromiss]).then(function (resultArray) {
-                if(resultArray[0].data.result !== null)
+                if(resultArray[0].data.result !== null) {
                     InformationData.certificateAbilityInfo = resultArray[0].data.result;
-                if(resultArray[1].data.result !== null)
+                }
+                if(resultArray[1].data.result !== null) {
                     InformationData.proficiencyInfo = resultArray[1].data.result;
-                if(resultArray[2].data.result !== null)
+                }
+                if(resultArray[2].data.result !== null) {
                     InformationData.computerAbilityInfo = resultArray[2].data.result;
-                if(resultArray[3].data.result !== null)
+                }
+                if(resultArray[3].data.result !== null) {
                     InformationData.paperAbilityInfo = resultArray[3].data.result;
+                }
             });
         }
 
@@ -67,10 +74,12 @@ define([
             var loadAwardPromiss = $http.get('http://210.118.74.166:8123/info/award', {withCredentials: true});
 
             $q.all([loadScholarshipPromiss, loadAwardPromiss]).then(function (resultArray) {
-                if(resultArray[0].data.result !== null)
+                if(resultArray[0].data.result !== null) {
                     InformationData.scholarshipInfo = resultArray[0].data.result;
-                if(resultArray[1].data.result !== null)
+                }
+                if(resultArray[1].data.result !== null) {
                     InformationData.awardInfo = resultArray[1].data.result;
+                }
             });
         }
 
@@ -79,10 +88,12 @@ define([
             var loadGlobalActivityPromiss = $http.get('http://210.118.74.166:8123/info/globalActivity', {withCredentials: true});
 
             $q.all([loadLocalActivityPromiss, loadGlobalActivityPromiss]).then(function (resultArray) {
-                if(resultArray[0].data.result !== null)
+                if(resultArray[0].data.result !== null) {
                     InformationData.localActivityInfo = resultArray[0].data.result;
-                if(resultArray[1].data.result !== null)
+                }
+                if(resultArray[1].data.result !== null) {
                     InformationData.globalActivityInfo = resultArray[1].data.result;
+                }
             });
         }
 
@@ -90,8 +101,9 @@ define([
             var loadProjectPromiss = $http.get('http://210.118.74.166:8123/info/project', {withCredentials: true});
 
             $q.all([loadProjectPromiss]).then(function (resultArray) {
-                if(resultArray[0].data.result !== null)
+                if(resultArray[0].data.result !== null) {
                     InformationData.projectInfo = resultArray[0].data.result;
+                }
             });
         }
 
@@ -99,8 +111,9 @@ define([
             var loadColumnPromiss = $http.get('http://210.118.74.166:8123/info/column', {withCredentials: true});
 
             $q.all([loadColumnPromiss]).then(function (resultArray) {
-                if(resultArray[0].data.result !== null)
+                if(resultArray[0].data.result !== null) {
                     InformationData.columnInfo = resultArray[0].data.result;
+                }
             });
         }
         function loadAllInfo(){

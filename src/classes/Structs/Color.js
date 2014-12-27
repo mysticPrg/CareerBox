@@ -22,7 +22,7 @@ define([], function () {
             this.G = colorCode.G;
             this.B = colorCode.B;
         }
-    };
+    }
 
     Color.prototype.getColorCode = function getColorCode() {
         return (this.R + this.G + this.B);

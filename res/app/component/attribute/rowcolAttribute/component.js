@@ -1,11 +1,9 @@
 
 define([
-    'app',
-    'service/loadArticle',
-    'service/reloadPaper'
+    'app'
 ], function (app) {
 
-    app.directive('rowcolAttribute', function (loadArticle, reloadPaper) {
+    app.directive('rowcolAttribute', function () {
         return {
             restrict: 'A',
             scope: {
@@ -15,7 +13,7 @@ define([
             controller:function($scope){
                 $scope.reload = function() {
                     $scope.$emit('reload');
-                }
+                };
 
             }
         };

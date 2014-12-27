@@ -30,16 +30,12 @@ define([
             'date' : 'D'
         };
 
-        $scope.type;
-
-        $scope.result;
-
         $scope.test = function (){
             var category = $scope.category.infoType;
 
             var infoType = $scope.type;
 
             $scope.result = getAvailableAttribute(category, infoType);
-        }
+        };
     }]);
 });

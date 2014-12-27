@@ -5,7 +5,6 @@
 var requirejs = require('../../require.config');
 var GlobalActivityInfo = requirejs('classes/Info/GlobalActivityInfo');
 
-var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
 function save(data, callback) {
@@ -55,7 +54,6 @@ function useCheck(_member_id, _item_id, callback) {
 function reset() {
     var globalActivityInfoCollection = require('../../util/DBCollections').getInstance().collections.globalActivityInfo;
     globalActivityInfoCollection.remove({}, function() {
-        return;
     });
 }
 

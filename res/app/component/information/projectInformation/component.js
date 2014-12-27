@@ -12,7 +12,6 @@ define([
     app.controller('projectInformationController', ['$scope', '$upload', 'fileUpload', 'ImageUpload',
         function ($scope, $upload, fileUpload, ImageUpload) {
             $scope.projectInfoItem = new ProjectInfoItem();
-            $scope.files;
             $scope.progress = 0;
             $scope.imageProgress = 0;
 
@@ -42,11 +41,11 @@ define([
                 $scope.fileNameForProject = '';
 
                 initializeFileForm();
-            }
+            };
 
             $scope.delProjectInfo = function (index) {
                 $scope.projectInfoItems.splice(index, 1);
-            }
+            };
 
             $scope.onFileSelectProjectInfo = function ($files) {
                 if($files[0].size > 5242880){
@@ -57,7 +56,7 @@ define([
                 $scope.fileNameForProject = $files[0].name;
                 $scope.files = $files;
                 $('#project_upload').fadeIn('slow');
-            }
+            };
 
             $scope.uploadProjectInfo = function () {
                 $('#project_progressbar').fadeIn('slow');
@@ -67,7 +66,7 @@ define([
                 }, function (data) {
                     $scope.projectInfoItem.F_file = data.result;
                 });
-            }
+            };
 
             $scope.onFileSelectProjectImage = function ($files) {
                 if($files[0].size > 5242880){
@@ -85,7 +84,7 @@ define([
                     $scope.projectInfoItem.I_image = data.result;
                     $('#project_picture').attr('src', 'http://210.118.74.166:8123/image/symbol/thumb/' + data.result._id);
                 });
-            }
+            };
 
         }]);
 

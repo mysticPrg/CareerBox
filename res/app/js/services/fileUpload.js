@@ -4,6 +4,15 @@
 define(['app', 'service/serverURL'], function (app) {
     app.factory('fileUpload', ['serverURL', function (serverURL) {
         return function ($upload, files, isBinding, progressCallBack, successCallBack) {
+
+            function onProgress(evt) {
+                progressCallBack(evt);
+            }
+
+            function onSuccess(data) {
+                successCallBack(data);
+            }
+
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 $upload.upload({
@@ -12,12 +21,8 @@ define(['app', 'service/serverURL'], function (app) {
                     withCredentials: true,
                     data: {isBinding: isBinding},
                     file: file
-                }).progress(function (evt) {
-                    progressCallBack(evt);
-                }).success(function (data, status, headers, config) {
-                    successCallBack(data);
-                });
+                }).progress(onProgress).success(onSuccess);
             }
-        }
+        };
     }]);
 });

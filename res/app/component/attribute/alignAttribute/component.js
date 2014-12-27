@@ -10,8 +10,6 @@ define([
                 data : "=to"
             },
             templateUrl: require.toUrl('component/attribute/alignAttribute/template.html'),
-            controller: function ($scope, $rootScope) {
-            }
         };
     });
 

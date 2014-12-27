@@ -1,6 +1,6 @@
 define(['app'], function (app) {
 
-    app.controller('menuController', function ($scope) {
+    app.controller('menuController', function () {
     });
 
     app.directive('menu', function () {

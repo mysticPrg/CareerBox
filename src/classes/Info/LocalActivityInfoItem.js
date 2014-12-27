@@ -43,7 +43,7 @@ define([
 
     LocalActivityInfoItem.prototype.getAttributeName = function getAttributeName(key){
         return dictionary[key];
-    }
+    };
 
     return LocalActivityInfoItem;
 });

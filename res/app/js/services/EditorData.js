@@ -5,13 +5,13 @@ define(['app', 'classes/Paper', 'classes/Portfolio', 'classes/Templates/Template
 
     var EditorData = {
         editorType : '',
-        portfolio : new Portfolio,
-        paper : new Paper,
+        portfolio : new Portfolio(),
+        paper : new Paper(),
         paperId : '',
         paperTitle : '',
         paperItemArray : [],
         paperList : [],
-        template : new Template,
+        template : new Template(),
         templateState : '',
         templateItemArray : [],
         childArr: [],

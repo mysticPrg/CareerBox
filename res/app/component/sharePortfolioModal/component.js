@@ -13,5 +13,5 @@ define([
     return {
         templateUrl: require.toUrl('component/sharePortfolioModal/template.html'),
         controller: 'sharePortfolioModalController'
-    }
+    };
 });

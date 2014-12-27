@@ -31,8 +31,8 @@ define([
         $scope.EditorData = EditorData;
 
         // 모델 갱신
-        $scope.changeModel = function() {
-            if(EditorData.focusId){
+        $scope.changeModel = function () {
+            if (EditorData.focusId) {
                 // 모델 적용
                 var infomation = SetAttributeInformation(EditorData.focusId);
                 $scope.attributeInformation = infomation.attributeInformation;
@@ -51,7 +51,7 @@ define([
         };
 
         // 모델 갱신 리스너
-        $rootScope.$on('changeAttributePanelModel',function(){
+        $rootScope.$on('changeAttributePanelModel', function () {
             $scope.changeModel();
         });
 
@@ -60,7 +60,7 @@ define([
             $scope.changeModel();
         }, true);
 
-        $scope.editArticle = function(){
+        $scope.editArticle = function () {
             $scope.$emit('editTemplate', $scope.attributeInformation._template_id);
         };
 
@@ -91,17 +91,19 @@ define([
             EditorData.templateItemArray[id].state = 'del';
         }
 
-        function isTemplateEditor(url){
-            if(url.indexOf('TemplateEditor') >= 0)
+        function isTemplateEditor(url) {
+            if (url.indexOf('TemplateEditor') >= 0) {
                 return true;
-            else
+            }
+            else {
                 return false;
+            }
         }
 
         $scope.goFront = function () {
 
             for (var key in $scope.parentArray) {
-                if ($scope.parentArray[key].zOrder == $scope.attributeInformation.zOrder + 1) {
+                if ($scope.parentArray[key].zOrder === $scope.attributeInformation.zOrder + 1) {
                     $scope.parentArray[key].zOrder--;
                     $scope.attributeInformation.zOrder++;
                     return;
@@ -113,14 +115,14 @@ define([
         $scope.goBack = function () {
 
             for (var key in $scope.parentArray) {
-                if ($scope.parentArray[key].zOrder == $scope.attributeInformation.zOrder - 1) {
+                if ($scope.parentArray[key].zOrder === $scope.attributeInformation.zOrder - 1) {
                     $scope.parentArray[key].zOrder++;
                     $scope.attributeInformation.zOrder--;
                     return;
                 }
             }
             console.log('더이상 뒤로 갈수가 없습니다.', $scope);
-        }
+        };
 
         $scope.goFirst = function () {
 
@@ -131,10 +133,10 @@ define([
                 if ($scope.parentArray[key].zOrder < $scope.attributeInformation.zOrder) {
                     $scope.parentArray[key].zOrder++;
                 }
-            };
+            }
 
             // 자신을 start로
-            $scope.attributeInformation.zOrder = EditorData.start_zOrder+1;
+            $scope.attributeInformation.zOrder = EditorData.start_zOrder + 1;
 
         };
 
@@ -147,17 +149,17 @@ define([
                 if ($scope.parentArray[key].zOrder > $scope.attributeInformation.zOrder) {
                     $scope.parentArray[key].zOrder--;
                 }
-            };
+            }
 
             // 자신을 end로
             $scope.attributeInformation.zOrder = EditorData.end_zOrder;
-        }
+        };
 
         $scope.editTemplate = function (template) {
             EditorData.template = template;
             EditorData.templateState = 'edit';
             $window.location.href = "#/TemplateEditor";
-        }
+        };
     }]);
 
     app.directive('attributePanel', function () {

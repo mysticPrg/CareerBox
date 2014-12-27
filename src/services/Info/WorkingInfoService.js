@@ -82,7 +82,7 @@ function checkService(req, res) {
 
     var _member_id = req.session._id;
     var _item_id = req.params._id;
-    AwardInfoDB.useCheck(_member_id, _item_id, function (err, checkResult) {
+    WorkingInfoDB.useCheck(_member_id, _item_id, function (err, checkResult) {
         ServiceUtil.sendResult(err, res, checkResult);
     });
 }

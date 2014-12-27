@@ -4,7 +4,7 @@ define(['app', 'service/memberlist'], function (app) {
         return {
             restrict: 'E',
             templateUrl: require.toUrl('component/memberlist/template.html'),
-            link: function (scope, elem, attr) {
+            link: function (scope) {
                 memberlist.success(function(data) {
                     scope.memberlist = data.result;
                 });

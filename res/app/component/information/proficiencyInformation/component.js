@@ -11,7 +11,6 @@ define([
 ], function (app, InformationData, ProficiencyInfoItem) {
     app.controller('proficiencyInformationContorller', ['$scope', '$upload', 'fileUpload', function ($scope, $upload, fileUpload) {
         $scope.proficiencyInfoItem = new ProficiencyInfoItem();
-        $scope.files;
         $scope.progress = 0;
 
         $scope.InformationData = InformationData;
@@ -34,11 +33,11 @@ define([
             $scope.fileNameForProficiency = '';
 
             initializeFileForm();
-        }
+        };
 
         $scope.delProficiencyInfo = function (index) {
             $scope.proficiencyInfoItems.splice(index, 1);
-        }
+        };
 
         $scope.onFileSelectProficiencyInfo = function ($files) {
             if($files[0].size > 5242880){
@@ -49,7 +48,7 @@ define([
             $scope.fileNameForProficiency = $files[0].name;
             $scope.files = $files;
             $('#proficiency_upload').fadeIn('slow');
-        }
+        };
 
         $scope.uploadProficiencyInfo = function (){
             $('#proficiency_progressbar').fadeIn('slow');
@@ -59,7 +58,7 @@ define([
             },function(data){
                 $scope.proficiencyInfoItem.F_file = data.result;
             });
-        }
+        };
     }]);
 
     app.directive('proficiencyInformation', function () {

@@ -16,7 +16,7 @@ define(['classes/Enums/Direction'], function (Direction) {
             this.use = (props.use!==undefined) ? props.use : this.use;
             this.direction = props.direction ? props.direction : this.direction;
         }
-    };
+    }
 
     return Arrow;
 });

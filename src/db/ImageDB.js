@@ -5,7 +5,6 @@
 var requirejs = require('../require.config');
 var Image = requirejs('classes/PrimitiveTypes/Image');
 
-var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
 function write(data, callback) {
@@ -39,7 +38,6 @@ function deleteFile(_id, callback) {
 function reset() {
     var imageCollection = require('../util/DBCollections').getInstance().collections.image;
     imageCollection.remove({}, function() {
-        return;
     });
 }
 

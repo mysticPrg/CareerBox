@@ -16,7 +16,7 @@ define([], function () {
             this._portfolio_id = props._portfolio_id ? props._portfolio_id : this._portfolio_id;
             this.title = props.title ? props.title : this.title;
         }
-    };
+    }
 
     return PaperInfo;
 });

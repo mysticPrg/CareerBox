@@ -5,7 +5,6 @@
 var requirejs = require('../../require.config');
 var PersonalInfo = requirejs('classes/Info/PersonalInfo');
 
-var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
 function save(data, callback) {
@@ -40,7 +39,6 @@ function read(_member_id, callback) {
 function reset() {
     var personalInfoCollection = require('../../util/DBCollections').getInstance().collections.personalInfo;
     personalInfoCollection.remove({}, function() {
-        return;
     });
 }
 

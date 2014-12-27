@@ -19,11 +19,11 @@ define([
             var newColumnInfo = new ColumnInfoItem($scope.columnInfoItem);
             $scope.columnInfoItems.push(newColumnInfo);
             $scope.columnInfoItem = new ColumnInfoItem();
-        }
+        };
 
         $scope.delColumnInfo = function (index) {
             $scope.columnInfoItems.splice(index, 1);
-        }
+        };
     }]);
 
     app.directive('columnInformation', function () {

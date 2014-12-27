@@ -23,14 +23,15 @@ define([
                 return Facebook.isReady();
             },
             function (newVal) {
-                if (newVal)
+                if (newVal) {
                     $scope.facebookReady = true;
+                }
             }
         );
 
         $scope.IntentLogin = function () {
             Facebook.getLoginStatus(function (response) {
-                if (response.status == 'connected') {
+                if (response.status === 'connected') {
                     $scope.logged = true;
                     $scope.LoginFBSuccess();
                 }else{
@@ -43,7 +44,7 @@ define([
 
         $scope.Facebooklogin = function () {
             Facebook.login(function (response) {
-                if (response.status == 'connected') {
+                if (response.status === 'connected') {
                     $scope.logged = true;
                     $scope.LoginFBSuccess();
                 }
@@ -57,7 +58,7 @@ define([
             var href = "portfolioManager.html";
 
             memberCallback($window, $scope, data, href);
-        }
+        };
 
         $scope.LoginFBSuccess = function () {
             Facebook.api('/me', function (response) {

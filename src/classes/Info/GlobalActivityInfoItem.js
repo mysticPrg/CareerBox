@@ -40,7 +40,7 @@ define([
 
     GlobalActivityInfoItem.prototype.getAttributeName = function getAttributeName(key){
         return dictionary[key];
-    }
+    };
 
     return GlobalActivityInfoItem;
 });

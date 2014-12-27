@@ -27,7 +27,7 @@ define([
             this.pos_start = new Position(props.pos_start ? props.pos_start : this.pos_start);
             this.pos_end = new Position(props.pos_end ? props.pos_end : this.pos_end);
         }
-    };
+    }
 
     Util.inherit(Line, Item);
 

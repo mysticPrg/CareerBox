@@ -25,7 +25,7 @@ define([
             this.itemType = props.itemType ? props.itemType : this.itemType;
             this.rotate = Number((props.rotate!==undefined) ? props.rotate : this.rotate);
         }
-    };
+    }
 
     Util.inherit(Item, LayoutComponent);
 

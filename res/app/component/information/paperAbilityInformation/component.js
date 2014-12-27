@@ -19,11 +19,11 @@ define([
             var newPaperAbilityInfoItem = new PaperAbilityInfoItem($scope.paperAbilityInfoItem);
             $scope.paperAbilityInfoItems.push(newPaperAbilityInfoItem);
             $scope.paperAbilityInfoItem = new PaperAbilityInfoItem();
-        }
+        };
 
         $scope.delPaperAbilityInfo = function (index) {
             $scope.paperAbilityInfoItems.splice(index, 1);
-        }
+        };
 
     }]);
 

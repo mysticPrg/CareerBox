@@ -17,6 +17,6 @@ define(['app','service/serverURL'], function(app) {
             }).success(function (data) {
                 callback(data);
             });
-        }
+        };
     }]);
 });

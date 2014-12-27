@@ -5,7 +5,6 @@
 var requirejs = require('../../require.config');
 var ProficiencyInfo = requirejs('classes/Info/ProficiencyInfo');
 
-var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
 function save(data, callback) {
@@ -55,7 +54,6 @@ function useCheck(_member_id, _item_id, callback) {
 function reset() {
     var proficiencyInfoCollection = require('../../util/DBCollections').getInstance().collections.proficiencyInfo;
     proficiencyInfoCollection.remove({}, function() {
-        return;
     });
 }
 

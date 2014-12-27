@@ -20,11 +20,11 @@ define([
             var newHighSchoolInfoItem = new HighSchoolInfoItem($scope.highSchoolInfoItem);
             $scope.highSchoolInfoItems.push(newHighSchoolInfoItem);
             $scope.highSchoolInfoItem = new HighSchoolInfoItem();
-        }
+        };
 
         $scope.delHighSchoolInfo = function (index) {
             $scope.highSchoolInfoItems.splice(index, 1);
-        }
+        };
 
     }]);
 

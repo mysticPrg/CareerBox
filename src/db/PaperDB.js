@@ -6,7 +6,6 @@
 var requirejs = require('../require.config');
 var Paper = requirejs('classes/Paper');
 var PaperInfo = requirejs('classes/Structs/PaperInfo');
-var Template = requirejs('classes/Templates/Template');
 var Article = requirejs('classes/LayoutComponents/Article');
 
 var async = require('async');
@@ -101,14 +100,12 @@ function refreshTemplateData(template, callback) {
                 }
             }
 
-            paperCollection.update(
-                {
+            paperCollection.update({
                     _id: p._id
-                },
-                {
+                }, {
                     $set: {childArr: newArr}
-                }
-                , cb);
+                },
+                cb);
         }, callback);
     });
 }
@@ -134,8 +131,8 @@ function removeTemplateData(_template_id, callback) {
                 },
                 {
                     $set: {childArr: newArr}
-                }
-                , cb);
+                },
+                cb);
         }, callback);
     });
 
@@ -157,8 +154,8 @@ function setIndex(_portfolio_id, _paper_id, callback) {
                     },
                     {
                         $set: {isIndex: true}
-                    }
-                    , cb);
+                    },
+                    cb);
             } else {
                 paperCollection.update(
                     {
@@ -166,8 +163,8 @@ function setIndex(_portfolio_id, _paper_id, callback) {
                     },
                     {
                         $set: {isIndex: false}
-                    }
-                    , cb);
+                    },
+                    cb);
             }
         }, callback);
     });
@@ -175,7 +172,7 @@ function setIndex(_portfolio_id, _paper_id, callback) {
 
 function reset() {
     var paperCollection = require('../util/DBCollections').getInstance().collections.paper;
-    paperCollection.remove({}, function() {
+    paperCollection.remove({}, function () {
         return;
     });
 }
@@ -191,6 +188,6 @@ var exports = {
     removeTemplateData: removeTemplateData,
     setIndex: setIndex,
     reset: reset
-}
+};
 
 module.exports = exports;
