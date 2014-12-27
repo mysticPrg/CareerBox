@@ -16,7 +16,7 @@ define([
                 // 사이즈 업데이트
                 if(scope.item){
                     scope.item.size = {width: element.width(), height: element.height()};
-                    if (scope.item.state != 'new') {
+                    if (scope.item.state !== 'new') {
                         scope.item.state = 'edit';
                     }
                 }
@@ -35,7 +35,7 @@ define([
                     $rootScope.$on('getModel',function(){
                         scope.item = SetAttributeInformation(att.id).attributeInformation;
                         // 아티클, 아이템 공통
-                        bindMousedown(element, scope)
+                        bindMousedown(element, scope);
                     });
                 }
 
@@ -66,12 +66,12 @@ define([
 
                             var compareY = Number(child.pos.y) + Number(child.size.height) + Number(child.outline.weight)*2;
                             if(minHeight<compareY){
-                                minHeight = compareY
+                                minHeight = compareY;
                             }
 
                             var compareX = Number(child.pos.x) + Number(child.size.width) + Number(child.outline.weight)*2;
                             if(minWidth<compareX){
-                                minWidth = compareX
+                                minWidth = compareX;
                             }
                         }
 
