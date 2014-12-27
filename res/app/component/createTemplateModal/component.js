@@ -32,5 +32,5 @@ define([
     return {
         templateUrl: require.toUrl('component/createTemplateModal/template.html'),
         controller: 'createTemplateModalController'
-    }
+    };
 });

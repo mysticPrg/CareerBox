@@ -15,5 +15,5 @@ define([
     return {
         templateUrl: require.toUrl('component/deletePaperModal/template.html'),
         controller: 'deletePaperModalController'
-    }
+    };
 });

@@ -17,5 +17,5 @@ define([
     return {
         templateUrl: require.toUrl('component/createPaperModal/template.html'),
         controller: 'createPaperModalController'
-    }
+    };
 });

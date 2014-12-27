@@ -16,5 +16,5 @@ define([
     return {
         templateUrl: require.toUrl('component/deletePortfolioModal/template.html'),
         controller: 'deletePortfolioModalController'
-    }
+    };
 });
