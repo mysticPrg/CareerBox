@@ -28,7 +28,7 @@ define([
             EditorData.editorType = 'paper';
             $scope.paperChanged = false;
 
-            $scope.paper;
+            //$scope.paper;
 
             $scope.paperItemArray = [];
 
@@ -55,8 +55,9 @@ define([
 
             // 페이지 바꿧을때  loadPaper()를 다시;
             $scope.$watch("EditorData.paperId", function () {
-                if (EditorData.paperId === '')
+                if (EditorData.paperId === '') {
                     return;
+                }
 
                 loadPaper();
             });
@@ -110,8 +111,10 @@ define([
                             templateStateProcess();
                         }, function () {
                             templateStateProcess();
-                        })
-                    } else templateStateProcess();
+                        });
+                    } else {
+                        templateStateProcess();
+                    }
                 }
             });
 
@@ -150,16 +153,16 @@ define([
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             function getPaperChildArr(childArr) {
-                var paperChildArr = new Array();
+                var paperChildArr = [];
 
                 for (var key in childArr) {
                     var child = childArr[key];
 
-                    if (child.state == 'new') {
+                    if (child.state === 'new') {
                         delete child._id;
                     }
 
-                    if (child.state == 'del') {
+                    if (child.state === 'del') {
                         continue;
                     }
 
@@ -189,12 +192,12 @@ define([
 
             };
 
-            $('#canvas-content').droppable({
-                activeClass: "drop-area",
-                drop: function (e, ui) {            // 드롭될 경우
-                    var id = ui.draggable[0].getAttribute("id");
-                }
-            });
+            //$('#canvas-content').droppable({
+            //    activeClass: "drop-area",
+            //    drop: function (e, ui) {            // 드롭될 경우
+            //        var id = ui.draggable[0].getAttribute("id");
+            //    }
+            //});
 
             function showSuccessNotification() {
                 var notification = kendo.toString('성공하였습니다.');

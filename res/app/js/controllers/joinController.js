@@ -14,11 +14,11 @@ define([
 
         $scope.redirectJoinForm = function (){
             window.location.href = "JoinForm.html";
-        }
+        };
 
         $scope.join = function () {
             // 패스워드 확인
-            if ($scope.userPassword != $scope.userPasswordReconfirm) {
+            if ($scope.userPassword !== $scope.userPasswordReconfirm) {
                 $scope.msgs.push("패스워드를 다시 확인해주세요.");
                 return;
             }
@@ -36,9 +36,9 @@ define([
         };
 
         // 포트폴리오 에디터 이동 함수
-        $scope.goToLogin = function (index) {
+        $scope.goToLogin = function () {
             var href = 'login.html';
             $window.location.href = href;
-        }
-    }])
+        };
+    }]);
 });
