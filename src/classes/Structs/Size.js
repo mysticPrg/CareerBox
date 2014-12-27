@@ -16,7 +16,7 @@ define([], function () {
             this.width = Number((props.width!==undefined) ? props.width : this.width);
             this.height = Number((props.height!==undefined) ? props.height : this.height);
         }
-    };
+    }
 
     return Size;
 });

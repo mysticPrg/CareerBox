@@ -19,7 +19,7 @@ define([], function () {
         'S_cellphone' : '핸드폰',
         'S_address_1' : '주소',
         'S_address_2' : '상세주소'
-    }
+    };
 
     function PersonalInfoItem(props) {
 
@@ -52,7 +52,7 @@ define([], function () {
 
     PersonalInfoItem.prototype.getAttributeName = function getAttributeName(key) {
         return dictionary[key];
-    }
+    };
 
     return PersonalInfoItem;
 });

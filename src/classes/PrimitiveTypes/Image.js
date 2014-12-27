@@ -24,7 +24,7 @@ define([
             this.size = new Size(props.size ? props.size : this.size);
             this.fitSize = (props.fitSize!==undefined) ? props.fitSize : this.fitSize;
         }
-    };
+    }
 
     Util.inherit(Image, File);
 

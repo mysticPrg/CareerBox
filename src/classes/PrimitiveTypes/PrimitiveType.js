@@ -23,7 +23,7 @@ define([
             this.value = props.value ? props.value : this.value;
             this.title = props.title ? props.title : this.title;
         }
-    };
+    }
 
     return PrimitiveType;
 });

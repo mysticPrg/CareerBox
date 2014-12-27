@@ -14,7 +14,7 @@ define([], function () {
         'S_school' : '기관명',
         'N_year' : '수여년도',
         'N_term' : '수여학기'
-    }
+    };
 
     function ScholarshipInfoItem(props) {
 
@@ -35,7 +35,7 @@ define([], function () {
 
     ScholarshipInfoItem.prototype.getAttributeName = function getAttributeName(key){
         return dictionary[key];
-    }
+    };
 
     return ScholarshipInfoItem;
 });

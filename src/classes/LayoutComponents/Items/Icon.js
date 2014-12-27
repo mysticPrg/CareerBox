@@ -22,7 +22,7 @@ define([
         if (props) {
             this.iconType = props.iconType ? props.iconType : this.iconType;
         }
-    };
+    }
 
     Util.inherit(Icon, Item);
 

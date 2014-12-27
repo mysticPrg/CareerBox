@@ -25,7 +25,7 @@ define([], function () {
 
             this.timestamp = props.timestamp ? props.timestamp : this.timestamp;
         }
-    };
+    }
 
     return Member;
 });

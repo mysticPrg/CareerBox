@@ -16,7 +16,7 @@ define([], function () {
             this.x = Number((props.x!==undefined) ? props.x : this.x);
             this.y = Number((props.y!==undefined) ? props.y : this.y);
         }
-    };
+    }
 
     return Position;
 });

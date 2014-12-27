@@ -24,7 +24,7 @@ define([
         'S_jobType': '직종',
         'S_business': '주요업무',
         'S_achive': '주요성과'
-    }
+    };
 
     function WorkingInfoItem(props) {
 
@@ -61,7 +61,7 @@ define([
 
     WorkingInfoItem.prototype.getAttributeName = function getAttributeName(key){
         return dictionary[key];
-    }
+    };
 
     return WorkingInfoItem;
 });

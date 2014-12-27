@@ -23,7 +23,7 @@ define([
             this.name = props.name ? props.name : this.name;
             this.thumbnail = props.thumbnail ? props.thumbnail : this.thumbnail;
         }
-    };
+    }
 
     Util.inherit(Image, Item);
 

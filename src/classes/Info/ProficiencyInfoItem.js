@@ -16,7 +16,7 @@ define([], function () {
         'S_grade': '등급',
         'S_proficiency': '활용수준',
         'F_file': '첨부파일'
-    }
+    };
 
     function ProficiencyInfoItem(props) {
 
@@ -43,7 +43,7 @@ define([], function () {
 
     ProficiencyInfoItem.prototype.getAttributeName = function getAttributeName(key) {
         return dictionary[key];
-    }
+    };
 
     return ProficiencyInfoItem;
 });

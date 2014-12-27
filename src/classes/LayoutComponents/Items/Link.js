@@ -28,7 +28,7 @@ define([
             this.isOutURL = (props.isOutURL!==undefined) ? props.isOutURL : this.isOutURL;
             this.isNewWindow = (props.isNewWindow!==undefined) ? props.isNewWindow : this.isNewWindow;
         }
-    };
+    }
 
     Util.inherit(Link, Text);
 

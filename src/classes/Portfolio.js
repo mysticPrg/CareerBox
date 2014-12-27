@@ -30,8 +30,7 @@ define([], function () {
 
             this._member_id = props._member_id ? props._member_id : this._member_id;
         }
-
-    };
+    }
 
     return Portfolio;
 });

@@ -83,7 +83,7 @@ define([
                 createChildObj(this, props.childArr);
             }
         }
-    };
+    }
 
     Util.inherit(Article, LayoutComponent);
 

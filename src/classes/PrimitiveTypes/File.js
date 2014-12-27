@@ -29,7 +29,7 @@ define([
             this.filesize = (props.filesize!==undefined) ? props.filesize : this.filesize;
             this.isBinding = (props.isBinding!==undefined) ? props.isBinding : this.isBinding;
         }
-    };
+    }
 
     Util.inherit(File, PrimitiveType);
 

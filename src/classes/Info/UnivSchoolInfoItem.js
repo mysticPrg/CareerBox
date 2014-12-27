@@ -39,7 +39,7 @@ define([
 
     UnivSchoolInfoItem.prototype.getAttributeName = function getAttributeName(key){
         return dictionary[key];
-    }
+    };
 
     return UnivSchoolInfoItem;
 });
