@@ -15,7 +15,7 @@ define(['app', 'service/WaitServer'], function (app) {
                 WaitServer.hide();
                 callback(data);
             });
-        }
+        };
     });
 });
 

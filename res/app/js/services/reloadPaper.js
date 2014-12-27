@@ -34,24 +34,24 @@ define([
 
                         callback();
                     });
-
-                } else if (result.returnCode === '001') {
-                } else if (result.returnCode === '002') {
                 }
+                //} else if (result.returnCode === '001') {
+                //} else if (result.returnCode === '002') {
+                //}
             });
         }
 
         function getPaperChildArr(childArr) {
-            var paperChildArr = new Array();
+            var paperChildArr = [];
 
             for (var key in childArr) {
                 var child = childArr[key];
 
-                if (child.state == 'new') {
+                if (child.state === 'new') {
                     delete child._id;
                 }
 
-                if (child.state == 'del') {
+                if (child.state === 'del') {
                     continue;
                 }
 
