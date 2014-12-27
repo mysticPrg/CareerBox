@@ -50,25 +50,23 @@
     <div class="form-group">
         <label for="lbl_global_activity_image" class="col-md-2 control-label">대표이미지</label>
 
-        <div class="col-md-3" id="lbl_global_activity_image">
-            <img src="../img/noImage200x200.png" id="globalActivity_picture">
+        <div class="col-md-1" style="text-align: left; width: 115px">
+            <div class="fileInputDiv">
+                <input type="button" class="btn btn-default" value="사진첨부" class="fileInputButton" style="width: 100px"/>
+                <input type="file" class="fileInputHidden" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectGlobalActivityImage($files)"/>
+            </div>
         </div>
+
+        <div id="globalActivity_picture_progressbar" class="col-md-offset-2 col-md-3" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="imageProgress" style="margin-top: 12px ;margin-left: 20px ;width: 230px; height: 8px; display: none;"></div>
     </div>
 
     <!--대표이미지 첨부-->
     <div class="form-group">
         <div class="row">
-            <div class="col-md-offset-2 col-md-4" style="width: 290px">
-                <input type="text" id="globalActivity_picture_upload" class="fileInputTextBorder form-control" readonly="readonly" accept=".jpg, .jpeg, .bmp, .png" ng-model = "fileName1"/>
-            </div>
-            <div class="col-md-1" style="padding-left: 0; text-align: left; width: 115px">
-                <div class="fileInputDiv">
-                    <input type="button" class="btn btn-default" value="파일첨부" class="fileInputButton" style="width: 100px"/>
-                    <input type="file" class="fileInputHidden" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectGlobalActivityImage($files)"/>
-                </div>
+            <div class="col-md-offset-2 col-md-3" id="lbl_global_activity_image">
+                <img src="../img/noImage200x200.png" id="globalActivity_picture">
             </div>
         </div>
-        <div id="globalActivity_picture_progressbar" class="col-md-offset-2 col-md-3" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="imageProgress" style="width: 230px; height: 8px; display: none;"></div>
     </div>
 
     <!--첨부파일-->

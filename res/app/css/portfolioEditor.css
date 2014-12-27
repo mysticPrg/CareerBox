@@ -379,13 +379,13 @@ img {
     position: absolute;
 }
 
+/*생성한 템플릿 리스트*/
 #articleTemplateArea > #articleTemplateList {
-    width: 220px;
+    width: 200px;
     margin: 0 auto;
 }
 
 #articleTemplateArea > #articleTemplateList > li{
-
     position: relative;
     margin-bottom: 40px;
 }
@@ -397,39 +397,17 @@ img {
 }
 
 #articleTemplateArea #articleTemplateList #templateThumb #templateThumbImg {
-    border: 5px solid #e9e9e9;
-    box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
-}
-
-#articleTemplateArea > #basicTemplateList {
-    width: 200px;
-    margin: 0 auto;
-}
-
-#articleTemplateArea > #basicTemplateList > li{
-
-    position: relative;
-    margin-bottom: 40px;
-}
-
-#articleTemplateArea #basicTemplateList .description {
-    margin: 15px 0;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-#articleTemplateArea #basicTemplateList #basicTemplateThumb #basicTemplateThumbImg {
     /*border: 5px solid #e9e9e9;*/
     box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
 }
 
-#articleTemplateArea #articleTemplateList #editGroup {
-    position: absolute;
-    bottom: -7px;
-    right: 19px;
-}
-
 /*템플릿 수정버튼*/
+#articleTemplateArea #articleTemplateList #editGroup{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+}
 #articleTemplateArea #articleTemplateList #editGroup  #editBtn {
     width: 30px;
     height: 30px;
@@ -456,6 +434,15 @@ img {
     display: block;
 }
 
+/*.effect {*/
+    /*background-color: #fff;*/
+    /*-webkit-box-shadow: 0 7px 3px -4px rgba(0,0,0,0.15);*/
+    /*-moz-box-shadow: 0 7px 3px -4px rgba(0,0,0,0.15);*/
+    /*box-shadow: 0 10px 6px -6px rgba(0,0,0,0.1);*/
+    /*box-shadow: 0 7px 2px -4px rgba(0,0,0,0.1);*/
+/*}*/
+
+
 #articleTemplateArea #articleTemplateList #editGroup .dropdown-menu {
     min-width: 75px;
     position: absolute;
@@ -469,6 +456,30 @@ img {
 
 #articleTemplateArea #articleTemplateList #editGroup .dropdown-menu li {
     cursor: pointer;
+}
+
+
+/*basic 템플릿 리스트*/
+#articleTemplateArea > #basicTemplateList {
+    width: 200px;
+    margin: 0 auto;
+}
+
+#articleTemplateArea > #basicTemplateList > li{
+
+    position: relative;
+    margin-bottom: 40px;
+}
+
+#articleTemplateArea #basicTemplateList .description {
+    margin: 15px 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#articleTemplateArea #basicTemplateList #basicTemplateThumb #basicTemplateThumbImg {
+    /*border: 5px solid #e9e9e9;*/
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.4);
 }
 
 #itemTemplateArea {
@@ -668,7 +679,7 @@ img {
 }
 
 #content {
-    background-color: #f8f8f8;
+    background-color: #fff;
     background-image:         linear-gradient(top, #fff, #ddd);
     border-radius: 0 2px 2px 2px;
     /*box-shadow: 0 2px 2px #000, 0 -1px 0 #fff inset;*/
