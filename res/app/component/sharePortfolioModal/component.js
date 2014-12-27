@@ -4,7 +4,7 @@ define([
     'service/EditorData'
 ], function (app) {
     app.controller('sharePortfolioModalController', function ($scope, $window, $modalInstance, EditorData) {
-        $scope.url = 'http://localhost:63342/CareerBoxService/res/app/partials/portfolio.html?id=' + EditorData.shareId;
+        $scope.url = 'http://210.118.74.166:8123/res/app/partials/portfolio.html?id=' + EditorData.shareId;
 
         $scope.cancel = function () {
             $modalInstance.dismiss();

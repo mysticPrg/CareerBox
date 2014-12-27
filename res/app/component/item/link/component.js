@@ -14,20 +14,26 @@ define([
     }
 
     function vAlign(scope, element) {
+
         var height, textElement, textElementHeight;
+
+        height = scope.info.size.height;
+        textElement = element.find('.linkContent');
+        textElementHeight = textElement.height();
+
         if (scope.info.vAlign === 'top') {
-            scope.style.top = '0px';
+            textElement.css({
+                'top': "0px"
+            });
         } else if (scope.info.vAlign === 'middle') {
-            height = scope.info.size.height;
-            textElement = element.find('.linkContent');
-            textElementHeight = textElement.height();
-            scope.style.top = height / 2 - textElementHeight / 2;
+            textElement.css({
+                'top': (height / 2 - textElementHeight / 2) + "px"
+            });
 
         } else if (scope.info.vAlign === 'bottom') {
-            height = scope.info.size.height;
-            textElement = element.find('.linkContent');
-            textElementHeight = textElement.height();
-            scope.style.top = height - textElementHeight;
+            textElement.css({
+                'top': (height - textElementHeight) + "px"
+            });
         }
     }
 
@@ -50,6 +56,11 @@ define([
                     element.css({
                         'font-size': scope.info.font.size + "px"
                     });
+
+                    element.css({
+                        'font-family': "'" + trim(scope.info.font.family) + "', '" + scope.info.font.family + "'"
+                    });
+
                     vAlign(scope, element);
                 }, true);
 
@@ -76,13 +87,6 @@ define([
                     else {
                         scope.style['font-style'] = "normal";
                     }
-                });
-
-                // font-family
-                scope.$watch("info.font.family", function () {
-                    element.css({
-                        'font-family': "'" + trim(scope.info.font.family) + "', '" + scope.info.font.family + "'"
-                    });
                 });
 
                 scope.goToPreview = function () {
