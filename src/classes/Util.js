@@ -20,7 +20,7 @@ define([], function () {
         if (obj && obj.constructor && obj.constructor.toString) {
             var arr = obj.constructor.toString().match(/function\s*(\w+)/);
 
-            if (arr && arr.length == 2) {
+            if (arr && arr.length === 2) {
                 return arr[1];
             }
         }
@@ -41,10 +41,6 @@ define([], function () {
         subCls.prototype.constructor = superCls;
 
         return subCls;
-    };
-
-    Util.clone = function clone(obj) {
-
     };
 
     return Util;

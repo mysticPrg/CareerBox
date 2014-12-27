@@ -1,6 +1,6 @@
 {
     "unused": true,    // 사용하지 않는 이름 체크
-    "camelcase": true, // 이름 정의에 camel-case 사용하는지 여부 (언더바로 구분하지 않고 대소문자로 구분하는 변수명)
+    "camelcase": false, // 이름 정의에 camel-case 사용하는지 여부 (언더바로 구분하지 않고 대소문자로 구분하는 변수명)
     "curly": true,     // 중괄호 규칙
     "undef": true,     // 정의하지 않은 이름 체크
     "eqeqeq": true,    // ===, !== 사용 여부
@@ -22,6 +22,13 @@
         "expect": true,
         "require": true,
         "console": true,
-        "module": true
+        "module": true,
+        "define": true,
+        "require": true,
+        "kendo": true,
+        "jQuery": true,
+        "setTimeout": true,
+        "__dirname": true,
+        "window": true
     }
 }

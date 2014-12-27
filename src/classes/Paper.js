@@ -24,7 +24,7 @@ define([
         });
         this.isIndex = false;
 
-        // server only
+        //server only
         this._member_id = null;
 
         if ( props ) {

@@ -85,6 +85,6 @@ require([
     require([
             'controllers/' + cntl
     ], function () {
-        require(['bootstrap'])
+        require(['bootstrap']);
     });
 });
