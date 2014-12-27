@@ -4,12 +4,6 @@ define([
     'service/SetAttributeInformation',
     'service/EditorData'
 ], function (app) {
-    var vAlign = {
-        top : '10%',
-        middle : '50%',
-        bottom : '90%'
-    };
-
     function trim(str) {
         var result='';
         var splitArr = str.split(' ');
@@ -34,9 +28,23 @@ define([
                 });
 
                 //vAlign
-                scope.$watch("info.vAlign",function() {
-                    scope.style['top'] = vAlign[scope.info.vAlign];
-                });
+                scope.$watch("info",function() {
+                    var height, textElement, textElementHeight
+                    if(scope.info.vAlign === 'top'){
+                        scope.style['top'] = '0px';
+                    } else if(scope.info.vAlign === 'middle') {
+                        height = scope.info.size.height;
+                        textElement = element.find('.linkContent');
+                        textElementHeight = textElement.height();
+                        scope.style['top'] = height/2 - textElementHeight/2
+
+                    } else if(scope.info.vAlign === 'bottom'){
+                        height = scope.info.size.height;
+                        textElement = element.find('.linkContent');
+                        textElementHeight = textElement.height();
+                        scope.style['top'] = height - textElementHeight
+                    }
+                }, true);
 
                 // font color
                 scope.$watch("info.font.color",function() {
