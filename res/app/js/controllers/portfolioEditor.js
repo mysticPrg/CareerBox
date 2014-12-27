@@ -28,25 +28,25 @@ define([
 
             $scope.hrefPreview = function (){
                 $window.location.href = 'portfolioPreview.html?id=' + EditorData.portfolio._id;
-            }
+            };
 
             $scope.hrefManager = function (){
                 $window.location.href = 'portfolioManager.html';
-            }
+            };
 
             $scope.logout = function (){
                 httpLogout(function(data){
-                    if (data.returnCode == '000') {
+                    if (data.returnCode === '000') {
                         //
                         $window.location.href = 'index.html';
                     }
                 });
-            }
+            };
 
             $scope.goToPortfolio = function () {
                 var href = 'portfolioPreview.html?id=' + EditorData.portfolio._id;
                 $window.open(href);
-            }
+            };
 
         });
 

@@ -6,7 +6,6 @@ define([
     'angular',
     'app',
     'classes/Paper',
-    'classes/LayoutComponents/Article',
     'service/EditorData',
     'service/HTMLGenerator',
     'service/LoadPaperList',
@@ -18,9 +17,9 @@ define([
     'component/item/image/component',
     'directives/CommonAttribute',
     'service/loadArticle'
-], function ($, ng, app, Paper, Article, EditorData) {
+], function ($, ng, app, Paper) {
     app.controller('portfolio', ['$scope', '$http', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'LoadPaper', 'loadArticle', function ($scope, $http, $compile, EditorData, HTMLGenerator, LoadPaperList, LoadPaper, loadArticle) {
-        $scope.paper;
+        //$scope.paper;
 
         $scope.paperItemArray = [];
 
@@ -39,37 +38,35 @@ define([
                 EditorData.paperList = result.result;
                 $scope.papers = result.result;
 
+                function loadPaperWithResult(result) {
+                    EditorData.paper = result.result;
+
+                    loadPaper(EditorData.paper);
+                }
+
                 var paper;
-                for(var idx = 0; idx < $scope.papers.length; idx++){
+                for (var idx = 0; idx < $scope.papers.length; idx++) {
                     paper = $scope.papers[idx];
 
-                    if(!EditorData.paper_id && paper.isIndex === true){
+                    if (!EditorData.paper_id && paper.isIndex === true) {
                         EditorData.paperId = paper._id;
 
-                        LoadPaper($http, EditorData.paperId, function (result) {
-                            EditorData.paper = result.result;
-
-                            loadPaper(EditorData.paper);
-                        });
+                        LoadPaper($http, EditorData.paperId, loadPaperWithResult);
                         return;
                     }
 
-                    if(paper._id === EditorData.paper_id){
+                    if (paper._id === EditorData.paper_id) {
 
                         EditorData.paperId = paper._id;
 
-                        LoadPaper($http, EditorData.paperId, function (result) {
-                            EditorData.paper = result.result;
-
-                            loadPaper(EditorData.paper);
-                        });
+                        LoadPaper($http, EditorData.paperId, loadPaperWithResult);
                         return;
                     }
                 }
             });
         });
 
-        function initPaper(){
+        function initPaper() {
             $('#canvas-content').find('div').remove();
 
             $scope.paper = new Paper();
@@ -92,7 +89,7 @@ define([
                 EditorData.childArr[child._id] = child;
                 if (child.childArr) {
                     loadArticle(child, $scope);
-                }else{
+                } else {
                     loadItem(child);
                 }
             }
