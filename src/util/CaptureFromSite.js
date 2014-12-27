@@ -20,11 +20,11 @@ var queue = {
 
 var isRunning = false;
 
-var g_ph = null;
-
-phantom.create(function (ph) {
-    g_ph = ph;
-});
+//var g_ph = null;
+//
+//phantom.create(function (ph) {
+//    g_ph = ph;
+//});
 
 function CaptureFromSite(_id, type, closerCallback) {
     queue[type].push({_id: _id, callback: closerCallback, type: type});
@@ -116,37 +116,43 @@ function DoCapture(_id, type, closerCallback) {
 
     async.waterfall([
         function (callback) {
-            g_ph.createPage(function (page) {
-                callback(null, page);
+            phantom.create(function (ph) {
+                callback(null, ph);
             });
         },
-        function (page, callback) { // open page
+        function (ph, callback) {
+            ph.createPage(function (page) {
+                callback(null, ph, page);
+            });
+        },
+        function (ph, page, callback) { // open page
             initPage(page);
             page.open(url[type] + _id, function (stat) {
                 if (stat === 'success') {
-                    callback(null, page);
+                    callback(null, ph, page);
                 } else {
                     page.close();
+                    ph.exit();
                     CaptureFromSite(_id, type, closerCallback);
                 }
             });
         },
-        function (page, callback) {
+        function (ph, page, callback) {
             page.wait(function () {
-                callback(null, page);
+                callback(null, ph, page);
             });
         },
-        function (page, callback) { // save screenshot
+        function (ph, page, callback) { // save screenshot
             setTimeout(function () {
                 page.render(filename, {
                     format: 'png',
                     quality: '50'
                 }, function () {
-                    callback(null, page);
+                    callback(null, ph, page);
                 });
             }, 1000);
         },
-        function (page, callback) {
+        function (ph, page, callback) {
             if (type === 'portfolio') {
                 gm(filename)
                     .quality(50)
@@ -154,21 +160,22 @@ function DoCapture(_id, type, closerCallback) {
                     .crop(250, 350)
                     .noProfile()
                     .write(filename, function (err) {
-                        callback(err, page);
+                        callback(err, ph, page);
                     });
             } else if (type === 'template') {
                 gm(filename)
                     .scale(200)
                     .noProfile()
                     .write(filename, function (err) {
-                        callback(err, page);
+                        callback(err, ph, page);
                     });
             }
         },
-        function (page) {
+        function (ph, page) {
             //ph.exit();
             setTimeout(function () {
                 page.close();
+                ph.exit();
                 closerCallback();
             }, 200);
         }
