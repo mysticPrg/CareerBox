@@ -19,13 +19,13 @@ define([
             scope.style.top = '0px';
         } else if (scope.info.vAlign === 'middle') {
             height = scope.info.size.height;
-            textElement = element.find('.whiteSpace');
+            textElement = element.find('.linkContent');
             textElementHeight = textElement.height();
             scope.style.top = height / 2 - textElementHeight / 2;
 
         } else if (scope.info.vAlign === 'bottom') {
             height = scope.info.size.height;
-            textElement = element.find('.whiteSpace');
+            textElement = element.find('.linkContent');
             textElementHeight = textElement.height();
             scope.style.top = height - textElementHeight;
         }
