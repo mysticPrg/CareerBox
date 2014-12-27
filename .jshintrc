@@ -29,6 +29,7 @@
         "jQuery": true,
         "setTimeout": true,
         "__dirname": true,
-        "window": true
+        "window": true,
+        "angular": true
     }
 }
