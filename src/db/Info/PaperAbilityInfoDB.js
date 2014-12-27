@@ -5,7 +5,6 @@
 var requirejs = require('../../require.config');
 var PaperAbilityInfo = requirejs('classes/Info/PaperAbilityInfo');
 
-var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
 function save(data, callback) {
@@ -55,7 +54,6 @@ function useCheck(_member_id, _item_id, callback) {
 function reset() {
     var paperAbilityInfoCollection = require('../../util/DBCollections').getInstance().collections.paperAbilityInfo;
     paperAbilityInfoCollection.remove({}, function() {
-        return;
     });
 }
 

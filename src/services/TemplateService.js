@@ -10,7 +10,6 @@ var Article = requirejs('classes/LayoutComponents/Article');
 var TemplateDB = require('../db/TemplateDB');
 var ServiceUtil = require('../util/ServiceUtil');
 
-var async = require('async');
 var Result = require('./result');
 var ObjectID = require('mongodb').ObjectID;
 var genID = require('../util/genID');
@@ -117,7 +116,7 @@ function createOrUpdateService(req, res) {
         newTemplate._id = new ObjectID(newTemplate._id);
         var str_id = newTemplate._id.toHexString();
 
-        TemplateDB.update(newTemplate, function (err) {
+        TemplateDB.update(newTemplate, function () {
             CaptureFromSite(str_id, 'template', function(err2) {
                 ServiceUtil.sendResult(err2, res, str_id);
             });

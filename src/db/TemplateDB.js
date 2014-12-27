@@ -133,8 +133,8 @@ function update(data, callback) {
         },
         function () {
             PaperDB.refreshTempalteData(template, function (err2) {
-                callback(err2)
-            })
+                callback(err2);
+            });
         }
     );
 }
@@ -172,6 +172,6 @@ var exports = {
     update: update,
     checkUsingTemplate: checkUsingTemplate,
     reset: reset
-}
+};
 
 module.exports = exports;

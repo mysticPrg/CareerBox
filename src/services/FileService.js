@@ -8,7 +8,6 @@ var FileDB = require('../db/FileDB');
 var ServiceUtil = require('../util/ServiceUtil');
 
 var Result = require('./result');
-var ObjectID = require('mongodb').ObjectID;
 
 var fs = require('fs');
 
@@ -91,7 +90,7 @@ function uploadService(req, res) {
             return;
         }
 
-        var isBinding = (req.body.isBinding === 'true') ? true : false;
+        var isBinding = (req.body.isBinding === 'true');
 
         var fileData = {
             originalName: data[0].originalName,

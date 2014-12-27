@@ -54,7 +54,7 @@ setFuncs[ItemType.image] = setImage;
 setFuncs[ItemType.text] = setText;
 setFuncs[ItemType.link] = setLink;
 
-setFuncs[ItemType.line] = setDefault
+setFuncs[ItemType.line] = setDefault;
 setFuncs[ItemType.shape] = setDefault;
 setFuncs[ItemType.icon] = setDefault;
 
@@ -121,9 +121,8 @@ function getInfoValue(infoType, infoData) {
         case 'B':
             if (infoData) {
                 return true;
-            } else {
-                return false;
             }
+            return false;
 
         case 'F':
             return infoData._id;
@@ -173,8 +172,8 @@ function bindItems(layoutItems, infoData) {
 //    console.log(infoData._id);
 
     var resultArr = [];
-
-    for (var k in layoutItems) {
+    var k;
+    for (k in layoutItems) {
 
         if (layoutItems[k].isBinding) {
             var bindedLayoutItem = setFuncs[layoutItems[k].itemType](layoutItems[k], infoData[layoutItems[k].bindingType]);

@@ -96,7 +96,8 @@ function createOrUpdateService(req, res) {
     newPaper._member_id = session._id;
     newPaper._portfolio_id = _portfolio_id;
 
-    for (var k in newPaper.childArr) {
+    var k;
+    for (k in newPaper.childArr) {
         if (!newPaper.childArr[k]._id) {
             newPaper.childArr[k]._id = genID();
         }

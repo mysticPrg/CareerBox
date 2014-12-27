@@ -9,7 +9,6 @@ var Portflio = requirejs('classes/Portfolio');
 var PortfolioDB = require('../db/PortfolioDB');
 var ServiceUtil = require('../util/ServiceUtil');
 
-var async = require('async');
 var Result = require('./result');
 var ObjectID = require('mongodb').ObjectID;
 

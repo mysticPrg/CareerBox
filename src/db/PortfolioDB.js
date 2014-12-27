@@ -97,6 +97,6 @@ var exports = {
     remove: remove,
     update: update,
     reset: reset
-}
+};
 
 module.exports = exports;
