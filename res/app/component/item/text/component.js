@@ -22,11 +22,6 @@ define([
     'jquery-ui',
     'service/SetAttributeInformation'
 ], function (app) {
-    var vAlign = {
-        top : '0px',
-        middle : '20px',
-        bottom : '40px'
-    };
 
     function trim(str) {
         var result='';
@@ -35,6 +30,23 @@ define([
             result += splitArr[key];
         }
         return result;
+    }
+
+    function vAlign(scope, element) {
+        if(scope.info.vAlign === 'top'){
+            scope.style['top'] = '0px';
+        } else if(scope.info.vAlign === 'middle') {
+            var height = scope.info.size.height;
+            var textElement = element.find('.whiteSpace');
+            var textElementHeight = textElement.height();
+            scope.style['top'] = height/2 - textElementHeight/2
+
+        } else if(scope.info.vAlign === 'bottom'){
+            var height = scope.info.size.height;
+            var textElement = element.find('.whiteSpace');
+            var textElementHeight = textElement.height();
+            scope.style['top'] = height - textElementHeight
+        }
     }
 
     app.directive('text', ['SetAttributeInformation', function (SetAttributeInformation) {
@@ -54,31 +66,15 @@ define([
 
                 //vAlign
                 scope.$watch("info",function() {
-                    var height, textElement, textElementHeight
-                    if(scope.info.vAlign === 'top'){
-                        scope.style['top'] = '0px';
-                    } else if(scope.info.vAlign === 'middle') {
-                        height = scope.info.size.height;
-                        textElement = element.find('.whiteSpace');
-                        textElementHeight = textElement.height();
-                        scope.style['top'] = height/2 - textElementHeight/2
-
-                    } else if(scope.info.vAlign === 'bottom'){
-                        height = scope.info.size.height;
-                        textElement = element.find('.whiteSpace');
-                        textElementHeight = textElement.height();
-                        scope.style['top'] = height - textElementHeight
-                    }
+                    element.css({
+                        'font-size' : scope.info.font.size + "px"
+                    });
+                    vAlign(scope, element);
                 },true);
 
                 // font color
                 scope.$watch("info.font.color",function() {
                     scope.style['color'] = "#" + scope.info.font.color.R + scope.info.font.color.G + scope.info.font.color.B;
-                });
-
-                // font-size
-                scope.$watch("info.font.size",function() {
-                    scope.style['font-size'] = scope.info.font.size + "px";
                 });
 
                 // font-family
@@ -107,11 +103,6 @@ define([
                         scope.style['font-style'] = "normal";
                     }
                 });
-
-                // binding
-//                scope.$watch("info.bindingType",function() {
-//                    scope.info['value'] = scope.info.bindingType
-//                });
 
             },
             templateUrl: require.toUrl('component/item/text/template.html')

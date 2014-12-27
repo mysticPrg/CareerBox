@@ -13,6 +13,23 @@ define([
         return result;
     }
 
+    function vAlign(scope, element) {
+        if(scope.info.vAlign === 'top'){
+            scope.style['top'] = '0px';
+        } else if(scope.info.vAlign === 'middle') {
+            var height = scope.info.size.height;
+            var textElement = element.find('.whiteSpace');
+            var textElementHeight = textElement.height();
+            scope.style['top'] = height/2 - textElementHeight/2
+
+        } else if(scope.info.vAlign === 'bottom'){
+            var height = scope.info.size.height;
+            var textElement = element.find('.whiteSpace');
+            var textElementHeight = textElement.height();
+            scope.style['top'] = height - textElementHeight
+        }
+    }
+
     app.directive('link', ['SetAttributeInformation', 'EditorData', '$window', function (SetAttributeInformation, EditorData, $window) {
         return {
             // A = attribute, E = Element, C = Class and M = HTML Comment
@@ -29,31 +46,15 @@ define([
 
                 //vAlign
                 scope.$watch("info",function() {
-                    var height, textElement, textElementHeight
-                    if(scope.info.vAlign === 'top'){
-                        scope.style['top'] = '0px';
-                    } else if(scope.info.vAlign === 'middle') {
-                        height = scope.info.size.height;
-                        textElement = element.find('.linkContent');
-                        textElementHeight = textElement.height();
-                        scope.style['top'] = height/2 - textElementHeight/2
-
-                    } else if(scope.info.vAlign === 'bottom'){
-                        height = scope.info.size.height;
-                        textElement = element.find('.linkContent');
-                        textElementHeight = textElement.height();
-                        scope.style['top'] = height - textElementHeight
-                    }
-                }, true);
+                    element.css({
+                        'font-size' : scope.info.font.size + "px"
+                    });
+                    vAlign(scope, element);
+                },true);
 
                 // font color
                 scope.$watch("info.font.color",function() {
                     scope.style['color'] = "#" + scope.info.font.color.R + scope.info.font.color.G + scope.info.font.color.B;
-                });
-
-                // font-size
-                scope.$watch("info.font.size",function() {
-                    scope.style['font-size'] = scope.info.font.size + "px";
                 });
 
                 // font-bold
