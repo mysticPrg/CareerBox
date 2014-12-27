@@ -40,7 +40,7 @@ define([
                 $scope.orientation = "horizontal";
 
                 $scope.panes = [
-                    {collapsible: true, size: "300px"},
+                    {collapsible: true, size: "320px"},
                     {collapsible: false}
                 ];
 

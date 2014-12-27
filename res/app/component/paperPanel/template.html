@@ -16,7 +16,7 @@
             </ul>
 
             <div class="tab-content" id="content">
-                <div id="articleTemplateArea" >
+                <div id="articleTemplateArea" style="background-color: #f8f8f8">
                     <div style="margin-bottom: 30px;">
                         <div class="btn-group">
                             <button type="button" class="tamplateCategory btn btn-default dropdown-toggle" data-toggle="dropdown">{{selected.title}}
@@ -40,7 +40,7 @@
                     <!--기본 템플릿 리스트 -->
                     <ul id="basicTemplateList">
                         <li ng-repeat="template in basicTemplates track by $index">
-                            <div id="basicTemplateThumb" ng-click="templateClone(template)">
+                            <div id="basicTemplateThumb" ng-click="templateClone(template)" >
                                 <div class="thumbImgWrapper effect">
                                     <img id="basicTemplateThumbImg" ng-src="{{template.thumbURL}}">
                                 </div>
@@ -54,8 +54,8 @@
                     <!--생성한 템플릿 리스트 -->
                     <ul id="articleTemplateList">
                         <li ng-repeat="template in templates track by $index">
-                            <div id="templateThumb" ng-click="templateClone(template)">
-                                <div style="background-color: #fff; width: 200px">
+                            <div id="templateThumb" ng-click="templateClone(template)" >
+                                <div class="thumbImgWrapper effect">
                                     <img id="templateThumbImg" ng-src="{{template.thumbURL}}">
                                 </div>
 
@@ -77,8 +77,8 @@
                     </ul>
                 </div>
 
-                <div id="itemTemplateArea">
-                    <ul id="itemTemplateList" class="clearfix">
+                <div id="itemTemplateArea" style="background-color: #f8f8f8">
+                    <ul id="itemTemplateList" class="clearfix" style="background-color: #f8f8f8">
                         <li>
                             <div id="text" class="" ng-click="itemClone('text')">
                                 <img src="../img/item_icon/item_text.png"/>

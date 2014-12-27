@@ -391,28 +391,39 @@ img {
 }
 
 #articleTemplateArea #articleTemplateList .description {
+    /*margin: 15px 0;*/
+    /*font-size: 14px;*/
+    /*font-weight: 700;*/
     margin: 15px 0;
-    font-size: 14px;
-    font-weight: 700;
+    width: 120px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 100px;
+    background-color: rgba(16,21,44,0.9);
+    color: #fff;
+    font-size: 12px;
+    /*font-weight: 700;*/
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    display: inline-block;
 }
 
 #articleTemplateArea #articleTemplateList #templateThumb #templateThumbImg {
     /*border: 5px solid #e9e9e9;*/
-    box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+    /*box-shadow: 0px 0px 2px rgba(0,0,0,0.5);*/
 }
 
 /*템플릿 수정버튼*/
 #articleTemplateArea #articleTemplateList #editGroup{
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 6px;
+    right: 6px;
     display: inline-block;
 }
 #articleTemplateArea #articleTemplateList #editGroup  #editBtn {
     width: 30px;
     height: 30px;
     border-radius: 100%;
-    background-color: #e9e9e9;
+    background-color: #f8f8f8;
     background-image: url('../img/editor_img/editTemplateIcon.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -434,13 +445,13 @@ img {
     display: block;
 }
 
-/*.effect {*/
-    /*background-color: #fff;*/
-    /*-webkit-box-shadow: 0 7px 3px -4px rgba(0,0,0,0.15);*/
-    /*-moz-box-shadow: 0 7px 3px -4px rgba(0,0,0,0.15);*/
-    /*box-shadow: 0 10px 6px -6px rgba(0,0,0,0.1);*/
-    /*box-shadow: 0 7px 2px -4px rgba(0,0,0,0.1);*/
-/*}*/
+.effect {
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    /*-webkit-box-shadow: 0 10px 6px -6px #777;*/
+    /*-moz-box-shadow: 0 10px 6px -6px #777;*/
+    /*box-shadow: 0 10px 6px -6px #777;*/
+}
 
 
 #articleTemplateArea #articleTemplateList #editGroup .dropdown-menu {
@@ -473,13 +484,22 @@ img {
 
 #articleTemplateArea #basicTemplateList .description {
     margin: 15px 0;
-    font-size: 14px;
-    font-weight: 700;
+    width: 120px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 100px;
+    background-color: rgba(16,21,44,0.9);
+    color: #fff;
+    font-size: 12px;
+    /*font-weight: 700;*/
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    display: inline-block;
 }
 
 #articleTemplateArea #basicTemplateList #basicTemplateThumb #basicTemplateThumbImg {
     /*border: 5px solid #e9e9e9;*/
-    box-shadow: 0px 0px 2px rgba(0,0,0,0.4);
+    /*border-bottom: 5px solid #00abf2;*/
+    /*box-shadow: 0px 0px 2px rgba(0,0,0,0.4);*/
 }
 
 #itemTemplateArea {
@@ -672,8 +692,8 @@ img {
 
 
 #SectionEditorTab #current a {
-    background: #fff;
-    background: linear-gradient(135deg, transparent 10px, #fff 10px);
+    background: #f8f8f8;
+    background: linear-gradient(135deg, transparent 10px, #f8f8f8 10px);
     text-shadow: none;
     color: #000;
 }
