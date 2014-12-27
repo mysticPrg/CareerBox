@@ -46,8 +46,13 @@ define([
                             handles: "n, e, s, w, nw, ne, sw,se"
                         }
                     );
-                }
-                else{
+                } else if(scope.item.itemType === 'line'){
+                    element.resizable(
+                        {
+                            handles: "e, w"
+                        }
+                    );
+                } else{
                     element.resizable(
                         {
                             containment: '#canvas-content',
