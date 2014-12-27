@@ -20,7 +20,6 @@ define([
         function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, getTemplate, SaveTemplate) {
         EditorData.editorType = 'template';
         $scope.changed = false;
-        $scope.saveRock;
 
         // z index 초기화
         EditorData.end_zOrder = 0;
@@ -132,8 +131,6 @@ define([
 
         // 템플릿에서 edit 눌러서 저장된 아이템이 로드될 때 발생!
         function loadElement(item) {
-            var id = EditorData.template._id + '_' + item._id;
-
             var option = {draggable: true, resizable: true, rotatable: true};
 
             var domObj = HTMLGenerator('loadItem', item, item._id, option);
@@ -148,21 +145,22 @@ define([
         function getTemplateChildArr(ItemArray) {
             // array copy
             var templateItemArray = [];
-            for (var key in ItemArray) {
+            var key;
+            for (key in ItemArray) {
                 templateItemArray[key] = ItemArray[key];
             }
 
             var templateChildArr = [];
 
-            for (var key in templateItemArray) {
+            for (key in templateItemArray) {
 
                 var item = templateItemArray[key];
 
-                if (item.state == 'new') {
+                if (item.state === 'new') {
                     delete item._id;
                 }
 
-                if (item.state == 'del') {
+                if (item.state === 'del') {
                     continue;
                 }
 
@@ -200,10 +198,10 @@ define([
                     showFailNotification('로그인 필요');
                 }
             });
-        }
+        };
 
         $scope.movePaperEditor = function () {
-            if($scope.changed == true){
+            if($scope.changed === true){
                 var modalInstance = $modal.open(saveConfirmModal);
                 modalInstance.result.then(function () {
                     $.when($scope.save()).then(function(){
@@ -215,7 +213,7 @@ define([
             }else{
                 $window.location.href = '#portfolioEditor';
             }
-        }
+        };
 
         function showSuccessNotification() {
             var notification = kendo.toString('성공하였습니다.');

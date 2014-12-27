@@ -18,10 +18,8 @@ define([
     'component/item/image/component',
     'directives/CommonAttribute',
     'service/loadArticle'
-], function ($, ng, app, Paper, Article, EditorData) {
+], function ($, ng, app, Paper) {
     app.controller('portfolioPreview', ['$scope', '$http', '$compile', 'EditorData', 'HTMLGenerator', 'LoadPaperList', 'LoadPaper', 'loadArticle', function ($scope, $http, $compile, EditorData, HTMLGenerator, LoadPaperList, LoadPaper, loadArticle) {
-        $scope.paper;
-
         $scope.paperItemArray = [];
 
         $(document).ready(function () {
@@ -39,6 +37,12 @@ define([
                 EditorData.paperList = result.result;
                 $scope.papers = result.result;
 
+                function loadPaperWithResult(result) {
+                    EditorData.paper = result.result;
+
+                    loadPaper(EditorData.paper);
+                }
+
                 var paper;
                 for(var idx = 0; idx < $scope.papers.length; idx++){
                     paper = $scope.papers[idx];
@@ -46,11 +50,7 @@ define([
                     if(!EditorData.paper_id && paper.isIndex === true){
                         EditorData.paperId = paper._id;
 
-                        LoadPaper($http, EditorData.paperId, function (result) {
-                            EditorData.paper = result.result;
-
-                            loadPaper(EditorData.paper);
-                        });
+                        LoadPaper($http, EditorData.paperId, loadPaperWithResult);
                         return;
                     }
 
@@ -58,11 +58,7 @@ define([
 
                         EditorData.paperId = paper._id;
 
-                        LoadPaper($http, EditorData.paperId, function (result) {
-                            EditorData.paper = result.result;
-
-                            loadPaper(EditorData.paper);
-                        });
+                        LoadPaper($http, EditorData.paperId, loadPaperWithResult);
                         return;
                     }
                 }
