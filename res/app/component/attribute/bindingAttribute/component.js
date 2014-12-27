@@ -71,7 +71,7 @@ define([
                 // 아이템에 속성이름을 매칭
                 $scope.setAttributeName = function() {
                     for(var key in $scope.attributeNames){
-                        if($scope.attributeNames[key] == $scope.attributeName){
+                        if($scope.attributeNames[key] === $scope.attributeName){
                             if(key in EditorData.template.target.bindingType){
                                 $scope.data.bindingType = EditorData.template.target.bindingType[key];
                             } else{

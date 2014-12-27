@@ -6,12 +6,9 @@ define([
     'classes/Paper',
     'service/ImageUpload',
     'service/deleteImage'
-], function (app, Paper) {
-    app.controller('bindingImageModal', function ($scope, $modalInstance, $compile, $upload, ImageUpload, $http, $q, deleteImage, $http) {
-        $scope.files;
+], function (app) {
+    app.controller('bindingImageModal', function ($scope, $modalInstance, $compile, $upload, ImageUpload, $http, $q, deleteImage) {
         $scope.progress = 0;
-
-        $scope.imageFile;
 
         // 기존 파일 가져오기
         function getImageFiles() {
@@ -28,7 +25,7 @@ define([
 
             $('ul li div').removeClass('focus');
             $(e.target).parent().addClass('focus');
-        }
+        };
 
         $scope.onFileSelectUnbindImage = function ($files) {
             $scope.files = $files;
@@ -40,7 +37,7 @@ define([
 
                 ImageUpload($upload, $scope.files, '', function (evt) {   // 독립이미지
                     $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-                }, function (data) {
+                }, function () {
                     // 파일 다시 받기
                     getImageFiles();
 
@@ -69,11 +66,11 @@ define([
                 // 파일 다시 받기
                 getImageFiles();
             });
-        }
+        };
     });
     return {
         templateUrl: require.toUrl('component/bindingImageModal/template.html'),
         controller: 'bindingImageModal',
         size: 'lg'
-    }
+    };
 });

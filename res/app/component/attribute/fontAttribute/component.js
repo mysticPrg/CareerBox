@@ -11,7 +11,7 @@ define([
                 data : "=to"
             },
             templateUrl: require.toUrl('component/attribute/fontAttribute/template.html'),
-            link: function ($scope, element, att) {
+            link: function ($scope) {
 
                 $scope.fontFamily = {
                     // 영어폰트

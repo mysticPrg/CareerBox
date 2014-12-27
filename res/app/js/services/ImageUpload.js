@@ -22,6 +22,6 @@ define(['app', 'service/serverURL'], function (app) {
                     file: file
                 }).progress(onProgress).success(onSuccess);
             }
-        }
+        };
     }]);
 });

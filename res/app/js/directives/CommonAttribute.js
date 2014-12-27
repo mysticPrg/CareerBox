@@ -66,7 +66,7 @@ define([
                 // outline
                 {
                     // grid일 경우 선 없애기
-                    if (att.grid !== null) {
+                    if (att.grid !== undefined) {
                         element.css({
                             'border': "0px"
                         });
@@ -119,7 +119,7 @@ define([
             // size
             {
                 // grid일 경우 예외처리
-                if (att.grid !== null) {
+                if (att.grid !== undefined) {
                     element.css({
                         width: (Number(scope.attributeInformation.size.width) * scope.attributeInformation.colCount + Number(scope.attributeInformation.outline.weight) * (Number(scope.attributeInformation.colCount) + 1)) + "px",
                         height: (Number(scope.attributeInformation.size.height) * scope.attributeInformation.rowCount + Number(scope.attributeInformation.outline.weight) * (Number(scope.attributeInformation.rowCount) + 1)) + "px"
@@ -128,7 +128,9 @@ define([
                 else {
                     // 그외
                     scope.$watch("attributeInformation.size", function () {
+//                if(EditorData.focusId == att.id)
                         ApplyCommonItemAttribute.size(element, scope.attributeInformation);
+
                     }, true);
                 }
             }

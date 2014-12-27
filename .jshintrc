@@ -33,6 +33,7 @@
         "window": true,
         "document": true,
         "angular": true,
+        "alert": true,
         "$": true
     }
 }
