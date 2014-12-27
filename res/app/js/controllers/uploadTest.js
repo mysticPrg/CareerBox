@@ -15,6 +15,14 @@ define([
         $scope.progress = 0;
         $scope.status = 'ready';
 
+        function onProgress(evt) {
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+        }
+
+        function onSuccess(data) {
+            $scope.status = data;
+        }
+
         $scope.onFileSelect = function ($files) {
             //$files: an array of files selected, each file has name, size, and type.
             for (var i = 0; i < $files.length; i++) {
@@ -31,16 +39,14 @@ define([
                     //fileFormDataName: myFile, //or a list of names for multiple files (html5). Default is 'file'
                     // customize how data is added to formData. See #40#issuecomment-28612000 for sample code
                     //formDataAppender: function(formData, key, val){}
-                }).progress(function (evt) {
-                    $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-                }).success(function (data, status, headers, config) {
-                    $scope.status = data;
-                });
+                }).progress(onProgress).success(onSuccess);
                 //.error(...)
                 //.then(success, error, progress);
                 // access or attach event listeners to the underlying XMLHttpRequest.
                 //.xhr(function(xhr){xhr.upload.addEventListener(...)})
             }
+
+
             /* alternative way of uploading, send the file binary with the file's content-type.
              Could be used to upload files to CouchDB, imgur, etc... html5 FileReader is needed.
              It could also be used to monitor the progress of a normal http post/put request with large data*/
