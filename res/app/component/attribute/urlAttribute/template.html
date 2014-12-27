@@ -1,4 +1,4 @@
-<ul id="sizeForm" class="clearfix">
+<ul id="urlForm" class="clearfix">
 
     <label for="isOutURLBtn">url 타입</label>
     <div id="isOutURLBtn" class="btn-group">
@@ -6,9 +6,23 @@
         <label class="btn btn-default" ng-model="data.isOutURL" btn-radio=true>외부링크</label>
     </div>
 
-    <div class="btn-group">
-        <label class="btn btn-default" ng-model="data.isNewWindow" btn-radio=false>현재 창에서 열기</label>
-        <label class="btn btn-default" ng-model="data.isNewWindow" btn-radio=true>새 창에서 열기</label>
+    <div id="windowTypeBtn" class="btn-group">
+        <!--<label class="btn btn-default" ng-model="data.isNewWindow" btn-radio=false>현재 창에서 열기</label>-->
+        <!--<label class="btn btn-default" ng-model="data.isNewWindow" btn-radio=true>새 창에서 열기</label>-->
+
+        <div class="radio">
+            <label ng-model="data.isNewWindow">
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                현재 창에서 열기
+            </label>
+        </div>
+        <div class="radio">
+            <label ng-model="data.isNewWindow">
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                새 창에서 열기
+            </label>
+        </div>
+
     </div>
 
     <li ng-show="data.isOutURL">
@@ -18,7 +32,7 @@
 
     <li ng-hide="data.isOutURL">
         <label for="sizeInputWidth">내부 링크</label>
-        <select ng-selected="url_title = papers[data.url]" ng-model="url_title" class="form-control" ng-change="setURL()" ng-options="value for (key, value) in papers "></select>
+        <select ng-selected="url_title = papers[data.url]" ng-model="url_title" class="form-control" ng-change="setURL()" ng-options="value for (key, value) in papers " style="width: 250px; box-sizing: border-box"></select>
     </li>
 
 </ul>
