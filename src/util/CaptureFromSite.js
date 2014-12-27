@@ -32,7 +32,7 @@ function CaptureFromSite(_id, type, closerCallback) {
     if (isRunning === false) {
         ProccesesCapture();
     }
-};
+}
 
 function initPage(page) {
 
@@ -61,7 +61,7 @@ function initPage(page) {
 
     // Fire an event when we have received a resource.
     page.set('onResourceReceived', function (res) {
-        if (page.ready && (res.stage == 'end') && (--page.resources == 0)) {
+        if (page.ready && (res.stage === 'end') && (--page.resources === 0)) {
             page.loading = false;
         }
     });

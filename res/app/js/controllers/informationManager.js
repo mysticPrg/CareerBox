@@ -34,11 +34,11 @@ define([
             });
 
             $scope.transition('personalInfo');
-        }
+        };
 
         $scope.transition = function (link){
             $('#'+link).click();
-        }
+        };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $("#tabContent > div").hide(); // Initially hide all content
@@ -78,7 +78,7 @@ define([
                 GetInformation.loadColumnInfo();
             }
 
-        }
+        };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $scope.save = function (info) {
@@ -100,7 +100,7 @@ define([
                 saveColumnInfo();
             }
 
-        }
+        };
 
         function savePersonalInfo() {
             var savePersonalPromiss = $http.post('http://210.118.74.166:8123/info/personal', {personalInfo: InformationData.personalInfo}, {withCredentials: true});
@@ -126,7 +126,7 @@ define([
             $q.all([saveWorkingPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
             });
-        };
+        }
 
         function saveAbilityInfo() {
             var saveCertificationAbilityPromiss = $http.post('http://210.118.74.166:8123/info/certificationAbility', {certificationAbilityInfo: InformationData.certificateAbilityInfo}, {withCredentials: true});
@@ -137,7 +137,7 @@ define([
             $q.all([saveCertificationAbilityPromiss, saveProficiencyPromiss, saveComputerAbilityPromiss, savePaperAbilityPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
             });
-        };
+        }
 
         function saveAwardInfo() {
             var saveScholarshipPromiss = $http.post('http://210.118.74.166:8123/info/scholarship', {scholarshipInfo: InformationData.scholarshipInfo}, {withCredentials: true});
@@ -146,7 +146,7 @@ define([
             $q.all([saveScholarshipPromiss, saveAwardPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
             });
-        };
+        }
 
         function saveActivityInfo() {
             var saveLocalActivityPromiss = $http.post('http://210.118.74.166:8123/info/localActivity', {localActivityInfo: InformationData.localActivityInfo}, {withCredentials: true});
@@ -155,7 +155,7 @@ define([
             $q.all([saveLocalActivityPromiss, saveGlobalActivityPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
             });
-        };
+        }
 
         function saveProjectInfo() {
             var saveProjectPromiss = $http.post('http://210.118.74.166:8123/info/project', {projectInfo: InformationData.projectInfo}, {withCredentials: true});
@@ -163,7 +163,7 @@ define([
             $q.all([saveProjectPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
             });
-        };
+        }
 
         function saveColumnInfo() {
             var saveColumnPromiss = $http.post('http://210.118.74.166:8123/info/column', {columnInfo: InformationData.columnInfo}, {withCredentials: true});
@@ -171,11 +171,11 @@ define([
             $q.all([saveColumnPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
             });
-        };
+        }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         function resultCheck(resultArray){
             var returnCode;
-            angular.forEach(resultArray, function (value, key) {
+            angular.forEach(resultArray, function (value) {
                 returnCode = value.data.returnCode;
             });
 

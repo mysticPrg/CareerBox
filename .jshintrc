@@ -1,6 +1,6 @@
 {
     "unused": true,    // 사용하지 않는 이름 체크
-    "camelcase": true, // 이름 정의에 camel-case 사용하는지 여부 (언더바로 구분하지 않고 대소문자로 구분하는 변수명)
+    "camelcase": false, // 이름 정의에 camel-case 사용하는지 여부 (언더바로 구분하지 않고 대소문자로 구분하는 변수명)
     "curly": true,     // 중괄호 규칙
     "undef": true,     // 정의하지 않은 이름 체크
     "eqeqeq": true,    // ===, !== 사용 여부
@@ -8,11 +8,12 @@
     "noarg": true,     // arguments.caller, arguments.callee의 사용 금지
     "noempty": true,   // for 문 등에서 빈 블록 사용 금지
     "trailing": true,  // 라인 끝에 불필요한 공백문자 금지,
-    "maxdepth": 2,     // 제어문의 최대 중첩갯수
+    "maxdepth": 2,     // 제어문의 최대 중첩갯수,
+    "nonew": false,    // 생성자는 반드시 new로 호출
 
     "es5": false,      // es5 표준 사용 여부
     "strict": false,   // use strict 사용 여부
-    "latedef": false,  // 정의가 사용보다 뒤에 있는지 검사
+    "latedef": false,  // 정의가 사용보다 뒤에 있는지 검사,
 
     "globals": {    // 전역적으로 사용할 이름들 정의
         "it": true,
@@ -22,6 +23,15 @@
         "expect": true,
         "require": true,
         "console": true,
-        "module": true
+        "module": true,
+        "define": true,
+        "require": true,
+        "kendo": true,
+        "jQuery": true,
+        "setTimeout": true,
+        "__dirname": true,
+        "window": true,
+        "document": true,
+        "angular": true
     }
 }

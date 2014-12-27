@@ -42,8 +42,9 @@ module.exports = function (grunt) {
         jshint: {
             all: [
                 "Gruntfile.js",
-                "src/**/*.js",
-                "spec/**/*.js"
+                "res/app/js/**/*.js",
+                "res/app/component/**/*.js",
+                "src/**/*.js"
             ],
             options: {
                 jshintrc: ".jshintrc",
@@ -95,6 +96,7 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
+    //grunt.loadNpmTasks('jshint-jenkins-checkstyle-reporter');
     grunt.loadNpmTasks("grunt-jscpd");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-watch");
