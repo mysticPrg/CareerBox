@@ -19,11 +19,11 @@ define([
             var newComputerAbilityInfoItem = new ComputerAbilityInfoItem($scope.computerAbilityInfoItem);
             $scope.computerAbilityInfoItems.push(newComputerAbilityInfoItem);
             $scope.computerAbilityInfoItem = new ComputerAbilityInfoItem();
-        }
+        };
 
         $scope.delComputerAbilityInfo = function (index) {
             $scope.computerAbilityInfoItems.splice(index, 1);
-        }
+        };
 
     }]);
 

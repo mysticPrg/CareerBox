@@ -1,4 +1,3 @@
-
 define([
     'app',
     'classes/Portfolio',
@@ -16,5 +15,5 @@ define([
     return {
         templateUrl: require.toUrl('component/modifyPortfolioModal/template.html'),
         controller: 'modifyPortfolioModalController'
-    }
+    };
 });

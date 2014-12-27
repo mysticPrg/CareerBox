@@ -4,8 +4,6 @@ define([
     'service/EditorData'
 ], function (app, EditorData) {
     app.controller('saveConfirmModalController', function ($scope, $modalInstance) {
-        $scope.title;
-
         if(EditorData.editorType === 'template'){
             $scope.title = EditorData.template.title;
         }
@@ -22,5 +20,5 @@ define([
     return {
         templateUrl: require.toUrl('component/saveConfirmModal/template.html'),
         controller: 'saveConfirmModalController'
-    }
+    };
 });

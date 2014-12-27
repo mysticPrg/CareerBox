@@ -23,22 +23,24 @@ define([
             $scope.paperTitle = 'Select Paper';
             $scope.papers = [];
 
-            function loadPaperList(){
+            function loadPaperList() {
                 LoadPaperList($http, EditorData.portfolio._id, function (result) {
                     EditorData.paperList = result.result;
                     $scope.papers = result.result;
 
-                    if(EditorData.paperId === '') {
-                        var paper;
-                        for (var idx = 0; idx < $scope.papers.length; idx++) {
+                    var idx;
+                    var paper;
+
+                    if (EditorData.paperId === '') {
+                        for (idx = 0; idx < $scope.papers.length; idx++) {
                             paper = $scope.papers[idx];
                             if (paper.isIndex === true) {
                                 EditorData.paperId = paper._id;
                                 EditorData.paperTitle = paper.title;
                             }
                         }
-                    }else{
-                        for (var idx = 0; idx < $scope.papers.length; idx++) {
+                    } else {
+                        for (idx = 0; idx < $scope.papers.length; idx++) {
                             paper = $scope.papers[idx];
                             if (paper._id === EditorData.paperId) {
                                 EditorData.paperId = paper._id;
@@ -58,24 +60,24 @@ define([
                 loadPaperList();
             });
 
-            $scope.createPaper = function (paper){
+            $scope.createPaper = function (paper) {
                 var data = {_portfolio_id: EditorData.portfolio._id, paper: paper};
                 EditorData.focusId = paper._id;
                 SavePaper($http, data, function (result) {
-                    if(result.returnCode === '000'){
+                    if (result.returnCode === '000') {
                         EditorData.paperId = result.result;
                         loadPaperList();
                     }
                 });
-            }
+            };
 
-            $scope.changePage = function (id, title){
+            $scope.changePage = function (id, title) {
                 EditorData.paperId = id;
                 $scope.paperTitle = title;
 
                 // 속성창 갱신 First Task
                 EditorData.focusId = EditorData.paperId;
-            }
+            };
 
             $scope.popCreatePaperModal = function () {
                 var modalInstance = $modal.open(createPaperModal);
@@ -85,19 +87,19 @@ define([
                 });
             };
 
-            $scope.popDeletePaperModal = function (id){
+            $scope.popDeletePaperModal = function (id) {
                 var modalInstance = $modal.open(deletePaperModal);
                 modalInstance.result.then(function () {
                     var data = {_id: id};
 
-                    deletePaper($http, data, function(result){
+                    deletePaper($http, data, function () {
                         $scope.paperTitle = 'Select Paper';
                         loadPaperList();
                         window.location.reload();
                     });
                 }, function () {
                 });
-            }
+            };
         }
     ]);
 

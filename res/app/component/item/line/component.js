@@ -10,50 +10,50 @@ define([
     'service/EditorData'
 
 ], function (app) {
-    app.directive('ngX1', function() {
-        return function(scope, element, attrs) {
+    app.directive('ngX1', function () {
+        return function (scope, element, attrs) {
             scope.attrs = attrs;
-            scope.$watch('attrs.ngX1', function() {
+            scope.$watch('attrs.ngX1', function () {
                 element.attr('x1', attrs.ngX1);
-            },true);
-        }
+            }, true);
+        };
 
     });
-    app.directive('ngX2', function() {
-        return function(scope, element, attrs) {
+    app.directive('ngX2', function () {
+        return function (scope, element, attrs) {
             scope.attrs = attrs;
-            scope.$watch('attrs.ngX2', function() {
+            scope.$watch('attrs.ngX2', function () {
                 element.attr('x2', attrs.ngX2);
-            },true);
-        }
+            }, true);
+        };
     });
-    app.directive('ngY1', function() {
-        return function(scope, element, attrs) {
+    app.directive('ngY1', function () {
+        return function (scope, element, attrs) {
             scope.attrs = attrs;
-            scope.$watch('attrs.ngY1', function() {
+            scope.$watch('attrs.ngY1', function () {
                 element.attr('y1', attrs.ngY1);
-            },true);
-        }
+            }, true);
+        };
     });
-    app.directive('ngY2', function() {
-        return function(scope, element, attrs) {
+    app.directive('ngY2', function () {
+        return function (scope, element, attrs) {
             scope.attrs = attrs;
-            scope.$watch('attrs.ngY2', function() {
+            scope.$watch('attrs.ngY2', function () {
                 element.attr('y2', attrs.ngY2);
-            },true);
-        }
+            }, true);
+        };
     });
 
 
     app.directive('line', ['SetAttributeInformation', 'ApplyCommonItemAttribute', 'EditorData', function (SetAttributeInformation, ApplyCommonItemAttribute, EditorData) {
-        function HexTo10(Hex){
-            return parseInt(Hex, 16).toString(10)
-        };
+        function HexTo10(Hex) {
+            return parseInt(Hex, 16).toString(10);
+        }
 
-        function setLineSize(element, scope){
+        function setLineSize(element, scope) {
             element.css({
                 width: scope.attributeInformation.size.width + "px",
-                height: scope.attributeInformation.outline.weight*15 + "px"
+                height: scope.attributeInformation.outline.weight * 15 + "px"
             });
         }
 
@@ -61,7 +61,7 @@ define([
 
             // outline.color
             scope.$watch("attributeInformation.outline.color", function () {
-                scope.style.fill = 'rgba(' + HexTo10(scope.attributeInformation.outline.color.R) + ', '+HexTo10(scope.attributeInformation.outline.color.G)+', '+HexTo10(scope.attributeInformation.outline.color.B)+', '+scope.attributeInformation.alpha/100+')';
+                scope.style.fill = 'rgba(' + HexTo10(scope.attributeInformation.outline.color.R) + ', ' + HexTo10(scope.attributeInformation.outline.color.G) + ', ' + HexTo10(scope.attributeInformation.outline.color.B) + ', ' + scope.attributeInformation.alpha / 100 + ')';
             }, true);
 
             // outline.weight
@@ -71,45 +71,47 @@ define([
 
             // alpha
             scope.$watch("attributeInformation.alpha", function () {
-                scope.style.fill = 'rgba(' + HexTo10(scope.attributeInformation.outline.color.R) + ', '+HexTo10(scope.attributeInformation.outline.color.G)+', '+HexTo10(scope.attributeInformation.outline.color.B)+', '+scope.attributeInformation.alpha/100+')';
+                scope.style.fill = 'rgba(' + HexTo10(scope.attributeInformation.outline.color.R) + ', ' + HexTo10(scope.attributeInformation.outline.color.G) + ', ' + HexTo10(scope.attributeInformation.outline.color.B) + ', ' + scope.attributeInformation.alpha / 100 + ')';
             }, true);
 
             // pos
-            scope.$watch("attributeInformation.pos",function() {
-                if(EditorData.focusId == att.id)
+            scope.$watch("attributeInformation.pos", function () {
+                if (EditorData.focusId === att.id) {
                     ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
-            },true);
+                }
+            }, true);
 
             // size
-            scope.$watch("attributeInformation.size",function() {
+            scope.$watch("attributeInformation.size", function () {
 
                 setLineSize(element, scope);
 
-                var divWidth = element.width() == 0 ? (150 - 10) : (element.width() - 10 );
-                var divHeight = element.height() == 0 ? (150 - 10) : (element.height() - 10);
+                var divWidth = element.width() === 0 ? (150 - 10) : (element.width() - 10 );
+                var divHeight = element.height() === 0 ? (150 - 10) : (element.height() - 10);
 
                 scope.lineEnd.x = divWidth;
                 scope.lineEnd.y = divHeight;
 
-            },true);
+            }, true);
 
             // rotate
-            scope.$watch("attributeInformation.rotate",function() {
+            scope.$watch("attributeInformation.rotate", function () {
                 ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
-            },true);
+            }, true);
 
             // z-watch
             scope.$watch("attributeInformation.zOrder", function () {
-                if(scope.attributeInformation._id == att.id)
+                if (scope.attributeInformation._id === att.id) {
                     ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
+                }
             }, true);
 
-        };
+        }
 
         return {
             // A = attribute, E = Element, C = Class and M = HTML Comment
             restrict: 'A',
-            scope : true,   // 새로운 스코프
+            scope: true,   // 새로운 스코프
             //The link function is responsible for registering DOM listeners as well as updating the DOM.
             link: function (scope, element, att) {
 

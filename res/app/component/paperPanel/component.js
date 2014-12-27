@@ -48,7 +48,7 @@ define([
             // Initialize Template InfoType
             var infoTypes = [];
             infoTypes.push({title: '전체보기', infoType: ''});
-            for(var key in InformationData){
+            for (var key in InformationData) {
                 infoTypes.push(InformationData[key]);
             }
             $scope.selected = infoTypes[0];
@@ -65,23 +65,21 @@ define([
 
 
                 $("#content > div").hide(); // Initially hide all content
-                $("#SectionEditorTab li:first").attr("id","current"); // Activate first tab
+                $("#SectionEditorTab li:first").attr("id", "current"); // Activate first tab
                 $("#SectionEditorTab li:first a img").attr("src", "../img/editor_img/articleIcon.png");
                 $("#content div:first").fadeIn(); // Show first tab content
 
-                $('#SectionEditorTab a').click(function(e) {
+                $('#SectionEditorTab a').click(function (e) {
                     e.preventDefault();
                     $("#content > div").hide(); //Hide all content
-                    $("#SectionEditorTab li").attr("id",""); //Reset id's
-                    $(this).parent().attr("id","current"); // Activate this
+                    $("#SectionEditorTab li").attr("id", ""); //Reset id's
+                    $(this).parent().attr("id", "current"); // Activate this
 
-                    if($(this).children().attr('id') === 'articleTabImg')
-                    {
+                    if ($(this).children().attr('id') === 'articleTabImg') {
                         $(this).children().attr("src", "../img/editor_img/articleIcon.png");
                         $(this).parent().siblings().children().children().attr("src", "../img/editor_img/itemIconActive.png");
                     }
-                    else if($(this).children().attr('id') === 'itemTabImg')
-                    {
+                    else if ($(this).children().attr('id') === 'itemTabImg') {
                         $(this).children().attr("src", "../img/editor_img/itemIcon.png");
                         $(this).parent().siblings().children().children().attr("src", "../img/editor_img/articleIconActive.png");
                     }
@@ -91,43 +89,42 @@ define([
                     $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
                 });
 
-            }
+            };
 
-            function getTemplateListByType(infotype){
+            function getTemplateListByType(infotype) {
                 getTemplateListBasic($http, infotype, function (data) {
-                    if (data.returnCode == 000) {
+                    if (data.returnCode === '000') {
                         var templates = data.result;
                         $scope.basicTemplates = [];
-                        for(var i = 0; i < templates.length; i++){
+                        for (var i = 0; i < templates.length; i++) {
                             var template = new Template(templates[i]);
-                            template.thumbURL = 'http://210.118.74.166:8123/template/thumb/'+template._id+'?'+new Date();
+                            template.thumbURL = 'http://210.118.74.166:8123/template/thumb/' + template._id + '?' + new Date();
                             $scope.basicTemplates.push(template);
                         }
                     }
                 });
 
                 getTemplateList($http, infotype, function (data) {
-                    if (data.returnCode == 000) {
+                    if (data.returnCode === '000') {
                         var templates = data.result;
-                        $scope.templates = []
-                        for(var i = 0; i < templates.length; i++){
+                        $scope.templates = [];
+                        for (var i = 0; i < templates.length; i++) {
                             var template = new Template(templates[i]);
-                            template.thumbURL = 'http://210.118.74.166:8123/template/thumb/'+template._id+'?'+new Date();
+                            template.thumbURL = 'http://210.118.74.166:8123/template/thumb/' + template._id + '?' + new Date();
                             $scope.templates.push(template);
                         }
                     }
                 });
             }
 
-            $scope.setInfoType = function (infoType){
+            $scope.setInfoType = function (infoType) {
                 $scope.selected = infoType;
                 getTemplateListByType($scope.selected.infoType);
-            }
+            };
 
             $scope.loadArticleTemplate = function () {
                 getTemplateListByType('');
             };
-
 
 
             function newItem(type) {
@@ -206,14 +203,15 @@ define([
                 var template = new Template(template_ori);   // 객체 복사해주어야함!.
 
                 // 로드된 템플릿과 아이디가 겹치지 않도록함.
-                for(var key in EditorData.childArr){
+                for (var key in EditorData.childArr) {
 
-                    if(EditorData.childArr[key].layoutComponentType != "item")  // 아이템은 무시
-                        if($scope.childIndex <= Number(EditorData.childArr[key]._id.split(template._id + '_')[1])){
+                    if (EditorData.childArr[key].layoutComponentType !== "item") {  // 아이템은 무시
+                        if ($scope.childIndex <= Number(EditorData.childArr[key]._id.split(template._id + '_')[1])) {
 
 
                             $scope.childIndex = Number(EditorData.childArr[key]._id.split(template._id + '_')[1]) + 1;
                         }
+                    }
                 }
 
                 var templateId = template._id + '_' + $scope.childIndex;
@@ -249,7 +247,7 @@ define([
 //                    EditorData.childArr[templateDomId].target.childArr[index] = item;
 
                     // 아티클아이디_차일드인덱스_0_아이템아이디
-                    templateItemId = templateDomId + '_' +templateItemArray[index]._id;
+                    templateItemId = templateDomId + '_' + templateItemArray[index]._id;
                     templateItemDom += HTMLGenerator('loadItem', templateItemArray[index], templateItemId, option);
                 }
 
@@ -259,7 +257,7 @@ define([
                 $scope.childIndex++;
 
                 EditorData.focusId = templateDomId;    // 클론될 때 클론된 아이템의 속성창을 바로 띄워줌.
-            }
+            };
 
             function createTemplateDiv(template, id) {
                 var domObj = "<div id=" + id + " draggable ng-click common-attribute></div>";
@@ -280,11 +278,11 @@ define([
             }
 
             // 에디터 수정 리스너
-            $rootScope.$on('editTemplate',function(e, templateId) {
-                for(var key in $scope.templates){
+            $rootScope.$on('editTemplate', function (e, templateId) {
+                for (var key in $scope.templates) {
                     var template = $scope.templates[key];
-                    if(template._id === templateId){
-                        $scope.editTemplate(template)
+                    if (template._id === templateId) {
+                        $scope.editTemplate(template);
                         break;
                     }
                 }
@@ -293,18 +291,18 @@ define([
             $scope.editTemplate = function (template) {
                 EditorData.template = template;
                 EditorData.templateState = 'edit';
-            }
+            };
 
             $scope.deleteTemplate = function (id) {
                 DeleteTemplate($http, id, function (result) {
-                    if (result.returnCode == 000) {
+                    if (result.returnCode === '000') {
                         $scope.loadArticleTemplate();
                         window.location.reload();
                     } else {
                         console.log('error: ' + result);
                     }
                 });
-            }
+            };
 
             // create template modal
             $scope.popCreateTemplateModal = function () {

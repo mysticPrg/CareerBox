@@ -10,14 +10,14 @@ define([
             // A = attribute, E = Element, C = Class and M = HTML Comment
 
             restrict: 'A',
-            scope : true,   // 새로운 스코프
-            link: function(scope, element, att) {
+            scope: true,   // 새로운 스코프
+            link: function (scope, element, att) {
                 scope.info = SetAttributeInformation(att.id).attributeInformation;
 
-                scope.$watch('info.radius',function(){
+                scope.$watch('info.radius', function () {
                     scope.radius = {
                         'border-radius': scope.info.radius + "px"
-                    }
+                    };
                 });
 
             },

@@ -22,11 +22,11 @@ define([
             getPortfolioList($http, function (data) {
                 CommonCallback(data, function () {
                     // 포트폴리오 리스트에 추가
-                    for (var i = 0, portfolio; portfolio = data.result[i]; i++) {
+                    for (var i = 0; i<data.result.length; i++) {
                         $scope.portfolios.push(data.result[i]); // 포트폴리오 리스트에 추가
                     }
-                })
-            })
+                });
+            });
         };
 
         $scope.getPortfolioList();    // 함수 실행
@@ -43,7 +43,7 @@ define([
                         portfolio._id = data.result;
                         // 배열에 추가
                         $scope.portfolios.push(portfolio);
-                    })
+                    });
                 });
             }, function () { // Cancel
             });
@@ -64,7 +64,7 @@ define([
                     CommonCallback(data, function () {
                         // 성공시
                         console.log("정상적으로 변경 되었습니다.");
-                    })
+                    });
                 });
             }, function () {
                 // Cancel
@@ -80,7 +80,7 @@ define([
                 deletePortfolio($http, {_id: $scope.portfolios[index]._id}, function (data) {
                     CommonCallback(data, function () { // 성공시
                         console.log("정상적으로 삭제 되었습니다.");
-                    })
+                    });
                 });
 
                 // 포트폴리오 삭제
@@ -93,7 +93,7 @@ define([
         $scope.sharePortfolio = function (id) {
             EditorData.shareId = id;
 
-            var modalInstance = $modal.open(sharePortfolioModal);
+            $modal.open(sharePortfolioModal);
         };
 
         // 포트폴리오 에디터 이동 함수
@@ -107,7 +107,7 @@ define([
         $scope.goToPortfolio = function (portfolioId) {
             var href = 'portfolioPreview.html?id=' + portfolioId;
             $window.location.href = href;
-        }
+        };
 
     }]);
 

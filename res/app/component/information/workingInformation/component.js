@@ -20,11 +20,11 @@ define([
             var newWorkingInfoItem = new WorkingInfoItem($scope.workingInfoItem);
             $scope.workingInfoItems.push(newWorkingInfoItem);
             $scope.workingInfoItem = new WorkingInfoItem();
-        }
+        };
 
         $scope.delWorkingInfo = function (index) {
             $scope.workingInfoItems.splice(index, 1);
-        }
+        };
 
     }]);
 

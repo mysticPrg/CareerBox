@@ -11,7 +11,6 @@ define([
 ], function (app, InformationData, CertificationAbilityInfoItem) {
     app.controller('certificateAbilityInformationContorller', ['$scope', '$upload', 'fileUpload', function ($scope, $upload, fileUpload) {
         $scope.certificateAbilityInfoItem = new CertificationAbilityInfoItem();
-        $scope.files;
         $scope.progress = 0;
 
         $scope.InformationData = InformationData;
@@ -34,11 +33,11 @@ define([
             $scope.fileNameForCertification = '';
 
             initializeFileForm();
-        }
+        };
 
         $scope.delCertificateAbilityInfo = function (index) {
             $scope.certificateAbilityInfoItems.splice(index, 1);
-        }
+        };
 
         $scope.onFileSelectCertificateAbilityInfo = function ($files) {
             if($files[0].size > 5242880){
@@ -49,7 +48,7 @@ define([
             $scope.fileNameForCertification = $files[0].name;
             $scope.files = $files;
             $('#certificate_upload').fadeIn('slow');
-        }
+        };
 
         $scope.uploadCertificateAbilityInfo = function (){
             $('#certificate_progressbar').fadeIn('slow');
@@ -59,7 +58,7 @@ define([
             },function(data){
                 $scope.certificateAbilityInfoItem.F_file = data.result;
             });
-        }
+        };
     }]);
 
     app.directive('certificateAbilityInformation', function () {

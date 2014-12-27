@@ -20,11 +20,11 @@ define([
             var newUnivSchoolInfoItem = new UnivSchoolInfoItem($scope.univSchoolInfoItem);
             $scope.univSchoolInfoItems.push(newUnivSchoolInfoItem);
             $scope.univSchoolInfoItem = new UnivSchoolInfoItem();
-        }
+        };
 
         $scope.delUnivSchoolInfo = function (index) {
             $scope.univSchoolInfoItems.splice(index, 1);
-        }
+        };
 
     }]);
 

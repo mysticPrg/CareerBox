@@ -19,11 +19,11 @@ define([
             var newScholarshipInfoItem = new ScholarshipInfoItem($scope.scholarshipInfoItem);
             $scope.scholarshipInfoItems.push(newScholarshipInfoItem);
             $scope.scholarshipInfoItem = new ScholarshipInfoItem();
-        }
+        };
 
         $scope.delScholarshipInfo = function (index) {
             $scope.scholarshipInfoItems.splice(index, 1);
-        }
+        };
 
     }]);
 

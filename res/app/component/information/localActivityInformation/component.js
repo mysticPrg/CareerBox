@@ -12,7 +12,6 @@ define([
     app.controller('localActivityInformationController', ['$scope', '$upload', 'fileUpload', 'ImageUpload',
         function ($scope, $upload, fileUpload, ImageUpload) {
             $scope.localActivityInfoItem = new LocalActivityInfoItem();
-            $scope.files;
             $scope.progress = 0;
             $scope.imageProgress = 0;
 
@@ -42,11 +41,11 @@ define([
                 $scope.fileNameForLocalActivity = '';
 
                 initializeFileForm();
-            }
+            };
 
             $scope.delLocalActivityInfo = function (index) {
                 $scope.localActivityInfoItems.splice(index, 1);
-            }
+            };
 
             $scope.onFileSelectLocalActivityInfo = function ($files) {
                 if($files[0].size > 5242880){
@@ -57,7 +56,7 @@ define([
                 $scope.fileNameForLocalActivity = $files[0].name;
                 $scope.files = $files;
                 $('#localActivity_upload').fadeIn('slow');
-            }
+            };
 
             $scope.uploadLocalActivityInfo = function () {
                 $('#localActivity_progressbar').fadeIn('slow');
@@ -67,7 +66,7 @@ define([
                 }, function (data) {
                     $scope.localActivityInfoItem.F_file = data.result;
                 });
-            }
+            };
 
             $scope.onFileSelectLocalActivityImage = function ($files) {
                 if($files[0].size > 5242880){
@@ -85,7 +84,7 @@ define([
                     $scope.localActivityInfoItem.I_image = data.result;
                     $('#localActivity_picture').attr('src', 'http://210.118.74.166:8123/image/symbol/thumb/' + data.result._id);
                 });
-            }
+            };
 
         }]);
 

@@ -31,7 +31,7 @@ define([
                 $scope.personalInfo.I_picture = data.result;
                 $('#personal_picture').attr('src', 'http://210.118.74.166:8123/image/profile/thumb/' + data.result._id);
             });
-        }
+        };
 
     }]);
 
