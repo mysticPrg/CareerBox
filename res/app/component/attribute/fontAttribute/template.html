@@ -14,10 +14,10 @@
     <div id="fontOptionForm" class="fontElement">
         <label id="fontFamilyInputLabel">글꼴</label>
 
-        <select ng-model="data.font.family"
+        <select id="fontFamilySelect" ng-model="data.font.family"
                 ng-options="key for (key, value) in fontFamily"></select>
 
-        <div class="btn-group">
+        <div id="fontOption" class="btn-group">
             <label class="btn btn-default" ng-model="data.font.bold" btn-checkbox><b>B</b></label>
             <label class="btn btn-default" ng-model="data.font.italic" btn-checkbox><i>I</i></label>
         </div>

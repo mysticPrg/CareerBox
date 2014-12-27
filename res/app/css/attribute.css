@@ -67,6 +67,18 @@
     margin-left: 10px;
 }
 
+#fontForm #fontOptionForm #fontFamilySelect {
+    height: 34px;
+    width: 180px;
+    border-color: #d6d6d6;
+    border-radius: 3px;
+}
+
+#fontForm #fontOptionForm #fontOption {
+    margin-left: 61px;
+    margin-top: 10px;
+}
+
 /*사이즈*/
 #sizeForm #sizeFillForm > label {
     width: 57px;
@@ -270,4 +282,22 @@
 #rowcolForm .transformElement {
     text-align: right;
     margin-left: 65px;
+}
+
+/*url*/
+#urlForm > label {
+    width: 57px;
+}
+
+#urlForm > li {
+    margin-top: 25px;
+}
+
+#urlForm #isOutURLBtn {
+    margin-left: 10px;
+}
+
+#urlForm #windowTypeBtn {
+    margin-top: 10px;
+    margin-left: 67px;
 }

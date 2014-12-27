@@ -34,21 +34,26 @@ define([
     }
 
     function vAlign(scope, element) {
+
         var height, textElement, textElementHeight;
 
+        height = scope.info.size.height;
+        textElement = element.find('.whiteSpace');
+        textElementHeight = textElement.height();
+
         if (scope.info.vAlign === 'top') {
-            scope.style.top = '0px';
+            textElement.css({
+                'top': "0px"
+            });
         } else if (scope.info.vAlign === 'middle') {
-            height = scope.info.size.height;
-            textElement = element.find('.whiteSpace');
-            textElementHeight = textElement.height();
-            scope.style.top = height / 2 - textElementHeight / 2;
+            textElement.css({
+                'top': (height / 2 - textElementHeight / 2) + "px"
+            });
 
         } else if (scope.info.vAlign === 'bottom') {
-            height = scope.info.size.height;
-            textElement = element.find('.whiteSpace');
-            textElementHeight = textElement.height();
-            scope.style.top = height - textElementHeight;
+            textElement.css({
+                'top': (height - textElementHeight) + "px"
+            });
         }
     }
 
@@ -64,46 +69,63 @@ define([
 
                 // align
                 scope.$watch("info.align", function () {
-                    scope.style['text-align'] = scope.info.align;
+                    element.css({
+                        'text-align': scope.info.align
+                    });
+
+//                    scope.style['text-align'] = scope.info.align;
                 });
 
                 //vAlign
                 scope.$watch("info", function () {
+
                     element.css({
                         'font-size': scope.info.font.size + "px"
                     });
+
+                    element.css({
+                        'font-family': "'" + trim(scope.info.font.family) + "', '" + scope.info.font.family + "'"
+                    });
+
                     vAlign(scope, element);
                 }, true);
 
                 // font color
                 scope.$watch("info.font.color", function () {
-                    scope.style.color = "#" + scope.info.font.color.R + scope.info.font.color.G + scope.info.font.color.B;
-                });
-
-                // font-family
-                scope.$watch("info.font.family", function () {
                     element.css({
-                        'font-family': "'" + trim(scope.info.font.family) + "', '" + scope.info.font.family + "'"
+                        'color': "#" + scope.info.font.color.R + scope.info.font.color.G + scope.info.font.color.B
                     });
                 });
 
                 // font-bold
                 scope.$watch("info.font.bold", function () {
                     if (scope.info.font.bold) {
-                        scope.style['font-weight'] = "bold";
+                        element.css({
+                            'font-weight': "bold"
+                        });
+//                        scope.style['font-weight'] = "bold";
                     }
                     else {
-                        scope.style['font-weight'] = "normal";
+                        element.css({
+                            'font-weight': "normal"
+                        });
+//                        scope.style['font-weight'] = "normal";
                     }
                 });
 
                 // font-italic
                 scope.$watch("info.font.italic", function () {
                     if (scope.info.font.italic) {
-                        scope.style['font-style'] = "italic";
+                        element.css({
+                            'font-style': "italic"
+                        });
+//                        scope.style['font-style'] = "italic";
                     }
                     else {
-                        scope.style['font-style'] = "normal";
+                        element.css({
+                            'font-style': "normal"
+                        });
+//                        scope.style['font-style'] = "normal";
                     }
                 });
 
