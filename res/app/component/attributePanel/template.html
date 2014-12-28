@@ -34,7 +34,7 @@
             <ul id="itemAttrList">
                 <!----------------------< 순서를 바꿀수 있도록 바뀐 속성 리스트 >--------------------->
 
-                <li ng-if=" (attributeInformation.bindingType || attributeInformation.bindingType==='') && !(attributeInformation.bindingType.title === '기본정보' || attributeInformation.bindingType.title === '추가정보') ">
+                <li ng-if=" (attributeInformation.bindingType || attributeInformation.bindingType==='')  ">
                     <div binding-attribute to="attributeInformation" type="type"></div>
                 </li>
 
