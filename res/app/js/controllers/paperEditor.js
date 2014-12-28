@@ -106,7 +106,7 @@ define([
             $(document).on('mousedown', function (e) {
                 if (isFocusInput(e.target)) {
                     EditorData.focusInput = true;
-                }else{
+                } else {
                     EditorData.focusInput = false;
                 }
 
