@@ -203,14 +203,33 @@ img {
 
 #bottom-pane #page #stateBar #stateGroup .statePaper.btn-default {
     width: 80px;
-    height: 37px;
+    height: 34px;
     padding: 0;
-    line-height: 37px;
+    line-height: 34px;
     border-radius: 2px;
     border-style: none;
     color: #10152c;
     background-color: #fff;
     box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+    margin-right: 15px;
+}
+
+#bottom-pane #page #stateBar #stateGroup .statePaper2.btn-default {
+    width: 80px;
+    height: 34px;
+    padding: 0;
+    line-height: 34px;
+    border-radius: 2px;
+    border-style: none;
+    color: #9c9c9c;
+    background-color: #fff;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+    margin-right: 15px;
+}
+
+.statePaper2.btn:hover {
+    background-color: #fff !important;
+    color: #10152c !important;
 }
 
 .stateCircle {
@@ -218,7 +237,7 @@ img {
     height: 10px;
     border-radius: 100%;
     background-color: #3EB3E2;
-    margin-top: 14px;
+    margin-top: 13px;
     margin-left: 11px;
 }
 
@@ -756,7 +775,8 @@ img {
 #editBtnGrp > .btn {
     font-size: 12px;
     border-style: none;
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    border-radius: 2px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
 }
 
 #articleEditBtn {
