@@ -98,7 +98,7 @@
                     <div alpha-attribute to="attributeInformation"></div>
                 </li>
 
-                <li ng-if="attributeInformation.radius || attributeInformation.radius==='' || attributeInformation.radius===0" ng-hide="attributeInformation.layoutComponentType === 'article' && type !== 'template' && attributeInformation.layoutComponentType === 'article'">
+                <li ng-if="attributeInformation.radius || attributeInformation.radius==='' || attributeInformation.radius===0" ng-hide="(attributeInformation.layoutComponentType === 'article' && type !== 'template' && attributeInformation.layoutComponentType === 'article') || attributeInformation.itemType === 'line'">
                     <div radius-attribute to="attributeInformation"></div>
                 </li>
 
