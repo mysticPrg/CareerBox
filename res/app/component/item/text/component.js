@@ -41,39 +41,49 @@ define([
         textElement = element.find('.whiteSpace');
         textElementHeight = textElement.height();
 
+//        console.log('before========');
+//        console.log('height', height);
+//        console.log('textElementHeight', textElementHeight);
+
         if (scope.info.vAlign === 'top') {
             textElement.css({
+                'bottom': '',
                 'top': "0px"
             });
         } else if (scope.info.vAlign === 'middle') {
             textElement.css({
-                'top': parseInt(height / 2 - textElementHeight / 2) +"px"
+                'top': (height / 2 - textElementHeight / 2) + "px",
+                'bottom': ''
             });
 
         } else if (scope.info.vAlign === 'bottom') {
+
             textElement.css({
-                'top': (height - textElementHeight) + "px"
+                'top': '',
+                'bottom': 0 + "px"
+//                'bottom': (height - textElementHeight) + "px"
             });
         }
+
+//        console.log('after========');
+//        console.log('height', height);
+//        console.log('textElementHeight', textElementHeight);
+
     }
 
     app.directive('text', ['SetAttributeInformation', function (SetAttributeInformation) {
+
         return {
             // A = attribute, E = Element, C = Class and M = HTML Comment
             restrict: 'A',
             scope: true,   // 새로운 스코프
             link: function (scope, element, att) {
-
                 scope.info = SetAttributeInformation(att.id).attributeInformation;
                 scope.style = {};
 
                 // align
                 scope.$watch("info.align", function () {
-                    element.css({
-                        'text-align': scope.info.align
-                    });
 
-//                    scope.style['text-align'] = scope.info.align;
                 });
 
                 //vAlign
@@ -87,18 +97,6 @@ define([
                         'font-family': "'" + trim(scope.info.font.family) + "', '" + scope.info.font.family + "'"
                     });
 
-                    vAlign(scope, element);
-                }, true);
-
-                // font color
-                scope.$watch("info.font.color", function () {
-                    element.css({
-                        'color': "#" + scope.info.font.color.R + scope.info.font.color.G + scope.info.font.color.B
-                    });
-                });
-
-                // font-bold
-                scope.$watch("info.font.bold", function () {
                     if (scope.info.font.bold) {
                         element.css({
                             'font-weight': "bold"
@@ -111,10 +109,11 @@ define([
                         });
 //                        scope.style['font-weight'] = "normal";
                     }
-                });
 
-                // font-italic
-                scope.$watch("info.font.italic", function () {
+                    element.css({
+                        'color': "#" + scope.info.font.color.R + scope.info.font.color.G + scope.info.font.color.B
+                    });
+
                     if (scope.info.font.italic) {
                         element.css({
                             'font-style': "italic"
@@ -127,6 +126,27 @@ define([
                         });
 //                        scope.style['font-style'] = "normal";
                     }
+
+                    element.css({
+                        'text-align': scope.info.align
+                    });
+
+                    vAlign(scope, element);
+                }, true);
+
+                // font color
+                scope.$watch("info.font.color", function () {
+
+                });
+
+                // font-bold
+                scope.$watch("info.font.bold", function () {
+
+                });
+
+                // font-italic
+                scope.$watch("info.font.italic", function () {
+
                 });
 
             },
