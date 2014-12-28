@@ -60,24 +60,36 @@ define([
                 switch (e.keyCode) {
                     case 38:
                         focusObejct.pos.y -= 5;
+                        if ( focusObejct.pos.y < 0 ) {
+                            focusObejct.pos.y = 0;
+                        }
                         direction = 'top';
                         value = focusObejct.pos.y;
                         result = false;
                         break;
                     case 40:
                         focusObejct.pos.y += 5;
+                        if ( focusObejct.pos.y + focusObejct.size.height > EditorData.paper.size.height ) {
+                            focusObejct.pos.y = EditorData.paper.size.height - focusObejct.size.height;
+                        }
                         direction = 'top';
                         value = focusObejct.pos.y;
                         result = false;
                         break;
                     case 37:
                         focusObejct.pos.x -= 5;
+                        if ( focusObejct.pos.x < 0 ) {
+                            focusObejct.pos.x = 0;
+                        }
                         direction = 'left';
                         value = focusObejct.pos.x;
                         result = false;
                         break;
                     case 39:
                         focusObejct.pos.x += 5;
+                        if ( focusObejct.pos.x + focusObejct.size.width > EditorData.paper.size.width ) {
+                            focusObejct.pos.x = EditorData.paper.size.width - focusObejct.size.width;
+                        }
                         direction = 'left';
                         value = focusObejct.pos.x;
                         result = false;
