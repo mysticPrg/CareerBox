@@ -7,18 +7,16 @@
     </div>
 
     <div id="windowTypeBtn" class="btn-group">
-        <!--<label class="btn btn-default" ng-model="data.isNewWindow" btn-radio=false>현재 창에서 열기</label>-->
-        <!--<label class="btn btn-default" ng-model="data.isNewWindow" btn-radio=true>새 창에서 열기</label>-->
 
         <div class="radio">
-            <label ng-model="data.isNewWindow">
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+            <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked ng-model="data.isNewWindow">
                 현재 창에서 열기
             </label>
         </div>
         <div class="radio">
-            <label ng-model="data.isNewWindow">
-                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+            <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" ng-model="data.isNewWindow">
                 새 창에서 열기
             </label>
         </div>
