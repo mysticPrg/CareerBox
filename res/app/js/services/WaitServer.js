@@ -61,7 +61,7 @@ define([
 
     function hide() {
         $('#WaitServerImg').remove();
-        $('WaitServerImgWrapper').remove();
+        $('#WaitServerImgWrapper').remove();
         $('#WaitServerDiv').remove();
     }
 
