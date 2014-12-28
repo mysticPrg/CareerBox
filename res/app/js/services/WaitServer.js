@@ -5,11 +5,11 @@
 define([
     'app',
     'jquery'
-], function(app, $) {
+], function (app, $) {
 
     function show(msec) {
 
-        if ( $('#WaitServerDiv').length !== 0 ) {
+        if ($('#WaitServerDiv').length !== 0) {
             return;
         }
 
@@ -69,7 +69,7 @@ define([
         hide: hide
     };
 
-    app.factory('WaitServer', [ function () {
+    app.factory('WaitServer', [function () {
         return exports;
     }]);
 });
