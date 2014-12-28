@@ -48,9 +48,10 @@ define([
                 EditorData.focusId = EditorData.paper._id;
             });
 
+            // 방향키로 item 움직이도록 처리
             $(document).on('keydown', function (e) {
                 var result = true;
-                if (EditorData.focusId === 'canvas-content') {
+                if (EditorData.focusId === 'canvas-content' || EditorData.focusInput === true) {
                     return result;
                 }
 
@@ -100,6 +101,26 @@ define([
                 $compile('#posAttribute')($scope);
                 return result;
             });
+
+            // input이 선택되면 focusInput = true;
+            $(document).on('mousedown', function (e) {
+                if (isFocusInput(e.target)) {
+                    EditorData.focusInput = true;
+                }else{
+                    EditorData.focusInput = false;
+                }
+
+                return true;
+            });
+
+            function isFocusInput(target) {
+                var targetTagName = target.tagName;
+                if ((targetTagName === 'INPUT') || (targetTagName === 'TEXTAREA')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
 
             // 페이퍼 속성
             $('#canvas-content').bind('click', function () {

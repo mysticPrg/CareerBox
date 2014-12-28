@@ -19,7 +19,10 @@ define(['app', 'classes/Paper', 'classes/Portfolio', 'classes/Templates/Template
         end_zOrder : null,
         infoType : '',
         bindingData : [],
-        shareId : ''
+        shareId : '',
+
+        focusId : '',
+        focusInput : false
     };
 
     app.factory('EditorData', function() {
