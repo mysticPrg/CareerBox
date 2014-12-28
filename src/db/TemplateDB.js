@@ -80,9 +80,9 @@ function getBasicList(callback) {
     templateCollection.find({
         isBasic: true
     })
-        //.sort({
-        //    title: 1
-        //})
+        .sort({
+            order: 1
+        })
         .toArray(function (err, list) {
             async.each(list, function (t, cb) {
                 delete t._member_id;
@@ -100,9 +100,9 @@ function getBasicListByInfoType(infoType, callback) {
         isBasic: true,
         'target.bindingType.infoType': infoType
     })
-        //.sort({
-        //    title: 1
-        //})
+        .sort({
+            order: 1
+        })
         .toArray(function (err, list) {
             async.each(list, function (t, cb) {
                 delete t._member_id;
