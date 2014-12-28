@@ -2,7 +2,8 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{CareerBoxServer node_modules}" />
-    <file url="PROJECT" libraries="{angularjs-DefinitelyTyped, async-DefinitelyTyped, body-parser-DefinitelyTyped, requirejs-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{requirejs-DefinitelyTyped}" />
     <includedPredefinedLibrary name="Node.js Globals" />
   </component>
 </project>
+
