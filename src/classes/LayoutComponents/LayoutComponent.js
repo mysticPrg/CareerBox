@@ -31,18 +31,18 @@ define([
         if (props) {
             this._id = props._id ? props._id : this._id;
             this.layoutComponentType = props.layoutComponentType ? props.layoutComponentType : this.layoutComponentType;
-            this.zOrder = Number((props.zOrder!==undefined) ? props.zOrder : this.zOrder);
+            this.zOrder = Number((props.zOrder !== undefined) ? props.zOrder : this.zOrder);
             this.size = new Size(props.size ? props.size : this.size);
             this.pos = new Position(props.pos ? props.pos : this.pos);
             this.fill = new Fill(props.fill ? props.fill : this.fill);
             this.outline = new Outline(props.outline ? props.outline : this.outline);
-            this.radius = Number((props.radius!==undefined) ? props.radius : this.radius);
-            this.isBinding = (props.isBinding!==undefined) ? props.isBinding : this.isBinding;
+            this.radius = Number((props.radius !== undefined) ? props.radius : this.radius);
+            this.isBinding = (props.isBinding !== undefined) ? props.isBinding : this.isBinding;
             this.bindingData = props.bindingData ? props.bindingData : this.bindingData;
-            this.alpha = Number((props.alpha!==undefined) ? props.alpha : this.alpha);
+            this.alpha = Number((props.alpha !== undefined) ? props.alpha : this.alpha);
 
-            if ( props.bindingType ) {
-                if ( typeof props.bindingType === 'object') {
+            if (props.bindingType) {
+                if (typeof props.bindingType === 'object') {
                     this.bindingType = {
                         title: props.bindingType.title,
                         infoType: props.bindingType.infoType
