@@ -83,7 +83,7 @@
                 </li>
 
                 <li ng-if="attributeInformation.pos || attributeInformation.pos==='' " ng-hide="attributeInformation.layoutComponentType === 'article' && type === 'template'">
-                    <div pos-attribute to="attributeInformation"></div>
+                    <div id="posAttribute" pos-attribute to="attributeInformation"></div>
                 </li>
 
                 <li ng-if="attributeInformation.fill || attributeInformation.fill==='' " class="att_list" ng-hide="(attributeInformation.layoutComponentType === 'article' && type !== 'template') || attributeInformation.itemType ==='line'">

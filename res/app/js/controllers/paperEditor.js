@@ -97,8 +97,7 @@ define([
                 }
 
                 $('#' + EditorData.focusId).css(direction, value + 'px');
-                $scope.$emit('keyDown');
-//                $compile('#'+EditorData.focusId)($scope);
+                $compile('#posAttribute')($scope);
                 return result;
             });
 

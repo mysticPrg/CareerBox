@@ -55,11 +55,6 @@ define([
             $scope.changeModel();
         });
 
-        // TODO KeyDown을 통해 객체 위치가 변경 되었을 때
-        $rootScope.$on('keyDown', function () {
-//            $scope.changeModel();
-        });
-
         // 선택된 것이 바뀔때마다 모델을 갱신
         $scope.$watch('EditorData.focusId', function () {
             $scope.changeModel();
