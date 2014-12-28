@@ -50,14 +50,14 @@ define([
 
             $(document).on('keydown', function (e) {
                 var result = true;
-                if(EditorData.focusId === 'canvas-content') {
+                if (EditorData.focusId === 'canvas-content') {
                     return result;
                 }
 
                 var focusObejct = SetAttributeInformation(EditorData.focusId).attributeInformation;
 
                 var direction, value;
-                switch(e.keyCode){
+                switch (e.keyCode) {
                     case 38:
                         focusObejct.pos.y -= 5;
                         direction = 'top';
@@ -84,7 +84,7 @@ define([
                         break;
                 }
 
-                $('#'+EditorData.focusId).css(direction, value +'px');
+                $('#' + EditorData.focusId).css(direction, value + 'px');
                 $scope.$emit('keyDown');
 //                $compile('#'+EditorData.focusId)($scope);
                 return result;
