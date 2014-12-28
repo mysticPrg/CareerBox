@@ -35,7 +35,7 @@ define([
         } else if (scope.info.vAlign === 'bottom') {
 
             textElement.css({
-                'top' : '',
+                'top': '',
                 'bottom': 0 + "px"
             });
         }
