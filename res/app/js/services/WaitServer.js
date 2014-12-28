@@ -25,7 +25,7 @@ define([
 //               'border-radius': '50%'
 //            }).prependTo($('body'));
 
-        $('<div class="progressCrop"><img id="WaitServerImg" src="../img/preload.gif"></div>').
+        $('<div id="WaitServerImgWrapper" class="progressCrop"><img id="WaitServerImg" src="../img/preload.gif"></div>').
 //        $('<img id="WaitServerImg" src="../img/preload.gif">').
 
             css({
@@ -61,6 +61,7 @@ define([
 
     function hide() {
         $('#WaitServerImg').remove();
+        $('WaitServerImgWrapper').remove();
         $('#WaitServerDiv').remove();
     }
 
