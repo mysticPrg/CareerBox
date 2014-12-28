@@ -41,7 +41,7 @@ define([
 
                 // Box shadow
                 var element_old_focusId, element_focusId;
-                if($scope.type === 'template') {
+                if ($scope.type === 'template') {
                     EditorData.focusId = 'canvas-content';
                 }
 

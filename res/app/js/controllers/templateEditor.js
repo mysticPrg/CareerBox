@@ -64,7 +64,7 @@ define([
                 }
 
                 EditorData.focusId = EditorData.template._id;
-                if(EditorData.template._id === null){
+                if (EditorData.template._id === null) {
                     EditorData.focusId = 'canvas-content';
                     $scope.$emit('changeAttributePanelModel');
                 }
