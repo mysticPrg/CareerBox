@@ -37,10 +37,20 @@ define([
             this.fill = new Fill(props.fill ? props.fill : this.fill);
             this.outline = new Outline(props.outline ? props.outline : this.outline);
             this.radius = Number((props.radius!==undefined) ? props.radius : this.radius);
-            this.bindingType = props.bindingType ? props.bindingType : this.bindingType;
             this.isBinding = (props.isBinding!==undefined) ? props.isBinding : this.isBinding;
             this.bindingData = props.bindingData ? props.bindingData : this.bindingData;
             this.alpha = Number((props.alpha!==undefined) ? props.alpha : this.alpha);
+
+            if ( props.bindingType ) {
+                if ( typeof props.bindingType === 'object') {
+                    this.bindingType = {
+                        title: props.bindingType.title,
+                        infoType: props.bindingType.infoType
+                    };
+                } else {
+                    this.bindingType = props.bindingType;
+                }
+            }
         }
     }
 
