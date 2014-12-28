@@ -13,16 +13,30 @@ define([
             return;
         }
 
-        $('<img id="WaitServerImg" src="../img/progress.gif">').
+//        $('<img id="WaitServerImg" src="../img/progress.gif">').
+//            css({
+//                left: '50%',
+//                display: 'block',
+//                top: '50%',
+//                position: 'fixed',
+//                'margin-top': '-100px',
+//                'margin-left': '-100px',
+//                'z-index': 65536,
+//               'border-radius': '50%'
+//            }).prependTo($('body'));
+
+        $('<div class="progressCrop"><img id="WaitServerImg" src="../img/preload.gif"></div>').
+//        $('<img id="WaitServerImg" src="../img/preload.gif">').
+
             css({
                 left: '50%',
                 display: 'block',
                 top: '50%',
                 position: 'fixed',
-                'margin-top': '-100px',
-                'margin-left': '-100px',
-                'z-index': 65536,
-               'border-radius': '50%'
+                'margin-top': '-350px',
+                'margin-left': '-460.5px',
+                'z-index': 65536
+//                'border-radius': '50%'
             }).prependTo($('body'));
 
         $('<div id="WaitServerDiv"></div>')

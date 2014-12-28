@@ -786,3 +786,18 @@ img {
 .k-notification-wrap {
     background-color: #ef5777;
 }
+
+.progressCrop img {
+    width: 921px;
+    overflow: hidden;
+}
+
+.progressCrop {
+    width: 915px;
+    height: 533px;
+    overflow: hidden;
+    color: #fff;
+    -webkit-mask-position: 50%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-image: url('../img/progressCrop.png');
+}

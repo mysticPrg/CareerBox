@@ -21,10 +21,11 @@ define([
     'service/SavePaper',
     'service/LoadPaper',
     'service/loadPaperDom',
+    'service/SetAttributeInformation',
     'component/paperPanel/component'
 ], function ($, ng, app, Paper, Article, createTemplateModal, saveConfirmModal) {
     app.controller('PaperEditorController',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper, loadPaperDom) {
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper, loadPaperDom, SetAttributeInformation) {
             EditorData.editorType = 'paper';
             $scope.paperChanged = false;
 
@@ -45,6 +46,48 @@ define([
                 ];
 
                 EditorData.focusId = EditorData.paper._id;
+            });
+
+            $(document).on('keydown', function (e) {
+                var result = true;
+                if(EditorData.focusId === 'canvas-content') {
+                    return result;
+                }
+
+                var focusObejct = SetAttributeInformation(EditorData.focusId).attributeInformation;
+
+                var direction, value;
+                switch(e.keyCode){
+                    case 38:
+                        focusObejct.pos.y -= 5;
+                        direction = 'top';
+                        value = focusObejct.pos.y;
+                        result = false;
+                        break;
+                    case 40:
+                        focusObejct.pos.y += 5;
+                        direction = 'top';
+                        value = focusObejct.pos.y;
+                        result = false;
+                        break;
+                    case 37:
+                        focusObejct.pos.x -= 5;
+                        direction = 'left';
+                        value = focusObejct.pos.x;
+                        result = false;
+                        break;
+                    case 39:
+                        focusObejct.pos.x += 5;
+                        direction = 'left';
+                        value = focusObejct.pos.x;
+                        result = false;
+                        break;
+                }
+
+                $('#'+EditorData.focusId).css(direction, value +'px');
+                $scope.$emit('keyDown');
+//                $compile('#'+EditorData.focusId)($scope);
+                return result;
             });
 
             // 페이퍼 속성
