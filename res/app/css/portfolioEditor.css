@@ -197,6 +197,31 @@ img {
     float: right;
 }
 
+#bottom-pane #page #stateBar #stateGroup .stateBtnElement {
+    float: left;
+}
+
+#bottom-pane #page #stateBar #stateGroup .statePaper.btn-default {
+    width: 80px;
+    height: 37px;
+    padding: 0;
+    line-height: 37px;
+    border-radius: 2px;
+    border-style: none;
+    color: #10152c;
+    background-color: #fff;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+}
+
+.stateCircle {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #3EB3E2;
+    margin-top: 14px;
+    margin-left: 11px;
+}
+
 #bottom-pane #page #stateBar #btnGroup #btnSave {
     padding: 0;
     box-sizing: border-box;
