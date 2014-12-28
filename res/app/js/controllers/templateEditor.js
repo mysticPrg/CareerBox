@@ -64,6 +64,10 @@ define([
                 }
 
                 EditorData.focusId = EditorData.template._id;
+                if (EditorData.template._id === null) {
+                    EditorData.focusId = 'canvas-content';
+                    $scope.$emit('changeAttributePanelModel');
+                }
 
                 // changed 초기화
                 $scope.changed = false;

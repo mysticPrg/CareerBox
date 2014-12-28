@@ -23,16 +23,20 @@ define([
 
         if (scope.info.vAlign === 'top') {
             textElement.css({
+                'bottom': '',
                 'top': "0px"
             });
         } else if (scope.info.vAlign === 'middle') {
             textElement.css({
-                'top': (height / 2 - textElementHeight / 2) + "px"
+                'top': (height / 2 - textElementHeight / 2) + "px",
+                'bottom': ''
             });
 
         } else if (scope.info.vAlign === 'bottom') {
+
             textElement.css({
-                'top': (height - textElementHeight) + "px"
+                'top' : '',
+                'bottom': 0 + "px"
             });
         }
     }
