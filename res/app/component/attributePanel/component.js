@@ -32,7 +32,7 @@ define([
 
         // 모델 갱신
         $scope.changeModel = function () {
-            if (EditorData.focusId) {
+            if (EditorData.focusId || EditorData.focusId === 0) {
                 // 모델 적용
                 var infomation = SetAttributeInformation(EditorData.focusId);
                 $scope.attributeInformation = infomation.attributeInformation;
@@ -40,8 +40,13 @@ define([
                 $scope.type = infomation.type;
 
                 // Box shadow
-                var element_old_focusId = $('#' + EditorData.old_focusId);
-                var element_focusId = $('#' + EditorData.focusId);
+                var element_old_focusId, element_focusId;
+                if($scope.type === 'template') {
+                    EditorData.focusId = 'canvas-content';
+                }
+
+                element_old_focusId = $('#' + EditorData.old_focusId);
+                element_focusId = $('#' + EditorData.focusId);
 
                 element_old_focusId.removeClass('focus');
                 element_focusId.addClass('focus');
