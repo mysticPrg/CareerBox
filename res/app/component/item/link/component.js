@@ -28,7 +28,7 @@ define([
             });
         } else if (scope.info.vAlign === 'middle') {
             textElement.css({
-                'top': (height / 2 - textElementHeight / 2) + "px",
+                'top': parseInt(height / 2 - textElementHeight / 2) + "px",
                 'bottom': ''
             });
 
