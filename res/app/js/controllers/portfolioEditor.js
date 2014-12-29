@@ -2,6 +2,7 @@ define([
     'jquery',
     'angular',
     'app',
+    'component/tutorialModal/component',
     'service/EditorData',
     'service/httpLogout',
     'service/SetAttributeInformation',
@@ -13,9 +14,9 @@ define([
     'component/item/link/component',
     'component/item/image/component',
     'directives/CommonAttribute'
-], function ($, ng, app) {
-    app.controller('portfolioEditor', ['$scope', '$compile', '$window', 'EditorData', 'httpLogout', 'SetAttributeInformation',
-        function ($scope, $compile, $window, EditorData, httpLogout, SetAttributeInformation) {
+], function ($, ng, app, tutorialModal) {
+    app.controller('portfolioEditor', ['$scope', '$compile', '$window', '$modal', 'EditorData', 'httpLogout', 'SetAttributeInformation',
+        function ($scope, $compile, $window, $modal, EditorData, httpLogout, SetAttributeInformation) {
 
             $(document).ready(function () {
                 EditorData.portfolio._id = window.location.href.split("id=")[1].split('#/')[0];
@@ -127,6 +128,13 @@ define([
                 $scope.goToPortfolio = function () {
                     var href = 'portfolioPreview.html?id=' + EditorData.portfolio._id + '&paper_id=' + EditorData.paperId;
                     $window.open(href);
+                };
+
+                $scope.tutorial = function () {
+                    var modalInstance = $modal.open(tutorialModal);
+                    modalInstance.result.then(function () {
+                    }, function () {
+                    });
                 };
 
             });
