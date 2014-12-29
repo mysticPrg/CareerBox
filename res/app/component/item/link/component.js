@@ -105,7 +105,7 @@ define([
                 scope.goToPreview = function () {
 
                     // 에디터에서는 링크 걸리지 않게
-                    if (window.location.href.indexOf('Preview') < 0) {
+                    if (window.location.href.indexOf('Editor') >= 0) {
                         return;
                     }
 
