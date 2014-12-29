@@ -146,3 +146,12 @@ body {
     top: 270px;
     left: 220px;
 }
+
+/*샘플 이미지 보여줄 영역*/
+#samplePaperImg {
+    width: 380px;
+    height: 285px;
+    position: absolute;
+    top: 290px;
+    left: 242px;
+}
