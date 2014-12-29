@@ -58,6 +58,9 @@ define([
                     item.outline.weight = 0;
                     item.font.size = 15;
                     item.align = 'center';
+                    item.font.color.R = "00";
+                    item.font.color.G = "00";
+                    item.font.color.B = "ff";
 
                 } else if (type === 'shape') {
                     item = new Shape();
