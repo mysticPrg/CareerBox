@@ -861,3 +861,12 @@ img {
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-image: url('../img/progressCrop.png');
 }
+
+.imgInfo {
+    margin-top: 10px;
+}
+
+.imgInfo .infoFloat {
+    float: left;
+    margin-left: 30px;
+}
