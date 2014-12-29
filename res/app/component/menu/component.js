@@ -1,6 +1,23 @@
-define(['app'], function (app) {
+define([
+    'app',
+    'component/tutorialModal/component',
+    'service/httpLogout'
+], function (app, tutorialModal) {
+    app.controller('menuController', function ($scope, $window, $modal, httpLogout) {
+        $scope.tutorial = function () {
+            var modalInstance = $modal.open(tutorialModal);
+            modalInstance.result.then(function () {
+            }, function () {
+            });
+        };
 
-    app.controller('menuController', function () {
+        $scope.logout = function () {
+            httpLogout(function (data) {
+                if (data.returnCode === '000') {
+                    $window.location.href = 'index.html';
+                }
+            });
+        };
     });
 
     app.directive('menu', function () {
