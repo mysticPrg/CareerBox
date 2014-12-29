@@ -157,6 +157,10 @@ body {
     display: none;
 }
 
+.samplePaperImg > img {
+    width: 380px;
+}
+
 /*#samplePaperImg_2, #samplePaperImg_3, #samplePaperImg_4 {*/
     /*display: none;*/
 /*}*/

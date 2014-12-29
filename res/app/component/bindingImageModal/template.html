@@ -7,11 +7,11 @@
 <div class="modal-body">
     <div style="height: 500px; overflow-x:hidden; overflow-y:auto;">
         <ul style="list-style-type: none;">
-            <li ng-repeat="imageFile in imageFiles" style="float: left; margin: 20px;">
+            <li ng-repeat="imageFile in imageFiles" style="float: left; margin: 20px; text-align: center">
                 <div ng-click="selectImage(imageFile, $event)">
                     <img ng-src="http://210.118.74.166:8123/image/thumb/{{imageFile._id}}">
                     <h6> {{imageFile.originalName}} </h6>
-                    <button ng-click="deleteImage(imageFile._id)">삭제</button>
+                    <button ng-click="deleteImage(imageFile._id)" class="btn btn-default">삭제</button>
                 </div>
             </li>
         </ul>
