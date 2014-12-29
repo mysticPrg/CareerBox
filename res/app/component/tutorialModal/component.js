@@ -1,15 +1,14 @@
-
 define([
     'app'
 ], function (app) {
-    app.controller('tutorialModal', function ($scope, $modalInstance) {
-        $scope.ok = function () {
-            $modalInstance.close();
+    app.controller('tutorialModalController', function ($scope, $modalInstance) {
+        $scope.cancel = function () {
+            $modalInstance.dismiss();
         };
     });
-
     return {
         templateUrl: require.toUrl('component/tutorialModal/template.html'),
-        controller: 'tutorialModalController'
+        controller: 'tutorialModalController',
+        size: 'lg'
     };
 });
