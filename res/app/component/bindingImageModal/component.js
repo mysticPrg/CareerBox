@@ -28,6 +28,10 @@ define([
         };
 
         $scope.onFileSelectUnbindImage = function ($files) {
+            if($files[0].size > 5242880){
+                alert('파일 크기는 5MB를 넘을 수 없습니다.');
+                return;
+            }
             $scope.files = $files;
         };
 
