@@ -121,7 +121,7 @@ define([
                 };
 
                 $scope.goToPortfolio = function () {
-                    var href = 'portfolioPreview.html?id=' + EditorData.portfolio._id;
+                    var href = 'portfolioPreview.html?id=' + EditorData.portfolio._id + '&paper_id=' + EditorData.paperId;
                     $window.open(href);
                 };
 
