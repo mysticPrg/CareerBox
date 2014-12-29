@@ -828,8 +828,23 @@ img {
     white-space:pre-line;
 }
 
+.k-icon {
+    visibility: hidden;
+}
+
 .k-notification-wrap {
-    background-color: #ef5777;
+    background-color: #3be;
+    border-radius: 100px;
+    font-size: 16px;
+}
+
+.k-notification-wrap > span {
+}
+
+.k-notification {
+
+    width: 165px;
+    border-radius: 100px;
 }
 
 .progressCrop img {
