@@ -143,6 +143,12 @@ function DoCapture(_id, type, closerCallback) {
             });
         },
         function (ph, page, callback) { // save screenshot
+
+            var waitTime = 3000;
+            if (type === 'template') {
+                waitTime = 1000;
+            }
+
             setTimeout(function () {
                 page.render(filename, {
                     format: 'png',
@@ -150,7 +156,7 @@ function DoCapture(_id, type, closerCallback) {
                 }, function () {
                     callback(null, ph, page);
                 });
-            }, 1000);
+            }, waitTime);
         },
         function (ph, page, callback) {
             if (type === 'portfolio') {
