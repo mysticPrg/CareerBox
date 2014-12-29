@@ -5,9 +5,9 @@
 define([
     'app',
     'classes/LayoutComponents/Article',
-    'services/HTMLGenerator',
-    'services/EditorData',
-    'services/loadArticle'
+    'service/HTMLGenerator',
+    'service/EditorData',
+    'service/loadArticle'
 
 ], function(app) {
     app.factory('loadPaperDom', function (HTMLGenerator, EditorData, $compile, loadArticle) {

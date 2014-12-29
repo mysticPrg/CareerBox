@@ -74,9 +74,9 @@ require.config({
 });
 
 require([
-    'jquery'
-//    'classes.min',
-//    'services.min'
+    'jquery',
+    'classes.min',
+    'services.min'
 ], function ($) {
 
     var cntl = $('body').attr('ng-controller');

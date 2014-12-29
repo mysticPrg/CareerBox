@@ -64,8 +64,8 @@ module.exports = function (grunt) {
         requirejs: {
             compile: {
                 options: {
-//                    name: '../../../src/classes/classes',
-//                    out: 'res/app/js/classes.min.js',
+                    //name: '../../../src/classes/classes',
+                    //out: 'res/app/js/classes.min.js',
                     name: 'service/services',
                     out: 'res/app/js/services.min.js',
                     removeCombined: true,
