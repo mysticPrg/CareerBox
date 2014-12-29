@@ -32,7 +32,7 @@
             <!--시작 날짜-->
             <div class="col-md-2" style="padding-right: 0; width: 161px">
                 <div class="input-group">
-                    <input type="text" class="form-control" value="{{highSchoolInfoItem.T_term.start | date:'yyyy.MM.dd'}}" style="width: 105px"/>
+                    <input type="text" class="form-control" value="{{highSchoolInfoItem.T_term.start | date:'yyyy.MM.dd'}}" style="width: 105px" readonly/>
                     <span class="input-group-btn">
                        <button class="btn btn-default" type="button" ng-click="win_highschool_term_start.center(); win_highschool_term_start.open();" style="height: 34px; box-sizing: border-box"><img src="../img/information_img/calendarIcon.png" style="width: 16px; padding-bottom: 3px"/></button>
                     </span>
@@ -42,7 +42,7 @@
             <!--종료 날짜-->
             <div class="col-md-2" style="padding-left: 0; width: 161px">
                 <div class="input-group">
-                    <input type="text" class="form-control" value="{{highSchoolInfoItem.T_term.end | date:'yyyy.MM.dd'}}" style="width: 105px"/>
+                    <input type="text" class="form-control" value="{{highSchoolInfoItem.T_term.end | date:'yyyy.MM.dd'}}" style="width: 105px" readonly/>
                     <span class="input-group-btn">
                        <button class="btn btn-default" type="button" ng-click="win_highschool_term_end.center(); win_highschool_term_end.open();" style="height: 34px; box-sizing: border-box"><img src="../img/information_img/calendarIcon.png" style="width: 16px; padding-bottom: 3px"/></button>
                     </span>
