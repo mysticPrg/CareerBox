@@ -36,45 +36,41 @@ define([
             $scope.transition('personalInfo');
         };
 
-        $scope.transition = function (link){
-            $('#'+link).click();
+        $scope.transition = function (link) {
+            $('#' + link).click();
         };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $("#tabContent > div").hide(); // Initially hide all content
-        $("#informationTab li:first").attr("id","current"); // Activate first tab
+        $("#informationTab li:first").attr("id", "current"); // Activate first tab
         $("#tabContent > div:first").fadeIn(); // Show first tab content
 
-        $('#informationTab a').click(function(e) {
+        $('#informationTab a').click(function (e) {
             e.preventDefault();
             $("#tabContent > div").hide(); //Hide all content
-            $("#informationTab li").attr("id",""); //Reset id's
-            $(this).parent().attr("id","current"); // Activate this
+            $("#informationTab li").attr("id", ""); //Reset id's
+            $(this).parent().attr("id", "current"); // Activate this
             $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
         });
-
-
-
-
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $scope.load = function (info) {
             if (info === 'personalInfo') {
                 GetInformation.loadPersonalInfo();
-            }else if(info === 'schoolInfo'){
+            } else if (info === 'schoolInfo') {
                 GetInformation.loadSchoolInfo();
-            }else if(info === 'workingInfo'){
+            } else if (info === 'workingInfo') {
                 GetInformation.loadWorkingInfo();
-            }else if(info === 'abilityInfo'){
+            } else if (info === 'abilityInfo') {
                 GetInformation.loadAbilityInfo();
-            }else if(info === 'awardInfo'){
+            } else if (info === 'awardInfo') {
                 GetInformation.loadAwardInfo();
-            }else if(info === 'activityInfo'){
+            } else if (info === 'activityInfo') {
                 GetInformation.loadActivityInfo();
-            }else if(info === 'projectInfo'){
+            } else if (info === 'projectInfo') {
                 GetInformation.loadProjectInfo();
-            }else if(info === 'columnInfo'){
+            } else if (info === 'columnInfo') {
                 GetInformation.loadColumnInfo();
             }
 
@@ -84,19 +80,19 @@ define([
         $scope.save = function (info) {
             if (info === 'personalInfo') {
                 savePersonalInfo();
-            }else if(info === 'schoolInfo'){
+            } else if (info === 'schoolInfo') {
                 saveSchoolInfo();
-            }else if(info === 'workingInfo'){
+            } else if (info === 'workingInfo') {
                 saveWorkingInfo();
-            }else if(info === 'abilityInfo'){
+            } else if (info === 'abilityInfo') {
                 saveAbilityInfo();
-            }else if(info === 'awardInfo'){
+            } else if (info === 'awardInfo') {
                 saveAwardInfo();
-            }else if(info === 'activityInfo'){
+            } else if (info === 'activityInfo') {
                 saveActivityInfo();
-            }else if(info === 'projectInfo'){
+            } else if (info === 'projectInfo') {
                 saveProjectInfo();
-            }else if(info === 'columnInfo'){
+            } else if (info === 'columnInfo') {
                 saveColumnInfo();
             }
 
@@ -172,19 +168,21 @@ define([
                 resultCheck(resultArray);
             });
         }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        function resultCheck(resultArray){
+        function resultCheck(resultArray) {
             var returnCode;
             angular.forEach(resultArray, function (value) {
                 returnCode = value.data.returnCode;
             });
 
-            if(returnCode === '000'){
+            if (returnCode === '000') {
                 showSuccessNotification();
-            }else{
+            } else {
                 showFailNotification();
             }
         }
+
         function showSuccessNotification() {
             var notification = kendo.toString('성공하였습니다.');
             $scope.noti.show(notification, "info");
