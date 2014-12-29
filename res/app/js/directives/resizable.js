@@ -69,7 +69,7 @@ define([
                         var minHeight = 0, minWidth = 0;
                         for (var key in EditorData.templateItemArray) {
                             var child = EditorData.templateItemArray[key];
-                            if(EditorData.templateItemArray[key].state !== 'del'){
+                            if (EditorData.templateItemArray[key].state !== 'del') {
                                 var compareY = Number(child.pos.y) + Number(child.size.height) + Number(child.outline.weight) * 2;
                                 if (minHeight < compareY) {
                                     minHeight = compareY;
