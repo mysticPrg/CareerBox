@@ -861,3 +861,54 @@ img {
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-image: url('../img/progressCrop.png');
 }
+
+.imgInfo {
+    margin-top: 10px;
+}
+
+.imgInfo .infoFloat {
+    float: left;
+    margin-left: 30px;
+}
+
+#imageNameInput {
+    width: 500px;
+    height: 34px;
+    display: inline-block;
+}
+
+#fileUproad {
+    position: relative;
+    height: 50px;
+}
+
+.fileInputDiv {
+    /*position: relative;*/
+    position: absolute;
+    top: 5px;
+    left: 510px;
+    width: 87px;
+    line-height: 40px;
+    height: 40px;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+}
+
+.fileInputHidden {
+    font-size: 23px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.imageSelectInputButton {
+    cursor: pointer;
+}
+
+#imageNameInput {
+    position: absolute;
+    top: 10px;
+}

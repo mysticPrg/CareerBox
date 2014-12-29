@@ -7,23 +7,41 @@
 <div class="modal-body">
     <div style="height: 500px; overflow-x:hidden; overflow-y:auto;">
         <ul style="list-style-type: none;">
-            <li ng-repeat="imageFile in imageFiles" style="float: left; margin: 20px; text-align: center">
+            <li ng-repeat="imageFile in imageFiles" style="float: left; margin: 30px 20px; text-align: center; cursor:pointer;">
                 <div ng-click="selectImage(imageFile, $event)">
                     <img ng-src="http://210.118.74.166:8123/image/thumb/{{imageFile._id}}">
-                    <h6> {{imageFile.originalName}} </h6>
-                    <button ng-click="deleteImage(imageFile._id)" class="btn btn-default">삭제</button>
+                    <div class="imgInfo">
+                        <h6 class="infoFloat"> {{imageFile.originalName}} </h6>
+                        <button ng-click="deleteImage(imageFile._id)" class="btn btn-default infoFloat">삭제</button>
+                    </div>
                 </div>
             </li>
         </ul>
     </div>
 
     <hr>
-    <h6 class="modal-title">새 이미지</h6>
+    <h6 class="modal-title" style="margin-bottom: 20px; font-size: 15px; font-weight: 600">새 이미지</h6>
 
-    <input type="file" id="image_picture_file" class="col-md-10" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectUnbindImage($files)">
-    <button type="btn btn-default col-md-2"  ng-click="uploadUnbindImage()">업로드</button>
+    <!--파일첨부 origin-->
+    <!--<input type="file" id="image_picture_file" class="col-md-10" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectUnbindImage($files)">-->
+    <!--<button type="btn btn-default col-md-2"  ng-click="uploadUnbindImage()">업로드</button>-->
 
-    <div id="image_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div><br>
+    <!--<div id="image_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none;"></div><br>-->
+
+
+    <div id="fileUproad">
+        <input type="text" id="imageNameInput" class="form-control" readonly="readonly" ng-model = "fileNameForImage"/>
+
+        <div class="fileInputDiv" >
+            <input type="button" class="imageSelectInputButton btn btn-default" value="사진선택" />
+            <input type="file" class="fileInputHidden" accept=".jpg, .jpeg, .bmp, .png" ng-file-select="onFileSelectUnbindImage($files)"/>
+        </div>
+
+        <button type="button"  class="btn btn-default" ng-click="uploadUnbindImage()" style="position: absolute; top: 10px; right: 205px">업로드</button>
+    </div>
+
+    <div id="image_picture_progressbar" kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress" style="display: none; width: 500px; margin-top: 20px"></div>
+
 
 </div>
 <div class="modal-footer">
