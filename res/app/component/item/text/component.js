@@ -35,39 +35,38 @@ define([
 
     function vAlign(scope, element) {
 
-        var height, textElement, textElementHeight;
+        var textElement;
 
-        height = scope.info.size.height;
         textElement = element.find('.whiteSpace');
-        textElementHeight = textElement.height();
-
-//        console.log('before========');
-//        console.log('height', height);
-//        console.log('textElementHeight', textElementHeight);
-
         if (scope.info.vAlign === 'top') {
             textElement.css({
+                'position': 'absolute',
+                'transform': '',
+                '-webkit-transform': '',
+
                 'bottom': '',
                 'top': "0px"
             });
         } else if (scope.info.vAlign === 'middle') {
+
             textElement.css({
-                'top': parseInt(height / 2 - textElementHeight / 2) + "px",
-                'bottom': ''
+                'position': 'relative',
+                'top': '50%',
+                'transform': 'translateY(-50%)',
+                '-webkit-transform': 'translateY(-50%)'
             });
 
         } else if (scope.info.vAlign === 'bottom') {
 
             textElement.css({
+                'position': 'absolute',
+                'transform': '',
+                '-webkit-transform': '',
+
                 'top': '',
                 'bottom': 0 + "px"
-//                'bottom': (height - textElementHeight) + "px"
             });
         }
-
-//        console.log('after========');
-//        console.log('height', height);
-//        console.log('textElementHeight', textElementHeight);
 
     }
 
