@@ -30,6 +30,7 @@ define([
 
                 // 방향키로 item 움직이도록 처리
                 $(document).on('keydown', function (e) {
+                    console.log(e.keyCode);
                     var result = true;
                     if (EditorData.focusId === 'canvas-content' || EditorData.focusInput === true) {
                         return result;
@@ -95,7 +96,7 @@ define([
 
                 function isFocusInput(target) {
                     var targetTagName = target.tagName;
-                    if ((targetTagName === 'INPUT') || (targetTagName === 'TEXTAREA')) {
+                    if ((targetTagName === 'INPUT') || (targetTagName === 'TEXTAREA') || (targetTagName === 'SELECT')) {
                         return true;
                     } else {
                         return false;
