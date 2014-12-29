@@ -25,7 +25,7 @@ define([
     'component/paperPanel/component'
 ], function ($, ng, app, Paper, Article, createTemplateModal, saveConfirmModal) {
     app.controller('PaperEditorController',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper, loadPaperDom, SetAttributeInformation) {
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, LoadPaperList, SavePaper, LoadPaper, loadPaperDom) {
             EditorData.editorType = 'paper';
             $scope.paperChanged = false;
 

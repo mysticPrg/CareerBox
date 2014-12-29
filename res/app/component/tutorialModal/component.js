@@ -1,4 +1,3 @@
-
 define([
     'app'
 ], function (app) {

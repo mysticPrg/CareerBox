@@ -25,7 +25,7 @@ define([
                 $scope.orientation = "horizontal";
                 $scope.panes = [
                     {collapsible: false, scrollable: false},
-                    {collapsible: true, size: "300px" }
+                    {collapsible: true, size: "300px"}
                 ];
 
                 // 방향키로 item 움직이도록 처리
