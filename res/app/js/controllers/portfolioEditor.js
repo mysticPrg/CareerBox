@@ -83,8 +83,10 @@ define([
                             break;
                     }
 
-                    $('#' + EditorData.focusId).css(direction, value + 'px');
-                    $compile('#posAttribute')($scope);
+                    if (value) {
+                        $('#' + EditorData.focusId).css(direction, value + 'px');
+                        $compile('#posAttribute')($scope);
+                    }
                     return result;
                 });
 
