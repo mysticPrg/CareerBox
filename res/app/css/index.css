@@ -109,3 +109,40 @@ body {
     left: 40px;
     top: 260px;
 }
+
+#sample {
+    position: relative;
+    background-color: #ee9099;
+    width: 100%;
+    height: 795px;
+}
+
+#sample #sampleTitle {
+    position: absolute;
+    left: 30px;
+    top: 35px;
+}
+
+#sample #sampleDescription {
+    position: absolute;
+    right: 40px;
+    top: 260px;
+    
+}
+
+#sample #sampleBtn {
+    position: absolute;
+    bottom: 230px;
+    right: 90px;
+}
+
+#sample #sampleBtn > li {
+    float: left;
+    margin-left: 50px;
+}
+
+#sample #samplePaper {
+    position: absolute;
+    top: 270px;
+    left: 220px;
+}
