@@ -39,22 +39,26 @@ define([
 
                 function loadPaperWithResult(result) {
                     EditorData.paper = result.result;
-
+                    $scope.canvasStyle = {
+                        position: 'relative',
+                        width: paper.size.width + 'px',
+                        margin: 'auto'
+                    };
                     loadPaper(EditorData.paper);
                 }
 
                 var paper;
-                for(var idx = 0; idx < $scope.papers.length; idx++){
+                for (var idx = 0; idx < $scope.papers.length; idx++) {
                     paper = $scope.papers[idx];
 
-                    if(!EditorData.paper_id && paper.isIndex === true){
+                    if (!EditorData.paper_id && paper.isIndex === true) {
                         EditorData.paperId = paper._id;
 
                         LoadPaper($http, EditorData.paperId, loadPaperWithResult);
                         return;
                     }
 
-                    if(paper._id === EditorData.paper_id){
+                    if (paper._id === EditorData.paper_id) {
 
                         EditorData.paperId = paper._id;
 
@@ -65,7 +69,7 @@ define([
             });
         });
 
-        function initPaper(){
+        function initPaper() {
             $('#canvas-content').find('div').remove();
 
             $scope.paper = new Paper();
@@ -88,7 +92,7 @@ define([
                 EditorData.childArr[child._id] = child;
                 if (child.childArr) {
                     loadArticle(child, $scope);
-                }else{
+                } else {
                     loadItem(child);
                 }
             }
