@@ -83,6 +83,7 @@ body {
     color: #fff;
     font-size: 25px;
     line-height: 200px;
+    cursor: pointer;
 }
 
 #about {
