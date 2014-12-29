@@ -120,9 +120,9 @@ function getInfoValue(infoType, infoData) {
 
         case 'B':
             if (infoData) {
-                return true;
+                return '해당';
             }
-            return false;
+            return '해당없음';
 
         case 'F':
             return infoData._id;
