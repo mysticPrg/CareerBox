@@ -828,7 +828,7 @@ img {
     white-space:pre-line;
 }
 
-.k-icon {
+.k-notification-wrap > span.k-icon {
     visibility: hidden;
 }
 

@@ -265,7 +265,7 @@ img {
 
 }
 
-.k-icon {
+.k-notification-wrap > span.k-icon {
     visibility: hidden;
 }
 
