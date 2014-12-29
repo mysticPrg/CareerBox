@@ -148,10 +148,15 @@ body {
 }
 
 /*샘플 이미지 보여줄 영역*/
-#samplePaperImg {
+.samplePaperImg {
     width: 380px;
     height: 285px;
     position: absolute;
     top: 290px;
     left: 242px;
+    display: none;
 }
+
+/*#samplePaperImg_2, #samplePaperImg_3, #samplePaperImg_4 {*/
+    /*display: none;*/
+/*}*/
