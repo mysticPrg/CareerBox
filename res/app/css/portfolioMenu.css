@@ -118,3 +118,14 @@
     transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.00166, -240, 0, 0, 1);
     -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.00166, -240, 0, 0, 1);
 }
+
+.subMenu {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.subMenu #logout, #tutorial {
+    margin-top: 12px;
+}
+
