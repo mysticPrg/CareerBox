@@ -1,11 +1,11 @@
 var tests = [];
-for (var file in window.__karma__.files) {
-    if (window.__karma__.files.hasOwnProperty(file)) {
-        if (/spec\.js$/i.test(file)) {
-            tests.push(file);
-        }
-    }
-}
+//for (var file in window.__karma__.files) {
+//    if (window.__karma__.files.hasOwnProperty(file)) {
+//        if (/spec\.js$/i.test(file)) {
+//            tests.push(file);
+//        }
+//    }
+//}
 
 require.config({
     // Karma serves files under /base, which is the basePath from your config file
