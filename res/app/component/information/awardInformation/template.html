@@ -26,7 +26,7 @@
 
         <div class="col-md-3" id="lbl_award_date">
             <div class="input-group">
-                <input type="text" class="form-control" value="{{awardInfoItem.D_date | date:'yyyy.MM.dd'}}" />
+                <input type="text" class="form-control" value="{{awardInfoItem.D_date | date:'yyyy.MM.dd'}}" readonly/>
                 <span class="input-group-btn">
                    <button class="btn btn-default" type="button" ng-click="win_award_date.center(); win_award_date.open();" style="height: 34px; box-sizing: border-box"><img src="../img/information_img/calendarIcon.png" style="width: 16px; padding-bottom: 3px"/></button>
                 </span>
