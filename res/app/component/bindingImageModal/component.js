@@ -61,6 +61,9 @@ define([
 
 //        $scope.paper = new Paper();
         $scope.save = function () {
+            if (!$scope.imageFile) {
+                $modalInstance.dismiss();
+            }
             $modalInstance.close($scope.imageFile); // 인자에 넘길 것을 넣는다.
         };
         $scope.cancel = function () {
@@ -71,6 +74,7 @@ define([
             deleteImage({'_id': id}, function () {
                 // 파일 다시 받기
                 getImageFiles();
+                $scope.imageFile = null;
             });
         };
     });

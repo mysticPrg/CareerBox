@@ -40,7 +40,11 @@ define([
 
                 function loadPaperWithResult(result) {
                     EditorData.paper = result.result;
-
+                    $scope.canvasStyle = {
+                        position: 'relative',
+                        width: paper.size.width + 'px',
+                        margin: 'auto'
+                    };
                     loadPaper(EditorData.paper);
                 }
 
