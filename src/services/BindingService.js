@@ -125,10 +125,16 @@ function getInfoValue(infoType, infoData) {
             return '해당없음';
 
         case 'F':
-            return infoData._id;
+            if (infoData) {
+                return infoData._id;
+            }
+            return '';
 
         case 'I':
-            return infoData._id;
+            if (infoData) {
+                return infoData._id;
+            }
+            return '';
 
         case 'D':
             var tempDate = new Date(infoData);

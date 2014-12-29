@@ -4,11 +4,11 @@
 
 define([
     'app',
-    'services/HTMLGenerator',
-    'services/EditorData',
-    'services/SetAttributeInformation',
-    'services/SavePaper',
-    'services/LoadPaper',
+    'service/HTMLGenerator',
+    'service/EditorData',
+    'service/SetAttributeInformation',
+    'service/SavePaper',
+    'service/LoadPaper',
     'service/loadPaperDom'
 ], function (app) {
     app.factory('reloadPaper', function (HTMLGenerator, EditorData, SetAttributeInformation, SavePaper, LoadPaper, $http, $compile, loadPaperDom) {

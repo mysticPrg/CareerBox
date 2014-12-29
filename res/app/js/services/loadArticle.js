@@ -5,8 +5,8 @@
 define([
     'app',
     'classes/LayoutComponents/Article',
-    'services/HTMLGenerator',
-    'services/EditorData'
+    'service/HTMLGenerator',
+    'service/EditorData'
 
 ], function (app, Article) {
     app.factory('loadArticle', function (HTMLGenerator, EditorData, $compile) {
