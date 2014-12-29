@@ -100,13 +100,12 @@ define([
         $scope.goToPortfolioEditor = function (portfolioId) {
             var href = 'portfolioEditor.html?id=' + portfolioId;
             $window.location.href = href;
-
-//            $scope.$emit("createPortfolio", portfolio);
         };
 
         $scope.goToPortfolio = function (portfolioId) {
             var href = 'portfolioPreview.html?id=' + portfolioId;
-            $window.location.href = href;
+            //$window.location.href = href;
+            window.open(href, '_blank').focus();
         };
 
     }]);
