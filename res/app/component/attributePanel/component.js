@@ -60,6 +60,10 @@ define([
             $scope.changeModel();
         });
 
+        $rootScope.$on('deleteItemOnKey', function (e, id) {
+            $scope.deleteItem(id);
+        });
+
         // 선택된 것이 바뀔때마다 모델을 갱신
         $scope.$watch('EditorData.focusId', function () {
             $scope.changeModel();

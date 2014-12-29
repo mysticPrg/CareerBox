@@ -30,7 +30,6 @@ define([
 
                 // 방향키로 item 움직이도록 처리
                 $(document).on('keydown', function (e) {
-                    console.log(e.keyCode);
                     var result = true;
                     if (EditorData.focusId === 'canvas-content' || EditorData.focusInput === true) {
                         return result;
@@ -74,6 +73,11 @@ define([
                             }
                             direction = 'left';
                             value = focusObejct.pos.x;
+                            result = false;
+                            break;
+                        // delete
+                        case 46:
+                            $scope.$emit('deleteItemOnKey', EditorData.focusId);
                             result = false;
                             break;
                     }
