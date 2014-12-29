@@ -19,7 +19,7 @@
 
                 <!--수정, 삭제 버튼-->
                 <div id="editBtnGrp" ng-if=attributeInformation ng-show="type != 'template' && !attributeInformation._portfolio_id">
-                    <button ng-show="attributeInformation.layoutComponentType === 'article' && attributeInformation.isBasic === false && attributeInformation.isBasic === false"  id="articleEditBtn" class="btn btn-default"
+                    <button ng-show="attributeInformation.layoutComponentType === 'article' && (attributeInformation.isBasic !== true)"  id="articleEditBtn" class="btn btn-default"
                              ng-click="editArticle()">
                         <img src="../img/editor_img/articleEditBtn.png" style="margin-right: 3px;"/>수정
                     </button>
