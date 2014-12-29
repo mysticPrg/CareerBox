@@ -28,7 +28,7 @@ define([
         };
 
         $scope.onFileSelectUnbindImage = function ($files) {
-            if($files[0].size > 5242880){
+            if ($files[0].size > 5242880) {
                 alert('파일 크기는 5MB를 넘을 수 없습니다.');
                 return;
             }
@@ -36,7 +36,7 @@ define([
         };
 
         $scope.uploadUnbindImage = function () {
-            if($scope.files){
+            if ($scope.files) {
                 $('#image_picture_progressbar').fadeIn('slow');
 
                 ImageUpload($upload, $scope.files, '', function (evt) {   // 독립이미지

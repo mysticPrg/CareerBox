@@ -15,30 +15,39 @@ define([
 
     function vAlign(scope, element) {
 
-        var height, textElement, textElementHeight;
+        var textElement;
 
-        height = scope.info.size.height;
         textElement = element.find('.linkContent');
-        textElementHeight = textElement.height();
-
         if (scope.info.vAlign === 'top') {
             textElement.css({
+                'position': 'absolute',
+                'transform': '',
+                '-webkit-transform': '',
+
                 'bottom': '',
                 'top': "0px"
             });
         } else if (scope.info.vAlign === 'middle') {
+
             textElement.css({
-                'top': parseInt(height / 2 - textElementHeight / 2) + "px",
-                'bottom': ''
+                'position': 'relative',
+                'top': '50%',
+                'transform': 'translateY(-50%)',
+                '-webkit-transform': 'translateY(-50%)'
             });
 
         } else if (scope.info.vAlign === 'bottom') {
 
             textElement.css({
+                'position': 'absolute',
+                'transform': '',
+                '-webkit-transform': '',
+
                 'top': '',
                 'bottom': 0 + "px"
             });
         }
+
     }
 
     app.directive('link', ['SetAttributeInformation', 'EditorData', '$window', function (SetAttributeInformation, EditorData, $window) {
@@ -94,6 +103,12 @@ define([
                 });
 
                 scope.goToPreview = function () {
+
+                    // 에디터에서는 링크 걸리지 않게
+                    if(window.location.href.indexOf('Preview')<0){
+                        return;
+                    }
+
                     // isOutURL 에 따라 분류
                     var href;
                     if (scope.info.bindingType === "F_file") {
