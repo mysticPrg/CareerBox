@@ -94,6 +94,12 @@ define([
                 });
 
                 scope.goToPreview = function () {
+
+                    // 에디터에서는 링크 걸리지 않게
+                    if(window.location.href.indexOf('Preview')<0){
+                        return;
+                    }
+
                     // isOutURL 에 따라 분류
                     var href;
                     if (scope.info.bindingType === "F_file") {
