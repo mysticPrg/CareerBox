@@ -18,7 +18,7 @@ define([
     'component/templatePanel/component'
 ], function ($, ng, app, Template, Article, saveConfirmModal) {
     app.controller('TemplateEditor', ['$scope', '$rootScope', '$http', '$modal', '$window', '$compile', 'EditorData', 'HTMLGenerator', 'getTemplate', 'SaveTemplate', 'SetAttributeInformation',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, getTemplate, SaveTemplate, SetAttributeInformation) {
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, HTMLGenerator, getTemplate, SaveTemplate) {
             EditorData.editorType = 'template';
             $scope.changed = false;
 
