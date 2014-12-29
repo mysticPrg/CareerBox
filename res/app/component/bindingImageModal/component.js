@@ -61,7 +61,7 @@ define([
 
 //        $scope.paper = new Paper();
         $scope.save = function () {
-            if(!$scope.imageFile){
+            if (!$scope.imageFile) {
                 $modalInstance.dismiss();
             }
             $modalInstance.close($scope.imageFile); // 인자에 넘길 것을 넣는다.
