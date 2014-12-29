@@ -59,6 +59,11 @@ define([
                 scope.info = SetAttributeInformation(att.id).attributeInformation;
                 scope.style = {};
 
+                // 첨부파일에 없을 경우
+                if(scope.info.url === ''){
+                    scope.info.value = '첨부파일없음';
+                }
+
                 // align
                 scope.$watch("info.align", function () {
                     scope.style['text-align'] = scope.info.align;
@@ -112,6 +117,9 @@ define([
                     // isOutURL 에 따라 분류
                     var href;
                     if (scope.info.bindingType === "F_file") {
+                        if(scope.info.url === ''){
+                            return;
+                        }
                         href = 'http://210.118.74.166:8123/file/' + scope.info.url;
                     }
                     else if (scope.info.isOutURL) {
