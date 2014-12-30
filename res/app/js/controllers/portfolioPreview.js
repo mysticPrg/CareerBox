@@ -82,6 +82,9 @@ define([
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         function loadPaper(paper) {
+
+            $('title').text(paper.title);
+
             var paperChildArr = paper.childArr;
 
             $compile($('#canvas-content'))($scope); // 페이퍼 속성을 적용시켜줌.

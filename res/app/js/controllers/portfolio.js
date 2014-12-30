@@ -85,6 +85,8 @@ define([
         function loadPaper(paper) {
             var paperChildArr = paper.childArr;
 
+            $('title').text(paper.title);
+
             $compile($('#canvas-content'))($scope); // 페이퍼 속성을 적용시켜줌.
 
             var child;
