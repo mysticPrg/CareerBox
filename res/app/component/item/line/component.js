@@ -135,8 +135,8 @@ define([
 
                 setLineSize(element, scope);
 
-                scope.endArrow_id = 'endArrow_' + att.id ;
-                scope.startArrow_id = 'startArrow_' + att.id ;
+                scope.endArrow_id = 'endArrow_' + att.id;
+                scope.startArrow_id = 'startArrow_' + att.id;
 
 
             },
