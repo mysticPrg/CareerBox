@@ -87,54 +87,70 @@ body {
 }
 
 #about {
-    position: relative;
+    /*position: relative;*/
     background-color: #6eccd2;
+    text-align: center;
     width: 100%;
     height: 795px;
+}
+
+#about  #aboutWrapper {
+    width: 960px;
+    height: 795px;
+    display: inline-block;
+    position: relative;
 }
 
 #about #careerbox {
     position: absolute;
     right: 0;
-    top: 35px
+    top: 85px
 }
 
 #about #computer {
     position: absolute;
     bottom: 35px;
-    right: 50px;
+    right: 0;
 }
 
 #about #definition {
     position: absolute;
-    left: 40px;
+    left: 0;
     top: 260px;
 }
 
 #sample {
-    position: relative;
+    /*position: relative;*/
+    text-align: center;
     background-color: #ee9099;
     width: 100%;
     height: 795px;
 }
 
+#sample #sampleWrapper {
+    width: 960px;
+    height: 795px;
+    display: inline-block;
+    position: relative;
+}
+
 #sample #sampleTitle {
     position: absolute;
-    left: 30px;
-    top: 35px;
+    left: 0;
+    top: 85px;
 }
 
 #sample #sampleDescription {
     position: absolute;
-    right: 40px;
-    top: 260px;
+    right: 0;
+    top: 320px;
     
 }
 
 #sample #sampleBtn {
     position: absolute;
-    bottom: 230px;
-    right: 90px;
+    bottom: 260px;
+    right: 0;
 }
 
 #sample #sampleBtn > li {
@@ -144,22 +160,22 @@ body {
 
 #sample #samplePaper {
     position: absolute;
-    top: 270px;
-    left: 220px;
+    top: 320px;
+    left: 0;
 }
 
 /*샘플 이미지 보여줄 영역*/
 .samplePaperImg {
-    width: 380px;
-    height: 285px;
+    width: 354px;
+    height: 264px;
     position: absolute;
-    top: 290px;
-    left: 242px;
+    top: 335px;
+    left: 12px;
     display: none;
 }
 
 .samplePaperImg > img {
-    width: 380px;
+    width: 342px;
 }
 
 /*#samplePaperImg_2, #samplePaperImg_3, #samplePaperImg_4 {*/
