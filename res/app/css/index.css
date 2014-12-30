@@ -178,6 +178,6 @@ body {
     width: 342px;
 }
 
-/*#samplePaperImg_2, #samplePaperImg_3, #samplePaperImg_4 {*/
-    /*display: none;*/
-/*}*/
+.overImg {
+    position: relative;
+}
