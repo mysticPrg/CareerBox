@@ -16,6 +16,20 @@ define([
             });
         };
 
+        function moveOnScroll(target, axis, range, initPos, maxYOffset) {
+            var pos = initPos + ((window.pageYOffset/maxYOffset) * range) / 2;
+            var option = {};
+            option[axis] = pos + 'px';
+            $(target).stop().animate(option,'fast', 'linear');
+        }
+        function moveImg() {
+            moveOnScroll('#careerbox', 'top', 200, 35, 2000);
+            moveOnScroll('#sampleTitle', 'left', 500, 0, 2000);
+        }
+
+        moveImg();
+        $(document).on('scroll', moveImg);
+
         $('.overImg').on('mouseover', function (e) {
             $(e.target).stop().animate({
                 top: '-30px'
