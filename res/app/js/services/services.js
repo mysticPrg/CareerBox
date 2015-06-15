@@ -3,7 +3,7 @@
  */
 
 require([
-    'service/applyCommonItemAttribute',
+    'service/ApplyCommonItemAttribute',
     'service/CommonCallback',
     'service/createPortfolio',
     'service/deleteImage',
