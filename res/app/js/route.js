@@ -11,7 +11,7 @@ define([
         function ($routeProvider) {
             $routeProvider
                 .when('/PaperEditor', {
-                    templateUrl: 'PaperEditor.html',
+                    templateUrl: 'paperEditor.html',
                     controller: 'PaperEditorController'
                 })
 //                .when('/SectionEditor', {
