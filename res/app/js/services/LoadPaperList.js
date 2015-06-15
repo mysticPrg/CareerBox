@@ -6,7 +6,7 @@ define(['app', 'service/serverURL'], function(app) {
         return function ($http, portfolioId, callback) {
             $http({
                 method: 'POST',
-                url: serverURL + 'serverURL/portfolio/paperList',
+                url: serverURL + '/portfolio/paperList',
                 data: {_portfolio_id : portfolioId},
                 responseType: 'json',
                 withCredentials: true
