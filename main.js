@@ -56,7 +56,7 @@ ColumnInfoService.set(server);
 ResetService.set(server);
 
 try {
-    server.start(8123);
+    server.start(8124);
 } catch (e) {
     console.log(e.message);
     //
