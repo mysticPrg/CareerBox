@@ -7,7 +7,7 @@ var async = require('async');
 var requirejs = require('../require.config');
 
 var InfoType = requirejs('classes/Enums/InfoType');
-var ItemType = requirejs('classes/Enums/itemType');
+var ItemType = requirejs('classes/Enums/ItemType');
 var LayoutComponentType = requirejs('classes/Enums/LayoutComponentType');
 var Term = requirejs('classes/Structs/Term');
 

@@ -13,7 +13,7 @@ var FileService = require('./src/services/FileService');
 var ImageService = require('./src/services/ImageService');
 
 var PersonalInfoService = require('./src/services/Info/PersonalInfoService');
-var AdditionalInfoService = require('./src/services/info/AdditionalInfoService');
+var AdditionalInfoService = require('./src/services/Info/AdditionalInfoService');
 var HighSchoolInfoService = require('./src/services/Info/HighSchoolInfoService');
 var UnivSchoolInfoService = require('./src/services/Info/UnivSchoolInfoService');
 var WorkingInfoService = require('./src/services/Info/WorkingInfoService');
