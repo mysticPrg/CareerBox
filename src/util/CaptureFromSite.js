@@ -37,7 +37,7 @@ function CaptureFromSite(_id, type, closerCallback) {
 
 function initPage(page) {
 
-    page.settings.webSecurityEnabled = false;
+    //page.settings.webSecurityEnabled = false;
     page.resources = 0;
 
     // Whether page has loaded.
@@ -118,7 +118,7 @@ function DoCapture(_id, type, closerCallback) {
 
     async.waterfall([
         function (callback) {
-            phantom.create(function (ph) {
+            phantom.create('--ssl-protocol=any', function (ph) {
                 callback(null, ph);
             });
         },
