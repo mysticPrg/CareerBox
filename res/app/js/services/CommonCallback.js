@@ -3,12 +3,12 @@
  */
 
 define(['app'
-], function(app) {
-    app.factory('CommonCallback', [ function () {
-        return function(data, successCallback) {
+], function (app) {
+    app.factory('CommonCallback', [function () {
+        return function (data, successCallback) {
             var stateText = "";
             // Error
-            if(data === null){
+            if (data === null) {
                 stateText = "서버와의 연결이 되지 않았습니다.";
 //                alert(stateText);
             }
@@ -28,7 +28,7 @@ define(['app'
 //                alert(stateText);
                 window.location.href = "../partials/login.html";
             }
-            else{
+            else {
                 stateText = "파싱 오류 발생";
                 console.log(stateText);
                 console.log(data);

@@ -6,13 +6,13 @@ define([
     'app',
     'jquery-ui',
     'service/EditorData',
-    'service/ApplyCommonItemAttribute',
+    'service/applyCommonItemAttribute',
     'service/SetAttributeInformation',
     'service/loadArticle',
     'service/getInformationByType',
     'service/reloadPaper'
 ], function (app) {
-    app.directive('commonAttribute', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation, loadArticle, getInformationByType, reloadPaper, $http, $rootScope) {
+    app.directive('commonAttribute', function ($compile, EditorData, applyCommonItemAttribute, SetAttributeInformation, loadArticle, getInformationByType, reloadPaper, $http, $rootScope) {
         function singleInfoInit(scope) {
             if (scope.type === 'article' && scope.attributeInformation.bindingData.length === 0) {
                 // 바인딩 상태
@@ -57,7 +57,7 @@ define([
                     else {
                         scope.$watch("attributeInformation.pos", function () {
                             if (EditorData.focusId === att.id) {
-                                ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
+                                applyCommonItemAttribute.pos(element, scope.attributeInformation);
                             }
                         }, true);
                     }
@@ -74,7 +74,7 @@ define([
                     else {
                         // 그외
                         scope.$watch("attributeInformation.outline", function () {
-                            ApplyCommonItemAttribute.outline(element, scope.attributeInformation);
+                            applyCommonItemAttribute.outline(element, scope.attributeInformation);
                         }, true);
                     }
                 }
@@ -84,7 +84,7 @@ define([
                     // 쉐이프일 경우에는 적용되지 않도록함.
                     if (scope.attributeInformation.shapeType !== 'circle') {
 //                    if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.radius(element, scope.attributeInformation);
+                        applyCommonItemAttribute.radius(element, scope.attributeInformation);
                     }
 
                 }, true);
@@ -93,26 +93,26 @@ define([
                 // rotate
                 scope.$watch("attributeInformation.rotate", function () {
 //                if(EditorData.focusId == att.id)
-                    ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
+                    applyCommonItemAttribute.rotate(element, scope.attributeInformation);
                 }, true);
 
                 // z - index
                 scope.$watch("attributeInformation.zOrder", function () {
                     // 비교하면 아티클 배열에서 z-index가 안매겨잠.
 //                    if(scope.attributeInformation._id == att.id)
-                    ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
+                    applyCommonItemAttribute.zOrder(element, scope.attributeInformation);
                 }, true);
             }
 
             // alpha 리스너 달기
             scope.$watch("attributeInformation.alpha", function () {
 //                    if(EditorData.focusId == att.id)
-                ApplyCommonItemAttribute.alpha(element, scope.attributeInformation);
+                applyCommonItemAttribute.alpha(element, scope.attributeInformation);
             }, true);
 
             // fill 리스너 달기
             scope.$watch("attributeInformation.fill", function () {
-                ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
+                applyCommonItemAttribute.fill(element, scope.attributeInformation);
 
             }, true);
 
@@ -129,7 +129,7 @@ define([
                     // 그외
                     scope.$watch("attributeInformation.size", function () {
 //                if(EditorData.focusId == att.id)
-                        ApplyCommonItemAttribute.size(element, scope.attributeInformation);
+                        applyCommonItemAttribute.size(element, scope.attributeInformation);
 
                     }, true);
                 }
@@ -169,13 +169,13 @@ define([
                 if (scope.attributeInformation) {
                     // 로딩시 CSS 적용
                     if (!((!isTemplateEditor(window.location.href)) && att.id === 'canvas-content')) {
-                        ApplyCommonItemAttribute.all(element, scope.attributeInformation);
+                        applyCommonItemAttribute.all(element, scope.attributeInformation);
                     } else if (!(window.location.href.split("partials/")[1].split('?')[0] !== 'templatePreview.html' && att.id === 'canvas-content')) {
-                        ApplyCommonItemAttribute.all(element, scope.attributeInformation);
+                        applyCommonItemAttribute.all(element, scope.attributeInformation);
                     }
                     else {
-                        ApplyCommonItemAttribute.fill(element, scope.attributeInformation);
-                        ApplyCommonItemAttribute.size(element, scope.attributeInformation);
+                        applyCommonItemAttribute.fill(element, scope.attributeInformation);
+                        applyCommonItemAttribute.size(element, scope.attributeInformation);
                     }
 
                     // 아티클, 아이템 공통

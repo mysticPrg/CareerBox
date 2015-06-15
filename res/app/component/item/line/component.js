@@ -6,7 +6,7 @@ define([
     'app',
     'jquery-ui',
     'service/SetAttributeInformation',
-    'service/ApplyCommonItemAttribute',
+    'service/applyCommonItemAttribute',
     'service/EditorData'
 
 ], function (app) {
@@ -45,7 +45,7 @@ define([
     });
 
 
-    app.directive('line', ['SetAttributeInformation', 'ApplyCommonItemAttribute', 'EditorData', function (SetAttributeInformation, ApplyCommonItemAttribute, EditorData) {
+    app.directive('line', ['SetAttributeInformation', 'applyCommonItemAttribute', 'EditorData', function (SetAttributeInformation, applyCommonItemAttribute, EditorData) {
         function HexTo10(Hex) {
             return parseInt(Hex, 16).toString(10);
         }
@@ -77,7 +77,7 @@ define([
             // pos
             scope.$watch("attributeInformation.pos", function () {
                 if (EditorData.focusId === att.id) {
-                    ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
+                    applyCommonItemAttribute.pos(element, scope.attributeInformation);
                 }
             }, true);
 
@@ -96,13 +96,13 @@ define([
 
             // rotate
             scope.$watch("attributeInformation.rotate", function () {
-                ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
+                applyCommonItemAttribute.rotate(element, scope.attributeInformation);
             }, true);
 
             // z-watch
             scope.$watch("attributeInformation.zOrder", function () {
                 if (scope.attributeInformation._id === att.id) {
-                    ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
+                    applyCommonItemAttribute.zOrder(element, scope.attributeInformation);
                 }
             }, true);
 
@@ -127,11 +127,11 @@ define([
                 setWatch(scope, element, att);
 
                 // 로딩시 CSS 적용
-                ApplyCommonItemAttribute.fillLine(element, scope.attributeInformation);
-                ApplyCommonItemAttribute.rotate(element, scope.attributeInformation);
-                ApplyCommonItemAttribute.alphaLine(element, scope.attributeInformation);
-                ApplyCommonItemAttribute.pos(element, scope.attributeInformation);
-                ApplyCommonItemAttribute.zOrder(element, scope.attributeInformation);
+                applyCommonItemAttribute.fillLine(element, scope.attributeInformation);
+                applyCommonItemAttribute.rotate(element, scope.attributeInformation);
+                applyCommonItemAttribute.alphaLine(element, scope.attributeInformation);
+                applyCommonItemAttribute.pos(element, scope.attributeInformation);
+                applyCommonItemAttribute.zOrder(element, scope.attributeInformation);
 
                 setLineSize(element, scope);
 

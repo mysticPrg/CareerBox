@@ -7,10 +7,10 @@ define([
     'jquery',
     'jquery-ui',
     'service/EditorData',
-    'service/ApplyCommonItemAttribute',
+    'service/applyCommonItemAttribute',
     'service/SetAttributeInformation'
 ], function (app, $) {
-    app.directive('draggable', ['$compile', 'EditorData', 'ApplyCommonItemAttribute', 'SetAttributeInformation', function ($compile, EditorData, ApplyCommonItemAttribute, SetAttributeInformation) {
+    app.directive('draggable', ['$compile', 'EditorData', 'applyCommonItemAttribute', 'SetAttributeInformation', function ($compile, EditorData, applyCommonItemAttribute, SetAttributeInformation) {
         return {
 
             // A = attribute, E = Element, C = Class and M = HTML Comment

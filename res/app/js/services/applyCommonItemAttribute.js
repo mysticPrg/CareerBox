@@ -3,38 +3,38 @@
  */
 
 define(['app'
-], function(app) {
-    app.factory('ApplyCommonItemAttribute', [ function () {
+], function (app) {
+    app.factory('applyCommonItemAttribute', [function () {
 
         var att = {
-            'fill' : fill,
-            'outline' : outline,
-            'radius' : radius,
-            'rotate' : rotate,
-            'alpha' : alpha,
-            'all' : all,
-            'pos' : pos,
-            'size' : size,
-            'zOrder' : zOrder,
-            'alphaLine' : alphaLine,
-            'fillLine' : fillLine
+            'outline': outline,
+            'fill': fill,
+            'radius': radius,
+            'rotate': rotate,
+            'alpha': alpha,
+            'all': all,
+            'pos': pos,
+            'size': size,
+            'zOrder': zOrder,
+            'alphaLine': alphaLine,
+            'fillLine': fillLine
         };
         return att;
     }]);
 
-    function HexTo10(Hex){
+    function HexTo10(Hex) {
         return parseInt(Hex, 16).toString(10);
     }
 
     function fill(element, item) {
-        if(typeof item.alpha !== 'undefined') {
+        if (typeof item.alpha !== 'undefined') {
             element.css({
                 'background-color': 'rgba(' + HexTo10(item.fill.color.R) + ', ' + HexTo10(item.fill.color.G) + ', ' + HexTo10(item.fill.color.B) + ', ' + item.alpha / 100 + ')'
             });
         }
-        else{
+        else {
             element.css({
-                'background-color' : 'rgba(' + HexTo10(item.fill.color.R) + ', '+ HexTo10(item.fill.color.G)+', '+HexTo10(item.fill.color.B)+', '+1+')'
+                'background-color': 'rgba(' + HexTo10(item.fill.color.R) + ', ' + HexTo10(item.fill.color.G) + ', ' + HexTo10(item.fill.color.B) + ', ' + 1 + ')'
             });
         }
     }
@@ -46,7 +46,7 @@ define(['app'
     }
 
     function outline(element, item) {
-        if(typeof item.alpha !== 'undefined') {
+        if (typeof item.alpha !== 'undefined') {
             element.css({
                 'border': "10px solid #ffffff",
                 'border-width': item.outline.weight + "px",
@@ -76,8 +76,8 @@ define(['app'
         });
     }
 
-    function alpha(element, item){
-        if(item.alpha) {
+    function alpha(element, item) {
+        if (item.alpha) {
             element.css({
                 'background-color': 'rgba(' + HexTo10(item.fill.color.R) + ', ' + HexTo10(item.fill.color.G) + ', ' + HexTo10(item.fill.color.B) + ', ' + item.alpha / 100 + ')',
                 'border-color': 'rgba(' + HexTo10(item.outline.color.R) + ', ' + HexTo10(item.outline.color.G) + ', ' + HexTo10(item.outline.color.B) + ', ' + item.alpha / 100 + ')'
@@ -85,14 +85,14 @@ define(['app'
         }
     }
 
-    function alphaLine(element){
+    function alphaLine(element) {
         element.css({
             'background-color': 'rgba(0,0,0,0)',
             'border-color': 'rgba(0,0,0,0)'
         });
     }
 
-    function pos(element, item){
+    function pos(element, item) {
 //        if( !(item.pos.x == element[0].offsetLeft && item.pos.y == element[0].offsetTop) )
         {
             element.css({
@@ -102,14 +102,14 @@ define(['app'
         }
     }
 
-    function size(element, item){
+    function size(element, item) {
         element.css({
             width: item.size.width + "px",
             height: item.size.height + "px"
         });
     }
 
-    function zOrder(element, item){
+    function zOrder(element, item) {
         element.css({
             'z-Index': item.zOrder
         });

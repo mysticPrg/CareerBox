@@ -2,10 +2,10 @@ define([
     'app',
     'jquery-ui',
     'rotatable',
-    'service/ApplyCommonItemAttribute',
+    'service/applyCommonItemAttribute',
     'service/EditorData'
 ], function (app) {
-    app.directive('rotatable', function (ApplyCommonItemAttribute, $compile) {
+    app.directive('rotatable', function (applyCommonItemAttribute, $compile) {
         function getRotationRadian(obj) {
             var rad;
             var matrix = obj.css("-webkit-transform") ||

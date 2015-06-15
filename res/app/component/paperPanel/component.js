@@ -21,7 +21,7 @@ define([
     'service/getTemplateList',
     'service/getTemplateListBasic',
     'service/deleteTemplate',
-    'service/ApplyCommonItemAttribute',
+    'service/applyCommonItemAttribute',
     'service/SetZOrder',
     'service/serverURL'
 ], function (app, Template, Icon, Image, Item, Line, Link, Shape, Text, createTemplateModal, deleteTemplateModal) {
@@ -39,10 +39,10 @@ define([
         'getTemplateList',
         'getTemplateListBasic',
         'DeleteTemplate',
-        'ApplyCommonItemAttribute',
+        'applyCommonItemAttribute',
         'SetZOrder',
         'serverURL',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, InformationData, HTMLGenerator, SaveTemplate, getTemplateList, getTemplateListBasic, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder, serverURL) {
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, InformationData, HTMLGenerator, SaveTemplate, getTemplateList, getTemplateListBasic, DeleteTemplate, applyCommonItemAttribute, SetZOrder, serverURL) {
             $scope.basicTemplates = [];
             $scope.templates = [];
             $scope.childIndex = 0;
