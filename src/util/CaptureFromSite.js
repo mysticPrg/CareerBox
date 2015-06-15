@@ -37,6 +37,7 @@ function CaptureFromSite(_id, type, closerCallback) {
 
 function initPage(page) {
 
+    page.settings.webSecurityEnabled = false;
     page.resources = 0;
 
     // Whether page has loaded.
