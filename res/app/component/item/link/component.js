@@ -2,7 +2,8 @@ define([
     'app',
     'jquery-ui',
     'service/SetAttributeInformation',
-    'service/EditorData'
+    'service/EditorData',
+    'service/serverURL'
 ], function (app) {
     function trim(str) {
         var result = '';
@@ -50,7 +51,7 @@ define([
 
     }
 
-    app.directive('link', ['SetAttributeInformation', 'EditorData', '$window', function (SetAttributeInformation, EditorData, $window) {
+    app.directive('link', ['SetAttributeInformation', 'EditorData', '$window', 'serverURL', function (SetAttributeInformation, EditorData, $window, serverURL) {
         return {
             // A = attribute, E = Element, C = Class and M = HTML Comment
             restrict: 'A',
@@ -120,7 +121,7 @@ define([
                         if(scope.info.url === ''){
                             return;
                         }
-                        href = 'http://210.118.74.166:8123/file/' + scope.info.url;
+                        href = serverURL + '/file/' + scope.info.url;
                     }
                     else if (scope.info.isOutURL) {
                         href = scope.info.url;

@@ -6,12 +6,11 @@ var Uploader = require('express-uploader');
 var multipart = require('connect-multiparty')();
 var ImageDB = require('../db/ImageDB');
 var ServiceUtil = require('../util/ServiceUtil');
+var serverURL = require('../util/serverURL');
 
 var Result = require('./result');
 
 var fs = require('fs');
-
-
 var fileDir = __dirname + '/../../res/uploads/image';
 
 var isolateUploader = new Uploader({
@@ -19,7 +18,7 @@ var isolateUploader = new Uploader({
     safeName: true,
     publicDir: __dirname + '/../../res',
     uploadDir: fileDir,
-    uploadUrl: 'http://210.118.74.166:8123/image/',
+    uploadUrl: serverURL + '/image/',
     thumbnails: true,
     thumbToSubDir: true,
     thumbSizes: [
@@ -35,7 +34,7 @@ var profileImgUploader = new Uploader({
     safeName: true,
     publicDir: __dirname + '/../../res',
     uploadDir: fileDir,
-    uploadUrl: 'http://210.118.74.166:8123/image/',
+    uploadUrl: serverURL + '/image/',
     thumbnails: true,
     thumbToSubDir: true,
     thumbSizes: [
@@ -52,7 +51,7 @@ var symbolImgUploader = new Uploader({
     safeName: true,
     publicDir: __dirname + '/../../res',
     uploadDir: fileDir,
-    uploadUrl: 'http://210.118.74.166:8123/image/',
+    uploadUrl: serverURL + '/image/',
     thumbnails: true,
     thumbToSubDir: true,
     thumbSizes: [

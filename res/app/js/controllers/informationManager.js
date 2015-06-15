@@ -9,6 +9,7 @@ define([
     'component/menu/component',
     'service/InformationData',
     'service/GetInformation',
+    'service/serverURL',
     'component/information/personalInformation/component',
     'component/information/additionalInformation/component',
     'component/information/highSchoolInformation/component',
@@ -25,7 +26,7 @@ define([
     'component/information/projectInformation/component',
     'component/information/columnInformation/component'
 ], function ($, ng, app) {
-    app.controller('informationManager', ['$scope', '$http', '$q', 'InformationData', 'GetInformation', function ($scope, $http, $q, InformationData, GetInformation) {
+    app.controller('informationManager', ['$scope', '$http', '$q', 'InformationData', 'GetInformation', 'serverURL', function ($scope, $http, $q, InformationData, GetInformation, serverURL) {
         $scope.initialize = function () {
             $('#informationTab a').click(function (e) {
                 e.preventDefault();
@@ -99,8 +100,8 @@ define([
         };
 
         function savePersonalInfo() {
-            var savePersonalPromiss = $http.post('http://210.118.74.166:8123/info/personal', {personalInfo: InformationData.personalInfo}, {withCredentials: true});
-            var saveAdditionalPromiss = $http.post('http://210.118.74.166:8123/info/additional', {additionalInfo: InformationData.additionalInfo}, {withCredentials: true});
+            var savePersonalPromiss = $http.post(serverURL + '/info/personal', {personalInfo: InformationData.personalInfo}, {withCredentials: true});
+            var saveAdditionalPromiss = $http.post(serverURL + '/info/additional', {additionalInfo: InformationData.additionalInfo}, {withCredentials: true});
 
             $q.all([savePersonalPromiss, saveAdditionalPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
@@ -108,8 +109,8 @@ define([
         }
 
         function saveSchoolInfo() {
-            var saveHighSchoolPromiss = $http.post('http://210.118.74.166:8123/info/highSchool', {highSchoolInfo: InformationData.highSchoolInfo}, {withCredentials: true});
-            var saveUnivSchoolPromiss = $http.post('http://210.118.74.166:8123/info/univSchool', {univSchoolInfo: InformationData.univSchoolInfo}, {withCredentials: true});
+            var saveHighSchoolPromiss = $http.post(serverURL + '/info/highSchool', {highSchoolInfo: InformationData.highSchoolInfo}, {withCredentials: true});
+            var saveUnivSchoolPromiss = $http.post(serverURL + '/info/univSchool', {univSchoolInfo: InformationData.univSchoolInfo}, {withCredentials: true});
 
             $q.all([saveHighSchoolPromiss, saveUnivSchoolPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
@@ -117,7 +118,7 @@ define([
         }
 
         function saveWorkingInfo() {
-            var saveWorkingPromiss = $http.post('http://210.118.74.166:8123/info/working', {workingInfo: InformationData.workingInfo}, {withCredentials: true});
+            var saveWorkingPromiss = $http.post(serverURL + '/info/working', {workingInfo: InformationData.workingInfo}, {withCredentials: true});
 
             $q.all([saveWorkingPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
@@ -125,10 +126,10 @@ define([
         }
 
         function saveAbilityInfo() {
-            var saveCertificationAbilityPromiss = $http.post('http://210.118.74.166:8123/info/certificationAbility', {certificationAbilityInfo: InformationData.certificateAbilityInfo}, {withCredentials: true});
-            var saveProficiencyPromiss = $http.post('http://210.118.74.166:8123/info/proficiency', {proficiencyInfo: InformationData.proficiencyInfo}, {withCredentials: true});
-            var saveComputerAbilityPromiss = $http.post('http://210.118.74.166:8123/info/computerAbility', {computerAbilityInfo: InformationData.computerAbilityInfo}, {withCredentials: true});
-            var savePaperAbilityPromiss = $http.post('http://210.118.74.166:8123/info/paperAbility', {paperAbilityInfo: InformationData.paperAbilityInfo}, {withCredentials: true});
+            var saveCertificationAbilityPromiss = $http.post(serverURL + '/info/certificationAbility', {certificationAbilityInfo: InformationData.certificateAbilityInfo}, {withCredentials: true});
+            var saveProficiencyPromiss = $http.post(serverURL + '/info/proficiency', {proficiencyInfo: InformationData.proficiencyInfo}, {withCredentials: true});
+            var saveComputerAbilityPromiss = $http.post(serverURL + '/info/computerAbility', {computerAbilityInfo: InformationData.computerAbilityInfo}, {withCredentials: true});
+            var savePaperAbilityPromiss = $http.post(serverURL + '/info/paperAbility', {paperAbilityInfo: InformationData.paperAbilityInfo}, {withCredentials: true});
 
             $q.all([saveCertificationAbilityPromiss, saveProficiencyPromiss, saveComputerAbilityPromiss, savePaperAbilityPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
@@ -136,8 +137,8 @@ define([
         }
 
         function saveAwardInfo() {
-            var saveScholarshipPromiss = $http.post('http://210.118.74.166:8123/info/scholarship', {scholarshipInfo: InformationData.scholarshipInfo}, {withCredentials: true});
-            var saveAwardPromiss = $http.post('http://210.118.74.166:8123/info/award', {awardInfo: InformationData.awardInfo}, {withCredentials: true});
+            var saveScholarshipPromiss = $http.post(serverURL + '/info/scholarship', {scholarshipInfo: InformationData.scholarshipInfo}, {withCredentials: true});
+            var saveAwardPromiss = $http.post(serverURL + '/info/award', {awardInfo: InformationData.awardInfo}, {withCredentials: true});
 
             $q.all([saveScholarshipPromiss, saveAwardPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
@@ -145,8 +146,8 @@ define([
         }
 
         function saveActivityInfo() {
-            var saveLocalActivityPromiss = $http.post('http://210.118.74.166:8123/info/localActivity', {localActivityInfo: InformationData.localActivityInfo}, {withCredentials: true});
-            var saveGlobalActivityPromiss = $http.post('http://210.118.74.166:8123/info/globalActivity', {globalActivityInfo: InformationData.globalActivityInfo}, {withCredentials: true});
+            var saveLocalActivityPromiss = $http.post(serverURL + '/info/localActivity', {localActivityInfo: InformationData.localActivityInfo}, {withCredentials: true});
+            var saveGlobalActivityPromiss = $http.post(serverURL + '/info/globalActivity', {globalActivityInfo: InformationData.globalActivityInfo}, {withCredentials: true});
 
             $q.all([saveLocalActivityPromiss, saveGlobalActivityPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
@@ -154,7 +155,7 @@ define([
         }
 
         function saveProjectInfo() {
-            var saveProjectPromiss = $http.post('http://210.118.74.166:8123/info/project', {projectInfo: InformationData.projectInfo}, {withCredentials: true});
+            var saveProjectPromiss = $http.post(serverURL + '/info/project', {projectInfo: InformationData.projectInfo}, {withCredentials: true});
 
             $q.all([saveProjectPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);
@@ -162,7 +163,7 @@ define([
         }
 
         function saveColumnInfo() {
-            var saveColumnPromiss = $http.post('http://210.118.74.166:8123/info/column', {columnInfo: InformationData.columnInfo}, {withCredentials: true});
+            var saveColumnPromiss = $http.post(serverURL + '/info/column', {columnInfo: InformationData.columnInfo}, {withCredentials: true});
 
             $q.all([saveColumnPromiss]).then(function (resultArray) {
                 resultCheck(resultArray);

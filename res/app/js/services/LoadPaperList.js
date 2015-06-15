@@ -1,12 +1,12 @@
 /**
  * Created by JEONGBORAM-PC-W1 on 2014-11-22.
  */
-define(['app'], function(app) {
-    app.factory('LoadPaperList', function () {
+define(['app', 'service/serverURL'], function(app) {
+    app.factory('LoadPaperList', ['serverURL', function (serverURL) {
         return function ($http, portfolioId, callback) {
             $http({
                 method: 'POST',
-                url: 'http://210.118.74.166:8123/portfolio/paperList',
+                url: serverURL + 'serverURL/portfolio/paperList',
                 data: {_portfolio_id : portfolioId},
                 responseType: 'json',
                 withCredentials: true
@@ -14,5 +14,5 @@ define(['app'], function(app) {
                 callback(data);
             });
         };
-    });
+    }]);
 });

@@ -22,7 +22,8 @@ define([
     'service/getTemplateListBasic',
     'service/deleteTemplate',
     'service/ApplyCommonItemAttribute',
-    'service/SetZOrder'
+    'service/SetZOrder',
+    'service/serverURL'
 ], function (app, Template, Icon, Image, Item, Line, Link, Shape, Text, createTemplateModal, deleteTemplateModal) {
     app.controller('paperPanel', [
         '$scope',
@@ -40,10 +41,12 @@ define([
         'DeleteTemplate',
         'ApplyCommonItemAttribute',
         'SetZOrder',
-        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, InformationData, HTMLGenerator, SaveTemplate, getTemplateList, getTemplateListBasic, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder) {
+        'serverURL',
+        function ($scope, $rootScope, $http, $modal, $window, $compile, EditorData, InformationData, HTMLGenerator, SaveTemplate, getTemplateList, getTemplateListBasic, DeleteTemplate, ApplyCommonItemAttribute, SetZOrder, serverURL) {
             $scope.basicTemplates = [];
             $scope.templates = [];
             $scope.childIndex = 0;
+            $scope.serverURL = serverURL;
 
             // Initialize Template InfoType
             var infoTypes = [];
@@ -98,7 +101,7 @@ define([
                         $scope.basicTemplates = [];
                         for (var i = 0; i < templates.length; i++) {
                             var template = new Template(templates[i]);
-                            template.thumbURL = 'http://210.118.74.166:8123/template/thumb/' + template._id + '?' + new Date();
+                            template.thumbURL =  serverURL+ '/template/thumb/' + template._id + '?' + new Date();
                             $scope.basicTemplates.push(template);
                         }
                     }
@@ -110,7 +113,7 @@ define([
                         $scope.templates = [];
                         for (var i = 0; i < templates.length; i++) {
                             var template = new Template(templates[i]);
-                            template.thumbURL = 'http://210.118.74.166:8123/template/thumb/' + template._id + '?' + new Date();
+                            template.thumbURL = serverURL + '/template/thumb/' + template._id + '?' + new Date();
                             $scope.templates.push(template);
                         }
                     }

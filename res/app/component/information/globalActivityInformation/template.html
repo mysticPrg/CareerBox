@@ -128,7 +128,7 @@
                     <img ng-src="../img/noImage200x200.png">
                 </div>
                 <div ng-show = "item.I_image">
-                    <img ng-src="http://210.118.74.166:8123/image/symbol/thumb/{{item.I_image._id}}">
+                    <img ng-src="{{serverURL}}/image/symbol/thumb/{{item.I_image._id}}">
                 </div>
             </div>
         </div>
@@ -139,7 +139,7 @@
 
             <div class="col-md-5" id="lbl_global_activity_file_load">
                 <div ng-show = "!item.F_file" style="text-align: left; line-height: 34px">없음</div>
-                <div ng-show = "item.F_file" style="text-align: left; line-height: 34px"><a href="http://210.118.74.166:8123/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
+                <div ng-show = "item.F_file" style="text-align: left; line-height: 34px"><a href="{{serverURL}}/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
             </div>
         </div>
 

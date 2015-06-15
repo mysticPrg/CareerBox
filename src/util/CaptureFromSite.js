@@ -7,10 +7,11 @@ var gm = require('gm');
 var phantom = require('phantom');
 
 var screenShotPath = 'res/screenshot/';
+var serverURL = require('../util/serverURL');
 
 var url = {
-    portfolio: 'http://210.118.74.166:8123/res/app/partials/portfolioPreview.html?id=',
-    template: 'http://210.118.74.166:8123/res/app/partials/templatePreview.html?id='
+    portfolio: serverURL + '/res/app/partials/portfolioPreview.html?id=',
+    template: serverURL + '/res/app/partials/templatePreview.html?id='
 };
 
 var queue = {

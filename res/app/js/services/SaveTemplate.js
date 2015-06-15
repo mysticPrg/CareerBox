@@ -1,13 +1,13 @@
 /**
  * Created by JEONGBORAM-PC-W1 on 2014-11-16.
  */
-define(['app', 'service/WaitServer'], function (app) {
-    app.factory('SaveTemplate', function (WaitServer) {
+define(['app', 'service/WaitServer', 'service/serverURL'], function (app) {
+    app.factory('SaveTemplate', ['WaitServer', 'serverURL', function (WaitServer, serverURL) {
         return function ($http, template, callback) {
             WaitServer.show();
             $http({
                 method: 'POST',
-                url: 'http://210.118.74.166:8123/template',
+                url: serverURL + '/template',
                 data: {template: template},
                 responseType: 'json',
                 withCredentials: true
@@ -16,6 +16,6 @@ define(['app', 'service/WaitServer'], function (app) {
                 callback(data);
             });
         };
-    });
+    }]);
 });
 

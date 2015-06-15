@@ -2,8 +2,8 @@
  * Created by careerBox on 2014-10-19.
  */
 
-define(['app'], function(app) {
-    app.factory('memberlist', function($http) {
-        return $http.get('http://210.118.74.166:8123/member/list');
-    });
+define(['app', 'service/serverURL'], function(app) {
+    app.factory('memberlist', ['$http', 'serverURL', function($http, serverURL) {
+        return $http.get(serverURL + '/member/list');
+    }]);
 });

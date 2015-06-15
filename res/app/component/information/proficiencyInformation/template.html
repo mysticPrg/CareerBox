@@ -117,7 +117,7 @@
             <label for="lbl_proficiency_file_load" class="col-md-2 control-label">첨부파일</label>
             <div class="col-md-4" id="lbl_proficiency_file_load" style="height: 34px; line-height: 34px; text-align: left">
                 <div ng-show = "!item.F_file">없음</div>
-                <div ng-show = "item.F_file"><a href="http://210.118.74.166:8123/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
+                <div ng-show = "item.F_file"><a href="{{serverURL}}/file/{{item.F_file._id}}">{{item.F_file.originalName}}</a></div>
             </div>
         </div>
 

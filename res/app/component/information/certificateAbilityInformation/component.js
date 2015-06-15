@@ -7,11 +7,13 @@ define([
     'service/InformationData',
     'classes/Info/CertificationAbilityInfoItem',
     'angular-upload',
-    'service/fileUpload'
+    'service/fileUpload',
+    'service/serverURL'
 ], function (app, InformationData, CertificationAbilityInfoItem) {
-    app.controller('certificateAbilityInformationContorller', ['$scope', '$upload', 'fileUpload', function ($scope, $upload, fileUpload) {
+    app.controller('certificateAbilityInformationContorller', ['$scope', '$upload', 'fileUpload', 'serverURL', function ($scope, $upload, fileUpload, serverURL) {
         $scope.certificateAbilityInfoItem = new CertificationAbilityInfoItem();
         $scope.progress = 0;
+        $scope.serverURL = serverURL;
 
         $scope.InformationData = InformationData;
 

@@ -5,14 +5,16 @@ define([
     'app',
     'classes/Paper',
     'service/ImageUpload',
-    'service/deleteImage'
+    'service/deleteImage',
+    'service/serverURL'
 ], function (app) {
-    app.controller('bindingImageModal', function ($scope, $modalInstance, $compile, $upload, ImageUpload, $http, $q, deleteImage) {
+    app.controller('bindingImageModal', function ($scope, $modalInstance, $compile, $upload, ImageUpload, $http, $q, deleteImage, serverURL) {
         $scope.progress = 0;
+        $scope.serverURL = serverURL;
 
         // 기존 파일 가져오기
         function getImageFiles() {
-            var loadImagePromiss = $http.get('http://210.118.74.166:8123/image', {withCredentials: true});
+            var loadImagePromiss = $http.get(serverURL + '/image', {withCredentials: true});
             $q.all([loadImagePromiss]).then(function (resultArray) {
                 $scope.imageFiles = resultArray[0].data.result;
             });

@@ -5,13 +5,14 @@ define([
     'jquery',
     'angular',
     'app',
-    'service/InformationData'
+    'service/InformationData',
+    'service/serverURL'
 ], function($, ng, app) {
-    app.factory('GetInformation', ['$http', '$q', 'InformationData', function ($http, $q, InformationData) {
+    app.factory('GetInformation', ['$http', '$q', 'InformationData', 'serverURL', function ($http, $q, InformationData, serverURL) {
 
         function loadPersonalInfo() {
-            var loadPersonalPromiss = $http.get('http://210.118.74.166:8123/info/personal', {withCredentials: true});
-            var loadAdditionalPromiss = $http.get('http://210.118.74.166:8123/info/additional', {withCredentials: true});
+            var loadPersonalPromiss = $http.get(serverURL + '/info/personal', {withCredentials: true});
+            var loadAdditionalPromiss = $http.get(serverURL + '/info/additional', {withCredentials: true});
 
             $q.all([loadPersonalPromiss, loadAdditionalPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null){
@@ -24,8 +25,8 @@ define([
         }
 
         function loadSchoolInfo() {
-            var loadHighSchoolPromiss = $http.get('http://210.118.74.166:8123/info/highSchool', {withCredentials: true});
-            var loadUnivSchoolPromiss = $http.get('http://210.118.74.166:8123/info/univSchool', {withCredentials: true});
+            var loadHighSchoolPromiss = $http.get(serverURL + '/info/highSchool', {withCredentials: true});
+            var loadUnivSchoolPromiss = $http.get(serverURL + '/info/univSchool', {withCredentials: true});
 
             $q.all([loadHighSchoolPromiss, loadUnivSchoolPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null) {
@@ -38,7 +39,7 @@ define([
         }
 
         function loadWorkingInfo() {
-            var loadWorkingPromiss = $http.get('http://210.118.74.166:8123/info/working', {withCredentials: true});
+            var loadWorkingPromiss = $http.get(serverURL + '/info/working', {withCredentials: true});
 
             $q.all([loadWorkingPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null) {
@@ -48,10 +49,10 @@ define([
         }
 
         function loadAbilityInfo() {
-            var loadCertificationAbilityPromiss = $http.get('http://210.118.74.166:8123/info/certificationAbility', {withCredentials: true});
-            var loadProficiencyPromiss = $http.get('http://210.118.74.166:8123/info/proficiency', {withCredentials: true});
-            var loadComputerAbilityPromiss = $http.get('http://210.118.74.166:8123/info/computerAbility', {withCredentials: true});
-            var loadPaperAbilityPromiss = $http.get('http://210.118.74.166:8123/info/paperAbility', {withCredentials: true});
+            var loadCertificationAbilityPromiss = $http.get(serverURL + '/info/certificationAbility', {withCredentials: true});
+            var loadProficiencyPromiss = $http.get(serverURL + '/info/proficiency', {withCredentials: true});
+            var loadComputerAbilityPromiss = $http.get(serverURL + '/info/computerAbility', {withCredentials: true});
+            var loadPaperAbilityPromiss = $http.get(serverURL + '/info/paperAbility', {withCredentials: true});
 
             $q.all([loadCertificationAbilityPromiss, loadProficiencyPromiss, loadComputerAbilityPromiss, loadPaperAbilityPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null) {
@@ -70,8 +71,8 @@ define([
         }
 
         function loadAwardInfo() {
-            var loadScholarshipPromiss = $http.get('http://210.118.74.166:8123/info/scholarship', {withCredentials: true});
-            var loadAwardPromiss = $http.get('http://210.118.74.166:8123/info/award', {withCredentials: true});
+            var loadScholarshipPromiss = $http.get(serverURL + '/info/scholarship', {withCredentials: true});
+            var loadAwardPromiss = $http.get(serverURL + '/info/award', {withCredentials: true});
 
             $q.all([loadScholarshipPromiss, loadAwardPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null) {
@@ -84,8 +85,8 @@ define([
         }
 
         function loadActivityInfo() {
-            var loadLocalActivityPromiss = $http.get('http://210.118.74.166:8123/info/localActivity', {withCredentials: true});
-            var loadGlobalActivityPromiss = $http.get('http://210.118.74.166:8123/info/globalActivity', {withCredentials: true});
+            var loadLocalActivityPromiss = $http.get(serverURL + '/info/localActivity', {withCredentials: true});
+            var loadGlobalActivityPromiss = $http.get(serverURL + '/info/globalActivity', {withCredentials: true});
 
             $q.all([loadLocalActivityPromiss, loadGlobalActivityPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null) {
@@ -98,7 +99,7 @@ define([
         }
 
         function loadProjectInfo() {
-            var loadProjectPromiss = $http.get('http://210.118.74.166:8123/info/project', {withCredentials: true});
+            var loadProjectPromiss = $http.get(serverURL + '/info/project', {withCredentials: true});
 
             $q.all([loadProjectPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null) {
@@ -108,7 +109,7 @@ define([
         }
 
         function loadColumnInfo() {
-            var loadColumnPromiss = $http.get('http://210.118.74.166:8123/info/column', {withCredentials: true});
+            var loadColumnPromiss = $http.get(serverURL + '/info/column', {withCredentials: true});
 
             $q.all([loadColumnPromiss]).then(function (resultArray) {
                 if(resultArray[0].data.result !== null) {

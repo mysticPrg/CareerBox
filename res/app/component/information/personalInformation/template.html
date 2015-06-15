@@ -93,7 +93,7 @@
                 <img ng-src="../img/noImage.png">
             </div>
             <div ng-show = "personalInfo.I_picture">
-                <img ng-src="http://210.118.74.166:8123/image/profile/thumb/{{personalInfo.I_picture._id}}" id="personal_picture" style="box-shadow: 2px 2px 2px rgba(0,0,0,0.5)">
+                <img ng-src="{{serverURL}}/image/profile/thumb/{{personalInfo.I_picture._id}}" id="personal_picture" style="box-shadow: 2px 2px 2px rgba(0,0,0,0.5)">
             </div>
 
             <!--<input type="text" id="personal_picture_file" class="fileInputText" readonly="readonly" ng-model = "fileName"/>-->

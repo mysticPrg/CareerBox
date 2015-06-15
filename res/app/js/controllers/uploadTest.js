@@ -8,9 +8,10 @@ define([
     'app',
     'bootstrap',
     'angular-upload',
-    'kendo'
+    'kendo',
+    'service/serverURL'
 ], function ($, ng, app) {
-    app.controller('uploadTest', ['$scope', '$upload', function ($scope, $upload) {
+    app.controller('uploadTest', ['$scope', '$upload', 'serverURL', function ($scope, $upload, serverURL) {
 
         $scope.progress = 0;
         $scope.status = 'ready';
@@ -28,7 +29,7 @@ define([
             for (var i = 0; i < $files.length; i++) {
                 var file = $files[i];
                 $scope.upload = $upload.upload({
-                    url: 'http://210.118.74.166:8123/upload', //upload.php script, node.js route, or servlet url
+                    url: serverURL + '/upload', //upload.php script, node.js route, or servlet url
                     method: 'POST',
                     //headers: {'header-key': 'header-value'},
                     withCredentials: true,

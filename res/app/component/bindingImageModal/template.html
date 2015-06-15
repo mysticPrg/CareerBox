@@ -9,7 +9,7 @@
         <ul style="list-style-type: none;">
             <li ng-repeat="imageFile in imageFiles" style="float: left; margin: 30px 20px; text-align: center; cursor:pointer;">
                 <div ng-click="selectImage(imageFile, $event)">
-                    <img ng-src="http://210.118.74.166:8123/image/thumb/{{imageFile._id}}">
+                    <img ng-src="{{serverURL}}/image/thumb/{{imageFile._id}}">
                     <div class="imgInfo">
                         <h6 class="infoFloat"> {{imageFile.originalName}} </h6>
                         <button ng-click="deleteImage(imageFile._id)" class="btn btn-default infoFloat">삭제</button>

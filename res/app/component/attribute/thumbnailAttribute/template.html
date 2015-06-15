@@ -14,7 +14,7 @@
             <img ng-src="../img/noImage.png">
         </div>
         <div ng-if = "data.thumbnail">
-            <img ng-src="http://210.118.74.166:8123/image/thumb/{{data.thumbnail}}" id="image_picture">
+            <img ng-src="{{serverUrl}}/image/thumb/{{data.thumbnail}}" id="image_picture">
         </div>
     </div>
 </div>

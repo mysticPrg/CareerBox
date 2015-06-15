@@ -6,9 +6,12 @@ define([
     'jquery',
     'angular',
     'app',
-    'component/tutorialModal/component'
+    'component/tutorialModal/component',
+    'service/serverURL'
 ], function ($, ng, app, tutorialModal) {
-    app.controller('index', ['$scope', '$modal', function ($scope, $modal) {
+    app.controller('index', ['$scope', '$modal', 'serverURL', function ($scope, $modal, serverURL) {
+        $scope.serverURL = serverURL;
+
         $scope.tutorial = function () {
             var modalInstance = $modal.open(tutorialModal);
             modalInstance.result.then(function () {

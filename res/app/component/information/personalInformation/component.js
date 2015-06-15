@@ -5,12 +5,13 @@ define([
     'app',
     'service/InformationData',
     'angular-upload',
-    'service/ImageUpload'
+    'service/ImageUpload',
+    'service/serverURL'
 ], function (app, InformationData) {
-    app.controller('personalInformationController', ['$scope', '$upload', 'ImageUpload', function ($scope, $upload, ImageUpload) {
+    app.controller('personalInformationController', ['$scope', '$upload', 'ImageUpload', 'serverURL', function ($scope, $upload, ImageUpload, serverURL) {
         $scope.InformationData = InformationData;
         $scope.progress = 0;
-
+        $scope.serverURL = serverURL;
 
         $scope.$watch("InformationData.personalInfo", function () {
             $scope.personalInfo = InformationData.personalInfo.items[0];
@@ -29,7 +30,7 @@ define([
                 $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
             }, function (data) {
                 $scope.personalInfo.I_picture = data.result;
-                $('#personal_picture').attr('src', 'http://210.118.74.166:8123/image/profile/thumb/' + data.result._id);
+                $('#personal_picture').attr('src', serverURL + '/image/profile/thumb/' + data.result._id);
             });
         };
 

@@ -1,10 +1,10 @@
 /**
  * Created by JEONGBORAM-PC-W1 on 2014-12-26.
  */
-define(['app'], function (app) {
-    app.factory('getTemplateListBasic', function () {
+define(['app', 'service/serverURL'], function (app) {
+    app.factory('getTemplateListBasic', ['serverURL', function (serverURL) {
         return function ($http, infoType, callback) {
-            var url = 'http://210.118.74.166:8123/template/basic/list';
+            var url = serverURL + '/template/basic/list';
             if(infoType !== ''){
                 url = url + '/' + infoType;
             }
@@ -18,5 +18,5 @@ define(['app'], function (app) {
                 callback(data);
             });
         };
-    });
+    }]);
 });

@@ -7,11 +7,13 @@ define([
     'service/InformationData',
     'classes/Info/ProficiencyInfoItem',
     'angular-upload',
-    'service/fileUpload'
+    'service/fileUpload',
+    'service/serverURL'
 ], function (app, InformationData, ProficiencyInfoItem) {
-    app.controller('proficiencyInformationContorller', ['$scope', '$upload', 'fileUpload', function ($scope, $upload, fileUpload) {
+    app.controller('proficiencyInformationContorller', ['$scope', '$upload', 'fileUpload', 'serverURL', function ($scope, $upload, fileUpload, serverURL) {
         $scope.proficiencyInfoItem = new ProficiencyInfoItem();
         $scope.progress = 0;
+        $scope.serverURL = serverURL;
 
         $scope.InformationData = InformationData;
 

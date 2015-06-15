@@ -1,10 +1,11 @@
 
 define([
     'app',
-    'component/bindingImageModal/component'
+    'component/bindingImageModal/component',
+    'service/serverURL'
 ], function (app, bindingImageModal) {
 
-    app.directive('thumbnailAttribute', function () {
+    app.directive('thumbnailAttribute', ['serverURL', function (serverURL) {
         return {
             restrict: 'A',
             scope: {
@@ -19,6 +20,7 @@ define([
                     modalInstance.result.then(function (imageFile) {
                         // 성공
                         // 모델에 저장
+                        $scope.serverURL = serverURL;
                         $scope.data.thumbnail = imageFile._id;
 
                     }, function () {
@@ -28,6 +30,6 @@ define([
                 };
             }
         };
-    });
+    }]);
 
 });

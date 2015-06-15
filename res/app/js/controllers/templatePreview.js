@@ -10,6 +10,7 @@ define([
     'angular',
     'app',
     'service/HTMLGenerator',
+    'service/serverURL',
     'component/item/line/component',
     'component/item/shape/component',
     'component/item/text/component',
@@ -17,7 +18,7 @@ define([
     'component/item/image/component',
     'directives/CommonAttribute'
 ], function ($, ng, app) {
-    app.controller('templatePreview', ['$scope', '$http', '$compile', 'EditorData', 'HTMLGenerator', function ($scope, $http, $compile, EditorData, HTMLGenerator) {
+    app.controller('templatePreview', ['$scope', '$http', '$compile', 'EditorData', 'HTMLGenerator', 'serverURL', function ($scope, $http, $compile, EditorData, HTMLGenerator, serverURL) {
         // z index 초기화
         EditorData.end_zOrder = 0;
         EditorData.start_zOrder = 0;
@@ -27,7 +28,7 @@ define([
 
             $http({
                 method: 'GET',
-                url: 'http://210.118.74.166:8123/template/preview/' + $scope.templateId,
+                url: serverURL + '/template/preview/' + $scope.templateId,
                 responseType: 'json',
                 withCredentials: true
             }).success(function (data) {

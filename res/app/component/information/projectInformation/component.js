@@ -7,13 +7,15 @@ define([
     'classes/Info/ProjectInfoItem',
     'angular-upload',
     'service/fileUpload',
-    'service/ImageUpload'
+    'service/ImageUpload',
+    'service/serverURL'
 ], function (app, InformationData, ProjectInfoItem) {
-    app.controller('projectInformationController', ['$scope', '$upload', 'fileUpload', 'ImageUpload',
-        function ($scope, $upload, fileUpload, ImageUpload) {
+    app.controller('projectInformationController', ['$scope', '$upload', 'fileUpload', 'ImageUpload', 'serverURL',
+        function ($scope, $upload, fileUpload, ImageUpload, serverURL) {
             $scope.projectInfoItem = new ProjectInfoItem();
             $scope.progress = 0;
             $scope.imageProgress = 0;
+            $scope.serverURL = serverURL;
 
             $scope.InformationData = InformationData;
 
@@ -82,7 +84,7 @@ define([
                     $scope.imageProgress = parseInt(100.0 * evt.loaded / evt.total);
                 }, function (data) {
                     $scope.projectInfoItem.I_image = data.result;
-                    $('#project_picture').attr('src', 'http://210.118.74.166:8123/image/symbol/thumb/' + data.result._id);
+                    $('#project_picture').attr('src', serverURL + '/image/symbol/thumb/' + data.result._id);
                 });
             };
 

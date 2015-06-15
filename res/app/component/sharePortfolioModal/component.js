@@ -1,10 +1,11 @@
 
 define([
     'app',
-    'service/EditorData'
+    'service/EditorData',
+    'service/serverURL'
 ], function (app) {
-    app.controller('sharePortfolioModalController', function ($scope, $window, $modalInstance, EditorData) {
-        $scope.url = 'http://210.118.74.166:8123/res/app/partials/portfolio.html?id=' + EditorData.shareId;
+    app.controller('sharePortfolioModalController', 'serverURL', function ($scope, $window, $modalInstance, EditorData, serverURL) {
+        $scope.url = serverURL + '/res/app/partials/portfolio.html?id=' + EditorData.shareId;
 
         $scope.cancel = function () {
             $modalInstance.dismiss();
